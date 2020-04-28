@@ -448,3 +448,126 @@ blockquote {
   border-left: 3px solid #D0E5F2;
   font-size: 1.3rem;
 } 
+
+
+/* theorem */ 
+body {
+  counter-reset: theorem;
+  counter-reset: definition;
+  counter-reset: fact;
+  counter-reset: remark;
+  counter-reset: example;
+  counter-reset: proposition;
+  counter-reset: lemma;
+}
+
+.theorem {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: theorem
+}
+.theorem:before {
+  content: "Theorem " counter(theorem) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.theorem[text]:before {
+  content: "Theorem " counter(theorem) " (" attr(text) ") ";
+}
+
+.fact {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: fact
+}
+.fact:before {
+  content: "Fact " counter(fact) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.fact[text]:before {
+  content: "Fact " counter(fact) " (" attr(text) ") ";
+}
+
+.remark {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: remark
+}
+.remark:before {
+  content: "Remark " counter(remark) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.remark[text]:before {
+  content: "Remark " counter(remark) " (" attr(text) ") ";
+}
+
+.prop {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: prop
+}
+.prop:before {
+  content: "Proposition " counter(prop) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.prop[text]:before {
+  content: "Proposition " counter(prop) " (" attr(text) ") ";
+}
+
+.example {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: example
+}
+.example:before {
+  content: "Example " counter(example) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.example[text]:before {
+  content: "Example " counter(example) " (" attr(text) ") ";
+}
+
+.lemma {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: lemma
+}
+.lemma:before {
+  content: "Lemma. ";
+  font-weight: bold;
+  font-style: normal;
+}
+.proof {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.proof:before {
+  content: "(Proof) ";
+  font-style: italic;
+}
+.proof:after {
+  content: "\25FC";
+  float:right;
+}
+.definition {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+  counter-increment: definition
+}
+.definition:before {
+  content: "Definition. ";
+  font-weight: bold;
+  font-style: normal;
+} 
