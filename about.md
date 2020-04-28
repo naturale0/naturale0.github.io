@@ -1,8 +1,16 @@
 ---
 layout: page
-title: De Novo | About
+title: About
 permalink: /about/
 ---
+
+<p align="center">
+  <img src="../assets/goni.jpg" alt="goni" width="200">
+  <img src="../assets/bori.jpg" alt="goni" width="200">
+</p>
+<p align="center">
+  <em><font size=1>Goni and Bori, my beloved cockatiels. They love head scritches.</font></em>
+</p>
 
 Hi,
 
@@ -10,6 +18,6 @@ I am Park, Sihyung, an M.S. student majoring in Statistics.
 
 This blog is about some random interesting/important statistical ideas I encounter while studying.
 
-I also run [an Instagram account](https://instagram.com/stat.today), just to recall short ideas on statistics. You can also see the posts uploaded on instagram from "stat.today" category of this blog.
+I also run [an Instagram account](https://instagram.com/stat.today), just to recall short ideas on statistics. You can also see the posts uploaded there from "stat.today" category of this blog.
 
-Hope to see my knowledge helping someone (including future self!).
+Hope my knowledge helps someone (including future self!).
