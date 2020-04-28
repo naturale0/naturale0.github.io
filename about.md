@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: De Novo | About
 permalink: /about/
 ---
 
