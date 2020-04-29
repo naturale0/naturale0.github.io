@@ -9,7 +9,7 @@ permalink: /about/
   <img src="../assets/bori.jpg" alt="goni" width="200">
 </p>
 <p align="center">
-  <em><font size=1>Goni and Bori, my beloved cockatiels. They love head scritches.</font></em>
+  <em>Goni and Bori, my cockatiels. They love head scritches.</em>
 </p>
 
 Hi,
