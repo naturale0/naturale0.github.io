@@ -93,7 +93,7 @@
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/stat.today/2020/04/29/Borel-Cantelli-lemmas.html">Borel-Cantelli lemmas are converses of each other</a></h2>
+        <h2 class="post_title"><a href="/probability/2020/04/29/Borel-Cantelli-lemmas.html">Borel-Cantelli lemmas are converses of each other</a></h2>
         <time class="post_date">29 April 2020, Wednesday</time>
       </header>
       <div class="post_excerpt">
@@ -106,7 +106,7 @@
 </div>
 
 <div class="proof">
-(1) Let $N := \sum\limits_{k=1}^\infty \mathbf{1}_{A_k}$. The given condition implies $E(N)&lt;\infty$. Hence at most finitely many $\mathbf{1}_{A_k}$'s should be $1$, and this is equivalent to $P(A_n \:\: i.o) = 0$
+(1) Let $N := \sum\limits_{k=1}^\infty \mathbf{1}_{A_k}$. The given condition implies $E(N)&lt;\infty$, and thus $P(N&lt;\infty)=1$. Hence at most finitely many $\mathbf{1}_{A_k}$'s should be $1$, and this is equivalent to $P(A_n \:\: i.o) = 0$
 <br />
 
 (2)
@@ -118,7 +118,7 @@ $\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n})
 </div>
 
 <div class="theorem" text="Kolmogorov's 0-1 law">
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcup\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
 </div>
 
 <div class="proof">
@@ -141,7 +141,7 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 <p>Kolmogorov’s 0-1 law shows that tail events (any $A \in \mathcal{T}$. $\mathcal{T}$ is called a “tail sigma-field”) can only have either probability 0 or 1. Since $\{A_n \:\: i.o\}$ is a tail event, combined with Borel-Cantelli lemma, it is clear that the second Borel-Cantelli lemma is equivalent to the converse of the first one.</p>
 
           
-          <a class="read-more" href="/stat.today/2020/04/29/Borel-Cantelli-lemmas.html"> »  </a>
+          <a class="read-more" href="/probability/2020/04/29/Borel-Cantelli-lemmas.html"> »  </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -150,9 +150,9 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
         
         <!--
         
-        <a href="/category/stat.today">
+        <a href="/category/probability">
           <data data-icon="ei-archive"></data>
-          stat.today</a>
+          probability</a>
         
         -->
 
@@ -170,7 +170,7 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/stat.today/2020/04/28/limitation-of-R-sq.html">Limitation of $R^2$</a></h2>
+        <h2 class="post_title"><a href="/regression/2020/04/28/limitation-of-R-sq.html">Limitation of $R^2$</a></h2>
         <time class="post_date">28 April 2020, Tuesday</time>
       </header>
       <div class="post_excerpt">
@@ -191,7 +191,7 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
 <p>Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.</p>
 
           
-          <a class="read-more" href="/stat.today/2020/04/28/limitation-of-R-sq.html"> »  </a>
+          <a class="read-more" href="/regression/2020/04/28/limitation-of-R-sq.html"> »  </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -200,9 +200,9 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
         
         <!--
         
-        <a href="/category/stat.today">
+        <a href="/category/regression">
           <data data-icon="ei-archive"></data>
-          stat.today</a>
+          regression</a>
         
         -->
 
@@ -220,7 +220,7 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/stat.today/2020/04/27/irregularity-of-a.s.-convergence.html">Irregularity of almost sure convergence</a></h2>
+        <h2 class="post_title"><a href="/probability/2020/04/27/irregularity-of-a.s.-convergence.html">Irregularity of almost sure convergence</a></h2>
         <time class="post_date">27 April 2020, Monday</time>
       </header>
       <div class="post_excerpt">
@@ -237,7 +237,7 @@ A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subse
 <p>Theorem 1 and 2 combined implies that almost sure convergence does not come from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a “convergence” concept that we generally think of.</p>
 
           
-          <a class="read-more" href="/stat.today/2020/04/27/irregularity-of-a.s.-convergence.html"> »  </a>
+          <a class="read-more" href="/probability/2020/04/27/irregularity-of-a.s.-convergence.html"> »  </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -246,9 +246,9 @@ A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subse
         
         <!--
         
-        <a href="/category/stat.today">
+        <a href="/category/probability">
           <data data-icon="ei-archive"></data>
-          stat.today</a>
+          probability</a>
         
         -->
 
@@ -266,7 +266,7 @@ A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subse
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/stat.today/2020/04/25/SLLN.html">Strong law of large numbers</a></h2>
+        <h2 class="post_title"><a href="/probability/2020/04/25/SLLN.html">Strong law of large numbers</a></h2>
         <time class="post_date">25 April 2020, Saturday</time>
       </header>
       <div class="post_excerpt">
@@ -279,7 +279,7 @@ $X_1, X_2, \cdots$ are pairwise independent and identically distributed random v
 <p>SLLN is “strong” in two senses. First, it only requires pairwise independence which is much generous condition than mutual independence required in WLLN. Second, it implies almost sure convergence rather than convergence in probability.</p>
 
           
-          <a class="read-more" href="/stat.today/2020/04/25/SLLN.html"> »  </a>
+          <a class="read-more" href="/probability/2020/04/25/SLLN.html"> »  </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -288,9 +288,9 @@ $X_1, X_2, \cdots$ are pairwise independent and identically distributed random v
         
         <!--
         
-        <a href="/category/stat.today">
+        <a href="/category/probability">
           <data data-icon="ei-archive"></data>
-          stat.today</a>
+          probability</a>
         
         -->
 
@@ -308,7 +308,7 @@ $X_1, X_2, \cdots$ are pairwise independent and identically distributed random v
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/stat.today/2020/04/24/high-dimensional-box.html">High-dimensional box</a></h2>
+        <h2 class="post_title"><a href="/probability/2020/04/24/high-dimensional-box.html">High-dimensional box</a></h2>
         <time class="post_date">24 April 2020, Friday</time>
       </header>
       <div class="post_excerpt">
@@ -321,7 +321,7 @@ Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element
 <p>This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.</p>
 
           
-          <a class="read-more" href="/stat.today/2020/04/24/high-dimensional-box.html"> »  </a>
+          <a class="read-more" href="/probability/2020/04/24/high-dimensional-box.html"> »  </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -330,9 +330,9 @@ Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element
         
         <!--
         
-        <a href="/category/stat.today">
+        <a href="/category/probability">
           <data data-icon="ei-archive"></data>
-          stat.today</a>
+          probability</a>
         
         -->
 

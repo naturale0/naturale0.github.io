@@ -12,7 +12,7 @@ categories: probability
 </div>
 
 <div class="proof">
-(1) Let $N := \sum\limits_{k=1}^\infty \mathbf{1}_{A_k}$. The given condition implies $E(N)<\infty$. Hence at most finitely many $\mathbf{1}_{A_k}$'s should be $1$, and this is equivalent to $P(A_n \:\: i.o) = 0$
+(1) Let $N := \sum\limits_{k=1}^\infty \mathbf{1}_{A_k}$. The given condition implies $E(N)<\infty$, and thus $P(N<\infty)=1$. Hence at most finitely many $\mathbf{1}_{A_k}$'s should be $1$, and this is equivalent to $P(A_n \:\: i.o) = 0$
 <br>
 
 (2)
@@ -24,7 +24,7 @@ $\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n})
 </div>
 
 <div class="theorem" text="Kolmogorov's 0-1 law">
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcup\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
 </div>
 
 <div class="proof">
