@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>De Novo</title>
+    <description>Just some random ideas that interest me.
+</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 29 Apr 2020 10:31:06 +0900</pubDate>
+    <lastBuildDate>Wed, 29 Apr 2020 10:31:06 +0900</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Limitation of $R^2$</title>
+        <description>&lt;div class=&quot;fact&quot; text=&quot;limitation of coefficient of determination&quot;&gt;
+For a linear regression $y_i = \beta_0 + \sum\limits_{j=1}^{p} \beta_j x_{ij}$, $1 \leq i \leq n$, suppose $x_{ij}$'s does not have any relationship with $y_i$'s. i.e. true model is $y_i = \beta_0 = \bar{y}$. Under this assumption,
+
+$$\begin{align*}
+    \frac{SSE}{\sigma^2} &amp;amp;\sim \chi^2(n-p-1) \overset{D}{=} \Gamma(\frac{n-p-1}{2}, 2)\\
+    \frac{SSR}{\sigma^2} &amp;amp;\sim \chi^2(p) \overset{D}{=} \Gamma(\frac{p}{2}, 2)\\   
+    SSE &amp;amp;\perp SSR
+\end{align*}$$
+
+Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2})$, and $E(R^2) = \frac{p}{n-1}$.
+&lt;/div&gt;
+
+&lt;p&gt;Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Apr 2020 18:37:10 +0900</pubDate>
+        <link>http://localhost:4000/stat.today/2020/04/28/limitation-of-R-sq.html</link>
+        <guid isPermaLink="true">http://localhost:4000/stat.today/2020/04/28/limitation-of-R-sq.html</guid>
+        
+        
+        <category>stat.today</category>
+        
+      </item>
+    
+      <item>
+        <title>Irregularity of almost sure convergence</title>
+        <description>&lt;div class=&quot;theorem&quot;&gt;
+Let $y_n$ be a sequence on topological space. If $\forall$ subsequence $y_{n_k}$, $\exists$ a further subsequence $y_{n(m_k)}$ s.t. $y_{n(m_k)} \to y$, then $y_n \to y$.
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subsequence $X_{n_k}$, $\exists$ a further subsequence $X_{n(m_k)}$ s.t. $X_{n(m_k)} \to X$ a.s.
+&lt;/div&gt;
+
+&lt;p&gt;Theorem 1 and 2 combined implies that almost sure convergence does not come from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a “convergence” concept that we generally think of.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 27 Apr 2020 18:37:10 +0900</pubDate>
+        <link>http://localhost:4000/stat.today/2020/04/27/irregularity-of-a.s.-convergence.html</link>
+        <guid isPermaLink="true">http://localhost:4000/stat.today/2020/04/27/irregularity-of-a.s.-convergence.html</guid>
+        
+        
+        <category>stat.today</category>
+        
+      </item>
+    
+      <item>
+        <title>Strong law of large numbers</title>
+        <description>&lt;div class=&quot;theorem&quot; text=&quot;Strong Law of Large Numbers&quot;&gt;
+$X_1, X_2, \cdots$ are pairwise independent and identically distributed random variables. If $E|X_1| = \mu &amp;lt; \infty$, then $\frac{X_1 + \cdots + X_n}{n} \to \mu \:\: a.s.$
+&lt;/div&gt;
+
+&lt;p&gt;SLLN is “strong” in two senses. First, it only requires pairwise independence which is much generous condition than mutual independence required in WLLN. Second, it implies almost sure convergence rather than convergence in probability.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 25 Apr 2020 18:37:10 +0900</pubDate>
+        <link>http://localhost:4000/stat.today/2020/04/25/SLLN.html</link>
+        <guid isPermaLink="true">http://localhost:4000/stat.today/2020/04/25/SLLN.html</guid>
+        
+        
+        <category>stat.today</category>
+        
+      </item>
+    
+      <item>
+        <title>High-dimensional box</title>
+        <description>&lt;div class=&quot;example&quot; text=&quot;High-dimensional box&quot;&gt;
+Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element from this box. i.e. $\mathbf{X_n}=(X_1, \cdots, X_n)$, where $X_1, \cdots, X_n \stackrel{iid}{\sim} \mathcal{U}(-1,1)$. Then as $n \to \infty$, $P(\sqrt{\frac{n}{3}(1-\epsilon)}&amp;lt; \|\mathbf{X_n}\|_2 &amp;lt; \sqrt{\frac{n}{3}(1+\epsilon)}) \to 1$, $\forall{0&amp;lt;\epsilon&amp;lt;1}$.
+&lt;/div&gt;
+
+&lt;p&gt;This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 24 Apr 2020 18:37:10 +0900</pubDate>
+        <link>http://localhost:4000/stat.today/2020/04/24/high-dimensional-box.html</link>
+        <guid isPermaLink="true">http://localhost:4000/stat.today/2020/04/24/high-dimensional-box.html</guid>
+        
+        
+        <category>stat.today</category>
+        
+      </item>
+    
+  </channel>
+</rss>

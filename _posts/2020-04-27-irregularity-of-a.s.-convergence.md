@@ -16,4 +16,4 @@ A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subse
 
 
 
-Theorem 1 and 2 combined implies that almost sure convergence does not comes from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a "convergence" concept that we generally think of.
+Theorem 1 and 2 combined implies that almost sure convergence does not come from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a "convergence" concept that we generally think of.
