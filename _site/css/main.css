@@ -227,9 +227,9 @@ input[type="checkbox"], input[type="radio"] { display: inline; }
 label > .label-body { display: inline-block; margin-left: .5rem; font-weight: normal; }
 
 /* Lists
-–––––––––––––––––––––––––––––––––––––––––––––––––– 
+––––––––––––––––––––––––––––––––––––––––––––––––––
 ul {
-  list-style: circle inside; 
+  list-style: circle inside;
 }
 ol {
   list-style: decimal inside; }
@@ -260,7 +260,7 @@ th:first-child, td:first-child { padding-left: 0; }
 
 th:last-child, td:last-child { padding-right: 0; }
 
-/* Spacing ––––––––––––––––––––––––––––––––––––––––––––––––––  button, .button { margin-bottom: 1rem; } input, textarea, select, fieldset { margin-bottom: 1rem; } pre, blockquote, dl, figure, table, p, ul, ol form { margin-bottom: 1.25rem; } */
+/* Spacing –––––––––––––––––––––––––––––––––––––––––––––––––– button, .button { margin-bottom: 1rem; } input, textarea, select, fieldset { margin-bottom: 1rem; } pre, blockquote, dl, figure, table, p, ul, ol form { margin-bottom: 1.25rem; } */
 p { margin-bottom: 1.25rem; }
 
 /* Utilities
@@ -282,7 +282,7 @@ hr { margin-top: 2rem; margin-bottom: 2.5rem; border-width: 0; border-top: 1px s
 /* Self Clearing Goodness */
 .container:after, .row:after, .u-cf { content: ""; display: table; clear: both; }
 
-/* Images 
+/* Images
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 img { max-width: 100%; vertical-align: middle; }
 
@@ -296,31 +296,31 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .theorem:before { content: "Theorem " counter(theorem) ". "; font-weight: bold; font-style: normal; }
 
-.theorem[text]:before { content: "Theorem " counter(theorem) " (" attr(text) ") "; }
+.theorem[text]:before { content: "Theorem " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
 .fact { display: block; margin: 12px 0; font-style: italic; counter-increment: fact; }
 
-.fact:before { content: "Fact " counter(fact) ". "; font-weight: bold; font-style: normal; }
+.fact:before { content: "Fact " counter(fact) ".\a"; font-weight: bold; font-style: normal; white-space: pre; }
 
-.fact[text]:before { content: "Fact " counter(fact) " (" attr(text) ") "; }
+.fact[text]:before { content: "Fact " counter(fact) " (" attr(text) ")\a"; white-space: pre; }
 
 .remark { display: block; margin: 12px 0; font-style: italic; counter-increment: remark; }
 
 .remark:before { content: "Remark " counter(remark) ". "; font-weight: bold; font-style: normal; }
 
-.remark[text]:before { content: "Remark " counter(remark) " (" attr(text) ") "; }
+.remark[text]:before { content: "Remark " counter(remark) " (" attr(text) ")\a"; white-space: pre; }
 
 .prop { display: block; margin: 12px 0; font-style: italic; counter-increment: prop; }
 
 .prop:before { content: "Proposition " counter(prop) ". "; font-weight: bold; font-style: normal; }
 
-.prop[text]:before { content: "Proposition " counter(prop) " (" attr(text) ") "; }
+.prop[text]:before { content: "Proposition " counter(prop) " (" attr(text) ")\a"; white-space: pre; }
 
 .example { display: block; margin: 12px 0; font-style: italic; counter-increment: example; }
 
 .example:before { content: "Example " counter(example) ". "; font-weight: bold; font-style: normal; }
 
-.example[text]:before { content: "Example " counter(example) " (" attr(text) ") "; }
+.example[text]:before { content: "Example " counter(example) " (" attr(text) ")\a"; white-space: pre; }
 
 .lemma { display: block; margin: 12px 0; font-style: italic; counter-increment: lemma; }
 
@@ -334,7 +334,7 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .definition { display: block; margin: 12px 0; font-style: normal; counter-increment: definition; }
 
-.definition:before { content: "Definition. "; font-weight: bold; font-style: normal; }
+.definition:before { content: "Def. "; font-weight: bold; font-style: normal; }
 
 /* layout */
 html, .container { position: relative; min-height: 100%; }

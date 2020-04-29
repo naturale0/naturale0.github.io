@@ -32,7 +32,7 @@
 }
 
 .box {
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 /* Grid
@@ -313,9 +313,9 @@ label > .label-body {
 
 
 /* Lists
-–––––––––––––––––––––––––––––––––––––––––––––––––– 
+––––––––––––––––––––––––––––––––––––––––––––––––––
 ul {
-  list-style: circle inside; 
+  list-style: circle inside;
 }
 ol {
   list-style: decimal inside; }
@@ -366,7 +366,7 @@ td:last-child {
 
 
 /* Spacing
-–––––––––––––––––––––––––––––––––––––––––––––––––– 
+––––––––––––––––––––––––––––––––––––––––––––––––––
 button,
 .button {
   margin-bottom: 1rem; }
@@ -428,8 +428,8 @@ hr {
   display: table;
   clear: both; }
 
-  
-/* Images 
+
+/* Images
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 img {
@@ -437,7 +437,7 @@ img {
     vertical-align: middle;
 }
 
-/* blockquote */ 
+/* blockquote */
 
 blockquote {
   margin: 1.5rem 0;
@@ -447,10 +447,10 @@ blockquote {
   line-height: 1.8rem;
   border-left: 3px solid #D0E5F2;
   font-size: 1.3rem;
-} 
+}
 
 
-/* theorem */ 
+/* theorem */
 body {
   counter-reset: theorem;
   counter-reset: definition;
@@ -473,7 +473,8 @@ body {
   font-style: normal;
 }
 .theorem[text]:before {
-  content: "Theorem " counter(theorem) " (" attr(text) ") ";
+  content: "Theorem " counter(theorem) " (" attr(text) ")\A";
+  white-space: pre;
 }
 
 .fact {
@@ -483,12 +484,14 @@ body {
   counter-increment: fact
 }
 .fact:before {
-  content: "Fact " counter(fact) ". ";
+  content: "Fact " counter(fact) ".\A";
   font-weight: bold;
   font-style: normal;
+  white-space: pre;
 }
 .fact[text]:before {
-  content: "Fact " counter(fact) " (" attr(text) ") ";
+  content: "Fact " counter(fact) " (" attr(text) ")\A";
+  white-space: pre;
 }
 
 .remark {
@@ -503,7 +506,8 @@ body {
   font-style: normal;
 }
 .remark[text]:before {
-  content: "Remark " counter(remark) " (" attr(text) ") ";
+  content: "Remark " counter(remark) " (" attr(text) ")\A";
+  white-space: pre;
 }
 
 .prop {
@@ -518,7 +522,8 @@ body {
   font-style: normal;
 }
 .prop[text]:before {
-  content: "Proposition " counter(prop) " (" attr(text) ") ";
+  content: "Proposition " counter(prop) " (" attr(text) ")\A";
+  white-space: pre;
 }
 
 .example {
@@ -533,7 +538,8 @@ body {
   font-style: normal;
 }
 .example[text]:before {
-  content: "Example " counter(example) " (" attr(text) ") ";
+  content: "Example " counter(example) " (" attr(text) ")\A";
+  white-space: pre;
 }
 
 .lemma {
@@ -567,7 +573,7 @@ body {
   counter-increment: definition
 }
 .definition:before {
-  content: "Definition. ";
+  content: "Def. ";
   font-weight: bold;
   font-style: normal;
-} 
+}
