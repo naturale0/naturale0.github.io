@@ -2,7 +2,7 @@
 layout: post
 title:  "Irregularity of almost sure convergence"
 date:   2020-04-27 18:37:10 +0900
-categories: stat.today
+categories: probability
 ---
 
 

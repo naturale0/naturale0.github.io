@@ -18,6 +18,4 @@ I am Park, Sihyung, an M.S. student majoring in Statistics.
 
 *De Novo* means "of new", "from the beginning" in Latin, which is used frequently in Biology. This blog is about some random interesting/important ideas I encounter while studying and doing research. This is my attempt to build up and organize new (and hopefully meaningful) knowledge from scratch.
 
-I also run [an Instagram account](https://instagram.com/stat.today), just to recall short ideas on statistics. You can also see the posts uploaded there from "stat.today" category of this blog.
-
 Hope my knowledge helps someone (including my future self).
