@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Apr 2020 18:57:22 +0900</pubDate>
-    <lastBuildDate>Wed, 29 Apr 2020 18:57:22 +0900</lastBuildDate>
+    <pubDate>Wed, 29 Apr 2020 19:00:12 +0900</pubDate>
+    <lastBuildDate>Wed, 29 Apr 2020 19:00:12 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -31,7 +31,7 @@ $\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n})
 &lt;/div&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's 0-1 law&quot;&gt;
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
 &lt;/div&gt;
 
 &lt;div class=&quot;proof&quot;&gt;

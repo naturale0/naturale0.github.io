@@ -24,7 +24,7 @@ $\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n})
 </div>
 
 <div class="theorem" text="Kolmogorov's 0-1 law">
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $T := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
 </div>
 
 <div class="proof">
