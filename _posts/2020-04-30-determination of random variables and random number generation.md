@@ -5,7 +5,7 @@ date:   2020-04-30 18:39:00 +0900
 categories: probability
 ---
 
-<div class="theorem" text='Distribution function determines random variable'>
+<div class="theorem" text='Distribution determines random variable'>
 $F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
 </div>
 
