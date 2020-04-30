@@ -27,8 +27,8 @@ $$\therefore \: \{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\
 
 &ensp;&ensp;Hence the claim is true, and
 $$\begin{align}
-  F(x) = \lambda\big( (0, F(x)] \big) &= P(\{\omega: \omega \leq F(x)\})\\
-                                      &= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
+  F(x) &= \lambda\big( (0, F(x)] \big) = P(\{\omega: \omega \leq F(x)\})\\
+       &= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
 \end{align}$$
 </div>
 
