@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Determination of random variable and random number generation"
+title:  "Determination of random variables and random number generation"
 date:   2020-04-30 18:39:00 +0900
 categories: probability
 ---
@@ -47,7 +47,7 @@ Suppose $U \sim \text{U}(0, 1)$. If a distribution function $F$ has an inverse $
 
 So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,
 
-<div class="example" text="generating $\text{Exp}(1)$ random sample">
+<div class="example" text="generating Exp(1) random sample">
 1. Generate random numbers $u_i$'s from $\text{U}(0, 1)$.
 <br>
 2. $y_i := -\log(1-u_i)$ are random numbers from $\text{Exp}(1)$.
