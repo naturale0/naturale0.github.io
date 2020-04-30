@@ -1,0 +1,28 @@
+I"<div class="theorem" text="Distribution function is unique">
+$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
+</div>
+
+<div class="proof"> <br />
+($\Rightarrow$) is trivial.
+<br />
+($\Leftarrow$) let $\Omega = [0, 1)$, $\mathcal{F} = \mathcal{B}\big( [0, 1) \big)$, $P=\lambda$ where $\lambda$ is a lebesgue measure. Define $X(\omega) := \sup\{y: F(y) &lt; \omega\}$, then our claim is that X is a random variable that has $F$ as its distribution. To show the claim is true, we need to show $P(X\leq x) = F(x) = P(\{\omega: 0\leq \omega \leq F(x)\})$, which can be inferred by $\{\omega: X(\omega) \leq x\} = \{\omega: \omega \leq F(x)\}$, $\forall x$.
+<br />
+&ensp;
+<br />
+&ensp;&ensp;Given $x$, pick $\omega_0 \in \{\omega: \omega \leq F(x)\}$, since $F(x) \geq \omega_0$, $x \notin \{y: F(y) &lt; \omega_0\}$. Therefore $X(\omega_0) \leq x$ and $\omega_0 \in \{\omega: X(\omega) \leq x\}$.
+$$\{\omega: X(\omega) \leq x\} \supset \{\omega: \omega \leq F(x)\}, \forall x$$
+<br />
+&ensp;
+<br />
+&ensp;&ensp;(ii) For given $x$, $\{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\}$ $\iff$ $\omega_0 \notin \{\omega: \omega \leq F(x)\} \to \omega_0 \notin \{\omega: X(\omega) \leq x\}$.
+<br />
+&ensp;&ensp;Given $x$, pick $\omega_0 \notin \{\omega: \omega \leq F(x)\}$, then $\omega_0 &gt; F(x)$. Since $F$ is right-continuous, $\exists\epsilon &gt; 0$ such that $F(x) \leq F(x+\epsilon) &lt; \omega_0$. $x+\epsilon \leq X(\omega_0)$ because $X$ is defined as $\sup$, and this gives $x &lt; X(\omega_0)$ and thus $\omega_0 \notin \{\omega: X(\omega) \leq x\}$.
+
+
+</div>
+
+<div class="theorem" text="Probability integral transform">
+
+</div>
+
+:ET

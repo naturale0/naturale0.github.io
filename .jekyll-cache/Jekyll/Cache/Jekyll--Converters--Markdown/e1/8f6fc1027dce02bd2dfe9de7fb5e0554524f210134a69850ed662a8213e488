@@ -1,0 +1,21 @@
+I"'<div class="theorem" text="Distribution function is unique">
+$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
+</div>
+
+<div class="proof">
+($\Rightarrow$) is trivial.
+<br />
+($\Leftarrow$)
+<br />
+
+
+</div>
+
+<div class="theorem" text="Probability integral transform">
+
+</div>
+
+<p>Borel-Cantelli lemmas are widely used to prove almost sure convergence/existence of limit points of random variables. e.g. By showing that $P(|X_n - X|&gt;\epsilon)$ is summable for any given $\epsilon &gt; 0$, one can easily check almost sure convergence from convergence in probability.</p>
+
+<p>Kolmogorov’s 0-1 law shows that tail events (any $A \in \mathcal{T}$. $\mathcal{T}$ is called a “tail sigma-field”) can only have either probability 0 or 1. Since $\{A_n \:\: i.o\}$ is a tail event, combined with Borel-Cantelli lemma, it is clear that the second Borel-Cantelli lemma is equivalent to the converse of the first one.</p>
+:ET
