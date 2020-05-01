@@ -45,7 +45,7 @@ Probability integral transform can be proven by similar method to the one that u
 The fact that we can naturally derive from here is interesting:
 
 <div class="fact">
-Suppose $U \sim \text{U}(0, 1)$. If a distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
+Suppose $U \sim \text{U}(0, 1)$. If a continuous distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
 </div>
 
 So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,
