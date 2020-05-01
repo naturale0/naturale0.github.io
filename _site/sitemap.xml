@@ -2,6 +2,22 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
+      <loc>http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</loc>
+      
+        <lastmod>2020-04-30T18:39:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
       <loc>http://localhost:4000/probability/2020/04/29/Borel-Cantelli-lemmas.html</loc>
       
         <lastmod>2020-04-29T15:11:00+09:00</lastmod>
@@ -18,7 +34,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/regression/2020/04/28/limitation-of-R-sq.html</loc>
+      <loc>http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</loc>
       
         <lastmod>2020-04-28T18:37:10+09:00</lastmod>
       

@@ -6,9 +6,72 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Apr 2020 19:00:12 +0900</pubDate>
-    <lastBuildDate>Wed, 29 Apr 2020 19:00:12 +0900</lastBuildDate>
+    <pubDate>Fri, 01 May 2020 19:11:25 +0900</pubDate>
+    <lastBuildDate>Fri, 01 May 2020 19:11:25 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Determination of random variables and random number generation</title>
+        <description>&lt;div class=&quot;theorem&quot; text=&quot;Distribution determines random variable&quot;&gt;
+$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt; &lt;br /&gt;
+($\Rightarrow$) is trivial.
+&lt;br /&gt;
+($\Leftarrow$) let $\Omega = [0, 1)$, $\mathcal{F} = \mathcal{B}\big( [0, 1] \big)$, $P=\lambda$ where $\lambda$ is a lebesgue measure. Define $X(\omega) := \sup\{y: F(y) &amp;lt; \omega\}$, then our claim is that X is a random variable that has $F$ as its distribution. To show the claim is true, we need to show 
+$$P(X\leq x) = F(x) = P(\{\omega: 0\leq \omega \leq F(x)\})$$
+which can be inferred by $\{\omega: X(\omega) \leq x\} = \{\omega: \omega \leq F(x)\}$, $\forall x$.
+&lt;br /&gt;
+&amp;ensp;
+&lt;br /&gt;
+
+Given $x$, pick $\omega_0 \in \{\omega: \omega \leq F(x)\}$, since $F(x) \geq \omega_0$, $x \notin \{y: F(y) &amp;lt; \omega_0\}$. Therefore $X(\omega_0) \leq x$ and $\omega_0 \in \{\omega: X(\omega) \leq x\}$.
+$$\begin{equation}
+\therefore \: \{\omega: X(\omega) \leq x\} \supset \{\omega: \omega \leq F(x)\}, \forall x
+\end{equation}$$
+
+Given $x$, pick $\omega_0 \notin \{\omega: \omega \leq F(x)\}$, then $\omega_0 &amp;gt; F(x)$. Since $F$ is right-continuous, $\exists\epsilon &amp;gt; 0$ such that $F(x) \leq F(x+\epsilon) &amp;lt; \omega_0$. $x+\epsilon \leq X(\omega_0)$ because $X$ is defined as $\sup$, and this gives $x &amp;lt; X(\omega_0)$ and thus $\omega_0 \notin \{\omega: X(\omega) \leq x\}$.
+
+$$\therefore \: \{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\}, \forall x$$
+
+Hence the claim is true, and
+$$\begin{align}
+  F(x) &amp;amp;= \lambda\big( [0, F(x)] \big) = P(\{\omega: \omega \leq F(x)\})\\
+       &amp;amp;= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
+\end{align}$$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Probability integral transform&quot;&gt;
+Suppose that a random variable $X$ has a continuous distibution $F$, then $Y := F(X) \sim \text{U}(0, 1)$
+&lt;/div&gt;
+
+&lt;p&gt;Probability integral transform can be proven by similar method to the one that used to prove theorem 1. The idea here is to construct a function that is an “inverse” of $F$. Since it is not sure that $F$ can have an inverse, it is safe to say that $X$ is constructed as an upper-quantile function of $F$.&lt;/p&gt;
+
+&lt;p&gt;The fact that we can naturally derive from here is interesting:&lt;/p&gt;
+
+&lt;div class=&quot;fact&quot;&gt;
+Suppose $U \sim \text{U}(0, 1)$. If a distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
+&lt;/div&gt;
+
+&lt;p&gt;So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,&lt;/p&gt;
+
+&lt;div class=&quot;example&quot; text=&quot;generating Exp(1) random sample&quot;&gt;
+1. Generate random numbers $u_i$'s from $\text{U}(0, 1)$.
+&lt;br /&gt;
+2. $y_i := -\log(1-u_i)$ are random numbers from $\text{Exp}(1)$.
+&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 30 Apr 2020 18:39:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>Borel-Cantelli lemmas are converses of each other</title>
@@ -79,11 +142,11 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
 &lt;p&gt;Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.&lt;/p&gt;
 </description>
         <pubDate>Tue, 28 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/regression/2020/04/28/limitation-of-R-sq.html</link>
-        <guid isPermaLink="true">http://localhost:4000/regression/2020/04/28/limitation-of-R-sq.html</guid>
+        <link>http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</guid>
         
         
-        <category>regression</category>
+        <category>linear model</category>
         
       </item>
     

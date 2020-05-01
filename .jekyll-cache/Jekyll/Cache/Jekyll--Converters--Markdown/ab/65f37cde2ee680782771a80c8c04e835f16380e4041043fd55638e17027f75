@@ -1,0 +1,18 @@
+I"¬<div class="theorem" text="Distribution function is unique">
+$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
+</div>
+
+<div class="proof"> <br />
+($\Rightarrow$) is trivial.
+<br />
+($\Leftarrow$)
+<br />
+
+
+</div>
+
+<div class="theorem" text="Probability integral transform">
+
+</div>
+
+:ET

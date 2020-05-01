@@ -93,6 +93,94 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html">Determination of random variables and random number generation</a></h2>
+        <time class="post_date">30 April 2020, Thursday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <div class="theorem" text="Distribution determines random variable">
+$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
+</div>
+
+<div class="proof"> <br />
+($\Rightarrow$) is trivial.
+<br />
+($\Leftarrow$) let $\Omega = [0, 1)$, $\mathcal{F} = \mathcal{B}\big( [0, 1] \big)$, $P=\lambda$ where $\lambda$ is a lebesgue measure. Define $X(\omega) := \sup\{y: F(y) &lt; \omega\}$, then our claim is that X is a random variable that has $F$ as its distribution. To show the claim is true, we need to show 
+$$P(X\leq x) = F(x) = P(\{\omega: 0\leq \omega \leq F(x)\})$$
+which can be inferred by $\{\omega: X(\omega) \leq x\} = \{\omega: \omega \leq F(x)\}$, $\forall x$.
+<br />
+&ensp;
+<br />
+
+Given $x$, pick $\omega_0 \in \{\omega: \omega \leq F(x)\}$, since $F(x) \geq \omega_0$, $x \notin \{y: F(y) &lt; \omega_0\}$. Therefore $X(\omega_0) \leq x$ and $\omega_0 \in \{\omega: X(\omega) \leq x\}$.
+$$\begin{equation}
+\therefore \: \{\omega: X(\omega) \leq x\} \supset \{\omega: \omega \leq F(x)\}, \forall x
+\end{equation}$$
+
+Given $x$, pick $\omega_0 \notin \{\omega: \omega \leq F(x)\}$, then $\omega_0 &gt; F(x)$. Since $F$ is right-continuous, $\exists\epsilon &gt; 0$ such that $F(x) \leq F(x+\epsilon) &lt; \omega_0$. $x+\epsilon \leq X(\omega_0)$ because $X$ is defined as $\sup$, and this gives $x &lt; X(\omega_0)$ and thus $\omega_0 \notin \{\omega: X(\omega) \leq x\}$.
+
+$$\therefore \: \{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\}, \forall x$$
+
+Hence the claim is true, and
+$$\begin{align}
+  F(x) &amp;= \lambda\big( [0, F(x)] \big) = P(\{\omega: \omega \leq F(x)\})\\
+       &amp;= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
+\end{align}$$
+</div>
+
+<p><br /></p>
+<div class="theorem" text="Probability integral transform">
+Suppose that a random variable $X$ has a continuous distibution $F$, then $Y := F(X) \sim \text{U}(0, 1)$
+</div>
+
+<p>Probability integral transform can be proven by similar method to the one that used to prove theorem 1. The idea here is to construct a function that is an “inverse” of $F$. Since it is not sure that $F$ can have an inverse, it is safe to say that $X$ is constructed as an upper-quantile function of $F$.</p>
+
+<p>The fact that we can naturally derive from here is interesting:</p>
+
+<div class="fact">
+Suppose $U \sim \text{U}(0, 1)$. If a distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
+</div>
+
+<p>So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,</p>
+
+<div class="example" text="generating Exp(1) random sample">
+1. Generate random numbers $u_i$'s from $\text{U}(0, 1)$.
+<br />
+2. $y_i := -\log(1-u_i)$ are random numbers from $\text{Exp}(1)$.
+</div>
+
+
+          
+          <a class="read-more-btn" href="/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/2020/04/29/Borel-Cantelli-lemmas.html">Borel-Cantelli lemmas are converses of each other</a></h2>
         <time class="post_date">29 April 2020, Wednesday</time>
       </header>
@@ -141,7 +229,7 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 <p>Kolmogorov’s 0-1 law shows that tail events (any $A \in \mathcal{T}$. $\mathcal{T}$ is called a “tail sigma-field”) can only have either probability 0 or 1. Since $\{A_n \:\: i.o\}$ is a tail event, combined with Borel-Cantelli lemma, it is clear that the second Borel-Cantelli lemma is equivalent to the converse of the first one.</p>
 
           
-          <a class="read-more" href="/probability/2020/04/29/Borel-Cantelli-lemmas.html"> »  </a>
+          <a class="read-more-btn" href="/probability/2020/04/29/Borel-Cantelli-lemmas.html"> » </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -170,7 +258,7 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/regression/2020/04/28/limitation-of-R-sq.html">Limitation of $R^2$</a></h2>
+        <h2 class="post_title"><a href="/linear%20model/2020/04/28/limitation-of-R-sq.html">Limitation of $R^2$</a></h2>
         <time class="post_date">28 April 2020, Tuesday</time>
       </header>
       <div class="post_excerpt">
@@ -191,7 +279,7 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
 <p>Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.</p>
 
           
-          <a class="read-more" href="/regression/2020/04/28/limitation-of-R-sq.html"> »  </a>
+          <a class="read-more-btn" href="/linear%20model/2020/04/28/limitation-of-R-sq.html"> » </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -200,9 +288,9 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
         
         <!--
         
-        <a href="/category/regression">
+        <a href="/category/linear model">
           <data data-icon="ei-archive"></data>
-          regression</a>
+          linear model</a>
         
         -->
 
@@ -217,136 +305,36 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
       <hr/>
     </article>
     
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/2020/04/27/irregularity-of-a.s.-convergence.html">Irregularity of almost sure convergence</a></h2>
-        <time class="post_date">27 April 2020, Monday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <div class="theorem">
-Let $y_n$ be a sequence on topological space. If $\forall$ subsequence $y_{n_k}$, $\exists$ a further subsequence $y_{n(m_k)}$ s.t. $y_{n(m_k)} \to y$, then $y_n \to y$.
-</div>
-
-<div class="theorem">
-A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subsequence $X_{n_k}$, $\exists$ a further subsequence $X_{n(m_k)}$ s.t. $X_{n(m_k)} \to X$ a.s.
-</div>
-
-<p>Theorem 1 and 2 combined implies that almost sure convergence does not come from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a “convergence” concept that we generally think of.</p>
-
-          
-          <a class="read-more" href="/probability/2020/04/27/irregularity-of-a.s.-convergence.html"> »  </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
+    
+  <div class='pagination'>
+    
+      <span>&laquo; Prev</span>
     
 
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/2020/04/25/SLLN.html">Strong law of large numbers</a></h2>
-        <time class="post_date">25 April 2020, Saturday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <div class="theorem" text="Strong Law of Large Numbers">
-$X_1, X_2, \cdots$ are pairwise independent and identically distributed random variables. If $E|X_1| = \mu &lt; \infty$, then $\frac{X_1 + \cdots + X_n}{n} \to \mu \:\: a.s.$
-</div>
-
-<p>SLLN is “strong” in two senses. First, it only requires pairwise independence which is much generous condition than mutual independence required in WLLN. Second, it implies almost sure convergence rather than convergence in probability.</p>
-
-          
-          <a class="read-more" href="/probability/2020/04/25/SLLN.html"> »  </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
     
 
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/2020/04/24/high-dimensional-box.html">High-dimensional box</a></h2>
-        <time class="post_date">24 April 2020, Friday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <div class="example" text="High-dimensional box">
-Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element from this box. i.e. $\mathbf{X_n}=(X_1, \cdots, X_n)$, where $X_1, \cdots, X_n \stackrel{iid}{\sim} \mathcal{U}(-1,1)$. Then as $n \to \infty$, $P(\sqrt{\frac{n}{3}(1-\epsilon)}&lt; \|\mathbf{X_n}\|_2 &lt; \sqrt{\frac{n}{3}(1+\epsilon)}) \to 1$, $\forall{0&lt;\epsilon&lt;1}$.
+    
+      <a href="/posts/page/2">
+        Next &raquo;
+      </a>
+    
+  </div>
+  
 </div>
 
-<p>This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.</p>
+<style lang="scss">
+  .pagination {
+    margin: auto;
+    text-align: center;
+    display: block;
+    padding: 5px 0 25px 0;
+    color: #999;
+  }
+  span.pagination-selected {
+    display: inline-block;
+  }
+</style>
 
-          
-          <a class="read-more" href="/probability/2020/04/24/high-dimensional-box.html"> »  </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
 
     <div class="pagination older-post"><a href="./archive"><data data-icon="ei-arrow-right"></data> Archive  </a></div>
   </div>

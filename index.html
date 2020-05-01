@@ -6,7 +6,7 @@ title: Home
 <div class="home">
   <div class="post-list">
 
-    {% for post in site.posts limit:5%}
+    {% for post in paginator.posts %}
 
     <article class="post_card post">
       <header class="post_header">
@@ -16,11 +16,11 @@ title: Home
       <div class="post_excerpt">
         <p>
           {% if post.description %}
-          {{ post.description}}
+          {{ post.description }}
           {% else %}
           {{ post.excerpt }}
           {% endif %}
-          <a class="read-more" href="{{ post.url | prepend: site.baseurl }}"> »  </a>
+          <a class="read-more-btn" href="{{ post.url | prepend: site.baseurl }}"> » </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -29,7 +29,7 @@ title: Home
         {% if post.location %}
         <span class="author-location">
           <div data-icon="ei-location"></div>
-          <a href=https://www.google.com/maps/place/{{post.location}}">{{ post.location }}</a>
+          <a href="https://www.google.com/maps/place/{{post.location}}">{{ post.location }}</a>
         </span>
         {% endif %}
         <!--
@@ -56,6 +56,7 @@ title: Home
       <hr/>
     </article>
     {% endfor %}
+    {% include pagination.html %}
 
     <div class="pagination older-post"><a href="./archive"><data data-icon="ei-arrow-right"></data> Archive  </a></div>
   </div>

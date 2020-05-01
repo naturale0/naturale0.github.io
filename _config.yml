@@ -23,7 +23,17 @@ kramdown:
 # Third-party services
 # just leave someone empty to disable it
 # google_analytics:
-disqus_shortname:
+disqus_url: http://disqus.com/by/naturale0
+disqus_id: naturale0-github-io
 
 # used this for post_excerpt at index_page
 excerpt_separator: <!--description-->
+
+exclude:
+  - .jekyll-cache
+
+plugins:
+  - jekyll-paginate
+
+paginate: 3
+paginate_path: "/posts/page/:num"
