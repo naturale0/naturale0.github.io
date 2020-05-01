@@ -1,8 +1,0 @@
-I"�<div class="theorem" text="Strong Law of Large Numbers">
-$X_1, X_2, \cdots$ are pairwise independent and identically distributed random variables. If $E|X_1| = \mu &lt; \infty$, then $\frac{X_1 + \cdots + X_n}{n} \to \mu \:\: a.s.$
-</div>
-
-<hr />
-
-<p>SLLN is “strong” in two senses. First, it only requires pairwise independence which is much generous condition than mutual independence required in WLLN. Second, it implies almost sure convergence rather than convergence in probability.</p>
-:ET
