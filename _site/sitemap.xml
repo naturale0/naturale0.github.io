@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
-      <loc>http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</loc>
+      <loc>http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</loc>
       
         <lastmod>2020-04-30T18:39:00+09:00</lastmod>
       
@@ -18,7 +18,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/probability/2020/04/29/Borel-Cantelli-lemmas.html</loc>
+      <loc>http://localhost:4000/probability/Borel-Cantelli-lemmas</loc>
       
         <lastmod>2020-04-29T15:11:00+09:00</lastmod>
       
@@ -34,7 +34,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</loc>
+      <loc>http://localhost:4000/linear%20model/limitation-of-R-sq</loc>
       
         <lastmod>2020-04-28T18:37:10+09:00</lastmod>
       
@@ -50,7 +50,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/probability/2020/04/27/irregularity-of-a.s.-convergence.html</loc>
+      <loc>http://localhost:4000/probability/irregularity-of-a.s.-convergence</loc>
       
         <lastmod>2020-04-27T18:37:10+09:00</lastmod>
       
@@ -66,7 +66,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/probability/2020/04/25/SLLN.html</loc>
+      <loc>http://localhost:4000/probability/SLLN</loc>
       
         <lastmod>2020-04-25T18:37:10+09:00</lastmod>
       
@@ -82,7 +82,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/probability/2020/04/24/high-dimensional-box.html</loc>
+      <loc>http://localhost:4000/probability/high-dimensional-box</loc>
       
         <lastmod>2020-04-24T18:37:10+09:00</lastmod>
       
@@ -98,7 +98,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/decision/2018/05/03/Probabilistic-interpretation-of-cross-entropy.html</loc>
+      <loc>http://localhost:4000/decision/Probabilistic-interpretation-of-cross-entropy</loc>
       
         <lastmod>2018-05-03T19:00:00+09:00</lastmod>
       

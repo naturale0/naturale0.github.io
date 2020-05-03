@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 May 2020 18:43:43 +0900</pubDate>
-    <lastBuildDate>Sun, 03 May 2020 18:43:43 +0900</lastBuildDate>
+    <pubDate>Sun, 03 May 2020 18:47:13 +0900</pubDate>
+    <lastBuildDate>Sun, 03 May 2020 18:47:13 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -65,8 +65,8 @@ Suppose $U \sim \text{U}(0, 1)$. If a continuous distribution function $F$ has a
 
 </description>
         <pubDate>Thu, 30 Apr 2020 18:39:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/30/determination-of-random-variables-and-random-number-generation.html</guid>
+        <link>http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</guid>
         
         
         <category>probability</category>
@@ -117,8 +117,8 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 &lt;p&gt;Kolmogorov’s 0-1 law shows that tail events (any $A \in \mathcal{T}$. $\mathcal{T}$ is called a “tail sigma-field”) can only have either probability 0 or 1. Since $\{A_n \:\: i.o\}$ is a tail event, combined with Borel-Cantelli lemma, it is clear that the second Borel-Cantelli lemma is equivalent to the converse of the first one.&lt;/p&gt;
 </description>
         <pubDate>Wed, 29 Apr 2020 15:11:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/2020/04/29/Borel-Cantelli-lemmas.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/29/Borel-Cantelli-lemmas.html</guid>
+        <link>http://localhost:4000/probability/Borel-Cantelli-lemmas</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/Borel-Cantelli-lemmas</guid>
         
         
         <category>probability</category>
@@ -142,8 +142,8 @@ Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2}
 &lt;p&gt;Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.&lt;/p&gt;
 </description>
         <pubDate>Tue, 28 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linear%20model/2020/04/28/limitation-of-R-sq.html</guid>
+        <link>http://localhost:4000/linear%20model/limitation-of-R-sq</link>
+        <guid isPermaLink="true">http://localhost:4000/linear%20model/limitation-of-R-sq</guid>
         
         
         <category>linear model</category>
@@ -163,8 +163,8 @@ A sequence of random variables $X_n \to X$ in probability $\iff$ $\forall$ subse
 &lt;p&gt;Theorem 1 and 2 combined implies that almost sure convergence does not come from topology. In fact, while convergence in probability forms convergence class, a.s. convergence does not. This shows that a.s. convergense is actually not a “convergence” concept that we generally think of.&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/probability/2020/04/27/irregularity-of-a.s.-convergence.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/27/irregularity-of-a.s.-convergence.html</guid>
+        <link>http://localhost:4000/probability/irregularity-of-a.s.-convergence</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/irregularity-of-a.s.-convergence</guid>
         
         
         <category>probability</category>
@@ -180,8 +180,8 @@ $X_1, X_2, \cdots$ are pairwise independent and identically distributed random v
 &lt;p&gt;SLLN is “strong” in two senses. First, it only requires pairwise independence which is much generous condition than mutual independence required in WLLN. Second, it implies almost sure convergence rather than convergence in probability.&lt;/p&gt;
 </description>
         <pubDate>Sat, 25 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/probability/2020/04/25/SLLN.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/25/SLLN.html</guid>
+        <link>http://localhost:4000/probability/SLLN</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/SLLN</guid>
         
         
         <category>probability</category>
@@ -197,8 +197,8 @@ Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element
 &lt;p&gt;This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/probability/2020/04/24/high-dimensional-box.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/2020/04/24/high-dimensional-box.html</guid>
+        <link>http://localhost:4000/probability/high-dimensional-box</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/high-dimensional-box</guid>
         
         
         <category>probability</category>
@@ -334,8 +334,8 @@ P(Y_n|X)=\frac{P(X|Y_n)P(Y_n)}{P(X)} =\frac{P(X|Y_n)P(Y_n)}{\sum_{i=1}^{n} P(X|Y
 
 </description>
         <pubDate>Thu, 03 May 2018 19:00:00 +0900</pubDate>
-        <link>http://localhost:4000/decision/2018/05/03/Probabilistic-interpretation-of-cross-entropy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/decision/2018/05/03/Probabilistic-interpretation-of-cross-entropy.html</guid>
+        <link>http://localhost:4000/decision/Probabilistic-interpretation-of-cross-entropy</link>
+        <guid isPermaLink="true">http://localhost:4000/decision/Probabilistic-interpretation-of-cross-entropy</guid>
         
         
         <category>decision</category>
