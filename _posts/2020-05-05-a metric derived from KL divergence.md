@@ -11,7 +11,7 @@ For probability densities $p_0$ and $p_1$, KL divergence of $p_1$ from $p_0$ is 
 
 KL divergence is regarded as *"a distance"* between the two probability distributions. However, it is not a metric in mathematical sense, since $K(p_0, p_1) \neq K(p_1, p_0)$ in general.
 
-What if we define a new function $D(p_0, p_1) := \{K(p_0, p_1) + K(p_1, p_0)\}/2$? It is easy to show from properties of KL divergence that 
+What if we define a new function $D(p_0, p_1) := \frac{K(p_0, p_1) + K(p_1, p_0)}{2}$? It is easy to show from properties of KL divergence that 
 
 $$\begin{align}
 &\text{(1)} \:\: D \geq 0 \\
