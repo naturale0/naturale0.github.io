@@ -572,6 +572,11 @@ body {
   font-style: normal;
   counter-increment: definition
 }
+.definition[text]:before {
+  content: "Def. " " (" attr(text) ")\A";
+  font-weight: bold;
+  font-style: normal;
+}
 .definition:before {
   content: "Def. ";
   font-weight: bold;
