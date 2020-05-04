@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 May 2020 02:46:22 +0900</pubDate>
-    <lastBuildDate>Tue, 05 May 2020 02:46:22 +0900</lastBuildDate>
+    <pubDate>Tue, 05 May 2020 02:47:28 +0900</pubDate>
+    <lastBuildDate>Tue, 05 May 2020 02:47:28 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -43,11 +43,11 @@ For probability densities $p_0$ and $p_1$, KL divergence of $p_1$ from $p_0$ is 
 &lt;p&gt;Hence we can say that $J := \sqrt{JS}$ is truely &lt;strong&gt;a metric defined on a set of density functions&lt;/strong&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 05 May 2020 01:37:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/a-metric-derived-from-KL-divergence</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/a-metric-derived-from-KL-divergence</guid>
+        <link>http://localhost:4000/information%20theory/a-metric-derived-from-KL-divergence</link>
+        <guid isPermaLink="true">http://localhost:4000/information%20theory/a-metric-derived-from-KL-divergence</guid>
         
         
-        <category>probability</category>
+        <category>information theory</category>
         
       </item>
     
