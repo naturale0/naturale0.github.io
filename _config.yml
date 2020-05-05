@@ -22,7 +22,7 @@ kramdown:
 
 # Third-party services
 # just leave someone empty to disable it
-# google_analytics:
+google_analytics: 'UA-99089561-1'
 disqus_url: http://disqus.com/by/naturale0
 disqus_id: naturale0-github-io
 
@@ -50,4 +50,4 @@ twitter:
   username: naturale0
   card: summary
 webmaster_verifications:
-  google: tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48
+  google: 'tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48'
