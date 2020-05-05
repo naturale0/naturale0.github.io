@@ -34,6 +34,7 @@ exclude:
 
 plugins:
   - jekyll-paginate
+  - jekyll-seo-tag
 
 paginate: 3
 paginate_path: "/page/:num"
