@@ -18,5 +18,8 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
   {% seo %}
+  
+  {% if jekyll.environment == 'production' %}
   {% include ga.html %}
+  {% endif %}
 </head>
