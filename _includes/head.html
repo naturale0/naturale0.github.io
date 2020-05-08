@@ -18,8 +18,14 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
   {% seo %}
-  
+
   {% if jekyll.environment == 'production' %}
   {% include ga.html %}
   {% endif %}
+
+  <script language='JavaScript' type='text/javascript'>
+    function layer_toggle(obj) {
+        if (obj.style.display=='none') obj.style.display = 'block';
+        else if (obj.style.display=='block') obj.style.display = 'none'; }
+  </script> 
 </head>
