@@ -5,7 +5,7 @@ date:   2020-05-09 01:12:00 +0900
 categories: probability
 ---
 
-Kolmogorov's maximal inequality provides result similar to that of Chebyshev's inequality to maximum of random series.
+Kolmogorov's maximal inequality provides result similar to that of Chebyshev's inequality to maximum of partial sum of random variables.
 
 <div class="theorem" text="Kolmogorov's maximal inequality">
 If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) < \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.

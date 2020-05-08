@@ -6,13 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 09 May 2020 01:18:10 +0900</pubDate>
-    <lastBuildDate>Sat, 09 May 2020 01:18:10 +0900</lastBuildDate>
+    <pubDate>Sat, 09 May 2020 01:22:04 +0900</pubDate>
+    <lastBuildDate>Sat, 09 May 2020 01:22:04 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Kolmogorov's maximal inequality with shifted starting point</title>
-        <description>&lt;p&gt;Kolmogorov’s maximal inequality provides result similar to that of Chebyshev’s inequality to maximum of random series.&lt;/p&gt;
+        <description>&lt;p&gt;Kolmogorov’s maximal inequality provides result similar to that of Chebyshev’s inequality to maximum of partial sum of random variables.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's maximal inequality&quot;&gt;
 If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &amp;lt; \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.
