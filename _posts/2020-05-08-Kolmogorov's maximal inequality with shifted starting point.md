@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kolmogorov's maximal inequality and its implications"
+title:  "Kolmogorov's maximal inequality with shifted starting point"
 date:   2020-05-09 01:12:00 +0900
 categories: probability
 ---

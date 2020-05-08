@@ -6,12 +6,12 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 09 May 2020 01:12:21 +0900</pubDate>
-    <lastBuildDate>Sat, 09 May 2020 01:12:21 +0900</lastBuildDate>
+    <pubDate>Sat, 09 May 2020 01:14:52 +0900</pubDate>
+    <lastBuildDate>Sat, 09 May 2020 01:14:52 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>Kolmogorov's maximal inequality and its implications</title>
+        <title>Kolmogorov's maximal inequality with shifted starting point</title>
         <description>&lt;p&gt;Kolmogorov’s maximal inequality provides result similar to that of Chebyshev’s inequality to maximum of random series.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's maximal inequality&quot;&gt;
@@ -48,8 +48,8 @@ Let $Y_n = X_{n+m}$ and $T_n= \sum\limits_{k=1}^n Y_k$, then $Y_i$’s are also 
 &lt;p&gt;Thus, even with different starting point of summation, and even if $X_i$’s are &lt;em&gt;not identically distributed&lt;/em&gt;, the same form of inequality can be used. This result is useful when proving Kolmogorov’s three-series theorem.&lt;/p&gt;
 </description>
         <pubDate>Sat, 09 May 2020 01:12:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/Kolmogorov's-maximal-inequality-and-implications</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/Kolmogorov's-maximal-inequality-and-implications</guid>
+        <link>http://localhost:4000/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point</guid>
         
         
         <category>probability</category>
