@@ -33,7 +33,7 @@ $$\begin{align}
 <br>
 Let $Y_n = X_{n+m}$ and $T_n= \sum\limits_{k=1}^n Y_k$, then $Y_i$'s are also independent with expectaion 0 and finite variance. Hence, the following also holds,
 
-$$P(\max_{1 \leq k \leq n-m} |T_k| > x) \leq \frac{1}{x^2} \mathrm{Var}(T_{n-m})$$
+$$P(\max_{0 \leq k \leq n-m} |T_k| > x) \leq \frac{1}{x^2} \mathrm{Var}(T_{n-m})$$
 
 which means
 
