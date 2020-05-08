@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 09 May 2020 01:22:04 +0900</pubDate>
-    <lastBuildDate>Sat, 09 May 2020 01:22:04 +0900</lastBuildDate>
+    <pubDate>Sat, 09 May 2020 01:25:07 +0900</pubDate>
+    <lastBuildDate>Sat, 09 May 2020 01:25:07 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -218,12 +218,12 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
 For a linear regression $y_i = \beta_0 + \sum\limits_{j=1}^{p} \beta_j x_{ij}$, $1 \leq i \leq n$, suppose $x_{ij}$'s does not have any relationship with $y_i$'s. i.e. true model is $y_i = \beta_0 = \bar{y}$. Under this assumption,
 
 $$\begin{align*}
-    \frac{SSE}{\sigma^2} &amp;amp;\sim \chi^2(n-p-1) \overset{D}{=} \Gamma(\frac{n-p-1}{2}, 2)\\
-    \frac{SSR}{\sigma^2} &amp;amp;\sim \chi^2(p) \overset{D}{=} \Gamma(\frac{p}{2}, 2)\\   
-    SSE &amp;amp;\perp SSR
+    \frac{\mathrm{SSE}}{\sigma^2} &amp;amp;\sim \chi^2(n-p-1) \overset{D}{=} \Gamma(\frac{n-p-1}{2}, 2)\\
+    \frac{\mathrm{SSR}}{\sigma^2} &amp;amp;\sim \chi^2(p) \overset{D}{=} \Gamma(\frac{p}{2}, 2)\\   
+    \mathrm{SSE} &amp;amp;\perp \mathrm{SSR}
 \end{align*}$$
 
-Thus, $R^2 = \frac{SSR}{SSR + SSE} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2})$, and $E(R^2) = \frac{p}{n-1}$.
+Thus, $R^2 = \frac{\mathrm{SSR}}{\mathrm{SSR} + \mathrm{SSE}} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2})$, and $E(R^2) = \frac{p}{n-1}$.
 &lt;/div&gt;
 
 &lt;p&gt;Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.&lt;/p&gt;
