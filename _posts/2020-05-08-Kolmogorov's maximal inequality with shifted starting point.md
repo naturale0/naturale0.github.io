@@ -16,7 +16,7 @@ $$P(\max_{1 \leq k \leq n} |S_k| > x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
 
 
 <div class="proof">
-Let $A_k = \{ S_k > x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \geq k \geq n} \|S_k\| > x \}$.
+Let $A_k = \{ S_k > x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} \|S_k\| > x \}$.
 
 $$\begin{align} 
   \mathrm{Var}(S_n) &= \mathrm{E}(S_n^2) \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
