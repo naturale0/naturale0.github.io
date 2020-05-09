@@ -37,6 +37,9 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# sitemap
+url: "https://naturale0.github.io"
+
 # paginate
 paginate: 3
 paginate_path: "/page/:num"
