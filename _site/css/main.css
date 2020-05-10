@@ -326,7 +326,7 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .lemma:before { content: "Lemma. "; font-weight: bold; font-style: normal; }
 
-.proof { display: block; margin: 12px 0; font-style: normal; }
+.proof { display: block; margin: 12px 0; font-style: normal; color: #6F6F6F; }
 
 .proof:before { content: "(Proof) "; font-style: italic; }
 
