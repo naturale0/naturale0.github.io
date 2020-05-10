@@ -2,7 +2,7 @@
 layout: post
 title:  "Kolmogorov's maximal inequality with shifted starting point"
 date:   2020-05-09 01:12:00 +0900
-categories: probability
+categories: [probability]
 ---
 
 Kolmogorov's maximal inequality provides result similar to that of Chebyshev's inequality to maximum of partial sum of random variables.
