@@ -34,9 +34,9 @@ Then we state the main theorem.
 $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
 </div>
 
-Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.
-
 <br>
+
+Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.
 
 With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.
 

@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 13 May 2020 23:45:41 +0900</pubDate>
-    <lastBuildDate>Wed, 13 May 2020 23:45:41 +0900</lastBuildDate>
+    <pubDate>Wed, 13 May 2020 23:48:15 +0900</pubDate>
+    <lastBuildDate>Wed, 13 May 2020 23:48:15 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -41,9 +41,9 @@ A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the foll
 $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
 &lt;/div&gt;
 
-&lt;p&gt;Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.&lt;/p&gt;
-
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.&lt;/p&gt;
 
 &lt;p&gt;With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.&lt;/p&gt;
 
