@@ -38,7 +38,7 @@
 <meta name="twitter:creator" content="@Sihyung Park" />
 <meta name="google-site-verification" content="tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/","author":{"@type":"Person","name":"Sihyung Park"},"headline":"Home","description":"statistical ideas that interest me.","@type":"WebSite","name":"De Novo","@context":"https://schema.org"}</script>
+{"headline":"Home","author":{"@type":"Person","name":"Sihyung Park"},"description":"statistical ideas that interest me.","@type":"WebSite","url":"http://localhost:4000/","name":"De Novo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -108,8 +108,6 @@
               
             
               
-            
-              
                 
               
             
@@ -119,6 +117,8 @@
             
               
                 
+              
+            
               
             
           -->
@@ -169,8 +169,9 @@ A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the foll
 
 <p>Note: Sometimes $\lambda$-system is referred to as <strong>“Dynkin’s system”</strong>. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the most easy to use when proving some collection is a $\lambda$-system.</p>
 
-<p><br />
-Then we state the main theorem.</p>
+<p><br /></p>
+
+<p>Then we state the main theorem.</p>
 
 <div class="theorem" text="Dynkin's π-λ theorem">
 $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
@@ -182,6 +183,8 @@ $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: 
 
 <p>With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.</p>
 
+<p><br /></p>
+
 <div class="theorem" text="equivalent probability measures">
 $\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
 </div>
@@ -190,12 +193,16 @@ $\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{
 Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
 </div>
 
+<p><br /></p>
+
 <div class="theorem" text="extension of independence">
 $\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $\mathcal{A}, \mathcal{B}$ are independent, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
 </div>
 
 <div class="proof">
-For a given $A \in \mathcal{A}$, let $\mathcal{L}_A = \{  \}$
+Let $\mu$ be a probability measure on $(\Omega, \mathcal{F})$. For a given $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  \mu(A \cap B) = \mu(A)\mu(B) \}$. Then $\mathcal{L}_A$ is a $\lambda$-system that contains $\mathcal{B}$ and $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. Since $A \in \mathcal{A}$ was arbitrarily chosen, it is independent to $\mathcal{A}$.
+<br />
+&ensp; Now for given $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$, which leads to the desired result.
 </div>
 
 <p><br /></p>
