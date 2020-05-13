@@ -1,0 +1,39 @@
+I"v<p>When dealing with collections of sets, Dynkin’s systems provides simple but powerful tool for extension of properties in smaller collections to bigger ones.</p>
+
+<p>First, we define $\pi$ and $\lambda$-systems.</p>
+
+<div class="definition" text="π-system">
+A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
+
+</div>
+
+<div class="definition" text="λ-system">
+A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.
+<br />
+(1) $\Omega \in \mathcal{L}$
+<br /> 
+(2) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$
+<br />
+(3) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
+</div>
+
+<p>Note: Sometimes $\lambda$-system is referred to as <strong>“Dynkin’s system”</strong>. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the most easy to use when proving some collection is a $\lambda$-system.</p>
+
+<p>Then we state the main theorem.</p>
+<div class="theorem" text="Dynkin's π-λ theorem">
+$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
+</div>
+
+<p>$\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.</p>
+
+<p>With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$.</p>
+
+<div class="theorem" text="equivalent probability measures">
+$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
+</div>
+
+<div class="proof">
+Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system.
+</div>
+
+:ET

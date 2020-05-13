@@ -1,0 +1,54 @@
+I"
+<p>When dealing with collections of sets, Dynkin’s systems provides simple but powerful tool for generalization of properties in smaller collections to bigger ones.</p>
+
+<p>First, we define $\pi$ and $\lambda$-systems.</p>
+
+<div class="def" text="π-system">
+A collection of sets $P$ is a $\pi$-system if the followings hold.
+<br />
+(1) $A, B \in P$ then $A \cap B \in P$
+<br /> 
+(2)
+</div>
+
+<div class="def" text="λ-system">
+A collection of sets $P$ is a $\pi$-system if the followings hold.
+<br />
+(1) $A, B \in P$ then $A \cap B \in P$
+<br /> 
+(2)
+</div>
+
+<div class="theorem" text="Dynkin's π-λ theorem">
+If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &lt; \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.
+
+$$P(\max_{1 \leq k \leq n} |S_k| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
+
+</div>
+
+<div class="proof">
+Let $A_k = \{ S_k &gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} \|S_k\| &gt; x \}$.
+
+$$\begin{align} 
+  \mathrm{Var}(S_n) &amp;= \mathrm{E}(S_n^2) \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
+                                &amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
+                                &amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
+                                &amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
+                                &amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
+                                &amp;= \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
+                                &amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
+                                &amp;= x^2P(\cup_{k=1}^n A_k) \\
+                                &amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &gt; x)
+\end{align}$$
+</div>
+<p><br />
+Let $Y_n = X_{n+m}$ and $T_n= \sum\limits_{k=1}^n Y_k$, then $Y_i$’s are also independent with expectaion 0 and finite variance. Hence, the following also holds,</p>
+
+\[P(\max_{0 \leq k \leq n-m} |T_k| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(T_{n-m})\]
+
+<p>which means</p>
+
+\[P(\max_{m \leq k \leq n} |S_k - S_m| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n - S_m)\]
+
+<p>Thus, even with different starting point of summation, and even if $X_i$’s are <em>not identically distributed</em>, the same form of inequality can be used. This result is useful when proving Kolmogorov’s three-series theorem.</p>
+:ET

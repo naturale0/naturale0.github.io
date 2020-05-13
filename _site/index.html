@@ -38,7 +38,7 @@
 <meta name="twitter:creator" content="@Sihyung Park" />
 <meta name="google-site-verification" content="tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48" />
 <script type="application/ld+json">
-{"headline":"Home","author":{"@type":"Person","name":"Sihyung Park"},"description":"statistical ideas that interest me.","@type":"WebSite","url":"http://localhost:4000/","name":"De Novo","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/","author":{"@type":"Person","name":"Sihyung Park"},"headline":"Home","description":"statistical ideas that interest me.","@type":"WebSite","name":"De Novo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -108,13 +108,17 @@
               
             
               
-                
-              
             
               
                 
               
             
+              
+                
+              
+            
+              
+                
               
             
           -->
@@ -134,6 +138,100 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/application-of-pi-lambda-theorem">Application of Dynkin's π-λ theorem</a></h2>
+        <time class="post_date">13 May 2020, Wednesday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>When dealing with collections of sets, Dynkin’s systems provides simple but powerful tool for extension of properties in smaller collections to bigger ones.</p>
+
+<p>First, we define $\pi$ and $\lambda$-systems.</p>
+
+<div class="definition" text="π-system">
+A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
+
+</div>
+
+<div class="definition" text="λ-system">
+A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.
+<br />
+(1) $\Omega \in \mathcal{L}$
+<br /> 
+(2) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$
+<br />
+(3) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
+</div>
+
+<p>Note: Sometimes $\lambda$-system is referred to as <strong>“Dynkin’s system”</strong>. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the most easy to use when proving some collection is a $\lambda$-system.</p>
+
+<p><br />
+Then we state the main theorem.</p>
+
+<div class="theorem" text="Dynkin's π-λ theorem">
+$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
+</div>
+
+<p>Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.</p>
+
+<p><br /></p>
+
+<p>With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.</p>
+
+<div class="theorem" text="equivalent probability measures">
+$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
+</div>
+
+<div class="proof">
+Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
+</div>
+
+<div class="theorem" text="extension of independence">
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $\mathcal{A}, \mathcal{B}$ are independent, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+</div>
+
+<div class="proof">
+For a given $A \in \mathcal{A}$, let $\mathcal{L}_A = \{  \}$
+</div>
+
+<p><br /></p>
+
+<p>The last example does not actually utilize $\pi-\lambda$ theorem, but is uses similar idea on its proof.</p>
+
+<div class="theorem" text="extension to random variable">
+$\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.
+</div>
+
+          
+          <a class="read-more-btn" href="/probability/application-of-pi-lambda-theorem"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -258,94 +356,6 @@ For probability densities $p_0$ and $p_1$, KL divergence of $p_1$ from $p_0$ is 
         <a href="/category/information theory">
           <data data-icon="ei-archive"></data>
           information theory</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/determination-of-random-variables-and-random-number-generation">Determination of random variables and random number generation</a></h2>
-        <time class="post_date">30 April 2020, Thursday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <div class="theorem" text="Distribution determines random variable">
-$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
-</div>
-
-<div class="proof"> <br />
-($\Rightarrow$) is trivial.
-<br />
-($\Leftarrow$) let $\Omega = [0, 1]$, $\mathcal{F} = \mathcal{B}\big( [0, 1] \big)$, $P=\lambda$ where $\lambda$ is a lebesgue measure. Define $X(\omega) := \sup\{y: F(y) &lt; \omega\}$, then our claim is that X is a random variable that has $F$ as its distribution. To show the claim is true, we need to show 
-$$P(X\leq x) = F(x) = P(\{\omega: 0\leq \omega \leq F(x)\})$$
-which can be inferred by $\{\omega: X(\omega) \leq x\} = \{\omega: \omega \leq F(x)\}$, $\forall x$.
-<br />
-&ensp;
-<br />
-
-Given $x$, pick $\omega_0 \in \{\omega: \omega \leq F(x)\}$, since $F(x) \geq \omega_0$, $x \notin \{y: F(y) &lt; \omega_0\}$. Therefore $X(\omega_0) \leq x$ and $\omega_0 \in \{\omega: X(\omega) \leq x\}$.
-$$\begin{equation}
-\therefore \: \{\omega: X(\omega) \leq x\} \supset \{\omega: \omega \leq F(x)\}, \forall x
-\end{equation}$$
-
-Given $x$, pick $\omega_0 \notin \{\omega: \omega \leq F(x)\}$, then $\omega_0 &gt; F(x)$. Since $F$ is right-continuous, $\exists\epsilon &gt; 0$ such that $F(x) \leq F(x+\epsilon) &lt; \omega_0$. $x+\epsilon \leq X(\omega_0)$ because $X$ is defined as $\sup$, and this gives $x &lt; X(\omega_0)$ and thus $\omega_0 \notin \{\omega: X(\omega) \leq x\}$.
-
-$$\therefore \: \{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\}, \forall x$$
-
-Hence the claim is true, and
-$$\begin{align}
-  F(x) &amp;= \lambda\big( [0, F(x)] \big) = P(\{\omega: \omega \leq F(x)\})\\
-       &amp;= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
-\end{align}$$
-</div>
-
-<p><br /></p>
-<div class="theorem" text="Probability integral transform">
-Suppose that a random variable $X$ has a continuous distibution $F$, then $Y := F(X) \sim \text{U}(0, 1)$
-</div>
-
-<p>Probability integral transform can be proven by similar method to the one that used to prove theorem 1. The idea here is to construct a function that is an “inverse” of $F$. Since it is not sure that $F$ can have an inverse, it is safe to say that $X$ is constructed as an upper-quantile function of $F$.</p>
-
-<p>The fact that we can naturally derive from here is interesting:</p>
-
-<div class="fact" text="inverse-transform sampling">
-Suppose $U \sim \text{U}(0, 1)$. If a continuous distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
-</div>
-
-<p>So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,</p>
-
-<div class="example" text="generating Exp(1) random sample">
-1. Generate random numbers $u_i$'s from $\text{U}(0, 1)$.
-<br />
-2. $y_i := -\log(1-u_i)$ are random numbers from $\text{Exp}(1)$.
-</div>
-
-
-          
-          <a class="read-more-btn" href="/probability/determination-of-random-variables-and-random-number-generation"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
         
         -->
 

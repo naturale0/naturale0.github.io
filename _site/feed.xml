@@ -6,9 +6,78 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 May 2020 20:30:57 +0900</pubDate>
-    <lastBuildDate>Sun, 10 May 2020 20:30:57 +0900</lastBuildDate>
+    <pubDate>Wed, 13 May 2020 22:45:24 +0900</pubDate>
+    <lastBuildDate>Wed, 13 May 2020 22:45:24 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Application of Dynkin's π-λ theorem</title>
+        <description>&lt;p&gt;When dealing with collections of sets, Dynkin’s systems provides simple but powerful tool for extension of properties in smaller collections to bigger ones.&lt;/p&gt;
+
+&lt;p&gt;First, we define $\pi$ and $\lambda$-systems.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;π-system&quot;&gt;
+A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
+
+&lt;/div&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;λ-system&quot;&gt;
+A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.
+&lt;br /&gt;
+(1) $\Omega \in \mathcal{L}$
+&lt;br /&gt; 
+(2) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$
+&lt;br /&gt;
+(3) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
+&lt;/div&gt;
+
+&lt;p&gt;Note: Sometimes $\lambda$-system is referred to as &lt;strong&gt;“Dynkin’s system”&lt;/strong&gt;. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the most easy to use when proving some collection is a $\lambda$-system.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Then we state the main theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Dynkin's π-λ theorem&quot;&gt;
+$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
+&lt;/div&gt;
+
+&lt;p&gt;Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;equivalent probability measures&quot;&gt;
+$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;
+Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;extension of independence&quot;&gt;
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $\mathcal{A}, \mathcal{B}$ are independent, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;
+For a given $A \in \mathcal{A}$, let $\mathcal{L}_A = \{  \}$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The last example does not actually utilize $\pi-\lambda$ theorem, but is uses similar idea on its proof.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;extension to random variable&quot;&gt;
+$\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 13 May 2020 22:00:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/application-of-pi-lambda-theorem</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/application-of-pi-lambda-theorem</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>Kolmogorov's maximal inequality with shifted starting point</title>
