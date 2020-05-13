@@ -24,7 +24,7 @@ A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the foll
 (3) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
 </div>
 
-Note: Sometimes $\lambda$-system is referred to as **"Dynkin's system"**. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the most easy to use when proving some collection is a $\lambda$-system.
+Note: Sometimes $\lambda$-system is referred to as **"Dynkin's system"**. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the easiest to use when proving some collection of sets is a $\lambda$-system.
 
 <br>
 
