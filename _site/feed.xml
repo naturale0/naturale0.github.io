@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 13 May 2020 23:53:51 +0900</pubDate>
-    <lastBuildDate>Wed, 13 May 2020 23:53:51 +0900</lastBuildDate>
+    <pubDate>Wed, 13 May 2020 23:54:20 +0900</pubDate>
+    <lastBuildDate>Wed, 13 May 2020 23:54:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -71,7 +71,7 @@ Let $\mu$ be a probability measure on $(\Omega, \mathcal{F})$. For a given $A \i
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;The last example does not actually utilize $\pi-\lambda$ theorem, but is uses similar idea on its proof.&lt;/p&gt;
+&lt;p&gt;The last example does not actually utilize $\pi-\lambda$ theorem, but it uses similar idea on its proof.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;extension to random variable&quot;&gt;
 $\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.

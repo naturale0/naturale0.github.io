@@ -66,7 +66,7 @@ Let $\mu$ be a probability measure on $(\Omega, \mathcal{F})$. For a given $A \i
 
 <br>
 
-The last example does not actually utilize $\pi-\lambda$ theorem, but is uses similar idea on its proof.
+The last example does not actually utilize $\pi-\lambda$ theorem, but it uses similar idea on its proof.
 
 <div class="theorem" text="extension to random variable">
 $\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.
