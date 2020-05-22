@@ -2,7 +2,7 @@
 layout: post
 title:  "Probabilistic interpretation of cross-entropy"
 date:   2018-05-03 19:00:00 +0900
-categories: decision
+categories: [decision theory]
 ---
 
 머신러닝을 공부하다보면 logistic을 참 많이 접하게 된다. 당장 로지스틱 회귀만 해도 그렇고, 딥러닝에서 자주 사용하는 saturating non-linearity 중 하나인 softmax function도 logistic function의 multi-class 버전이니 말이다.
