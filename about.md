@@ -16,6 +16,6 @@ Hi,
 
 I am Park, Sihyung, an M.S. student majoring in Statistics.
 
-*De Novo* is a word frequently used in Biology, which means "of new", "from the beginning" in Latin. This blog is about some random interesting/important ideas I encounter while studying and doing research. This is my attempt to build up and organize new (and hopefully meaningful) knowledge from scratch.
+*De Novo* is a word frequently used in Biology, which means "of new", "from the beginning" in Latin. This blog is about some random interesting/important ideas I encountered while studying and doing research. This is my attempt to build up and organize new (and hopefully meaningful) knowledge from scratch.
 
-Hope my knowledge helps someone (including my future self).
+Hope my knowledge helps someone, including my future self.
