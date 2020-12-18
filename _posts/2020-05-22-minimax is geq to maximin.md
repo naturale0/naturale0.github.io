@@ -17,7 +17,7 @@ Now let's think about this problem in decision theoretic framework. Suppose the 
 
 <br>
 
-## 1. If the environment "knows" our choise $\delta$ prior to the runner's decision.
+### 1. If the environment "knows" our choise $\delta$ prior to the runner's decision.
 
 Then it will choose the worst possible choice to the runner. That is, 
 
@@ -37,7 +37,7 @@ $\delta^*$ here is called a **minimax rule**, while $\pi_\delta$ is called a **$
 
 <br>
 
-## 2. If the runner "knows" the environment's choise $\pi$ prior to his/her decision.
+### 2. If the runner "knows" the environment's choise $\pi$ prior to his/her decision.
 
 Then he/she will choose the best possible choice to reduce the time. That is, 
 
