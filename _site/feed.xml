@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:18:16 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:18:16 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:19:23 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:19:23 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -51,6 +51,7 @@ $(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a &lt
 &lt;p&gt;If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;Borel σ-field&quot;&gt;
+&lt;br /&gt;
 $\begin{align}
 \mathcal{B}(\Omega) &amp;amp;= \text{(the smallest $\sigma$-field that contains all open sets of $\Omega$)} \\
  &amp;amp;= \cap_{\tau\subset\mathcal{F}} \mathcal{F}
