@@ -457,8 +457,9 @@ body {
   counter-reset: fact;
   counter-reset: remark;
   counter-reset: example;
-  counter-reset: proposition;
-  counter-reset: lemma;
+  //counter-reset: proposition;
+  //counter-reset: lemma;
+  //counter-reset: corollary;
 }
 
 .theorem {
@@ -474,6 +475,22 @@ body {
 }
 .theorem[text]:before {
   content: "Theorem " counter(theorem) " (" attr(text) ")\A";
+  white-space: pre;
+}
+
+.corollary {
+  display: block;
+  margin: 12px 0;
+  font-style: italic;
+  counter-increment: theorem//corollary
+}
+.corollary:before {
+  content: "Corollary " counter(theorem) ". ";
+  font-weight: bold;
+  font-style: normal;
+}
+.corollary[text]:before {
+  content: "Corollary " counter(theorem) " (" attr(text) ")\A";
   white-space: pre;
 }
 
@@ -514,15 +531,15 @@ body {
   display: block;
   margin: 12px 0;
   font-style: italic;
-  counter-increment: prop
+  counter-increment: theorem//prop
 }
 .prop:before {
-  content: "Proposition " counter(prop) ". ";
+  content: "Proposition " counter(theorem) ". ";
   font-weight: bold;
   font-style: normal;
 }
 .prop[text]:before {
-  content: "Proposition " counter(prop) " (" attr(text) ")\A";
+  content: "Proposition " counter(theorem) " (" attr(text) ")\A";
   white-space: pre;
 }
 
@@ -546,12 +563,16 @@ body {
   display: block;
   margin: 12px 0;
   font-style: italic;
-  counter-increment: lemma
+  counter-increment: theorem//lemma
 }
 .lemma:before {
-  content: "Lemma. ";
+  content: "Lemma ";
   font-weight: bold;
   font-style: normal;
+}
+.lemma[text]:before {
+  content: "Lemma " counter(theorem) " (" attr(text) ")\A";
+  white-space: pre;
 }
 .proof {
   display: block;

@@ -6,9 +6,204 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 May 2020 23:20:37 +0900</pubDate>
-    <lastBuildDate>Fri, 29 May 2020 23:20:37 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:07:11 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:07:11 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[PTE] (1.1) Basics on measure theory</title>
+        <description>&lt;p&gt;The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book &lt;a href=&quot;https://services.math.duke.edu/~rtd/PTE/pte.html&quot;&gt;&lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019)&lt;/a&gt;, while some others are borrowed from the lecture note and personal communications with colleagues.&lt;/p&gt;
+
+&lt;p&gt;The first chapter devotes on the basics of measure theory. A probability space is defined and essential theorems are introduced.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
+
+&lt;p&gt;A probability space is a special kind of a measure space, which is equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;σ-field&quot;&gt;
+For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
+&lt;br /&gt;
+(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}$. &lt;br /&gt;
+(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}$.
+&lt;/div&gt;
+
+&lt;p&gt;A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.&lt;/p&gt;
+
+&lt;p&gt;We nect define a function that &lt;em&gt;measures&lt;/em&gt; sizes of sets inside the $\sigma$-field.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;measure&quot;&gt;
+$\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$.
+(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+&lt;/div&gt;
+
+&lt;p&gt;The second condition is sometimes referred to as &lt;em&gt;$\sigma$ sub-additivity&lt;/em&gt;. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.&lt;/p&gt;
+
+&lt;p&gt;If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &amp;lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a &lt;strong&gt;$\sigma$-finite&lt;/strong&gt; measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this &lt;strong&gt;a probability measure&lt;/strong&gt; (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.&lt;/p&gt;
+
+&lt;p&gt;Finally we can define a measure space and in addition a probability space.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;probability space&quot;&gt;
+$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a &lt;b&gt;measurable space&lt;/b&gt;. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a &lt;b&gt;measurable space&lt;/b&gt;. If $P$ is a probability measure, we call this a &lt;b&gt;probability space&lt;/b&gt;, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
+&lt;/div&gt;
+
+&lt;p&gt;If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;Borel σ-field&quot;&gt;
+$\begin{align}
+\mathcal{B}(\Omega) &amp;amp;= \text{(the smallest $\sigma$-field that contains all open sets of $\Omega$)} \\
+ &amp;amp;= \cap_{\tau\subset\mathcal{F}} \mathcal{F}
+\end{align}$
+&lt;br /&gt;
+is the Borel $\sigma$-field of $\Omega$, where $\tau$ is a topology on $\Omega$. An element of $\mathcal{B}(\Omega)$ is called a Borel set.
+&lt;/div&gt;
+
+&lt;p&gt;An important property of $\sigma$-fields related to the definition of Borel fields is that arbitrary intersections of $\sigma$-fields is a $\sigma$-algebra. (This comes directly from the definition.)&lt;/p&gt;
+
+&lt;p&gt;For example of a Borel $\sigma$-field and a measure space, consider $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ and the Lebesgue measure $\lambda$. It is not difficult to know that $\mathcal{B}(\mathbb{R})$ is consists of intersections and unions of sets of the form $(a,b),~(a,b],~[a,b)$ or $[a,b]$ where $a,b\in\mathbb{R}$. The Lebesgue measure measures their “size” as $\lambda(a,b]=b-a$.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;probability-measures&quot;&gt;Probability measures&lt;/h2&gt;
+
+&lt;p&gt;Let’s take a deeper look into the properties of measure and probability measures.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;properties of probability measures&quot;&gt;
+Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following properties hold.&lt;br /&gt;
+(i) (monotonicity) $A\subset B \implies P(A) \le P(B)$. &lt;br /&gt;
+(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i)$. &lt;br /&gt;
+(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A)$. &lt;br /&gt;
+(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B)$.
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A)$. &lt;br /&gt;
+(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n)$. &lt;br /&gt;
+(iii) Let $B_n = A_n \setminus A_{n-1},~ A_0=\phi$ so that $B_n$'s be disjoint. Then $$\begin{align} 
+  P(\cup_n A_n) &amp;amp;= P(\cup_n B_n) = \sum_n P(B_n) \\
+                &amp;amp;= \lim_n P(\cup_{i=1}^n B_i) \\
+                &amp;amp;= \lim_n P(\cup_{i=1}^n A_i) \\
+                &amp;amp;= \lim_n P(A_n)
+\end{align}$$ &lt;br /&gt;
+(iv) Let $B_n' = B_1 \setminus B_n$ and use (iii).
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characterization-of-a-probability-measure&quot;&gt;Characterization of a probability measure&lt;/h2&gt;
+
+&lt;p&gt;Until here, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generatlizations of $\sigma$-fields.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;semi-algebra&quot;&gt;
+A collection of sets $\mathcal{S}$ is a semi-algebra, if &lt;br /&gt;
+(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoin unions of $S_i \in \mathcal{S}$. &lt;br /&gt;
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+&lt;/div&gt;
+
+&lt;p&gt;It is not necessary for a semi-algebra to contain $\phi$. However in many cases it is convenient to make it do so.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;algebra&quot;&gt;
+A collection of sets $\mathcal{A}$ is an algebra, if &lt;br /&gt;
+(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}$. &lt;br /&gt;
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+&lt;/div&gt;
+
+&lt;p&gt;Note that the strengthened condition on the definition of algrebra allows it to be closed on both the finite intersection &lt;em&gt;and&lt;/em&gt; union.&lt;/p&gt;
+
+&lt;p&gt;For example, $\mathcal{S}_1 = {\phi} \cup {(a,b]:~-\infty\le a&amp;lt;b\le \infty}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.&lt;/p&gt;
+
+&lt;p&gt;An algebra can be generated using semi-algebra. $\overline{\mathcal{S}} := {\text{finite disjoint unions of sets in }\mathcal{S}}$ is an &lt;strong&gt;algebra generated by a semi-algebra $\mathcal{S}$&lt;/strong&gt;. Like Borel $\sigma$-field, it is the smallest algebra that contains $\mathcal{S}$.&lt;/p&gt;
+
+&lt;p&gt;Similarly, a $\sigma$-field can be generated by (semi)algebra. $\sigma(\mathcal{S}) = \sigma(\overline{\mathcal{S}})$ is the smallest $\sigma$-field that contains $\mathcal{S}$.&lt;/p&gt;
+
+&lt;p&gt;Now we define “measures” on these structures.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;measure on algebra&quot;&gt;
+$\mu:\mathcal{A} \to \mathbb{R}^*\cup\{0\}$ is a measure on an algebra $\mathcal{A}$ if &lt;br /&gt;
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}$. &lt;br /&gt;
+(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+&lt;/div&gt;
+
+&lt;p&gt;$\sigma$-finiteness is defined as in the $\sigma$-field case.&lt;/p&gt;
+
+&lt;p&gt;We can define similar functions in semi-algebra. Let $\mu: \mathcal{S} \to \mathbb{R}^+ \cup {0}$ be a function on a semi-algebra $\mathcal{S}$ that satisfies&lt;br /&gt;
+(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}$.&lt;br /&gt;
+(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i)$.&lt;br /&gt;
+(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i)$.&lt;br /&gt;
+I will call such functions &lt;em&gt;semi-measures&lt;/em&gt;&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;The following theorem states that a semi-measure can uniquely extended to a measure on algebra. If the extended measure on algebra is $\sigma$-finite, it can further extended to a measure on $\sigma$-field.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Caratheodory's extension&quot;&gt;
+$\mathcal{S}$: a semi-algebra with $\phi\in\mathcal{S}$.&lt;br /&gt;
+$\mu: \mathcal{S} \to \mathbb{R}^+\cup\{0\}$ is a semi-measure.&lt;br /&gt;
+$\Rightarrow \exists!$ a positive measure $\overline{\mu}$ in $\overline{\mathcal{S}}$ that is an extension of $\mu$. &lt;br /&gt;
+In addition, if $\overline{\mu}$ is $\sigma$-finite, $\exists!$ a measure $\nu$ on $\sigma(\mathcal{S})$ that is an extension of $\overline{\mu}$.
+&lt;/div&gt;
+
+&lt;p&gt;Our major interest is in probability measure on $\mathbb{R}$. In undergraduate statistics, we learned that (cumulative) distribution functions uniquely determine probability distributions while densities cannot. Caratheodory’s extension theorem leads us the that conclution.&lt;/p&gt;
+
+&lt;p&gt;We say a real-valued function on $\mathbb{R}$ is a &lt;strong&gt;Stieltjes measure function&lt;/strong&gt; if it is non-decreasing and right-continuous.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+$F$ is a Stieltjest measure function. $\Rightarrow \exists!$ a measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ such that $\mu(a,b] = F(b)-F(a)$.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $\mathcal{S} = \{0\} \cup \{(a,b]:~ -\infty\le a &amp;lt; b \le \infty\}$ and $\nu(\phi)=0$, $\nu(a,b] = F(b) - F(a)$. Then $\mathcal{S}$ is a semi-algebra and $\nu$ is a semi-measure. Let $S_n = (-n, n] \in \overline{\mathcal{S}}$, then it is easy to show $\sigma$-finiteness. By Caratheodory's theorem, there is a unique extension of $\nu$.
+&lt;/div&gt;
+
+&lt;p&gt;Since a distribution fundtion $F$ is a special case of Stieltjes measure function, it follows directly from the theorem that $F$ uniquely determines a probability measure.&lt;/p&gt;
+
+&lt;p&gt;On $\mathbb{R}^d,~ d&amp;gt;1$, we define functions similar to Stieltjes measure function: $F:\mathbb{R}^d \to \mathbb{R}^+ \cup {0}$ such that $F$ is non-decreasing, right-continuous and $\Delta_A F \ge 0,~ \forall A = (a_1,b_1] \times \cdots \times (a_d,b_d]$, where $\Delta_A F = \sum_{v\in V}\text{sgn}(v)F(v)$, $V={a_1, b_1} \times \cdots \times {a_d, b_d}$. Similar to the above, such $F$ can be uniquely extended to a measure $\mu$ such that $\mu(A) = \Delta_A F$ forall finite rectable $A$. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dynkins-pi-lambda-theorem&quot;&gt;Dynkin’s $\pi$-$\lambda$ theorem&lt;/h2&gt;
+&lt;p&gt;I will end this subsection by stating the theorem that will be used throughout the course.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;π-system&quot;&gt;
+A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
+&lt;/div&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;λ-system&quot;&gt;
+A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.&lt;br /&gt;
+(i) $\Omega \in \mathcal{L}$ &lt;br /&gt; 
+(ii) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$ &lt;br /&gt;
+(iii) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Dynkin's π-λ theorem&quot;&gt;
+$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
+&lt;/div&gt;
+
+&lt;p&gt;The theorem implies in order to show that some property holds in a $\sigma$-field, we only need to prove that it holds in a $\lambda$-system and the generator $pi$-system of the $\sigma$-field is contained in our $\lambda$-system. A simple but useful corollary is about equivalent probability measures.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot;&gt;
+$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;
+Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgenment&quot;&gt;Acknowledgenment&lt;/h3&gt;
+
+&lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;I named this “semi-measure” just for the convenience. This might be different to the actual definition of semi-measure. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 22 May 2020 14:46:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-1.1-Measure-theory</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.1-Measure-theory</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>The slowest run vs. the fastest walk: which is faster?</title>
@@ -430,23 +625,6 @@ $X_1, X_2, \cdots$ are pairwise independent and identically distributed random v
         <pubDate>Sat, 25 Apr 2020 18:37:10 +0900</pubDate>
         <link>http://localhost:4000/probability/SLLN</link>
         <guid isPermaLink="true">http://localhost:4000/probability/SLLN</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>High-dimensional box</title>
-        <description>&lt;div class=&quot;example&quot; text=&quot;High-dimensional box&quot;&gt;
-Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element from this box. i.e. $\mathbf{X_n}=(X_1, \cdots, X_n)$, where $X_1, \cdots, X_n \stackrel{iid}{\sim} \mathcal{U}(-1,1)$. Then as $n \to \infty$, $P(\sqrt{\frac{n}{3}(1-\epsilon)}&amp;lt; \|\mathbf{X_n}\|_2 &amp;lt; \sqrt{\frac{n}{3}(1+\epsilon)}) \to 1$, $\forall{0&amp;lt;\epsilon&amp;lt;1}$.
-&lt;/div&gt;
-
-&lt;p&gt;This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 24 Apr 2020 18:37:10 +0900</pubDate>
-        <link>http://localhost:4000/probability/high-dimensional-box</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/high-dimensional-box</guid>
         
         
         <category>probability</category>

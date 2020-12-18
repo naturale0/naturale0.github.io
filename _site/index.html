@@ -38,7 +38,7 @@
 <meta name="twitter:creator" content="@Sihyung Park" />
 <meta name="google-site-verification" content="tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/","author":{"@type":"Person","name":"Sihyung Park"},"headline":"Home","description":"statistical ideas that interest me.","@type":"WebSite","name":"De Novo","@context":"https://schema.org"}</script>
+{"headline":"Home","author":{"@type":"Person","name":"Sihyung Park"},"description":"statistical ideas that interest me.","@type":"WebSite","url":"http://localhost:4000/","name":"De Novo","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -108,8 +108,6 @@
               
             
               
-            
-              
                 
               
             
@@ -119,6 +117,8 @@
             
               
                 
+              
+            
               
             
           -->
@@ -138,6 +138,226 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-1.1-Measure-theory">[PTE] (1.1) Basics on measure theory</a></h2>
+        <time class="post_date">22 May 2020, Friday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book <a href="https://services.math.duke.edu/~rtd/PTE/pte.html"><em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019)</a>, while some others are borrowed from the lecture note and personal communications with colleagues.</p>
+
+<p>The first chapter devotes on the basics of measure theory. A probability space is defined and essential theorems are introduced.
+<br /><br /></p>
+
+<h2 id="probability-space">Probability space</h2>
+
+<p>A probability space is a special kind of a measure space, which is equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.</p>
+
+<div class="definition" text="σ-field">
+For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
+<br />
+(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}$. <br />
+(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}$.
+</div>
+
+<p>A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.</p>
+
+<p>We nect define a function that <em>measures</em> sizes of sets inside the $\sigma$-field.</p>
+
+<div class="definition" text="measure">
+$\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if <br />
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$.
+(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+</div>
+
+<p>The second condition is sometimes referred to as <em>$\sigma$ sub-additivity</em>. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.</p>
+
+<p>If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a <strong>$\sigma$-finite</strong> measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this <strong>a probability measure</strong> (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.</p>
+
+<p>Finally we can define a measure space and in addition a probability space.</p>
+
+<div class="definition" text="probability space">
+$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a <b>measurable space</b>. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a <b>measurable space</b>. If $P$ is a probability measure, we call this a <b>probability space</b>, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
+</div>
+
+<p>If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.</p>
+
+<div class="definition" text="Borel σ-field">
+$\begin{align}
+\mathcal{B}(\Omega) &amp;= \text{(the smallest $\sigma$-field that contains all open sets of $\Omega$)} \\
+ &amp;= \cap_{\tau\subset\mathcal{F}} \mathcal{F}
+\end{align}$
+<br />
+is the Borel $\sigma$-field of $\Omega$, where $\tau$ is a topology on $\Omega$. An element of $\mathcal{B}(\Omega)$ is called a Borel set.
+</div>
+
+<p>An important property of $\sigma$-fields related to the definition of Borel fields is that arbitrary intersections of $\sigma$-fields is a $\sigma$-algebra. (This comes directly from the definition.)</p>
+
+<p>For example of a Borel $\sigma$-field and a measure space, consider $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ and the Lebesgue measure $\lambda$. It is not difficult to know that $\mathcal{B}(\mathbb{R})$ is consists of intersections and unions of sets of the form $(a,b),~(a,b],~[a,b)$ or $[a,b]$ where $a,b\in\mathbb{R}$. The Lebesgue measure measures their “size” as $\lambda(a,b]=b-a$.
+<br /><br /></p>
+
+<h2 id="probability-measures">Probability measures</h2>
+
+<p>Let’s take a deeper look into the properties of measure and probability measures.</p>
+
+<div class="prop" text="properties of probability measures">
+Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following properties hold.<br />
+(i) (monotonicity) $A\subset B \implies P(A) \le P(B)$. <br />
+(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i)$. <br />
+(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A)$. <br />
+(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B)$.
+</div>
+
+<div class="proof"><br />
+(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A)$. <br />
+(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n)$. <br />
+(iii) Let $B_n = A_n \setminus A_{n-1},~ A_0=\phi$ so that $B_n$'s be disjoint. Then $$\begin{align} 
+  P(\cup_n A_n) &amp;= P(\cup_n B_n) = \sum_n P(B_n) \\
+                &amp;= \lim_n P(\cup_{i=1}^n B_i) \\
+                &amp;= \lim_n P(\cup_{i=1}^n A_i) \\
+                &amp;= \lim_n P(A_n)
+\end{align}$$ <br />
+(iv) Let $B_n' = B_1 \setminus B_n$ and use (iii).
+</div>
+<p><br /></p>
+
+<h2 id="characterization-of-a-probability-measure">Characterization of a probability measure</h2>
+
+<p>Until here, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generatlizations of $\sigma$-fields.</p>
+
+<div class="definition" text="semi-algebra">
+A collection of sets $\mathcal{S}$ is a semi-algebra, if <br />
+(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoin unions of $S_i \in \mathcal{S}$. <br />
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+</div>
+
+<p>It is not necessary for a semi-algebra to contain $\phi$. However in many cases it is convenient to make it do so.</p>
+
+<div class="definition" text="algebra">
+A collection of sets $\mathcal{A}$ is an algebra, if <br />
+(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}$. <br />
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+</div>
+
+<p>Note that the strengthened condition on the definition of algrebra allows it to be closed on both the finite intersection <em>and</em> union.</p>
+
+<p>For example, $\mathcal{S}_1 = {\phi} \cup {(a,b]:~-\infty\le a&lt;b\le \infty}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.</p>
+
+<p>An algebra can be generated using semi-algebra. $\overline{\mathcal{S}} := {\text{finite disjoint unions of sets in }\mathcal{S}}$ is an <strong>algebra generated by a semi-algebra $\mathcal{S}$</strong>. Like Borel $\sigma$-field, it is the smallest algebra that contains $\mathcal{S}$.</p>
+
+<p>Similarly, a $\sigma$-field can be generated by (semi)algebra. $\sigma(\mathcal{S}) = \sigma(\overline{\mathcal{S}})$ is the smallest $\sigma$-field that contains $\mathcal{S}$.</p>
+
+<p>Now we define “measures” on these structures.</p>
+
+<div class="definition" text="measure on algebra">
+$\mu:\mathcal{A} \to \mathbb{R}^*\cup\{0\}$ is a measure on an algebra $\mathcal{A}$ if <br />
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}$. <br />
+(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+</div>
+
+<p>$\sigma$-finiteness is defined as in the $\sigma$-field case.</p>
+
+<p>We can define similar functions in semi-algebra. Let $\mu: \mathcal{S} \to \mathbb{R}^+ \cup {0}$ be a function on a semi-algebra $\mathcal{S}$ that satisfies<br />
+(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}$.<br />
+(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i)$.<br />
+(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i)$.<br />
+I will call such functions <em>semi-measures</em><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>The following theorem states that a semi-measure can uniquely extended to a measure on algebra. If the extended measure on algebra is $\sigma$-finite, it can further extended to a measure on $\sigma$-field.</p>
+
+<div class="theorem" text="Caratheodory's extension">
+$\mathcal{S}$: a semi-algebra with $\phi\in\mathcal{S}$.<br />
+$\mu: \mathcal{S} \to \mathbb{R}^+\cup\{0\}$ is a semi-measure.<br />
+$\Rightarrow \exists!$ a positive measure $\overline{\mu}$ in $\overline{\mathcal{S}}$ that is an extension of $\mu$. <br />
+In addition, if $\overline{\mu}$ is $\sigma$-finite, $\exists!$ a measure $\nu$ on $\sigma(\mathcal{S})$ that is an extension of $\overline{\mu}$.
+</div>
+
+<p>Our major interest is in probability measure on $\mathbb{R}$. In undergraduate statistics, we learned that (cumulative) distribution functions uniquely determine probability distributions while densities cannot. Caratheodory’s extension theorem leads us the that conclution.</p>
+
+<p>We say a real-valued function on $\mathbb{R}$ is a <strong>Stieltjes measure function</strong> if it is non-decreasing and right-continuous.</p>
+
+<div class="theorem">
+$F$ is a Stieltjest measure function. $\Rightarrow \exists!$ a measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ such that $\mu(a,b] = F(b)-F(a)$.
+</div>
+<div class="proof"><br />
+Let $\mathcal{S} = \{0\} \cup \{(a,b]:~ -\infty\le a &lt; b \le \infty\}$ and $\nu(\phi)=0$, $\nu(a,b] = F(b) - F(a)$. Then $\mathcal{S}$ is a semi-algebra and $\nu$ is a semi-measure. Let $S_n = (-n, n] \in \overline{\mathcal{S}}$, then it is easy to show $\sigma$-finiteness. By Caratheodory's theorem, there is a unique extension of $\nu$.
+</div>
+
+<p>Since a distribution fundtion $F$ is a special case of Stieltjes measure function, it follows directly from the theorem that $F$ uniquely determines a probability measure.</p>
+
+<p>On $\mathbb{R}^d,~ d&gt;1$, we define functions similar to Stieltjes measure function: $F:\mathbb{R}^d \to \mathbb{R}^+ \cup {0}$ such that $F$ is non-decreasing, right-continuous and $\Delta_A F \ge 0,~ \forall A = (a_1,b_1] \times \cdots \times (a_d,b_d]$, where $\Delta_A F = \sum_{v\in V}\text{sgn}(v)F(v)$, $V={a_1, b_1} \times \cdots \times {a_d, b_d}$. Similar to the above, such $F$ can be uniquely extended to a measure $\mu$ such that $\mu(A) = \Delta_A F$ forall finite rectable $A$. <br /><br /></p>
+
+<h2 id="dynkins-pi-lambda-theorem">Dynkin’s $\pi$-$\lambda$ theorem</h2>
+<p>I will end this subsection by stating the theorem that will be used throughout the course.</p>
+
+<div class="definition" text="π-system">
+A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
+</div>
+
+<div class="definition" text="λ-system">
+A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.<br />
+(i) $\Omega \in \mathcal{L}$ <br /> 
+(ii) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$ <br />
+(iii) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
+</div>
+
+<div class="theorem" text="Dynkin's π-λ theorem">
+$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
+</div>
+
+<p>The theorem implies in order to show that some property holds in a $\sigma$-field, we only need to prove that it holds in a $\lambda$-system and the generator $pi$-system of the $\sigma$-field is contained in our $\lambda$-system. A simple but useful corollary is about equivalent probability measures.</p>
+
+<div class="corollary">
+$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
+</div>
+<div class="proof">
+Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
+</div>
+
+<hr />
+
+<h3 id="acknowledgenment">Acknowledgenment</h3>
+
+<p>This post is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>I named this “semi-measure” just for the convenience. This might be different to the actual definition of semi-measure. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-1.1-Measure-theory"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -325,77 +545,6 @@ $\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\
 
           
           <a class="read-more-btn" href="/probability/application-of-pi-lambda-theorem"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point">Kolmogorov's maximal inequality with shifted starting point</a></h2>
-        <time class="post_date">09 May 2020, Saturday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>Kolmogorov’s maximal inequality provides result similar to that of Chebyshev’s inequality to maximum of partial sum of random variables.</p>
-
-<div class="theorem" text="Kolmogorov's maximal inequality">
-If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &lt; \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.
-
-$$P(\max_{1 \leq k \leq n} |S_k| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
-
-</div>
-
-<div class="proof">
-Let $A_k = \{ S_k &gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} \|S_k\| &gt; x \}$.
-
-$$\begin{align} 
-  \mathrm{Var}(S_n) &amp;= \mathrm{E}(S_n^2) \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
-                                &amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
-                                &amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
-                                &amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
-                                &amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
-                                &amp;= \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
-                                &amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
-                                &amp;= x^2P(\cup_{k=1}^n A_k) \\
-                                &amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &gt; x)
-\end{align}$$
-</div>
-<p><br />
-Let $Y_n = X_{n+m}$ and $T_n= \sum\limits_{k=1}^n Y_k$, then $Y_i$’s are also independent with expectaion 0 and finite variance. Hence, the following also holds,</p>
-
-\[P(\max_{0 \leq k \leq n-m} |T_k| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(T_{n-m})\]
-
-<p>which means</p>
-
-\[P(\max_{m \leq k \leq n} |S_k - S_m| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n - S_m)\]
-
-<p>Thus, even with different starting point of summation, and even if $X_i$’s are <em>not identically distributed</em>, the same form of inequality can be used. This result is useful when proving Kolmogorov’s three-series theorem.</p>
-
-          
-          <a class="read-more-btn" href="/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point"> » </a>
         </p>
       </div>
       <footer class="post_meta">

@@ -290,13 +290,19 @@ img { max-width: 100%; vertical-align: middle; }
 blockquote { margin: 1.5rem 0; padding: 0 0 0 10px; font-style: normal; font-size: 100%; line-height: 1.8rem; border-left: 3px solid #D0E5F2; font-size: 1.3rem; }
 
 /* theorem */
-body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; counter-reset: remark; counter-reset: example; counter-reset: proposition; counter-reset: lemma; }
+body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; counter-reset: remark; counter-reset: example; }
 
 .theorem { display: block; margin: 12px 0; font-style: italic; counter-increment: theorem; }
 
 .theorem:before { content: "Theorem " counter(theorem) ". "; font-weight: bold; font-style: normal; }
 
 .theorem[text]:before { content: "Theorem " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
+
+.corollary { display: block; margin: 12px 0; font-style: italic; counter-increment: theorem; }
+
+.corollary:before { content: "Corollary " counter(theorem) ". "; font-weight: bold; font-style: normal; }
+
+.corollary[text]:before { content: "Corollary " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
 .fact { display: block; margin: 12px 0; font-style: italic; counter-increment: fact; }
 
@@ -310,11 +316,11 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .remark[text]:before { content: "Remark " counter(remark) " (" attr(text) ")\a"; white-space: pre; }
 
-.prop { display: block; margin: 12px 0; font-style: italic; counter-increment: prop; }
+.prop { display: block; margin: 12px 0; font-style: italic; counter-increment: theorem; }
 
-.prop:before { content: "Proposition " counter(prop) ". "; font-weight: bold; font-style: normal; }
+.prop:before { content: "Proposition " counter(theorem) ". "; font-weight: bold; font-style: normal; }
 
-.prop[text]:before { content: "Proposition " counter(prop) " (" attr(text) ")\a"; white-space: pre; }
+.prop[text]:before { content: "Proposition " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
 .example { display: block; margin: 12px 0; font-style: italic; counter-increment: example; }
 
@@ -322,9 +328,11 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .example[text]:before { content: "Example " counter(example) " (" attr(text) ")\a"; white-space: pre; }
 
-.lemma { display: block; margin: 12px 0; font-style: italic; counter-increment: lemma; }
+.lemma { display: block; margin: 12px 0; font-style: italic; counter-increment: theorem; }
 
-.lemma:before { content: "Lemma. "; font-weight: bold; font-style: normal; }
+.lemma:before { content: "Lemma "; font-weight: bold; font-style: normal; }
+
+.lemma[text]:before { content: "Lemma " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
 .proof { display: block; margin: 12px 0; font-style: normal; color: #6F6F6F; }
 

@@ -1,7 +1,0 @@
-I"9<p>Standardizing both the predictors and the response is common in linear regression. This is to scale the regression coeffients into reasonable range and to explain them as “unit effect” of the change of predictor values on response. It is also easier to construct penalized models, such as ridge, on top of standardized settings.</p>
-
-<p>However, fitting and testing a standard regression model with popular statistical softwares (<code class="highlighter-rouge">lm</code> from R) requires additional care.</p>
-
-<h3 id="1-centering">1. centering</h3>
-<p>\(\)</p>
-:ET
