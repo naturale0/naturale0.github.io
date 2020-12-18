@@ -31,7 +31,7 @@ By setting up a reference density $M := \frac{p_0 + p_1}{2}$, and taking a squar
 
 $$J(p_0, p_1) := \sqrt{\frac{K(p_0, M) + K(p_1, M)}{2}}$$
 
-has been proven to satisfy triangular inequality. $J$ here is actually a square root of [Jensen-Shannon divergence](https://en.wikipedia.org/wiki/Jensen–Shannon_divergence) $JS(p_0, p_1)$.
+has been proven to satisfy triangule inequality. $J$ here is actually a square root of [Jensen-Shannon divergence](https://en.wikipedia.org/wiki/Jensen–Shannon_divergence) $JS(p_0, p_1)$.
 
 
 Hence we can say that $J := \sqrt{JS}$ is truely **a metric defined on a set of density functions**.
