@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:38:24 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:38:24 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:38:58 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:38:58 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -34,7 +34,7 @@ For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$
 
 &lt;div class=&quot;definition&quot; text=&quot;measure&quot;&gt;
 $\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$.
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$. &lt;br /&gt;
 (ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
 &lt;/div&gt;
 
@@ -96,7 +96,7 @@ Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following prop
 
 &lt;div class=&quot;definition&quot; text=&quot;semi-algebra&quot;&gt;
 A collection of sets $\mathcal{S}$ is a semi-algebra, if &lt;br /&gt;
-(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoin unions of $S_i \in \mathcal{S}$. &lt;br /&gt;
+(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoint unions of $S_i \in \mathcal{S}$. &lt;br /&gt;
 (ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
 &lt;/div&gt;
 
