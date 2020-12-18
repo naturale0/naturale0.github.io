@@ -342,9 +342,9 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .definition { display: block; margin: 12px 0; font-style: normal; counter-increment: definition; }
 
-.definition[text]:before { content: "Def. " " (" attr(text) ")\a"; font-weight: bold; font-style: normal; }
+.definition[text]:before { content: "Definition " " (" attr(text) ")\a"; font-weight: bold; font-style: normal; }
 
-.definition:before { content: "Def. "; font-weight: bold; font-style: normal; }
+.definition:before { content: "Definition "; font-weight: bold; font-style: normal; }
 
 /* layout */
 html, .container { position: relative; min-height: 100%; }

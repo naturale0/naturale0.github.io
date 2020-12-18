@@ -595,12 +595,12 @@ body {
   counter-increment: definition
 }
 .definition[text]:before {
-  content: "Def. " " (" attr(text) ")\A";
+  content: "Definition " " (" attr(text) ")\A";
   font-weight: bold;
   font-style: normal;
 }
 .definition:before {
-  content: "Def. ";
+  content: "Definition ";
   font-weight: bold;
   font-style: normal;
 }
