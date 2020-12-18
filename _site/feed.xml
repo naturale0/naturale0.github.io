@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:19:23 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:19:23 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:24:03 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:24:03 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -182,6 +182,8 @@ $\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{
 &lt;div class=&quot;proof&quot;&gt;
 Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
 &lt;/div&gt;
+
+&lt;p&gt;Other examples can be found &lt;a href=&quot;https://naturale0.github.io/probability/application-of-pi-lambda-theorem&quot;&gt;here&lt;/a&gt;. We will get on it in this post series one at a time.&lt;/p&gt;
 
 &lt;hr /&gt;
 
