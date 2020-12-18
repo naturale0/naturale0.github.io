@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:24:03 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:24:03 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:38:24 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:38:24 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -19,7 +19,7 @@
 
 &lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
 
-&lt;p&gt;A probability space is a special kind of a measure space, which is equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.&lt;/p&gt;
+&lt;p&gt;A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;σ-field&quot;&gt;
 For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
@@ -30,7 +30,7 @@ For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$
 
 &lt;p&gt;A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.&lt;/p&gt;
 
-&lt;p&gt;We nect define a function that &lt;em&gt;measures&lt;/em&gt; sizes of sets inside the $\sigma$-field.&lt;/p&gt;
+&lt;p&gt;We next define a function that &lt;em&gt;measures&lt;/em&gt; sizes of sets inside the $\sigma$-field.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;measure&quot;&gt;
 $\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
