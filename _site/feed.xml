@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:17:14 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:17:14 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:18:16 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:18:16 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -91,7 +91,7 @@ Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following prop
 
 &lt;h2 id=&quot;characterization-of-a-probability-measure&quot;&gt;Characterization of a probability measure&lt;/h2&gt;
 
-&lt;p&gt;Until here, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generatlizations of $\sigma$-fields.&lt;/p&gt;
+&lt;p&gt;Until now, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generatlizations of $\sigma$-fields.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;semi-algebra&quot;&gt;
 A collection of sets $\mathcal{S}$ is a semi-algebra, if &lt;br /&gt;
