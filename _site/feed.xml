@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 23:54:59 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 23:54:59 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 23:57:19 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 23:57:19 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -86,7 +86,7 @@ $$\begin{align}
 i.e. $\Omega_0$ is a measurable set.
 &lt;/div&gt;
 
-&lt;p&gt;We used $\limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0$ instead of $\limsup_n X_n(\omega) = \liminf_n X_n(\omega)$ to cover the case where $X_\infty$is either $\pm\infty$.&lt;/p&gt;
+&lt;p&gt;We used $\limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0$ instead of $\limsup_n X_n(\omega) = \liminf_n X_n(\omega)$ to cover the case where $X_\infty$ is either $\pm\infty$.&lt;/p&gt;
 
 &lt;p&gt;I will finish this section by defining a kind of convergence used in probability theory.&lt;/p&gt;
 
@@ -94,9 +94,9 @@ i.e. $\Omega_0$ is a measurable set.
 We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\infty \text{ a.s.}$, if $P(\{\lim_n X_n = X_\infty\}) = 1$.
 &lt;/div&gt;
 
-&lt;p&gt;Here, $\text{a.s.}$ stands for “almost surely”. In general measure theory, this term is usually replaced with $a.e.$ or “almost everywhere”.&lt;/p&gt;
+&lt;p&gt;Here, $\text{a.s.}$ stands for “almost surely”. In general measure theory, this term is usually replaced with $\text{a.e.}$ or “almost everywhere”.&lt;/p&gt;
 
-&lt;p&gt;Almost sure convergence implies that in probability space, in most of the times only the subsets with positive measures are important: it might be enough to show that $X_n$ converges a.s.&lt;/p&gt;
+&lt;p&gt;Almost sure convergence implies that in probability space, in most of the times only the subsets with positive measures are important: it might be enough to have the fact that $X_n$ converges a.s. Convergence theorems in Lebesgue integration are the examples. We will cover this in detail later.&lt;/p&gt;
 
 &lt;hr /&gt;
 
