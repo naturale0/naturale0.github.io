@@ -6,15 +6,15 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Dec 2020 20:07:11 +0900</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 20:07:11 +0900</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 20:11:20 +0900</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 20:11:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>[PTE] (1.1) Basics on measure theory</title>
         <description>&lt;p&gt;The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book &lt;a href=&quot;https://services.math.duke.edu/~rtd/PTE/pte.html&quot;&gt;&lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019)&lt;/a&gt;, while some others are borrowed from the lecture note and personal communications with colleagues.&lt;/p&gt;
 
-&lt;p&gt;The first chapter devotes on the basics of measure theory. A probability space is defined and essential theorems are introduced.
+&lt;p&gt;The first chapter is devoting to the basics of measure theory. A probability space is defined and essential theorems are introduced.
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
