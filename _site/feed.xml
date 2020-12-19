@@ -6,12 +6,12 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 22:18:50 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 22:18:50 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 22:19:25 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 22:19:25 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>(PTE) 1.5. Convergence theorems and inequalities</title>
+        <title>(PTE) 1.5. Convergence theorems and elementary inequalities</title>
         <description>&lt;p&gt;In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.&lt;/p&gt;
 
 &lt;p&gt;In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
