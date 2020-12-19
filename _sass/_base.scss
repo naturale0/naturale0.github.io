@@ -566,7 +566,7 @@ body {
   counter-increment: theorem//lemma
 }
 .lemma:before {
-  content: "Lemma ";
+  content: "Lemma " counter(theorem) ". ";
   font-weight: bold;
   font-style: normal;
 }
@@ -583,6 +583,10 @@ body {
 .proof:before {
   content: "(Proof) ";
   font-style: italic;
+}
+.proof[text]:before {
+  content: "(Proof of "attr(text)")\A";
+  white-space: pre;
 }
 .proof:after {
   content: "\25FC";

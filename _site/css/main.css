@@ -330,13 +330,15 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .lemma { display: block; margin: 12px 0; font-style: italic; counter-increment: theorem; }
 
-.lemma:before { content: "Lemma "; font-weight: bold; font-style: normal; }
+.lemma:before { content: "Lemma " counter(theorem) ". "; font-weight: bold; font-style: normal; }
 
 .lemma[text]:before { content: "Lemma " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
 .proof { display: block; margin: 12px 0; font-style: normal; color: #6F6F6F; }
 
 .proof:before { content: "(Proof) "; font-style: italic; }
+
+.proof[text]:before { content: "(Proof of " attr(text) ")\a"; white-space: pre; }
 
 .proof:after { content: "\25FC"; float: right; }
 

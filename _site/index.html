@@ -124,6 +124,10 @@
               
             
               
+                
+              
+            
+              
             
           -->
           <br>
@@ -142,6 +146,231 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-1.5-Convergence-theorems-and-inequalities">(PTE) 1.5. Convergence theorems and inequalities</a></h2>
+        <time class="post_date">19 December 2020, Saturday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.</p>
+
+<p>In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space. <br /><br /></p>
+
+<h2 id="convergence-theorems">Convergence theorems</h2>
+
+<p>Earlier, I mentioned that to prove the additive property of the Lebesgue integrals, we need the monotone convergence theorem. Monotone convergence theorem (or MCT) is for a sequence of non-negative functions that increases monotonically to the limiting function. In fact, there are other convergence theorems - bounded and dominated one - in addition to the MCT. Fatou’s lemma, a corollary of the MCT, is another useful tool for our journey through probability theory.<br />
+ </p>
+
+<h3 id="monotone-convergence-theorem-mct">Monotone convergence theorem (MCT)</h3>
+
+<div class="theorem" text="Monotone convergence">
+$\{f_n\}_{n\in\mathbb{N}}: \Omega \to [0,\infty]$: a sequence of measurable functions.<br />
+$f: \Omega \to [0,\infty]$: the limiting function of $\{f_n\}$.<br />
+$f_n\uparrow f \text{ a.s.} \implies$ (i) $f$ is measurable, (ii) $\int f_n d\mu \uparrow \int f d\mu$.
+</div>
+
+<p>To prove this, we need two lemmas.</p>
+
+<div class="lemma" text="1.25(a) from RCA">
+$s: \Omega \to [0,\infty]$: a simple function.<br />
+$\varphi(E) = \int_E s d\mu,~ \forall E\in\mathcal{F} \implies \varphi$ is a measure on $(\Omega, \mathcal{F}).$
+</div>
+
+<div class="lemma"><br />
+$s: \Omega \to [0,\infty]$: a simple function.<br />
+$E_n \uparrow E$: $E_n, E$ are measurable.<br />
+$\implies \lim_n \int_{E_n} s d\mu = \int_E s d\mu.$
+</div>
+
+<p>The first lemma is easy to check. The second one is trivial by continuity of measure $\phi$ defined as in the first one. The latter one will be used in the proof of the MCT.</p>
+
+<div class="proof" text="MCT">
+Let $\alpha_n = \int f_n d\mu$ so that $\alpha_1 \le \alpha_2 \le \cdots \le \int f d\mu$ and $\lim_n \alpha_n = \alpha$ for some $\alpha$. We need to show that $\alpha = \int f d\mu$.<br />
+&ensp; (1) It is trivial that $\alpha \le \int f d\mu$.<br />
+&ensp; (2) Now, let $s$ be a simple function such that $0 \le s \le f$ and a constant $0 &lt; c &lt; 1$. Define $E_n = \{\omega\in\Omega:~ f_n(\omega) \ge c\cdot s(\omega)\}$. Then since $E_n$ increases monotonically as $f_n$ increases monotonically and $\cup_{n=1}^\infty E_n = \Omega$, $E_n \uparrow \Omega$. By the lemma 3, this implies $\int_{E_n} s d\mu \uparrow \int s d\mu$.
+$$
+\begin{align}
+&amp;\int f_n d\mu \ge \int_{E_n} f_n d\mu \ge \int_{E_n} c\cdot s d\mu \\
+&amp;\overset{\lim_n}{\implies} \alpha \ge c\int s d\mu \\
+&amp;\overset{c\to1}{\implies} \alpha \ge \int s d\mu \\
+&amp;\overset{\sup_{0\le s\le f}}{\implies} \alpha \ge \int f d\mu
+\end{align}
+$$  
+&ensp; By (1) and (2), the desired result follows.
+</div>
+
+<p>The MCT allows us to prove the yet to be shown property.</p>
+
+<div class="prop" text="additivity of the integrals">
+$f,g: \Omega \to [0,\infty]$: measurable.<br />
+$\implies \int f+g d\mu = \int f d\mu + \int g d\mu.$
+</div>
+<div class="proof"><br />
+Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rfloor / 2^n) \wedge n$. Then $s_n + t_n \uparrow f+g$ and $\int s_n + t_n d\mu = \int s_n d\mu + \int t_n d\mu$. By the MCT, the result follows.
+</div>
+<p> </p>
+
+<h3 id="fatous-lemma">Fatou’s lemma</h3>
+
+<p>Fatou’s lemma, another important convergence theorem can be directly derived by the MCT.</p>
+
+<div class="theorem" text="Fatou">
+$\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.<br />
+$\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
+</div>
+
+<p>It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.<br />
+ </p>
+
+<h3 id="dominated-convergence-theorem-dct">Dominated convergence theorem (DCT)</h3>
+
+<p>While the MCT is very useful, it can only be applied to a sequence of functions that monotonically converges. Lebesgue’s dominated convergence theorem (DCT) provides a tool for not only monotonically convergent, but general convergent functions that are uniformly dominated by some integrable function.</p>
+
+<div class="theorem" text="Dominated convergence">
+$\{f_n\}: \Omega \to \mathbb{R}$: a sequence of measurable functions.<br />
+$f: \Omega \to \mathbb{R}$: a measurable functions.<br />
+$f_n \to f \text{ a.s.}$ and $|f_n| \le g,~ g$ is integrable.<br />
+$\begin{align}
+\implies &amp; \text{(i) } f \in L^1(\mu). \\
+         &amp; \text{(ii) } \int |f_n - f| d\mu \to 0. \\
+         &amp; \text{(iii) } \int f_n d\mu \to \int f d\mu.
+\end{align}$
+</div>
+
+<p>The usefulness of the DCT is that it not only shows convergence of the integral, but also integrability of the limiting function and $L^1$ convergence<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> to it.</p>
+
+<div class="proof" text="DCT">
+(i) Trivial since $|f| \le g$.<br />
+(ii) $|f_n - f|$ are integrable since $\le 2g$. $0 \le 2g - |f_n - f| \le 2g$. By fatou's lemma,
+$$
+\int 2g d\mu \le \int 2g d\mu - \limsup\limits_n \int |f_n - f| d\mu \\
+\limsup\limits_n \int |f_n - f| d\mu \le 0 \\
+\therefore \lim_n \int |f_n -f| d\mu = 0
+$$<br />
+(iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
+</div>
+<p><br /></p>
+
+<h2 id="inequalities">Inequalities</h2>
+<p>Along with convergence theorems, these integral inequalities will be used intensely throughout the probability theory. In the following theorems, assume $f,g$ are measurable. For $p \ge 1$, if $|f|^p$ is integrable, $\|f\|_p := (\int |f|^p d\mu)^\frac{1}{p}$ is the $L^p(\mu)$-norm of $f$.</p>
+
+<div class="theorem" text="Jensen's inequality">
+$\varphi: \mathbb{R} \to \mathbb{R}$: convex function.<br />
+$\int |f| d\mu &lt; \infty$, $\int |\varphi(f)| d\mu &lt; \infty$.<br /> 
+$\implies \varphi(\int f d\mu) \le \int \varphi(f) d\mu$.
+</div>
+<div class="proof"><br />
+Let $t = \int f d\mu$, then there exists $\beta = \sup\limits_{s&lt;t} \frac{\varphi(t)-\varphi(s)}{t-s} \in \mathbb{R}$ such that $\varphi(x) \ge \beta(x-t) + \varphi(t)$. Take integral to both sides and we get the result.
+</div>
+
+<div class="theorem" text="Hölder's inequality">
+$p,q \in (1,\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$.<br />
+$\begin{align}
+\implies &amp;\int |fg| d\mu \le (\int |f|^p d\mu)^\frac{1}{p} (\int |g|^q d\mu)^\frac{1}{q}. \\
+ &amp;\text{i.e. } \|fg\|_1 \le \|f\|_p \|g\|_q.
+\end{align}$
+</div>
+<div class="proof"><br />
+Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = \int G^q d\mu = 1$.<br />
+&ensp; Our claim is that $x,y \ge 0 \Rightarrow xy \le \frac{x^p}{p} + \frac{y^q}{q}$. Let $h(x) = xy - x^p/p$, then $h'(x) = y - x^{p-1} = y - x^{p/q}$ and $h$ achieves maximum at $x = y^{q/p}$.<br />
+&ensp; By the claim, $\int FG d\mu \le \int F^p/p + G^q/q d\mu = 1$ and the desired result follows.
+</div>
+
+<p>A special case of Hölder’s inequality is Cauchy-Schwarz inequality: $|fg|_1 \le |f|_2 |g|_2.$</p>
+
+<div class="theorem" text="Minkowski's inequality">
+$p \ge 1$, $\int |f|^p d\mu &lt; \infty$, $\int |g|^p d\mu &lt; \infty$<br />
+$\implies \|f+g\|_p \le \|f\|_p + \|g\|_p.$
+</div>
+<div class="proof"><br />
+$$
+\int (f+g)^p d\mu = \int f(f+g)^{p-1} d\mu + \int g(f+g)^{p-1} d\mu
+$$
+By Hölder's inequality, 
+$$
+\begin{align}
+\int f(f+g)^{p-1} d\mu &amp;\le \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^{(p-1)q} d\mu \right)^{1/q} \\
+  &amp;= \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}
+\end{align}
+$$
+
+Similarly, $\int g(f+g)^{p-1} d\mu \le \left(\int g^p d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}$. Thus 
+
+$$
+\begin{align}
+\int (f+g)^p d\mu &amp;\le \left(\int (f^p + g^p) d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q} \\
+\therefore \|f+q\|_p &amp;\le \|f\|_p + \|g\|_p  
+\end{align}
+$$
+</div>
+
+<p>Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.</p>
+
+<div class="theorem" text="Markov-Chevyshev's inequality">
+$\varphi: \mathbb{R}\to\mathbb{R}$, $\varphi \ge 0$.<br />
+$A \in \mathcal{B}(\mathbb{R})$, $i_A := \inf\{\varphi(y):~ y\in A\}$. <br />
+$\implies i_A \cdot P(X \in A) \le \int_A \varphi(X) dP \le E\varphi(X).$
+</div>
+
+<p>Special cases of the theorem is Markov’s inequality and Chebyshev’s inequality.</p>
+
+<div class="corollary" text="Markov's inequality">
+$X \ge 0$ a.s., $a &gt; 0$ $\implies P(X \ge a) \le EX/a.$
+</div>
+<div class="corollary" text="Chebyshev's inequality">
+$a &gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
+</div>
+<p><br /></p>
+
+<h2 id="concluding-remarks">Concluding remarks</h2>
+<p>Since the expectation $EX$ is defined as a mere integral, all of the above theorems can be applied. For instance, if $X_n \to X$ a.s. and $|X_n| \le Y$ for some $Y$ such that $E|Y| &lt; \infty$, then by DCT $EX_n \to EX$ as $n\to\infty$.</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+<p>This post is also based on the textbook <em>Real and Complex Analysis</em>, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>$f_n \to f$ in $L^1(\mu)$ is equivalent to $\int |f_n - f| d\mu \to 0$ and $f \in L^1(\mu)$. It will be covered in the next section. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-1.5-Convergence-theorems-and-inequalities"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -225,10 +454,17 @@ $\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in 
 
 <p>Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\phi_n$ monomonically increases as $n$ increases and approaches $f$ from below. i.e. $\phi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.<br /><br /></p>
 
+<div style="text-align:center">
+<img src="../assets/fig/201219_step-function.png" alt="ieman-vs-lebesgue.png" width="300" />
+<br />
+<em>Shape of $\varphi_n$ with varying $n$. $f$: the black dashed line.</em>
+</div>
+<p><br /></p>
+
 <h3 id="4-general-measurable-function">4. general measurable function</h3>
 <p>Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.</p>
 
-<p>If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &lt; \infty$.</p>
+<p>If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &lt; \infty$ and write $f \in L^1(\mu)$ or just $f \in L^1$ if the measure is clear.</p>
 
 <p>There are several properties of the integral naturally arises from the definition.</p>
 
@@ -388,93 +624,6 @@ We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\inf
 
           
           <a class="read-more-btn" href="/probability/PTE-1.3-Random-variables"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.2-Distributions">(PTE) 1.2. Distributions</a></h2>
-        <time class="post_date">18 December 2020, Friday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>In this subsection, we define random variables and distribution functions.<br /><br /></p>
-
-<h2 id="random-variables">Random variables</h2>
-
-<p>In measure theory, a function on a measurable space $A$ onto another measurable space $B$ is <em>measurable</em> if its inverse image of measurable sets are measurable sets. If $A$ is a probability space and $B$ is a Borel measurable space of $\mathbb{R}$, then we call this function a random variable.</p>
-
-<div class="definition" text="random variable">
-Let $(\Omega, \mathcal{F}, P)$ be a probability space. $X: \Omega \to \mathbb{R}$ is a random variable, if for all $B \in \mathcal{ B}$, $X^{-1}(B) \in \mathcal{F}$.
-</div>
-
-<p>We also say $X$ is <em>$\mathcal{ F}$- measurable</em> or write $X \in \mathcal{ F}$. That is, random variables are Borel measurable real-valued functions defined on a probability space.</p>
-<div class="example">
-(1) If $(\Omega, \mathcal{ F}, P)$ is a discrete probability space, every function is a random variable. <br />
-(2) An indicator function $\mathbb{1}_A$, $A \in \mathcal{ F}$ is a random variable.
-</div>
-
-<p>In undergraduate statistics, we used random variables as if they were values. Now we can understand true meaning behind these notations: \(P(-1\le X \le 1) = P(X^{-1}([-1, 1])) = P(\{\omega\in\Omega:~ X(\omega) \in [-1,1]\})\) and such. Random variables are defined as a measurable function so that their inverse images can be measured by the probability measure $P$.</p>
-
-<p>An important fact is that every random variable <em>induces a probability measure on $(\mathbb{ R}, \mathcal{ B}(\mathbb{ R}))$</em>. (note that it is not on $(\Omega, \mathcal{ F})$.)</p>
-
-<div class="definition" text="induced probability measure">
-$P_X(A) := P(X \in A),~ A \in \mathcal{\mathbb{R}}$ is a probability measure induced by a random variable $X$. $P_X$ is called the distribution of $X$.
-</div>
-
-<p>It is not difficult to show that such $P_X$ is a probability measure. <br /><br /></p>
-
-<h2 id="distribution-functions">Distribution functions</h2>
-
-<p>A distribution function of $X$ is defined in terms of probability.</p>
-
-<div class="definition" text="distribution function">
-$F:\mathbb{ R}\to\mathbb{ R}$ is a distribution function of $X$. <br />$\Leftrightarrow$ $F(x) := P(X\le x) = P_X(-\infty, x],~ \forall x \in \mathbb{ R}$. 
-</div>
-
-<p>We already saw in <a href="https://naturale0.github.io/probability/PTE-1.1-Measure-theory">section 1.1</a> that a distribution function uniquely determines a distribution (or a random variable). The following theorem implies that every function that satisfies some conditions can be regarded as a distribution function of some random variable.</p>
-
-<div class="theorem">
-$F$ is a distribution of some random variable $X$ if and only if it is (i) non-decreasing, (ii) right-continuous, (iii) $\lim_{x\to-\infty}F(x) = 0$ and $\lim_{x\to\infty}F(x) = 1$.
-</div>
-<div class="proof"><br />
-($\Rightarrow$) is trivial. <br />
-($\Leftarrow$) we proof this by construction. Without loss of generality, let $\Omega = [0,1]$, $\mathcal{ F} = \mathcal{B}([0,1])$, $P=\lambda$ (Lebesgue measure). Let $X(\omega) = \sup\{y:~ F(y)&lt;\omega\}$. Then $X$ is a random variable. To show $P(X\le x) = P(\{\omega:~ 0\le\omega\le F(x)\}),~ \forall x$, it is equivalent to show that $\{\omega:~ X(\omega) \le x\} = \{\omega: \omega \le F(x)\},~ \forall x$.<br />
-&ensp; First given $x$, $\omega_0 \in \{\omega:~ \omega \le F(x)\}$, we get $x \notin \{y:~ F(y) &lt; \omega_0\}$. Thus $X(\omega_0) \le x$ and we get $\{\omega:~ X(\omega) \le x\} \supset \{\omega: \omega \le F(x)\}$. Next, suppose $\omega_0 \notin \{\omega: \omega \le F(x)\}$, then $\omega_0 &gt; F(x)$. Since $F$ is right-continuous, there exists $\epsilon &gt; 0$ such that $F(x) \le F(x+\epsilon) &lt; \omega_0$. Hence $x&lt;x+\epsilon\le X(\omega_0)$ and $\{\omega:~ X(\omega) \le x\} \subset \{\omega: \omega \le F(x)\}$. Finally we get $F(x) = \lambda(0, F(x)] = P(\{\omega:~ X(\omega) \le x\}) = P(X \le x)$.
-</div>
-
-<hr />
-
-<h3 id="acknowledgenment">Acknowledgenment</h3>
-
-<p>This post is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.2-Distributions"> » </a>
         </p>
       </div>
       <footer class="post_meta">

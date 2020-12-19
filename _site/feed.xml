@@ -6,9 +6,209 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 18:54:24 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 18:54:24 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 22:18:28 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 22:18:28 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>(PTE) 1.5. Convergence theorems and inequalities</title>
+        <description>&lt;p&gt;In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.&lt;/p&gt;
+
+&lt;p&gt;In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h2&gt;
+
+&lt;p&gt;Earlier, I mentioned that to prove the additive property of the Lebesgue integrals, we need the monotone convergence theorem. Monotone convergence theorem (or MCT) is for a sequence of non-negative functions that increases monotonically to the limiting function. In fact, there are other convergence theorems - bounded and dominated one - in addition to the MCT. Fatou’s lemma, a corollary of the MCT, is another useful tool for our journey through probability theory.&lt;br /&gt;
+ &lt;/p&gt;
+
+&lt;h3 id=&quot;monotone-convergence-theorem-mct&quot;&gt;Monotone convergence theorem (MCT)&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Monotone convergence&quot;&gt;
+$\{f_n\}_{n\in\mathbb{N}}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
+$f: \Omega \to [0,\infty]$: the limiting function of $\{f_n\}$.&lt;br /&gt;
+$f_n\uparrow f \text{ a.s.} \implies$ (i) $f$ is measurable, (ii) $\int f_n d\mu \uparrow \int f d\mu$.
+&lt;/div&gt;
+
+&lt;p&gt;To prove this, we need two lemmas.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;1.25(a) from RCA&quot;&gt;
+$s: \Omega \to [0,\infty]$: a simple function.&lt;br /&gt;
+$\varphi(E) = \int_E s d\mu,~ \forall E\in\mathcal{F} \implies \varphi$ is a measure on $(\Omega, \mathcal{F}).$
+&lt;/div&gt;
+
+&lt;div class=&quot;lemma&quot;&gt;&lt;br /&gt;
+$s: \Omega \to [0,\infty]$: a simple function.&lt;br /&gt;
+$E_n \uparrow E$: $E_n, E$ are measurable.&lt;br /&gt;
+$\implies \lim_n \int_{E_n} s d\mu = \int_E s d\mu.$
+&lt;/div&gt;
+
+&lt;p&gt;The first lemma is easy to check. The second one is trivial by continuity of measure $\phi$ defined as in the first one. The latter one will be used in the proof of the MCT.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot; text=&quot;MCT&quot;&gt;
+Let $\alpha_n = \int f_n d\mu$ so that $\alpha_1 \le \alpha_2 \le \cdots \le \int f d\mu$ and $\lim_n \alpha_n = \alpha$ for some $\alpha$. We need to show that $\alpha = \int f d\mu$.&lt;br /&gt;
+&amp;ensp; (1) It is trivial that $\alpha \le \int f d\mu$.&lt;br /&gt;
+&amp;ensp; (2) Now, let $s$ be a simple function such that $0 \le s \le f$ and a constant $0 &amp;lt; c &amp;lt; 1$. Define $E_n = \{\omega\in\Omega:~ f_n(\omega) \ge c\cdot s(\omega)\}$. Then since $E_n$ increases monotonically as $f_n$ increases monotonically and $\cup_{n=1}^\infty E_n = \Omega$, $E_n \uparrow \Omega$. By the lemma 3, this implies $\int_{E_n} s d\mu \uparrow \int s d\mu$.
+$$
+\begin{align}
+&amp;amp;\int f_n d\mu \ge \int_{E_n} f_n d\mu \ge \int_{E_n} c\cdot s d\mu \\
+&amp;amp;\overset{\lim_n}{\implies} \alpha \ge c\int s d\mu \\
+&amp;amp;\overset{c\to1}{\implies} \alpha \ge \int s d\mu \\
+&amp;amp;\overset{\sup_{0\le s\le f}}{\implies} \alpha \ge \int f d\mu
+\end{align}
+$$  
+&amp;ensp; By (1) and (2), the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;The MCT allows us to prove the yet to be shown property.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;additivity of the integrals&quot;&gt;
+$f,g: \Omega \to [0,\infty]$: measurable.&lt;br /&gt;
+$\implies \int f+g d\mu = \int f d\mu + \int g d\mu.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rfloor / 2^n) \wedge n$. Then $s_n + t_n \uparrow f+g$ and $\int s_n + t_n d\mu = \int s_n d\mu + \int t_n d\mu$. By the MCT, the result follows.
+&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;fatous-lemma&quot;&gt;Fatou’s lemma&lt;/h3&gt;
+
+&lt;p&gt;Fatou’s lemma, another important convergence theorem can be directly derived by the MCT.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Fatou&quot;&gt;
+$\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
+$\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
+&lt;/div&gt;
+
+&lt;p&gt;It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.&lt;br /&gt;
+ &lt;/p&gt;
+
+&lt;h3 id=&quot;dominated-convergence-theorem-dct&quot;&gt;Dominated convergence theorem (DCT)&lt;/h3&gt;
+
+&lt;p&gt;While the MCT is very useful, it can only be applied to a sequence of functions that monotonically converges. Lebesgue’s dominated convergence theorem (DCT) provides a tool for not only monotonically convergent, but general convergent functions that are uniformly dominated by some integrable function.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Dominated convergence&quot;&gt;
+$\{f_n\}: \Omega \to \mathbb{R}$: a sequence of measurable functions.&lt;br /&gt;
+$f: \Omega \to \mathbb{R}$: a measurable functions.&lt;br /&gt;
+$f_n \to f \text{ a.s.}$ and $|f_n| \le g,~ g$ is integrable.&lt;br /&gt;
+$\begin{align}
+\implies &amp;amp; \text{(i) } f \in L^1(\mu). \\
+         &amp;amp; \text{(ii) } \int |f_n - f| d\mu \to 0. \\
+         &amp;amp; \text{(iii) } \int f_n d\mu \to \int f d\mu.
+\end{align}$
+&lt;/div&gt;
+
+&lt;p&gt;The usefulness of the DCT is that it not only shows convergence of the integral, but also integrability of the limiting function and $L^1$ convergence&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to it.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot; text=&quot;DCT&quot;&gt;
+(i) Trivial since $|f| \le g$.&lt;br /&gt;
+(ii) $|f_n - f|$ are integrable since $\le 2g$. $0 \le 2g - |f_n - f| \le 2g$. By fatou's lemma,
+$$
+\int 2g d\mu \le \int 2g d\mu - \limsup\limits_n \int |f_n - f| d\mu \\
+\limsup\limits_n \int |f_n - f| d\mu \le 0 \\
+\therefore \lim_n \int |f_n -f| d\mu = 0
+$$&lt;br /&gt;
+(iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;inequalities&quot;&gt;Inequalities&lt;/h2&gt;
+&lt;p&gt;Along with convergence theorems, these integral inequalities will be used intensely throughout the probability theory. In the following theorems, assume $f,g$ are measurable. For $p \ge 1$, if $|f|^p$ is integrable, $\|f\|_p := (\int |f|^p d\mu)^\frac{1}{p}$ is the $L^p(\mu)$-norm of $f$.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Jensen's inequality&quot;&gt;
+$\varphi: \mathbb{R} \to \mathbb{R}$: convex function.&lt;br /&gt;
+$\int |f| d\mu &amp;lt; \infty$, $\int |\varphi(f)| d\mu &amp;lt; \infty$.&lt;br /&gt; 
+$\implies \varphi(\int f d\mu) \le \int \varphi(f) d\mu$.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $t = \int f d\mu$, then there exists $\beta = \sup\limits_{s&amp;lt;t} \frac{\varphi(t)-\varphi(s)}{t-s} \in \mathbb{R}$ such that $\varphi(x) \ge \beta(x-t) + \varphi(t)$. Take integral to both sides and we get the result.
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Hölder's inequality&quot;&gt;
+$p,q \in (1,\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$.&lt;br /&gt;
+$\begin{align}
+\implies &amp;amp;\int |fg| d\mu \le (\int |f|^p d\mu)^\frac{1}{p} (\int |g|^q d\mu)^\frac{1}{q}. \\
+ &amp;amp;\text{i.e. } \|fg\|_1 \le \|f\|_p \|g\|_q.
+\end{align}$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = \int G^q d\mu = 1$.&lt;br /&gt;
+&amp;ensp; Our claim is that $x,y \ge 0 \Rightarrow xy \le \frac{x^p}{p} + \frac{y^q}{q}$. Let $h(x) = xy - x^p/p$, then $h'(x) = y - x^{p-1} = y - x^{p/q}$ and $h$ achieves maximum at $x = y^{q/p}$.&lt;br /&gt;
+&amp;ensp; By the claim, $\int FG d\mu \le \int F^p/p + G^q/q d\mu = 1$ and the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;A special case of Hölder’s inequality is Cauchy-Schwarz inequality: $|fg|_1 \le |f|_2 |g|_2.$&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Minkowski's inequality&quot;&gt;
+$p \ge 1$, $\int |f|^p d\mu &amp;lt; \infty$, $\int |g|^p d\mu &amp;lt; \infty$&lt;br /&gt;
+$\implies \|f+g\|_p \le \|f\|_p + \|g\|_p.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\int (f+g)^p d\mu = \int f(f+g)^{p-1} d\mu + \int g(f+g)^{p-1} d\mu
+$$
+By Hölder's inequality, 
+$$
+\begin{align}
+\int f(f+g)^{p-1} d\mu &amp;amp;\le \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^{(p-1)q} d\mu \right)^{1/q} \\
+  &amp;amp;= \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}
+\end{align}
+$$
+
+Similarly, $\int g(f+g)^{p-1} d\mu \le \left(\int g^p d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}$. Thus 
+
+$$
+\begin{align}
+\int (f+g)^p d\mu &amp;amp;\le \left(\int (f^p + g^p) d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q} \\
+\therefore \|f+q\|_p &amp;amp;\le \|f\|_p + \|g\|_p  
+\end{align}
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Markov-Chevyshev's inequality&quot;&gt;
+$\varphi: \mathbb{R}\to\mathbb{R}$, $\varphi \ge 0$.&lt;br /&gt;
+$A \in \mathcal{B}(\mathbb{R})$, $i_A := \inf\{\varphi(y):~ y\in A\}$. &lt;br /&gt;
+$\implies i_A \cdot P(X \in A) \le \int_A \varphi(X) dP \le E\varphi(X).$
+&lt;/div&gt;
+
+&lt;p&gt;Special cases of the theorem is Markov’s inequality and Chebyshev’s inequality.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;Markov's inequality&quot;&gt;
+$X \ge 0$ a.s., $a &amp;gt; 0$ $\implies P(X \ge a) \le EX/a.$
+&lt;/div&gt;
+&lt;div class=&quot;corollary&quot; text=&quot;Chebyshev's inequality&quot;&gt;
+$a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;concluding-remarks&quot;&gt;Concluding remarks&lt;/h2&gt;
+&lt;p&gt;Since the expectation $EX$ is defined as a mere integral, all of the above theorems can be applied. For instance, if $X_n \to X$ a.s. and $|X_n| \le Y$ for some $Y$ such that $E|Y| &amp;lt; \infty$, then by DCT $EX_n \to EX$ as $n\to\infty$.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;p&gt;This post is also based on the textbook &lt;em&gt;Real and Complex Analysis&lt;/em&gt;, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;$f_n \to f$ in $L^1(\mu)$ is equivalent to $\int |f_n - f| d\mu \to 0$ and $f \in L^1(\mu)$. It will be covered in the next section. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 19 Dec 2020 18:49:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-1.5-Convergence-theorems-and-inequalities</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.5-Convergence-theorems-and-inequalities</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 1.4. The Lebesgue integral</title>
@@ -85,10 +285,17 @@ $\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in 
 
 &lt;p&gt;Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\phi_n$ monomonically increases as $n$ increases and approaches $f$ from below. i.e. $\phi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;../assets/fig/201219_step-function.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt;Shape of $\varphi_n$ with varying $n$. $f$: the black dashed line.&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h3 id=&quot;4-general-measurable-function&quot;&gt;4. general measurable function&lt;/h3&gt;
 &lt;p&gt;Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.&lt;/p&gt;
 
-&lt;p&gt;If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &amp;lt; \infty$.&lt;/p&gt;
+&lt;p&gt;If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &amp;lt; \infty$ and write $f \in L^1(\mu)$ or just $f \in L^1$ if the measure is clear.&lt;/p&gt;
 
 &lt;p&gt;There are several properties of the integral naturally arises from the definition.&lt;/p&gt;
 
@@ -798,58 +1005,6 @@ Suppose $U \sim \text{U}(0, 1)$. If a continuous distribution function $F$ has a
         <pubDate>Thu, 30 Apr 2020 18:39:00 +0900</pubDate>
         <link>http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</link>
         <guid isPermaLink="true">http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>Borel-Cantelli lemmas are converses of each other</title>
-        <description>&lt;div class=&quot;theorem&quot; text=&quot;Borel-Cantelli lemmas&quot;&gt;
-(1) Let $A_n$ be a sequence of events. If $\sum\limits_{k=1}^\infty P(A_k) &amp;lt; \infty$, then $P(A_n \:\: i.o) = 0$.
-&lt;br /&gt;
-(2) If $A_n$'s are independent, $\sum\limits_{k=1}^\infty P(A_k) = \infty$, then $P(A_n \:\: i.o) = 1$
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-(1) Let $N := \sum\limits_{k=1}^\infty \mathbf{1}_{A_k}$. The given condition implies $E(N)&amp;lt;\infty$, and thus $P(N&amp;lt;\infty)=1$. Hence at most finitely many $\mathbf{1}_{A_k}$'s should be $1$, and this is equivalent to $P(A_n \:\: i.o) = 0$
-&lt;br /&gt;
-
-(2)
-\begin{align*}
-    P(\bigcap\limits_{k \geq m}{A_k}^c) &amp;amp;= \prod\limits_{k \geq m}\big( 1-P({A_k}) \big) \\
-    &amp;amp;\leq \prod\limits_{k \geq m}e^{-P(A_k)} = e^{-\sum\limits_{k \geq m} P(A_k)} = 0, \:\: \forall m&amp;gt;0
-\end{align*}
-$\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n}) = P(A_n \:\: i.o.) = 1$.
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's 0-1 law&quot;&gt;
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap\limits_{k\geq1} \sigma(X_k, X_{k+1}, \cdots)$, then $P(A)=0$ or $1$.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-Let $A \in \sigma(X_1, \cdots, X_k)$ and $B \in \sigma(X_{k+1}, \cdots, X_{k+j})$ for some $j$. Because $X_i$'s are independent, $A \perp B$. Thus $\sigma(X_1, \cdots, X_k) \perp \bigcup_j \sigma(X_{k+1}, \cdots, X_{k+j})$. Since both are $\pi$-systems, by Dynkin's $\pi$-$\lambda$ theorem,
-\begin{equation}
-    \sigma(X_1, \cdots, X_k) \perp \sigma(X_{k+1}, \cdots)
-\end{equation}
-
-Now, let $A \in \sigma(X_1, \cdots, X_j)$ for some $j$ and $B \in \mathcal{T} \subset \sigma(X_{j+1}, \cdots)$. By (1) and similar process, 
-\begin{equation}
-    \sigma(X_1, \cdots) \perp \mathcal{T}
-\end{equation}
-
-By (2), since $\mathcal{T} \subset \sigma(X_1, \cdots)$, $\mathcal{T}$ is independent of itself. &lt;br /&gt;
-$\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
-&lt;/div&gt;
-
-&lt;p&gt;Borel-Cantelli lemmas are widely used to prove almost sure convergence/existence of limit points of random variables. e.g. By showing that $P(|X_n - X|&amp;gt;\epsilon)$ is summable for any given $\epsilon &amp;gt; 0$, one can easily check almost sure convergence from convergence in probability.&lt;/p&gt;
-
-&lt;p&gt;Kolmogorov’s 0-1 law shows that tail events (any $A \in \mathcal{T}$. $\mathcal{T}$ is called a “tail sigma-field”) can only have either probability 0 or 1. Since $\{A_n \:\: i.o\}$ is a tail event, combined with Borel-Cantelli lemma, it is clear that the second Borel-Cantelli lemma is equivalent to the converse of the first one.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 29 Apr 2020 15:11:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/Borel-Cantelli-lemmas</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/Borel-Cantelli-lemmas</guid>
         
         
         <category>probability</category>
