@@ -6,13 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 23:12:08 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 23:12:08 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 23:14:27 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 23:14:27 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>(PTE) 1.6. $L^p$ space</title>
-        <description>&lt;p&gt;In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space and f&lt;/p&gt;
+        <description>&lt;p&gt;In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;lp-space-on-probability-space&quot;&gt;$L^p$ space on probability space&lt;/h2&gt;
 
@@ -21,7 +21,7 @@ $L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &amp;lt; \infty\}.$&lt;br /&gt;
 $\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
 &lt;/div&gt;
 
-&lt;p&gt;$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &amp;lt; q$. &lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &amp;lt; q$. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;convergence-in-lp&quot;&gt;Convergence in $L^p$&lt;/h2&gt;
 
