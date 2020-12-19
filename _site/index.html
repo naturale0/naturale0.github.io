@@ -146,6 +146,147 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-1.4-Lebesgue-integral">(PTE) 1.4. The Lebesgue integral</a></h2>
+        <time class="post_date">18 December 2020, Friday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the <em>standard machine</em> in measure theory and use it to define the <em>Lebesgue integral</em>. Next, the definition of <em>expectation</em> will be discussed in terms of the Lebesgue integral. <br /><br /></p>
+
+<h2 id="the-standard-machine">The standard machine</h2>
+
+<p>The standard machine is a proof scheme in measure theory that is especially useful when proving properties of a general measurable function. The proof starts from the simplest form of functions, indicator functions, and repeatedly use the result from simpler functions to prove properties in more general functions. To be specific, the standard machine procedes in the following steps:</p>
+
+<ol>
+  <li>indicator function</li>
+  <li>simple function</li>
+  <li>non-negative measurable function</li>
+  <li>general measurable function</li>
+</ol>
+
+<p>Some textbooks (including PTE) drops proof for indicator functions and intead add proof for bounded functions in between simple functions and non-negative functions. However in my experience starting with indicator function was much less cumbersome.</p>
+
+<p>We define the Lebesgue integral using the standard machine, starting from the one for indicator functions. <br /><br /></p>
+
+<h2 id="the-lebesgue-integral">The Lebesgue integral</h2>
+
+<p>Unlike the Riemann integration which was defined as the limit of sums of areas of rectangles that partitions the domain of a function (Riemann sum), the Lebesgue integral is defined as those that partitions the <em>image</em> of a measurable function. While the “height” of each rectangle was of interest in the Riemann integral, it is the “width” of it that is important when defining the Lebesgue integral. We use the measure of inverse image of a partition of a function’s codomain as the width. (This is why we named such functions “measurable”)</p>
+
+<div style="text-align:center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/RandLintegrals.png" alt="ieman-vs-lebesgue.png" width="300" />
+<br />
+<em>(Blue) Riemann integral. (Red) Lebesgue integral. (<a href="https://en.wikipedia.org/wiki/Lebesgue_integration#/media/File:RandLintegrals.png">source</a>)</em>
+</div>
+<p><br /></p>
+
+<p>The following definitions and statements are all assuming a measure space $(\Omega, \mathcal{F}, \mu)$ where $\mu$ is $\sigma$-finite unless otherwise noted.<br /><br /></p>
+
+<h3 id="1-indicator-function">1. indicator function</h3>
+<div class="definition" text="indicator function"><br />
+$\mathbb{1}_A(x) := \begin{cases}
+  1 &amp;, \text{ if } x \in A \\
+  0 &amp;, \text{ otherwise}
+\end{cases}$<br />
+where $A$ is measurable, is an indicator function.
+</div>
+
+<p>An indicator function is trivially a measurable function since its inverse image is either $\phi$ or $\Omega$.</p>
+
+<div class="definition" text="Lebesgue integral of an indicator function"><br />
+$\int_E \mathbb{1}_A d\mu := \mu(A\cap E),~ E \in \mathcal{B}(\mathbb{R})$ is the integral of $\mathbb{1}_A$ over $E$.
+</div>
+
+<p><br /></p>
+
+<h3 id="2-simple-function">2. simple function</h3>
+
+<p>A simple function is a finite weighted sum of indicator functions.</p>
+
+<div class="definition" text="simple function"><br />
+$s(x) := \sum_{i=1}^n \alpha_i \mathbb{1}_{A_i}$, where $A_i$'s are measurable and $\alpha_i \in \mathbb{R},~ i=1,\cdots,n.$
+</div>
+
+<p>Since the sum of measurable functions is also measurable, simple functions are measurable. Naturally, the Lebesgue integral of a simple function is defined in a similar way.</p>
+
+<div class="definition" text="Lebesgue integral of a simple function"><br />
+$\int_E s d\mu := \sum_{i=1}^n \alpha_i \mu(A_i \cap E),~ E \in \mathcal{B}(\mathbb{R}).$
+</div>
+<p><br /></p>
+
+<h3 id="3-non-negative-measurable-function">3. non-negative measurable function</h3>
+<p>Things get a little interesting for non-negative measurable functions. For a non-negative funciton, its integral is defined as $\sup$ (or $\inf$) of simple functions.</p>
+
+<div class="definition" text="Lebesgue integral of a non-negative measurable function"><br />
+Let $f: \Omega \to \mathbb{R}^+ \cup \{0\}$ be measurable.<br />
+Let $\varphi,\psi$ be simple functions.<br />
+$\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in \mathcal{B}(\mathbb{R}).$
+</div>
+
+<p>Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\phi_n$ monomonically increases as $n$ increases and approaches $f$ from below. i.e. $\phi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.<br /><br /></p>
+
+<h3 id="4-general-measurable-function">4. general measurable function</h3>
+<p>Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.</p>
+
+<p>If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &lt; \infty$.</p>
+
+<p>There are several properties of the integral naturally arises from the definition.</p>
+
+<div class="prop" text="properties of the integral">
+Let $f,g$ be integrable, $A,B,E$ be measurable.<br />
+(i) $f \le g \implies \int_E f d\mu \le \int_E g d\mu.$ <br />
+(ii) $A\subset B \implies \int_A f d\mu \le \int_B f d\mu.$ <br />
+(iii) $\int_E cf d\mu = c\int_E f d\mu,~ c \in \mathbb{R}.$ <br />
+(iv) $f = 0 \text{ on } E \implies \int_E f d\mu = 0.$ <br />
+(v) $\mu(E) = 0 \implies \int_E f d\mu = 0,~ \forall f.$ <br />
+(vi) $\int_E f d\mu = \int f \mathbb{1}_E d\mu.$
+</div>
+
+<p>Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of <a href="https://en.wikipedia.org/wiki/Monotone_convergence_theorem">monotone convergence theorem</a>, which will be covered soon.<br /><br /></p>
+
+<h2 id="expectation">Expectation</h2>
+
+<p>I would like to finish this part by defining expectation of random variables. Recall that a random variable $X$ is a measurable function on a probability space $(\Omega, \mathcal{F}, P)$. The expectation is merely the integral of $X$ on $\Omega$ with respect to $P$. That is, $EX := \int X dP$.</p>
+
+<p>As a side note, the Lebesgue integration can be viewed as a generalization of the Riemann integration. It can be shown that any Riemann integrable functions are Lebesgue integrable. Thus it is still viable to interpret expectation as a weight sum of probabilities for many random variables with Riemann integrable densities.</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+
+          
+          <a class="read-more-btn" href="/probability/PTE-1.4-Lebesgue-integral"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/PTE-1.3-Random-variables">(PTE) 1.3. Random variables</a></h2>
         <time class="post_date">18 December 2020, Friday</time>
       </header>
@@ -333,232 +474,6 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 
           
           <a class="read-more-btn" href="/probability/PTE-1.2-Distributions"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.1-Measure-theory">(PTE) 1.1. Basics on measure theory</a></h2>
-        <time class="post_date">18 December 2020, Friday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book <a href="https://services.math.duke.edu/~rtd/PTE/pte.html"><em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019)</a>, while some others are borrowed from the lecture note and personal communications with colleagues.</p>
-
-<p>The first chapter is devoting to the basics of measure theory. A probability space is defined and essential theorems are introduced.
-<br /><br /></p>
-
-<h2 id="probability-space">Probability space</h2>
-
-<p>A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a set, a $\sigma$-field attached to that set, and a measure function. We will define each of the components.</p>
-
-<div class="definition" text="σ-field">
-For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
-<br />
-(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}$. <br />
-(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}$.
-</div>
-
-<p>A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.</p>
-
-<p>We next define a function that <em>measures</em> sizes of sets inside the $\sigma$-field.</p>
-
-<div class="definition" text="measure">
-$\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if <br />
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$. <br />
-(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
-</div>
-
-<p>The second condition is sometimes referred to as <em>$\sigma$ sub-additivity (countable sub-additivity)</em>. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.</p>
-
-<p>If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a <strong>$\sigma$-finite</strong> measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this <strong>a probability measure</strong> (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.</p>
-
-<p>Finally we can define a measure space and in addition a probability space.</p>
-
-<div class="definition" text="probability space">
-$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a <b>measurable space</b>. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a <b>measure space</b>. If $P$ is a probability measure, we call this a <b>probability space</b>, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
-</div>
-
-<p>If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.</p>
-
-<div class="definition" text="Borel σ-field">
-<br />
-$\begin{align}
-\mathcal{B}(\Omega) &amp;= \text{(the smallest $\sigma$-field that contains all open sets of $\Omega$)} \\
- &amp;= \cap_{\tau\subset\mathcal{F}} \mathcal{F}
-\end{align}$
-<br />
-is the Borel $\sigma$-field of $\Omega$, where $\tau$ is a topology on $\Omega$. An element of $\mathcal{B}(\Omega)$ is called a Borel set.
-</div>
-
-<p>An important property of $\sigma$-fields related to the definition of Borel fields is that arbitrary intersections of $\sigma$-fields is a $\sigma$-algebra. (This comes directly from the definition.)</p>
-
-<p>For example of a Borel $\sigma$-field and a measure space, consider $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ and the Lebesgue measure $\lambda$. It is not difficult to know that $\mathcal{B}(\mathbb{R})$ is consists of intersections and unions of sets of the form $(a,b),~(a,b],~[a,b)$ or $[a,b]$ where $a,b\in\mathbb{R}$. The Lebesgue measure measures their “size” as $\lambda(a,b]=b-a$.
-<br /><br /></p>
-
-<h2 id="probability-measures">Probability measures</h2>
-
-<p>Let’s take a deeper look into the properties of measure and probability measures.</p>
-
-<div class="prop" text="properties of probability measures">
-Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following properties hold.<br />
-(i) (monotonicity) $A\subset B \implies P(A) \le P(B)$. <br />
-(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i)$. <br />
-(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A)$. <br />
-(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B)$.
-</div>
-
-<div class="proof"><br />
-(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A)$. <br />
-(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n)$. <br />
-(iii) Let $B_n = A_n \setminus A_{n-1},~ A_0=\phi$ so that $B_n$'s be disjoint. Then $$\begin{align} 
-  P(\cup_n A_n) &amp;= P(\cup_n B_n) = \sum_n P(B_n) \\
-                &amp;= \lim_n P(\cup_{i=1}^n B_i) \\
-                &amp;= \lim_n P(\cup_{i=1}^n A_i) \\
-                &amp;= \lim_n P(A_n)
-\end{align}$$ <br />
-(iv) Let $B_n' = B_1 \setminus B_n$ and use (iii).
-</div>
-<p><br /></p>
-
-<h2 id="characterization-of-a-probability-measure">Characterization of a probability measure</h2>
-
-<p>Until now, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generalizations of $\sigma$-fields.</p>
-
-<div class="definition" text="semi-algebra">
-A collection of sets $\mathcal{S}$ is a semi-algebra, if <br />
-(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoint unions of $S_i \in \mathcal{S}$. <br />
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
-</div>
-
-<p>It is not necessary for a semi-algebra to contain $\phi$. However in many cases it is convenient to make it do so.</p>
-
-<div class="definition" text="algebra">
-A collection of sets $\mathcal{A}$ is an algebra, if <br />
-(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}$. <br />
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
-</div>
-
-<p>Note that the strengthened condition on the definition of algrebra allows it to be closed on both the finite intersection <em>and</em> union.</p>
-
-<p>For example, $\mathcal{S}_1 = {\phi} \cup {(a,b]:~-\infty\le a&lt;b\le \infty}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.</p>
-
-<p>An algebra can be generated using semi-algebra. $\overline{\mathcal{S}} := {\text{finite disjoint unions of sets in }\mathcal{S}}$ is an <strong>algebra generated by a semi-algebra $\mathcal{S}$</strong>. Sometimes we call $\mathcal{S}$ a generator of $\overline{\mathcal{S}}$. Like Borel $\sigma$-field, it is the smallest algebra that contains $\mathcal{S}$.</p>
-
-<p>Similarly, a $\sigma$-field can be generated by (semi)algebra. $\sigma(\mathcal{S}) = \sigma(\overline{\mathcal{S}})$ is the smallest $\sigma$-field that contains $\mathcal{S}$.</p>
-
-<p>Now we define “measures” on these structures.</p>
-
-<div class="definition" text="measure on algebra">
-$\mu:\mathcal{A} \to \mathbb{R}^*\cup\{0\}$ is a measure on an algebra $\mathcal{A}$ if <br />
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}$. <br />
-(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
-</div>
-
-<p>$\sigma$-finiteness is defined as in the $\sigma$-field case.</p>
-
-<p>We can define similar functions in semi-algebra. Let $\mu: \mathcal{S} \to \mathbb{R}^+ \cup {0}$ be a function on a semi-algebra $\mathcal{S}$ that satisfies<br />
-(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}$.<br />
-(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i)$.<br />
-(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i)$.<br />
-I will call such functions <em>semi-measures</em><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>.</p>
-
-<p>The following theorem states that a semi-measure can be uniquely extended to a measure on algebra. If the extended measure on algebra is $\sigma$-finite, it can be further extended to a measure on $\sigma$-field.</p>
-
-<div class="theorem" text="Caratheodory's extension">
-$\mathcal{S}$: a semi-algebra with $\phi\in\mathcal{S}$.<br />
-$\mu: \mathcal{S} \to \mathbb{R}^+\cup\{0\}$ is a semi-measure.<br />
-$\Rightarrow \exists!$ a positive measure $\overline{\mu}$ in $\overline{\mathcal{S}}$ that is an extension of $\mu$. <br />
-In addition, if $\overline{\mu}$ is $\sigma$-finite, $\exists!$ a measure $\nu$ on $\sigma(\mathcal{S})$ that is an extension of $\overline{\mu}$.
-</div>
-
-<p>Our major interest is in probability measure on $\mathbb{R}$. In undergraduate statistics, we learned that (cumulative) distribution functions uniquely determine probability distributions while densities cannot. Caratheodory’s extension theorem leads us the that conclution.</p>
-
-<p>We say a real-valued function on $\mathbb{R}$ is a <strong>Stieltjes measure function</strong> if it is non-decreasing and right-continuous.</p>
-
-<div class="theorem">
-$F$ is a Stieltjest measure function. $\Rightarrow \exists!$ a measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ such that $\mu(a,b] = F(b)-F(a)$.
-</div>
-<div class="proof"><br />
-Let $\mathcal{S} = \{0\} \cup \{(a,b]:~ -\infty\le a &lt; b \le \infty\}$ and $\nu(\phi)=0$, $\nu(a,b] = F(b) - F(a)$. Then $\mathcal{S}$ is a semi-algebra and $\nu$ is a semi-measure. Let $S_n = (-n, n] \in \overline{\mathcal{S}}$, then it is easy to show $\sigma$-finiteness. By Caratheodory's theorem, there is a unique extension of $\nu$.
-</div>
-
-<p>Since a distribution function $F$ is a special case of Stieltjes measure function, it follows directly from the theorem that $F$ uniquely determines a probability measure<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>.</p>
-
-<p>On $\mathbb{R}^d,~ d&gt;1$, we define functions similar to Stieltjes measure function: $F:\mathbb{R}^d \to \mathbb{R}^+ \cup {0}$ such that $F$ is non-decreasing, right-continuous and $\Delta_A F \ge 0,~ \forall A = (a_1,b_1] \times \cdots \times (a_d,b_d]$, where $\Delta_A F = \sum_{v\in V}\text{sgn}(v)F(v)$, $V={a_1, b_1} \times \cdots \times {a_d, b_d}$. Similar to the above, such $F$ can be uniquely extended to a measure $\mu$ such that $\mu(A) = \Delta_A F$ forall finite rectable $A$. <br /><br /></p>
-
-<h2 id="dynkins-pi-lambda-theorem">Dynkin’s $\pi$-$\lambda$ theorem</h2>
-<p>I will end this subsection by stating the theorem that will be used throughout the course.</p>
-
-<div class="definition" text="π-system">
-A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
-</div>
-
-<div class="definition" text="λ-system">
-A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.<br />
-(i) $\Omega \in \mathcal{L}$ <br /> 
-(ii) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$ <br />
-(iii) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
-</div>
-
-<div class="theorem" text="Dynkin's π-λ theorem">
-$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
-</div>
-
-<p>The theorem implies in order to show that some property holds in a $\sigma$-field, we only need to prove that it holds in a $\lambda$-system and the generator $pi$-system of the $\sigma$-field is contained in our $\lambda$-system. A simple but useful corollary is about equivalent probability measures.</p>
-
-<div class="corollary">
-$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
-</div>
-<div class="proof">
-Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
-</div>
-
-<p>Other examples can be found <a href="https://naturale0.github.io/probability/application-of-pi-lambda-theorem">here</a>. We will get on it in this post series one at a time.</p>
-
-<hr />
-
-<h3 id="acknowledgenment">Acknowledgenment</h3>
-
-<p>This post is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>I named this “semi-measure” just for the convenience. This might be different to the actual definition of semi-measure. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:2" role="doc-endnote">
-      <p>Why does this mean that $F$ uniquely determines a probability distribution? Because probability distribution is defined as a probability measure generated by a special kind of functions. This will be discussed in subsection 1.2. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.1-Measure-theory"> » </a>
         </p>
       </div>
       <footer class="post_meta">
