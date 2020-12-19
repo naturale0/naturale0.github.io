@@ -6,9 +6,45 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 22:43:20 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 22:43:20 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 23:12:08 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 23:12:08 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>(PTE) 1.6. $L^p$ space</title>
+        <description>&lt;p&gt;In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space and f&lt;/p&gt;
+
+&lt;h2 id=&quot;lp-space-on-probability-space&quot;&gt;$L^p$ space on probability space&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;Lᵖ space&quot;&gt;&lt;br /&gt;
+$L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &amp;lt; \infty\}.$&lt;br /&gt;
+$\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
+&lt;/div&gt;
+
+&lt;p&gt;$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &amp;lt; q$. &lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;convergence-in-lp&quot;&gt;Convergence in $L^p$&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;Lᵖ convergence&quot;&gt;
+Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ and $\|X_n - X\|_p \to 0$, then we say $X_n$ converges to $X$ in $L^p$ and write $X_n \overset{L^p}{\to} X$.
+&lt;/div&gt;
+
+&lt;p&gt;We could just say $X_n \to X$ in $L^p$ too. It is known that for $p &amp;gt; 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 Dec 2020 22:18:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-1.6-Lp-space</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.6-Lp-space</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 1.5. Convergence theorems and elementary inequalities</title>
@@ -949,69 +985,6 @@ For probability densities $p_0$ and $p_1$, KL divergence of $p_1$ from $p_0$ is 
         
         
         <category>information theory</category>
-        
-      </item>
-    
-      <item>
-        <title>Determination of random variables and random number generation</title>
-        <description>&lt;div class=&quot;theorem&quot; text=&quot;Distribution determines random variable&quot;&gt;
-$F$ is a distribution of a random variable $X$, iff $F$ is (1) non decreasing, (2) right-continuous functions s.t. (3) $\lim\limits_{x\to -\infty}F(x) = 0$ and $\lim\limits_{x\to\infty}F(x) = 1$.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt; &lt;br /&gt;
-($\Rightarrow$) is trivial.
-&lt;br /&gt;
-($\Leftarrow$) let $\Omega = [0, 1]$, $\mathcal{F} = \mathcal{B}\big( [0, 1] \big)$, $P=\lambda$ where $\lambda$ is a lebesgue measure. Define $X(\omega) := \sup\{y: F(y) &amp;lt; \omega\}$, then our claim is that X is a random variable that has $F$ as its distribution. To show the claim is true, we need to show 
-$$P(X\leq x) = F(x) = P(\{\omega: 0\leq \omega \leq F(x)\})$$
-which can be inferred by $\{\omega: X(\omega) \leq x\} = \{\omega: \omega \leq F(x)\}$, $\forall x$.
-&lt;br /&gt;
-&amp;ensp;
-&lt;br /&gt;
-
-Given $x$, pick $\omega_0 \in \{\omega: \omega \leq F(x)\}$, since $F(x) \geq \omega_0$, $x \notin \{y: F(y) &amp;lt; \omega_0\}$. Therefore $X(\omega_0) \leq x$ and $\omega_0 \in \{\omega: X(\omega) \leq x\}$.
-$$\begin{equation}
-\therefore \: \{\omega: X(\omega) \leq x\} \supset \{\omega: \omega \leq F(x)\}, \forall x
-\end{equation}$$
-
-Given $x$, pick $\omega_0 \notin \{\omega: \omega \leq F(x)\}$, then $\omega_0 &amp;gt; F(x)$. Since $F$ is right-continuous, $\exists\epsilon &amp;gt; 0$ such that $F(x) \leq F(x+\epsilon) &amp;lt; \omega_0$. $x+\epsilon \leq X(\omega_0)$ because $X$ is defined as $\sup$, and this gives $x &amp;lt; X(\omega_0)$ and thus $\omega_0 \notin \{\omega: X(\omega) \leq x\}$.
-
-$$\therefore \: \{\omega: X(\omega) \leq x\} \subset \{\omega: \omega \leq F(x)\}, \forall x$$
-
-Hence the claim is true, and
-$$\begin{align}
-  F(x) &amp;amp;= \lambda\big( [0, F(x)] \big) = P(\{\omega: \omega \leq F(x)\})\\
-       &amp;amp;= P(\{\omega: X(\omega) \leq x\}) = P(X \leq x)
-\end{align}$$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;Probability integral transform&quot;&gt;
-Suppose that a random variable $X$ has a continuous distibution $F$, then $Y := F(X) \sim \text{U}(0, 1)$
-&lt;/div&gt;
-
-&lt;p&gt;Probability integral transform can be proven by similar method to the one that used to prove theorem 1. The idea here is to construct a function that is an “inverse” of $F$. Since it is not sure that $F$ can have an inverse, it is safe to say that $X$ is constructed as an upper-quantile function of $F$.&lt;/p&gt;
-
-&lt;p&gt;The fact that we can naturally derive from here is interesting:&lt;/p&gt;
-
-&lt;div class=&quot;fact&quot; text=&quot;inverse-transform sampling&quot;&gt;
-Suppose $U \sim \text{U}(0, 1)$. If a continuous distribution function $F$ has an inverse $F^{-1}$, then $X := F^{-1}(U) \sim F$.
-&lt;/div&gt;
-
-&lt;p&gt;So we can easily generate random numbers from continuous distribution with surjective CDF. For example, to generate random sample from exponential distribution with rate 1,&lt;/p&gt;
-
-&lt;div class=&quot;example&quot; text=&quot;generating Exp(1) random sample&quot;&gt;
-1. Generate random numbers $u_i$'s from $\text{U}(0, 1)$.
-&lt;br /&gt;
-2. $y_i := -\log(1-u_i)$ are random numbers from $\text{Exp}(1)$.
-&lt;/div&gt;
-
-</description>
-        <pubDate>Thu, 30 Apr 2020 18:39:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/determination-of-random-variables-and-random-number-generation</guid>
-        
-        
-        <category>probability</category>
         
       </item>
     

@@ -150,6 +150,67 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-1.6-Lp-space">(PTE) 1.6. $L^p$ space</a></h2>
+        <time class="post_date">19 December 2020, Saturday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space and f</p>
+
+<h2 id="lp-space-on-probability-space">$L^p$ space on probability space</h2>
+
+<div class="definition" text="Lᵖ space"><br />
+$L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &lt; \infty\}.$<br />
+$\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
+</div>
+
+<p>$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &lt; q$. <br /></p>
+
+<h2 id="convergence-in-lp">Convergence in $L^p$</h2>
+
+<div class="definition" text="Lᵖ convergence">
+Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ and $\|X_n - X\|_p \to 0$, then we say $X_n$ converges to $X$ in $L^p$ and write $X_n \overset{L^p}{\to} X$.
+</div>
+
+<p>We could just say $X_n \to X$ in $L^p$ too. It is known that for $p &gt; 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-1.6-Lp-space"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/PTE-1.5-Convergence-theorems-and-inequalities">(PTE) 1.5. Convergence theorems and elementary inequalities</a></h2>
         <time class="post_date">19 December 2020, Saturday</time>
       </header>
@@ -500,134 +561,6 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.<br />
 
           
           <a class="read-more-btn" href="/probability/PTE-1.4-Lebesgue-integral"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.3-Random-variables">(PTE) 1.3. Random variables</a></h2>
-        <time class="post_date">18 December 2020, Friday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>We take a closer look at random variables and random elements. <br /><br /></p>
-
-<h2 id="random-elements-measurable-maps">Random elements (measurable maps)</h2>
-
-<p>Random elements are generalizations of random variables. While the textbook focuses on random variables, we introduce them to provide properties that are not only related to random variables, but also to more general functions.</p>
-
-<div class="definition" text="random elements">
-$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
-</div>
-
-<p>If the codomain is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ we call a random element a random variable. If the codomain is $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ we call it a random vector. If the codomain is a class of functions, we call it a random function.</p>
-
-<p>As we can see in the definition of random variables (measurable functions), functions are closely related to sets. To be specific, properties of a class of functions is closely related to its domain and image. Similar to $\pi$-$\lambda$ theorem, we can check if a function is a random element by just checking inverse images of elements of the generator of $\sigma$-field of its codomain.</p>
-
-<div class="theorem">
-Let $X: \Omega \to S$ be a function and $\mathcal{A}$ be a collection of sets such that $\sigma(\mathcal{A}) = \Sigma$. If $X^{-1}(A) \in \mathcal{F},~ \forall A \in \mathcal{A}$, then $X$ is a random element.
-</div>
-<div class="proof"><br />
-Let $\mathcal{S}=\{B:~ X^{-1}(B) \in \mathcal{F}\}$ ,then $\mathcal{S}$ is a $\sigma$-field and $\mathcal{A} \subset \mathcal{S}$. Hence by definition $\sigma(\mathcal{A}) = \Sigma \subset \mathcal{S}$ and the desired result follows.
-</div>
-
-<p>In the proof of the theorem, observe that if $\mathcal{A}$ is a $\sigma$-field on the codomain $S$ of a random element $X$, then ${A:~ X^{-1}(A)\in\mathcal{F}}$ is also a $\sigma$-field <em>on $S$</em> and ${X^{-1}(A):~ A\in\mathcal{A}}$ is a $\sigma$-field <em>on $\Omega$</em>. In fact, the latter is the smallest $\sigma$-field that makes $X$ a random element. We call it a <strong>$\sigma$-field generated by a measurable map $X$</strong>. <br /><br /></p>
-
-<h2 id="closure-properties-of-random-variables">Closure properties of random variables</h2>
-
-<p>In this subsection, we are interested in operations on random elements/variables that preserves its measurability.</p>
-
-<p>The first two theorems are about a <em>composition of two measurable functions</em>.</p>
-
-<div class="theorem" text="1.3.4">
-$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element.<br />
-$f: (S, \Sigma) \to (T, \mathcal{T})$ is a measurable function.<br />
-$\Rightarrow f \circ X: (\Omega, \mathcal{F}) \to (T, \mathcal{T})$ is a random element.
-</div>
-<div class="proof"><br />
-Given $B \in \mathcal{T}$, $$(f\circ X)^{-1}(B) = X^{-1}(f^{-1}(B)) = X^{-1}(S) \in \mathcal{F}$$ where $S = f^{-1}(B) \in \Sigma$.
-</div>
-
-<div class="theorem" text="1.3.5">
-$X_1,\cdots,X_n: (\Omega, \mathcal{F})\to(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ are random variables.<br />
-$f: \mathbb{R}^d\to\mathbb{R}$ is a Borel measurable function.<br />
-$\Rightarrow f(X_1,\cdots,X_n)$ is a random variable.
-</div>
-<div class="proof"><br />
-Let $Y=(X_1,\cdots,X_n)$, $\mathcal{A}=\{A_1\times\cdots\times A_n:~ A_i \in \mathcal{B}(\mathbb{R}),~ i=1,\cdots,n\}$ then use the fact that $\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R}^d)$ and theorem 1 to show that $Y$ is a random vector. By theorem 2, $f(Y)$ is a random variable.
-</div>
-
-<p>The next two theorems are about minimum/maximum and limiting behaviors of random variables.</p>
-
-<div class="theorem" text="1.3.6">
-Let $X_n$, $n=1,2,\cdots$ be random variables. The followings are random variables.<br />
-(i) $\inf_n X_n$ <br />
-(ii) $\sup_n X_n$ <br />
-(iii) $\liminf_n X_n$ <br />
-(iii) $\limsup_n X_n$ <br />
-</div>
-<div class="proof">
-<br />
-Let $\mathcal{A}=\{(-\infty,x]:~ x\in\mathbb{R}\}$ so that $\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R})$.<br />
-(i) Let $Y = \inf_n X_n$. Given $A=(-\infty, x] \in \mathcal{A}$. $Y^{-1}(A) = \{\inf_n X_n \le x\} = \cup_{i=1}^\infty \{X_i \le x\} \in \mathcal{F}$. <br />
-(iii) $\liminf_n X_n = \sup_n \inf_{m\ge n} X_m$. Use (i), (ii). <br />
-(ii), (iv) Use $-X_n$ and (i), (iii).
-</div>
-
-<p>By (iii) and (iv), if $X_n$ is a random variable and its limit $X_\infty$ exists, then $X_\infty$ is also a random variable.</p>
-
-<div class="corollary">
-$$\begin{align}
-\Omega_0 &amp;:= \{\omega:~ \lim_n X_n(\omega) = X_\infty(\omega)\} \\
-  &amp;= \{\omega:~ \limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0\} \in \mathcal{F}.
-\end{align}$$
-i.e. $\Omega_0$ is a measurable set.
-</div>
-
-<p>We used $\limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0$ instead of $\limsup_n X_n(\omega) = \liminf_n X_n(\omega)$ to cover the case where $X_\infty$ is either $\pm\infty$.</p>
-
-<p>I will finish this section by defining a kind of convergence used in probability theory.</p>
-
-<div class="definition" text="almost sure convergence">
-We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\infty \text{ a.s.}$, if $P(\{\lim_n X_n = X_\infty\}) = 1$.
-</div>
-
-<p>Here, $\text{a.s.}$ stands for “almost surely”. In general measure theory, this term is usually replaced with $\text{a.e.}$ or “almost everywhere”.</p>
-
-<p>Almost sure convergence implies that in probability space, in most of the times only the subsets with positive measures are important: it might be enough to have the fact that $X_n$ converges a.s. Convergence theorems in Lebesgue integration are the examples. We will cover this in detail later.</p>
-
-<hr />
-
-<h3 id="acknowledgenment">Acknowledgenment</h3>
-
-<p>This post is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.3-Random-variables"> » </a>
         </p>
       </div>
       <footer class="post_meta">
