@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 00:18:07 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 00:18:07 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 00:25:13 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 00:25:13 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -51,13 +51,26 @@ $$
 
 &lt;p&gt;Fubini’s theorem implies that for almost surely non-negative or integrable functions, we can calculate the integral with respect to the product measure as a double integral, and its order is negligible.&lt;/p&gt;
 
-&lt;p&gt;Finishing the section, I would like to remark that we can even define $n$-dimensional product spaces to extend the notion even further.&lt;/p&gt;
+&lt;p&gt;Finishing the section, I would like to remark some points.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;We can even define $n$-dimensional product spaces to extend the notion even further.&lt;/li&gt;
+  &lt;li&gt;If $(X,Y)$ is a random element on a metric space $S \times S$, then $X, Y$ are random elements on $S$. However the converse is not always the truth. In fact, it is known that the converse holds if $S$ is &lt;a href=&quot;https://en.wikipedia.org/wiki/Separable_space&quot;&gt;separable&lt;/a&gt;.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Since $(\mathbb{R}, d)$ is a separable space, we can be sure that $(X,Y)$ is a random vector if and only if $X, Y$ are random variables.&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Billingsley, 1999, &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 00:11:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-1.7-product-space</link>
