@@ -150,6 +150,89 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-1.7-product-space">(PTE) 1.7. Product space</a></h2>
+        <time class="post_date">19 December 2020, Saturday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>Let $X, Y$ be random variables on $(\Omega_1, \mathcal{F}_1, P_1)$ and $(\Omega_2, \mathcal{F}_2, P_2)$ respectively. In order to well-define sets such as $\{ X + Y \le 0 \}$, we should consider a random vector $(X,Y)$ on a <em>product space</em> $\mathbb{R} \times \mathbb{R}$ since $+: \mathbb{R}\times\mathbb{R} \to \mathbb{R}$ is defined this way. In addition, to measure the probability of such sets, we also need to define another product probability space $(\Omega, \mathcal{F}, P)$ where $\Omega = \Omega_1 \times \Omega_2$. Main question to answer in this subsection is: how can we define a proper $\sigma$-field $\mathcal{F}$ and a product measure $P$ on such $\Omega$?<br /><br /></p>
+
+<h2 id="product-measure-space">Product measure space</h2>
+
+<div class="definition" text="product measure space">
+Let $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$ be measure spaces with $\sigma$-finite measures $\mu_1, \mu_2$.<br />
+(i) $\Omega = \Omega_1 \times \Omega_2 := \{(\omega_1, \omega_2):~ \omega_1 \in \Omega_1, \omega_2 \in \Omega_2\}$ is the product space.<br />
+(ii) $\mathcal{S} := \{E_1 \times E_2:~ E_1 \in \mathcal{F}_1, E_2 \in \mathcal{F}_2\}$. $S \in \mathcal{S}$ is called a (measurable) rectangle.<br />
+(iii) $\mathcal{F} = \mathcal{F}_1 \times \mathcal{F}_2 := \sigma(\mathcal{S})$ is the $\sigma$-field of the product space.
+</div>
+
+<p>Note that instead of directly product the two $\sigma$-fields, we define $\mathcal{F}$ with measurable rectangles. In fact, direct product of the $\sigma$-field does not yield a $\sigma$-field.</p>
+
+<p>We now define a product measure on $(\Omega, \mathcal{F})$. Uniqueness of such measure is as important as existence of it. Even if we define a proper measure, it would be useless unless it is uniquely determined. Thankfully, <a href="https://naturale0.github.io/probability/PTE-1.1-Measure-theory">Caratheodory’s theorem</a> ensures uniqueness.</p>
+
+<div class="theorem" text="uniqueness of the product measure">
+There uniquely exists a measure $\mu$ on $(\Omega, \mathcal{F})$ such that $\mu(E_1 \times E_2) = \mu_1(E_1) \mu_2(E_2),~ \forall E_1\in\mathcal{F}_1, E_2\in\mathcal{F}.$
+</div>
+<div class="proof"><br />
+$\mathcal{S}$ is a semi-algebra. Show (i) $\mu(A \times B) = \sum_{i=1}^\infty \mu(A_i \times B_i) = \sum_{i=1}^\infty \mu_1(A_i)\mu_2(B_i)$ for $A\times B = \cup_{i=1}^\infty (A_i \times B_i)$ and (ii) $\sigma$-finiteness of $\mu$. Use Caratheodory's theorem to get the result.
+</div>
+<p><br /></p>
+
+<h2 id="fubinis-theorem">Fubini’s theorem</h2>
+
+<p>Measure of a measurable rectangle is comprehensive. However it is combersome to compute and intuitively understand measurable sets <em>that are not rectangles</em>. We <em>could</em> understand it as the limit of measure of rectangles, but it is still a problem to calculate it - we only know the existence of it. Fubini’s theorem is here for the rescue.</p>
+
+<div class="theorem" text="Fubini">
+Let $(\Omega, \mathcal{F}, P)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. <b>or</b> $f \in L^1(\mu)$, then 
+$$
+\begin{align}
+\int_{\Omega} f d\mu &amp;= \int_{\Omega_1} \int_{\Omega_2} f(x,y) d\mu_1(x) d\mu_2(y)\\
+                     &amp;= \int_{\Omega_2} \int_{\Omega_1} f(x,y) d\mu_2(y) d\mu_1(x)
+\end{align}
+$$
+</div>
+
+<p>Fubini’s theorem implies that for almost surely non-negative or integrable functions, we can calculate the integral with respect to the product measure as a double integral, and its order is negligible.</p>
+
+<p>Finishing the section, I would like to remark that we can even define $n$-dimensional product spaces to extend the notion even further.</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-1.7-product-space"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/PTE-1.6-Lp-space">(PTE) 1.6. $L^p$ space</a></h2>
         <time class="post_date">19 December 2020, Saturday</time>
       </header>
@@ -412,155 +495,6 @@ $a &gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
 
           
           <a class="read-more-btn" href="/probability/PTE-1.5-Convergence-theorems-and-inequalities"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.4-Lebesgue-integral">(PTE) 1.4. The Lebesgue integral</a></h2>
-        <time class="post_date">19 December 2020, Saturday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the <em>standard machine</em> in measure theory and use it to define the <em>Lebesgue integral</em>. Next, the definition of <em>expectation</em> will be discussed in terms of the Lebesgue integral. <br /><br /></p>
-
-<h2 id="the-standard-machine">The standard machine</h2>
-
-<p>The standard machine is a proof scheme in measure theory that is especially useful when proving properties of a general measurable function. The proof starts from the simplest form of functions, indicator functions, and repeatedly use the result from simpler functions to prove properties in more general functions. To be specific, the standard machine procedes in the following steps:</p>
-
-<ol>
-  <li>indicator function</li>
-  <li>simple function</li>
-  <li>non-negative measurable function</li>
-  <li>general measurable function</li>
-</ol>
-
-<p>Some textbooks (including PTE) drops proof for indicator functions and intead add proof for bounded functions in between simple functions and non-negative functions. However in my experience starting with indicator function was much less cumbersome.</p>
-
-<p>We define the Lebesgue integral using the standard machine, starting from the one for indicator functions. <br /><br /></p>
-
-<h2 id="the-lebesgue-integral">The Lebesgue integral</h2>
-
-<p>Unlike the Riemann integration which was defined as the limit of sums of areas of rectangles that partitions the domain of a function (Riemann sum), the Lebesgue integral is defined as those that partitions the <em>image</em> of a measurable function. While the “height” of each rectangle was of interest in the Riemann integral, it is the “width” of it that is important when defining the Lebesgue integral. We use the measure of inverse image of a partition of a function’s codomain as the width. (This is why we named such functions “measurable”)</p>
-
-<div style="text-align:center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/RandLintegrals.png" alt="ieman-vs-lebesgue.png" width="300" />
-<br />
-<em>(Blue) Riemann integral. (Red) Lebesgue integral. (<a href="https://en.wikipedia.org/wiki/Lebesgue_integration#/media/File:RandLintegrals.png">source</a>)</em>
-</div>
-<p><br /></p>
-
-<p>The following definitions and statements are all assuming a measure space $(\Omega, \mathcal{F}, \mu)$ where $\mu$ is $\sigma$-finite unless otherwise noted.<br /><br /></p>
-
-<h3 id="1-indicator-function">1. indicator function</h3>
-<div class="definition" text="indicator function"><br />
-$\mathbb{1}_A(x) := \begin{cases}
-  1 &amp;, \text{ if } x \in A \\
-  0 &amp;, \text{ otherwise}
-\end{cases}$<br />
-where $A$ is measurable, is an indicator function.
-</div>
-
-<p>An indicator function is trivially a measurable function since its inverse image is either $\phi$ or $\Omega$.</p>
-
-<div class="definition" text="Lebesgue integral of an indicator function"><br />
-$\int_E \mathbb{1}_A d\mu := \mu(A\cap E),~ E \in \mathcal{B}(\mathbb{R})$ is the integral of $\mathbb{1}_A$ over $E$.
-</div>
-
-<p><br /></p>
-
-<h3 id="2-simple-function">2. simple function</h3>
-
-<p>A simple function is a finite weighted sum of indicator functions.</p>
-
-<div class="definition" text="simple function"><br />
-$s(x) := \sum_{i=1}^n \alpha_i \mathbb{1}_{A_i}$, where $A_i$'s are measurable and $\alpha_i \in \mathbb{R},~ i=1,\cdots,n.$
-</div>
-
-<p>Since the sum of measurable functions is also measurable, simple functions are measurable. Naturally, the Lebesgue integral of a simple function is defined in a similar way.</p>
-
-<div class="definition" text="Lebesgue integral of a simple function"><br />
-$\int_E s d\mu := \sum_{i=1}^n \alpha_i \mu(A_i \cap E),~ E \in \mathcal{B}(\mathbb{R}).$
-</div>
-<p><br /></p>
-
-<h3 id="3-non-negative-measurable-function">3. non-negative measurable function</h3>
-<p>Things get a little interesting for non-negative measurable functions. For a non-negative funciton, its integral is defined as $\sup$ (or $\inf$) of simple functions.</p>
-
-<div class="definition" text="Lebesgue integral of a non-negative measurable function"><br />
-Let $f: \Omega \to \mathbb{R}^+ \cup \{0\}$ be measurable.<br />
-Let $\varphi,\psi$ be simple functions.<br />
-$\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in \mathcal{B}(\mathbb{R}).$
-</div>
-
-<p>Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\varphi_n$ monotonically increases as $n$ increases and approaches $f$ from below. i.e. $\varphi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.<br /><br /></p>
-
-<div style="text-align:center">
-<img src="../assets/fig/201219_step-function.png" alt="ieman-vs-lebesgue.png" width="300" />
-<br />
-<em>Shape of $\varphi_n$ with varying $n$. $f$: the black dashed line.</em>
-</div>
-<p><br /></p>
-
-<h3 id="4-general-measurable-function">4. general measurable function</h3>
-<p>Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and the negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.</p>
-
-<p>If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &lt; \infty$ and write $f \in L^1(\mu)$ or just $f \in L^1$ if the measure is clear.</p>
-
-<p>There are several properties of the integral naturally arises from the definition.</p>
-
-<div class="prop" text="properties of the integral">
-Let $f,g$ be integrable, $A,B,E$ be measurable.<br />
-(i) $f \le g \implies \int_E f d\mu \le \int_E g d\mu.$ <br />
-(ii) $A\subset B \implies \int_A f d\mu \le \int_B f d\mu.$ <br />
-(iii) $\int_E cf d\mu = c\int_E f d\mu,~ c \in \mathbb{R}.$ <br />
-(iv) $f = 0 \text{ on } E \implies \int_E f d\mu = 0.$ <br />
-(v) $\mu(E) = 0 \implies \int_E f d\mu = 0,~ \forall f.$ <br />
-(vi) $\int_E f d\mu = \int f \mathbb{1}_E d\mu.$
-</div>
-
-<p>Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of <a href="https://en.wikipedia.org/wiki/Monotone_convergence_theorem">monotone convergence theorem</a>, which will be covered soon.<br /><br /></p>
-
-<h2 id="expectation">Expectation</h2>
-
-<p>I would like to finish this part by defining expectation of random variables. Recall that a random variable $X$ is a measurable function on a probability space $(\Omega, \mathcal{F}, P)$. The expectation is merely the integral of $X$ on $\Omega$ with respect to $P$. That is, $EX := \int X dP$.</p>
-
-<p>As a side note, the Lebesgue integration can be viewed as a generalization of the Riemann integration. It can be shown that any Riemann integrable functions are Lebesgue integrable. Thus it is still viable to interpret expectation as a weight sum of probabilities for many random variables with Riemann integrable densities.</p>
-
-<hr />
-
-<h3 id="acknowledgement">Acknowledgement</h3>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<p>This post is also based on the textbook <em>Real and Complex Analysis</em>, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).</p>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.4-Lebesgue-integral"> » </a>
         </p>
       </div>
       <footer class="post_meta">
