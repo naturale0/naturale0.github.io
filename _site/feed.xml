@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 00:37:55 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 00:37:55 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 00:47:16 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 00:47:16 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -184,6 +184,9 @@ Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rf
 &lt;div class=&quot;theorem&quot; text=&quot;Fatou&quot;&gt;
 $\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
 $\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $g_n = \inf_{k \ge n} f_k$ so that $g_n \uparrow \liminf\limits_n f_n$. By MCT, $\lim_n \int g_n d\mu = \int \liminf\limits_n f_n d\mu$. Since $g_n$ is monotone and $g_n \le f_n$, we get $\int g_n d\mu \le \int f_n d\mu,~ \forall n$ thus $\lim_n \int g_n d\mu \le \liminf\limits_n \int f_n d\mu$. 
 &lt;/div&gt;
 
 &lt;p&gt;It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.&lt;br /&gt;
