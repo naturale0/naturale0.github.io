@@ -1,6 +1,6 @@
 # naturale0.github.io
 
-## supoorted `div` classes
+## supported `div` classes
 * theorem
 * lemma
 * corollary
