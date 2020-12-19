@@ -6,125 +6,9 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 18:48:35 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 18:48:35 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 18:49:46 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 18:49:46 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
-    
-      <item>
-        <title>(PTE) 1.4. The Lebesgue integral</title>
-        <description>&lt;p&gt;In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the &lt;em&gt;standard machine&lt;/em&gt; in measure theory and use it to define the &lt;em&gt;Lebesgue integral&lt;/em&gt;. Next, the definition of &lt;em&gt;expectation&lt;/em&gt; will be discussed in terms of the Lebesgue integral. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;the-standard-machine&quot;&gt;The standard machine&lt;/h2&gt;
-
-&lt;p&gt;The standard machine is a proof scheme in measure theory that is especially useful when proving properties of a general measurable function. The proof starts from the simplest form of functions, indicator functions, and repeatedly use the result from simpler functions to prove properties in more general functions. To be specific, the standard machine procedes in the following steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;indicator function&lt;/li&gt;
-  &lt;li&gt;simple function&lt;/li&gt;
-  &lt;li&gt;non-negative measurable function&lt;/li&gt;
-  &lt;li&gt;general measurable function&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Some textbooks (including PTE) drops proof for indicator functions and intead add proof for bounded functions in between simple functions and non-negative functions. However in my experience starting with indicator function was much less cumbersome.&lt;/p&gt;
-
-&lt;p&gt;We define the Lebesgue integral using the standard machine, starting from the one for indicator functions. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;the-lebesgue-integral&quot;&gt;The Lebesgue integral&lt;/h2&gt;
-
-&lt;p&gt;Unlike the Riemann integration which was defined as the limit of sums of areas of rectangles that partitions the domain of a function (Riemann sum), the Lebesgue integral is defined as those that partitions the &lt;em&gt;image&lt;/em&gt; of a measurable function. While the “height” of each rectangle was of interest in the Riemann integral, it is the “width” of it that is important when defining the Lebesgue integral. We use the measure of inverse image of a partition of a function’s codomain as the width. (This is why we named such functions “measurable”)&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/1/1b/RandLintegrals.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;(Blue) Riemann integral. (Red) Lebesgue integral. (&lt;a href=&quot;https://en.wikipedia.org/wiki/Lebesgue_integration#/media/File:RandLintegrals.png&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The following definitions and statements are all assuming a measure space $(\Omega, \mathcal{F}, \mu)$ where $\mu$ is $\sigma$-finite unless otherwise noted.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-indicator-function&quot;&gt;1. indicator function&lt;/h3&gt;
-&lt;div class=&quot;definition&quot; text=&quot;indicator function&quot;&gt;&lt;br /&gt;
-$\mathbb{1}_A(x) := \begin{cases}
-  1 &amp;amp;, \text{ if } x \in A \\
-  0 &amp;amp;, \text{ otherwise}
-\end{cases}$&lt;br /&gt;
-where $A$ is measurable, is an indicator function.
-&lt;/div&gt;
-
-&lt;p&gt;An indicator function is trivially a measurable function since its inverse image is either $\phi$ or $\Omega$.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of an indicator function&quot;&gt;&lt;br /&gt;
-$\int_E \mathbb{1}_A d\mu := \mu(A\cap E),~ E \in \mathcal{B}(\mathbb{R})$ is the integral of $\mathbb{1}_A$ over $E$.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-simple-function&quot;&gt;2. simple function&lt;/h3&gt;
-
-&lt;p&gt;A simple function is a finite weighted sum of indicator functions.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;simple function&quot;&gt;&lt;br /&gt;
-$s(x) := \sum_{i=1}^n \alpha_i \mathbb{1}_{A_i}$, where $A_i$'s are measurable and $\alpha_i \in \mathbb{R},~ i=1,\cdots,n.$
-&lt;/div&gt;
-
-&lt;p&gt;Since the sum of measurable functions is also measurable, simple functions are measurable. Naturally, the Lebesgue integral of a simple function is defined in a similar way.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of a simple function&quot;&gt;&lt;br /&gt;
-$\int_E s d\mu := \sum_{i=1}^n \alpha_i \mu(A_i \cap E),~ E \in \mathcal{B}(\mathbb{R}).$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-non-negative-measurable-function&quot;&gt;3. non-negative measurable function&lt;/h3&gt;
-&lt;p&gt;Things get a little interesting for non-negative measurable functions. For a non-negative funciton, its integral is defined as $\sup$ (or $\inf$) of simple functions.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of a non-negative measurable function&quot;&gt;&lt;br /&gt;
-Let $f: \Omega \to \mathbb{R}^+ \cup \{0\}$ be measurable.&lt;br /&gt;
-Let $\varphi,\psi$ be simple functions.&lt;br /&gt;
-$\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in \mathcal{B}(\mathbb{R}).$
-&lt;/div&gt;
-
-&lt;p&gt;Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\phi_n$ monomonically increases as $n$ increases and approaches $f$ from below. i.e. $\phi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-general-measurable-function&quot;&gt;4. general measurable function&lt;/h3&gt;
-&lt;p&gt;Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.&lt;/p&gt;
-
-&lt;p&gt;If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &amp;lt; \infty$.&lt;/p&gt;
-
-&lt;p&gt;There are several properties of the integral naturally arises from the definition.&lt;/p&gt;
-
-&lt;div class=&quot;prop&quot; text=&quot;properties of the integral&quot;&gt;
-Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
-(i) $f \le g \implies \int_E f d\mu \le \int_E g d\mu.$ &lt;br /&gt;
-(ii) $A\subset B \implies \int_A f d\mu \le \int_B f d\mu.$ &lt;br /&gt;
-(iii) $\int_E cf d\mu = c\int_E f d\mu,~ c \in \mathbb{R}.$ &lt;br /&gt;
-(iv) $f = 0 \text{ on } E \implies \int_E f d\mu = 0.$ &lt;br /&gt;
-(v) $\mu(E) = 0 \implies \int_E f d\mu = 0,~ \forall f.$ &lt;br /&gt;
-(vi) $\int_E f d\mu = \int f \mathbb{1}_E d\mu.$
-&lt;/div&gt;
-
-&lt;p&gt;Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of &lt;a href=&quot;https://en.wikipedia.org/wiki/Monotone_convergence_theorem&quot;&gt;monotone convergence theorem&lt;/a&gt;, which will be covered soon.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;expectation&quot;&gt;Expectation&lt;/h2&gt;
-
-&lt;p&gt;I would like to finish this part by defining expectation of random variables. Recall that a random variable $X$ is a measurable function on a probability space $(\Omega, \mathcal{F}, P)$. The expectation is merely the integral of $X$ on $\Omega$ with respect to $P$. That is, $EX := \int X dP$.&lt;/p&gt;
-
-&lt;p&gt;As a side note, the Lebesgue integration can be viewed as a generalization of the Riemann integration. It can be shown that any Riemann integrable functions are Lebesgue integrable. Thus it is still viable to interpret expectation as a weight sum of probabilities for many random variables with Riemann integrable densities.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
-
-&lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 18 Dec 2020 22:42:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.4-Lebesgue-integral</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.4-Lebesgue-integral</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
     
       <item>
         <title>(PTE) 1.3. Random variables</title>
@@ -852,6 +736,31 @@ $\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
         
         
         <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>Limitation of $R^2$</title>
+        <description>&lt;div class=&quot;fact&quot; text=&quot;limitation of coefficient of determination&quot;&gt;
+For a linear regression $y_i = \beta_0 + \sum\limits_{j=1}^{p} \beta_j x_{ij}$, $1 \leq i \leq n$, suppose $x_{ij}$'s does not have any relationship with $y_i$'s. i.e. true model is $y_i = \beta_0 = \bar{y}$. Under this assumption,
+
+$$\begin{align*}
+    \frac{\mathrm{SSE}}{\sigma^2} &amp;amp;\sim \chi^2(n-p-1) \overset{D}{=} \Gamma(\frac{n-p-1}{2}, 2)\\
+    \frac{\mathrm{SSR}}{\sigma^2} &amp;amp;\sim \chi^2(p) \overset{D}{=} \Gamma(\frac{p}{2}, 2)\\   
+    \mathrm{SSE} &amp;amp;\perp \mathrm{SSR}
+\end{align*}$$
+
+Thus, $R^2 = \frac{\mathrm{SSR}}{\mathrm{SSR} + \mathrm{SSE}} \sim \mathcal{B}(\frac{p}{2}, \frac{n-p-1}{2})$, and $E(R^2) = \frac{p}{n-1}$.
+&lt;/div&gt;
+
+&lt;p&gt;Hence expectation of $R^2$ increases as the dimension of predictors increases, regardless of fit of the model.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Apr 2020 18:37:10 +0900</pubDate>
+        <link>http://localhost:4000/linear%20model/limitation-of-R-sq</link>
+        <guid isPermaLink="true">http://localhost:4000/linear%20model/limitation-of-R-sq</guid>
+        
+        
+        <category>linear model</category>
         
       </item>
     
