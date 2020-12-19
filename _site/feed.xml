@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 22:31:09 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 22:31:09 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 22:43:20 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 22:43:20 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -110,6 +110,10 @@ $$&lt;br /&gt;
 (iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/h2&gt;
+&lt;p&gt;A special case of the DCT is where the sequence ${f_n}$ is uniformly bounded almost surely (i.e. $Y = c \in \mathbb{R}$). In this case we call it the &lt;em&gt;bounded convergence theorem&lt;/em&gt;.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;inequalities&quot;&gt;Inequalities&lt;/h2&gt;
 &lt;p&gt;Along with convergence theorems, these integral inequalities will be used intensely throughout the probability theory. In the following theorems, assume $f,g$ are measurable. For $p \ge 1$, if $|f|^p$ is integrable, $\|f\|_p := (\int |f|^p d\mu)^\frac{1}{p}$ is the $L^p(\mu)$-norm of $f$.&lt;/p&gt;
