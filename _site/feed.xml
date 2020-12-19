@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Dec 2020 00:54:06 +0900</pubDate>
-    <lastBuildDate>Sat, 19 Dec 2020 00:54:06 +0900</lastBuildDate>
+    <pubDate>Sat, 19 Dec 2020 12:36:02 +0900</pubDate>
+    <lastBuildDate>Sat, 19 Dec 2020 12:36:02 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -19,7 +19,7 @@
 &lt;p&gt;Random elements are generalizations of random variables. While the textbook focuses on random variables, we introduce them to provide properties that are not only related to random variables, but also to more general functions.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;random elements&quot;&gt;
-$X: (\omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
+$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
 &lt;/div&gt;
 
 &lt;p&gt;If the codomain is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ we call a random element a random variable. If the codomain is $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ we call it a random vector. If the codomain is a class of functions, we call it a random function.&lt;/p&gt;
@@ -184,7 +184,7 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 
 &lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
 
-&lt;p&gt;A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.&lt;/p&gt;
+&lt;p&gt;A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a set, a $\sigma$-field attached to that set, and a measure function. We will define each of the components.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;σ-field&quot;&gt;
 For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
@@ -203,14 +203,14 @@ $\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
 (ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
 &lt;/div&gt;
 
-&lt;p&gt;The second condition is sometimes referred to as &lt;em&gt;$\sigma$ sub-additivity&lt;/em&gt;. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.&lt;/p&gt;
+&lt;p&gt;The second condition is sometimes referred to as &lt;em&gt;$\sigma$ sub-additivity (countable sub-additivity)&lt;/em&gt;. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.&lt;/p&gt;
 
 &lt;p&gt;If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &amp;lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a &lt;strong&gt;$\sigma$-finite&lt;/strong&gt; measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this &lt;strong&gt;a probability measure&lt;/strong&gt; (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.&lt;/p&gt;
 
 &lt;p&gt;Finally we can define a measure space and in addition a probability space.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;probability space&quot;&gt;
-$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a &lt;b&gt;measurable space&lt;/b&gt;. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a &lt;b&gt;measurable space&lt;/b&gt;. If $P$ is a probability measure, we call this a &lt;b&gt;probability space&lt;/b&gt;, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
+$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a &lt;b&gt;measurable space&lt;/b&gt;. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a &lt;b&gt;measure space&lt;/b&gt;. If $P$ is a probability measure, we call this a &lt;b&gt;probability space&lt;/b&gt;, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
 &lt;/div&gt;
 
 &lt;p&gt;If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.&lt;/p&gt;

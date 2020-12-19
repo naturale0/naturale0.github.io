@@ -159,7 +159,7 @@
 <p>Random elements are generalizations of random variables. While the textbook focuses on random variables, we introduce them to provide properties that are not only related to random variables, but also to more general functions.</p>
 
 <div class="definition" text="random elements">
-$X: (\omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
+$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
 </div>
 
 <p>If the codomain is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ we call a random element a random variable. If the codomain is $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ we call it a random vector. If the codomain is a class of functions, we call it a random function.</p>
@@ -374,7 +374,7 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 
 <h2 id="probability-space">Probability space</h2>
 
-<p>A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a space, a $\sigma$-field attached to that space, and a measure function. We will define each of the components.</p>
+<p>A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a set, a $\sigma$-field attached to that set, and a measure function. We will define each of the components.</p>
 
 <div class="definition" text="σ-field">
 For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
@@ -393,14 +393,14 @@ $\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if <br />
 (ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
 </div>
 
-<p>The second condition is sometimes referred to as <em>$\sigma$ sub-additivity</em>. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.</p>
+<p>The second condition is sometimes referred to as <em>$\sigma$ sub-additivity (countable sub-additivity)</em>. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.</p>
 
 <p>If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a <strong>$\sigma$-finite</strong> measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this <strong>a probability measure</strong> (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.</p>
 
 <p>Finally we can define a measure space and in addition a probability space.</p>
 
 <div class="definition" text="probability space">
-$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a <b>measurable space</b>. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a <b>measurable space</b>. If $P$ is a probability measure, we call this a <b>probability space</b>, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
+$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a <b>measurable space</b>. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a <b>measure space</b>. If $P$ is a probability measure, we call this a <b>probability space</b>, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
 </div>
 
 <p>If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.</p>
