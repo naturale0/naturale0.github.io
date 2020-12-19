@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 00:36:22 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 00:36:22 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 00:37:55 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 00:37:55 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -277,7 +277,7 @@ $$
 
 &lt;p&gt;Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.&lt;/p&gt;
 
-&lt;div class=&quot;theorem&quot; text=&quot;Markov-Chevyshev's inequality&quot;&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Markov-Chebyshev's inequality&quot;&gt;
 $\varphi: \mathbb{R}\to\mathbb{R}$, $\varphi \ge 0$.&lt;br /&gt;
 $A \in \mathcal{B}(\mathbb{R})$, $i_A := \inf\{\varphi(y):~ y\in A\}$. &lt;br /&gt;
 $\implies i_A \cdot P(X \in A) \le \int_A \varphi(X) dP \le E\varphi(X).$
