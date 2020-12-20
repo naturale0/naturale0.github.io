@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 14:50:52 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 14:50:52 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 14:57:37 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 14:57:37 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -71,8 +71,7 @@ X &amp;amp;,~ \text{if } |X| \le M \\
 &lt;div class=&quot;theorem&quot; text=&quot;Weak law for triangular arrays&quot;&gt;
 For each $n$, $X_{nk}$, $k=1\cdots,n$ are independent.&lt;br /&gt;
 Let $b_n &amp;gt; 0$, $b_n \to_n \infty$. &lt;br /&gt;
-Define $\bar X_{nk} := X_nk \mathbb{1}_{(|X_{nk}| \le b_n)}.$&lt;br /&gt;
-If the followings hold,&lt;br /&gt;
+Define $\bar X_{nk} := X_{nk} \mathbb{1}_{(|X_{nk}| \le b_n)}.$&lt;br /&gt;
 (i) $\sum_{k=1}^n P(|X_{nk}| &amp;gt; b_n) \to_n 0.$ &lt;br /&gt;
 (ii) $\frac{1}{b_n^2} \sum_{k=1}^n E\bar X_{nk}^2 \to_n 0.$ &lt;br /&gt;
 $\implies \frac{S_n - a_n}{b_n} \overset{P}{\to} 0$, where $a_n = \sum_{k=1}^n E\bar X_{nk}.$
