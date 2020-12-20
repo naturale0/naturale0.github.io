@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 22:22:35 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 22:22:35 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 22:24:59 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 22:24:59 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -171,7 +171,7 @@ $$
 
 &lt;p&gt;(TBD: example - head runs)&lt;/p&gt;
 </description>
-        <pubDate>Sun, 20 Dec 2020 19:10:00 +0900</pubDate>
+        <pubDate>Sun, 20 Dec 2020 22:23:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-2.3-B-C-lemmas</link>
         <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.3-B-C-lemmas</guid>
         
