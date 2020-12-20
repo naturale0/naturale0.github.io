@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 18:43:09 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 18:43:09 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 19:08:47 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 19:08:47 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -143,6 +143,19 @@ By theorem 6, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} 
 
 &lt;p&gt;Note that we do not need finite second moment condition.&lt;/p&gt;
 
+&lt;p&gt;While I will leave other examples as further readings, I would like to discuss the example of coupon collector’s problem (example 2.2.7).&lt;/p&gt;
+
+&lt;div class=&quot;example&quot; text=&quot;coupon collector's problem&quot;&gt;
+$X_1,X_2,\cdots \overset{\text{iid}}{\sim} \mathcal{U}\{1,2,\cdots,n\}.$ Define a &lt;i&gt;stopping time&lt;/i&gt; $\tau_k^n = \inf\{m:~ |\{X_1,\cdots,X_m\}| = k\}$ and let $T_n = \tau_n^n.$ Then $\frac{T_n}{n\log{n}} \overset{P}{\to} 1.$
+&lt;/div&gt;
+
+&lt;p&gt;Here, $\mathcal{U}{1,2,\cdots,n}$ is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Discrete_uniform_distribution&quot;&gt;discrete uniform distribution&lt;/a&gt; from one to $n$. In this example it can be interpreted that $n$ is the total number of different coupons and $\tau_k^n$ represents the number of trials until $k$ different kinds of coupons are collected, $T_n$ is the number of trials until all of the coupons are collected. This example says that asymptotically $n\log n$ trials are required for all $n$ coupons to be collected. Likewise, asymptotic rate of a stochastic process can be calculated using the weak laws.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot; text=&quot;example 1&quot;&gt;
+Let $X_{nk} = \tau_k^n - \tau_{k-1}^n$, $k=1,\cdots,n.$ Then $X_{nk} \sim \text{Geo}(p)$ where $p=1-\frac{k-1}{n}.$ The memoryless property of Benoulli process implies $X_{nk} \perp X_{nj}$, $j=1,\cdots,k-1$ and $T_n = X_{n1} + \cdots + X_{nn}.$&lt;br /&gt;
+Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
+&lt;/div&gt;
+
 &lt;p&gt;In the following section I will cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. B-C lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -190,6 +203,8 @@ Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_1, \cdots, \
 Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cdots,X_n$ are independent if $\sigma(X_i)$, $i=1,\cdots,n$ are independent.
 &lt;/div&gt;
 
+&lt;p&gt;We sometimes write $X \perp Y$ for independence between $X$ and $Y$.&lt;/p&gt;
+
 &lt;p&gt;It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;2.1.7&quot;&gt;
@@ -226,7 +241,7 @@ P((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}^{\infty-n}) = P_n((a_1,b_
 $$
 &lt;/div&gt;
 
-&lt;p&gt;Furthermore, if a measurable space $(S, \mathcal{S})$ is &lt;strong&gt;nice&lt;/strong&gt;, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can construct a sequence of random &lt;em&gt;elements&lt;/em&gt; $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$&lt;/p&gt;
+&lt;p&gt;Furthermore, if a measurable space $(S, \mathcal{S})$ is &lt;strong&gt;nice&lt;/strong&gt;, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can also construct a sequence of random &lt;em&gt;elements&lt;/em&gt; $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$&lt;/p&gt;
 
 &lt;hr /&gt;
 
