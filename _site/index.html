@@ -58,6 +58,14 @@
   </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+    MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
   </script>
   <script type="text/javascript" src="http://cdn.mathjax.org/math...">
   </script>
@@ -150,6 +158,201 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a></h2>
+        <time class="post_date">20 December 2020, Sunday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>In this section I would like to cover the <em>Borel-Cantelli lemmas</em>, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of <em>tail events</em> and deriving almost sure convergence from $P$-convergence.<br /><br /></p>
+
+<h2 id="limit-of-a-sequence-of-sets">Limit of a sequence of sets</h2>
+<p>Borel-Cantelli lemmas are statements about probability of “limit” of sets. To state and prove the lemma, we first define $\limsup$ and $\liminf$ of a sequence of sets.</p>
+
+<div class="definition"><br />
+Let $(A_n)_{n\in\mathbb{N}}$ be a sequence of sets.<br />
+$\limsup\limits_n A_n = \bigcap_n \bigcup_{k\ge n} A_k = \{A_n \text{ i.o.}\}.$ <br />
+$\liminf\limits_n A_n = \bigcup_n \bigcap_{k\ge n} A_k = \{A_n \text{ eventually}\}.$
+</div>
+
+<p><em>i.o.</em> stands for “infinitely often”. We named these $\limsup, \liminf$ since there is a connection with those of functions. It is not difficult to show that $\limsup\limits_n \mathbb{1}_{A_n} = \mathbb{1}_{\limsup\limits_n A_n}$ and $\liminf\limits_n \mathbb{1}_{A_n} = \mathbb{1}_{\liminf\limits_n A_n}.$ As a remark, by de Morgan’s law, $\{A_n \text{ i.o.}\}^c = \{ A_n^c \text{ eventually} \}$ thus $P(A_n \text{ i.o.}) = 0$ is equivalent to $P(A_n^c \text{ eventually}) = 1.$<br /><br /></p>
+
+<h2 id="borel-cantelli-lemmas">Borel-Cantelli lemmas</h2>
+
+<div class="theorem" text="Borel-Cantelli">
+(i) $\sum\limits_{n=1}^\infty P(A_n) &lt; \infty \implies P(A_n \text{ i.o.}) = 0.$ <br />
+(ii) If $A_n$'s are independent, $\sum\limits_{n=1}^\infty P(A_n) = \infty \implies P(A_n \text{ i.o.}) = 1.$ <br />
+</div>
+<div class="proof"><br />
+(i) $\sum\limits_{k=1}^n \mathbb{1}_{A_k} \uparrow \sum\limits_{n=1}^\infty \mathbb{1}_{A_n}$. By MCT $E\sum\limits_{n=1}^\infty \mathbb{1}_{A_n} = \sum\limits_{n=1}^\infty P(A_n) &lt; \infty$ which leads to $\sum\limits_{n=1}^\infty \mathbb{1}_{A_n} &lt; \infty$ a.s. <br />
+(ii) Using the inequality $1-x \le e^{-x}$, \begin{align*}
+    P(\bigcap\limits_{k \geq m}{A_k}^c) &amp;= \prod\limits_{k \geq m}\big( 1-P({A_k}) \big) \\
+    &amp;\leq \prod\limits_{k \geq m}e^{-P(A_k)} = e^{-\sum\limits_{k \geq m} P(A_k)} = 0, \:\: \forall m&gt;0
+\end{align*}
+$\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n}) = P(A_n \text{ i.o.}) = 1.$
+</div>
+
+<p>Using Borel-Cantelli lemmas, we can convert the sum of probabilities to probability of <em>tail events</em>.<br /><br /></p>
+
+<h3 id="tail-events-and-the-0-1-law">Tail events and the 0-1 law</h3>
+
+<p>I mentioned tail events several times but never actually defined it.</p>
+
+<div class="definition" text="tail event">
+Let $(X_n)$ be a sequence of random variables. Let $\mathcal{G}_n = \sigma(X_n,X_{n+1},\cdots).$ We call $\mathcal{T}=\bigcap_n\mathcal{G}_n$ a <b>tail $\sigma$-field</b> of $(X_n)$, $A\in\mathcal{T}$ a <b>tail event</b>.
+</div>
+
+<p>Simply put, a tail event is an event that does not depend on finite number of random variables. For instance,  $\{ \limsup_n S_n/C_n &gt; x \} \in \mathcal{T}$ for $C_n, x \in \mathbb{R}$, $S_n=X_1 + \cdots + X_n$ if $X_n\to_n\infty$ while $\{\limsup_n S_n &gt; 0\}\notin\mathcal{T}.$</p>
+
+<div class="definition" text="P-trivial event">
+An event $A$ is $P$-trivial if $P(A) = 0$ or $1.$<br />
+</div>
+
+<p>The next theorem implies that <a href="https://naturale0.github.io/probability/Borel-Cantelli-lemmas">Borel-cantelli lemmas are converses of each other</a>.</p>
+
+<div class="theorem" text="Kolmogorov's 0-1 law">
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap_n \sigma(X_n, X_{n+1}, \cdots)$, then $A$ is a $P$-trivial event.
+</div>
+
+<div class="proof">
+Let $A \in \sigma(X_1, \cdots, X_k)$ and $B \in \sigma(X_{k+1}, \cdots, X_{k+j})$ for some $j$. Because $X_i$'s are independent, $A \perp B$. Thus $\sigma(X_1, \cdots, X_k) \perp \bigcup_j \sigma(X_{k+1}, \cdots, X_{k+j})$. Since both are $\pi$-systems, by Dynkin's $\pi$-$\lambda$ theorem,
+\begin{equation}
+    \sigma(X_1, \cdots, X_k) \perp \sigma(X_{k+1}, \cdots)
+\end{equation}
+
+Now, let $A \in \sigma(X_1, \cdots, X_j)$ for some $j$ and $B \in \mathcal{T} \subset \sigma(X_{j+1}, \cdots)$. By (1) and similar process, 
+\begin{equation}
+    \sigma(X_1, \cdots) \perp \mathcal{T}
+\end{equation}
+
+By (2), since $\mathcal{T} \subset \sigma(X_1, \cdots)$, $\mathcal{T}$ is independent of itself. <br />
+$\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
+</div>
+<p><br /></p>
+
+<h2 id="application-of-borel-cantelli-lemmas">Application of Borel-Cantelli lemmas</h2>
+<h3 id="application-of-the-first-lemma">Application of the first lemma</h3>
+
+<p>The first application connects convergence in probability to almost sure convergence.</p>
+
+<div class="theorem">
+$X_n \overset{P}{\to} X$ if and only if for all subsequence $(X_{n_k})$, there exists a further subsequence $(X_{n_k(m)})$ such that $X_{n_k(m)} \to X$ a.s.
+</div>
+<div class="proof"><br />
+($\Rightarrow$) 
+Without loss of generality, we only have to prove that there exists a.s. convergent subsequence. Let $\epsilon_k&gt;0$, $\epsilon_k \downarrow 0.$ There exists $n_k \in \mathbb{N}$ such that if $n \ge n_k$, $P(|X_n - X| &gt; \epsilon_k) &lt; \frac{1}{2^k}$ and $n_{k+1} &gt; n_k.$ Hence $\sum\limits_{k=1}^\infty P(|X_{n_k} - X| \ge \epsilon_k) \le 1 &lt; \infty$ and by the first Borel-Cantelli lemma, $P(|X_{n_k} - X| \ge \epsilon_k \text{ i.o.}) = 0.$<br />
+($\Leftarrow$) 
+It is easy to show that for a sequence $(y_n)$ on a topological space, if for all subsequence there exists a further subsequence that converges to $y$, then $y_n \to y.$ Given $\delta &gt; 0$, let $y_n = P(|X_n - X| &gt; \delta)$ then it is a sequence on topological space $\mathbb{R}$ that converges to 0. By the condition, the result directly follows.
+</div>
+
+<p>Another application is in the form of strong law of large numbers.</p>
+
+<div class="theorem" text="2.3.5">
+$X_1,\cdots,X_n$ are i.i.d. with $EX_1 = \mu$ and $EX_1^4 \le C &lt; \infty.$ $\implies S_n/n \to \mu$ a.s.
+</div>
+<div class="proof"><br />
+$$
+\begin{align}
+P(|S_n/n - \mu| &gt; \epsilon) &amp;= P(|S_n - n\mu| &gt; n\epsilon) \\
+  &amp;\le E(S_n - n\mu)^4 / n^4\epsilon^4 \le C / n^2\epsilon^4. 
+\end{align}
+$$
+$\sum\limits_{n=1}^\infty P(|S_n/n - \mu| &gt; \epsilon) \le \sum\limits_{n=1}^\infty C_1 / n^2 &lt; \infty$ for some $C_1.$ By the first Borel-Cantelli lemma, the result follows.
+</div>
+<p><br /></p>
+
+<h3 id="application-of-the-second-lemma">Application of the second lemma</h3>
+
+<p>As a sneak peek of the next sction, the second Borel-Cantelli lemma leads to a necessary condition of the strong law of large numbers.</p>
+
+<div class="theorem" text="necessity of the strong law">
+$X_1,X_2,\cdots$ are i.i.d. with $E|X_1| = \infty$. $S_n = X_1 + \cdots + X_n.$<br />
+$\begin{align}
+\implies &amp;\text{(i) } P(|X_1|\ge n \text{ i.o.}) = 1. \\
+         &amp;\text{(ii) } P(\lim_n S_n/n \text{ exists and finite}) = 0.
+\end{align}$
+</div>
+
+<p>Note that this implies $E|X_1| &lt; \infty$ is required for the strong law.</p>
+
+<div class="proof"><br />
+(i) $E|X_1| = \int_0^\infty P(|X_1|&gt;x)dx \le \sum\limits_{n=0}^\infty P(|X_1| \ge n) = \infty.$ By the second B-C lemma, $P(|X_1| \ge n \text{ i.o.}) = 1.$<br />
+(ii) $\frac{S_n}{n}-\frac{S_{n+1}}{n+1} = \frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}.$ Let $C = \{\lim_n S_n/n \text{ exists and finite}\}$, then on $C$, $\lim_n \frac{S_n}{n(n+1)} = 0.$ On $C \cap (|X_i| \ge n \text{ i.o.})$, 
+$$
+\begin{align}
+\limsup\limits_n |\frac{S_n}{n}-\frac{S_{n+1}}{n+1}|
+&amp;= \limsup\limits_n |\frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}| \\
+&amp;\ge \limsup\limits_n |\frac{X_{n+1}}{n+1}| - \cancelto{0}{\lim_n |\frac{S_n}{n(n+1)}|} \ge 1.
+\end{align}
+$$
+By (i), the desired result follows.
+</div>
+
+<p>Another important result is a generalization of the lemma.</p>
+
+<div class="theorem" text="2.3.9">
+Let $A_1,A_2,\cdots$ be pairwise independent events.<br />
+$\sum\limits_{n=1}^\infty P(A_n) = \infty \implies \frac{\sum_{m=1}^n \mathbb{1}_{A_m}}{\sum_{m=1}^n P(A_m)}\to 1 \text{ a.s.}$
+</div>
+<div class="proof"><br />
+Let $X_m = 1_{A_m}$, $S_n = X_1 + \cdots + X_n$. Note that $0 \le X_m \le 1.$<br />
+(Step 1: $\frac{\sum_{m=1}^n \mathbb{1}_{A_m}}{\sum_{m=1}^n P(A_m)} = \frac{S_n}{ES_n} \overset{P}{\to} 1.$)<br />
+&ensp; $EX_n^2 = P(\mathbb{1}_{A_n}) &lt; \infty.$ Thus $ES_n^2 = \sum_{i=1}^n EX_n^2 + 2\sum_{1\le i &lt; j \le n}EX_i EX_j &lt; \infty.$
+$$
+\begin{align}
+P(|\frac{S_n - ES_n}{ES_n}| &gt; \epsilon) 
+ &amp;\le \frac{\text{Var}(S_n)}{\epsilon^2(ES_n)^2} \\
+ &amp;\le \frac{\sum_{i=1}^n EX_i^2}{\epsilon^2(ES_n)^2} \\
+ &amp;= \frac{\sum_{i=1}^n EX_i}{\epsilon^2(ES_n)^2} \\
+ &amp;= \frac{1}{\epsilon^2 ES_n} \to 0.
+\end{align}
+$$
+(Step 2: $\exists n_k$ s.t. $\frac{S_{n_k}}{ES_{n_k}} \to 1 \text{ a.s.}$)<br />
+&ensp; Let $n_k = \inf\{n:~ ES_n &gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \sum_k \frac{1/k^2} / \delta^2 &lt; \infty.$ By the first Borel-cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.<br />
+(Step 3: sandwich)<br />
+&ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
+</div>
+
+<p>As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+<p>(TBD: example - head runs)</p>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-2.3-B-C-lemmas"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -304,8 +507,6 @@ Let $X_{nk} = \tau_k^n - \tau_{k-1}^n$, $k=1,\cdots,n.$ Then $X_{nk} \sim \text{
 Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 </div>
 
-<p>In the following section I will cover the <em>Borel-Cantelli lemmas</em>, or B-C lemmas for short. B-C lemmas are quintessential tools for analysis of <em>tail events</em> and deriving almost sure convergence from $P$-convergence.</p>
-
 <hr />
 
 <h3 id="acknowledgement">Acknowledgement</h3>
@@ -432,102 +633,6 @@ $$
 
           
           <a class="read-more-btn" href="/probability/PTE-2.1-independence"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.7-product-space">(PTE) 1.7. Product space</a></h2>
-        <time class="post_date">20 December 2020, Sunday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>Let $X, Y$ be random variables on $(\Omega_1, \mathcal{F}_1, P_1)$ and $(\Omega_2, \mathcal{F}_2, P_2)$ respectively. In order to well-define sets such as $\{ X + Y \le 0 \}$, we should consider a random vector $(X,Y)$ on a <em>product space</em> $\mathbb{R} \times \mathbb{R}$ since $+: \mathbb{R}\times\mathbb{R} \to \mathbb{R}$ is defined this way. In addition, to measure the probability of such sets, we also need to define another product probability space $(\Omega, \mathcal{F}, P)$ where $\Omega = \Omega_1 \times \Omega_2$. Main question to answer in this subsection is: how can we define a proper $\sigma$-field $\mathcal{F}$ and a product measure $P$ on such $\Omega$?<br /><br /></p>
-
-<h2 id="product-measure-space">Product measure space</h2>
-
-<div class="definition" text="product measure space">
-Let $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$ be measure spaces with $\sigma$-finite measures $\mu_1, \mu_2$.<br />
-(i) $\Omega = \Omega_1 \times \Omega_2 := \{(\omega_1, \omega_2):~ \omega_1 \in \Omega_1, \omega_2 \in \Omega_2\}$ is the product space.<br />
-(ii) $\mathcal{S} := \{E_1 \times E_2:~ E_1 \in \mathcal{F}_1, E_2 \in \mathcal{F}_2\}$. $S \in \mathcal{S}$ is called a (measurable) rectangle.<br />
-(iii) $\mathcal{F} = \mathcal{F}_1 \times \mathcal{F}_2 := \sigma(\mathcal{S})$ is the $\sigma$-field of the product space.
-</div>
-
-<p>Note that instead of directly product the two $\sigma$-fields, we define $\mathcal{F}$ with measurable rectangles. In fact, direct product of the $\sigma$-field does not yield a $\sigma$-field.</p>
-
-<p>We now define a product measure on $(\Omega, \mathcal{F})$. Uniqueness of such measure is as important as existence of it. Even if we define a proper measure, it would be useless unless it is uniquely determined. Thankfully, <a href="https://naturale0.github.io/probability/PTE-1.1-Measure-theory">Caratheodory’s theorem</a> ensures uniqueness.</p>
-
-<div class="theorem" text="uniqueness of the product measure">
-There uniquely exists a measure $\mu$ on $(\Omega, \mathcal{F})$ such that $\mu(E_1 \times E_2) = \mu_1(E_1) \mu_2(E_2),~ \forall E_1\in\mathcal{F}_1, E_2\in\mathcal{F}.$
-</div>
-<div class="proof"><br />
-$\mathcal{S}$ is a semi-algebra. Show (i) $\mu(A \times B) = \sum_{i=1}^\infty \mu(A_i \times B_i) = \sum_{i=1}^\infty \mu_1(A_i)\mu_2(B_i)$ for $A\times B = \cup_{i=1}^\infty (A_i \times B_i)$ and (ii) $\sigma$-finiteness of $\mu$. Use Caratheodory's theorem to get the result.
-</div>
-<p><br /></p>
-
-<h2 id="fubinis-theorem">Fubini’s theorem</h2>
-
-<p>Measure of a measurable rectangle is comprehensive. However it is cumbersome to compute and intuitively understand measurable sets <em>that are not rectangles</em>. We <em>could</em> understand it as the limit of measure of rectangles, but it is still a problem to calculate it - we do not know anything more than the existence of the measure. Fubini’s theorem is here for the rescue.</p>
-
-<div class="theorem" text="Fubini">
-Let $(\Omega, \mathcal{F}, \mu)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. <b>or</b> $f \in L^1(\mu)$, then 
-$$
-\begin{align}
-\int_{\Omega} f d\mu &amp;= \int_{\Omega_2} \int_{\Omega_1} f(x,y) d\mu_1(x) d\mu_2(y)\\
-                     &amp;= \int_{\Omega_1} \int_{\Omega_2} f(x,y) d\mu_2(y) d\mu_1(x)
-\end{align}
-$$
-</div>
-
-<p>Fubini’s theorem implies that for almost surely non-negative or integrable functions, we can calculate the integral with respect to the product measure as a double integral, and its order is negligible.</p>
-
-<p>Finishing the section, I would like to remark some points.</p>
-
-<ol>
-  <li>We can even define $n$-dimensional product spaces to extend the notion even further.</li>
-  <li>If $(X,Y)$ is a random element on a metric space $S \times S$, then $X, Y$ are random elements on $S$. However the converse is not always the truth. In fact, it is known that the converse holds if $S$ is <a href="https://en.wikipedia.org/wiki/Separable_space">separable</a>.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> Since $(\mathbb{R}, d)$ is a separable space, we can be sure that $(X,Y)$ is a random vector if and only if $X, Y$ are random variables.</li>
-</ol>
-
-<hr />
-
-<h3 id="acknowledgement">Acknowledgement</h3>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>Billingsley, 1999, <em>Convergence of Probability Measures</em>, 2nd edition. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.7-product-space"> » </a>
         </p>
       </div>
       <footer class="post_meta">

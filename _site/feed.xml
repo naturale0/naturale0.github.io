@@ -6,9 +6,179 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 19:09:43 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 19:09:43 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 22:22:35 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 22:22:35 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>(PTE) 2.3. Borel-Cantelli lemmas</title>
+        <description>&lt;p&gt;In this section I would like to cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;limit-of-a-sequence-of-sets&quot;&gt;Limit of a sequence of sets&lt;/h2&gt;
+&lt;p&gt;Borel-Cantelli lemmas are statements about probability of “limit” of sets. To state and prove the lemma, we first define $\limsup$ and $\liminf$ of a sequence of sets.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot;&gt;&lt;br /&gt;
+Let $(A_n)_{n\in\mathbb{N}}$ be a sequence of sets.&lt;br /&gt;
+$\limsup\limits_n A_n = \bigcap_n \bigcup_{k\ge n} A_k = \{A_n \text{ i.o.}\}.$ &lt;br /&gt;
+$\liminf\limits_n A_n = \bigcup_n \bigcap_{k\ge n} A_k = \{A_n \text{ eventually}\}.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;i.o.&lt;/em&gt; stands for “infinitely often”. We named these $\limsup, \liminf$ since there is a connection with those of functions. It is not difficult to show that $\limsup\limits_n \mathbb{1}_{A_n} = \mathbb{1}_{\limsup\limits_n A_n}$ and $\liminf\limits_n \mathbb{1}_{A_n} = \mathbb{1}_{\liminf\limits_n A_n}.$ As a remark, by de Morgan’s law, $\{A_n \text{ i.o.}\}^c = \{ A_n^c \text{ eventually} \}$ thus $P(A_n \text{ i.o.}) = 0$ is equivalent to $P(A_n^c \text{ eventually}) = 1.$&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;borel-cantelli-lemmas&quot;&gt;Borel-Cantelli lemmas&lt;/h2&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Borel-Cantelli&quot;&gt;
+(i) $\sum\limits_{n=1}^\infty P(A_n) &amp;lt; \infty \implies P(A_n \text{ i.o.}) = 0.$ &lt;br /&gt;
+(ii) If $A_n$'s are independent, $\sum\limits_{n=1}^\infty P(A_n) = \infty \implies P(A_n \text{ i.o.}) = 1.$ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) $\sum\limits_{k=1}^n \mathbb{1}_{A_k} \uparrow \sum\limits_{n=1}^\infty \mathbb{1}_{A_n}$. By MCT $E\sum\limits_{n=1}^\infty \mathbb{1}_{A_n} = \sum\limits_{n=1}^\infty P(A_n) &amp;lt; \infty$ which leads to $\sum\limits_{n=1}^\infty \mathbb{1}_{A_n} &amp;lt; \infty$ a.s. &lt;br /&gt;
+(ii) Using the inequality $1-x \le e^{-x}$, \begin{align*}
+    P(\bigcap\limits_{k \geq m}{A_k}^c) &amp;amp;= \prod\limits_{k \geq m}\big( 1-P({A_k}) \big) \\
+    &amp;amp;\leq \prod\limits_{k \geq m}e^{-P(A_k)} = e^{-\sum\limits_{k \geq m} P(A_k)} = 0, \:\: \forall m&amp;gt;0
+\end{align*}
+$\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n}) = P(A_n \text{ i.o.}) = 1.$
+&lt;/div&gt;
+
+&lt;p&gt;Using Borel-Cantelli lemmas, we can convert the sum of probabilities to probability of &lt;em&gt;tail events&lt;/em&gt;.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tail-events-and-the-0-1-law&quot;&gt;Tail events and the 0-1 law&lt;/h3&gt;
+
+&lt;p&gt;I mentioned tail events several times but never actually defined it.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;tail event&quot;&gt;
+Let $(X_n)$ be a sequence of random variables. Let $\mathcal{G}_n = \sigma(X_n,X_{n+1},\cdots).$ We call $\mathcal{T}=\bigcap_n\mathcal{G}_n$ a &lt;b&gt;tail $\sigma$-field&lt;/b&gt; of $(X_n)$, $A\in\mathcal{T}$ a &lt;b&gt;tail event&lt;/b&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;Simply put, a tail event is an event that does not depend on finite number of random variables. For instance,  $\{ \limsup_n S_n/C_n &amp;gt; x \} \in \mathcal{T}$ for $C_n, x \in \mathbb{R}$, $S_n=X_1 + \cdots + X_n$ if $X_n\to_n\infty$ while $\{\limsup_n S_n &amp;gt; 0\}\notin\mathcal{T}.$&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;P-trivial event&quot;&gt;
+An event $A$ is $P$-trivial if $P(A) = 0$ or $1.$&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The next theorem implies that &lt;a href=&quot;https://naturale0.github.io/probability/Borel-Cantelli-lemmas&quot;&gt;Borel-cantelli lemmas are converses of each other&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's 0-1 law&quot;&gt;
+If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap_n \sigma(X_n, X_{n+1}, \cdots)$, then $A$ is a $P$-trivial event.
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;
+Let $A \in \sigma(X_1, \cdots, X_k)$ and $B \in \sigma(X_{k+1}, \cdots, X_{k+j})$ for some $j$. Because $X_i$'s are independent, $A \perp B$. Thus $\sigma(X_1, \cdots, X_k) \perp \bigcup_j \sigma(X_{k+1}, \cdots, X_{k+j})$. Since both are $\pi$-systems, by Dynkin's $\pi$-$\lambda$ theorem,
+\begin{equation}
+    \sigma(X_1, \cdots, X_k) \perp \sigma(X_{k+1}, \cdots)
+\end{equation}
+
+Now, let $A \in \sigma(X_1, \cdots, X_j)$ for some $j$ and $B \in \mathcal{T} \subset \sigma(X_{j+1}, \cdots)$. By (1) and similar process, 
+\begin{equation}
+    \sigma(X_1, \cdots) \perp \mathcal{T}
+\end{equation}
+
+By (2), since $\mathcal{T} \subset \sigma(X_1, \cdots)$, $\mathcal{T}$ is independent of itself. &lt;br /&gt;
+$\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;application-of-borel-cantelli-lemmas&quot;&gt;Application of Borel-Cantelli lemmas&lt;/h2&gt;
+&lt;h3 id=&quot;application-of-the-first-lemma&quot;&gt;Application of the first lemma&lt;/h3&gt;
+
+&lt;p&gt;The first application connects convergence in probability to almost sure convergence.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+$X_n \overset{P}{\to} X$ if and only if for all subsequence $(X_{n_k})$, there exists a further subsequence $(X_{n_k(m)})$ such that $X_{n_k(m)} \to X$ a.s.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+($\Rightarrow$) 
+Without loss of generality, we only have to prove that there exists a.s. convergent subsequence. Let $\epsilon_k&amp;gt;0$, $\epsilon_k \downarrow 0.$ There exists $n_k \in \mathbb{N}$ such that if $n \ge n_k$, $P(|X_n - X| &amp;gt; \epsilon_k) &amp;lt; \frac{1}{2^k}$ and $n_{k+1} &amp;gt; n_k.$ Hence $\sum\limits_{k=1}^\infty P(|X_{n_k} - X| \ge \epsilon_k) \le 1 &amp;lt; \infty$ and by the first Borel-Cantelli lemma, $P(|X_{n_k} - X| \ge \epsilon_k \text{ i.o.}) = 0.$&lt;br /&gt;
+($\Leftarrow$) 
+It is easy to show that for a sequence $(y_n)$ on a topological space, if for all subsequence there exists a further subsequence that converges to $y$, then $y_n \to y.$ Given $\delta &amp;gt; 0$, let $y_n = P(|X_n - X| &amp;gt; \delta)$ then it is a sequence on topological space $\mathbb{R}$ that converges to 0. By the condition, the result directly follows.
+&lt;/div&gt;
+
+&lt;p&gt;Another application is in the form of strong law of large numbers.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;2.3.5&quot;&gt;
+$X_1,\cdots,X_n$ are i.i.d. with $EX_1 = \mu$ and $EX_1^4 \le C &amp;lt; \infty.$ $\implies S_n/n \to \mu$ a.s.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{align}
+P(|S_n/n - \mu| &amp;gt; \epsilon) &amp;amp;= P(|S_n - n\mu| &amp;gt; n\epsilon) \\
+  &amp;amp;\le E(S_n - n\mu)^4 / n^4\epsilon^4 \le C / n^2\epsilon^4. 
+\end{align}
+$$
+$\sum\limits_{n=1}^\infty P(|S_n/n - \mu| &amp;gt; \epsilon) \le \sum\limits_{n=1}^\infty C_1 / n^2 &amp;lt; \infty$ for some $C_1.$ By the first Borel-Cantelli lemma, the result follows.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;application-of-the-second-lemma&quot;&gt;Application of the second lemma&lt;/h3&gt;
+
+&lt;p&gt;As a sneak peek of the next sction, the second Borel-Cantelli lemma leads to a necessary condition of the strong law of large numbers.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;necessity of the strong law&quot;&gt;
+$X_1,X_2,\cdots$ are i.i.d. with $E|X_1| = \infty$. $S_n = X_1 + \cdots + X_n.$&lt;br /&gt;
+$\begin{align}
+\implies &amp;amp;\text{(i) } P(|X_1|\ge n \text{ i.o.}) = 1. \\
+         &amp;amp;\text{(ii) } P(\lim_n S_n/n \text{ exists and finite}) = 0.
+\end{align}$
+&lt;/div&gt;
+
+&lt;p&gt;Note that this implies $E|X_1| &amp;lt; \infty$ is required for the strong law.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) $E|X_1| = \int_0^\infty P(|X_1|&amp;gt;x)dx \le \sum\limits_{n=0}^\infty P(|X_1| \ge n) = \infty.$ By the second B-C lemma, $P(|X_1| \ge n \text{ i.o.}) = 1.$&lt;br /&gt;
+(ii) $\frac{S_n}{n}-\frac{S_{n+1}}{n+1} = \frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}.$ Let $C = \{\lim_n S_n/n \text{ exists and finite}\}$, then on $C$, $\lim_n \frac{S_n}{n(n+1)} = 0.$ On $C \cap (|X_i| \ge n \text{ i.o.})$, 
+$$
+\begin{align}
+\limsup\limits_n |\frac{S_n}{n}-\frac{S_{n+1}}{n+1}|
+&amp;amp;= \limsup\limits_n |\frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}| \\
+&amp;amp;\ge \limsup\limits_n |\frac{X_{n+1}}{n+1}| - \cancelto{0}{\lim_n |\frac{S_n}{n(n+1)}|} \ge 1.
+\end{align}
+$$
+By (i), the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;Another important result is a generalization of the lemma.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;2.3.9&quot;&gt;
+Let $A_1,A_2,\cdots$ be pairwise independent events.&lt;br /&gt;
+$\sum\limits_{n=1}^\infty P(A_n) = \infty \implies \frac{\sum_{m=1}^n \mathbb{1}_{A_m}}{\sum_{m=1}^n P(A_m)}\to 1 \text{ a.s.}$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_m = 1_{A_m}$, $S_n = X_1 + \cdots + X_n$. Note that $0 \le X_m \le 1.$&lt;br /&gt;
+(Step 1: $\frac{\sum_{m=1}^n \mathbb{1}_{A_m}}{\sum_{m=1}^n P(A_m)} = \frac{S_n}{ES_n} \overset{P}{\to} 1.$)&lt;br /&gt;
+&amp;ensp; $EX_n^2 = P(\mathbb{1}_{A_n}) &amp;lt; \infty.$ Thus $ES_n^2 = \sum_{i=1}^n EX_n^2 + 2\sum_{1\le i &amp;lt; j \le n}EX_i EX_j &amp;lt; \infty.$
+$$
+\begin{align}
+P(|\frac{S_n - ES_n}{ES_n}| &amp;gt; \epsilon) 
+ &amp;amp;\le \frac{\text{Var}(S_n)}{\epsilon^2(ES_n)^2} \\
+ &amp;amp;\le \frac{\sum_{i=1}^n EX_i^2}{\epsilon^2(ES_n)^2} \\
+ &amp;amp;= \frac{\sum_{i=1}^n EX_i}{\epsilon^2(ES_n)^2} \\
+ &amp;amp;= \frac{1}{\epsilon^2 ES_n} \to 0.
+\end{align}
+$$
+(Step 2: $\exists n_k$ s.t. $\frac{S_{n_k}}{ES_{n_k}} \to 1 \text{ a.s.}$)&lt;br /&gt;
+&amp;ensp; Let $n_k = \inf\{n:~ ES_n &amp;gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta) \le \sum_k \frac{1/k^2} / \delta^2 &amp;lt; \infty.$ By the first Borel-cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.&lt;br /&gt;
+(Step 3: sandwich)&lt;br /&gt;
+&amp;ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
+&lt;/div&gt;
+
+&lt;p&gt;As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;p&gt;(TBD: example - head runs)&lt;/p&gt;
+</description>
+        <pubDate>Sun, 20 Dec 2020 19:10:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-2.3-B-C-lemmas</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.3-B-C-lemmas</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 2.2. Weak law of large numbers</title>
@@ -155,8 +325,6 @@ $X_1,X_2,\cdots \overset{\text{iid}}{\sim} \mathcal{U}\{1,2,\cdots,n\}.$ Define 
 Let $X_{nk} = \tau_k^n - \tau_{k-1}^n$, $k=1,\cdots,n.$ Then $X_{nk} \sim \text{Geo}(p)$ where $p=1-\frac{k-1}{n}.$ The memoryless property of Benoulli process implies $X_{nk} \perp X_{nj}$, $j=1,\cdots,k-1$ and $T_n = X_{n1} + \cdots + X_{nn}.$&lt;br /&gt;
 Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 &lt;/div&gt;
-
-&lt;p&gt;In the following section I will cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. B-C lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1067,91 +1235,6 @@ Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by const
         
         
         <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>The slowest run vs. the fastest walk: which is faster?</title>
-        <description>&lt;p&gt;Suppose there are twins with exactly same physical strength. One of them runs as slowly as he/she can, and the other walks as fast as one can. Who would be the one that crosses the finish line first?&lt;/p&gt;
-
-&lt;p&gt;This was the question that I encountered while killing time during some boring class activities back in the elementary school days. A crude, ill-defined question, but at the same time an interesting one worth mentioning.&lt;/p&gt;
-
-&lt;p&gt;Consider the average time required to finish the race as a Bayes risk $r(\pi, \delta)$ and a decision (speed of the run/walk, between 0 and 1 for simplicity) as a concentrated prior $\pi \in (0,1)$ and an effort (whether to walk or run) as $\delta \in \{ \text{walk}, \text{run} \}$.&lt;/p&gt;
-
-&lt;p&gt;It is our objective to minimize the risk by controlling $\delta$ in various speed $\pi$. Note that if one choose to $\delta_0 = \text{run}$, with a very low speed of $\pi_0 \approx 0$, then one might be unstable and as a result $r(\pi_0, \delta_0)$ increases. Similarly it is impossible to walk with speed higher than certain amount, thus risk increases in this situation. (Yeah I know it is not so well defined context neither, but let’s just skip to the interesting part)&lt;/p&gt;
-
-&lt;p&gt;Now let’s think about this problem in decision theoretic framework. Suppose the environment decides the speed of the run ($\pi$) and the runner decides whether to walk or run ($\delta$). The runner’s goal here is to minimize the risk(time), while the environment’s is to maximize it.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-if-the-environment-knows-our-choise-delta-prior-to-the-runners-decision&quot;&gt;1. If the environment “knows” our choise $\delta$ prior to the runner’s decision.&lt;/h3&gt;
-
-&lt;p&gt;Then it will choose the worst possible choice to the runner. That is,&lt;/p&gt;
-
-\[\pi_{\delta} = \text{argmax}_\pi r(\pi, \delta)\]
-
-&lt;p&gt;will be its choice.&lt;/p&gt;
-
-&lt;p&gt;Then the runner will try to defend against the worst sinario by minimizing this as follows,&lt;/p&gt;
-
-\[\delta^* = \text{argmin}_\delta \sup_\pi r(\pi, \delta)\]
-
-&lt;p&gt;which yields the &lt;strong&gt;minimax&lt;/strong&gt; risk:&lt;/p&gt;
-
-\[\inf_{\delta} \sup_{\pi} r(\pi, \delta)\]
-
-&lt;p&gt;$\delta^*$ here is called a &lt;strong&gt;minimax rule&lt;/strong&gt;, while $\pi_\delta$ is called a &lt;strong&gt;$\delta$-least favorable($\delta$-LF) prior&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-if-the-runner-knows-the-environments-choise-pi-prior-to-hisher-decision&quot;&gt;2. If the runner “knows” the environment’s choise $\pi$ prior to his/her decision.&lt;/h3&gt;
-
-&lt;p&gt;Then he/she will choose the best possible choice to reduce the time. That is,&lt;/p&gt;
-
-\[\delta_{\pi} = \text{argmin}_\delta r(\pi, \delta)\]
-
-&lt;p&gt;will be the runner’s choice.&lt;/p&gt;
-
-&lt;p&gt;Then the environment will try to maximize this by choosing&lt;/p&gt;
-
-\[\pi^{LF} = \text{argmax}_\pi \inf_\delta r(\pi, \delta)\]
-
-&lt;p&gt;which yields the &lt;strong&gt;maximin&lt;/strong&gt; risk:&lt;/p&gt;
-
-\[\sup_{\pi} \inf_{\delta} r(\pi, \delta)\]
-
-&lt;p&gt;$\pi^{LF}$ here is called a &lt;strong&gt;least favorable (LF) prior&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then here comes our theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;minimax is greather than maximin&quot;&gt;
-$$ \inf_{\delta} \sup_{\pi} r(\pi, \delta) \ge \sup_{\pi} \inf_{\delta} r(\pi, \delta) $$
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-It is clear by properties of $\sup$ and $\inf$.
-&lt;br /&gt;
-&lt;br /&gt;
-$$
-  \sup_\pi r(\pi, \delta) \ge r(\pi_0, \delta), \forall \pi_0 \in \Pi \\
-  \inf_\delta \sup_\pi r(\pi, \delta) \ge \inf_\delta r(\pi_0, \delta), \forall \pi_0 \in \Pi \\
-  \inf_\delta \sup_\pi r(\pi, \delta) \ge \sup_\pi \inf_\delta r(\pi, \delta)
-$$
-&lt;br /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;In this example, we can think of the time of race from the fastest possible walk as $\inf_{\delta} \sup_{\pi} r(\pi, \delta)$ (minimax risk), and the time of race from the slowest possible run as $\sup_{\pi} \inf_{\delta} r(\pi, \delta)$ (maximin risk).&lt;/p&gt;
-
-&lt;p&gt;Hence the slowest possible run is faster than the fastest walk.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 14:46:00 +0900</pubDate>
-        <link>http://localhost:4000/decision%20theory/minimax-is-geq-to-maximin</link>
-        <guid isPermaLink="true">http://localhost:4000/decision%20theory/minimax-is-geq-to-maximin</guid>
-        
-        
-        <category>decision theory</category>
         
       </item>
     

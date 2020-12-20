@@ -57,6 +57,14 @@
   </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+    MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
   </script>
   <script type="text/javascript" src="http://cdn.mathjax.org/math...">
   </script>
@@ -177,6 +185,13 @@
     <div class="category-name">
       <h2>probability</h2>
     </div>
+    
+
+    <div class="post_title">
+      <a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a>
+      <span class="date">20 Dec, 2020</span>
+    </div>
+
     
 
     <div class="post_title">
