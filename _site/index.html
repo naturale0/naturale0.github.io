@@ -160,7 +160,7 @@
       <div class="post_excerpt">
         <p>
           
-          <p>We say a random variable $X_n$ <strong>converges in probability</strong> to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &gt; \epsilon) = 0$ for all $\epsilon &gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. $X_n \overset{L^p}{\to} X$ with $p &gt; 0$ implies $X_n \overset{P}{\to} X$ by <a href="https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities">Markov-Chebyshev inequality</a> with $\varphi(x) = |x|^p$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+          <p>We say a random variable $X_n$ <strong>converges in probability</strong> (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &gt; \epsilon) = 0$ for all $\epsilon &gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. $X_n \overset{L^p}{\to} X$ with $p &gt; 0$ implies $X_n \overset{P}{\to} X$ by <a href="https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities">Markov-Chebyshev inequality</a> with $\varphi(x) = |x|^p$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
 
 <p>Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most powerful form which only requires $L^1$ condition. <br /><br /></p>
 
@@ -224,10 +224,74 @@ Define $\bar X_{nk} := X_{nk} \mathbb{1}_{(|X_{nk}| \le b_n)}.$<br />
 (ii) $\frac{1}{b_n^2} \sum_{k=1}^n E\bar X_{nk}^2 \to_n 0.$ <br />
 $\implies \frac{S_n - a_n}{b_n} \overset{P}{\to} 0$, where $a_n = \sum_{k=1}^n E\bar X_{nk}.$
 </div>
-
+<div class="proof"><br />
+Let $\bar S_n = \bar X_{n1} + \cdots + \bar X_{nn}$ so that $a_n = E\bar S_n.$ Then for an arbitrary $\epsilon&gt;0$, $P( |\frac{S_n - a_n}{b_n}|  &gt; \epsilon) \le \underbrace{P(S_n \ne \bar S_n)}_\text{(i)} + \underbrace{P(|\frac{\bar S_n - a_n}{b_n}| &gt; \epsilon)}_\text{(ii)}.$<br />
+For the first part,
+$$\begin{align}
+\text{(i)} &amp;\le P(\bigcup\limits_{k=1}^n \{X_{nk} \ne \bar X_{nk}\}) \le \sum\limits_{k=1}^n P(X_{nk} \ne \bar X_{nk}) \\
+  &amp; = \sum\limits_{k=1}^n P(|X_{nk}| &gt; b_n) \to_n 0
+\end{align}
+$$
+and for the latter,
+$$
+\begin{align}
+\text{(ii)} &amp;\le E(\frac{\bar S_n - a_n}{b_n})^2 / \epsilon^2 \le \text{Var}(\bar S_n) / \epsilon^2b_n^2 \\
+  &amp;= \sum\limits_{k=1}^n \text{Var}(\bar S_n) / \epsilon^2b_n^2 \\
+  &amp;= \sum\limits_{k=1}^n E\bar X_{nk}^2 / \epsilon^2b_n^2 \to_n 0
+\end{align}
+$$
+$\therefore P(|\frac{S_n - a_n}{b_n}| &gt; \epsilon) \to_n 0$ for all $\epsilon &gt;0.$
+</div>
 <p><br /></p>
+
 <h2 id="weak-law-of-large-numbers">Weak law of large numbers</h2>
-<p>(tbd)</p>
+<p>Result for triangular arrays paves the way for general weak law of large numbers. Before we get to it, let’s take a look at a highly useful lemma.</p>
+
+<div class="lemma">
+Let $Y \ge 0$ be a random variable and $p&gt;0.$<br />
+$\implies EY^p = \int_0^\infty py^{p-1} P(Y &gt; y) dy.$
+</div>
+<div class="proof"><br />
+$$
+\begin{align}
+\int_0^\infty py^{p-1} P(Y &gt; y) dy 
+  &amp;= \int_0^\infty \int_{(Y&gt;y)} py^{p-1} dP dy \\
+  &amp;= \int_\Omega \int_0^Y py^{p-1} dy dP \\
+  &amp;= \int_\Omega Y^p dP = EY^p.
+\end{align}
+$$
+The second equality comes from the Fubini's theorem.
+</div>
+
+<div class="theorem" text="2.2.12">
+$X_1,X_2,\cdots$ are i.i.d. $S_n = \sum\limits_{i=1}^n X_i.$<br />
+$x P(|X_i| &gt; x) \to 0$ as $x \to \infty.$<br />
+$\implies S_n/n - \mu_n \overset{P}{\to} 0$ where $\mu_n = EX_1 \mathbb{1}_{(|X_1|\le n)}.$
+</div>
+<div class="proof"><br />
+&ensp;
+Use the weak law for triangular arrays. Let $X_{nk} = X_k$ and $b_n = n.$<br />
+&ensp; (i) $\sum\limits_{i=1}^n P(|X_i| &gt; n) = n P(|X_1| &gt; n) \to_n 0.$<br />
+&ensp; (ii) Let $\bar X_k = X_k\mathbb{1}_{(|X_k|\le n)}.$ Then $\frac{1}{n^2} \sum\limits_{k=1}^n E\bar X_k^2 = \frac{1}{n} E\bar X_1^2.$ By the lemma, $E\bar X_1^2 = \int_0^n 2xP(X_1 &gt; x) dx$ so $\frac{1}{n} E\bar X_1^2 \to 0$ as $x\to\infty.$<br />
+&ensp; By (i) and (ii) and theorem 3, $S_n/n - \mu_n \overset{P}{\to} 0.$
+</div>
+
+<p>Use this to get the weak law of large numbers.</p>
+
+<div class="theorem" text="weak law of large numbers">
+$X_1, X_2, \cdots$ are i.i.d. $with E|X_i| &lt; \infty.$ <br />
+Let $S_n = X_1 + \cdots X_n$, $\mu = EX_1.$<br />
+$\implies S_n/n \overset{P}{\to} \mu.$
+</div>
+<div class="proof"><br />
+(i) $x P(|X_1| &gt; x) = x E\mathbb{1}_{(|X_1| &gt; x)} \le E|X_1|\mathbb{1}_{(|X_1| &gt; x)}.$ Since $|X_1|\mathbb{1}_{(|X_1| &gt; x)} \le |X_1|$ and $E|X_1| &lt; \infty$ by DCT $E|X_1|\mathbb{1}_{(|X_1| &gt; x)} \to 0$ as $x\to\infty.$<br />
+(ii) Let $\mu_n = E|X_1|\mathbb{1}_{(|X_1| \le n)}.$ Since $|X_1|\mathbb{1}_{(|X_1| \le n)} \le |X_1|$ and $E|X_1| &lt; \infty$ by DCT $E|X_1|\mathbb{1}_{(|X_1| \le n)} \to_n \mu.$<br />
+By theorem 6, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
+</div>
+
+<p>Note that we do not need finite second moment condition.</p>
+
+<p>In the following section I will cover the <em>Borel-Cantelli lemmas</em>, or B-C lemmas for short. B-C lemmas are quintessential tools for analysis of <em>tail events</em> and deriving almost sure convergence from $P$-convergence.</p>
 
 <hr />
 
