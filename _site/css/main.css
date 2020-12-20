@@ -195,7 +195,7 @@ p { margin-top: 0; }
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a { color: #222; text-decoration: none; -webkit-transition: color .4s; transition: color .4s; }
 
-a:hover { color: #b1b1b1; text-decoration: underline; }
+a:hover { color: red; }
 
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

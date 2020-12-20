@@ -154,6 +154,87 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-2.2-WLLN">(PTE) 2.2. Weak law of large numbers</a></h2>
+        <time class="post_date">20 December 2020, Sunday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>We say a random variable $X_n$ <strong>converges in probability</strong> to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &gt; \epsilon) = 0$ for all $\epsilon &gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. $X_n \overset{L^p}{\to} X$ with $p &gt; 0$ implies $X_n \overset{P}{\to} X$ by <a href="https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities">Markov-Chebyshev inequality</a> with $\varphi(x) = |x|^p$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<p>Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most powerful form which only requires $L^1$ condition. <br /><br /></p>
+
+<h2 id="l2-weak-law-of-large-numbers">$L^2$ weak law of large numbers</h2>
+
+<div class="definition" text="uncorrelatedness">
+$X_1, X_2$ are uncorrelated if $EX_1X_2 = EX_1 EX_2.$
+</div>
+
+<p>If $X_n$’s are independent then it is uncorrelated but the converse does not hold. It is also clear that if $X_i$’s are uncorrelated then $\text{Var}(X_1+\cdots+X_n) = \sum_{i=1}^n \text{Var}(X_i).$ Using Chebyshev’s inequality we can easier get our first WLLN for uncorrelated random variables.</p>
+
+<div class="theorem" text="L² weak law">
+Let $X_i$'s be uncorrelated with $EX_i = \mu$ and $\text{Var}(X_i) \le C &lt; \infty$ for all $i$. Let $S_n = X_1 + \cdots + X_n.$ Then $S_n/n \to \mu$ in probability and in $L^2$.
+</div>
+<div class="proof"><br />
+By chebyshev's inequality, given $\epsilon &gt; 0$,
+$$\begin{align}
+P(|S_n/n - \mu| &gt; \epsilon) \le \text{Var}(S_n/n)/\epsilon^2 \le C/\epsilon^2n \to 0
+\end{align}
+$$
+and by definition of variance,
+$$
+E|S_n/n - \mu|^2 = \text{Var}(S_n/n) \le C/n \to 0.
+$$
+</div>
+
+<p>An example of $L^2$ weak law is in <a href="https://naturale0.github.io/probability/high-dimensional-box">high-dimensional problem</a>.</p>
+
+<p>(TBD)</p>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Relationship between $L^p$ convergence, convergence in probability, almost sure convergence will be covered later in detail. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-2.2-WLLN"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/PTE-2.1-independence">(PTE) 2.1. Independence</a></h2>
         <time class="post_date">20 December 2020, Sunday</time>
       </header>
@@ -162,7 +243,7 @@
           
           <p>First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.</p>
 
-<p>Following chapters will cover two fundamental theory in convergence of random variables: <strong>the strong law of large numbers</strong> and <strong>the central limit theorem</strong>. We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence.</p>
+<p>Following chapters will cover two fundamental theory in convergence of random variables: <strong>the strong law of large numbers</strong> (Chapter 2) and <strong>the central limit theorem</strong> (Chapter 3). We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence. The rest of the chapter is about law of large numbers.</p>
 
 <p>As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.</p>
 
@@ -190,17 +271,47 @@ $\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. I
 &ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
 </div>
 
-<p>It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in(-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.</p>
+<p>It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in (-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.</p>
 
 <div class="corollary" text="2.1.8">
 $X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
 </div>
+<p><br /></p>
+
+<h2 id="existence-of-a-sequence-of-independent-random-variables">Existence of a sequence of independent random variables</h2>
+
+<p>In the following chapters, we will construct a sequence of independent random variables to state and prove limiting laws. It is important to mention that such sequence exists.</p>
+
+<p>For a finite number $n\in\mathbb{N}$, we can construct $n$ independent random variables using <a href="https://naturale0.github.io/probability/PTE-1.7-product-space">product space</a>. Given distribution functions $F_i$, $i=1,\cdots,n$, let $X_i$ with $P(X_i \le x) = F_i(x)$ and $X_i(\omega_1,\cdots,\omega_n)=\omega_i$. (i.e. $X_i$ is the coordinate-wise projection.) Let $(\Omega, \mathcal{F}, P) = (\mathbb{R}^n, \mathcal{B}(\mathbb{R}), P)$ where $P((a_1,b_1]\times\cdots\times(a_n,b_n]) = \prod\limits_{i=1}^n (F_i(b_i) - F_i(a_i))$ then $X_i$’s are independent.</p>
+
+<p>Now we need infinite number of independent random variables. Consider $\mathbb{R}^\infty := \{(x_1,x_2,\cdots):~ x_i \in \mathbb{R}\}$, an infinite-dimensional product space of $\mathbb{R}$ and corresponding product $\sigma$-field $\mathcal{R}^\infty$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> Kolmogorov’s extension theorem states that we can construct a unique probability measure on this space.</p>
+
+<div class="theorem" text="Kolmogorov's extension">
+Given probability measures $P_n$ on $(\mathbb{R}^n, \mathcal{R}^n)$ that satisfies
+$$
+P_{n+1}((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n])
+$$
+there uniquely exists a probability measure $P$ on $(\mathbb{R}^\infty, \mathcal{R}^\infty)$ such that
+$$
+P((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}^{\infty-n}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n]).
+$$
+</div>
+
+<p>Furthermore, if a measurable space $(S, \mathcal{S})$ is <strong>nice</strong>, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can construct a sequence of random <em>elements</em> $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$</p>
 
 <hr />
 
 <h3 id="acknowledgement">Acknowledgement</h3>
 
 <p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>I will cover the detail later when reviewing <em>Convergence of Probability Measures</em>, 2nd edition (Billingsley, 1999). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
           
           <a class="read-more-btn" href="/probability/PTE-2.1-independence"> » </a>
@@ -300,67 +411,6 @@ $$
 
           
           <a class="read-more-btn" href="/probability/PTE-1.7-product-space"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.6-Lp-space">(PTE) 1.6. $L^p$ space</a></h2>
-        <time class="post_date">19 December 2020, Saturday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space.<br /><br /></p>
-
-<h2 id="lp-space-on-probability-space">$L^p$ space on probability space</h2>
-
-<div class="definition" text="Lᵖ space"><br />
-$L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &lt; \infty\}.$<br />
-$\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
-</div>
-
-<p>$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le p \le q$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &lt; q$. <br /><br /></p>
-
-<h2 id="convergence-in-lp">Convergence in $L^p$</h2>
-
-<div class="definition" text="Lᵖ convergence">
-Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ and $\|X_n - X\|_p \to 0$, then we say $X_n$ converges to $X$ in $L^p$ and write $X_n \overset{L^p}{\to} X$.
-</div>
-
-<p>Or we could just say $X_n \to X$ in $L^p$. It is known that for $p \ge 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.</p>
-
-<hr />
-
-<h3 id="acknowledgement">Acknowledgement</h3>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.6-Lp-space"> » </a>
         </p>
       </div>
       <footer class="post_meta">

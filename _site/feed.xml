@@ -6,15 +6,71 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 11:37:27 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 11:37:27 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 14:12:14 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 14:12:14 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>(PTE) 2.2. Weak law of large numbers</title>
+        <description>&lt;p&gt;We say a random variable $X_n$ &lt;strong&gt;converges in probability&lt;/strong&gt; to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &amp;gt; \epsilon) = 0$ for all $\epsilon &amp;gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. $X_n \overset{L^p}{\to} X$ with $p &amp;gt; 0$ implies $X_n \overset{P}{\to} X$ by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities&quot;&gt;Markov-Chebyshev inequality&lt;/a&gt; with $\varphi(x) = |x|^p$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most powerful form which only requires $L^1$ condition. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;l2-weak-law-of-large-numbers&quot;&gt;$L^2$ weak law of large numbers&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;uncorrelatedness&quot;&gt;
+$X_1, X_2$ are uncorrelated if $EX_1X_2 = EX_1 EX_2.$
+&lt;/div&gt;
+
+&lt;p&gt;If $X_n$’s are independent then it is uncorrelated but the converse does not hold. It is also clear that if $X_i$’s are uncorrelated then $\text{Var}(X_1+\cdots+X_n) = \sum_{i=1}^n \text{Var}(X_i).$ Using Chebyshev’s inequality we can easier get our first WLLN for uncorrelated random variables.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;L² weak law&quot;&gt;
+Let $X_i$'s be uncorrelated with $EX_i = \mu$ and $\text{Var}(X_i) \le C &amp;lt; \infty$ for all $i$. Let $S_n = X_1 + \cdots + X_n.$ Then $S_n/n \to \mu$ in probability and in $L^2$.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+By chebyshev's inequality, given $\epsilon &amp;gt; 0$,
+$$\begin{align}
+P(|S_n/n - \mu| &amp;gt; \epsilon) \le \text{Var}(S_n/n)/\epsilon^2 \le C/\epsilon^2n \to 0
+\end{align}
+$$
+and by definition of variance,
+$$
+E|S_n/n - \mu|^2 = \text{Var}(S_n/n) \le C/n \to 0.
+$$
+&lt;/div&gt;
+
+&lt;p&gt;An example of $L^2$ weak law is in &lt;a href=&quot;https://naturale0.github.io/probability/high-dimensional-box&quot;&gt;high-dimensional problem&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(TBD)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Relationship between $L^p$ convergence, convergence in probability, almost sure convergence will be covered later in detail. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-2.2-WLLN</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.2-WLLN</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 2.1. Independence</title>
         <description>&lt;p&gt;First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.&lt;/p&gt;
 
-&lt;p&gt;Following chapters will cover two fundamental theory in convergence of random variables: &lt;strong&gt;the strong law of large numbers&lt;/strong&gt; and &lt;strong&gt;the central limit theorem&lt;/strong&gt;. We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence.&lt;/p&gt;
+&lt;p&gt;Following chapters will cover two fundamental theory in convergence of random variables: &lt;strong&gt;the strong law of large numbers&lt;/strong&gt; (Chapter 2) and &lt;strong&gt;the central limit theorem&lt;/strong&gt; (Chapter 3). We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence. The rest of the chapter is about law of large numbers.&lt;/p&gt;
 
 &lt;p&gt;As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.&lt;/p&gt;
 
@@ -42,17 +98,47 @@ $\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. I
 &amp;ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
 &lt;/div&gt;
 
-&lt;p&gt;It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in(-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.&lt;/p&gt;
+&lt;p&gt;It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in (-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.&lt;/p&gt;
 
 &lt;div class=&quot;corollary&quot; text=&quot;2.1.8&quot;&gt;
 $X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
 &lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;existence-of-a-sequence-of-independent-random-variables&quot;&gt;Existence of a sequence of independent random variables&lt;/h2&gt;
+
+&lt;p&gt;In the following chapters, we will construct a sequence of independent random variables to state and prove limiting laws. It is important to mention that such sequence exists.&lt;/p&gt;
+
+&lt;p&gt;For a finite number $n\in\mathbb{N}$, we can construct $n$ independent random variables using &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.7-product-space&quot;&gt;product space&lt;/a&gt;. Given distribution functions $F_i$, $i=1,\cdots,n$, let $X_i$ with $P(X_i \le x) = F_i(x)$ and $X_i(\omega_1,\cdots,\omega_n)=\omega_i$. (i.e. $X_i$ is the coordinate-wise projection.) Let $(\Omega, \mathcal{F}, P) = (\mathbb{R}^n, \mathcal{B}(\mathbb{R}), P)$ where $P((a_1,b_1]\times\cdots\times(a_n,b_n]) = \prod\limits_{i=1}^n (F_i(b_i) - F_i(a_i))$ then $X_i$’s are independent.&lt;/p&gt;
+
+&lt;p&gt;Now we need infinite number of independent random variables. Consider $\mathbb{R}^\infty := \{(x_1,x_2,\cdots):~ x_i \in \mathbb{R}\}$, an infinite-dimensional product space of $\mathbb{R}$ and corresponding product $\sigma$-field $\mathcal{R}^\infty$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Kolmogorov’s extension theorem states that we can construct a unique probability measure on this space.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's extension&quot;&gt;
+Given probability measures $P_n$ on $(\mathbb{R}^n, \mathcal{R}^n)$ that satisfies
+$$
+P_{n+1}((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n])
+$$
+there uniquely exists a probability measure $P$ on $(\mathbb{R}^\infty, \mathcal{R}^\infty)$ such that
+$$
+P((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}^{\infty-n}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n]).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Furthermore, if a measurable space $(S, \mathcal{S})$ is &lt;strong&gt;nice&lt;/strong&gt;, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can construct a sequence of random &lt;em&gt;elements&lt;/em&gt; $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;I will cover the detail later when reviewing &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition (Billingsley, 1999). &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-2.1-independence</link>
@@ -949,82 +1035,6 @@ $$
         
         
         <category>decision theory</category>
-        
-      </item>
-    
-      <item>
-        <title>Application of Dynkin's π-λ theorem</title>
-        <description>&lt;p&gt;When dealing with collections of sets, Dynkin’s systems provides simple but powerful tool for extension of properties in smaller collections to bigger ones.&lt;/p&gt;
-
-&lt;p&gt;First, we define $\pi$ and $\lambda$-systems.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;π-system&quot;&gt;
-A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
-
-&lt;/div&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;λ-system&quot;&gt;
-A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.
-&lt;br /&gt;
-(1) $\Omega \in \mathcal{L}$
-&lt;br /&gt; 
-(2) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$
-&lt;br /&gt;
-(3) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
-&lt;/div&gt;
-
-&lt;p&gt;Note: Sometimes $\lambda$-system is referred to as &lt;strong&gt;“Dynkin’s system”&lt;/strong&gt;. There are more than two alternative definitions of $\lambda$-system. They are all equivalent and can be proved easily. Here, I introduce only one of them which I find myself the easiest to use when proving some collection of sets is a $\lambda$-system.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then we state the main theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Dynkin's π-λ theorem&quot;&gt;
-$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Here, $\sigma(\mathcal{P})$ is the smallest $\sigma$-field containing $\mathcal{P}$.&lt;/p&gt;
-
-&lt;p&gt;With the theorem, if some property holds for a $\pi$-system $\mathcal{P}$, we can extend the same property to be hold for $\sigma(\mathcal{P})$. I will review three examples.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;equivalent probability measures&quot;&gt;
-$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;extension of independence&quot;&gt;
-$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $\mathcal{A}, \mathcal{B}$ are independent, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-Let $\mu$ be a probability measure on $(\Omega, \mathcal{F})$. For a given $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  \mu(A \cap B) = \mu(A)\mu(B) \}$. Then $\mathcal{L}_A$ is a $\lambda$-system that contains $\mathcal{B}$ and $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. Since $A \in \mathcal{A}$ was arbitrarily chosen, it is independent to $\mathcal{A}$.
-&lt;br /&gt;
-&amp;ensp; Now for given $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$, which leads to the desired result.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The last example does not actually utilize $\pi-\lambda$ theorem, but it uses similar idea on its proof.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;extension to random variable&quot;&gt;
-$\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.
-&lt;/div&gt;
-</description>
-        <pubDate>Wed, 13 May 2020 23:45:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/application-of-pi-lambda-theorem</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/application-of-pi-lambda-theorem</guid>
-        
-        
-        <category>probability</category>
         
       </item>
     
