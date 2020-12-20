@@ -1,4 +1,4 @@
-# [De Novo](https://naturale.github.io)
+# [De Novo](https://naturale0.github.io)
 
 ## implemented `div` classes
 * theorem
