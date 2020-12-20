@@ -164,7 +164,7 @@
 
 <p>Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most powerful form which only requires $L^1$ condition. <br /><br /></p>
 
-<h2 id="l2-weak-law-of-large-numbers">$L^2$ weak law of large numbers</h2>
+<h2 id="l2-weak-law">$L^2$ weak law</h2>
 
 <div class="definition" text="uncorrelatedness">
 $X_1, X_2$ are uncorrelated if $EX_1X_2 = EX_1 EX_2.$
@@ -186,10 +186,49 @@ $$
 E|S_n/n - \mu|^2 = \text{Var}(S_n/n) \le C/n \to 0.
 $$
 </div>
+<p><br />
+An example of $L^2$ weak law is in <a href="https://naturale0.github.io/probability/high-dimensional-box">high-dimensional problem</a>.</p>
 
-<p>An example of $L^2$ weak law is in <a href="https://naturale0.github.io/probability/high-dimensional-box">high-dimensional problem</a>.</p>
+<p>Theorem 1 requires strong conditions that $X_i$’s should have the same expectation and their variance should be uniformly bounded. Theorem 2 relieves these so that the result could be more useful.</p>
 
-<p>(TBD)</p>
+<div class="theorem" text="2.2.6">
+Let $\mu_n = ES_n$, $\sigma_n^2 = \text{Var}(S_n)$.<br />
+$\frac{\sigma_n^2}{b_n^2} \to_n 0 \implies \frac{S_n - \mu_n}{b_n} \overset{P}{\to} 0.$
+</div>
+<div class="proof"><br />
+$\sigma_n^2 / b_n^2 = E\left(\frac{S_n - \mu_n}{b_n}\right)^2 \to 0.$
+</div>
+
+<p>This can be used in any kind of sequence of random variable $(S_n)_{n\in\mathbb{N}}$. (Even the uncorrelatedness is not required!) <br /><br /></p>
+
+<h2 id="weak-law-for-triangular-arrays">Weak law for triangular arrays</h2>
+
+<p>Many topics in probability theory concerns <em>triangular arrays</em> $(X_{nk})_{1\le k \le n}$ such that $X_{nk}$, $k=1,\cdots,n$ are independent (row-wise independent). We are interested in limiting behaviors of row-wise sum $S_n := X_{n1} + \cdots + X_{nn}$.</p>
+
+<p>To deal with the case where the finite second moment condition is not ensured, we introduce truncated random variables.</p>
+
+<div class="definition" text="truncation"><br />
+$\bar X := X\mathbb{1}_{(|X| \le M)} = \begin{cases}
+X &amp;,~ \text{if } |X| \le M \\
+0 &amp;,~ \text{otherwise}
+\end{cases}$
+</div>
+
+<p>By ignoring the tail part of $X$, truncated random variable $\bar X$ always has finite moments.</p>
+
+<div class="theorem" text="Weak law for triangular arrays">
+For each $n$, $X_{nk}$, $k=1\cdots,n$ are independent.<br />
+Let $b_n &gt; 0$, $b_n \to_n \infty$. <br />
+Define $\bar X_{nk} := X_nk \mathbb{1}_{(|X_{nk}| \le b_n)}.$<br />
+If the followings hold,<br />
+(i) $\sum_{k=1}^n P(|X_{nk}| &gt; b_n) \to_n 0.$ <br />
+(ii) $\frac{1}{b_n^2} \sum_{k=1}^n E\bar X_{nk}^2 \to_n 0.$ <br />
+$\implies \frac{S_n - a_n}{b_n} \overset{P}{\to} 0$, where $a_n = \sum_{k=1}^n E\bar X_{nk}.$
+</div>
+
+<p><br /></p>
+<h2 id="weak-law-of-large-numbers">Weak law of large numbers</h2>
+<p>(tbd)</p>
 
 <hr />
 
@@ -264,7 +303,7 @@ Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cd
 <p>It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.</p>
 
 <div class="theorem" text="2.1.7">
-$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ forall $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
 </div>
 <div class="proof"><br />
 &ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. <br />

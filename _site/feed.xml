@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 14:12:14 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 14:12:14 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 14:50:52 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 14:50:52 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -16,7 +16,7 @@
 
 &lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most powerful form which only requires $L^1$ condition. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;l2-weak-law-of-large-numbers&quot;&gt;$L^2$ weak law of large numbers&lt;/h2&gt;
+&lt;h2 id=&quot;l2-weak-law&quot;&gt;$L^2$ weak law&lt;/h2&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;uncorrelatedness&quot;&gt;
 $X_1, X_2$ are uncorrelated if $EX_1X_2 = EX_1 EX_2.$
@@ -38,10 +38,49 @@ $$
 E|S_n/n - \mu|^2 = \text{Var}(S_n/n) \le C/n \to 0.
 $$
 &lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+An example of $L^2$ weak law is in &lt;a href=&quot;https://naturale0.github.io/probability/high-dimensional-box&quot;&gt;high-dimensional problem&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;An example of $L^2$ weak law is in &lt;a href=&quot;https://naturale0.github.io/probability/high-dimensional-box&quot;&gt;high-dimensional problem&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Theorem 1 requires strong conditions that $X_i$’s should have the same expectation and their variance should be uniformly bounded. Theorem 2 relieves these so that the result could be more useful.&lt;/p&gt;
 
-&lt;p&gt;(TBD)&lt;/p&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;2.2.6&quot;&gt;
+Let $\mu_n = ES_n$, $\sigma_n^2 = \text{Var}(S_n)$.&lt;br /&gt;
+$\frac{\sigma_n^2}{b_n^2} \to_n 0 \implies \frac{S_n - \mu_n}{b_n} \overset{P}{\to} 0.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$\sigma_n^2 / b_n^2 = E\left(\frac{S_n - \mu_n}{b_n}\right)^2 \to 0.$
+&lt;/div&gt;
+
+&lt;p&gt;This can be used in any kind of sequence of random variable $(S_n)_{n\in\mathbb{N}}$. (Even the uncorrelatedness is not required!) &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;weak-law-for-triangular-arrays&quot;&gt;Weak law for triangular arrays&lt;/h2&gt;
+
+&lt;p&gt;Many topics in probability theory concerns &lt;em&gt;triangular arrays&lt;/em&gt; $(X_{nk})_{1\le k \le n}$ such that $X_{nk}$, $k=1,\cdots,n$ are independent (row-wise independent). We are interested in limiting behaviors of row-wise sum $S_n := X_{n1} + \cdots + X_{nn}$.&lt;/p&gt;
+
+&lt;p&gt;To deal with the case where the finite second moment condition is not ensured, we introduce truncated random variables.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;truncation&quot;&gt;&lt;br /&gt;
+$\bar X := X\mathbb{1}_{(|X| \le M)} = \begin{cases}
+X &amp;amp;,~ \text{if } |X| \le M \\
+0 &amp;amp;,~ \text{otherwise}
+\end{cases}$
+&lt;/div&gt;
+
+&lt;p&gt;By ignoring the tail part of $X$, truncated random variable $\bar X$ always has finite moments.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Weak law for triangular arrays&quot;&gt;
+For each $n$, $X_{nk}$, $k=1\cdots,n$ are independent.&lt;br /&gt;
+Let $b_n &amp;gt; 0$, $b_n \to_n \infty$. &lt;br /&gt;
+Define $\bar X_{nk} := X_nk \mathbb{1}_{(|X_{nk}| \le b_n)}.$&lt;br /&gt;
+If the followings hold,&lt;br /&gt;
+(i) $\sum_{k=1}^n P(|X_{nk}| &amp;gt; b_n) \to_n 0.$ &lt;br /&gt;
+(ii) $\frac{1}{b_n^2} \sum_{k=1}^n E\bar X_{nk}^2 \to_n 0.$ &lt;br /&gt;
+$\implies \frac{S_n - a_n}{b_n} \overset{P}{\to} 0$, where $a_n = \sum_{k=1}^n E\bar X_{nk}.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;weak-law-of-large-numbers&quot;&gt;Weak law of large numbers&lt;/h2&gt;
+&lt;p&gt;(tbd)&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -57,7 +96,7 @@ $$
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
+        <pubDate>Sun, 20 Dec 2020 14:50:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-2.2-WLLN</link>
         <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.2-WLLN</guid>
         
@@ -91,7 +130,7 @@ Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cd
 &lt;p&gt;It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;2.1.7&quot;&gt;
-$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ forall $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 &amp;ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. &lt;br /&gt;
