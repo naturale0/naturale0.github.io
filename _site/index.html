@@ -312,7 +312,7 @@ P(|\frac{S_n - ES_n}{ES_n}| &gt; \epsilon)
 \end{align}
 $$
 (Step 2: $\exists n_k$ s.t. $\frac{S_{n_k}}{ES_{n_k}} \to 1 \text{ a.s.}$)<br />
-&ensp; Let $n_k = \inf\{n:~ ES_n &gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \sum_k \frac{1/k^2} / \delta^2 &lt; \infty.$ By the first Borel-cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.<br />
+&ensp; Let $n_k = \inf\{n:~ ES_n &gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \sum_k \frac{1}{k^2} / \delta^2 &lt; \infty.$ By the first Borel-cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.<br />
 (Step 3: sandwich)<br />
 &ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
 </div>
