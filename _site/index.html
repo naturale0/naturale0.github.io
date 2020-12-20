@@ -128,6 +128,10 @@
               
             
               
+                
+              
+            
+              
             
           -->
           <br>
@@ -146,6 +150,84 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-2.1-independence">(PTE) 2.1. Independence</a></h2>
+        <time class="post_date">20 December 2020, Sunday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.</p>
+
+<p>Following chapters will cover two fundamental theory in convergence of random variables: <strong>the strong law of large numbers</strong> and <strong>the central limit theorem</strong>. We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence.</p>
+
+<p>As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.</p>
+
+<div class="definition" text="independence 1">
+Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_1, \cdots, \mathcal{F}_n \subset \mathcal{F}$ be sub $\sigma$-fields, $E_1, \cdots, E_n$, $E_i \in \mathcal{F}_i$ be the events.<br />
+(i) $E_1,\cdots,E_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i).$<br />
+(ii) $\mathcal{F}_1,\cdots,\mathcal{F}_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i)$ for all $E_i \in \mathcal{F}_i.$
+</div>
+
+<p>In fact to be extra specific we say it is <em>$P$-mutually independent</em> if the above condition is met. It gives us extra information about regarding probability measure ($P$) and that it is mutual. If we just write “independence” it means mutual independence. We drop $P$ if the measure is clear without confusion.</p>
+
+<p>Independence of random variables are defined as independence of generated $\sigma$-fields.</p>
+
+<div class="definition" text="independence 2">
+Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cdots,X_n$ are independent if $\sigma(X_i)$, $i=1,\cdots,n$ are independent.
+</div>
+
+<p>It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.</p>
+
+<div class="theorem" text="2.1.7">
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ forall $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+</div>
+<div class="proof"><br />
+&ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. <br />
+&ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
+</div>
+
+<p>It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in(-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.</p>
+
+<div class="corollary" text="2.1.8">
+$X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
+</div>
+
+<hr />
+
+<h3 id="acknowledgement">Acknowledgement</h3>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-2.1-independence"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -184,7 +266,7 @@ $\mathcal{S}$ is a semi-algebra. Show (i) $\mu(A \times B) = \sum_{i=1}^\infty \
 <p>Measure of a measurable rectangle is comprehensive. However it is cumbersome to compute and intuitively understand measurable sets <em>that are not rectangles</em>. We <em>could</em> understand it as the limit of measure of rectangles, but it is still a problem to calculate it - we do not know anything more than the existence of the measure. Fubini’s theorem is here for the rescue.</p>
 
 <div class="theorem" text="Fubini">
-Let $(\Omega, \mathcal{F}, P)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. <b>or</b> $f \in L^1(\mu)$, then 
+Let $(\Omega, \mathcal{F}, \mu)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. <b>or</b> $f \in L^1(\mu)$, then 
 $$
 \begin{align}
 \int_{\Omega} f d\mu &amp;= \int_{\Omega_2} \int_{\Omega_1} f(x,y) d\mu_1(x) d\mu_2(y)\\
@@ -261,7 +343,7 @@ $L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &lt; \infty\}.$<br />
 $\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
 </div>
 
-<p>$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &lt; q$. <br /><br /></p>
+<p>$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le p \le q$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &lt; q$. <br /><br /></p>
 
 <h2 id="convergence-in-lp">Convergence in $L^p$</h2>
 
@@ -269,7 +351,7 @@ $\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
 Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ and $\|X_n - X\|_p \to 0$, then we say $X_n$ converges to $X$ in $L^p$ and write $X_n \overset{L^p}{\to} X$.
 </div>
 
-<p>We could just say $X_n \to X$ in $L^p$ too. It is known that for $p &gt; 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.</p>
+<p>Or we could just say $X_n \to X$ in $L^p$. It is known that for $p \ge 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.</p>
 
 <hr />
 
@@ -279,238 +361,6 @@ Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ a
 
           
           <a class="read-more-btn" href="/probability/PTE-1.6-Lp-space"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-1.5-Convergence-theorems-and-inequalities">(PTE) 1.5. Convergence theorems and elementary inequalities</a></h2>
-        <time class="post_date">19 December 2020, Saturday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.</p>
-
-<p>In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space. <br /><br /></p>
-
-<h2 id="convergence-theorems">Convergence theorems</h2>
-
-<p>Earlier, I mentioned that to prove the additive property of the Lebesgue integrals, we need the monotone convergence theorem. Monotone convergence theorem (or MCT) is for a sequence of non-negative functions that increases monotonically to the limiting function. In fact, there are other convergence theorems - bounded and dominated one - in addition to the MCT. Fatou’s lemma, a corollary of the MCT, is another useful tool for our journey through probability theory.<br />
- </p>
-
-<h3 id="monotone-convergence-theorem-mct">Monotone convergence theorem (MCT)</h3>
-
-<div class="theorem" text="Monotone convergence">
-$\{f_n\}_{n\in\mathbb{N}}: \Omega \to [0,\infty]$: a sequence of measurable functions.<br />
-$f: \Omega \to [0,\infty]$: the limiting function of $\{f_n\}$.<br />
-$f_n\uparrow f \text{ a.s.} \implies$ (i) $f$ is measurable, (ii) $\int f_n d\mu \uparrow \int f d\mu$.
-</div>
-
-<p>To prove this, we need two lemmas.</p>
-
-<div class="lemma" text="1.25(a) from RCA">
-$s: \Omega \to [0,\infty]$: a simple function.<br />
-$\varphi(E) = \int_E s d\mu,~ \forall E\in\mathcal{F} \implies \varphi$ is a measure on $(\Omega, \mathcal{F}).$
-</div>
-
-<div class="lemma"><br />
-$s: \Omega \to [0,\infty]$: a simple function.<br />
-$E_n \uparrow E$: $E_n, E$ are measurable.<br />
-$\implies \lim_n \int_{E_n} s d\mu = \int_E s d\mu.$
-</div>
-
-<p>The first lemma is easy to check. The second one is trivial by continuity of measure $\phi$ defined as in the first one. The latter one will be used in the proof of the MCT.</p>
-
-<div class="proof" text="MCT">
-Let $\alpha_n = \int f_n d\mu$ so that $\alpha_1 \le \alpha_2 \le \cdots \le \int f d\mu$ and $\lim_n \alpha_n = \alpha$ for some $\alpha$. We need to show that $\alpha = \int f d\mu$.<br />
-&ensp; (1) It is trivial that $\alpha \le \int f d\mu$.<br />
-&ensp; (2) Now, let $s$ be a simple function such that $0 \le s \le f$ and a constant $0 &lt; c &lt; 1$. Define $E_n = \{\omega\in\Omega:~ f_n(\omega) \ge c\cdot s(\omega)\}$. Then since $E_n$ increases monotonically as $f_n$ increases monotonically and $\cup_{n=1}^\infty E_n = \Omega$, $E_n \uparrow \Omega$. By the lemma 3, this implies $\int_{E_n} s d\mu \uparrow \int s d\mu$.
-$$
-\begin{align}
-&amp;\int f_n d\mu \ge \int_{E_n} f_n d\mu \ge \int_{E_n} c\cdot s d\mu \\
-&amp;\overset{\lim_n}{\implies} \alpha \ge c\int s d\mu \\
-&amp;\overset{c\to1}{\implies} \alpha \ge \int s d\mu \\
-&amp;\overset{\sup_{0\le s\le f}}{\implies} \alpha \ge \int f d\mu
-\end{align}
-$$  
-&ensp; By (1) and (2), the desired result follows.
-</div>
-
-<p>The MCT allows us to prove the yet to be shown property.</p>
-
-<div class="prop" text="additivity of the integrals">
-$f,g: \Omega \to [0,\infty]$: measurable.<br />
-$\implies \int f+g d\mu = \int f d\mu + \int g d\mu.$
-</div>
-<div class="proof"><br />
-Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rfloor / 2^n) \wedge n$. Then $s_n + t_n \uparrow f+g$ and $\int s_n + t_n d\mu = \int s_n d\mu + \int t_n d\mu$. By the MCT, the result follows.
-</div>
-<p> </p>
-
-<h3 id="fatous-lemma">Fatou’s lemma</h3>
-
-<p>Fatou’s lemma, another important convergence theorem can be directly derived by the MCT.</p>
-
-<div class="theorem" text="Fatou">
-$\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.<br />
-$\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
-</div>
-<div class="proof"><br />
-Let $g_n = \inf_{k \ge n} f_k$ so that $g_n \uparrow \liminf\limits_n f_n$. By MCT, $\lim_n \int g_n d\mu = \int \liminf\limits_n f_n d\mu$. Since $g_n$ is monotone and $g_n \le f_n$, we get $\int g_n d\mu \le \int f_n d\mu,~ \forall n$ thus $\lim_n \int g_n d\mu \le \liminf\limits_n \int f_n d\mu$. 
-</div>
-
-<p>It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.<br />
- </p>
-
-<h3 id="dominated-convergence-theorem-dct">Dominated convergence theorem (DCT)</h3>
-
-<p>While the MCT is very useful, it can only be applied to a sequence of functions that monotonically converges. Lebesgue’s dominated convergence theorem (DCT) provides a tool for not only monotonically convergent, but general convergent functions that are uniformly dominated by some integrable function.</p>
-
-<div class="theorem" text="Dominated convergence">
-$\{f_n\}: \Omega \to \mathbb{R}$: a sequence of measurable functions.<br />
-$f: \Omega \to \mathbb{R}$: a measurable functions.<br />
-$f_n \to f \text{ a.s.}$ and $|f_n| \le g,~ g$ is integrable.<br />
-$\begin{align}
-\implies &amp; \text{(i) } f \in L^1(\mu). \\
-         &amp; \text{(ii) } \int |f_n - f| d\mu \to 0. \\
-         &amp; \text{(iii) } \int f_n d\mu \to \int f d\mu.
-\end{align}$
-</div>
-
-<p>The usefulness of the DCT is that it not only shows convergence of the integral, but also integrability of the limiting function and $L^1$ convergence<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> to it.</p>
-
-<div class="proof" text="DCT">
-(i) Trivial since $|f| \le g$.<br />
-(ii) $|f_n - f|$ are integrable since $\le 2g$. $0 \le 2g - |f_n - f| \le 2g$. By fatou's lemma,
-$$
-\int 2g d\mu \le \int 2g d\mu - \limsup\limits_n \int |f_n - f| d\mu \\
-\limsup\limits_n \int |f_n - f| d\mu \le 0 \\
-\therefore \lim_n \int |f_n -f| d\mu = 0
-$$<br />
-(iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
-</div>
-<p><br /></p>
-
-<h2 id="bounded-convergence-theorem-bct">Bounded convergence theorem (BCT)</h2>
-<p>A special case of the DCT is where the sequence ${f_n}$ is uniformly bounded almost surely (i.e. $Y = c \in \mathbb{R}$). In this case we call it the <em>bounded convergence theorem</em>.
-<br /><br /></p>
-
-<h2 id="inequalities">Inequalities</h2>
-<p>Along with convergence theorems, these integral inequalities will be used intensely throughout the probability theory. In the following theorems, assume $f,g$ are measurable. For $p \ge 1$, if $|f|^p$ is integrable, $\|f\|_p := (\int |f|^p d\mu)^\frac{1}{p}$ is the $L^p(\mu)$-norm of $f$.</p>
-
-<div class="theorem" text="Jensen's inequality">
-$\varphi: \mathbb{R} \to \mathbb{R}$: convex function.<br />
-$\int |f| d\mu &lt; \infty$, $\int |\varphi(f)| d\mu &lt; \infty$.<br /> 
-$\implies \varphi(\int f d\mu) \le \int \varphi(f) d\mu$.
-</div>
-<div class="proof"><br />
-Let $t = \int f d\mu$, then there exists $\beta = \sup\limits_{s&lt;t} \frac{\varphi(t)-\varphi(s)}{t-s} \in \mathbb{R}$ such that $\varphi(x) \ge \beta(x-t) + \varphi(t)$. Take integral to both sides and we get the result.
-</div>
-
-<div class="theorem" text="Hölder's inequality">
-$p,q \in (1,\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$.<br />
-$\begin{align}
-\implies &amp;\int |fg| d\mu \le (\int |f|^p d\mu)^\frac{1}{p} (\int |g|^q d\mu)^\frac{1}{q}. \\
- &amp;\text{i.e. } \|fg\|_1 \le \|f\|_p \|g\|_q.
-\end{align}$
-</div>
-<div class="proof"><br />
-Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = \int G^q d\mu = 1$.<br />
-&ensp; Our claim is that $x,y \ge 0 \Rightarrow xy \le \frac{x^p}{p} + \frac{y^q}{q}$. Let $h(x) = xy - x^p/p$, then $h'(x) = y - x^{p-1} = y - x^{p/q}$ and $h$ achieves maximum at $x = y^{q/p}$.<br />
-&ensp; By the claim, $\int FG d\mu \le \int F^p/p + G^q/q d\mu = 1$ and the desired result follows.
-</div>
-
-<p>A special case of Hölder’s inequality is the Cauchy-Schwarz inequality: $\|fg\|_1 \le \|f\|_2 \|g\|_2.$</p>
-
-<div class="theorem" text="Minkowski's inequality">
-$p \ge 1$, $\int |f|^p d\mu &lt; \infty$, $\int |g|^p d\mu &lt; \infty$<br />
-$\implies \|f+g\|_p \le \|f\|_p + \|g\|_p.$
-</div>
-<div class="proof"><br />
-$$
-\int (f+g)^p d\mu = \int f(f+g)^{p-1} d\mu + \int g(f+g)^{p-1} d\mu
-$$
-By Hölder's inequality, 
-$$
-\begin{align}
-\int f(f+g)^{p-1} d\mu &amp;\le \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^{(p-1)q} d\mu \right)^{1/q} \\
-  &amp;= \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}
-\end{align}
-$$
-
-Similarly, $\int g(f+g)^{p-1} d\mu \le \left(\int g^p d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}$. Thus 
-
-$$
-\begin{align}
-\int (f+g)^p d\mu &amp;\le \left(\int (f^p + g^p) d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q} \\
-\therefore \|f+q\|_p &amp;\le \|f\|_p + \|g\|_p  
-\end{align}
-$$
-</div>
-
-<p>Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.</p>
-
-<div class="theorem" text="Markov-Chebyshev's inequality">
-$\varphi: \mathbb{R}\to\mathbb{R}$, $\varphi \ge 0$.<br />
-$A \in \mathcal{B}(\mathbb{R})$, $i_A := \inf\{\varphi(y):~ y\in A\}$. <br />
-$\implies i_A \cdot P(X \in A) \le \int_A \varphi(X) dP \le E\varphi(X).$
-</div>
-
-<p>Special cases of the theorem is Markov’s inequality and Chebyshev’s inequality.</p>
-
-<div class="corollary" text="Markov's inequality">
-$X \ge 0$ a.s., $a &gt; 0$ $\implies P(X \ge a) \le EX/a.$
-</div>
-<div class="corollary" text="Chebyshev's inequality">
-$a &gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
-</div>
-<p><br /></p>
-
-<h2 id="concluding-remarks">Concluding remarks</h2>
-<p>Since the expectation $EX$ is defined as a mere integral, all of the above theorems can be applied. For instance, if $X_n \to X$ a.s. and $|X_n| \le Y$ for some $Y$ such that $E|Y| &lt; \infty$, then by DCT $EX_n \to EX$ as $n\to\infty$.</p>
-
-<hr />
-
-<h3 id="acknowledgement">Acknowledgement</h3>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<p>This post is also based on the textbook <em>Real and Complex Analysis</em>, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>$f_n \to f$ in $L^1(\mu)$ is equivalent to $\int |f_n - f| d\mu \to 0$ and $f \in L^1(\mu)$. It will be covered in the next section. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-1.5-Convergence-theorems-and-inequalities"> » </a>
         </p>
       </div>
       <footer class="post_meta">

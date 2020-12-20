@@ -6,9 +6,62 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 Dec 2020 00:47:16 +0900</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 00:47:16 +0900</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 11:25:10 +0900</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 11:25:10 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>(PTE) 2.1. Independence</title>
+        <description>&lt;p&gt;First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.&lt;/p&gt;
+
+&lt;p&gt;Following chapters will cover two fundamental theory in convergence of random variables: &lt;strong&gt;the strong law of large numbers&lt;/strong&gt; and &lt;strong&gt;the central limit theorem&lt;/strong&gt;. We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence.&lt;/p&gt;
+
+&lt;p&gt;As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;independence 1&quot;&gt;
+Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_1, \cdots, \mathcal{F}_n \subset \mathcal{F}$ be sub $\sigma$-fields, $E_1, \cdots, E_n$, $E_i \in \mathcal{F}_i$ be the events.&lt;br /&gt;
+(i) $E_1,\cdots,E_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i).$&lt;br /&gt;
+(ii) $\mathcal{F}_1,\cdots,\mathcal{F}_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i)$ for all $E_i \in \mathcal{F}_i.$
+&lt;/div&gt;
+
+&lt;p&gt;In fact to be extra specific we say it is &lt;em&gt;$P$-mutually independent&lt;/em&gt; if the above condition is met. It gives us extra information about regarding probability measure ($P$) and that it is mutual. If we just write “independence” it means mutual independence. We drop $P$ if the measure is clear without confusion.&lt;/p&gt;
+
+&lt;p&gt;Independence of random variables are defined as independence of generated $\sigma$-fields.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;independence 2&quot;&gt;
+Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cdots,X_n$ are independent if $\sigma(X_i)$, $i=1,\cdots,n$ are independent.
+&lt;/div&gt;
+
+&lt;p&gt;It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;2.1.7&quot;&gt;
+$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ forall $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+&amp;ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. &lt;br /&gt;
+&amp;ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
+&lt;/div&gt;
+
+&lt;p&gt;It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in(-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;2.1.8&quot;&gt;
+$X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+</description>
+        <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
+        <link>http://localhost:4000/probability/PTE-2.1-independence</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.1-independence</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 1.7. Product space</title>
@@ -40,7 +93,7 @@ $\mathcal{S}$ is a semi-algebra. Show (i) $\mu(A \times B) = \sum_{i=1}^\infty \
 &lt;p&gt;Measure of a measurable rectangle is comprehensive. However it is cumbersome to compute and intuitively understand measurable sets &lt;em&gt;that are not rectangles&lt;/em&gt;. We &lt;em&gt;could&lt;/em&gt; understand it as the limit of measure of rectangles, but it is still a problem to calculate it - we do not know anything more than the existence of the measure. Fubini’s theorem is here for the rescue.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Fubini&quot;&gt;
-Let $(\Omega, \mathcal{F}, P)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. &lt;b&gt;or&lt;/b&gt; $f \in L^1(\mu)$, then 
+Let $(\Omega, \mathcal{F}, \mu)$ be the product space of $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$. If $f \ge 0$ a.s. &lt;b&gt;or&lt;/b&gt; $f \in L^1(\mu)$, then 
 $$
 \begin{align}
 \int_{\Omega} f d\mu &amp;amp;= \int_{\Omega_2} \int_{\Omega_1} f(x,y) d\mu_1(x) d\mu_2(y)\\
@@ -92,7 +145,7 @@ $L^p = L^p(\Omega,\mathcal{F},P) := \{X: E|X|^p &amp;lt; \infty\}.$&lt;br /&gt;
 $\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
 &lt;/div&gt;
 
-&lt;p&gt;$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le q \le p$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &amp;lt; q$. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;$L^p$-norms are monotone. That is, $|X|_p \le |X|_q,~ 1 \le p \le q$. Thus if $X \in L^q$, then $X \in L^p$ for $1 \le p &amp;lt; q$. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;convergence-in-lp&quot;&gt;Convergence in $L^p$&lt;/h2&gt;
 
@@ -100,7 +153,7 @@ $\|X\|_p := (E|X|^p)^{1/p},~ X\in L^p$ is the $L^p$-norm.
 Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ and $\|X_n - X\|_p \to 0$, then we say $X_n$ converges to $X$ in $L^p$ and write $X_n \overset{L^p}{\to} X$.
 &lt;/div&gt;
 
-&lt;p&gt;We could just say $X_n \to X$ in $L^p$ too. It is known that for $p &amp;gt; 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.&lt;/p&gt;
+&lt;p&gt;Or we could just say $X_n \to X$ in $L^p$. It is known that for $p \ge 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -221,7 +274,7 @@ $$&lt;br /&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/h2&gt;
+&lt;h3 id=&quot;bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/h3&gt;
 &lt;p&gt;A special case of the DCT is where the sequence ${f_n}$ is uniformly bounded almost surely (i.e. $Y = c \in \mathbb{R}$). In this case we call it the &lt;em&gt;bounded convergence theorem&lt;/em&gt;.
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -627,8 +680,8 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 &lt;div class=&quot;definition&quot; text=&quot;σ-field&quot;&gt;
 For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
 &lt;br /&gt;
-(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}$. &lt;br /&gt;
-(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}$.
+(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}.$ &lt;br /&gt;
+(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}.$
 &lt;/div&gt;
 
 &lt;p&gt;A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.&lt;/p&gt;
@@ -637,8 +690,8 @@ For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$
 
 &lt;div class=&quot;definition&quot; text=&quot;measure&quot;&gt;
 $\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}$. &lt;br /&gt;
-(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}.$ &lt;br /&gt;
+(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).$
 &lt;/div&gt;
 
 &lt;p&gt;The second condition is sometimes referred to as &lt;em&gt;$\sigma$ sub-additivity (countable sub-additivity)&lt;/em&gt;. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.&lt;/p&gt;
@@ -674,15 +727,15 @@ is the Borel $\sigma$-field of $\Omega$, where $\tau$ is a topology on $\Omega$.
 
 &lt;div class=&quot;prop&quot; text=&quot;properties of probability measures&quot;&gt;
 Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following properties hold.&lt;br /&gt;
-(i) (monotonicity) $A\subset B \implies P(A) \le P(B)$. &lt;br /&gt;
-(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i)$. &lt;br /&gt;
-(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A)$. &lt;br /&gt;
-(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B)$.
+(i) (monotonicity) $A\subset B \implies P(A) \le P(B).$ &lt;br /&gt;
+(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i).$ &lt;br /&gt;
+(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A).$&lt;br /&gt;
+(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B).$
 &lt;/div&gt;
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A)$. &lt;br /&gt;
-(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n)$. &lt;br /&gt;
+(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A).$&lt;br /&gt;
+(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n).$&lt;br /&gt;
 (iii) Let $B_n = A_n \setminus A_{n-1},~ A_0=\phi$ so that $B_n$'s be disjoint. Then $$\begin{align} 
   P(\cup_n A_n) &amp;amp;= P(\cup_n B_n) = \sum_n P(B_n) \\
                 &amp;amp;= \lim_n P(\cup_{i=1}^n B_i) \\
@@ -699,21 +752,21 @@ Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following prop
 
 &lt;div class=&quot;definition&quot; text=&quot;semi-algebra&quot;&gt;
 A collection of sets $\mathcal{S}$ is a semi-algebra, if &lt;br /&gt;
-(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoint unions of $S_i \in \mathcal{S}$. &lt;br /&gt;
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoint unions of $S_i \in \mathcal{S}.$ &lt;br /&gt;
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}.$
 &lt;/div&gt;
 
 &lt;p&gt;It is not necessary for a semi-algebra to contain $\phi$. However in many cases it is convenient to make it do so.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;algebra&quot;&gt;
 A collection of sets $\mathcal{A}$ is an algebra, if &lt;br /&gt;
-(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}$. &lt;br /&gt;
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}$.
+(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}.$ &lt;br /&gt;
+(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}.$
 &lt;/div&gt;
 
 &lt;p&gt;Note that the strengthened condition on the definition of algrebra allows it to be closed on both the finite intersection &lt;em&gt;and&lt;/em&gt; union.&lt;/p&gt;
 
-&lt;p&gt;For example, $\mathcal{S}_1 = {\phi} \cup {(a,b]:~-\infty\le a&amp;lt;b\le \infty}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.&lt;/p&gt;
+&lt;p&gt;For example, $\mathcal{S}_1 = \{\phi\} \cup \{(a,b]:~-\infty\le a&amp;lt;b\le \infty\}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.&lt;/p&gt;
 
 &lt;p&gt;An algebra can be generated using semi-algebra. $\overline{\mathcal{S}} := {\text{finite disjoint unions of sets in }\mathcal{S}}$ is an &lt;strong&gt;algebra generated by a semi-algebra $\mathcal{S}$&lt;/strong&gt;. Sometimes we call $\mathcal{S}$ a generator of $\overline{\mathcal{S}}$. Like Borel $\sigma$-field, it is the smallest algebra that contains $\mathcal{S}$.&lt;/p&gt;
 
@@ -723,16 +776,16 @@ A collection of sets $\mathcal{A}$ is an algebra, if &lt;br /&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;measure on algebra&quot;&gt;
 $\mu:\mathcal{A} \to \mathbb{R}^*\cup\{0\}$ is a measure on an algebra $\mathcal{A}$ if &lt;br /&gt;
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}$. &lt;br /&gt;
-(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$.
+(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}.$ &lt;br /&gt;
+(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).$
 &lt;/div&gt;
 
 &lt;p&gt;$\sigma$-finiteness is defined as in the $\sigma$-field case.&lt;/p&gt;
 
 &lt;p&gt;We can define similar functions in semi-algebra. Let $\mu: \mathcal{S} \to \mathbb{R}^+ \cup {0}$ be a function on a semi-algebra $\mathcal{S}$ that satisfies&lt;br /&gt;
-(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}$.&lt;br /&gt;
-(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i)$.&lt;br /&gt;
-(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i)$.&lt;br /&gt;
+(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}.$&lt;br /&gt;
+(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i).$&lt;br /&gt;
+(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i).$&lt;br /&gt;
 I will call such functions &lt;em&gt;semi-measures&lt;/em&gt;&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
 &lt;p&gt;The following theorem states that a semi-measure can be uniquely extended to a measure on algebra. If the extended measure on algebra is $\sigma$-finite, it can be further extended to a measure on $\sigma$-field.&lt;/p&gt;
@@ -969,52 +1022,6 @@ $\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\
         <pubDate>Wed, 13 May 2020 23:45:00 +0900</pubDate>
         <link>http://localhost:4000/probability/application-of-pi-lambda-theorem</link>
         <guid isPermaLink="true">http://localhost:4000/probability/application-of-pi-lambda-theorem</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>Kolmogorov's maximal inequality with shifted starting point</title>
-        <description>&lt;p&gt;Kolmogorov’s maximal inequality provides result similar to that of Chebyshev’s inequality to maximum of partial sum of random variables.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's maximal inequality&quot;&gt;
-If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &amp;lt; \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.
-
-$$P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
-
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-Let $A_k = \{ S_k &amp;gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} \|S_k\| &amp;gt; x \}$.
-
-$$\begin{align} 
-  \mathrm{Var}(S_n) &amp;amp;= \mathrm{E}(S_n^2) \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
-                                &amp;amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
-                                &amp;amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
-                                &amp;amp;= x^2P(\cup_{k=1}^n A_k) \\
-                                &amp;amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x)
-\end{align}$$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-Let $Y_n = X_{n+m}$ and $T_n= \sum\limits_{k=1}^n Y_k$, then $Y_i$’s are also independent with expectaion 0 and finite variance. Hence, the following also holds,&lt;/p&gt;
-
-\[P(\max_{0 \leq k \leq n-m} |T_k| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(T_{n-m})\]
-
-&lt;p&gt;which means&lt;/p&gt;
-
-\[P(\max_{m \leq k \leq n} |S_k - S_m| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n - S_m)\]
-
-&lt;p&gt;Thus, even with different starting point of summation, and even if $X_i$’s are &lt;em&gt;not identically distributed&lt;/em&gt;, the same form of inequality can be used. This result is useful when proving Kolmogorov’s three-series theorem.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 09 May 2020 01:12:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point</guid>
         
         
         <category>probability</category>
