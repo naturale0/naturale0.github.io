@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 02:22:25 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 02:22:25 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 02:22:43 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 02:22:43 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -135,7 +135,7 @@ Letting $\epsilon \to 0$ leads to the result.&lt;br /&gt;
 ((ii)&amp;amp;(iii)$\Rightarrow$(iv))
 $$
 \limsup_n P_n(A) \le \limsup_n P_n(\overline A) \le P(\overline A) = P(A). \\
-\liminf_n P_n(A) \ge \ liminf_n P_n(A^\circ) \ge P(A^\circ) = P(A). 
+\liminf_n P_n(A) \ge \liminf_n P_n(A^\circ) \ge P(A^\circ) = P(A). 
 $$
 ((iv)$\Rightarrow$(i)) Without loss of generality, let $f$ be a continuous function with $0 \le f \le 1.$ Note that $P(f=t) &amp;gt; 0$ for at most countably many $t$'s so that $P(\partial\{f&amp;gt;t\})=0.$ Hence by (iv),
 $$
