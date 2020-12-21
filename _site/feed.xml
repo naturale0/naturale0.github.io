@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 13:27:26 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 13:27:26 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 13:32:52 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 13:32:52 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -180,7 +180,7 @@ $$
 
 &lt;p&gt;As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -350,7 +350,7 @@ Let $X_{nk} = \tau_k^n - \tau_{k-1}^n$, $k=1,\cdots,n.$ Then $X_{nk} \sim \text{
 Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 &lt;/div&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -443,7 +443,7 @@ $$
 
 &lt;p&gt;Furthermore, if a measurable space $(S, \mathcal{S})$ is &lt;strong&gt;nice&lt;/strong&gt;, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can also construct a sequence of random &lt;em&gt;elements&lt;/em&gt; $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -520,7 +520,7 @@ $$
   &lt;li&gt;If $(X,Y)$ is a random element on a metric space $S \times S$, then $X, Y$ are random elements on $S$. However the converse is not always the truth. In fact, it is known that the converse holds if $S$ is &lt;a href=&quot;https://en.wikipedia.org/wiki/Separable_space&quot;&gt;separable&lt;/a&gt;.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Since $(\mathbb{R}, d)$ is a separable space, we can be sure that $(X,Y)$ is a random vector if and only if $X, Y$ are random variables.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -570,7 +570,7 @@ Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ a
 
 &lt;p&gt;Or we could just say $X_n \to X$ in $L^p$. It is known that for $p \ge 1$, $L^p$ are closed (Banach) spaces. If $p=2$, it becomes a Hilbert space since we can define the inner product as $\langle X, Y \rangle = EXY$.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -780,7 +780,7 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
 &lt;h2 id=&quot;concluding-remarks&quot;&gt;Concluding remarks&lt;/h2&gt;
 &lt;p&gt;Since the expectation $EX$ is defined as a mere integral, all of the above theorems can be applied. For instance, if $X_n \to X$ a.s. and $|X_n| \le Y$ for some $Y$ such that $E|Y| &amp;lt; \infty$, then by DCT $EX_n \to EX$ as $n\to\infty$.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -925,7 +925,7 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
 
 &lt;p&gt;As a side note, the Lebesgue integration can be viewed as a generalization of the Riemann integration. It can be shown that any Riemann integrable functions are Lebesgue integrable. Thus it is still viable to interpret expectation as a weight sum of probabilities for many random variables with Riemann integrable densities.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -1036,7 +1036,7 @@ We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\inf
 
 &lt;p&gt;Almost sure convergence implies that in probability space, in most of the times only the subsets with positive measures are important: it might be enough to have the fact that $X_n$ converges a.s. Convergence theorems in Lebesgue integration are the examples. We will cover this in detail later.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -1104,7 +1104,7 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 &amp;ensp; First given $x$, $\omega_0 \in \{\omega:~ \omega \le F(x)\}$, we get $x \notin \{y:~ F(y) &amp;lt; \omega_0\}$. Thus $X(\omega_0) \le x$ and we get $\{\omega:~ X(\omega) \le x\} \supset \{\omega: \omega \le F(x)\}$. Next, suppose $\omega_0 \notin \{\omega: \omega \le F(x)\}$, then $\omega_0 &amp;gt; F(x)$. Since $F$ is right-continuous, there exists $\epsilon &amp;gt; 0$ such that $F(x) \le F(x+\epsilon) &amp;lt; \omega_0$. Hence $x&amp;lt;x+\epsilon\le X(\omega_0)$ and $\{\omega:~ X(\omega) \le x\} \subset \{\omega: \omega \le F(x)\}$. Finally we get $F(x) = \lambda(0, F(x)] = P(\{\omega:~ X(\omega) \le x\}) = P(X \le x)$.
 &lt;/div&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -1301,7 +1301,7 @@ Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by const
 
 &lt;p&gt;Other examples can be found &lt;a href=&quot;https://naturale0.github.io/probability/application-of-pi-lambda-theorem&quot;&gt;here&lt;/a&gt;. We will get on it in this post series one at a time.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
