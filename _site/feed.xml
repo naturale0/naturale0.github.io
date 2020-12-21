@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 02:22:43 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 02:22:43 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 02:29:55 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 02:29:55 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -90,7 +90,7 @@ $$
 Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega) = Y_\infty(\omega).$
 &lt;/div&gt;
 
-&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;/p&gt;
+&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
 &lt;p&gt;The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.&lt;/p&gt;
@@ -105,6 +105,7 @@ Let $Y_n \sim F_n$ for $1 \le n \le \infty$ be random variables such that $Y_n \
 &lt;div class=&quot;theorem&quot; text=&quot;DCT&quot;&gt;
 $g,h$ are continuous, $g&amp;gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g(x) dF_n(x) &amp;lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h(x) dF_n(x) \to \int h(x) dF(x).$
 &lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;continuous-mapping-theorem&quot;&gt;Continuous mapping theorem&lt;sup id=&quot;fnref:later1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:later1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;div class=&quot;theorem&quot; text=&quot;continuous mapping&quot;&gt;
@@ -166,7 +167,7 @@ is the desired result.
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Tue, 22 Dec 2020 00:23:00 +0900</pubDate>
+        <pubDate>Tue, 22 Dec 2020 02:24:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</guid>
         
