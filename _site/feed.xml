@@ -6,9 +6,202 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 13:32:52 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 13:32:52 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 19:40:27 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 19:40:27 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 2.4. Strong law of large numbers</title>
+        <description>&lt;p&gt;Putting together all of the topics we covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#strong-law-of-large-numbers&quot; id=&quot;markdown-toc-strong-law-of-large-numbers&quot;&gt;Strong law of large numbers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#application-of-the-strong-law&quot; id=&quot;markdown-toc-application-of-the-strong-law&quot;&gt;Application of the strong law&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-extension-of-the-strong-law&quot; id=&quot;markdown-toc-1-extension-of-the-strong-law&quot;&gt;1. Extension of the strong law&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-renewal-theory&quot; id=&quot;markdown-toc-2-renewal-theory&quot;&gt;2. Renewal theory&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-glivenko-cantelli-theorem&quot; id=&quot;markdown-toc-3-glivenko-cantelli-theorem&quot;&gt;3. Glivenko-Cantelli theorem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-law-of-iterated-logarithm&quot; id=&quot;markdown-toc-4-law-of-iterated-logarithm&quot;&gt;4. Law of iterated logarithm&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;strong-law-of-large-numbers&quot;&gt;Strong law of large numbers&lt;/h2&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;strong law of large numbers&quot;&gt;
+Let $X_1, X_2, \cdots$ be pairwise independent, identically distributed. $S_n = \sum_{i=1}^n X_i.$&lt;br /&gt;
+$E|X_1| = \mu &amp;lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
+&lt;/div&gt;
+
+&lt;p&gt;The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma&quot;&gt;(2.3.9)&lt;/a&gt;. In addition, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cesàro_summation&quot;&gt;Cesàro’s mean&lt;/a&gt; will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot; text=&quot;the strong law&quot;&gt;
+Without loss of of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
+
+&lt;i&gt;(Step 1. &lt;b&gt;Claim&lt;/b&gt;: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
+(i) $\sum_{k=1}^\infty P(X_k &amp;gt; k) \le EX_1 &amp;lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&amp;gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &amp;lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$&lt;br /&gt;
+(ii) $\frac{ET_n}{n} = \frac{1}{n} \sum_{k=1}^n EY_k$ and $\lim_k EY_k = EX_1 = \mu$ by MCT. By the Cesàro mean, $\frac{ET_n}{n} \to \mu.$&lt;br /&gt;
+Combine (i) and (ii) and the claim is proved.&lt;br /&gt;&lt;br /&gt;
+
+&lt;i&gt;(Step 2. $\exists k(n)$ s.t. $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
+$$
+\begin{align}
+&amp;amp;\;\;\;\;P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &amp;gt; \epsilon\right) \\
+ &amp;amp;\le \frac{1}{\epsilon^2 k(n)^2} \text{Var}(T_{k(n)}) \\
+ &amp;amp;= \frac{1}{\epsilon^2 k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m)
+\end{align}
+$$
+We want the sum of probabilities
+$$
+\begin{align}
+&amp;amp;\;\;\;\;\sum\limits_{n=1}^\infty P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &amp;gt; \epsilon\right) \\
+ &amp;amp;\le \frac{1}{\epsilon^2} \sum\limits_{n=1}^\infty \frac{1}{k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m) \\
+ &amp;amp;= \frac{1}{\epsilon^2} \sum\limits_{m=1}^\infty \text{Var}(Y_m) \sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2}
+\end{align}
+$$
+to be finite. Let $k(n) = \lfloor \alpha^n \rfloor$ for $\alpha &amp;gt; 1$ then since $\lfloor \alpha^n \rfloor \ge \frac{1}{2} \alpha^n$,
+$$
+\begin{align}
+&amp;amp;\;\;\;\;\sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2} \\
+&amp;amp;=\sum\limits_{n:k(n)\ge m} \frac{1}{\lfloor \alpha^n \rfloor^2} \\
+&amp;amp;\le 4 \sum\limits_{n:k(n)\ge m} \alpha^{-2n} \\
+&amp;amp;\le \frac{4}{m^2 (1-\alpha^{-2})} \approx \frac{c}{m^2}.
+\end{align}
+$$
+In order to show finiteness of the sum, we need to show $\sum_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k) &amp;lt; \infty.$ This comes from
+$$
+\begin{align}
+\text{Var}(Y_k) 
+&amp;amp;\le EY_k^2 = \int_0^k 2y P(X_1 &amp;gt; y) dy. \\
+\sum\limits_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k)
+&amp;amp;\le \sum\limits_{k=1}^\infty \frac{1}{k^2} \int_0^k 2y P(X_1 &amp;gt; y) dy \\
+&amp;amp;= \int_0^\infty \left( \sum\limits_{k=1}^\infty \frac{1}{k^2} \mathbf{1}_{(y&amp;lt;k)} \right) 2y P(X_1 &amp;gt; y) dy \\
+&amp;amp;\le 4EX_1 &amp;lt; \infty.
+\end{align}
+$$
+The last inequality holds because 
+$$
+\begin{align}
+\sum\limits_{k:k&amp;gt;y} \frac{1}{k^2} 2y &amp;amp;= 2y\sum\limits_{k:k\ge \lfloor y \rfloor + 1} \frac{1}{k^2} \\
+&amp;amp;\le 2y \int_{\lfloor y \rfloor}^\infty \frac{1}{x^2} dx \\
+&amp;amp;= \frac{2y}{\lfloor y \rfloor} \le 4.
+\end{align}
+$$
+Hence $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$&lt;br /&gt;&lt;br /&gt;
+
+&lt;i&gt;(Step 3. sandwich)&lt;/i&gt;&lt;br /&gt;
+$T_{k(n)} \le T_m \le T_{k(n+1)}$ for $m:~ k(n) \le m \le k(n+1).$ Since $k(n) \to \infty$, every $m\in\mathbb{N}$ has a $k(n)$ and $k(n+1)$ that sandwiches $m.$ As $n \to \infty$, $\frac{k(n)}{k(n+1)} = \frac{\lfloor \alpha^n \rfloor}{\lfloor \alpha^{n+1} \rfloor} \to \frac{1}{\alpha}.$ Take $\liminf$ and $\limsup$ to each sides of
+$$
+\frac{T_{k(n)}}{k(n+1)} \le \frac{T_m}{m} \le \frac{T_{k(n+1)}}{k(n)}
+$$ and we get
+$$
+\frac{1}{\alpha}\mu \le \liminf\limits_m\frac{T_m}{m}
+ \le \limsup\limits_m\frac{T_m}{m}
+ \le \alpha\mu \;\;\text{a.s.},~ \forall \alpha &amp;gt; 1.
+$$
+Since $\alpha$ was arbitrary, $\alpha \to 1$ then the proof is done.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;application-of-the-strong-law&quot;&gt;Application of the strong law&lt;/h2&gt;
+&lt;p&gt;I would like to cover three important results that follow the strong law. The first example is about extending the theorem for the case where $EX_1 = \infty.$ The second will be about a simple form of renewal theory. The last will be the foundation of the theory of empirical processes: the Glivenko-Cantelli theorem. In addition to the results, I will mention the &lt;em&gt;law of iterated logarithm&lt;/em&gt;, which is not named in the textbook, but quite useful to know for the following section of martingales.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1-extension-of-the-strong-law&quot;&gt;1. Extension of the strong law&lt;/h3&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;2.4.5&quot;&gt;
+$X_1,X_2,\cdots$ are i.i.d. with $EX_1^+ = \infty$, $EX_1^- &amp;lt; \infty.$&lt;br /&gt;
+$\implies \frac{S_n}{n} \to \infty \text{ a.s.}$
+&lt;/div&gt;
+
+&lt;p&gt;This implies the strong law holds even if $EX_1$ is infinite.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+It suffices to show that $\sum_{i=1}^n X_i^+/n \to \infty$ a.s. Let $Y_i^m = X_i^+ \mathbf{1}_{(X_i^+ \le m)}$ so that $Y_i^m$'s be i.i.d. and integrable. By SLLN, $\sum_{i=1}^n X_i^+ / n \ge \sum_{i=1}^n Y_i^m \to EY_1^m$ a.s. By MCT, $EY_1^m \uparrow EX_1^+ = \infty$ as $m \uparrow \infty.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-renewal-theory&quot;&gt;2. Renewal theory&lt;/h3&gt;
+&lt;p&gt;The following theorem is about a simple version of &lt;a href=&quot;https://en.wikipedia.org/wiki/Renewal_theory&quot;&gt;Renewal theory&lt;/a&gt; arose from the question: How frequently should the light bulbs be exchanged to a new one? We are interested in the rate of the number of lightbulbs go out until the time $t$ versus $t$. Intuitively we can guess that it would be one over the mean lifetime of a bulb. The theorem confirms it.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;renewal theory&quot;&gt;
+$X_1,X_2,\cdots$ are i.i.d. with $0 &amp;lt; X_i &amp;lt; \infty$ and $EX_i = \mu \le \infty$ for all $i=1,2,\cdots.$&lt;br /&gt;
+Let $T_n = X_1+\cdots+X_n$, $N_t = \sup\{n:~ T_n \le t\}.$&lt;br /&gt;
+$\implies \frac{N_t}{t} \to \frac{1}{\mu} \text{ a.s.}$
+&lt;/div&gt;
+
+&lt;p&gt;Here, $X_i$ can be thought of as the lifetime of $i$th lightbulb and $N_t$ as the number of bulbs went out until the time $t$. We regard $1/\mu = \infty$ if $\mu = 0.$&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$T_n/n \to \mu$ a.s. by SLLN. Observe that $T_{N_t} \le t \le T_{N_t+1}.$ As $t \to \infty$, $N_t \to \infty$ a.s. and $\frac{N_t+1}{N_t} \to 1$ a.s. Taking $\lim_{t\to\infty}$ on each terms of 
+$$
+\frac{T_{N_t}}{N_t+1} \le \frac{t}{N_t} \le \frac{T_{N_t+1}}{N_t}
+$$
+we get the result we want.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-glivenko-cantelli-theorem&quot;&gt;3. Glivenko-Cantelli theorem&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Glivenko-Cantelli&quot;&gt;
+Let $X_1,X_2,\cdots \overset{\text{iid}}{\sim} F.$&lt;br /&gt;
+Let $F_n(x) = \frac{1}{n} \sum_{k=1}^n \mathbf{1}_{(X_k \le x)}.$&lt;br /&gt;
+$\implies \sup_x |F_n(x) - F(x)| \to 0 \text{ a.s. as } n \to \infty$
+&lt;/div&gt;
+
+&lt;p&gt;The theorem states that as the number of independent observations grow, the empirical distribution approaches to the (unknown) population distribution almost surely.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+&lt;i&gt;(1) pointwise convergence&lt;/i&gt;&lt;br /&gt;
+&amp;ensp; For a fixed $x\in\mathbb{R}$, $F_x(x) \to F(x)$ a.s. Let $Z_n = \mathbf{1}_{(X_n &amp;lt; x)}$ then $F_n(x^-)=\sum_{k=1}n Z_k \to F(x^-)$ a.s.
+&lt;br /&gt;
+&lt;i&gt;(2) uniform convergence at grid points&lt;/i&gt;&lt;br /&gt;
+&amp;ensp; Let $x_{jk} = \inf\{y:~ F(y) \ge j/k\}$, $1\le j\le k-1$, $x_{0k} = -\infty$, $x_{kk} = \infty.$ By (1), for each $k$ there exists $N_k \in\mathbb{N}$ such that if $n\ge N_k$ then $|F_n(x_{jk}) - F(x_{jk})| &amp;lt; 1/k$ and $|F_n(x_{jk}^-) - F(x_{jk}^-)| &amp;lt; 1/k$ for all $1 \le j \le k-1.$
+&lt;br /&gt;
+&lt;i&gt;(3) uniform convergence&lt;/i&gt;&lt;br /&gt;
+&amp;ensp; For all $x \in (x_{j-1,k}, x_{jk})$ and $n\ge N_k$,
+$$
+\begin{align}
+F_n(x) &amp;amp;\le F_n(x_{jk}^-) \le F(x_{jk}^-) + \frac{1}{k} \\
+&amp;amp;\le F(x_{j-1,k}) + \frac{2}{k} \le F(x) + \frac{2}{k}.
+\end{align}
+$$
+Similarly, $F_n(x) \ge F(x) - \frac{2}{k}.$ Hence the desired result follows.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-law-of-iterated-logarithm&quot;&gt;4. Law of iterated logarithm&lt;/h3&gt;
+
+&lt;p&gt;I will finish this section by briefly stating &lt;a href=&quot;https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm&quot;&gt;the law&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;remark&quot;&gt;
+Let $X_1,X_2,\cdots$ be i.i.d. with $EX_1 = 0$ and $\text{Var}(X_1) = \sigma^2 &amp;lt; \infty.$ Let $S_n = X_1 + \cdots + X_n.$ Then 
+$$
+\limsup\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = 1 \text{ a.s.} \\
+\text{and } \liminf\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = -1 \text{ a.s.}
+$$
+&lt;/div&gt;
+
+&lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers and the central limit theorem.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;../assets/fig/201221_lil.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt;Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 20 Dec 2020 22:23:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 2.3. Borel-Cantelli lemmas</title>
@@ -198,8 +391,8 @@ $$
       </item>
     
       <item>
-        <title>(PTE) 2.2. Weak law of large numbers</title>
-        <description>&lt;p&gt;We say a random variable $X_n$ &lt;strong&gt;converges in probability&lt;/strong&gt; (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &amp;gt; \epsilon) = 0$ for all $\epsilon &amp;gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &amp;gt; 0$ implies $X_n \overset{P}{\to} X$ by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities&quot;&gt;Markov-Chebyshev inequality&lt;/a&gt; with $\varphi(x) = |x|^p$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+        <title>(PTE) 2.2. Weak laws of large numbers</title>
+        <description>&lt;p&gt;We say a random variable $X_n$ &lt;strong&gt;converges in probability&lt;/strong&gt; (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &amp;gt; \epsilon) = 0$ for all $\epsilon &amp;gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &amp;gt; 0$ implies $X_n \overset{P}{\to} X$ by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities#inequalities&quot;&gt;Markov-Chebyshev inequality&lt;/a&gt; with $\varphi(x) = |x|^p$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most familiar form which only requires $L^1$ condition.&lt;/p&gt;
 
@@ -332,7 +525,7 @@ $\implies S_n/n \overset{P}{\to} \mu.$
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 (i) $x P(|X_1| &amp;gt; x) = x E\mathbf{1}_{(|X_1| &amp;gt; x)} \le E|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)}.$ Since $|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)} \le |X_1|$ and $E|X_1| &amp;lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)} \to 0$ as $x\to\infty.$&lt;br /&gt;
 (ii) Let $\mu_n = E|X_1|\mathbf{1}_{(|X_1| \le n)}.$ Since $|X_1|\mathbf{1}_{(|X_1| \le n)} \le |X_1|$ and $E|X_1| &amp;lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| \le n)} \to_n \mu.$&lt;br /&gt;
-By theorem 6, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
+By theorem 5, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
 &lt;/div&gt;
 
 &lt;p&gt;Note that we do not need finite second moment condition.&lt;/p&gt;
@@ -365,8 +558,8 @@ Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 18:39:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.2-WLLN</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.2-WLLN</guid>
+        <link>https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers</guid>
         
         
         <category>probability</category>
@@ -487,7 +680,7 @@ Let $(\Omega_1, \mathcal{F}_1, \mu_1)$ and $(\Omega_2, \mathcal{F}_2, \mu_2)$ be
 
 &lt;p&gt;Note that instead of directly product the two $\sigma$-fields, we define $\mathcal{F}$ with measurable rectangles. In fact, direct product of the $\sigma$-field does not yield a $\sigma$-field.&lt;/p&gt;
 
-&lt;p&gt;We now define a product measure on $(\Omega, \mathcal{F})$. Uniqueness of such measure is as important as existence of it. Even if we define a proper measure, it would be useless unless it is uniquely determined. Thankfully, &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.1-Measure-theory&quot;&gt;Caratheodory’s theorem&lt;/a&gt; ensures uniqueness.&lt;/p&gt;
+&lt;p&gt;We now define a product measure on $(\Omega, \mathcal{F})$. Uniqueness of such measure is as important as existence of it. Even if we define a proper measure, it would be useless unless it is uniquely determined. Thankfully, &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.1-Measure-theory#characterization-of-a-probability-measure&quot;&gt;Caratheodory’s theorem&lt;/a&gt; ensures uniqueness.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;uniqueness of the product measure&quot;&gt;
 There uniquely exists a measure $\mu$ on $(\Omega, \mathcal{F})$ such that $\mu(E_1 \times E_2) = \mu_1(E_1) \mu_2(E_2),~ \forall E_1\in\mathcal{F}_1, E_2\in\mathcal{F}.$
@@ -917,7 +1110,7 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
 (vi) $\int_E f d\mu = \int f \mathbf{1}_E d\mu.$
 &lt;/div&gt;
 
-&lt;p&gt;Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of &lt;a href=&quot;https://en.wikipedia.org/wiki/Monotone_convergence_theorem&quot;&gt;monotone convergence theorem&lt;/a&gt;, which will be covered soon.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities#monotone-convergence-theorem-mct&quot;&gt;monotone convergence theorem&lt;/a&gt;, which will be covered soon.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;expectation&quot;&gt;Expectation&lt;/h2&gt;
 
@@ -1093,7 +1286,7 @@ $P_X(A) := P(X \in A),~ A \in \mathcal{\mathbb{R}}$ is a probability measure ind
 $F:\mathbb{ R}\to\mathbb{ R}$ is a distribution function of $X$. &lt;br /&gt;$\Leftrightarrow$ $F(x) := P(X\le x) = P_X(-\infty, x],~ \forall x \in \mathbb{ R}$. 
 &lt;/div&gt;
 
-&lt;p&gt;We already saw in &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.1-Measure-theory&quot;&gt;section 1.1&lt;/a&gt; that a distribution function uniquely determines a distribution (or a random variable). The following theorem implies that every function that satisfies some conditions can be regarded as a distribution function of some random variable.&lt;/p&gt;
+&lt;p&gt;We already saw in &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.1-Measure-theory#characterization-of-a-probability-measure&quot;&gt;section 1.1&lt;/a&gt; that a distribution function uniquely determines a distribution (or a random variable). The following theorem implies that every function that satisfies some conditions can be regarded as a distribution function of some random variable.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot;&gt;
 $F$ is a distribution of some random variable $X$ if and only if it is (i) non-decreasing, (ii) right-continuous, (iii) $\lim_{x\to-\infty}F(x) = 0$ and $\lim_{x\to\infty}F(x) = 1$.
@@ -1113,214 +1306,6 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
         <pubDate>Fri, 18 Dec 2020 21:20:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-1.2-Distributions</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.2-Distributions</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 1.1. Basics on measure theory</title>
-        <description>&lt;p&gt;The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book &lt;a href=&quot;https://services.math.duke.edu/~rtd/PTE/pte.html&quot;&gt;&lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019)&lt;/a&gt;, while some others are borrowed from the lecture note and personal communications with colleagues.&lt;/p&gt;
-
-&lt;p&gt;The first chapter is devoting to the basics of measure theory. A probability space is defined and essential theorems are introduced.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#probability-space&quot; id=&quot;markdown-toc-probability-space&quot;&gt;Probability space&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#probability-measures&quot; id=&quot;markdown-toc-probability-measures&quot;&gt;Probability measures&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#characterization-of-a-probability-measure&quot; id=&quot;markdown-toc-characterization-of-a-probability-measure&quot;&gt;Characterization of a probability measure&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#dynkins-pi-lambda-theorem&quot; id=&quot;markdown-toc-dynkins-pi-lambda-theorem&quot;&gt;Dynkin’s $\pi$-$\lambda$ theorem&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
-
-&lt;p&gt;A probability space is a special kind of a measure space equipped with a positive finite measure. A measure space is defined as a triplet: a set, a $\sigma$-field attached to that set, and a measure function. We will define each of the components.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;σ-field&quot;&gt;
-For a set $\Omega$, $\mathcal{F}$, a non-empty collection of subsets of $\Omega$, is called a $\sigma$-field(or a $\sigma$-algebra) of $\Omega$, if the following conditions are satisfied.
-&lt;br /&gt;
-(i) If $A\in \mathcal{F}$, then $A^c \in \mathcal{F}.$ &lt;br /&gt;
-(ii) If $A_i\in\mathcal{F},~ i=1,2,\cdots$, then $\cup_{i=1}^\infty A_i \in \mathcal{F}.$
-&lt;/div&gt;
-
-&lt;p&gt;A $\sigma$-field is basically a set of sets. The first condition states that it is closed under complement and the second one states that it is closed under countable unions.&lt;/p&gt;
-
-&lt;p&gt;We next define a function that &lt;em&gt;measures&lt;/em&gt; sizes of sets inside the $\sigma$-field.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;measure&quot;&gt;
-$\mu: \mathcal{F} \to \mathbb{R}$ is a measure, if &lt;br /&gt;
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{F}.$ &lt;br /&gt;
-(ii) $A_i \in \mathcal{F},~ i=1,2,\cdots$ are disjoint. Then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).$
-&lt;/div&gt;
-
-&lt;p&gt;The second condition is sometimes referred to as &lt;em&gt;$\sigma$ sub-additivity (countable sub-additivity)&lt;/em&gt;. This is natural if we think of a common notion of a measure: if it is empty, its “size” should be zero and if we add one with another, the resulting size should be the sum. We call $\mu(A)$ the measure of a set $A$.&lt;/p&gt;
-
-&lt;p&gt;If there exists a sequence of sets ${A_n} \subset \mathcal{F}$ such that $\mu(A_n) &amp;lt; \infty$ for all $n$ and $\cup_{n=1}^\infty A_n = \Omega$, then $\mu$ is called a &lt;strong&gt;$\sigma$-finite&lt;/strong&gt; measure. If the measure of the whole set $\mu(\Omega)$ is finite, we call $\mu$ a finite measure. If $\mu(\Omega) = 1$ in addition, then we call this &lt;strong&gt;a probability measure&lt;/strong&gt; (PM for abbreviation in the following post series). Most of the times, we name a PM with alphabet $P$ or $Q$.&lt;/p&gt;
-
-&lt;p&gt;Finally we can define a measure space and in addition a probability space.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;probability space&quot;&gt;
-$(\Omega, \mathcal{F})$: a pair of a set and its $\sigma$-field, is called a &lt;b&gt;measurable space&lt;/b&gt;. A set $A \in \mathcal{F}$ is called a ($\mathcal{ F}$-)measurable set. $(\Omega, \mathcal{F}, P)$: a measureable space equipped with a measure is a &lt;b&gt;measure space&lt;/b&gt;. If $P$ is a probability measure, we call this a &lt;b&gt;probability space&lt;/b&gt;, $\Omega$ a sample space, and an element of $\mathcal{F}$ an event.
-&lt;/div&gt;
-
-&lt;p&gt;If one is familiar with topology, the definition of $\sigma$-field might also be quite familiar. In fact, Borel $\sigma$-field connects a topological space with a corresponding measurable space.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Borel σ-field&quot;&gt;
-&lt;br /&gt;
-$\begin{align}
-\mathcal{B}(\Omega) &amp;amp;= \text{(the smallest $\sigma$-field that contains all open sets of $\Omega$)} \\
- &amp;amp;= \cap_{\tau\subset\mathcal{F}} \mathcal{F}
-\end{align}$
-&lt;br /&gt;
-is the Borel $\sigma$-field of $\Omega$, where $\tau$ is a topology on $\Omega$. An element of $\mathcal{B}(\Omega)$ is called a Borel set.
-&lt;/div&gt;
-
-&lt;p&gt;An important property of $\sigma$-fields related to the definition of Borel fields is that arbitrary intersections of $\sigma$-fields is a $\sigma$-algebra. (This comes directly from the definition.)&lt;/p&gt;
-
-&lt;p&gt;For example of a Borel $\sigma$-field and a measure space, consider $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ and the Lebesgue measure $\lambda$. It is not difficult to know that $\mathcal{B}(\mathbb{R})$ is consists of intersections and unions of sets of the form $(a,b),~(a,b],~[a,b)$ or $[a,b]$ where $a,b\in\mathbb{R}$. The Lebesgue measure measures their “size” as $\lambda(a,b]=b-a$.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;probability-measures&quot;&gt;Probability measures&lt;/h2&gt;
-
-&lt;p&gt;Let’s take a deeper look into the properties of measure and probability measures.&lt;/p&gt;
-
-&lt;div class=&quot;prop&quot; text=&quot;properties of probability measures&quot;&gt;
-Let $P: \mathcal{F} \to [0,1]$ be a probability measure. Then the following properties hold.&lt;br /&gt;
-(i) (monotonicity) $A\subset B \implies P(A) \le P(B).$ &lt;br /&gt;
-(ii) ($\sigma$ sub-additivity) $A \subset \cup_{i=1}^\infty A_i \implies P(A) \sum_{i=1}^\infty P(A_i).$ &lt;br /&gt;
-(iii) (continuity from below) $A_1 \subset A_2 \subset \cdots,~ \bigcup_{i=1}^\infty A_i = A \implies \lim_n P(A_n) = P(A).$&lt;br /&gt;
-(iv) (continuity from above) $B_1 \supset B_2 \supset \cdots,~ \bigcap_{i=1}^\infty B_i = B \implies \lim_n P(B_n) = P(B).$
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $B = B-A + A$, $B \ne \phi$. Thus $P(B) = P(B-A) + P(A) \ge P(A).$&lt;br /&gt;
-(ii) Let $A_n' = A_n \cap A$, $B_n = A_n' \setminus \cup_{i=1}^{n-1}A_i$. Then $B_n$'s are disjoint and $\cup_{n=1}^\infty B_n = A$, $B_n \subset A_n$. Hence $P(A) = \sum_{n=1}^\infty P(B_n) \le \sum_{n=1}^\infty P(A_n).$&lt;br /&gt;
-(iii) Let $B_n = A_n \setminus A_{n-1},~ A_0=\phi$ so that $B_n$'s be disjoint. Then $$\begin{align} 
-  P(\cup_n A_n) &amp;amp;= P(\cup_n B_n) = \sum_n P(B_n) \\
-                &amp;amp;= \lim_n P(\cup_{i=1}^n B_i) \\
-                &amp;amp;= \lim_n P(\cup_{i=1}^n A_i) \\
-                &amp;amp;= \lim_n P(A_n)
-\end{align}$$ &lt;br /&gt;
-(iv) Let $B_n' = B_1 \setminus B_n$ and use (iii).
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;characterization-of-a-probability-measure&quot;&gt;Characterization of a probability measure&lt;/h2&gt;
-
-&lt;p&gt;Until now, we defined measures only on $\sigma$-fields. Measures in other set of subsets can be defined similarly. Furthermore, we can characterize each measure as an extension of the function similar to the measure defiend above. For this, we first define collections of sets that can be viewed as generalizations of $\sigma$-fields.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;semi-algebra&quot;&gt;
-A collection of sets $\mathcal{S}$ is a semi-algebra, if &lt;br /&gt;
-(i) For all $S \in \mathcal{S}$, $S^c$ is a finite disjoint unions of $S_i \in \mathcal{S}.$ &lt;br /&gt;
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}.$
-&lt;/div&gt;
-
-&lt;p&gt;It is not necessary for a semi-algebra to contain $\phi$. However in many cases it is convenient to make it do so.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;algebra&quot;&gt;
-A collection of sets $\mathcal{A}$ is an algebra, if &lt;br /&gt;
-(i) $A \in \mathcal{A} \implies A^c \in \mathcal{A}.$ &lt;br /&gt;
-(ii) $S,T\in\mathcal{S} \implies S\cap T \in \mathcal{S}.$
-&lt;/div&gt;
-
-&lt;p&gt;Note that the strengthened condition on the definition of algrebra allows it to be closed on both the finite intersection &lt;em&gt;and&lt;/em&gt; union.&lt;/p&gt;
-
-&lt;p&gt;For example, $\mathcal{S}_1 = \{\phi\} \cup \{(a,b]:~-\infty\le a&amp;lt;b\le \infty\}$ is a semi-algebra on $\mathbb{R}$. $\mathcal{A} = {A\in\mathbb{Z}:~ A \text{ or } A^c \text{ is finite}}$ is an algebra on $\mathbb{Z}$. They are trivial so I will leave it as exercises.&lt;/p&gt;
-
-&lt;p&gt;An algebra can be generated using semi-algebra. $\overline{\mathcal{S}} := {\text{finite disjoint unions of sets in }\mathcal{S}}$ is an &lt;strong&gt;algebra generated by a semi-algebra $\mathcal{S}$&lt;/strong&gt;. Sometimes we call $\mathcal{S}$ a generator of $\overline{\mathcal{S}}$. Like Borel $\sigma$-field, it is the smallest algebra that contains $\mathcal{S}$.&lt;/p&gt;
-
-&lt;p&gt;Similarly, a $\sigma$-field can be generated by (semi)algebra. $\sigma(\mathcal{S}) = \sigma(\overline{\mathcal{S}})$ is the smallest $\sigma$-field that contains $\mathcal{S}$.&lt;/p&gt;
-
-&lt;p&gt;Now we define “measures” on these structures.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;measure on algebra&quot;&gt;
-$\mu:\mathcal{A} \to \mathbb{R}^*\cup\{0\}$ is a measure on an algebra $\mathcal{A}$ if &lt;br /&gt;
-(i) $\mu(A) \ge \mu(\phi) = 0,~ \forall A \in \mathcal{A}.$ &lt;br /&gt;
-(ii) $A_i\in A,~ i=1,2,\cdots$ are disjoint and $A=\cup_{i=1}^\infty A_i \in \mathcal{A}$, then $\mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).$
-&lt;/div&gt;
-
-&lt;p&gt;$\sigma$-finiteness is defined as in the $\sigma$-field case.&lt;/p&gt;
-
-&lt;p&gt;We can define similar functions in semi-algebra. Let $\mu: \mathcal{S} \to \mathbb{R}^+ \cup {0}$ be a function on a semi-algebra $\mathcal{S}$ that satisfies&lt;br /&gt;
-(i) $\mu(\phi)=0 \text{ and } \mu(S) \ge 0,~ \forall S \in \mathcal{S}.$&lt;br /&gt;
-(ii) $S_i \in \mathcal{S},~ i=1,\cdots,n \implies \mu(\cup_{i=1}^n S_i) = \sum_{i=1}^n \mu(S_i).$&lt;br /&gt;
-(iii) $S_i \in \mathcal{S},~ i=1,2,\cdots \implies \mu(\cup_{i=1}^\infty S_i) \le \sum_{i=1}^\infty \mu(S_i).$&lt;br /&gt;
-I will call such functions &lt;em&gt;semi-measures&lt;/em&gt;&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;The following theorem states that a semi-measure can be uniquely extended to a measure on algebra. If the extended measure on algebra is $\sigma$-finite, it can be further extended to a measure on $\sigma$-field.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Caratheodory's extension&quot;&gt;
-$\mathcal{S}$: a semi-algebra with $\phi\in\mathcal{S}$.&lt;br /&gt;
-$\mu: \mathcal{S} \to \mathbb{R}^+\cup\{0\}$ is a semi-measure.&lt;br /&gt;
-$\Rightarrow \exists!$ a positive measure $\overline{\mu}$ in $\overline{\mathcal{S}}$ that is an extension of $\mu$. &lt;br /&gt;
-In addition, if $\overline{\mu}$ is $\sigma$-finite, $\exists!$ a measure $\nu$ on $\sigma(\mathcal{S})$ that is an extension of $\overline{\mu}$.
-&lt;/div&gt;
-
-&lt;p&gt;Our major interest is in probability measure on $\mathbb{R}$. In undergraduate statistics, we learned that (cumulative) distribution functions uniquely determine probability distributions while densities cannot. Caratheodory’s extension theorem leads us the that conclution.&lt;/p&gt;
-
-&lt;p&gt;We say a real-valued function on $\mathbb{R}$ is a &lt;strong&gt;Stieltjes measure function&lt;/strong&gt; if it is non-decreasing and right-continuous.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot;&gt;
-$F$ is a Stieltjest measure function. $\Rightarrow \exists!$ a measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ such that $\mu(a,b] = F(b)-F(a)$.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $\mathcal{S} = \{0\} \cup \{(a,b]:~ -\infty\le a &amp;lt; b \le \infty\}$ and $\nu(\phi)=0$, $\nu(a,b] = F(b) - F(a)$. Then $\mathcal{S}$ is a semi-algebra and $\nu$ is a semi-measure. Let $S_n = (-n, n] \in \overline{\mathcal{S}}$, then it is easy to show $\sigma$-finiteness. By Caratheodory's theorem, there is a unique extension of $\nu$.
-&lt;/div&gt;
-
-&lt;p&gt;Since a distribution function $F$ is a special case of Stieltjes measure function, it follows directly from the theorem that $F$ uniquely determines a probability measure&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;On $\mathbb{R}^d,~ d&amp;gt;1$, we define functions similar to Stieltjes measure function: $F:\mathbb{R}^d \to \mathbb{R}^+ \cup {0}$ such that $F$ is non-decreasing, right-continuous and $\Delta_A F \ge 0,~ \forall A = (a_1,b_1] \times \cdots \times (a_d,b_d]$, where $\Delta_A F = \sum_{v\in V}\text{sgn}(v)F(v)$, $V={a_1, b_1} \times \cdots \times {a_d, b_d}$. Similar to the above, such $F$ can be uniquely extended to a measure $\mu$ such that $\mu(A) = \Delta_A F$ forall finite rectable $A$. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;dynkins-pi-lambda-theorem&quot;&gt;Dynkin’s $\pi$-$\lambda$ theorem&lt;/h2&gt;
-&lt;p&gt;I will end this subsection by stating the theorem that will be used throughout the course.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;π-system&quot;&gt;
-A collection of sets $\mathcal{P}$ is a $\pi$-system if $A, B \in \mathcal{P}$, then $A \cap B \in \mathcal{P}$.
-&lt;/div&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;λ-system&quot;&gt;
-A collection of sets $\mathcal{L}$ is a $\lambda$-system on $\Omega$ if the followings hold.&lt;br /&gt;
-(i) $\Omega \in \mathcal{L}$ &lt;br /&gt; 
-(ii) $A \in \mathcal{L} \Rightarrow A^c \in \mathcal{L}$ &lt;br /&gt;
-(iii) $A_i \in \mathcal{L}, i=1,2,\cdots$, where $A_i$'s are disjoint. $\Rightarrow$ $\uplus_{i=1}^\infty A_i \in \mathcal{L}$
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Dynkin's π-λ theorem&quot;&gt;
-$\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system. If $\: \mathcal{P} \subset \mathcal{L}$, then $\sigma(\mathcal{P}) \subset \mathcal{L}$.
-&lt;/div&gt;
-
-&lt;p&gt;The theorem implies in order to show that some property holds in a $\sigma$-field, we only need to prove that it holds in a $\lambda$-system and the generator $pi$-system of the $\sigma$-field is contained in our $\lambda$-system. A simple but useful corollary is about equivalent probability measures.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot;&gt;
-$\mu_1$, $\mu_2$ are probability measures on $(\Omega, \mathcal{F})$. $\mathcal{A} \subset \mathcal{F}$ is a $\pi$-system such that $\sigma(\mathcal{A}) = \mathcal{F}$. If $\mu_1(A) = \mu_2(A)$, $\forall A \in \mathcal{A}$, then $\mu_1 \overset{A \in \mathcal{F}}{\equiv} \mu_2$.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;
-Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by construction $\mathcal{A} \subset \mathcal{L}$ and it is clear that $\mathcal{L}$ is a $\lambda$-system. By $\pi-\lambda$ theorem, $\sigma(\mathcal{A}) = \mathcal{F} \subset \mathcal{L}$ leads to the desired results.
-&lt;/div&gt;
-
-&lt;p&gt;Other examples can be found &lt;a href=&quot;https://naturale0.github.io/probability/application-of-pi-lambda-theorem&quot;&gt;here&lt;/a&gt;. We will get on it in this post series one at a time.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I named this “semi-measure” just for the convenience. This might be different to the actual definition of semi-measure. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Why does this mean that $F$ uniquely determines a probability distribution? Because probability distribution is defined as a probability measure generated by a special kind of functions. This will be discussed in subsection 1.2. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Fri, 18 Dec 2020 20:15:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-1.1-Measure-theory</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.1-Measure-theory</guid>
         
         
         <category>probability</category>

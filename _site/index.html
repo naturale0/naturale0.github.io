@@ -53,7 +53,7 @@
 
 
   <body>
-    <script type="text/javascript" async
+  <script type="text/javascript" async
     src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
   <script type="text/x-mathjax-config">
@@ -140,6 +140,10 @@
               
             
               
+                
+              
+            
+              
             
           -->
           <br>
@@ -158,6 +162,224 @@
             <div class="home">
   <div class="post-list">
 
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-2.4-strong-law-of-large-numbers">(PTE) 2.4. Strong law of large numbers</a></h2>
+        <time class="post_date">20 December 2020, Sunday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>Putting together all of the topics we covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).</p>
+
+<ul id="markdown-toc">
+  <li><a href="#strong-law-of-large-numbers" id="markdown-toc-strong-law-of-large-numbers">Strong law of large numbers</a></li>
+  <li><a href="#application-of-the-strong-law" id="markdown-toc-application-of-the-strong-law">Application of the strong law</a>    <ul>
+      <li><a href="#1-extension-of-the-strong-law" id="markdown-toc-1-extension-of-the-strong-law">1. Extension of the strong law</a></li>
+      <li><a href="#2-renewal-theory" id="markdown-toc-2-renewal-theory">2. Renewal theory</a></li>
+      <li><a href="#3-glivenko-cantelli-theorem" id="markdown-toc-3-glivenko-cantelli-theorem">3. Glivenko-Cantelli theorem</a></li>
+      <li><a href="#4-law-of-iterated-logarithm" id="markdown-toc-4-law-of-iterated-logarithm">4. Law of iterated logarithm</a></li>
+    </ul>
+  </li>
+</ul>
+<p><br /></p>
+
+<h2 id="strong-law-of-large-numbers">Strong law of large numbers</h2>
+
+<div class="theorem" text="strong law of large numbers">
+Let $X_1, X_2, \cdots$ be pairwise independent, identically distributed. $S_n = \sum_{i=1}^n X_i.$<br />
+$E|X_1| = \mu &lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
+</div>
+
+<p>The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of <a href="https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma">(2.3.9)</a>. In addition, the <a href="https://en.wikipedia.org/wiki/Cesàro_summation">Cesàro’s mean</a> will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$</p>
+
+<div class="proof" text="the strong law">
+Without loss of of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$<br /><br />
+
+<i>(Step 1. <b>Claim</b>: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)</i><br />
+(i) $\sum_{k=1}^\infty P(X_k &gt; k) \le EX_1 &lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$<br />
+(ii) $\frac{ET_n}{n} = \frac{1}{n} \sum_{k=1}^n EY_k$ and $\lim_k EY_k = EX_1 = \mu$ by MCT. By the Cesàro mean, $\frac{ET_n}{n} \to \mu.$<br />
+Combine (i) and (ii) and the claim is proved.<br /><br />
+
+<i>(Step 2. $\exists k(n)$ s.t. $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$)</i><br />
+$$
+\begin{align}
+&amp;\;\;\;\;P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &gt; \epsilon\right) \\
+ &amp;\le \frac{1}{\epsilon^2 k(n)^2} \text{Var}(T_{k(n)}) \\
+ &amp;= \frac{1}{\epsilon^2 k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m)
+\end{align}
+$$
+We want the sum of probabilities
+$$
+\begin{align}
+&amp;\;\;\;\;\sum\limits_{n=1}^\infty P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &gt; \epsilon\right) \\
+ &amp;\le \frac{1}{\epsilon^2} \sum\limits_{n=1}^\infty \frac{1}{k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m) \\
+ &amp;= \frac{1}{\epsilon^2} \sum\limits_{m=1}^\infty \text{Var}(Y_m) \sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2}
+\end{align}
+$$
+to be finite. Let $k(n) = \lfloor \alpha^n \rfloor$ for $\alpha &gt; 1$ then since $\lfloor \alpha^n \rfloor \ge \frac{1}{2} \alpha^n$,
+$$
+\begin{align}
+&amp;\;\;\;\;\sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2} \\
+&amp;=\sum\limits_{n:k(n)\ge m} \frac{1}{\lfloor \alpha^n \rfloor^2} \\
+&amp;\le 4 \sum\limits_{n:k(n)\ge m} \alpha^{-2n} \\
+&amp;\le \frac{4}{m^2 (1-\alpha^{-2})} \approx \frac{c}{m^2}.
+\end{align}
+$$
+In order to show finiteness of the sum, we need to show $\sum_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k) &lt; \infty.$ This comes from
+$$
+\begin{align}
+\text{Var}(Y_k) 
+&amp;\le EY_k^2 = \int_0^k 2y P(X_1 &gt; y) dy. \\
+\sum\limits_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k)
+&amp;\le \sum\limits_{k=1}^\infty \frac{1}{k^2} \int_0^k 2y P(X_1 &gt; y) dy \\
+&amp;= \int_0^\infty \left( \sum\limits_{k=1}^\infty \frac{1}{k^2} \mathbf{1}_{(y&lt;k)} \right) 2y P(X_1 &gt; y) dy \\
+&amp;\le 4EX_1 &lt; \infty.
+\end{align}
+$$
+The last inequality holds because 
+$$
+\begin{align}
+\sum\limits_{k:k&gt;y} \frac{1}{k^2} 2y &amp;= 2y\sum\limits_{k:k\ge \lfloor y \rfloor + 1} \frac{1}{k^2} \\
+&amp;\le 2y \int_{\lfloor y \rfloor}^\infty \frac{1}{x^2} dx \\
+&amp;= \frac{2y}{\lfloor y \rfloor} \le 4.
+\end{align}
+$$
+Hence $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$<br /><br />
+
+<i>(Step 3. sandwich)</i><br />
+$T_{k(n)} \le T_m \le T_{k(n+1)}$ for $m:~ k(n) \le m \le k(n+1).$ Since $k(n) \to \infty$, every $m\in\mathbb{N}$ has a $k(n)$ and $k(n+1)$ that sandwiches $m.$ As $n \to \infty$, $\frac{k(n)}{k(n+1)} = \frac{\lfloor \alpha^n \rfloor}{\lfloor \alpha^{n+1} \rfloor} \to \frac{1}{\alpha}.$ Take $\liminf$ and $\limsup$ to each sides of
+$$
+\frac{T_{k(n)}}{k(n+1)} \le \frac{T_m}{m} \le \frac{T_{k(n+1)}}{k(n)}
+$$ and we get
+$$
+\frac{1}{\alpha}\mu \le \liminf\limits_m\frac{T_m}{m}
+ \le \limsup\limits_m\frac{T_m}{m}
+ \le \alpha\mu \;\;\text{a.s.},~ \forall \alpha &gt; 1.
+$$
+Since $\alpha$ was arbitrary, $\alpha \to 1$ then the proof is done.
+</div>
+<p><br /></p>
+
+<h2 id="application-of-the-strong-law">Application of the strong law</h2>
+<p>I would like to cover three important results that follow the strong law. The first example is about extending the theorem for the case where $EX_1 = \infty.$ The second will be about a simple form of renewal theory. The last will be the foundation of the theory of empirical processes: the Glivenko-Cantelli theorem. In addition to the results, I will mention the <em>law of iterated logarithm</em>, which is not named in the textbook, but quite useful to know for the following section of martingales.<br /><br /></p>
+
+<h3 id="1-extension-of-the-strong-law">1. Extension of the strong law</h3>
+<div class="theorem" text="2.4.5">
+$X_1,X_2,\cdots$ are i.i.d. with $EX_1^+ = \infty$, $EX_1^- &lt; \infty.$<br />
+$\implies \frac{S_n}{n} \to \infty \text{ a.s.}$
+</div>
+
+<p>This implies the strong law holds even if $EX_1$ is infinite.</p>
+
+<div class="proof"><br />
+It suffices to show that $\sum_{i=1}^n X_i^+/n \to \infty$ a.s. Let $Y_i^m = X_i^+ \mathbf{1}_{(X_i^+ \le m)}$ so that $Y_i^m$'s be i.i.d. and integrable. By SLLN, $\sum_{i=1}^n X_i^+ / n \ge \sum_{i=1}^n Y_i^m \to EY_1^m$ a.s. By MCT, $EY_1^m \uparrow EX_1^+ = \infty$ as $m \uparrow \infty.$
+</div>
+<p><br /></p>
+
+<h3 id="2-renewal-theory">2. Renewal theory</h3>
+<p>The following theorem is about a simple version of <a href="https://en.wikipedia.org/wiki/Renewal_theory">Renewal theory</a> arose from the question: How frequently should the light bulbs be exchanged to a new one? We are interested in the rate of the number of lightbulbs go out until the time $t$ versus $t$. Intuitively we can guess that it would be one over the mean lifetime of a bulb. The theorem confirms it.</p>
+
+<div class="theorem" text="renewal theory">
+$X_1,X_2,\cdots$ are i.i.d. with $0 &lt; X_i &lt; \infty$ and $EX_i = \mu \le \infty$ for all $i=1,2,\cdots.$<br />
+Let $T_n = X_1+\cdots+X_n$, $N_t = \sup\{n:~ T_n \le t\}.$<br />
+$\implies \frac{N_t}{t} \to \frac{1}{\mu} \text{ a.s.}$
+</div>
+
+<p>Here, $X_i$ can be thought of as the lifetime of $i$th lightbulb and $N_t$ as the number of bulbs went out until the time $t$. We regard $1/\mu = \infty$ if $\mu = 0.$</p>
+
+<div class="proof"><br />
+$T_n/n \to \mu$ a.s. by SLLN. Observe that $T_{N_t} \le t \le T_{N_t+1}.$ As $t \to \infty$, $N_t \to \infty$ a.s. and $\frac{N_t+1}{N_t} \to 1$ a.s. Taking $\lim_{t\to\infty}$ on each terms of 
+$$
+\frac{T_{N_t}}{N_t+1} \le \frac{t}{N_t} \le \frac{T_{N_t+1}}{N_t}
+$$
+we get the result we want.
+</div>
+<p><br /></p>
+
+<h3 id="3-glivenko-cantelli-theorem">3. Glivenko-Cantelli theorem</h3>
+
+<div class="theorem" text="Glivenko-Cantelli">
+Let $X_1,X_2,\cdots \overset{\text{iid}}{\sim} F.$<br />
+Let $F_n(x) = \frac{1}{n} \sum_{k=1}^n \mathbf{1}_{(X_k \le x)}.$<br />
+$\implies \sup_x |F_n(x) - F(x)| \to 0 \text{ a.s. as } n \to \infty$
+</div>
+
+<p>The theorem states that as the number of independent observations grow, the empirical distribution approaches to the (unknown) population distribution almost surely.</p>
+
+<div class="proof"><br />
+<i>(1) pointwise convergence</i><br />
+&ensp; For a fixed $x\in\mathbb{R}$, $F_x(x) \to F(x)$ a.s. Let $Z_n = \mathbf{1}_{(X_n &lt; x)}$ then $F_n(x^-)=\sum_{k=1}n Z_k \to F(x^-)$ a.s.
+<br />
+<i>(2) uniform convergence at grid points</i><br />
+&ensp; Let $x_{jk} = \inf\{y:~ F(y) \ge j/k\}$, $1\le j\le k-1$, $x_{0k} = -\infty$, $x_{kk} = \infty.$ By (1), for each $k$ there exists $N_k \in\mathbb{N}$ such that if $n\ge N_k$ then $|F_n(x_{jk}) - F(x_{jk})| &lt; 1/k$ and $|F_n(x_{jk}^-) - F(x_{jk}^-)| &lt; 1/k$ for all $1 \le j \le k-1.$
+<br />
+<i>(3) uniform convergence</i><br />
+&ensp; For all $x \in (x_{j-1,k}, x_{jk})$ and $n\ge N_k$,
+$$
+\begin{align}
+F_n(x) &amp;\le F_n(x_{jk}^-) \le F(x_{jk}^-) + \frac{1}{k} \\
+&amp;\le F(x_{j-1,k}) + \frac{2}{k} \le F(x) + \frac{2}{k}.
+\end{align}
+$$
+Similarly, $F_n(x) \ge F(x) - \frac{2}{k}.$ Hence the desired result follows.
+</div>
+<p><br /></p>
+
+<h3 id="4-law-of-iterated-logarithm">4. Law of iterated logarithm</h3>
+
+<p>I will finish this section by briefly stating <a href="https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm">the law</a>.</p>
+
+<div class="remark">
+Let $X_1,X_2,\cdots$ be i.i.d. with $EX_1 = 0$ and $\text{Var}(X_1) = \sigma^2 &lt; \infty.$ Let $S_n = X_1 + \cdots + X_n.$ Then 
+$$
+\limsup\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = 1 \text{ a.s.} \\
+\text{and } \liminf\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = -1 \text{ a.s.}
+$$
+</div>
+
+<p>This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers and the central limit theorem.<br /><br /></p>
+
+<div style="text-align:center">
+<img src="../assets/fig/201221_lil.png" alt="ieman-vs-lebesgue.png" width="300" />
+<br />
+<em>Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.</em>
+</div>
+<p><br /></p>
+
+<p><strong><em>Acknowledgement</em></strong></p>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+
+          
+          <a class="read-more-btn" href="/probability/PTE-2.4-strong-law-of-large-numbers"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
     
 
     <article class="post_card post">
@@ -374,13 +596,13 @@ $$
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-2.2-WLLN">(PTE) 2.2. Weak law of large numbers</a></h2>
+        <h2 class="post_title"><a href="/probability/PTE-2.2-Weak-laws-of-large-numbers">(PTE) 2.2. Weak laws of large numbers</a></h2>
         <time class="post_date">20 December 2020, Sunday</time>
       </header>
       <div class="post_excerpt">
         <p>
           
-          <p>We say a random variable $X_n$ <strong>converges in probability</strong> (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &gt; \epsilon) = 0$ for all $\epsilon &gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &gt; 0$ implies $X_n \overset{P}{\to} X$ by <a href="https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities">Markov-Chebyshev inequality</a> with $\varphi(x) = |x|^p$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+          <p>We say a random variable $X_n$ <strong>converges in probability</strong> (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &gt; \epsilon) = 0$ for all $\epsilon &gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &gt; 0$ implies $X_n \overset{P}{\to} X$ by <a href="https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities#inequalities">Markov-Chebyshev inequality</a> with $\varphi(x) = |x|^p$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
 
 <p>Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most familiar form which only requires $L^1$ condition.</p>
 
@@ -513,7 +735,7 @@ $\implies S_n/n \overset{P}{\to} \mu.$
 <div class="proof"><br />
 (i) $x P(|X_1| &gt; x) = x E\mathbf{1}_{(|X_1| &gt; x)} \le E|X_1|\mathbf{1}_{(|X_1| &gt; x)}.$ Since $|X_1|\mathbf{1}_{(|X_1| &gt; x)} \le |X_1|$ and $E|X_1| &lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| &gt; x)} \to 0$ as $x\to\infty.$<br />
 (ii) Let $\mu_n = E|X_1|\mathbf{1}_{(|X_1| \le n)}.$ Since $|X_1|\mathbf{1}_{(|X_1| \le n)} \le |X_1|$ and $E|X_1| &lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| \le n)} \to_n \mu.$<br />
-By theorem 6, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
+By theorem 5, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
 </div>
 
 <p>Note that we do not need finite second moment condition.</p>
@@ -546,125 +768,7 @@ Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 </div>
 
           
-          <a class="read-more-btn" href="/probability/PTE-2.2-WLLN"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-2.1-independence">(PTE) 2.1. Independence</a></h2>
-        <time class="post_date">20 December 2020, Sunday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.</p>
-
-<p>Following chapters will cover two fundamental theory in convergence of random variables: <strong>the strong law of large numbers</strong> (Chapter 2) and <strong>the central limit theorem</strong> (Chapter 3). We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence. The rest of the chapter is about law of large numbers.</p>
-
-<ul id="markdown-toc">
-  <li><a href="#independence-of-random-variables" id="markdown-toc-independence-of-random-variables">Independence of random variables</a></li>
-  <li><a href="#existence-of-a-sequence-of-independent-random-variables" id="markdown-toc-existence-of-a-sequence-of-independent-random-variables">Existence of a sequence of independent random variables</a></li>
-</ul>
-<p><br /></p>
-
-<h2 id="independence-of-random-variables">Independence of random variables</h2>
-
-<p>As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.</p>
-
-<div class="definition" text="independence 1">
-Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_1, \cdots, \mathcal{F}_n \subset \mathcal{F}$ be sub $\sigma$-fields, $E_1, \cdots, E_n$, $E_i \in \mathcal{F}_i$ be the events.<br />
-(i) $E_1,\cdots,E_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i).$<br />
-(ii) $\mathcal{F}_1,\cdots,\mathcal{F}_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i)$ for all $E_i \in \mathcal{F}_i.$
-</div>
-
-<p>In fact to be extra specific we say it is <em>$P$-mutually independent</em> if the above condition is met. It gives us extra information about regarding probability measure ($P$) and that it is mutual. If we just write “independence” it means mutual independence. We drop $P$ if the measure is clear without confusion.</p>
-
-<p>Independence of random variables are defined as independence of generated $\sigma$-fields.</p>
-
-<div class="definition" text="independence 2">
-Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cdots,X_n$ are independent if $\sigma(X_i)$, $i=1,\cdots,n$ are independent.
-</div>
-
-<p>We sometimes write $X \perp Y$ for independence between $X$ and $Y$.</p>
-
-<p>It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.</p>
-
-<div class="theorem" text="2.1.7">
-$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
-</div>
-<div class="proof"><br />
-&ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. <br />
-&ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
-</div>
-
-<p>It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in (-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.</p>
-
-<div class="corollary" text="2.1.8">
-$X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
-</div>
-<p><br /></p>
-
-<h2 id="existence-of-a-sequence-of-independent-random-variables">Existence of a sequence of independent random variables</h2>
-
-<p>In the following chapters, we will construct a sequence of independent random variables to state and prove limiting laws. It is important to mention that such sequence exists.</p>
-
-<p>For a finite number $n\in\mathbb{N}$, we can construct $n$ independent random variables using <a href="https://naturale0.github.io/probability/PTE-1.7-product-space">product space</a>. Given distribution functions $F_i$, $i=1,\cdots,n$, let $X_i$ with $P(X_i \le x) = F_i(x)$ and $X_i(\omega_1,\cdots,\omega_n)=\omega_i$. (i.e. $X_i$ is the coordinate-wise projection.) Let $(\Omega, \mathcal{F}, P) = (\mathbb{R}^n, \mathcal{B}(\mathbb{R}), P)$ where $P((a_1,b_1]\times\cdots\times(a_n,b_n]) = \prod\limits_{i=1}^n (F_i(b_i) - F_i(a_i))$ then $X_i$’s are independent.</p>
-
-<p>Now we need infinite number of independent random variables. Consider $\mathbb{R}^\infty := \{(x_1,x_2,\cdots):~ x_i \in \mathbb{R}\}$, an infinite-dimensional product space of $\mathbb{R}$ and corresponding product $\sigma$-field $\mathcal{R}^\infty$.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> Kolmogorov’s extension theorem states that we can construct a unique probability measure on this space.</p>
-
-<div class="theorem" text="Kolmogorov's extension">
-Given probability measures $P_n$ on $(\mathbb{R}^n, \mathcal{R}^n)$ that satisfies
-$$
-P_{n+1}((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n])
-$$
-there uniquely exists a probability measure $P$ on $(\mathbb{R}^\infty, \mathcal{R}^\infty)$ such that
-$$
-P((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}^{\infty-n}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n]).
-$$
-</div>
-
-<p>Furthermore, if a measurable space $(S, \mathcal{S})$ is <strong>nice</strong>, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can also construct a sequence of random <em>elements</em> $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$</p>
-
-<p><br /><br /></p>
-
-<p><strong><em>Acknowledgement</em></strong></p>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>I will cover the detail later when reviewing <em>Convergence of Probability Measures</em>, 2nd edition (Billingsley, 1999). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-2.1-independence"> » </a>
+          <a class="read-more-btn" href="/probability/PTE-2.2-Weak-laws-of-large-numbers"> » </a>
         </p>
       </div>
       <footer class="post_meta">
