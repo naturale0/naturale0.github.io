@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 21:52:53 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 21:52:53 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 23:11:35 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 23:11:35 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -104,18 +104,18 @@ If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &amp;lt; \infty$, $S_n 
 $$P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $A_k = \{ S_k &amp;gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} \|S_k\| &amp;gt; x \}$.
+Let $A_k = \{ S_k &amp;gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} |S_k| &amp;gt; x \}$.
 
 $$\begin{align} 
-  \mathrm{Var}(S_n) &amp;amp;= \mathrm{E}(S_n^2) \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
-                                &amp;amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
-                                &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
-                                &amp;amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
-                                &amp;amp;= x^2P(\cup_{k=1}^n A_k) \\
-                                &amp;amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x)
+  \mathrm{Var}(S_n) &amp;amp;= \mathrm{E}S_n^2 \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
+    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
+    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
+    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
+    &amp;amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
+    &amp;amp;= \cancel{\sum\limits_{k=1}^n 2 \int \mathbf{1}_{A_k} S_k dP \cdot \int S_n - S_k dP} + \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
+    &amp;amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
+    &amp;amp;= x^2P(\cup_{k=1}^n A_k) \\
+    &amp;amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x)
 \end{align}$$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -157,7 +157,7 @@ $X_1,X_2,\cdots$ are independent. Let $Y_i = X_i \mathbf{1}_{|X_i|\le A}$ for $A
 &lt;p&gt;Intuitively, (i) assures that $X_n = Y_n$ eventually. (ii) and (iii) makes the series $S_n$ to be convergent with the help of the theorem 2.5.6. We will only prove the $\Leftarrow$ direction and leave the other direction for the next chapter.&lt;/p&gt;
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-($\Leftarrow$) Let $Z_n = Y_n - EY_n.$ Then $Z_n$'s are independent with mean 0 and $\sum_{n=1}^\infty \text{Var}(Z_n) &amp;lt;\infty.$ By 2.5.6, $\sum_{n=1}^\infty Z_n$ converges a.s. and thus by (ii), $\sum_{n=1}^\infty Y_n$ also converges a.s. Since the first B-C lemma and (i) implies that $X_n = Y_n$ for all but finite $n$'s, it yields $\sum_{n=1}^\infty$ to be almost surely convergent.
+($\Leftarrow$) Let $Z_n = Y_n - EY_n.$ Then $Z_n$'s are independent with mean 0 and $\sum_{n=1}^\infty \text{Var}(Z_n) &amp;lt;\infty.$ By 2.5.6, $\sum_{n=1}^\infty Z_n$ converges a.s. and thus by (ii), $\sum_{n=1}^\infty Y_n$ also converges a.s. Since the first B-C lemma and (i) implies that $X_n = Y_n$ for all but finite $n$'s, it yields $\sum_{n=1}^\infty X_n$ to be almost surely convergent.
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -165,7 +165,7 @@ $X_1,X_2,\cdots$ are independent. Let $Y_i = X_i \mathbf{1}_{|X_i|\le A}$ for $A
 &lt;p&gt;The three series theorem can be used to determine convergence of series. It is especially useful to determine aymptotic rate of series, as in conjunction with the Kronecker’s lemma, it can be applied to the form $\frac{S_n}{f(n)}$ (just like &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#4-law-of-iterated-logarithm&quot;&gt;LIL&lt;/a&gt;!). The next theorem is one example.&lt;/p&gt;
 
 &lt;div class=&quot;lemma&quot; text=&quot;Kronecker&quot;&gt;
-$a_n \uparrow \infty$ and $\sum\limits_{n=1}^\infty \frac{b_n}{a_n}$ converges. Then $\frac{1}{a_n} \sum\limits_{k=1}^n b_n \to 0$ as $n \to \infty.$
+$a_n \uparrow \infty$ and $\sum\limits_{n=1}^\infty \frac{b_n}{a_n}$ converges. Then $\frac{1}{a_n} \sum\limits_{k=1}^n b_k \to 0$ as $n \to \infty.$
 &lt;/div&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;2.5.12&quot;&gt;
@@ -328,7 +328,7 @@ Let $F_n(x) = \frac{1}{n} \sum_{k=1}^n \mathbf{1}_{(X_k \le x)}.$&lt;br /&gt;
 $\implies \sup_x |F_n(x) - F(x)| \to 0 \text{ a.s. as } n \to \infty$
 &lt;/div&gt;
 
-&lt;p&gt;The theorem states that as the number of independent observations grow, the empirical distribution approaches to the (unknown) population distribution almost surely.&lt;/p&gt;
+&lt;p&gt;The theorem states that as the number of independent observations grows, the empirical distribution approaches to the (unknown) population distribution almost surely.&lt;/p&gt;
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 &lt;i&gt;(1) pointwise convergence&lt;/i&gt;&lt;br /&gt;
