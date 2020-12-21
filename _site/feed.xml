@@ -6,9 +6,174 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 23:37:00 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 23:37:00 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 02:20:40 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 02:20:40 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 3.2.1. Weak convergence</title>
+        <description>&lt;p&gt;Now that we covered convergence of point estimates (specifically, the sample mean) our next interest is in weaker concept of convergence where convergence in probability is not guaranteed. In undergraduate statistics, we call it convergence in distribution. Here we prefer borrowing terminology from measure theory and call it &lt;em&gt;weak convergence&lt;/em&gt; and write $X_n \overset{w}{\to} X$.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#definition&quot; id=&quot;markdown-toc-definition&quot;&gt;Definition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tools&quot; id=&quot;markdown-toc-tools&quot;&gt;Tools&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#skorohods-representation-theorem&quot; id=&quot;markdown-toc-skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#continuous-mapping-theorem&quot; id=&quot;markdown-toc-continuous-mapping-theorem&quot;&gt;Continuous mapping theorem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#portmanteau-theorem&quot; id=&quot;markdown-toc-portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;definition&quot;&gt;Definition&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;weak convergence 1&quot;&gt;
+Let $(F_n)$ be a sequence of distribution functions. $F_n$ converges weakly to a distribution $F$, if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F.$ Likewise, a sequence of random variables $X_n$ converges weakly to a random variable $X$ if the corresponding distribution functions weakly converges.
+&lt;/div&gt;
+
+&lt;p&gt;Some textbook separates the usage of terms &lt;em&gt;weak convergence&lt;/em&gt; and &lt;em&gt;convergence in distribution&lt;/em&gt; by assigning the former to distribution functions and the latter to random variables. Durrett used the former for distribution and both for random variables.&lt;/p&gt;
+
+&lt;p&gt;While Durrett define the concept as pointwise convergence at continuity points, Billingsley&lt;sup id=&quot;fnref:billingsley&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; define it differently.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;weak convergence 2&quot;&gt;
+A sequence of probability measures $P_n$ converges weakly to a probability measure $P,$ if $\int f dP_n \to \int f dP_n$ for all bounded continuous function $f.$ $F_n \overset{w}{\to} F$ if their corresponding probability measures weakly converges. $X_n \overset{w}{\to} X$ if $Ef(X_n) \to Ef(X)$ for all bounded continuous $f.$
+&lt;/div&gt;
+
+&lt;p&gt;Equivalence of both definitions is not difficult to show. $1\rightarrow 2$ is trivial by the Skorohod’s representation theorem (&lt;a href=&quot;http://naturale0.github.io/probability/PTE-3.2-weak-convergence#skorohods-representation-theorem&quot;&gt;see below&lt;/a&gt;) and BCT. To show $2\rightarrow 1$, consider a function&lt;/p&gt;
+
+\[g_{x,\epsilon}(y) = \begin{cases}
+ 1 &amp;amp;,~ y \le x \\\\
+ 0 &amp;amp;,~ y \ge x+\epsilon \\\\
+ \text{linear} &amp;amp;,~ x &amp;lt; y &amp;lt; x+\epsilon 
+\end{cases}\]
+
+&lt;p&gt;for $x$: a continuity point of $F$ and an arbitrary $\epsilon &amp;gt;0.$ Then $g_{x,\epsilon}$ is continuous and bounded with&lt;/p&gt;
+
+\[g_{x-\epsilon,\epsilon} \le \mathbf{1}_{y \le x} \le g_{x,\epsilon}\]
+
+&lt;p&gt;and we get&lt;/p&gt;
+
+\[F(x-\epsilon) \le \liminf\limits_n F_n(x) \le \limsup\limits_n F_n(x) \le F(x+\epsilon).\]
+
+&lt;p&gt;Since $x$ was a continuity point and $\epsilon&amp;gt;0$ was arbitrary, letting $\epsilon \to 0$ yields the result we want.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
+
+&lt;h3 id=&quot;skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/h3&gt;
+&lt;p&gt;Even though the weak convergence is weak, we can relate it with much stronger almost sure convergence. Skorohod’s representation theorem allows us to do so.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Skorohod's representation&quot;&gt;
+Suppose $F_n \overset{w}{\to} F_\infty.$ Then there exists random variables $Y_n \sim F_n$ and $Y_\infty \sim F_\infty$ such that $Y_n \to Y_\infty \text{ a.s.}$
+&lt;/div&gt;
+
+&lt;p&gt;The proof is similar to that of &lt;a href=&quot;http://127.0.0.1:4000/probability/PTE-1.2-Distributions#distribution-functions&quot;&gt;theorem 1.2.2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $(\Omega, \mathcal{F}, P) = ((0,1), \mathcal{B}(0,1), \lambda)$ where $\lambda$ is the Lebesgue measure. Define $Y_n(\omega) = \sup\{y:~ F_n(y) &amp;lt; \omega\}$ so that $Y_n \sim F_n$ for $1\le n \le \infty$ which implies
+$$
+\begin{align}
+F(y) &amp;lt; \omega &amp;amp;\iff y &amp;lt; Y_\infty(\omega), \\
+F(z) &amp;gt; \omega &amp;amp;\iff z &amp;gt; Y_\infty(\omega).
+\end{align}
+$$
+&amp;ensp; We now need almost sure convergence. Let $a_\omega = \sup\{y:~ F_\infty(y)&amp;lt;\omega \}$, $b_\omega = \inf\{y:~ F_\infty(y)&amp;gt;\omega \}$, $\Omega_0 = \{\omega:~ (a_\omega, b_\omega) = \phi\}.$ Observe that $\omega \notin \Omega_0$ are at most countable since $(a_\omega, b_\omega)$'s are disjoint non-empty intervals containing distinct rational numbers. Thus $P(\Omega_0) = 1.$ Pick an arbitrary $\omega, \omega' \in \Omega_0$ such that $\omega &amp;lt; \omega'.$ Then for given $\epsilon &amp;gt;0$, $Y_n(\omega) \to Y_\infty(\omega)$ ($\omega$ is a continuity point of $Y_\infty$) implies for all large $n,$
+$$
+Y_\infty(\omega) - \epsilon &amp;lt; Y_n(\omega) &amp;lt; Y_\infty(\omega') + \epsilon.
+$$
+
+So it follows that 
+$$
+Y_\infty(\omega) \le \liminf\limits_n Y_n(\omega) \le \limsup\limits_n Y_n(\omega) \le Y_\infty(\omega').
+$$
+
+Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega) = Y_\infty(\omega).$
+&lt;/div&gt;
+
+&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;/p&gt;
+
+&lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
+&lt;p&gt;The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Fatou's lemma&quot;&gt;
+$g \ge 0$, $g$ is continuous, $X_n \overset{w}{\to} X_\infty.$ $\implies \liminf_n Eg(X_n) \ge Eg(X_\infty).$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $Y_n \sim F_n$ for $1 \le n \le \infty$ be random variables such that $Y_n \to Y$ a.s. By Fatou's lemma for almost surely convergent random variables, $\liminf_n Eg(Y_n) \ge Eg(Y_\infty).$ Since $X_n \overset{d}{=} Y_n$ for all $1\le n\le\infty$ the result follows.
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;DCT&quot;&gt;
+$g,h$ are continuous, $g&amp;gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g(x) dF_n(x) &amp;lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h(x) dF_n(x) \to \int h(x) dF(x).$
+&lt;/div&gt;
+
+&lt;h3 id=&quot;continuous-mapping-theorem&quot;&gt;Continuous mapping theorem&lt;sup id=&quot;fnref:later1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:later1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;continuous mapping&quot;&gt;
+$g$ is a measurable function. $D_g=\{x:~ g \text{ is not continuous at} x\}.$ If $X_n \overset{w}{\to} X_\infty$ and $P(X_\infty \in D_g)=0,$ then $g(X_n) \overset{w}{\to} g(X_\infty).$
+&lt;/div&gt;
+
+&lt;p&gt;Such $D_g$ is called the &lt;em&gt;discontinuity set&lt;/em&gt; of $g.$ The theorem extends the possible choice of $g$ from continuous to measurable functions.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;sup id=&quot;fnref:billingsley:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+
+&lt;p&gt;The following theorem is so important that it is named portmanteau. I found that almost every theorem regarding weak convergence can be proved with this to some extent.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Portmanteau theorem&quot;&gt;
+For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ where $\Omega$ is a metric space, the followings are equivalent.&lt;br /&gt;
+(i) $P_n \overset{w}{\to} P.$ &lt;br /&gt;
+(ii) $\limsup_n P_n(F) \le P(F),~ \forall \text{closed } F.$ &lt;br /&gt;
+(iii) $\liminf_n P_n(G) \ge P(G),~ \forall \text{open } G.$ &lt;br /&gt;
+(iv) $P_n(A) \to P(A),~ \forall A:~ P(\partial A)=0.$
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+((i)$\Rightarrow$(ii)) For given $\epsilon &amp;gt; 0$, let $f^\epsilon(x) = (1 - \inf_{y\in F}|x - y|/\epsilon)^+$ so that $\mathbf{1}_F \le f^\epsilon \le \mathbf{1}_{F^\epsilon}$ where $F^\epsilon = \{x: \inf_{y\in F}|x-y| &amp;lt; \epsilon\}.$ Then $f^\epsilon$ is continuous and bounded so 
+$$
+P_n(F) \le \limsup_n \int f^\epsilon dP_n = \int f^\epsilon dP \le P(F^\epsilon).
+$$
+Letting $\epsilon \to 0$ leads to the result.&lt;br /&gt;
+((ii)$\Leftrightarrow$(iii)) is trivial.&lt;br /&gt;
+((ii)&amp;amp;(iii)$\Rightarrow$(iv))
+$$
+\limsup_n P_n(A) \le \limsup_n P_n(\overline A) \le P(\overline A) = P(A). \\
+\liminf_n P_n(A) \ge \ liminf_n P_n(A^\circ) \ge P(A^\circ) = P(A). 
+$$
+((iv)$\Rightarrow$(i)) Without loss of generality, let $f$ be a continuous function with $0 \le f \le 1.$ Note that $P(f=t) &amp;gt; 0$ for at most countably many $t$'s so that $P(\partial\{f&amp;gt;t\})=0.$ Hence by (iv),
+$$
+\begin{align}
+\int f dP_n &amp;amp;= \int_0^\infty P(f &amp;gt; t) dt \\
+&amp;amp;\to \int_0^\infty P(f &amp;gt; t) dt = \int f dP.
+\end{align}
+$$
+is the desired result.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;p&gt;This post is also based on the textbook &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition (Billingsley, 1999) and the lecture at SNU (instructor: Prof. Jaeyong Lee).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:billingsley&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Billingsley, 1999, &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition. &lt;a href=&quot;#fnref:billingsley&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:billingsley:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:later1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;I will prove it in more general form later when reviewing Billingsley (1999). &lt;a href=&quot;#fnref:later1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 22 Dec 2020 00:23:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 2.S1. Convergence concepts</title>
@@ -1173,143 +1338,6 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
         <pubDate>Sat, 19 Dec 2020 22:18:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 1.4. The Lebesgue integral</title>
-        <description>&lt;p&gt;In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the &lt;em&gt;standard machine&lt;/em&gt; in measure theory and use it to define the &lt;em&gt;Lebesgue integral&lt;/em&gt;. Next, the definition of &lt;em&gt;expectation&lt;/em&gt; will be discussed in terms of the Lebesgue integral.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#standard-machine&quot; id=&quot;markdown-toc-standard-machine&quot;&gt;Standard machine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#lebesgue-integral&quot; id=&quot;markdown-toc-lebesgue-integral&quot;&gt;Lebesgue integral&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#1-indicator-function&quot; id=&quot;markdown-toc-1-indicator-function&quot;&gt;1. indicator function&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-simple-function&quot; id=&quot;markdown-toc-2-simple-function&quot;&gt;2. simple function&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3-non-negative-measurable-function&quot; id=&quot;markdown-toc-3-non-negative-measurable-function&quot;&gt;3. non-negative measurable function&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#4-general-measurable-function&quot; id=&quot;markdown-toc-4-general-measurable-function&quot;&gt;4. general measurable function&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#expectation&quot; id=&quot;markdown-toc-expectation&quot;&gt;Expectation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;standard-machine&quot;&gt;Standard machine&lt;/h2&gt;
-
-&lt;p&gt;The standard machine is a proof scheme in measure theory that is especially useful when proving properties of a general measurable function. The proof starts from the simplest form of functions, indicator functions, and repeatedly use the result from simpler functions to prove properties in more general functions. To be specific, the standard machine procedes in the following steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;indicator function&lt;/li&gt;
-  &lt;li&gt;simple function&lt;/li&gt;
-  &lt;li&gt;non-negative measurable function&lt;/li&gt;
-  &lt;li&gt;general measurable function&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Some textbooks (including PTE) drops proof for indicator functions and intead add proof for bounded functions in between simple functions and non-negative functions. However in my experience starting with indicator function was much less cumbersome.&lt;/p&gt;
-
-&lt;p&gt;We define the Lebesgue integral using the standard machine, starting from the one for indicator functions. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;lebesgue-integral&quot;&gt;Lebesgue integral&lt;/h2&gt;
-
-&lt;p&gt;Unlike the Riemann integration which was defined as the limit of sums of areas of rectangles that partitions the domain of a function (Riemann sum), the Lebesgue integral is defined as those that partitions the &lt;em&gt;image&lt;/em&gt; of a measurable function. While the “height” of each rectangle was of interest in the Riemann integral, it is the “width” of it that is important when defining the Lebesgue integral. We use the measure of inverse image of a partition of a function’s codomain as the width. (This is why we named such functions “measurable”)&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/1/1b/RandLintegrals.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;(Blue) Riemann integral. (Red) Lebesgue integral. (&lt;a href=&quot;https://en.wikipedia.org/wiki/Lebesgue_integration#/media/File:RandLintegrals.png&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;The following definitions and statements are all assuming a measure space $(\Omega, \mathcal{F}, \mu)$ where $\mu$ is $\sigma$-finite unless otherwise noted.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-indicator-function&quot;&gt;1. indicator function&lt;/h3&gt;
-&lt;div class=&quot;definition&quot; text=&quot;indicator function&quot;&gt;&lt;br /&gt;
-$\mathbf{1}_A(x) := \begin{cases}
-  1 &amp;amp;, \text{ if } x \in A \\
-  0 &amp;amp;, \text{ otherwise}
-\end{cases}$&lt;br /&gt;
-where $A$ is measurable, is an indicator function.
-&lt;/div&gt;
-
-&lt;p&gt;An indicator function is trivially a measurable function since its inverse image is either $\phi$ or $\Omega$.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of an indicator function&quot;&gt;&lt;br /&gt;
-$\int_E \mathbf{1}_A d\mu := \mu(A\cap E),~ E \in \mathcal{B}(\mathbb{R})$ is the integral of $\mathbf{1}_A$ over $E$.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-simple-function&quot;&gt;2. simple function&lt;/h3&gt;
-
-&lt;p&gt;A simple function is a finite weighted sum of indicator functions.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;simple function&quot;&gt;&lt;br /&gt;
-$s(x) := \sum_{i=1}^n \alpha_i \mathbf{1}_{A_i}$, where $A_i$'s are measurable and $\alpha_i \in \mathbb{R},~ i=1,\cdots,n.$
-&lt;/div&gt;
-
-&lt;p&gt;Since the sum of measurable functions is also measurable, simple functions are measurable. Naturally, the Lebesgue integral of a simple function is defined in a similar way.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of a simple function&quot;&gt;&lt;br /&gt;
-$\int_E s d\mu := \sum_{i=1}^n \alpha_i \mu(A_i \cap E),~ E \in \mathcal{B}(\mathbb{R}).$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-non-negative-measurable-function&quot;&gt;3. non-negative measurable function&lt;/h3&gt;
-&lt;p&gt;Things get a little interesting for non-negative measurable functions. For a non-negative funciton, its integral is defined as $\sup$ (or $\inf$) of simple functions.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;Lebesgue integral of a non-negative measurable function&quot;&gt;&lt;br /&gt;
-Let $f: \Omega \to \mathbb{R}^+ \cup \{0\}$ be measurable.&lt;br /&gt;
-Let $\varphi$ be a simple function.&lt;br /&gt;
-$\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in \mathcal{B}(\mathbb{R}).$
-&lt;/div&gt;
-
-&lt;p&gt;Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\varphi_n$ monotonically increases as $n$ increases and approaches $f$ from below. i.e. $\varphi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;../assets/fig/201219_step-function.png&quot; alt=&quot;riemann-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Shape of $\varphi_n$ with varying $n$. $f$: black dashed line.&lt;/em&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-general-measurable-function&quot;&gt;4. general measurable function&lt;/h3&gt;
-&lt;p&gt;Now that we defined the integral of non-negative functions, the remaining part is easy. Let $f$ be a measurable function. Define its positive part $f^+ := f \vee 0$ and the negative part $f^- := -(f \wedge 0)$. Then $f = f^+ - f^-$ and $f^+,~ f^-$ are non-negative measurable functions. The integral of $f$ on a measurable set $E$ is defined as $\int_E f d\mu := \int_E f^+ d\mu - \int_E f^- d\mu$.&lt;/p&gt;
-
-&lt;p&gt;If $E=\Omega$, then we omit $\Omega$ for simplicity. That is, $\int f d\mu = \int_\Omega f d\mu$. We call $f$ is (Lebesgue) integrable if $\int |f| d\mu = \int f^+ d\mu + \int f^- d\mu &amp;lt; \infty$ and write $f \in L^1(\mu)$ or just $f \in L^1$ if the measure is clear.&lt;/p&gt;
-
-&lt;p&gt;There are several properties of the integral naturally arises from the definition.&lt;/p&gt;
-
-&lt;div class=&quot;prop&quot; text=&quot;properties of the integral&quot;&gt;
-Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
-(i) $f \le g \implies \int_E f d\mu \le \int_E g d\mu.$ &lt;br /&gt;
-(ii) $A\subset B \implies \int_A f d\mu \le \int_B f d\mu.$ &lt;br /&gt;
-(iii) $\int_E cf d\mu = c\int_E f d\mu,~ c \in \mathbb{R}.$ &lt;br /&gt;
-(iv) $f = 0 \text{ on } E \implies \int_E f d\mu = 0.$ &lt;br /&gt;
-(v) $\mu(E) = 0 \implies \int_E f d\mu = 0,~ \forall f.$ &lt;br /&gt;
-(vi) $\int_E f d\mu = \int f \mathbf{1}_E d\mu.$
-&lt;/div&gt;
-
-&lt;p&gt;Since it is not difficult to show, I will leave it as an exercise. To prove somewhat straightforward-looking property $\int_E f+g d\mu = \int_E f d\mu + \int_E g d\mu$, we need help of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities#monotone-convergence-theorem-mct&quot;&gt;monotone convergence theorem&lt;/a&gt;, which will be covered soon.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;expectation&quot;&gt;Expectation&lt;/h2&gt;
-
-&lt;p&gt;I would like to finish this part by defining expectation of random variables. Recall that a random variable $X$ is a measurable function on a probability space $(\Omega, \mathcal{F}, P)$. The expectation is merely the integral of $X$ on $\Omega$ with respect to $P$. That is, $EX := \int X dP$.&lt;/p&gt;
-
-&lt;p&gt;As a side note, the Lebesgue integration can be viewed as a generalization of the Riemann integration. It can be shown that any Riemann integrable functions are Lebesgue integrable. Thus it is still viable to interpret expectation as a weight sum of probabilities for many random variables with Riemann integrable densities.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;p&gt;This post is also based on the textbook &lt;em&gt;Real and Complex Analysis&lt;/em&gt;, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).&lt;/p&gt;
-</description>
-        <pubDate>Sat, 19 Dec 2020 18:49:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</guid>
         
         
         <category>probability</category>
