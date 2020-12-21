@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 23:12:17 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 23:12:17 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 23:37:00 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 23:37:00 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -75,7 +75,7 @@ Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 </description>
-        <pubDate>Mon, 21 Dec 2020 21:20:00 +0900</pubDate>
+        <pubDate>Mon, 21 Dec 2020 21:46:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</guid>
         
