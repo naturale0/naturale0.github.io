@@ -328,7 +328,7 @@ $E|X_1| = \mu &lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
 <p>The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of <a href="https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma">(2.3.9)</a>. In addition, the <a href="https://en.wikipedia.org/wiki/Cesàro_summation">Cesàro’s mean</a> will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$</p>
 
 <div class="proof" text="the strong law">
-Without loss of of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$<br /><br />
+Without loss of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$<br /><br />
 
 <i>(Step 1. <b>Claim</b>: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)</i><br />
 (i) $\sum_{k=1}^\infty P(X_k &gt; k) \le EX_1 &lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$<br />

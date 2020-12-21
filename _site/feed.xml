@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 21:15:14 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 21:15:14 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 21:15:38 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 21:15:38 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -143,7 +143,7 @@ $E|X_1| = \mu &amp;lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
 &lt;p&gt;The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma&quot;&gt;(2.3.9)&lt;/a&gt;. In addition, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cesàro_summation&quot;&gt;Cesàro’s mean&lt;/a&gt; will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$&lt;/p&gt;
 
 &lt;div class=&quot;proof&quot; text=&quot;the strong law&quot;&gt;
-Without loss of of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
+Without loss of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
 
 &lt;i&gt;(Step 1. &lt;b&gt;Claim&lt;/b&gt;: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
 (i) $\sum_{k=1}^\infty P(X_k &amp;gt; k) \le EX_1 &amp;lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&amp;gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &amp;lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$&lt;br /&gt;
