@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 20:02:49 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 20:02:49 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 20:07:39 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 20:07:39 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -180,7 +180,7 @@ $$
 $$
 &lt;/div&gt;
 
-&lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers and the central limit theorem.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers (which is about $\frac{S_n}{n}$) and the central limit theorem ($\frac{S_n}{\sqrt{n}}$).&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
 &lt;img src=&quot;../assets/fig/201221_lil.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
