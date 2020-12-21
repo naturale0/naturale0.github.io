@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 21:15:38 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 21:15:38 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 21:17:18 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 21:17:18 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -75,8 +75,8 @@ This implies $W_m \overset{P}{\to} 0.$ By the lemma $W_m \to 0$ a.s. This means 
 
 &lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's three series&quot;&gt;
 $X_1,X_2,\cdots$ are independent. Let $Y_i = X_i \mathbf{1}_{|X_i|\le A}$ for $A &amp;gt; 0.$ Then, $S_n=X_1+\cdots+X_n$ converges a.s. if and only if the followings hold.&lt;br /&gt;
-(i) $\sum_{n=1}^\infty P(|X_n|&amp;gt;A) &amp;lt; \infty.$
-(ii) $\sum_{n=1}^\infty EY_n$ converges.
+(i) $\sum_{n=1}^\infty P(|X_n|&amp;gt;A) &amp;lt; \infty.$&lt;br /&gt;
+(ii) $\sum_{n=1}^\infty EY_n$ converges.&lt;br /&gt;
 (iii) $\sum_{n=1}^\infty \text{Var}(Y_n) &amp;lt; \infty.$
 &lt;/div&gt;
 
