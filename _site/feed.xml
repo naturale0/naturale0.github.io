@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 02:20:40 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 02:20:40 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 02:22:25 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 02:22:25 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -128,7 +128,7 @@ For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 ((i)$\Rightarrow$(ii)) For given $\epsilon &amp;gt; 0$, let $f^\epsilon(x) = (1 - \inf_{y\in F}|x - y|/\epsilon)^+$ so that $\mathbf{1}_F \le f^\epsilon \le \mathbf{1}_{F^\epsilon}$ where $F^\epsilon = \{x: \inf_{y\in F}|x-y| &amp;lt; \epsilon\}.$ Then $f^\epsilon$ is continuous and bounded so 
 $$
-P_n(F) \le \limsup_n \int f^\epsilon dP_n = \int f^\epsilon dP \le P(F^\epsilon).
+\limsup_n P_n(F) \le \limsup_n \int f^\epsilon dP_n = \int f^\epsilon dP \le P(F^\epsilon).
 $$
 Letting $\epsilon \to 0$ leads to the result.&lt;br /&gt;
 ((ii)$\Leftrightarrow$(iii)) is trivial.&lt;br /&gt;
