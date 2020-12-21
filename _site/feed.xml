@@ -4,15 +4,29 @@
     <title>De Novo</title>
     <description>statistical ideas that interest me.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 01:42:08 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 01:42:08 +0900</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <link>https://naturale0.github.io/</link>
+    <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 21 Dec 2020 13:21:40 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 13:21:40 +0900</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>(PTE) 2.3. Borel-Cantelli lemmas</title>
-        <description>&lt;p&gt;In this section I would like to cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;In this section I would like to cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#limit-of-a-sequence-of-sets&quot; id=&quot;markdown-toc-limit-of-a-sequence-of-sets&quot;&gt;Limit of a sequence of sets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#borel-cantelli-lemmas&quot; id=&quot;markdown-toc-borel-cantelli-lemmas&quot;&gt;Borel-Cantelli lemmas&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#tail-events-and-the-0-1-law&quot; id=&quot;markdown-toc-tail-events-and-the-0-1-law&quot;&gt;Tail events and the 0-1 law&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#application-of-borel-cantelli-lemmas&quot; id=&quot;markdown-toc-application-of-borel-cantelli-lemmas&quot;&gt;Application of Borel-Cantelli lemmas&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#application-of-the-first-lemma&quot; id=&quot;markdown-toc-application-of-the-first-lemma&quot;&gt;Application of the first lemma&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#application-of-the-second-lemma&quot; id=&quot;markdown-toc-application-of-the-second-lemma&quot;&gt;Application of the second lemma&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;limit-of-a-sequence-of-sets&quot;&gt;Limit of a sequence of sets&lt;/h2&gt;
 &lt;p&gt;Borel-Cantelli lemmas are statements about probability of “limit” of sets. To state and prove the lemma, we first define $\limsup$ and $\liminf$ of a sequence of sets.&lt;/p&gt;
@@ -165,15 +179,15 @@ $$
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
 &lt;p&gt;(TBD: example - head runs)&lt;/p&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 22:23:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-2.3-B-C-lemmas</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.3-B-C-lemmas</guid>
+        <link>https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</guid>
         
         
         <category>probability</category>
@@ -184,7 +198,14 @@ $$
         <title>(PTE) 2.2. Weak law of large numbers</title>
         <description>&lt;p&gt;We say a random variable $X_n$ &lt;strong&gt;converges in probability&lt;/strong&gt; (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &amp;gt; \epsilon) = 0$ for all $\epsilon &amp;gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &amp;gt; 0$ implies $X_n \overset{P}{\to} X$ by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities&quot;&gt;Markov-Chebyshev inequality&lt;/a&gt; with $\varphi(x) = |x|^p$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most familiar form which only requires $L^1$ condition. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most familiar form which only requires $L^1$ condition.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#l2-weak-law&quot; id=&quot;markdown-toc-l2-weak-law&quot;&gt;$L^2$ weak law&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#weak-law-for-triangular-arrays&quot; id=&quot;markdown-toc-weak-law-for-triangular-arrays&quot;&gt;Weak law for triangular arrays&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#weak-law-of-large-numbers&quot; id=&quot;markdown-toc-weak-law-of-large-numbers&quot;&gt;Weak law of large numbers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;l2-weak-law&quot;&gt;$L^2$ weak law&lt;/h2&gt;
 
@@ -328,7 +349,7 @@ Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
@@ -341,8 +362,8 @@ Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 18:39:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-2.2-WLLN</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.2-WLLN</guid>
+        <link>https://naturale0.github.io/probability/PTE-2.2-WLLN</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.2-WLLN</guid>
         
         
         <category>probability</category>
@@ -354,6 +375,14 @@ Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
         <description>&lt;p&gt;First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.&lt;/p&gt;
 
 &lt;p&gt;Following chapters will cover two fundamental theory in convergence of random variables: &lt;strong&gt;the strong law of large numbers&lt;/strong&gt; (Chapter 2) and &lt;strong&gt;the central limit theorem&lt;/strong&gt; (Chapter 3). We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence. The rest of the chapter is about law of large numbers.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#independence-of-random-variables&quot; id=&quot;markdown-toc-independence-of-random-variables&quot;&gt;Independence of random variables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#existence-of-a-sequence-of-independent-random-variables&quot; id=&quot;markdown-toc-existence-of-a-sequence-of-independent-random-variables&quot;&gt;Existence of a sequence of independent random variables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;independence-of-random-variables&quot;&gt;Independence of random variables&lt;/h2&gt;
 
 &lt;p&gt;As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.&lt;/p&gt;
 
@@ -413,7 +442,7 @@ $$
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
@@ -426,8 +455,8 @@ $$
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-2.1-independence</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-2.1-independence</guid>
+        <link>https://naturale0.github.io/probability/PTE-2.1-independence</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.1-independence</guid>
         
         
         <category>probability</category>
@@ -436,7 +465,13 @@ $$
     
       <item>
         <title>(PTE) 1.7. Product space</title>
-        <description>&lt;p&gt;Let $X, Y$ be random variables on $(\Omega_1, \mathcal{F}_1, P_1)$ and $(\Omega_2, \mathcal{F}_2, P_2)$ respectively. In order to well-define sets such as $\{ X + Y \le 0 \}$, we should consider a random vector $(X,Y)$ on a &lt;em&gt;product space&lt;/em&gt; $\mathbb{R} \times \mathbb{R}$ since $+: \mathbb{R}\times\mathbb{R} \to \mathbb{R}$ is defined this way. In addition, to measure the probability of such sets, we also need to define another product probability space $(\Omega, \mathcal{F}, P)$ where $\Omega = \Omega_1 \times \Omega_2$. Main question to answer in this subsection is: how can we define a proper $\sigma$-field $\mathcal{F}$ and a product measure $P$ on such $\Omega$?&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;Let $X, Y$ be random variables on $(\Omega_1, \mathcal{F}_1, P_1)$ and $(\Omega_2, \mathcal{F}_2, P_2)$ respectively. In order to well-define sets such as $\{ X + Y \le 0 \}$, we should consider a random vector $(X,Y)$ on a &lt;em&gt;product space&lt;/em&gt; $\mathbb{R} \times \mathbb{R}$ since $+: \mathbb{R}\times\mathbb{R} \to \mathbb{R}$ is defined this way. In addition, to measure the probability of such sets, we also need to define another product probability space $(\Omega, \mathcal{F}, P)$ where $\Omega = \Omega_1 \times \Omega_2$. Main question to answer in this subsection is: how can we define a proper $\sigma$-field $\mathcal{F}$ and a product measure $P$ on such $\Omega$?&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#product-measure-space&quot; id=&quot;markdown-toc-product-measure-space&quot;&gt;Product measure space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fubinis-theorem&quot; id=&quot;markdown-toc-fubinis-theorem&quot;&gt;Fubini’s theorem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;product-measure-space&quot;&gt;Product measure space&lt;/h2&gt;
 
@@ -484,7 +519,7 @@ $$
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
@@ -497,8 +532,8 @@ $$
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 20 Dec 2020 00:11:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.7-product-space</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.7-product-space</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.7-product-space</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.7-product-space</guid>
         
         
         <category>probability</category>
@@ -507,7 +542,13 @@ $$
     
       <item>
         <title>(PTE) 1.6. $L^p$ space</title>
-        <description>&lt;p&gt;In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;In the previous section, we defined Lebesgue integrability and write $f \in L^1$ for such function $f$. We also defined the $L^p$-norm. $L$ in these notations stands for “Lebesgue” and $L^p$ for $p \ge 1$ becomes a space of functions that is integrable in the order of $p$. We name it $L^p$ space.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#lp-space-on-probability-space&quot; id=&quot;markdown-toc-lp-space-on-probability-space&quot;&gt;$L^p$ space on probability space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#convergence-in-lp&quot; id=&quot;markdown-toc-convergence-in-lp&quot;&gt;Convergence in $L^p$&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;lp-space-on-probability-space&quot;&gt;$L^p$ space on probability space&lt;/h2&gt;
 
@@ -528,13 +569,13 @@ Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ a
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 </description>
         <pubDate>Sat, 19 Dec 2020 23:15:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.6-Lp-space</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.6-Lp-space</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.6-Lp-space</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.6-Lp-space</guid>
         
         
         <category>probability</category>
@@ -545,7 +586,20 @@ Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ a
         <title>(PTE) 1.5. Convergence theorems and elementary inequalities</title>
         <description>&lt;p&gt;In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.&lt;/p&gt;
 
-&lt;p&gt;In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#monotone-convergence-theorem-mct&quot; id=&quot;markdown-toc-monotone-convergence-theorem-mct&quot;&gt;Monotone convergence theorem (MCT)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#fatous-lemma&quot; id=&quot;markdown-toc-fatous-lemma&quot;&gt;Fatou’s lemma&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#dominated-convergence-theorem-dct&quot; id=&quot;markdown-toc-dominated-convergence-theorem-dct&quot;&gt;Dominated convergence theorem (DCT)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bounded-convergence-theorem-bct&quot; id=&quot;markdown-toc-bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#inequalities&quot; id=&quot;markdown-toc-inequalities&quot;&gt;Inequalities&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#concluding-remarks&quot; id=&quot;markdown-toc-concluding-remarks&quot;&gt;Concluding remarks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h2&gt;
 
@@ -725,7 +779,7 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
@@ -740,8 +794,8 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
 &lt;/div&gt;
 </description>
         <pubDate>Sat, 19 Dec 2020 22:18:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.5-Convergence-theorems-and-inequalities</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.5-Convergence-theorems-and-inequalities</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</guid>
         
         
         <category>probability</category>
@@ -750,9 +804,22 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
     
       <item>
         <title>(PTE) 1.4. The Lebesgue integral</title>
-        <description>&lt;p&gt;In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the &lt;em&gt;standard machine&lt;/em&gt; in measure theory and use it to define the &lt;em&gt;Lebesgue integral&lt;/em&gt;. Next, the definition of &lt;em&gt;expectation&lt;/em&gt; will be discussed in terms of the Lebesgue integral. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;In this section, we define the expectation of a random variable as the Lebesgue integral with respect to the probability measure. First, I will introduce the &lt;em&gt;standard machine&lt;/em&gt; in measure theory and use it to define the &lt;em&gt;Lebesgue integral&lt;/em&gt;. Next, the definition of &lt;em&gt;expectation&lt;/em&gt; will be discussed in terms of the Lebesgue integral.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-standard-machine&quot;&gt;The standard machine&lt;/h2&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#standard-machine&quot; id=&quot;markdown-toc-standard-machine&quot;&gt;Standard machine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#lebesgue-integral&quot; id=&quot;markdown-toc-lebesgue-integral&quot;&gt;Lebesgue integral&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-indicator-function&quot; id=&quot;markdown-toc-1-indicator-function&quot;&gt;1. indicator function&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-simple-function&quot; id=&quot;markdown-toc-2-simple-function&quot;&gt;2. simple function&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-non-negative-measurable-function&quot; id=&quot;markdown-toc-3-non-negative-measurable-function&quot;&gt;3. non-negative measurable function&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-general-measurable-function&quot; id=&quot;markdown-toc-4-general-measurable-function&quot;&gt;4. general measurable function&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#expectation&quot; id=&quot;markdown-toc-expectation&quot;&gt;Expectation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;standard-machine&quot;&gt;Standard machine&lt;/h2&gt;
 
 &lt;p&gt;The standard machine is a proof scheme in measure theory that is especially useful when proving properties of a general measurable function. The proof starts from the simplest form of functions, indicator functions, and repeatedly use the result from simpler functions to prove properties in more general functions. To be specific, the standard machine procedes in the following steps:&lt;/p&gt;
 
@@ -767,7 +834,7 @@ $a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
 
 &lt;p&gt;We define the Lebesgue integral using the standard machine, starting from the one for indicator functions. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;the-lebesgue-integral&quot;&gt;The Lebesgue integral&lt;/h2&gt;
+&lt;h2 id=&quot;lebesgue-integral&quot;&gt;Lebesgue integral&lt;/h2&gt;
 
 &lt;p&gt;Unlike the Riemann integration which was defined as the limit of sums of areas of rectangles that partitions the domain of a function (Riemann sum), the Lebesgue integral is defined as those that partitions the &lt;em&gt;image&lt;/em&gt; of a measurable function. While the “height” of each rectangle was of interest in the Riemann integral, it is the “width” of it that is important when defining the Lebesgue integral. We use the measure of inverse image of a partition of a function’s codomain as the width. (This is why we named such functions “measurable”)&lt;/p&gt;
 
@@ -857,15 +924,15 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgement&quot;&gt;Acknowledgement&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
 &lt;p&gt;This post is also based on the textbook &lt;em&gt;Real and Complex Analysis&lt;/em&gt;, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).&lt;/p&gt;
 </description>
         <pubDate>Sat, 19 Dec 2020 18:49:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.4-Lebesgue-integral</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.4-Lebesgue-integral</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</guid>
         
         
         <category>probability</category>
@@ -874,7 +941,13 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
     
       <item>
         <title>(PTE) 1.3. Random variables</title>
-        <description>&lt;p&gt;We take a closer look at random variables and random elements. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;We take a closer look at random variables and random elements.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#random-elements-measurable-maps&quot; id=&quot;markdown-toc-random-elements-measurable-maps&quot;&gt;Random elements (measurable maps)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#closure-properties-of-random-variables&quot; id=&quot;markdown-toc-closure-properties-of-random-variables&quot;&gt;Closure properties of random variables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;random-elements-measurable-maps&quot;&gt;Random elements (measurable maps)&lt;/h2&gt;
 
@@ -962,13 +1035,13 @@ We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\inf
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgenment&quot;&gt;Acknowledgenment&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 </description>
         <pubDate>Fri, 18 Dec 2020 22:42:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.3-Random-variables</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.3-Random-variables</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.3-Random-variables</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.3-Random-variables</guid>
         
         
         <category>probability</category>
@@ -977,7 +1050,13 @@ We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\inf
     
       <item>
         <title>(PTE) 1.2. Distributions</title>
-        <description>&lt;p&gt;In this subsection, we define random variables and distribution functions.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;In this subsection, we define random variables and distribution functions.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#random-variables&quot; id=&quot;markdown-toc-random-variables&quot;&gt;Random variables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#distribution-functions&quot; id=&quot;markdown-toc-distribution-functions&quot;&gt;Distribution functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;random-variables&quot;&gt;Random variables&lt;/h2&gt;
 
@@ -1024,13 +1103,13 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgenment&quot;&gt;Acknowledgenment&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 </description>
         <pubDate>Fri, 18 Dec 2020 21:20:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.2-Distributions</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.2-Distributions</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.2-Distributions</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.2-Distributions</guid>
         
         
         <category>probability</category>
@@ -1041,8 +1120,15 @@ $F$ is a distribution of some random variable $X$ if and only if it is (i) non-d
         <title>(PTE) 1.1. Basics on measure theory</title>
         <description>&lt;p&gt;The first year as an M.S. student in Statistics at SNU was the time spent for learning theoretical foundations of statistics. The probability theory was certainly the most emphasized subject of all. I would like to take this vacation as an opportunity to review the course on probability theory. Most of the content is from the book &lt;a href=&quot;https://services.math.duke.edu/~rtd/PTE/pte.html&quot;&gt;&lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019)&lt;/a&gt;, while some others are borrowed from the lecture note and personal communications with colleagues.&lt;/p&gt;
 
-&lt;p&gt;The first chapter is devoting to the basics of measure theory. A probability space is defined and essential theorems are introduced.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;The first chapter is devoting to the basics of measure theory. A probability space is defined and essential theorems are introduced.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#probability-space&quot; id=&quot;markdown-toc-probability-space&quot;&gt;Probability space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#probability-measures&quot; id=&quot;markdown-toc-probability-measures&quot;&gt;Probability measures&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#characterization-of-a-probability-measure&quot; id=&quot;markdown-toc-characterization-of-a-probability-measure&quot;&gt;Characterization of a probability measure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dynkins-pi-lambda-theorem&quot; id=&quot;markdown-toc-dynkins-pi-lambda-theorem&quot;&gt;Dynkin’s $\pi$-$\lambda$ theorem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;probability-space&quot;&gt;Probability space&lt;/h2&gt;
 
@@ -1214,7 +1300,7 @@ Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by const
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;acknowledgenment&quot;&gt;Acknowledgenment&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
@@ -1230,8 +1316,8 @@ Let $\mathcal{L} = \{ B \in \mathcal{F} : \mu_1(B) = \mu_2(B) \}$, then by const
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 18 Dec 2020 20:15:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-1.1-Measure-theory</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-1.1-Measure-theory</guid>
+        <link>https://naturale0.github.io/probability/PTE-1.1-Measure-theory</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.1-Measure-theory</guid>
         
         
         <category>probability</category>
