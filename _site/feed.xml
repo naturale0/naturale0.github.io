@@ -6,9 +6,83 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 Dec 2020 21:17:18 +0900</pubDate>
-    <lastBuildDate>Mon, 21 Dec 2020 21:17:18 +0900</lastBuildDate>
+    <pubDate>Mon, 21 Dec 2020 21:52:53 +0900</pubDate>
+    <lastBuildDate>Mon, 21 Dec 2020 21:52:53 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 2.S1. Convergence concepts</title>
+        <description>&lt;p&gt;This is a quick review of convergence concepts and their relations.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#relationship-between-convergence-concepts&quot; id=&quot;markdown-toc-relationship-between-convergence-concepts&quot;&gt;Relationship between convergence concepts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#counterexamples&quot; id=&quot;markdown-toc-counterexamples&quot;&gt;Counterexamples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;relationship-between-convergence-concepts&quot;&gt;Relationship between convergence concepts&lt;/h2&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Lᵖ and P (1)&quot;&gt;
+$X_n \overset{L^p}{\to} X \implies X_n \overset{P}{\to} X.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers&quot;&gt;I already mentioned the proof of it&lt;/a&gt;: Use Markov-Chebyshev inequality.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Lᵖ and P (2)&quot;&gt;
+Let $X_n, X \in L^p$ be random variables that $X_n \overset{P}{\to} X.$ If there exists $Y\in L^p$ such that $|X_n - X| \le Y$ for all $n$, then $X_n \overset{L^p}{\to} X.$
+&lt;/div&gt;
+
+&lt;p&gt;The result directly follows from the dominated convergence theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+For $1\le q &amp;lt; p$, $X_n \overset{L^p}{\to} X \implies X_n \overset{L^q}{\to} X.$
+&lt;/div&gt;
+
+&lt;p&gt;This is from the Jensen’s inequality. Hölder’s inequality can also yield the result. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;../assets/fig/201221_convergence.png&quot; alt=&quot;convergence.png&quot; width=&quot;250&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt;Relationship between convergence concepts.&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;counterexamples&quot;&gt;Counterexamples&lt;/h2&gt;
+
+&lt;div class=&quot;example&quot;&gt;&lt;br /&gt;
+Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.&lt;br /&gt;
+Let $X_{n,m}(\omega) = \begin{cases}
+1 &amp;amp;,~ \frac{m-1}{2^n} &amp;lt; \omega \le \frac{m}{2^n} \\
+0 &amp;amp;,~ \text{otherwise}
+\end{cases}$&lt;br /&gt;
+Let $\{Y_n:~ n\in\mathbb{N}\} = \{X_{1,1}, X_{1,2}, X_{2,1}, X_{2,2}, \cdots\}.$ Then $Y_n \overset{P}{\to} 0$ and $Y_n \overset{L^p}{\to} 0$, but $Y_n \not\to 0 \text{ a.s.}$
+&lt;/div&gt;
+
+&lt;div class=&quot;example&quot;&gt;&lt;br /&gt;
+Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.
+&lt;br /&gt;
+$X_n(\omega) := \begin{cases}
+2^n &amp;amp;,~ 0 &amp;lt; \omega \le \frac{1}{2^n}\\
+0 &amp;amp;,~ \text{otherwise}
+\end{cases}
+$&lt;br /&gt;
+Then $X_n \overset{P}{\to} 0$ but not in $L^p.$ In fact, it does not converge to a constant at all if $p &amp;gt; 1.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Dec 2020 21:20:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 2.5. Convergence of random series</title>
@@ -290,7 +364,7 @@ $$
 &lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers (which is about $\frac{S_n}{n}$) and the central limit theorem ($\frac{S_n}{\sqrt{n}}$).&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;../assets/fig/201221_lil.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
+&lt;img src=&quot;../assets/fig/201221_lil.png&quot; alt=&quot;lil.png&quot; width=&quot;300&quot; /&gt;
 &lt;br /&gt;
 &lt;em&gt;Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.&lt;/em&gt;
 &lt;/div&gt;
@@ -1194,7 +1268,7 @@ $\int_E f d\mu := \sup\limits_{0 \le \varphi \le f} \int_E \varphi d\mu,~ E \in 
 &lt;p&gt;Consider a sequence of simple functions $\{\varphi_n\}_{n\in\mathbb{N}}$ that $\varphi_n(x) := (\lfloor 2^n f(x) \rfloor / 2^n) \wedge n$. Then $\varphi_n$ monotonically increases as $n$ increases and approaches $f$ from below. i.e. $\varphi_n \uparrow f$ as $n \uparrow \infty$. Thus such simple function in the definition exists and it is well-defined.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;../assets/fig/201219_step-function.png&quot; alt=&quot;ieman-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
+&lt;img src=&quot;../assets/fig/201219_step-function.png&quot; alt=&quot;riemann-vs-lebesgue.png&quot; width=&quot;300&quot; /&gt;
 &lt;br /&gt;
 &lt;em&gt;Shape of $\varphi_n$ with varying $n$. $f$: black dashed line.&lt;/em&gt;
 &lt;/div&gt;
@@ -1236,115 +1310,6 @@ Let $f,g$ be integrable, $A,B,E$ be measurable.&lt;br /&gt;
         <pubDate>Sat, 19 Dec 2020 18:49:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.4-Lebesgue-integral</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 1.3. Random variables</title>
-        <description>&lt;p&gt;We take a closer look at random variables and random elements.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#random-elements-measurable-maps&quot; id=&quot;markdown-toc-random-elements-measurable-maps&quot;&gt;Random elements (measurable maps)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#closure-properties-of-random-variables&quot; id=&quot;markdown-toc-closure-properties-of-random-variables&quot;&gt;Closure properties of random variables&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;random-elements-measurable-maps&quot;&gt;Random elements (measurable maps)&lt;/h2&gt;
-
-&lt;p&gt;Random elements are generalizations of random variables. While the textbook focuses on random variables, we introduce them to provide properties that are not only related to random variables, but also to more general functions.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;random elements&quot;&gt;
-$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element if $X^{-1}(B) \in \mathcal{F},~ \forall B \in \Sigma$.
-&lt;/div&gt;
-
-&lt;p&gt;If the codomain is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ we call a random element a random variable. If the codomain is $(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ we call it a random vector. If the codomain is a class of functions, we call it a random function.&lt;/p&gt;
-
-&lt;p&gt;As we can see in the definition of random variables (measurable functions), functions are closely related to sets. To be specific, properties of a class of functions is closely related to its domain and image. Similar to $\pi$-$\lambda$ theorem, we can check if a function is a random element by just checking inverse images of elements of the generator of $\sigma$-field of its codomain.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot;&gt;
-Let $X: \Omega \to S$ be a function and $\mathcal{A}$ be a collection of sets such that $\sigma(\mathcal{A}) = \Sigma$. If $X^{-1}(A) \in \mathcal{F},~ \forall A \in \mathcal{A}$, then $X$ is a random element.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $\mathcal{S}=\{B:~ X^{-1}(B) \in \mathcal{F}\}$ ,then $\mathcal{S}$ is a $\sigma$-field and $\mathcal{A} \subset \mathcal{S}$. Hence by definition $\sigma(\mathcal{A}) = \Sigma \subset \mathcal{S}$ and the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;In the proof of the theorem, observe that if $\mathcal{A}$ is a $\sigma$-field on the codomain $S$ of a random element $X$, then ${A:~ X^{-1}(A)\in\mathcal{F}}$ is also a $\sigma$-field &lt;em&gt;on $S$&lt;/em&gt; and ${X^{-1}(A):~ A\in\mathcal{A}}$ is a $\sigma$-field &lt;em&gt;on $\Omega$&lt;/em&gt;. In fact, the latter is the smallest $\sigma$-field that makes $X$ a random element. We call it a &lt;strong&gt;$\sigma$-field generated by a measurable map $X$&lt;/strong&gt;. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;closure-properties-of-random-variables&quot;&gt;Closure properties of random variables&lt;/h2&gt;
-
-&lt;p&gt;In this subsection, we are interested in operations on random elements/variables that preserves its measurability.&lt;/p&gt;
-
-&lt;p&gt;The first two theorems are about a &lt;em&gt;composition of two measurable functions&lt;/em&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;1.3.4&quot;&gt;
-$X: (\Omega, \mathcal{F}) \to (S, \Sigma)$ is a random element.&lt;br /&gt;
-$f: (S, \Sigma) \to (T, \mathcal{T})$ is a measurable function.&lt;br /&gt;
-$\Rightarrow f \circ X: (\Omega, \mathcal{F}) \to (T, \mathcal{T})$ is a random element.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Given $B \in \mathcal{T}$, $$(f\circ X)^{-1}(B) = X^{-1}(f^{-1}(B)) = X^{-1}(S) \in \mathcal{F}$$ where $S = f^{-1}(B) \in \Sigma$.
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;1.3.5&quot;&gt;
-$X_1,\cdots,X_n: (\Omega, \mathcal{F})\to(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$ are random variables.&lt;br /&gt;
-$f: \mathbb{R}^d\to\mathbb{R}$ is a Borel measurable function.&lt;br /&gt;
-$\Rightarrow f(X_1,\cdots,X_n)$ is a random variable.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $Y=(X_1,\cdots,X_n)$, $\mathcal{A}=\{A_1\times\cdots\times A_n:~ A_i \in \mathcal{B}(\mathbb{R}),~ i=1,\cdots,n\}$ then use the fact that $\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R}^d)$ and theorem 1 to show that $Y$ is a random vector. By theorem 2, $f(Y)$ is a random variable.
-&lt;/div&gt;
-
-&lt;p&gt;The next two theorems are about minimum/maximum and limiting behaviors of random variables.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;1.3.6&quot;&gt;
-Let $X_n$, $n=1,2,\cdots$ be random variables. The followings are random variables.&lt;br /&gt;
-(i) $\inf_n X_n$ &lt;br /&gt;
-(ii) $\sup_n X_n$ &lt;br /&gt;
-(iii) $\liminf_n X_n$ &lt;br /&gt;
-(iii) $\limsup_n X_n$ &lt;br /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;
-&lt;br /&gt;
-Let $\mathcal{A}=\{(-\infty,x]:~ x\in\mathbb{R}\}$ so that $\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R})$.&lt;br /&gt;
-(i) Let $Y = \inf_n X_n$. Given $A=(-\infty, x] \in \mathcal{A}$. $Y^{-1}(A) = \{\inf_n X_n \le x\} = \cup_{i=1}^\infty \{X_i \le x\} \in \mathcal{F}$. &lt;br /&gt;
-(iii) $\liminf_n X_n = \sup_n \inf_{m\ge n} X_m$. Use (i), (ii). &lt;br /&gt;
-(ii), (iv) Use $-X_n$ and (i), (iii).
-&lt;/div&gt;
-
-&lt;p&gt;By (iii) and (iv), if $X_n$ is a random variable and its limit $X_\infty$ exists, then $X_\infty$ is also a random variable.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot;&gt;
-$$\begin{align}
-\Omega_0 &amp;amp;:= \{\omega:~ \lim_n X_n(\omega) = X_\infty(\omega)\} \\
-  &amp;amp;= \{\omega:~ \limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0\} \in \mathcal{F}.
-\end{align}$$
-i.e. $\Omega_0$ is a measurable set.
-&lt;/div&gt;
-
-&lt;p&gt;We used $\limsup_n X_n(\omega) - \liminf_n X_n(\omega) = 0$ instead of $\limsup_n X_n(\omega) = \liminf_n X_n(\omega)$ to cover the case where $X_\infty$ is either $\pm\infty$.&lt;/p&gt;
-
-&lt;p&gt;I will finish this section by defining a kind of convergence used in probability theory.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;almost sure convergence&quot;&gt;
-We say that $X_n$ converges almost surely to $X_\infty$ or write $X_n \to X_\infty \text{ a.s.}$, if $P(\{\lim_n X_n = X_\infty\}) = 1$.
-&lt;/div&gt;
-
-&lt;p&gt;Here, $\text{a.s.}$ stands for “almost surely”. In general measure theory, this term is usually replaced with $\text{a.e.}$ or “almost everywhere”.&lt;/p&gt;
-
-&lt;p&gt;Almost sure convergence implies that in probability space, in most of the times only the subsets with positive measures are important: it might be enough to have the fact that $X_n$ converges a.s. Convergence theorems in Lebesgue integration are the examples. We will cover this in detail later.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-</description>
-        <pubDate>Fri, 18 Dec 2020 22:42:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-1.3-Random-variables</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.3-Random-variables</guid>
         
         
         <category>probability</category>

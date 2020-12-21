@@ -166,6 +166,105 @@
 
     <article class="post_card post">
       <header class="post_header">
+        <h2 class="post_title"><a href="/probability/PTE-2.S1-convergence-concepts">(PTE) 2.S1. Convergence concepts</a></h2>
+        <time class="post_date">21 December 2020, Monday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>This is a quick review of convergence concepts and their relations.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#relationship-between-convergence-concepts" id="markdown-toc-relationship-between-convergence-concepts">Relationship between convergence concepts</a></li>
+  <li><a href="#counterexamples" id="markdown-toc-counterexamples">Counterexamples</a></li>
+</ul>
+<p><br /></p>
+
+<h2 id="relationship-between-convergence-concepts">Relationship between convergence concepts</h2>
+
+<div class="theorem" text="Lᵖ and P (1)">
+$X_n \overset{L^p}{\to} X \implies X_n \overset{P}{\to} X.$
+</div>
+
+<p><a href="http://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers">I already mentioned the proof of it</a>: Use Markov-Chebyshev inequality.</p>
+
+<div class="theorem" text="Lᵖ and P (2)">
+Let $X_n, X \in L^p$ be random variables that $X_n \overset{P}{\to} X.$ If there exists $Y\in L^p$ such that $|X_n - X| \le Y$ for all $n$, then $X_n \overset{L^p}{\to} X.$
+</div>
+
+<p>The result directly follows from the dominated convergence theorem.</p>
+
+<div class="theorem">
+For $1\le q &lt; p$, $X_n \overset{L^p}{\to} X \implies X_n \overset{L^q}{\to} X.$
+</div>
+
+<p>This is from the Jensen’s inequality. Hölder’s inequality can also yield the result. <br /><br /></p>
+
+<div style="text-align:center">
+<img src="../assets/fig/201221_convergence.png" alt="convergence.png" width="250" />
+<br />
+<em>Relationship between convergence concepts.</em>
+</div>
+<p><br /></p>
+
+<h2 id="counterexamples">Counterexamples</h2>
+
+<div class="example"><br />
+Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.<br />
+Let $X_{n,m}(\omega) = \begin{cases}
+1 &amp;,~ \frac{m-1}{2^n} &lt; \omega \le \frac{m}{2^n} \\
+0 &amp;,~ \text{otherwise}
+\end{cases}$<br />
+Let $\{Y_n:~ n\in\mathbb{N}\} = \{X_{1,1}, X_{1,2}, X_{2,1}, X_{2,2}, \cdots\}.$ Then $Y_n \overset{P}{\to} 0$ and $Y_n \overset{L^p}{\to} 0$, but $Y_n \not\to 0 \text{ a.s.}$
+</div>
+
+<div class="example"><br />
+Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.
+<br />
+$X_n(\omega) := \begin{cases}
+2^n &amp;,~ 0 &lt; \omega \le \frac{1}{2^n}\\
+0 &amp;,~ \text{otherwise}
+\end{cases}
+$<br />
+Then $X_n \overset{P}{\to} 0$ but not in $L^p.$ In fact, it does not converge to a constant at all if $p &gt; 1.$
+</div>
+
+<p><br /><br /></p>
+
+<p><strong><em>Acknowledgement</em></strong></p>
+
+<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
+
+          
+          <a class="read-more-btn" href="/probability/PTE-2.S1-convergence-concepts"> » </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
         <h2 class="post_title"><a href="/probability/PTE-2.5-convergence-of-random-series">(PTE) 2.5. Convergence of random series</a></h2>
         <time class="post_date">21 December 2020, Monday</time>
       </header>
@@ -475,7 +574,7 @@ $$
 <p>This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers (which is about $\frac{S_n}{n}$) and the central limit theorem ($\frac{S_n}{\sqrt{n}}$).<br /><br /></p>
 
 <div style="text-align:center">
-<img src="../assets/fig/201221_lil.png" alt="ieman-vs-lebesgue.png" width="300" />
+<img src="../assets/fig/201221_lil.png" alt="lil.png" width="300" />
 <br />
 <em>Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.</em>
 </div>
@@ -488,218 +587,6 @@ $$
 
           
           <a class="read-more-btn" href="/probability/PTE-2.4-strong-law-of-large-numbers"> » </a>
-        </p>
-      </div>
-      <footer class="post_meta">
-
-
-        
-        <!--
-        
-        <a href="/category/probability">
-          <data data-icon="ei-archive"></data>
-          probability</a>
-        
-        -->
-
-        <!--
-        
-        -->
-
-        <!--p class="readmore">
-          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
-        </p-->
-      </footer>
-      <hr/>
-    </article>
-    
-
-    <article class="post_card post">
-      <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a></h2>
-        <time class="post_date">20 December 2020, Sunday</time>
-      </header>
-      <div class="post_excerpt">
-        <p>
-          
-          <p>In this section I would like to cover the <em>Borel-Cantelli lemmas</em>, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of <em>tail events</em> and deriving almost sure convergence from $P$-convergence.</p>
-
-<ul id="markdown-toc">
-  <li><a href="#limit-of-a-sequence-of-sets" id="markdown-toc-limit-of-a-sequence-of-sets">Limit of a sequence of sets</a></li>
-  <li><a href="#borel-cantelli-lemmas" id="markdown-toc-borel-cantelli-lemmas">Borel-Cantelli lemmas</a>    <ul>
-      <li><a href="#tail-events-and-the-0-1-law" id="markdown-toc-tail-events-and-the-0-1-law">Tail events and the 0-1 law</a></li>
-    </ul>
-  </li>
-  <li><a href="#application-of-borel-cantelli-lemmas" id="markdown-toc-application-of-borel-cantelli-lemmas">Application of Borel-Cantelli lemmas</a>    <ul>
-      <li><a href="#application-of-the-first-lemma" id="markdown-toc-application-of-the-first-lemma">Application of the first lemma</a></li>
-      <li><a href="#application-of-the-second-lemma" id="markdown-toc-application-of-the-second-lemma">Application of the second lemma</a></li>
-      <li><a href="#generalization-of-the-second-lemma" id="markdown-toc-generalization-of-the-second-lemma">Generalization of the second lemma</a></li>
-    </ul>
-  </li>
-</ul>
-<p><br /></p>
-
-<h2 id="limit-of-a-sequence-of-sets">Limit of a sequence of sets</h2>
-<p>Borel-Cantelli lemmas are statements about probability of “limit” of sets. To state and prove the lemma, we first define $\limsup$ and $\liminf$ of a sequence of sets.</p>
-
-<div class="definition"><br />
-Let $(A_n)_{n\in\mathbb{N}}$ be a sequence of sets.<br />
-$\limsup\limits_n A_n = \bigcap_n \bigcup_{k\ge n} A_k = \{A_n \text{ i.o.}\}.$ <br />
-$\liminf\limits_n A_n = \bigcup_n \bigcap_{k\ge n} A_k = \{A_n \text{ eventually}\}.$
-</div>
-
-<p><em>i.o.</em> stands for “infinitely often”. We named these $\limsup, \liminf$ since there is a connection with those of functions. It is not difficult to show that $\limsup\limits_n \mathbf{1}_{A_n} = \mathbf{1}_{\limsup\limits_n A_n}$ and $\liminf\limits_n \mathbf{1}_{A_n} = \mathbf{1}_{\liminf\limits_n A_n}.$ As a remark, by de Morgan’s law, $\{A_n \text{ i.o.}\}^c = \{ A_n^c \text{ eventually} \}$ thus $P(A_n \text{ i.o.}) = 0$ is equivalent to $P(A_n^c \text{ eventually}) = 1.$<br /><br /></p>
-
-<h2 id="borel-cantelli-lemmas">Borel-Cantelli lemmas</h2>
-
-<div class="theorem" text="Borel-Cantelli">
-(i) $\sum\limits_{n=1}^\infty P(A_n) &lt; \infty \implies P(A_n \text{ i.o.}) = 0.$ <br />
-(ii) If $A_n$'s are independent, $\sum\limits_{n=1}^\infty P(A_n) = \infty \implies P(A_n \text{ i.o.}) = 1.$ <br />
-</div>
-<div class="proof"><br />
-(i) $\sum\limits_{k=1}^n \mathbf{1}_{A_k} \uparrow \sum\limits_{n=1}^\infty \mathbf{1}_{A_n}$. By MCT $E\sum\limits_{n=1}^\infty \mathbf{1}_{A_n} = \sum\limits_{n=1}^\infty P(A_n) &lt; \infty$ which leads to $\sum\limits_{n=1}^\infty \mathbf{1}_{A_n} &lt; \infty$ a.s. <br />
-(ii) Using the inequality $1-x \le e^{-x}$, \begin{align*}
-    P(\bigcap\limits_{k \geq m}{A_k}^c) &amp;= \prod\limits_{k \geq m}\big( 1-P({A_k}) \big) \\
-    &amp;\leq \prod\limits_{k \geq m}e^{-P(A_k)} = e^{-\sum\limits_{k \geq m} P(A_k)} = 0, \:\: \forall m&gt;0
-\end{align*}
-$\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n}) = P(A_n \text{ i.o.}) = 1.$
-</div>
-
-<p>Using Borel-Cantelli lemmas, we can convert the sum of probabilities to probability of <em>tail events</em>.<br /><br /></p>
-
-<h3 id="tail-events-and-the-0-1-law">Tail events and the 0-1 law</h3>
-
-<p>I mentioned tail events several times but never actually defined it.</p>
-
-<div class="definition" text="tail event">
-Let $(X_n)$ be a sequence of random variables. Let $\mathcal{G}_n = \sigma(X_n,X_{n+1},\cdots).$ We call $\mathcal{T}=\bigcap_n\mathcal{G}_n$ a <b>tail $\sigma$-field</b> of $(X_n)$, $A\in\mathcal{T}$ a <b>tail event</b>.
-</div>
-
-<p>Simply put, a tail event is an event that does not depend on finite number of random variables. For instance,  $\{ \limsup_n S_n/C_n &gt; x \} \in \mathcal{T}$ for $C_n, x \in \mathbb{R}$, $S_n=X_1 + \cdots + X_n$ if $X_n\to_n\infty$ while $\{\limsup_n S_n &gt; 0\}\notin\mathcal{T}.$</p>
-
-<div class="definition" text="P-trivial event">
-An event $A$ is $P$-trivial if $P(A) = 0$ or $1.$<br />
-</div>
-
-<p>The next theorem implies that <a href="https://naturale0.github.io/probability/Borel-Cantelli-lemmas">Borel-Cantelli lemmas are converses of each other</a>.</p>
-
-<div class="theorem" text="Kolmogorov's 0-1 law">
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap_n \sigma(X_n, X_{n+1}, \cdots)$, then $A$ is a $P$-trivial event.
-</div>
-
-<div class="proof">
-Let $A \in \sigma(X_1, \cdots, X_k)$ and $B \in \sigma(X_{k+1}, \cdots, X_{k+j})$ for some $j$. Because $X_i$'s are independent, $A \perp B$. Thus $\sigma(X_1, \cdots, X_k) \perp \bigcup_j \sigma(X_{k+1}, \cdots, X_{k+j})$. Since both are $\pi$-systems, by Dynkin's $\pi$-$\lambda$ theorem,
-\begin{equation}
-    \sigma(X_1, \cdots, X_k) \perp \sigma(X_{k+1}, \cdots)
-\end{equation}
-
-Now, let $A \in \sigma(X_1, \cdots, X_j)$ for some $j$ and $B \in \mathcal{T} \subset \sigma(X_{j+1}, \cdots)$. By (1) and similar process, 
-\begin{equation}
-    \sigma(X_1, \cdots) \perp \mathcal{T}
-\end{equation}
-
-By (2), since $\mathcal{T} \subset \sigma(X_1, \cdots)$, $\mathcal{T}$ is independent of itself. <br />
-$\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
-</div>
-<p><br /></p>
-
-<h2 id="application-of-borel-cantelli-lemmas">Application of Borel-Cantelli lemmas</h2>
-<h3 id="application-of-the-first-lemma">Application of the first lemma</h3>
-
-<p>The first application connects convergence in probability to almost sure convergence.</p>
-
-<div class="theorem">
-$X_n \overset{P}{\to} X$ if and only if for all subsequence $(X_{n_k})$, there exists a further subsequence $(X_{n_k(m)})$ such that $X_{n_k(m)} \to X$ a.s.
-</div>
-<div class="proof"><br />
-($\Rightarrow$) 
-Without loss of generality, we only have to prove that there exists a.s. convergent subsequence. Let $\epsilon_k&gt;0$, $\epsilon_k \downarrow 0.$ There exists $n_k \in \mathbb{N}$ such that if $n \ge n_k$, $P(|X_n - X| &gt; \epsilon_k) &lt; \frac{1}{2^k}$ and $n_{k+1} &gt; n_k.$ Hence $\sum\limits_{k=1}^\infty P(|X_{n_k} - X| \ge \epsilon_k) \le 1 &lt; \infty$ and by the first Borel-Cantelli lemma, $P(|X_{n_k} - X| \ge \epsilon_k \text{ i.o.}) = 0.$<br />
-($\Leftarrow$) 
-It is easy to show that for a sequence $(y_n)$ on a topological space, if for all subsequence there exists a further subsequence that converges to $y$, then $y_n \to y.$ Given $\delta &gt; 0$, let $y_n = P(|X_n - X| &gt; \delta)$ then it is a sequence on topological space $\mathbb{R}$ that converges to 0. By the condition, the result directly follows.
-</div>
-
-<p>Another application is in the form of strong law of large numbers.</p>
-
-<div class="theorem" text="2.3.5">
-$X_1,\cdots,X_n$ are i.i.d. with $EX_1 = \mu$ and $EX_1^4 \le C &lt; \infty.$ $\implies S_n/n \to \mu$ a.s.
-</div>
-<div class="proof"><br />
-$$
-\begin{align}
-P(|S_n/n - \mu| &gt; \epsilon) &amp;= P(|S_n - n\mu| &gt; n\epsilon) \\
-  &amp;\le E(S_n - n\mu)^4 / n^4\epsilon^4 \le C / n^2\epsilon^4. 
-\end{align}
-$$
-$\sum\limits_{n=1}^\infty P(|S_n/n - \mu| &gt; \epsilon) \le \sum\limits_{n=1}^\infty C_1 / n^2 &lt; \infty$ for some $C_1.$ By the first Borel-Cantelli lemma, the result follows.
-</div>
-<p><br /></p>
-
-<h3 id="application-of-the-second-lemma">Application of the second lemma</h3>
-
-<p>As a sneak peek of the next sction, the second Borel-Cantelli lemma leads to a necessary condition of the strong law of large numbers.</p>
-
-<div class="theorem" text="necessity of the strong law">
-$X_1,X_2,\cdots$ are i.i.d. with $E|X_1| = \infty$. $S_n = X_1 + \cdots + X_n.$<br />
-$\begin{align}
-\implies &amp;\text{(i) } P(|X_1|\ge n \text{ i.o.}) = 1. \\
-         &amp;\text{(ii) } P(\lim_n S_n/n \text{ exists and finite}) = 0.
-\end{align}$
-</div>
-
-<p>Note that this implies $E|X_1| &lt; \infty$ is required for the strong law.</p>
-
-<div class="proof"><br />
-(i) $E|X_1| = \int_0^\infty P(|X_1|&gt;x)dx \le \sum\limits_{n=0}^\infty P(|X_1| \ge n) = \infty.$ By the second B-C lemma, $P(|X_1| \ge n \text{ i.o.}) = 1.$<br />
-(ii) $\frac{S_n}{n}-\frac{S_{n+1}}{n+1} = \frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}.$ Let $C = \{\lim_n S_n/n \text{ exists and finite}\}$, then on $C$, $\lim_n \frac{S_n}{n(n+1)} = 0.$ On $C \cap (|X_i| \ge n \text{ i.o.})$, 
-$$
-\begin{align}
-\limsup\limits_n |\frac{S_n}{n}-\frac{S_{n+1}}{n+1}|
-&amp;= \limsup\limits_n |\frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}| \\
-&amp;\ge \limsup\limits_n |\frac{X_{n+1}}{n+1}| - \cancelto{0}{\lim_n |\frac{S_n}{n(n+1)}|} \ge 1.
-\end{align}
-$$
-By (i), the desired result follows.
-</div>
-
-<h3 id="generalization-of-the-second-lemma">Generalization of the second lemma</h3>
-
-<p>Another important result is a generalization of the lemma.</p>
-
-<div class="theorem" text="2.3.9">
-Let $A_1,A_2,\cdots$ be pairwise independent events.<br />
-$\sum\limits_{n=1}^\infty P(A_n) = \infty \implies \frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)}\to 1 \text{ a.s.}$
-</div>
-<div class="proof"><br />
-Let $X_m = 1_{A_m}$, $S_n = X_1 + \cdots + X_n$. Note that $0 \le X_m \le 1.$<br />
-(Step 1: $\frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)} = \frac{S_n}{ES_n} \overset{P}{\to} 1.$)<br />
-&ensp; $EX_n^2 = P(\mathbf{1}_{A_n}) &lt; \infty.$ Thus $ES_n^2 = \sum_{i=1}^n EX_n^2 + 2\sum_{1\le i &lt; j \le n}EX_i EX_j &lt; \infty.$
-$$
-\begin{align}
-P(|\frac{S_n - ES_n}{ES_n}| &gt; \epsilon) 
- &amp;\le \frac{\text{Var}(S_n)}{\epsilon^2(ES_n)^2} \\
- &amp;\le \frac{\sum_{i=1}^n EX_i^2}{\epsilon^2(ES_n)^2} \\
- &amp;= \frac{\sum_{i=1}^n EX_i}{\epsilon^2(ES_n)^2} \\
- &amp;= \frac{1}{\epsilon^2 ES_n} \to 0.
-\end{align}
-$$
-(Step 2: $\exists n_k$ s.t. $\frac{S_{n_k}}{ES_{n_k}} \to 1 \text{ a.s.}$)<br />
-&ensp; Let $n_k = \inf\{n:~ ES_n &gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta) \le \sum_k \frac{1}{k^2} / \delta^2 &lt; \infty.$ By the first Borel-Cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.<br />
-(Step 3: sandwich)<br />
-&ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
-</div>
-
-<p>As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.</p>
-
-<p><br /><br /></p>
-
-<p><strong><em>Acknowledgement</em></strong></p>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<p>(TBD: example - head runs)</p>
-
-          
-          <a class="read-more-btn" href="/probability/PTE-2.3-B-C-lemmas"> » </a>
         </p>
       </div>
       <footer class="post_meta">
