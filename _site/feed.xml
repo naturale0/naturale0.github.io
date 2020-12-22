@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 23:55:59 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 23:55:59 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 00:07:37 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 00:07:37 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -241,13 +241,30 @@ So $1-F_n(2/\delta)+F_n(-2/\delta) &amp;lt; 2\epsilon$ and $\mu_n$ is uniformly 
 If $E|X|^n = \int |x|^n d\mu(x) &amp;lt; \infty,$ then $\varphi$ is $n$ times differentiable and $\varphi^{(n)}(t) = \int (ix)^n e^{itx} d\mu(x).$
 &lt;/div&gt;
 
-&lt;p&gt;The obvious corollary is that $\varphi^{(n)}(0) = i^nEX^n$ for $1\le n \le p$ if $X\in L^p(\mu).$&lt;/p&gt;
-
-&lt;p&gt;The next theorem implies the converse in a special case.&lt;/p&gt;
+&lt;p&gt;The obvious corollary is that $\varphi^{(n)}(0) = i^nEX^n$ for $1\le n \le p$ if $X\in L^p(\mu).$ The next theorem implies the converse in $L^2$ case.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;3.3.21&quot;&gt;
 $\limsup_{h\downarrow 0} \frac{\varphi(h) + \varphi(-h) - 2\varphi(0)}{h^2} &amp;gt; -\infty$ $\implies EX^2 &amp;lt;\infty.$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+For necessity of Fubini's theorem see $\frac{e^{ihx} + e^{-ihx} - 2}{h^2} = \frac{2(\cos hx -1)}{h^2} \le 0.$ In addition, $\lim_{h\to0}\frac{2(\cos hx -1)}{h^2} = \lim_{h\to0} -x^2\cos hx = -x^2.$
+
+$$
+\begin{align}
+EX^2 &amp;amp;= \int x^2 dF(x) \\
+  &amp;amp;\le \liminf\limits_{h\downarrow0} \int \frac{2(1- \cos hx)}{h^2} dF(x) \\
+  &amp;amp;= -\limsup\limits_{h\downarrow0} \frac{\varphi(h)+\varphi(-h)-2\varphi(0)}{h^2} \\
+  &amp;amp;&amp;lt; \infty.
+\end{align}
+$$
+The first equality is from the Fubini's theorem and the first inequality is from the Fatou's lemma.
+&lt;/div&gt;&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;etimation-of-the-error-term&quot;&gt;Etimation of the error term&lt;/h2&gt;
