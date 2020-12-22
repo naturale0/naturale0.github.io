@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 11:56:16 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 11:56:16 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 13:00:41 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 13:00:41 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -96,7 +96,7 @@ Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega)
 &lt;/div&gt;
 &lt;/details&gt;
 
-&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F_\infty^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
 &lt;p&gt;The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.&lt;/p&gt;
@@ -281,6 +281,12 @@ If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &amp;lt; \infty$, $S_n 
 
 $$P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $A_k = \{ S_k &amp;gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} |S_k| &amp;gt; x \}$.
 
@@ -296,6 +302,7 @@ $$\begin{align}
     &amp;amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x)
 \end{align}$$
 &lt;/div&gt;
+&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;As a result we get the result similar to that of Chebyshev’s inequality for maximum of a random series. In the previous post, I also proved that &lt;a href=&quot;https://naturale0.github.io/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point&quot;&gt;the same results holds with series of shifted starting points&lt;/a&gt;.&lt;/p&gt;
@@ -394,8 +401,13 @@ $E|X_1| = \mu &amp;lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
 
 &lt;p&gt;The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma&quot;&gt;(2.3.9)&lt;/a&gt;. In addition, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cesàro_summation&quot;&gt;Cesàro’s mean&lt;/a&gt; will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$&lt;/p&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot; text=&quot;the strong law&quot;&gt;
-Without loss of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
+&amp;ensp; Without loss of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
 
 &lt;i&gt;(Step 1. &lt;b&gt;Claim&lt;/b&gt;: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
 (i) $\sum_{k=1}^\infty P(X_k &amp;gt; k) \le EX_1 &amp;lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&amp;gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &amp;lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$&lt;br /&gt;
@@ -449,7 +461,7 @@ $$
 Hence $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$&lt;br /&gt;&lt;br /&gt;
 
 &lt;i&gt;(Step 3. sandwich)&lt;/i&gt;&lt;br /&gt;
-$T_{k(n)} \le T_m \le T_{k(n+1)}$ for $m:~ k(n) \le m \le k(n+1).$ Since $k(n) \to \infty$, every $m\in\mathbb{N}$ has a $k(n)$ and $k(n+1)$ that sandwiches $m.$ As $n \to \infty$, $\frac{k(n)}{k(n+1)} = \frac{\lfloor \alpha^n \rfloor}{\lfloor \alpha^{n+1} \rfloor} \to \frac{1}{\alpha}.$ Take $\liminf$ and $\limsup$ to each sides of
+&amp;ensp; $T_{k(n)} \le T_m \le T_{k(n+1)}$ for $m:~ k(n) \le m \le k(n+1).$ Since $k(n) \to \infty$, every $m\in\mathbb{N}$ has a $k(n)$ and $k(n+1)$ that sandwiches $m.$ As $n \to \infty$, $\frac{k(n)}{k(n+1)} = \frac{\lfloor \alpha^n \rfloor}{\lfloor \alpha^{n+1} \rfloor} \to \frac{1}{\alpha}.$ Take $\liminf$ and $\limsup$ to each sides of
 $$
 \frac{T_{k(n)}}{k(n+1)} \le \frac{T_m}{m} \le \frac{T_{k(n+1)}}{k(n)}
 $$ and we get
@@ -460,6 +472,7 @@ $$
 $$
 Since $\alpha$ was arbitrary, $\alpha \to 1$ then the proof is done.
 &lt;/div&gt;
+&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;application-of-the-strong-law&quot;&gt;Application of the strong law&lt;/h2&gt;
@@ -508,13 +521,18 @@ $\implies \sup_x |F_n(x) - F(x)| \to 0 \text{ a.s. as } n \to \infty$
 
 &lt;p&gt;The theorem states that as the number of independent observations grows, the empirical distribution approaches to the (unknown) population distribution almost surely.&lt;/p&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 &lt;i&gt;(1) pointwise convergence&lt;/i&gt;&lt;br /&gt;
 &amp;ensp; For a fixed $x\in\mathbb{R}$, $F_x(x) \to F(x)$ a.s. Let $Z_n = \mathbf{1}_{(X_n &amp;lt; x)}$ then $F_n(x^-)=\sum_{k=1}n Z_k \to F(x^-)$ a.s.
-&lt;br /&gt;
+&lt;br /&gt;&lt;br /&gt;
 &lt;i&gt;(2) uniform convergence at grid points&lt;/i&gt;&lt;br /&gt;
 &amp;ensp; Let $x_{jk} = \inf\{y:~ F(y) \ge j/k\}$, $1\le j\le k-1$, $x_{0k} = -\infty$, $x_{kk} = \infty.$ By (1), for each $k$ there exists $N_k \in\mathbb{N}$ such that if $n\ge N_k$ then $|F_n(x_{jk}) - F(x_{jk})| &amp;lt; 1/k$ and $|F_n(x_{jk}^-) - F(x_{jk}^-)| &amp;lt; 1/k$ for all $1 \le j \le k-1.$
-&lt;br /&gt;
+&lt;br /&gt;&lt;br /&gt;
 &lt;i&gt;(3) uniform convergence&lt;/i&gt;&lt;br /&gt;
 &amp;ensp; For all $x \in (x_{j-1,k}, x_{jk})$ and $n\ge N_k$,
 $$
@@ -525,6 +543,7 @@ F_n(x) &amp;amp;\le F_n(x_{jk}^-) \le F(x_{jk}^-) + \frac{1}{k} \\
 $$
 Similarly, $F_n(x) \ge F(x) - \frac{2}{k}.$ Hence the desired result follows.
 &lt;/div&gt;
+&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;4-law-of-iterated-logarithm&quot;&gt;4. Law of iterated logarithm&lt;/h3&gt;
@@ -712,6 +731,12 @@ By (i), the desired result follows.
 Let $A_1,A_2,\cdots$ be pairwise independent events.&lt;br /&gt;
 $\sum\limits_{n=1}^\infty P(A_n) = \infty \implies \frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)}\to 1 \text{ a.s.}$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $X_m = 1_{A_m}$, $S_n = X_1 + \cdots + X_n$. Note that $0 \le X_m \le 1.$&lt;br /&gt;
 (Step 1: $\frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)} = \frac{S_n}{ES_n} \overset{P}{\to} 1.$)&lt;br /&gt;
@@ -730,6 +755,7 @@ $$
 (Step 3: sandwich)&lt;br /&gt;
 &amp;ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.&lt;/p&gt;
 
@@ -1185,6 +1211,11 @@ $\implies \lim_n \int_{E_n} s d\mu = \int_E s d\mu.$
 
 &lt;p&gt;The first lemma is easy to check. The second one is trivial by continuity of measure $\phi$ defined as in the first one. The latter one will be used in the proof of the MCT.&lt;/p&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot; text=&quot;MCT&quot;&gt;
 Let $\alpha_n = \int f_n d\mu$ so that $\alpha_1 \le \alpha_2 \le \cdots \le \int f d\mu$ and $\lim_n \alpha_n = \alpha$ for some $\alpha$. We need to show that $\alpha = \int f d\mu$.&lt;br /&gt;
 &amp;ensp; (1) It is trivial that $\alpha \le \int f d\mu$.&lt;br /&gt;
@@ -1198,7 +1229,8 @@ $$
 \end{align}
 $$  
 &amp;ensp; By (1) and (2), the desired result follows.
-&lt;/div&gt;
+&lt;/div&gt; 
+&lt;/details&gt;
 
 &lt;p&gt;The MCT allows us to prove the yet to be shown property.&lt;/p&gt;
 
@@ -1219,9 +1251,16 @@ Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rf
 $\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
 $\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $g_n = \inf_{k \ge n} f_k$ so that $g_n \uparrow \liminf\limits_n f_n$. By MCT, $\lim_n \int g_n d\mu = \int \liminf\limits_n f_n d\mu$. Since $g_n$ is monotone and $g_n \le f_n$, we get $\int g_n d\mu \le \int f_n d\mu,~ \forall n$ thus $\lim_n \int g_n d\mu \le \liminf\limits_n \int f_n d\mu$. 
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.&lt;br /&gt;
  &lt;/p&gt;
@@ -1243,6 +1282,11 @@ $\begin{align}
 
 &lt;p&gt;The usefulness of the DCT is that it not only shows convergence of the integral, but also integrability of the limiting function and $L^1$ convergence&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to it.&lt;/p&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
 &lt;div class=&quot;proof&quot; text=&quot;DCT&quot;&gt;
 (i) Trivial since $|f| \le g$.&lt;br /&gt;
 (ii) $|f_n - f|$ are integrable since $\le 2g$. $0 \le 2g - |f_n - f| \le 2g$. By fatou's lemma,
@@ -1253,6 +1297,7 @@ $$
 $$&lt;br /&gt;
 (iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
 &lt;/div&gt;
+&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/h3&gt;
@@ -1267,9 +1312,16 @@ $\varphi: \mathbb{R} \to \mathbb{R}$: convex function.&lt;br /&gt;
 $\int |f| d\mu &amp;lt; \infty$, $\int |\varphi(f)| d\mu &amp;lt; \infty$.&lt;br /&gt; 
 $\implies \varphi(\int f d\mu) \le \int \varphi(f) d\mu$.
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $t = \int f d\mu$, then there exists $\beta = \sup\limits_{s&amp;lt;t} \frac{\varphi(t)-\varphi(s)}{t-s} \in \mathbb{R}$ such that $\varphi(x) \ge \beta(x-t) + \varphi(t)$. Take integral to both sides and we get the result.
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Hölder's inequality&quot;&gt;
 $p,q \in (1,\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$.&lt;br /&gt;
@@ -1278,11 +1330,18 @@ $\begin{align}
  &amp;amp;\text{i.e. } \|fg\|_1 \le \|f\|_p \|g\|_q.
 \end{align}$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = \int G^q d\mu = 1$.&lt;br /&gt;
 &amp;ensp; Our claim is that $x,y \ge 0 \Rightarrow xy \le \frac{x^p}{p} + \frac{y^q}{q}$. Let $h(x) = xy - x^p/p$, then $h'(x) = y - x^{p-1} = y - x^{p/q}$ and $h$ achieves maximum at $x = y^{q/p}$.&lt;br /&gt;
 &amp;ensp; By the claim, $\int FG d\mu \le \int F^p/p + G^q/q d\mu = 1$ and the desired result follows.
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;A special case of Hölder’s inequality is the Cauchy-Schwarz inequality: $\|fg\|_1 \le \|f\|_2 \|g\|_2.$&lt;/p&gt;
 
@@ -1290,6 +1349,12 @@ Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = 
 $p \ge 1$, $\int |f|^p d\mu &amp;lt; \infty$, $\int |g|^p d\mu &amp;lt; \infty$&lt;br /&gt;
 $\implies \|f+g\|_p \le \|f\|_p + \|g\|_p.$
 &lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 $$
 \int (f+g)^p d\mu = \int f(f+g)^{p-1} d\mu + \int g(f+g)^{p-1} d\mu
@@ -1311,6 +1376,7 @@ $$
 \end{align}
 $$
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.&lt;/p&gt;
 

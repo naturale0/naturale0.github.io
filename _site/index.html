@@ -260,7 +260,7 @@ Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega)
 </div>
 </details>
 
-<p>Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.<br /><br /></p>
+<p>Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F_\infty^{-1}$ on $\Omega_0$ respectively.<br /><br /></p>
 
 <h3 id="convergence-theorems">Convergence theorems</h3>
 <p>The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.</p>
@@ -495,6 +495,12 @@ If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &lt; \infty$, $S_n := \
 
 $$P(\max_{1 \leq k \leq n} |S_k| &gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
 </div>
+
+<details>
+  <summary>
+    expand proof
+  </summary>
+  
 <div class="proof"><br />
 Let $A_k = \{ S_k &gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} |S_k| &gt; x \}$.
 
@@ -510,6 +516,7 @@ $$\begin{align}
     &amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &gt; x)
 \end{align}$$
 </div>
+</details>
 <p><br /></p>
 
 <p>As a result we get the result similar to that of Chebyshev’s inequality for maximum of a random series. In the previous post, I also proved that <a href="https://naturale0.github.io/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point">the same results holds with series of shifted starting points</a>.</p>
