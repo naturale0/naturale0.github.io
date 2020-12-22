@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 00:12:50 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 00:12:50 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 00:13:55 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 00:13:55 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -19,7 +19,7 @@
   &lt;li&gt;&lt;a href=&quot;#inversion-formula&quot; id=&quot;markdown-toc-inversion-formula&quot;&gt;Inversion formula&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#continuity-theorem&quot; id=&quot;markdown-toc-continuity-theorem&quot;&gt;Continuity theorem&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#moment-generating-property&quot; id=&quot;markdown-toc-moment-generating-property&quot;&gt;Moment generating property&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#etimation-of-the-error-term&quot; id=&quot;markdown-toc-etimation-of-the-error-term&quot;&gt;Etimation of the error term&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#estimation-of-the-error-term&quot; id=&quot;markdown-toc-estimation-of-the-error-term&quot;&gt;Estimation of the error term&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -267,7 +267,7 @@ The first equality is from the Fubini's theorem and the first inequality is from
 &lt;/div&gt;&lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;etimation-of-the-error-term&quot;&gt;Etimation of the error term&lt;/h2&gt;
+&lt;h2 id=&quot;estimation-of-the-error-term&quot;&gt;Estimation of the error term&lt;/h2&gt;
 &lt;p&gt;Before ending the section, I would like to cover the estimation of ch.f.s with Taylor series about 0. This will be used when proving the central limit theorem (the next section) and the existence of canonical representation of infinitely divisible distributions (section 3.9).&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;3.3.19&quot;&gt;
