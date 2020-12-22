@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 11:52:52 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 11:52:52 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 11:56:16 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 11:56:16 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -702,6 +702,7 @@ $$
 $$
 By (i), the desired result follows.
 &lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;generalization-of-the-second-lemma&quot;&gt;Generalization of the second lemma&lt;/h3&gt;
 
