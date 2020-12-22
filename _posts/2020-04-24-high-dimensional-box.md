@@ -2,6 +2,7 @@
 layout: post
 title:  "High-dimensional box"
 date:   2020-04-24 18:37:10 +0900
+author: "Sihyung Park"
 categories: probability
 ---
 

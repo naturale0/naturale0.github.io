@@ -2,6 +2,7 @@
 layout: post
 title:  "The slowest run vs. the fastest walk: which is faster?"
 date:   2020-05-22 14:46:00 +0900
+author: "Sihyung Park"
 categories: [decision theory]
 ---
 

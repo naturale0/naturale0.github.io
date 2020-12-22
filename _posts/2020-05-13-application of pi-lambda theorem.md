@@ -2,6 +2,7 @@
 layout: post
 title:  "Application of Dynkin's π-λ theorem"
 date:   2020-05-13 23:45:00 +0900
+author: "Sihyung Park"
 categories: [probability]
 ---
 

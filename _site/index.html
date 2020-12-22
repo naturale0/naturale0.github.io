@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Home | De Novo</title>
-  <meta name="description" content="statistical ideas that interest me.
+  <meta name="description" content="Notes on Probability and Statistics.
 ">
 
   <!-- evil icon -->
@@ -26,8 +26,8 @@
 <meta property="og:title" content="Home" />
 <meta name="author" content="Sihyung Park" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="statistical ideas that interest me." />
-<meta property="og:description" content="statistical ideas that interest me." />
+<meta name="description" content="Notes on Probability and Statistics." />
+<meta property="og:description" content="Notes on Probability and Statistics." />
 <link rel="canonical" href="https://naturale0.github.io/" />
 <meta property="og:url" content="https://naturale0.github.io/" />
 <meta property="og:site_name" content="De Novo" />
@@ -38,7 +38,7 @@
 <meta name="twitter:creator" content="@Sihyung Park" />
 <meta name="google-site-verification" content="tjq4lHXs2H8JUPh_QyKbr8Ozqb4NE5W8t60LImZcL48" />
 <script type="application/ld+json">
-{"headline":"Home","url":"https://naturale0.github.io/","name":"De Novo","author":{"@type":"Person","name":"Sihyung Park"},"description":"statistical ideas that interest me.","@type":"WebSite","@context":"https://schema.org"}</script>
+{"headline":"Home","url":"https://naturale0.github.io/","name":"De Novo","author":{"@type":"Person","name":"Sihyung Park"},"description":"Notes on Probability and Statistics.","@type":"WebSite","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -136,18 +136,6 @@
               
             
               
-                
-              
-            
-              
-                
-              
-            
-              
-                
-              
-            
-              
             
           -->
           <br>
@@ -170,149 +158,15 @@
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-3.2.2-vague-convergence">(PTE) 3.2.2. Vague convergence and uniform tightness</a></h2>
+        <h1 class="post_title"><a href="/probability/PTE-3.2.2-vague-convergence">(PTE) 3.2.2. Vague convergence and uniform tightness</a></h1>
         <time class="post_date">22 December 2020, Tuesday</time>
       </header>
       <div class="post_excerpt">
         <p>
           
-          <p>Our next interest is in whether a sequence of distribution functions converges weakly. To be more specific, subsequential convergence of distribution functions are is the topic of this subsection. Helly’s selection theorem shows there always exists a <em>vaguely</em> convergent subsequence. Uniform tightness of a sequence strengthen this result to be weakly convergent.</p>
-
-<ul id="markdown-toc">
-  <li><a href="#hellys-selection-theorem" id="markdown-toc-hellys-selection-theorem">Helly’s selection theorem</a></li>
-  <li><a href="#tightness-theorem" id="markdown-toc-tightness-theorem">Tightness theorem</a></li>
-</ul>
-<p><br /></p>
-
-<h2 id="hellys-selection-theorem">Helly’s selection theorem</h2>
-
-<div class="definition" text="vague convergence">
-A sequence of distribution $(F_n)$ vaguely converges to a function $F$ if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F$ and write $F_n \to_{v.} F.$
-</div>
-
-<p>Notice that unlike weak convergence, vague convergence does not guarantee that the limiting function $F$ is a distribution function.</p>
-
-<div class="theorem" text="Helly's selection">
-For a sequence of distribution functions $(F_n)$, there always exists a subsequence $(F_{n_k})$ and a decreasing right-continuous function $F$ such that $F_{n_k} \to_{v.} F.$
-</div>
-
-<details>
-  <summary>
-    expand proof
-  </summary>
-  
-<div class="proof"><br />
-(Step 1. Diagonal argument)
-&ensp; Let $q_1,\cdots,q_n \in \mathbb{Q}$ be $q_1&lt;\cdots&lt;q_n.$ For $k=1,$ $\{F_1(q_1),F_2(q_1),\cdots\}$ is a bounded real sequence so has a limit point. Pick a subsequence $(n_{1k})$ such that $F_{1k}(q_1) \to G(q_1)$ for a limit point $G(q_1).$ For $k=2,$ we do the similar work. $\{F_{n_{11}}(q_2), F_{n_{12}}(q_2),\cdots\}$ is a bounded real sequence so has a limit point $G(q_2).$ Picka further subsequence $(n_{2k})\subset(n_{1k})$ such that $F_{2k}(q_2) \to G(q_2).$ Repeat this process for all consecutive $k\in\mathbb{N}$ and let $m_k = n_{kk}$ so that $F_{mk} \to G(q)$ for all $q \in \mathbb{Q}.$ Then by construction $G$ is non-decreasing. Let $F(x) = \inf\{G(q):~ q\in\mathbb{Q}, q&gt; x\}.$<br /><br />
-
-(Step 2. $F \leftarrow_{v.} F_{m_k}$ is right-continuous)<br />
-First we prove that $F$ is right-continuous.
-$$
-\begin{align}
-\lim_{x_n\downarrow x} F(x_n)
-&amp;= \lim_{x_n\downarrow x} \inf\{G(q):~ q\in\mathbb{Q}, q&gt;x_n\} \\
-&amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&gt;x_n \text{ for some } n\} \\
-&amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&gt;x\} = F(x).
-\end{align}
-$$
-Next we show that $F_{m_k} \to_{v.} F.$ Given $x$ a continuity point of $F,$ pick $r_1,r_2,s\in\mathbb{Q}$ so that $r_1&lt;r_2&lt;x&lt;s$ and $F(x)-\epsilon&lt;F(r_1)\le F(r_2) \le F(x) \le F(s) &lt; F(x)+\epsilon.$ Then
-$$
-F_{m_k}(r_2) \to G(r_2) \ge F(r_1) = \inf\{G(q):~ q\in\mathbb{Q}, q&gt;r_1\}, \\
-F_{m_k}(s) \to G(s) \le F(s) = \inf\{G(q):~ q\in\mathbb{Q}, q&gt;s\}.
-$$
-Thus for all large $k$,
-$$
-F(x)-\epsilon &lt; F_{m_k}(x) &lt; F(x)+\epsilon.
-$$
-so $F_{m_k} \to_{v.} F.$
-</div>
-</details>
-<p><br /></p>
-
-<h2 id="tightness-theorem">Tightness theorem</h2>
-<p>While Helly’s thereom provides valuable result, vague convergence is not enough. We want additional condition that allows us to ensure weak convergence. Uniform tightness<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> is the one.</p>
-
-<div class="definition" text="uniform tightness">
-A set of measures $\{P_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&gt;0$ there exists a compact set $K$ such that $\inf_n P_n(K) \ge 1-\epsilon.$ Likewise, We say a set of distribution functions $\{F_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&gt;0$ there exists $M\in\mathbb{R}$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$
-</div>
-
-<p>Uniform tightness implies the measure of any set can be approximated from below by some compact set. This condition leads to a stronger result.</p>
-
-<div class="theorem" text="tightness theorem">
-Every subsequential limit of a sequence of distribution functions $(F_n)$ is a distribution function if and only if $(F_n)$ is uniformly tight.
-</div>
-
-<details>
-  <summary>
-    expand proof
-  </summary>
-   
-<div class="proof"><br />
-($\Leftarrow$)
-We need to show that for $F_{n_k} \to_{v.} F,$ $F$ is a distribution function. It suffices to show $\lim_{x \to \infty} (1-F(x)+F(-x))=0.$ Given $\epsilon&gt;0,$ there exists $M&gt;0$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$ Let $r&lt;-M$ and $s&gt;M$ be continuity points of $F.$
-$$
-\begin{align}
-1-F(s)+F(r) 
- &amp;= \lim_k (1-F_{n_k}(s)+F_{n_k}(r)) \\
- &amp;\le \limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.
-\end{align}
-$$
-Thus 
-$$
-\limsup\limits_{x\to\infty} (1-F(x)+F(-x)) \le \epsilon.
-$$
-
-($\Rightarrow$) Suppose $(F_n)$ is not tight and show that $F$ is not a distribution function in that case. There exists $\epsilon&gt;0$ such that $\limsup_n(1-F_n(M)+F_n(M))&gt;\epsilon$ for all $M.$ Let $r&lt;0&lt;s$ be continuity points of $F,$ then
-$$
-\begin{align}
-1-F(s)+F(r)
- &amp;= \lim_j (1-F_{n(k_j)}(s)+F_{n(k_j)}(r)) \\
- &amp;\ge \liminf\limits_j (1-F_{n(k_j)}(k_j)+F_{n(k_j)}(-k_j)) \ge \epsilon.
-\end{align}
-$$
-As $s\to\infty$ and $r\to-\infty,$ $\lim_{x\to\infty} (1-F(x)+F(-x))&gt;0$ so $F$ is not a distribution function.
-</div>
-</details>
-
-<p>There is a criterion for checking whether a sequence is uniformly tight.</p>
-
-<div class="theorem" text="sufficiency of tightness">
-For a sequence $(F_n),$ if there exists a function $\varphi \ge 0$ such that
-$$
-\begin{cases}
-\varphi(x) \to \infty \text{ as } |x|\to\infty. \\
-\sup_n \int \varphi dF_n &lt; \infty.
-\end{cases}
-$$
-then $(F_n)$ is uniformly tight.
-</div>
-<div class="proof">
-$$
-\begin{align}
-&amp;\;\;\;\;1-F_n(M)+F_n(-M) \\
- &amp;= \int_{|x|&gt;M} 1 dF_n(x) \\
- &amp;\le \frac{\sup_n \int \varphi dF_n}{\inf_{|x|\ge M}\varphi(x)}.
-\end{align}
-$$
-As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
-</div>
-
-<p><br /></p>
-
-<p><strong><em>Acknowledgement</em></strong></p>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:1" role="doc-endnote">
-      <p>Many textbooks including Durrett and Billingsley use the term <em>tightness</em> to describe this condition. However I want to separate the terms for clarity: <em>uniform tightness</em> for a collection of measures, and <em>tightness</em> for a measure. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
+          <p>Our next interest is in whether a sequence of distribution functions converges weakly. To be more specific, subsequential convergence of distribution functions are is the topic of this subsection. Helly’s selection theorem shows there always exists a <em>vaguely</em> convergent subsequence. Uniform tightness of a sequence strengthen this result to be weakly convergent.    <!- preview first paragraph ->
           
-          <a class="read-more-btn" href="/probability/PTE-3.2.2-vague-convergence"> » </a>
+          <a class="read-more-btn" href="/probability/PTE-3.2.2-vague-convergence"><br> » continue reading </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -329,6 +183,11 @@ As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
 
         <!--
         
+        <span class="author_meta">
+          <img src="/assets/img/Sihyung Park.jpg"></img>
+          <span>David Lin</span>
+        </span>
+        
         -->
 
         <!--p class="readmore">
@@ -341,204 +200,15 @@ As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-3.2.1-weak-convergence">(PTE) 3.2.1. Weak convergence</a></h2>
+        <h1 class="post_title"><a href="/probability/PTE-3.2.1-weak-convergence">(PTE) 3.2.1. Weak convergence</a></h1>
         <time class="post_date">22 December 2020, Tuesday</time>
       </header>
       <div class="post_excerpt">
         <p>
           
-          <p>Now that we covered convergence of point estimates (specifically, the sample mean) our next interest is in weaker concept of convergence where convergence in probability is not guaranteed. In undergraduate statistics, we call it convergence in distribution. Here we prefer borrowing terminology from measure theory and call it <em>weak convergence</em> and write $X_n \overset{w}{\to} X$.</p>
-
-<ul id="markdown-toc">
-  <li><a href="#definition" id="markdown-toc-definition">Definition</a></li>
-  <li><a href="#converging-together-lemmas" id="markdown-toc-converging-together-lemmas">Converging together lemmas</a></li>
-  <li><a href="#tools" id="markdown-toc-tools">Tools</a>    <ul>
-      <li><a href="#skorohods-representation-theorem" id="markdown-toc-skorohods-representation-theorem">Skorohod’s representation theorem</a></li>
-      <li><a href="#convergence-theorems" id="markdown-toc-convergence-theorems">Convergence theorems</a></li>
-      <li><a href="#continuous-mapping-theorem" id="markdown-toc-continuous-mapping-theorem">Continuous mapping theorem</a></li>
-      <li><a href="#portmanteau-theorem" id="markdown-toc-portmanteau-theorem">Portmanteau theorem</a></li>
-    </ul>
-  </li>
-  <li><a href="#metric-for-weak-convergence" id="markdown-toc-metric-for-weak-convergence">Metric for weak convergence</a></li>
-</ul>
-<p><br /></p>
-
-<h2 id="definition">Definition</h2>
-
-<div class="definition" text="weak convergence 1">
-Let $(F_n)$ be a sequence of distribution functions. $F_n$ converges weakly to a distribution $F$, if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F.$ Likewise, a sequence of random variables $X_n$ converges weakly to a random variable $X$ if the corresponding distribution functions weakly converges.
-</div>
-
-<p>The name “weak convergence” was named after <a href="https://en.wikipedia.org/wiki/Weak_topology#The_weak_and_weak*_topologies">weak topology</a> generated by bounded continuous functions: Convergence in weak topology is weak convergence. Some textbook separates the usage of terms <em>weak convergence</em> and <em>convergence in distribution</em> by assigning the former to distribution functions and the latter to random variables. Durrett used the former for distribution and both for random variables.</p>
-
-<p>While Durrett define the concept as pointwise convergence at continuity points, Billingsley<sup id="fnref:billingsley" role="doc-noteref"><a href="#fn:billingsley" class="footnote">1</a></sup> define it differently.</p>
-
-<div class="definition" text="weak convergence 2">
-A sequence of probability measures $P_n$ converges weakly to a probability measure $P,$ if $\int f dP_n \to \int f dP_n$ for all bounded continuous function $f.$ $F_n \overset{w}{\to} F$ if their corresponding probability measures weakly converges. $X_n \overset{w}{\to} X$ if $Ef(X_n) \to Ef(X)$ for all bounded continuous $f.$
-</div>
-
-<p>Equivalence of both definitions is not difficult to show. $1\rightarrow 2$ is trivial by the Skorohod’s representation theorem (<a href="http://naturale0.github.io/probability/PTE-3.2-weak-convergence#skorohods-representation-theorem">see below</a>) and BCT. To show $2\rightarrow 1$, consider a function</p>
-
-\[g_{x,\epsilon}(y) = \begin{cases}
- 1 &amp;,~ y \le x \\
- 0 &amp;,~ y \ge x+\epsilon \\
- \text{linear} &amp;,~ x &lt; y &lt; x+\epsilon 
-\end{cases}\]
-
-<p>for $x$: a continuity point of $F$ and an arbitrary $\epsilon &gt;0.$ Then $g_{x,\epsilon}$ is continuous and bounded with</p>
-
-\[g_{x-\epsilon,\epsilon} \le \mathbf{1}_{y \le x} \le g_{x,\epsilon}\]
-
-<p>and we get</p>
-
-\[F(x-\epsilon) \le \liminf\limits_n F_n(x) \le \limsup\limits_n F_n(x) \le F(x+\epsilon).\]
-
-<p>Since $x$ was a continuity point and $\epsilon&gt;0$ was arbitrary, letting $\epsilon \to 0$ yields the result we want.<br /><br /></p>
-
-<h2 id="converging-together-lemmas">Converging together lemmas</h2>
-
-<div class="lemma"><br />
-(i) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_n+Y_n \overset{w}{\to} X+c.$<br />
-(ii) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_nY_n \overset{w}{\to} cX.$<br />
-(iii) $X_n\overset{P}{\to}X$ $\implies X_n \overset{w}{\to} X.$<br />
-(iv) $X_n\overset{w}{\to} c$ for $c\in\mathbb{R}$ $\implies X_n \overset{P}{\to} c.$<br />
-</div>
-
-<p>The proof is not difficult so I would like to leave it as an exercise.<br /><br /></p>
-
-<h2 id="tools">Tools</h2>
-<h3 id="skorohods-representation-theorem">Skorohod’s representation theorem</h3>
-<p>Even though the weak convergence is weak, we can relate it with much stronger almost sure convergence. Skorohod’s representation theorem allows us to do so.</p>
-
-<div class="theorem" text="Skorohod's representation">
-Suppose $F_n \overset{w}{\to} F_\infty.$ Then there exists random variables $Y_n \sim F_n$ and $Y_\infty \sim F_\infty$ such that $Y_n \to Y_\infty \text{ a.s.}$
-</div>
-
-<p>The proof is similar to that of <a href="http://127.0.0.1:4000/probability/PTE-1.2-Distributions#distribution-functions">theorem 1.2.2</a>.</p>
-
-<details>
-  <summary>
-    expand proof
-  </summary>
-  
-<div class="proof"><br />
-Let $(\Omega, \mathcal{F}, P) = ((0,1), \mathcal{B}(0,1), \lambda)$ where $\lambda$ is the Lebesgue measure. Define $Y_n(\omega) = \sup\{y:~ F_n(y) &lt; \omega\}$ so that $Y_n \sim F_n$ for $1\le n \le \infty$ which implies
-$$
-\begin{align}
-F(y) &lt; \omega &amp;\iff y &lt; Y_\infty(\omega), \\
-F(z) &gt; \omega &amp;\iff z &gt; Y_\infty(\omega).
-\end{align}
-$$
-&ensp; We now need almost sure convergence. Let $a_\omega = \sup\{y:~ F_\infty(y)&lt;\omega \}$, $b_\omega = \inf\{y:~ F_\infty(y)&gt;\omega \}$, $\Omega_0 = \{\omega:~ (a_\omega, b_\omega) = \phi\}.$ Observe that $\omega \notin \Omega_0$ are at most countable since $(a_\omega, b_\omega)$'s are disjoint non-empty intervals containing distinct rational numbers. Thus $P(\Omega_0) = 1.$ Pick an arbitrary $\omega, \omega' \in \Omega_0$ such that $\omega &lt; \omega'.$ Then for given $\epsilon &gt;0$, $Y_n(\omega) \to Y_\infty(\omega)$ ($\omega$ is a continuity point of $Y_\infty$) implies for all large $n,$
-$$
-Y_\infty(\omega) - \epsilon &lt; Y_n(\omega) &lt; Y_\infty(\omega') + \epsilon.
-$$
-
-So it follows that 
-$$
-Y_\infty(\omega) \le \liminf\limits_n Y_n(\omega) \le \limsup\limits_n Y_n(\omega) \le Y_\infty(\omega').
-$$
-
-Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega) = Y_\infty(\omega).$
-</div>
-</details>
-
-<p>Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F_\infty^{-1}$ on $\Omega_0$ respectively.<br /><br /></p>
-
-<h3 id="convergence-theorems">Convergence theorems</h3>
-<p>The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.</p>
-
-<div class="theorem" text="Fatou's lemma">
-$g \ge 0$, $g$ is continuous, $X_n \overset{w}{\to} X_\infty.$ $\implies \liminf_n Eg(X_n) \ge Eg(X_\infty).$
-</div>
-<div class="proof"><br />
-Let $Y_n \sim F_n$ for $1 \le n \le \infty$ be random variables such that $Y_n \to Y$ a.s. By Fatou's lemma for almost surely convergent random variables, $\liminf_n Eg(Y_n) \ge Eg(Y_\infty).$ Since $X_n \overset{d}{=} Y_n$ for all $1\le n\le\infty$ the result follows.
-</div>
-
-<div class="theorem" text="DCT">
-$g,h$ are continuous, $g&gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g(x) dF_n(x) &lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h(x) dF_n(x) \to \int h(x) dF(x).$
-</div>
-<p><br /></p>
-
-<h3 id="continuous-mapping-theorem">Continuous mapping theorem<sup id="fnref:later1" role="doc-noteref"><a href="#fn:later1" class="footnote">2</a></sup></h3>
-<div class="theorem" text="continuous mapping">
-$g$ is a measurable function. $D_g=\{x:~ g \text{ is not continuous at} x\}.$ If $X_n \overset{w}{\to} X_\infty$ and $P(X_\infty \in D_g)=0,$ then $g(X_n) \overset{w}{\to} g(X_\infty).$
-</div>
-
-<p>Such $D_g$ is called the <em>discontinuity set</em> of $g.$ The theorem extends the possible choice of $g$ from continuous to measurable functions.<br /><br /></p>
-
-<h3 id="portmanteau-theorem">Portmanteau theorem<sup id="fnref:billingsley:1" role="doc-noteref"><a href="#fn:billingsley" class="footnote">1</a></sup></h3>
-
-<p>The following theorem is so important that it is named portmanteau. It is actually equivalent definitions of weak convergence. I found that almost every theorem regarding weak convergence can be proved with this to some extent.</p>
-
-<div class="theorem" text="Portmanteau theorem">
-For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ where $\Omega$ is a metric space, the followings are equivalent.<br />
-(i) $P_n \overset{w}{\to} P.$ <br />
-(ii) $\limsup_n P_n(F) \le P(F),~ \forall \text{closed } F.$ <br />
-(iii) $\liminf_n P_n(G) \ge P(G),~ \forall \text{open } G.$ <br />
-(iv) $P_n(A) \to P(A),~ \forall A:~ P(\partial A)=0.$
-</div>
-
-<details>
-  <summary style="cursor: pointer; color: #6F6F6F">
-    <span>expand proof</span>
-  </summary>
-  
-<div class="proof"><br />
-((i)$\Rightarrow$(ii)) For given $\epsilon &gt; 0$, let $f^\epsilon(x) = (1 - \inf_{y\in F}|x - y|/\epsilon)^+$ so that $\mathbf{1}_F \le f^\epsilon \le \mathbf{1}_{F^\epsilon}$ where $F^\epsilon = \{x: \inf_{y\in F}|x-y| &lt; \epsilon\}.$ Then $f^\epsilon$ is continuous and bounded so 
-$$
-\limsup_n P_n(F) \le \limsup_n \int f^\epsilon dP_n = \int f^\epsilon dP \le P(F^\epsilon).
-$$
-Letting $\epsilon \to 0$ leads to the result.<br />
-((ii)$\Leftrightarrow$(iii)) is trivial.<br />
-((ii)&amp;(iii)$\Rightarrow$(iv))
-$$
-\limsup_n P_n(A) \le \limsup_n P_n(\overline A) \le P(\overline A) = P(A). \\
-\liminf_n P_n(A) \ge \liminf_n P_n(A^\circ) \ge P(A^\circ) = P(A). 
-$$
-((iv)$\Rightarrow$(i)) Without loss of generality, let $f$ be a continuous function with $0 \le f \le 1.$ Note that $P(f=t) &gt; 0$ for at most countably many $t$'s so that $P(\partial\{f&gt;t\})=0.$ Hence by (iv),
-$$
-\begin{align}
-\int f dP_n &amp;= \int_0^\infty P_n(f &gt; t) dt \\
-&amp;\to \int_0^\infty P(f &gt; t) dt = \int f dP.
-\end{align}
-$$
-is the desired result.
-</div>
-</details>
-<p><br /></p>
-
-<h2 id="metric-for-weak-convergence">Metric for weak convergence</h2>
-<div class="definition" text="Lévy metric">
-$\rho(F,G) = \inf\{\epsilon:~ F(x-\epsilon)-\epsilon \le G(x) \le F(x+\epsilon)+\epsilon,\forall x\}$ is the Lévy metric.
-</div>
-
-<p>The Lévy metric is a metric defined on a space of distribution functions that metrizes weak convergence. That is, $\rho(F_n,F_\infty)\to0$ if and only if $F_n \overset{w}{\to} F_\infty.$<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">3</a></sup> With this measure we can regard a space of probability measures as a metric space, which is well studied.</p>
-
-<p><br /></p>
-
-<p><strong><em>Acknowledgement</em></strong></p>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
-<p>This post is also based on the textbook <em>Convergence of Probability Measures</em>, 2nd edition (Billingsley, 1999) and the lecture at SNU (instructor: Prof. Jaeyong Lee).</p>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:billingsley" role="doc-endnote">
-      <p>Billingsley, 1999, <em>Convergence of Probability Measures</em>, 2nd edition. <a href="#fnref:billingsley" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:billingsley:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-    <li id="fn:later1" role="doc-endnote">
-      <p>I will prove it in more general form later when reviewing Billingsley (1999). <a href="#fnref:later1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:2" role="doc-endnote">
-      <p>TBD. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
-
+          <p>Now that we covered convergence of point estimates (specifically, the sample mean) our next interest is in weaker concept of convergence where convergence in probability is not guaranteed. In undergraduate statistics, we call it convergence in distribution. Here we prefer borrowing terminology from measure theory and call it <em>weak convergence</em> and write $X_n \overset{w}{\to} X$.    <!- preview first paragraph ->
           
-          <a class="read-more-btn" href="/probability/PTE-3.2.1-weak-convergence"> » </a>
+          <a class="read-more-btn" href="/probability/PTE-3.2.1-weak-convergence"><br> » continue reading </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -555,6 +225,11 @@ $\rho(F,G) = \inf\{\epsilon:~ F(x-\epsilon)-\epsilon \le G(x) \le F(x+\epsilon)+
 
         <!--
         
+        <span class="author_meta">
+          <img src="/assets/img/Sihyung Park.jpg"></img>
+          <span>David Lin</span>
+        </span>
+        
         -->
 
         <!--p class="readmore">
@@ -567,77 +242,15 @@ $\rho(F,G) = \inf\{\epsilon:~ F(x-\epsilon)-\epsilon \le G(x) \le F(x+\epsilon)+
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="/probability/PTE-2.S1-convergence-concepts">(PTE) 2.S1. Convergence concepts</a></h2>
+        <h1 class="post_title"><a href="/probability/PTE-2.S1-convergence-concepts">(PTE) 2.S1. Convergence concepts</a></h1>
         <time class="post_date">21 December 2020, Monday</time>
       </header>
       <div class="post_excerpt">
         <p>
           
-          <p>This is a quick review of convergence concepts and their relations.</p>
-
-<ul id="markdown-toc">
-  <li><a href="#relationship-between-convergence-concepts" id="markdown-toc-relationship-between-convergence-concepts">Relationship between convergence concepts</a></li>
-  <li><a href="#counterexamples" id="markdown-toc-counterexamples">Counterexamples</a></li>
-</ul>
-<p><br /></p>
-
-<h2 id="relationship-between-convergence-concepts">Relationship between convergence concepts</h2>
-
-<div class="theorem" text="Lᵖ and P (1)">
-$X_n \overset{L^p}{\to} X \implies X_n \overset{P}{\to} X.$
-</div>
-
-<p><a href="http://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers">I already mentioned the proof of it</a>: Use Markov-Chebyshev inequality.</p>
-
-<div class="theorem" text="Lᵖ and P (2)">
-Let $X_n, X \in L^p$ be random variables that $X_n \overset{P}{\to} X.$ If there exists $Y\in L^p$ such that $|X_n - X| \le Y$ for all $n$, then $X_n \overset{L^p}{\to} X.$
-</div>
-
-<p>The result directly follows from the dominated convergence theorem.</p>
-
-<div class="theorem">
-For $1\le q &lt; p$, $X_n \overset{L^p}{\to} X \implies X_n \overset{L^q}{\to} X.$
-</div>
-
-<p>This is from the Jensen’s inequality. Hölder’s inequality can also yield the result. <br /><br /></p>
-
-<div style="text-align:center">
-<img src="../assets/fig/201221_convergence.png" alt="convergence.png" width="250" />
-<br />
-<em>Relationship between convergence concepts.</em>
-</div>
-<p><br /></p>
-
-<h2 id="counterexamples">Counterexamples</h2>
-
-<div class="example"><br />
-Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.<br />
-Let $X_{n,m}(\omega) = \begin{cases}
-1 &amp;,~ \frac{m-1}{2^n} &lt; \omega \le \frac{m}{2^n} \\
-0 &amp;,~ \text{otherwise}
-\end{cases}$<br />
-Let $\{Y_n:~ n\in\mathbb{N}\} = \{X_{1,1}, X_{1,2}, X_{2,1}, X_{2,2}, \cdots\}.$ Then $Y_n \overset{P}{\to} 0$ and $Y_n \overset{L^p}{\to} 0$, but $Y_n \not\to 0 \text{ a.s.}$
-</div>
-
-<div class="example"><br />
-Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.
-<br />
-$X_n(\omega) := \begin{cases}
-2^n &amp;,~ 0 &lt; \omega \le \frac{1}{2^n}\\
-0 &amp;,~ \text{otherwise}
-\end{cases}
-$<br />
-Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $S^p$-converge to a constant at all if $p &gt; 1.$
-</div>
-
-<p><br /><br /></p>
-
-<p><strong><em>Acknowledgement</em></strong></p>
-
-<p>This post series is based on the textbook <em>Probability: Theory and Examples</em>, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).</p>
-
+          <p>This is a quick review of convergence concepts and their relations.    <!- preview first paragraph ->
           
-          <a class="read-more-btn" href="/probability/PTE-2.S1-convergence-concepts"> » </a>
+          <a class="read-more-btn" href="/probability/PTE-2.S1-convergence-concepts"><br> » continue reading </a>
         </p>
       </div>
       <footer class="post_meta">
@@ -653,6 +266,95 @@ Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $
         -->
 
         <!--
+        
+        <span class="author_meta">
+          <img src="/assets/img/Sihyung Park.jpg"></img>
+          <span>David Lin</span>
+        </span>
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h1 class="post_title"><a href="/probability/PTE-2.5-convergence-of-random-series">(PTE) 2.5. Convergence of random series</a></h1>
+        <time class="post_date">21 December 2020, Monday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>As the last section in chapter 2, we cover convergence of random series. Especially, since I already explained <a href="https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#tail-events-and-the-0-1-law">what tail $\sigma$-fields and tail events are</a>, our focus will be on <em>Kolmogorov’s maximal inequality</em> and the <em>three series theorem</em>.    <!- preview first paragraph ->
+          
+          <a class="read-more-btn" href="/probability/PTE-2.5-convergence-of-random-series"><br> » continue reading </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        <span class="author_meta">
+          <img src="/assets/img/Sihyung Park.jpg"></img>
+          <span>David Lin</span>
+        </span>
+        
+        -->
+
+        <!--p class="readmore">
+          <a href=""><data data-icon="ei-arrow-right"></data>Read this article  </a>
+        </p-->
+      </footer>
+      <hr/>
+    </article>
+    
+
+    <article class="post_card post">
+      <header class="post_header">
+        <h1 class="post_title"><a href="/probability/PTE-2.4-strong-law-of-large-numbers">(PTE) 2.4. Strong law of large numbers</a></h1>
+        <time class="post_date">21 December 2020, Monday</time>
+      </header>
+      <div class="post_excerpt">
+        <p>
+          
+          <p>Putting together all of the topics we have covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).    <!- preview first paragraph ->
+          
+          <a class="read-more-btn" href="/probability/PTE-2.4-strong-law-of-large-numbers"><br> » continue reading </a>
+        </p>
+      </div>
+      <footer class="post_meta">
+
+
+        
+        <!--
+        
+        <a href="/category/probability">
+          <data data-icon="ei-archive"></data>
+          probability</a>
+        
+        -->
+
+        <!--
+        
+        <span class="author_meta">
+          <img src="/assets/img/Sihyung Park.jpg"></img>
+          <span>David Lin</span>
+        </span>
         
         -->
 
@@ -732,6 +434,6 @@ Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $
 
   /* pull down animation for details-proof tag */
   /* should only work for *proof*. (not for def., thm., etc..) */
-  <script type="text/javascript" src="../animation.js"></script>
+  <script type="text/javascript" src="https://naturale0.github.io/animation.js"></script>
   </body>
 </html>

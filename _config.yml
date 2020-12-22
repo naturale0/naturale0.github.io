@@ -9,7 +9,7 @@
 title: De Novo
 email: naturale0@snu.ac.kr
 description: > # this means to ignore newlines until "baseurl:"
-  statistical ideas that interest me.
+  Notes on Probability and Statistics.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 twitter_username: naturale0
@@ -41,7 +41,7 @@ plugins:
 url: "https://naturale0.github.io"
 
 # paginate
-paginate: 3
+paginate: 5
 paginate_path: "/page/:num"
 
 # permalink
@@ -49,7 +49,7 @@ permalink: /:categories/:title
 
 # SEO Tags
 author: Sihyung Park
-tagline: random stat ideas
+tagline: Notes on Probability and Statistics
 twitter:
   username: naturale0
   card: summary

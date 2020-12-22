@@ -10,7 +10,7 @@ title: Home
 
     <article class="post_card post">
       <header class="post_header">
-        <h2 class="post_title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title}}</a></h2>
+        <h1 class="post_title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title}}</a></h1>
         <time class="post_date">{{ post.date | date: "%d %B %Y, %A" }}</time>
       </header>
       <div class="post_excerpt">
@@ -18,9 +18,9 @@ title: Home
           {% if post.description %}
           {{ post.description }}
           {% else %}
-          {{ post.excerpt }}
+          {{ post.excerpt | split: "</p>" | first }}    <!- preview first paragraph ->
           {% endif %}
-          <a class="read-more-btn" href="{{ post.url | prepend: site.baseurl }}"> » </a>
+          <a class="read-more-btn" href="{{ post.url | prepend: site.baseurl }}"><br> » continue reading </a>
         </p>
       </div>
       <footer class="post_meta">

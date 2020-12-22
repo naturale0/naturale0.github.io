@@ -2,6 +2,7 @@
 layout: post
 title:  "Determination of random variables and random number generation"
 date:   2020-04-30 18:39:00 +0900
+author: "Sihyung Park"
 categories: probability
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title:  "Probabilistic interpretation of cross-entropy"
 date:   2018-05-03 19:00:00 +0900
+author: "Sihyung Park"
 categories: [decision theory]
 ---
 

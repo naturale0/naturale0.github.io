@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>De Novo</title>
-    <description>statistical ideas that interest me.
+    <description>Notes on Probability and Statistics.
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 15:12:18 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 15:12:18 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 15:52:15 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 15:52:15 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -388,7 +388,7 @@ For $1\le q &amp;lt; p$, $X_n \overset{L^p}{\to} X \implies X_n \overset{L^q}{\t
 &lt;p&gt;This is from the Jensen’s inequality. Hölder’s inequality can also yield the result. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;../assets/fig/201221_convergence.png&quot; alt=&quot;convergence.png&quot; width=&quot;250&quot; /&gt;
+&lt;img src=&quot;https://naturale0.github.io/assets/fig/201221_convergence.png&quot; alt=&quot;convergence.png&quot; width=&quot;250&quot; /&gt;
 &lt;br /&gt;
 &lt;em&gt;Relationship between convergence concepts.&lt;/em&gt;
 &lt;/div&gt;
@@ -547,7 +547,7 @@ Let $Y_k = X_k \mathbf{1}_{|X_k|\le k^{1/p}}$ then we can check it satisfies the
     
       <item>
         <title>(PTE) 2.4. Strong law of large numbers</title>
-        <description>&lt;p&gt;Putting together all of the topics we covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).&lt;/p&gt;
+        <description>&lt;p&gt;Putting together all of the topics we have covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#strong-law-of-large-numbers&quot; id=&quot;markdown-toc-strong-law-of-large-numbers&quot;&gt;Strong law of large numbers&lt;/a&gt;&lt;/li&gt;
@@ -730,7 +730,7 @@ $$
 &lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers (which is about $\frac{S_n}{n}$) and the central limit theorem ($\frac{S_n}{\sqrt{n}}$).&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;../assets/fig/201221_lil.png&quot; alt=&quot;lil.png&quot; width=&quot;300&quot; /&gt;
+&lt;img src=&quot;https://naturale0.github.io/assets/fig/201221_lil.png&quot; alt=&quot;lil.png&quot; width=&quot;300&quot; /&gt;
 &lt;br /&gt;
 &lt;em&gt;Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.&lt;/em&gt;
 &lt;/div&gt;
