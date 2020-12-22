@@ -334,19 +334,22 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .lemma[text]:before { content: "Lemma " counter(theorem) " (" attr(text) ")\a"; white-space: pre; }
 
-.proof { display: block; margin: 12px 0; font-style: normal; color: #6F6F6F; }
+.proof { display: block; margin: 12px 8px; font-style: normal; color: #6F6F6F; }
 
 .proof:before { content: "(Proof) "; font-style: italic; }
 
 .proof[text]:before { content: "(Proof of " attr(text) ")\a"; white-space: pre; }
 
-.proof:after { content: "\25FC"; float: right; }
+.proof:after { content: "\25FC"; float: none; }
 
 .definition { display: block; margin: 12px 0; font-style: normal; counter-increment: definition; }
 
 .definition[text]:before { content: "Definition " " (" attr(text) ")\a"; font-weight: bold; font-style: normal; }
 
 .definition:before { content: "Definition "; font-weight: bold; font-style: normal; }
+
+/*  styling expandables  */
+summary { outline: none; color: #6F6F6F; cursor: pointer; margin-bottom: 10px; }
 
 /* layout */
 html, .container { position: relative; min-height: 100%; }

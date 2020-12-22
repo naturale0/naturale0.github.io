@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 11:00:57 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 11:00:57 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 11:46:02 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 11:46:02 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -69,6 +69,11 @@ Suppose $F_n \overset{w}{\to} F_\infty.$ Then there exists random variables $Y_n
 
 &lt;p&gt;The proof is similar to that of &lt;a href=&quot;http://127.0.0.1:4000/probability/PTE-1.2-Distributions#distribution-functions&quot;&gt;theorem 1.2.2&lt;/a&gt;.&lt;/p&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $(\Omega, \mathcal{F}, P) = ((0,1), \mathcal{B}(0,1), \lambda)$ where $\lambda$ is the Lebesgue measure. Define $Y_n(\omega) = \sup\{y:~ F_n(y) &amp;lt; \omega\}$ so that $Y_n \sim F_n$ for $1\le n \le \infty$ which implies
 $$
@@ -89,8 +94,9 @@ $$
 
 Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega) = Y_\infty(\omega).$
 &lt;/div&gt;
+&lt;/details&gt;
 
-&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
 &lt;p&gt;The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.&lt;/p&gt;
@@ -126,6 +132,11 @@ For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ 
 (iv) $P_n(A) \to P(A),~ \forall A:~ P(\partial A)=0.$
 &lt;/div&gt;
 
+&lt;details&gt;
+  &lt;summary style=&quot;cursor: pointer; color: #6F6F6F&quot;&gt;
+    &lt;span&gt;expand proof&lt;/span&gt;
+  &lt;/summary&gt;
+  
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 ((i)$\Rightarrow$(ii)) For given $\epsilon &amp;gt; 0$, let $f^\epsilon(x) = (1 - \inf_{y\in F}|x - y|/\epsilon)^+$ so that $\mathbf{1}_F \le f^\epsilon \le \mathbf{1}_{F^\epsilon}$ where $F^\epsilon = \{x: \inf_{y\in F}|x-y| &amp;lt; \epsilon\}.$ Then $f^\epsilon$ is continuous and bounded so 
 $$
@@ -141,12 +152,13 @@ $$
 ((iv)$\Rightarrow$(i)) Without loss of generality, let $f$ be a continuous function with $0 \le f \le 1.$ Note that $P(f=t) &amp;gt; 0$ for at most countably many $t$'s so that $P(\partial\{f&amp;gt;t\})=0.$ Hence by (iv),
 $$
 \begin{align}
-\int f dP_n &amp;amp;= \int_0^\infty P(f &amp;gt; t) dt \\
+\int f dP_n &amp;amp;= \int_0^\infty P_n(f &amp;gt; t) dt \\
 &amp;amp;\to \int_0^\infty P(f &amp;gt; t) dt = \int f dP.
 \end{align}
 $$
 is the desired result.
 &lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
