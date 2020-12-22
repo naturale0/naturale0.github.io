@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 22:19:03 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 22:19:03 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 23:55:13 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 23:55:13 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -19,6 +19,7 @@
   &lt;li&gt;&lt;a href=&quot;#inversion-formula&quot; id=&quot;markdown-toc-inversion-formula&quot;&gt;Inversion formula&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#continuity-theorem&quot; id=&quot;markdown-toc-continuity-theorem&quot;&gt;Continuity theorem&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#moment-generating-property&quot; id=&quot;markdown-toc-moment-generating-property&quot;&gt;Moment generating property&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#etimation-of-the-error-term&quot; id=&quot;markdown-toc-etimation-of-the-error-term&quot;&gt;Etimation of the error term&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -208,11 +209,103 @@ Let $\mu_n$, $1\le n\le \infty$ be probability measures with ch.f. $\varphi_n.$ 
 (ii) If there exists $\varphi$ such that $\varphi_n \to \varphi$ and $\varphi$ is continuous at $0,$ then $\mu_n \overset{w}{\to} \mu$ where $\mu$ is a probability measure with $\varphi$ as its ch.f.
 &lt;/div&gt;
 
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i)
+(i) Trivial since $e^{itx}$ is bounded and continuous.&lt;br /&gt;
+(ii) First, show that $(\mu_n)$ is uniformly tight. Since $\varphi$ is continuous at $0,$ given $\epsilon&amp;gt;0,$ there exists $\delta&amp;gt;0$ such that $\frac{1}{\delta} \int_0^\delta (1-\varphi(t)) dt = \int 2(1-\frac{\sin \delta x}{\delta x}) d\mu(x) &amp;lt; \epsilon.$ So for large $n,$ $\frac{1}{\delta} (1-\varphi_n(t)) dt = \int 2(1-\frac{\sin \delta x}{\delta x}) d\mu_n(x) &amp;lt; 2\epsilon.$ The left hand side is bounded below by
+$$
+\begin{align}
+&amp;amp;\int 2 (1-\frac{\sin \delta x}{\delta x}) d\mu_n(x) \\
+&amp;amp;\ge \int 2(1-\frac{1}{\delta|x|}) d\mu_n(x) \\
+&amp;amp;\ge \int_{x:\frac{2}{\delta|x|}\le 1} 2(1-\frac{1}{\delta|x|}) d\mu_n(x) \\
+&amp;amp;\ge \int_{x:\frac{2}{\delta|x|}\le 1} 1 d\mu_n(x).
+\end{align}
+$$
+So $1-F_n(2/\delta)+F_n(-2/\delta) &amp;lt; 2\epsilon$ and $\mu_n$ is uniformly tight.&lt;br /&gt;
+&amp;ensp; By &lt;a href=&quot;http://naturale0.github.io/probability/PTE-3.2.2-vague-convergence#tightness-theorem&quot;&gt;tightness theorem&lt;/a&gt;, there exists a subsequence $\mu_{n_k}$ that converges weakly to some probability measure $\mu.$ We need to show that every subsequence has a further subsequence that weakly converges to the same $\mu.$ Given a subsequence $(\mu_{n_k}),$ again by tightness theorem there exists a further subsequence that converges weakly to some probability measure $\nu.$ By (i), $\varphi_{n_k} \to \varphi_\nu$ and since $\varphi_n \to \varphi,$ $\phi_\nu$ should be identical to $\varphi.$ Now given a bounded continuous function $f$, $(\int f d\mu_n)$ is a sequence on $\mathbb{R}.$ By the last result every subsequence of it has a further subsequence that converges to $\int f d\mu,$ so $\mu_n \overset{w}{\to} \mu.$
 &lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;moment-generating-property&quot;&gt;Moment generating property&lt;/h2&gt;
+&lt;p&gt;The result during the proof of the continuity theorem implies that smoothness of ch.f. $\varphi$ is related to the tail probability of underlying measure $\mu.$ To be specific, for $\delta&amp;gt;0,$ the inequality holds:
+\(\mu(\{x:~ |x|&amp;gt;\frac{2}{\delta}\}) \le \frac{1}{\delta} \int_{-\delta}^\delta (1-\varphi(t))dt.\)&lt;/p&gt;
+
+&lt;p&gt;This leads to another relationship between the ch.f. and its distribution: differentiability and derivative of the characteristic function is directly related to moments of its distribution.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;3.3.18&quot;&gt;
+If $E|X|^n = \int |x|^n d\mu(x) &amp;lt; \infty,$ then $\varphi$ is $n$ times differentiable and $\varphi^{(n)}(t) = \int (ix)^n e^{itx} d\mu(x).$
+&lt;/div&gt;
+
+&lt;p&gt;The obvious corollary is that $\varphi^{(n)}(0) = i^nEX^n$ for $1\le n \le p$ if $X\in L^p(\mu).$&lt;/p&gt;
+
+&lt;p&gt;The next theorem implies the converse in a special case.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;3.3.21&quot;&gt;
+$\limsup_{h\downarrow 0} \frac{\varphi(h) + \varphi(-h) - 2\varphi(0)}{h^2} &amp;gt; -\infty$ $\implies EX^2 &amp;lt;\infty.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;etimation-of-the-error-term&quot;&gt;Etimation of the error term&lt;/h2&gt;
+&lt;p&gt;Before ending the section, I would like to cover the estimation of ch.f.s with Taylor series about 0. This will be used when proving the central limit theorem (the next section) and the existence of canonical representation of infinitely divisible distributions (section 3.9).&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;3.3.19&quot;&gt;
+$$
+\left|e^{ix} - \sum_{m=0}^n \frac{(ix)^m}{m!}\right| \le \frac{|x|^{n+1}}{(n+1)!} \wedge \frac{2|x|^n}{n!}.
+$$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $R_n(x) = e^{ix} - \sum_{m=0}^n \frac{(ix)^m}{m!}.$ We will prove by induction. For $n=0,$ $R_0(x) = e^{ix}-1 = \int_0^x ie^{iy}dy.$ Thus 
+$$
+|R_0(x)| = \begin{cases}
+|e^{ix}-1| \le |e^{ix}| + 1 = 2 \\
+|\int_0^x ie^{iy} dy| \le \int_0^x |ie^{iy}| dy = x
+\end{cases}
+$$
+Now suppose $|R_n(x)| \le \frac{|x|^{n+1}}{(n+1)!} \wedge \frac{2|x|^n}{n!}.$ $R_{n+1} = R_n(x) - \frac{(ix)^{n+1}}{(n+1)!} = \int_0^x iR_n(y)dy.$ This is from term-by-term integration of $iR_n.$
+$$
+\begin{align}
+|R_{n+1}| &amp;amp;\le \int_0^x |iR_n(y)| dy \\
+  &amp;amp;\le \int_0^x (\frac{|y|^{n+1}}{(n+1)!} \wedge \frac{2|y|^n}{n!}) dy \\
+  &amp;amp;= \frac{|x|^{n+2}}{(n+2)!} \wedge \frac{2|x|^{n+1}}{(n+1)!}.
+\end{align}
+$$ 
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;Using this, we can reduce the order of error to 2 (from 3) for second-order Taylor series. We write $g(x) = o(f(x))$ if $g(x)/f(x) \to 0$ as &lt;strong&gt;$x\to0.$&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;upper bound of the error&quot;&gt;
+$EX^2 &amp;lt; \infty$ $\implies \varphi(t) = 1 + itEX - \frac{t^2 EX^2}{2} + o(t^2).$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+By the previous theorem we get
+$$
+\begin{align}
+|ER_2(tX)| \le E|R_2(tX)| \\
+  \le E(\frac{|tX|^3}{3!} \wedge \frac{2|tX|^2}{2!}) \\
+  \le t^2 E(|t||X|^3 \wedge X^2).
+\end{align}
+$$
+As $t\to0,$ $|t||X|^3\wedge X^2 \to 0$ and $|t||X|^3\wedge X^2 \le X^2$ with $EX^2 &amp;lt;\infty.$ By DCT, $ER_2(tX)/t^2 \to 0$ as $t\to0$ so $ER_2(tX) = o(t^2).$
+&lt;/div&gt;
+&lt;/details&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -221,7 +314,7 @@ Let $\mu_n$, $1\le n\le \infty$ be probability measures with ch.f. $\varphi_n.$ 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 22 Dec 2020 18:56:00 +0900</pubDate>
+        <pubDate>Tue, 22 Dec 2020 23:55:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</guid>
         
