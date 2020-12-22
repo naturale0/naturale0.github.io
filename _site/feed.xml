@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 23:55:13 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 23:55:13 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 23:55:59 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 23:55:59 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -286,7 +286,7 @@ $$
 &lt;p&gt;Using this, we can reduce the order of error to 2 (from 3) for second-order Taylor series. We write $g(x) = o(f(x))$ if $g(x)/f(x) \to 0$ as &lt;strong&gt;$x\to0.$&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;upper bound of the error&quot;&gt;
-$EX^2 &amp;lt; \infty$ $\implies \varphi(t) = 1 + itEX - \frac{t^2 EX^2}{2} + o(t^2).$
+$$EX^2 &amp;lt; \infty \implies \varphi(t) = 1 + itEX - \frac{t^2 EX^2}{2} + o(t^2).$$
 &lt;/div&gt;
 
 &lt;details&gt;
