@@ -6,9 +6,155 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 13:04:34 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 13:04:34 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 14:52:11 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 14:52:11 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 3.2.2. Vague convergence and uniform tightness</title>
+        <description>&lt;p&gt;Our next interest is in whether a sequence of distribution functions converges weakly. To be more specific, subsequential convergence of distribution functions are is the topic of this subsection. Helly’s selection theorem shows there always exists a &lt;em&gt;vaguely&lt;/em&gt; convergent subsequence. Uniform tightness of a sequence strengthen this result to be weakly convergent.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#hellys-selection-theorem&quot; id=&quot;markdown-toc-hellys-selection-theorem&quot;&gt;Helly’s selection theorem&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tightness-theorem&quot; id=&quot;markdown-toc-tightness-theorem&quot;&gt;Tightness theorem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;hellys-selection-theorem&quot;&gt;Helly’s selection theorem&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;vague convergence&quot;&gt;
+A sequence of distribution $(F_n)$ vaguely converges to a function $F$ if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F$ and write $F_n \to_{v.} F.$
+&lt;/div&gt;
+
+&lt;p&gt;Notice that unlike weak convergence, vague convergence does not guarantee that the limiting function $F$ is a distribution function.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Helly's selection&quot;&gt;
+For a sequence of distribution functions $(F_n)$, there always exists a subsequence $(F_{n_k})$ and a decreasing right-continuous function $F$ such that $F_{n_k} \to_{v.} F.$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(Step 1. Diagonal argument)
+&amp;ensp; Let $q_1,\cdots,q_n \in \mathbb{Q}$ be $q_1&amp;lt;\cdots&amp;lt;q_n.$ For $k=1,$ $\{F_1(q_1),F_2(q_1),\cdots\}$ is a bounded real sequence so has a limit point. Pick a subsequence $(n_{1k})$ such that $F_{1k}(q_1) \to G(q_1)$ for a limit point $G(q_1).$ For $k=2,$ we do the similar work. $\{F_{n_{11}}(q_2), F_{n_{12}}(q_2),\cdots\}$ is a bounded real sequence so has a limit point $G(q_2).$ Picka further subsequence $(n_{2k})\subset(n_{1k})$ such that $F_{2k}(q_2) \to G(q_2).$ Repeat this process for all consecutive $k\in\mathbb{N}$ and let $m_k = n_{kk}$ so that $F_{mk} \to G(q)$ for all $q \in \mathbb{Q}.$ Then by construction $G$ is non-decreasing. Let $F(x) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt; x\}.$&lt;br /&gt;&lt;br /&gt;
+
+(Step 2. $F \leftarrow_{v.} F_{m_k}$ is right-continuous)&lt;br /&gt;
+First we prove that $F$ is right-continuous.
+$$
+\begin{align}
+\lim_{x_n\downarrow x} F(x_n)
+&amp;amp;= \lim_{x_n\downarrow x} \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x_n\} \\
+&amp;amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x_n \text{ for some } n\} \\
+&amp;amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x\} = F(x).
+\end{align}
+$$
+Next we show that $F_{m_k} \to_{v.} F.$ Given $x$ a continuity point of $F,$ pick $r_1,r_2,s\in\mathbb{Q}$ so that $r_1&amp;lt;r_2&amp;lt;x&amp;lt;s$ and $F(x)-\epsilon&amp;lt;F(r_1)\le F(r_2) \le F(x) \le F(s) &amp;lt; F(x)+\epsilon.$ Then
+$$
+F_{m_k}(r_2) \to G(r_2) \ge F(r_1) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;r_1\}, \\
+F_{m_k}(s) \to G(s) \le F(s) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;s\}.
+$$
+Thus for all large $k$,
+$$
+F(x)-\epsilon &amp;lt; F_{m_k}(x) &amp;lt; F(x)+\epsilon.
+$$
+so $F_{m_k} \to_{v.} F.$
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tightness-theorem&quot;&gt;Tightness theorem&lt;/h2&gt;
+&lt;p&gt;While Helly’s thereom provides valuable result, vague convergence is not enough. We want additional condition that allows us to ensure weak convergence. Uniform tightness&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is the one.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;uniform tightness&quot;&gt;
+A set of measures $\{P_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&amp;gt;0$ there exists a compact set $K$ such that $\inf_n P_n(K) \ge 1-\epsilon.$ Likewise, We say a set of distribution functions $\{F_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&amp;gt;0$ there exists $M\in\mathbb{R}$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$
+&lt;/div&gt;
+
+&lt;p&gt;Uniform tightness implies the measure of any set can be approximated from below by some compact set. This condition leads to a stronger result.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;tightness theorem&quot;&gt;
+Every subsequential limit of a sequence of distribution functions $(F_n)$ is a distribution function if and only if $(F_n)$ is uniformly tight.
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+($\Leftarrow$)
+We need to show that for $F_{n_k} \to_{v.} F,$ $F$ is a distribution function. It suffices to show $\lim_{x \to \infty} (1-F(x)+F(-x))=0.$ Given $\epsilon&amp;gt;0,$ there exists $M&amp;gt;0$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$ Let $r&amp;lt;-M$ and $s&amp;gt;M$ be continuity points of $F.$
+$$
+\begin{align}
+1-F(s)+F(r) 
+ &amp;amp;= \lim_k (1-F_{n_k}(s)+F_{n_k}(r)) \\
+ &amp;amp;\le \limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.
+\end{align}
+$$
+Thus 
+$$
+\limsup\limits_{x\to\infty} (1-F(x)+F(-x)) \le \epsilon.
+$$
+
+($\Rightarrow$) Suppose $(F_n)$ is not tight and show that $F$ is not a distribution function in that case. There exists $\epsilon&amp;gt;0$ such that $\limsup_n(1-F_n(M)+F_n(M))&amp;gt;\epsilon$ for all $M.$ Let $r&amp;lt;0&amp;lt;s$ be continuity points of $F,$ then
+$$
+\begin{align}
+1-F(s)+F(r)
+ &amp;amp;= \lim_j (1-F_{n(k_j)}(s)+F_{n(k_j)}(r)) \\
+ &amp;amp;\ge \liminf\limits_j (1-F_{n(k_j)}(k_j)+F_{n(k_j)}(-k_j)) \ge \epsilon.
+\end{align}
+$$
+As $s\to\infty$ and $r\to-\infty,$ $\lim_{x\to\infty} (1-F(x)+F(-x))&amp;gt;0$ so $F$ is not a distribution function.
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;There is a criterion for checking whether a sequence is uniformly tight.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;sufficiency of tightness&quot;&gt;
+For a sequence $(F_n),$ if there exists a function $\varphi \ge 0$ such that
+$$
+\begin{cases}
+\varphi(x) \to \infty \text{ as } |x|\to\infty. \\
+\sup_n \int \varphi dF_n &amp;lt; \infty.
+\end{cases}
+$$
+then $(F_n)$ is uniformly tight.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;
+$$
+\begin{align}
+&amp;amp;\;\;\;\;1-F_n(M)+F_n(-M) \\
+ &amp;amp;= \int_{|x|&amp;gt;M} 1 dF_n(x) \\
+ &amp;amp;\le \frac{\sup_n \int \varphi dF_n}{\inf_{|x|\ge M}\varphi(x)}.
+\end{align}
+$$
+As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Many textbooks including Durrett and Billingsley use the term &lt;em&gt;tightness&lt;/em&gt; to describe this condition. However I want to separate the terms for clarity: &lt;em&gt;uniform tightness&lt;/em&gt; for a collection of measures, and &lt;em&gt;tightness&lt;/em&gt; for a measure. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 22 Dec 2020 13:23:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 3.2.1. Weak convergence</title>
@@ -16,6 +162,7 @@
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#definition&quot; id=&quot;markdown-toc-definition&quot;&gt;Definition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#converging-together-lemmas&quot; id=&quot;markdown-toc-converging-together-lemmas&quot;&gt;Converging together lemmas&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#tools&quot; id=&quot;markdown-toc-tools&quot;&gt;Tools&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#skorohods-representation-theorem&quot; id=&quot;markdown-toc-skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;&lt;/li&gt;
@@ -23,6 +170,7 @@
       &lt;li&gt;&lt;a href=&quot;#portmanteau-theorem&quot; id=&quot;markdown-toc-portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#metric-for-weak-convergence&quot; id=&quot;markdown-toc-metric-for-weak-convergence&quot;&gt;Metric for weak convergence&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -32,7 +180,7 @@
 Let $(F_n)$ be a sequence of distribution functions. $F_n$ converges weakly to a distribution $F$, if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F.$ Likewise, a sequence of random variables $X_n$ converges weakly to a random variable $X$ if the corresponding distribution functions weakly converges.
 &lt;/div&gt;
 
-&lt;p&gt;Some textbook separates the usage of terms &lt;em&gt;weak convergence&lt;/em&gt; and &lt;em&gt;convergence in distribution&lt;/em&gt; by assigning the former to distribution functions and the latter to random variables. Durrett used the former for distribution and both for random variables.&lt;/p&gt;
+&lt;p&gt;The name “weak convergence” was named after &lt;a href=&quot;https://en.wikipedia.org/wiki/Weak_topology#The_weak_and_weak*_topologies&quot;&gt;weak topology&lt;/a&gt; generated by bounded continuous functions: Convergence in weak topology is weak convergence. Some textbook separates the usage of terms &lt;em&gt;weak convergence&lt;/em&gt; and &lt;em&gt;convergence in distribution&lt;/em&gt; by assigning the former to distribution functions and the latter to random variables. Durrett used the former for distribution and both for random variables.&lt;/p&gt;
 
 &lt;p&gt;While Durrett define the concept as pointwise convergence at continuity points, Billingsley&lt;sup id=&quot;fnref:billingsley&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; define it differently.&lt;/p&gt;
 
@@ -58,8 +206,18 @@ A sequence of probability measures $P_n$ converges weakly to a probability measu
 
 &lt;p&gt;Since $x$ was a continuity point and $\epsilon&amp;gt;0$ was arbitrary, letting $\epsilon \to 0$ yields the result we want.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
+&lt;h2 id=&quot;converging-together-lemmas&quot;&gt;Converging together lemmas&lt;/h2&gt;
 
+&lt;div class=&quot;lemma&quot;&gt;&lt;br /&gt;
+(i) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_n+Y_n \overset{w}{\to} X+c.$&lt;br /&gt;
+(ii) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_nY_n \overset{w}{\to} cX.$&lt;br /&gt;
+(iii) $X_n\overset{P}{\to}X$ $\implies X_n \overset{w}{\to} X.$&lt;br /&gt;
+(iv) $X_n\overset{w}{\to} c$ for $c\in\mathbb{R}$ $\implies X_n \overset{P}{\to} c.$&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The proof is not difficult so I would like to leave it as an exercise.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
 &lt;h3 id=&quot;skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/h3&gt;
 &lt;p&gt;Even though the weak convergence is weak, we can relate it with much stronger almost sure convergence. Skorohod’s representation theorem allows us to do so.&lt;/p&gt;
 
@@ -122,7 +280,7 @@ $g$ is a measurable function. $D_g=\{x:~ g \text{ is not continuous at} x\}.$ If
 
 &lt;h3 id=&quot;portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;sup id=&quot;fnref:billingsley:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 
-&lt;p&gt;The following theorem is so important that it is named portmanteau. I found that almost every theorem regarding weak convergence can be proved with this to some extent.&lt;/p&gt;
+&lt;p&gt;The following theorem is so important that it is named portmanteau. It is actually equivalent definitions of weak convergence. I found that almost every theorem regarding weak convergence can be proved with this to some extent.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Portmanteau theorem&quot;&gt;
 For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ where $\Omega$ is a metric space, the followings are equivalent.&lt;br /&gt;
@@ -159,6 +317,14 @@ $$
 is the desired result.
 &lt;/div&gt;
 &lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;metric-for-weak-convergence&quot;&gt;Metric for weak convergence&lt;/h2&gt;
+&lt;div class=&quot;definition&quot; text=&quot;Lévy metric&quot;&gt;
+$\rho(F,G) = \inf\{\epsilon:~ F(x-\epsilon)-\epsilon \le G(x) \le F(x+\epsilon)+\epsilon,\forall x\}$ is the Lévy metric.
+&lt;/div&gt;
+
+&lt;p&gt;The Lévy metric is a metric defined on a space of distribution functions that metrizes weak convergence. That is, $\rho(F_n,F_\infty)\to0$ if and only if $F_n \overset{w}{\to} F_\infty.$&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; With this measure we can regard a space of probability measures as a metric space, which is well studied.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -175,6 +341,9 @@ is the desired result.
     &lt;/li&gt;
     &lt;li id=&quot;fn:later1&quot; role=&quot;doc-endnote&quot;&gt;
       &lt;p&gt;I will prove it in more general form later when reviewing Billingsley (1999). &lt;a href=&quot;#fnref:later1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;TBD. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -1158,266 +1327,6 @@ Let $X_n, X$ be random variables and $X_n \in L^p,~ \forall n$. If $X \in L^p$ a
         <pubDate>Sat, 19 Dec 2020 23:15:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-1.6-Lp-space</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.6-Lp-space</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 1.5. Convergence theorems and elementary inequalities</title>
-        <description>&lt;p&gt;In the previous section, we defined the Lebesgue integral and the expectation of random variables and showed basic properties. However the additive property of integrals is yet to be proved. In addition, since our major interest throughout the textbook is convergence of random variables and its rate, we need our toolbox for it.&lt;/p&gt;
-
-&lt;p&gt;In this section we assume a measure space $(\Omega, \mathcal{F}, \mu)$ with finite measure $\mu$. It is enough to state and prove theorems only on the finite measure case since our interest is in the probability space.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#monotone-convergence-theorem-mct&quot; id=&quot;markdown-toc-monotone-convergence-theorem-mct&quot;&gt;Monotone convergence theorem (MCT)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#fatous-lemma&quot; id=&quot;markdown-toc-fatous-lemma&quot;&gt;Fatou’s lemma&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#dominated-convergence-theorem-dct&quot; id=&quot;markdown-toc-dominated-convergence-theorem-dct&quot;&gt;Dominated convergence theorem (DCT)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#bounded-convergence-theorem-bct&quot; id=&quot;markdown-toc-bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#inequalities&quot; id=&quot;markdown-toc-inequalities&quot;&gt;Inequalities&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#concluding-remarks&quot; id=&quot;markdown-toc-concluding-remarks&quot;&gt;Concluding remarks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h2&gt;
-
-&lt;p&gt;Earlier, I mentioned that to prove the additive property of the Lebesgue integrals, we need the monotone convergence theorem. Monotone convergence theorem (or MCT) is for a sequence of non-negative functions that increases monotonically to the limiting function. In fact, there are other convergence theorems - bounded and dominated one - in addition to the MCT. Fatou’s lemma, a corollary of the MCT, is another useful tool for our journey through probability theory.&lt;br /&gt;
- &lt;/p&gt;
-
-&lt;h3 id=&quot;monotone-convergence-theorem-mct&quot;&gt;Monotone convergence theorem (MCT)&lt;/h3&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Monotone convergence&quot;&gt;
-$\{f_n\}_{n\in\mathbb{N}}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
-$f: \Omega \to [0,\infty]$: the limiting function of $\{f_n\}$.&lt;br /&gt;
-$f_n\uparrow f \text{ a.s.} \implies$ (i) $f$ is measurable, (ii) $\int f_n d\mu \uparrow \int f d\mu$.
-&lt;/div&gt;
-
-&lt;p&gt;To prove this, we need two lemmas.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot; text=&quot;1.25(a) from RCA&quot;&gt;
-$s: \Omega \to [0,\infty]$: a simple function.&lt;br /&gt;
-$\varphi(E) = \int_E s d\mu,~ \forall E\in\mathcal{F} \implies \varphi$ is a measure on $(\Omega, \mathcal{F}).$
-&lt;/div&gt;
-
-&lt;div class=&quot;lemma&quot;&gt;&lt;br /&gt;
-$s: \Omega \to [0,\infty]$: a simple function.&lt;br /&gt;
-$E_n \uparrow E$: $E_n, E$ are measurable.&lt;br /&gt;
-$\implies \lim_n \int_{E_n} s d\mu = \int_E s d\mu.$
-&lt;/div&gt;
-
-&lt;p&gt;The first lemma is easy to check. The second one is trivial by continuity of measure $\phi$ defined as in the first one. The latter one will be used in the proof of the MCT.&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot; text=&quot;MCT&quot;&gt;
-Let $\alpha_n = \int f_n d\mu$ so that $\alpha_1 \le \alpha_2 \le \cdots \le \int f d\mu$ and $\lim_n \alpha_n = \alpha$ for some $\alpha$. We need to show that $\alpha = \int f d\mu$.&lt;br /&gt;
-&amp;ensp; (1) It is trivial that $\alpha \le \int f d\mu$.&lt;br /&gt;
-&amp;ensp; (2) Now, let $s$ be a simple function such that $0 \le s \le f$ and a constant $0 &amp;lt; c &amp;lt; 1$. Define $E_n = \{\omega\in\Omega:~ f_n(\omega) \ge c\cdot s(\omega)\}$. Then since $E_n$ increases monotonically as $f_n$ increases monotonically and $\cup_{n=1}^\infty E_n = \Omega$, $E_n \uparrow \Omega$. By the lemma 3, this implies $\int_{E_n} s d\mu \uparrow \int s d\mu$.
-$$
-\begin{align}
-&amp;amp;\int f_n d\mu \ge \int_{E_n} f_n d\mu \ge \int_{E_n} c\cdot s d\mu \\
-&amp;amp;\overset{\lim_n}{\implies} \alpha \ge c\int s d\mu \\
-&amp;amp;\overset{c\to1}{\implies} \alpha \ge \int s d\mu \\
-&amp;amp;\overset{\sup_{0\le s\le f}}{\implies} \alpha \ge \int f d\mu
-\end{align}
-$$  
-&amp;ensp; By (1) and (2), the desired result follows.
-&lt;/div&gt; 
-&lt;/details&gt;
-
-&lt;p&gt;The MCT allows us to prove the yet to be shown property.&lt;/p&gt;
-
-&lt;div class=&quot;prop&quot; text=&quot;additivity of the integrals&quot;&gt;
-$f,g: \Omega \to [0,\infty]$: measurable.&lt;br /&gt;
-$\implies \int f+g d\mu = \int f d\mu + \int g d\mu.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $s_n = (\lfloor 2^n f \rfloor / 2^n) \wedge n$ and $t_n = (\lfloor 2^n g \rfloor / 2^n) \wedge n$. Then $s_n + t_n \uparrow f+g$ and $\int s_n + t_n d\mu = \int s_n d\mu + \int t_n d\mu$. By the MCT, the result follows.
-&lt;/div&gt;
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h3 id=&quot;fatous-lemma&quot;&gt;Fatou’s lemma&lt;/h3&gt;
-
-&lt;p&gt;Fatou’s lemma, another important convergence theorem can be directly derived by the MCT.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Fatou&quot;&gt;
-$\{f_n\}: \Omega \to [0,\infty]$: a sequence of measurable functions.&lt;br /&gt;
-$\implies \int \liminf\limits_n f_n d\mu \le \liminf\limits_n \int f_n d\mu.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $g_n = \inf_{k \ge n} f_k$ so that $g_n \uparrow \liminf\limits_n f_n$. By MCT, $\lim_n \int g_n d\mu = \int \liminf\limits_n f_n d\mu$. Since $g_n$ is monotone and $g_n \le f_n$, we get $\int g_n d\mu \le \int f_n d\mu,~ \forall n$ thus $\lim_n \int g_n d\mu \le \liminf\limits_n \int f_n d\mu$. 
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;It is worth noting that Fatou’s lemma does not require convergence. Thus it can be applied to any sequence of non-negative measurable functions. In many cases however, the lemma is used in the form of $\int X dP \le \liminf\limits_n \int X_n dP$ where $X_n \to X \text{ a.s.}$.&lt;br /&gt;
- &lt;/p&gt;
-
-&lt;h3 id=&quot;dominated-convergence-theorem-dct&quot;&gt;Dominated convergence theorem (DCT)&lt;/h3&gt;
-
-&lt;p&gt;While the MCT is very useful, it can only be applied to a sequence of functions that monotonically converges. Lebesgue’s dominated convergence theorem (DCT) provides a tool for not only monotonically convergent, but general convergent functions that are uniformly dominated by some integrable function.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Dominated convergence&quot;&gt;
-$\{f_n\}: \Omega \to \mathbb{R}$: a sequence of measurable functions.&lt;br /&gt;
-$f: \Omega \to \mathbb{R}$: a measurable functions.&lt;br /&gt;
-$f_n \to f \text{ a.s.}$ and $|f_n| \le g,~ g$ is integrable.&lt;br /&gt;
-$\begin{align}
-\implies &amp;amp; \text{(i) } f \in L^1(\mu). \\
-         &amp;amp; \text{(ii) } \int |f_n - f| d\mu \to 0. \\
-         &amp;amp; \text{(iii) } \int f_n d\mu \to \int f d\mu.
-\end{align}$
-&lt;/div&gt;
-
-&lt;p&gt;The usefulness of the DCT is that it not only shows convergence of the integral, but also integrability of the limiting function and $L^1$ convergence&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to it.&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot; text=&quot;DCT&quot;&gt;
-(i) Trivial since $|f| \le g$.&lt;br /&gt;
-(ii) $|f_n - f|$ are integrable since $\le 2g$. $0 \le 2g - |f_n - f| \le 2g$. By fatou's lemma,
-$$
-\int 2g d\mu \le \int 2g d\mu - \limsup\limits_n \int |f_n - f| d\mu \\
-\limsup\limits_n \int |f_n - f| d\mu \le 0 \\
-\therefore \lim_n \int |f_n -f| d\mu = 0
-$$&lt;br /&gt;
-(iii) $|\int f_n d\mu - \int f d\mu| \le \int |f_n -f| d\mu \to 0.$
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;bounded-convergence-theorem-bct&quot;&gt;Bounded convergence theorem (BCT)&lt;/h3&gt;
-&lt;p&gt;A special case of the DCT is where the sequence ${f_n}$ is uniformly bounded almost surely (i.e. $Y = c \in \mathbb{R}$). In this case we call it the &lt;em&gt;bounded convergence theorem&lt;/em&gt;.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;inequalities&quot;&gt;Inequalities&lt;/h2&gt;
-&lt;p&gt;Along with convergence theorems, these integral inequalities will be used intensely throughout the probability theory. In the following theorems, assume $f,g$ are measurable. For $p \ge 1$, if $|f|^p$ is integrable, $\|f\|_p := (\int |f|^p d\mu)^\frac{1}{p}$ is the $L^p(\mu)$-norm of $f$.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Jensen's inequality&quot;&gt;
-$\varphi: \mathbb{R} \to \mathbb{R}$: convex function.&lt;br /&gt;
-$\int |f| d\mu &amp;lt; \infty$, $\int |\varphi(f)| d\mu &amp;lt; \infty$.&lt;br /&gt; 
-$\implies \varphi(\int f d\mu) \le \int \varphi(f) d\mu$.
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $t = \int f d\mu$, then there exists $\beta = \sup\limits_{s&amp;lt;t} \frac{\varphi(t)-\varphi(s)}{t-s} \in \mathbb{R}$ such that $\varphi(x) \ge \beta(x-t) + \varphi(t)$. Take integral to both sides and we get the result.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Hölder's inequality&quot;&gt;
-$p,q \in (1,\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$.&lt;br /&gt;
-$\begin{align}
-\implies &amp;amp;\int |fg| d\mu \le (\int |f|^p d\mu)^\frac{1}{p} (\int |g|^q d\mu)^\frac{1}{q}. \\
- &amp;amp;\text{i.e. } \|fg\|_1 \le \|f\|_p \|g\|_q.
-\end{align}$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $A = \|f\|_p$ and $B = \|g\|_q$, $F=f/A$ and $G=g/B$. Then $\int F^p d\mu = \int G^q d\mu = 1$.&lt;br /&gt;
-&amp;ensp; Our claim is that $x,y \ge 0 \Rightarrow xy \le \frac{x^p}{p} + \frac{y^q}{q}$. Let $h(x) = xy - x^p/p$, then $h'(x) = y - x^{p-1} = y - x^{p/q}$ and $h$ achieves maximum at $x = y^{q/p}$.&lt;br /&gt;
-&amp;ensp; By the claim, $\int FG d\mu \le \int F^p/p + G^q/q d\mu = 1$ and the desired result follows.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;A special case of Hölder’s inequality is the Cauchy-Schwarz inequality: $\|fg\|_1 \le \|f\|_2 \|g\|_2.$&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Minkowski's inequality&quot;&gt;
-$p \ge 1$, $\int |f|^p d\mu &amp;lt; \infty$, $\int |g|^p d\mu &amp;lt; \infty$&lt;br /&gt;
-$\implies \|f+g\|_p \le \|f\|_p + \|g\|_p.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$$
-\int (f+g)^p d\mu = \int f(f+g)^{p-1} d\mu + \int g(f+g)^{p-1} d\mu
-$$
-By Hölder's inequality, 
-$$
-\begin{align}
-\int f(f+g)^{p-1} d\mu &amp;amp;\le \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^{(p-1)q} d\mu \right)^{1/q} \\
-  &amp;amp;= \left(\int f^p d\mu \right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}
-\end{align}
-$$
-
-Similarly, $\int g(f+g)^{p-1} d\mu \le \left(\int g^p d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q}$. Thus 
-
-$$
-\begin{align}
-\int (f+g)^p d\mu &amp;amp;\le \left(\int (f^p + g^p) d\mu\right)^{1/p} \left(\int (f+g)^p d\mu \right)^{1/q} \\
-\therefore \|f+q\|_p &amp;amp;\le \|f\|_p + \|g\|_p  
-\end{align}
-$$
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;Finally, we state Markov-Chebyshev inequality. Assume a probability space $(\Omega, \mathcal{F}, P)$ and a random variable $X$ on it.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Markov-Chebyshev's inequality&quot;&gt;
-$\varphi: \mathbb{R}\to\mathbb{R}$, $\varphi \ge 0$.&lt;br /&gt;
-$A \in \mathcal{B}(\mathbb{R})$, $i_A := \inf\{\varphi(y):~ y\in A\}$. &lt;br /&gt;
-$\implies i_A \cdot P(X \in A) \le \int_A \varphi(X) dP \le E\varphi(X).$
-&lt;/div&gt;
-
-&lt;p&gt;Special cases of the theorem is Markov’s inequality and Chebyshev’s inequality.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;Markov's inequality&quot;&gt;
-$X \ge 0$ a.s., $a &amp;gt; 0$ $\implies P(X \ge a) \le EX/a.$
-&lt;/div&gt;
-&lt;div class=&quot;corollary&quot; text=&quot;Chebyshev's inequality&quot;&gt;
-$a &amp;gt; 0$ $\implies P(X \ge a) \le EX^2/a^2.$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;concluding-remarks&quot;&gt;Concluding remarks&lt;/h2&gt;
-&lt;p&gt;Since the expectation $EX$ is defined as a mere integral, all of the above theorems can be applied. For instance, if $X_n \to X$ a.s. and $|X_n| \le Y$ for some $Y$ such that $E|Y| &amp;lt; \infty$, then by DCT $EX_n \to EX$ as $n\to\infty$.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;p&gt;This post is also based on the textbook &lt;em&gt;Real and Complex Analysis&lt;/em&gt;, 3rd edition (Rudin, 1986) and the lecture at SNU (instructor: Prof. Insuk Seo).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;$f_n \to f$ in $L^1(\mu)$ is equivalent to $\int |f_n - f| d\mu \to 0$ and $f \in L^1(\mu)$. It will be covered in the next section. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sat, 19 Dec 2020 22:18:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities</guid>
         
         
         <category>probability</category>
