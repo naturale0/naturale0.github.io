@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 02:29:55 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 02:29:55 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 11:00:57 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 11:00:57 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -43,8 +43,8 @@ A sequence of probability measures $P_n$ converges weakly to a probability measu
 &lt;p&gt;Equivalence of both definitions is not difficult to show. $1\rightarrow 2$ is trivial by the Skorohod’s representation theorem (&lt;a href=&quot;http://naturale0.github.io/probability/PTE-3.2-weak-convergence#skorohods-representation-theorem&quot;&gt;see below&lt;/a&gt;) and BCT. To show $2\rightarrow 1$, consider a function&lt;/p&gt;
 
 \[g_{x,\epsilon}(y) = \begin{cases}
- 1 &amp;amp;,~ y \le x \\\\
- 0 &amp;amp;,~ y \ge x+\epsilon \\\\
+ 1 &amp;amp;,~ y \le x \\
+ 0 &amp;amp;,~ y \ge x+\epsilon \\
  \text{linear} &amp;amp;,~ x &amp;lt; y &amp;lt; x+\epsilon 
 \end{cases}\]
 
