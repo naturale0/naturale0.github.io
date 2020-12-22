@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 00:07:37 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 00:07:37 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 00:12:50 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 00:12:50 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -197,7 +197,7 @@ so $\frac{1}{2\pi} \int e^{-ity} \varphi(t) dt$ is a density of $\mu.$&lt;br /&g
 &lt;/div&gt;
 &lt;/details&gt;
 
-&lt;p&gt;The formula indicates that if the ch.f. is integrable, then the distribution has a continuous density and it can be directly calculated.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;The formula indicates that if the ch.f. is integrable, then the distribution has a continuous density and it can be directly calculated. As an example of the inversion, remember the ch.f. of double exponential being a density of Cauchy distribution? In fact, Cauchy distribution has the ch.f. that is the same to a density of double exponential distribution. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;continuity-theorem&quot;&gt;Continuity theorem&lt;/h2&gt;
 
