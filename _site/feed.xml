@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 Dec 2020 16:08:27 +0900</pubDate>
-    <lastBuildDate>Tue, 22 Dec 2020 16:08:27 +0900</lastBuildDate>
+    <pubDate>Tue, 22 Dec 2020 16:11:37 +0900</pubDate>
+    <lastBuildDate>Tue, 22 Dec 2020 16:11:37 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -267,7 +267,7 @@ Let $Y_n \sim F_n$ for $1 \le n \le \infty$ be random variables such that $Y_n \
 &lt;/div&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;DCT&quot;&gt;
-$g,h$ are continuous, $g&amp;gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g(x) dF_n(x) &amp;lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h(x) dF_n(x) \to \int h(x) dF(x).$
+$g,h$ are continuous, $g&amp;gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g dF_n &amp;lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h dF_n \to \int h dF.$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
