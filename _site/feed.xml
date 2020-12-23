@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 22:10:36 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 22:10:36 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 22:12:02 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 22:12:02 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -196,9 +196,9 @@ is the total variation distance between $\mu$ and $\nu.$
 &lt;p&gt;While the first formula is the definition, the second one is a derived property. Note that&lt;/p&gt;
 
 \[\begin{aligned}
-\sum_{z\in\mathcal{S}}\|\mu(z)-\nu(z)\| 
- &amp;amp;\ge \|\mu(A) - \nu(A)\| + \|\mu(A^c)-\nu(A^c)\| \\
- &amp;amp;= 2\|\mu(A)-\nu(A)\|.
+\sum_{z\in\mathcal{S}}|\mu(z)-\nu(z)| 
+ &amp;amp;\ge |\mu(A) - \nu(A)| + |\mu(A^c)-\nu(A^c)| \\
+ &amp;amp;= 2|\mu(A)-\nu(A)|.
 \end{aligned}\]
 
 &lt;p&gt;Let $A=\{z:~ \mu(z) \ge \nu(z)\}$ then the equality holds.&lt;/p&gt;
