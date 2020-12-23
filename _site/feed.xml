@@ -6,9 +6,231 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 18:08:19 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 18:08:19 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 22:03:49 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 22:03:49 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 3.10. Limit theorems in ℝᵈ</title>
+        <description>&lt;p&gt;This part covers limit theorems regarding random vectors $\mathbf{X} = (X_1,\cdots,X_d)’\in\mathbb{R}^d.$&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#definitions&quot; id=&quot;markdown-toc-definitions&quot;&gt;Definitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#limit-theorems&quot; id=&quot;markdown-toc-limit-theorems&quot;&gt;Limit theorems&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#characteristic-functions-and-inversion&quot; id=&quot;markdown-toc-characteristic-functions-and-inversion&quot;&gt;Characteristic functions and inversion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#central-limit-theorem-in-mathbbrd&quot; id=&quot;markdown-toc-central-limit-theorem-in-mathbbrd&quot;&gt;Central limit theorem in $\mathbb{R}^d$&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;definitions&quot;&gt;Definitions&lt;/h2&gt;
+&lt;div class=&quot;definition&quot; text=&quot;distribution function&quot;&gt;
+$F:\mathbb{R}^d\to\mathbb{R}$ is a distribution function if it is&lt;br /&gt;
+(i) non-decreasing.&lt;br /&gt;
+(ii) right-continuous.&lt;br /&gt;
+(iii) $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1.$ Where $x\to\infty$ means $x_i\to\infty$ for all $i=1,\cdots,d$ and $x\downarrow x$ means $y_i\downarrow x_i$ for all $i.$ &amp;lt;/br&amp;gt;
+(iv) $\Delta_A F := P(X\in A) \ge 0$ for all rectangle $A,$ where $P(X\in A) = \sum_{v\in V}\text{sgn}(v)F(v),$ $A=(a_1,b_1]\times\cdots\times(a_d,b_d],$ $V=\{a_1,b_1\}\times\cdots\times\{a_d,b_d\},$ $\text{sgn}(v) = (-1)^{(\text{\# of } a_i \text{'s in } v)}.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;limit-theorems&quot;&gt;Limit theorems&lt;/h2&gt;
+&lt;div class=&quot;definition&quot; text=&quot;Lipschitz continuity&quot;&gt;
+$f$ is Lipschitz continuous on a metric space $(S,\rho)$ if there exists $c\in\mathbb{R}$ such that $|f(x)-f(y)|\le c\cdot\rho(x,y)$ for all $x,y\in S.$
+&lt;/div&gt;
+
+&lt;p&gt;We arrive at another portmanteau theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Portmanteau theorem&quot;&gt;
+The followings are equivalent.&lt;br /&gt;
+(i) $Eg(X_n) \to Eg(X_\infty),~ \forall g:$ bounded, continuous. &lt;br /&gt;
+(ii) $Eg(X_n) \to Eg(X_\infty),~ \forall g:$ bounded, Lipschitz continuous. &lt;br /&gt;
+(iii) $\limsup_n P(X_n \in F) \le P(X_\infty \in F),~ \forall F:$ closed. &lt;br /&gt;
+(iv) $\liminf_n P(X_n \in G) \ge P(X_\infty \in G),~ \forall G:$ open. &lt;br /&gt;
+(v) $\lim_n P(X_n\in A) = P(X_\infty \in A),~ \forall A:~ P(X_\infty \in \partial A)=0.$ &lt;br /&gt;
+(vi) $Ef(X_n) \to Ef(X_\infty),~ \forall f:$ bounded and $P(X_\infty \in D_f) = 0.$ &lt;br /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In addition, we get multi-dimensional version of tightness theorem.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;uniform tightness&quot;&gt;
+$(\mu_n)$ is uniformly tight if for all $\epsilon &amp;gt; 0,$ there exists $M$ such that $\liminf_n \mu_n([-M,M]^d) \ge 1-\epsilon.$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Prohorov&quot;&gt;
+If $(\mu_n)$ is tight, there exists a weakly convergent subsequence.
+&lt;/div&gt;
+
+&lt;p&gt;The proof uses both Helly’s selection theorem and uniform tightness.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;characteristic-functions-and-inversion&quot;&gt;Characteristic functions and inversion&lt;/h2&gt;
+&lt;div class=&quot;definition&quot; text=&quot;characteristic function&quot;&gt;
+$$\varphi(\mathbf{t}) := Ee^{i\mathbf{t}\cdot\mathbf{X}} = Ee^{i(t_1X_2+\cdots+t_dX_d)}$$ where $\mathbf{t}=(t_1,\cdots,t_d)$ and $\mathbf{X}=(X_1,\cdots,X_d).$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;inversion formula&quot;&gt;
+Let $A=[a_1,b_1]\times\cdots\times[a_d,b_d]$ such that $\mu(\partial A)=0.$ Let $\varphi$ be a ch.f. of $\mu.$ Define 
+$$\psi_j(t_j) = \frac{1}{it_j}\left( e^{-it_ja_j} - e^{-it_jb_j} \right)$$
+then
+$$\mu(A) = \lim_T \frac{1}{(2\pi)^d} \int_{[-T,T]^d} \prod_{j=1}^d \psi_j(t_j) \varphi(\mathbf{t})d\mathbf{t}.$$
+&lt;/div&gt;
+
+&lt;p&gt;We achieve the result by Fubini’s theorem and the inversion formula for random variables.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;central-limit-theorem-in-mathbbrd&quot;&gt;Central limit theorem in $\mathbb{R}^d$&lt;/h2&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Levy's convergence&quot;&gt;
+Let $\mathbf{X}_n$,  $1\le n\le\infty$ be random vectors with ch.f. $\varphi_n.$ then $\mathbf{X}_n \overset{w}{\to} \mathbf{X}_\infty$ if and only if $\varphi_n(\mathbf{t}) \to \varphi_\infty(\mathbf{t}).$
+&lt;/div&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;Cramer-Wold device&quot;&gt;
+$$\mathbf{\theta}\cdot\mathbf{X}_n \overset{w}{\to} \mathbf{\theta}\cdot\mathbf{X}_\infty,~ \forall \mathbf{\theta} \in \mathbb{R}^d \implies \mathbf{X}_n \overset{w}{\to} \mathbf{X}_\infty.$$
+&lt;/div&gt;
+
+&lt;p&gt;Cramer-Wold device implies if every linear combination converges weakly to the same random variable, then the random vector itself weakly converges. In fact for normal random vector we can prove that $\mathbf{X} \sim \mathcal{N}_d(0,\mathbf{\Gamma})$ if and only if $\mathbf{t}\cdot\mathbf{X} \sim \mathcal{N}(0,\mathbf{t}’\mathbf{\Gamma}\mathbf{t})$ for all $\mathbf{t} \in \mathbb{R}^d.$&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;central limit theorem&quot;&gt;
+$\mathbf{X}_i$'s are i.i.d. random vectors with $E\mathbf{X}_i=\mathbf{\mu},$ $\Gamma_{ij} = E(X_{ni}-\mu_i)(X_{nj}-\mu_j).$ Let $\mathbf{S}_n = \mathbf{X}_1+\cdots+\mathbf{X}_n$, then $\frac{\mathbf{S}_n - n\mathbf{\mu}}{\sqrt n} \overset{w}{\to} \mathcal{N}_d(\mathbf{0}, \mathbf{\Gamma}).$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Without loss of generality, let $\mathbf{\mu}=0.$ Given $\mathbf{t} \in \mathbb{R}^d,$
+$$\frac{1}{\sqrt n} \mathbf{t}\cdot\mathbf{S}_n = \frac{1}{\sqrt n} \sum\limits_{i=1}^n \mathbf{t}\cdot\mathbf{X}_i \overset{w}{\to} \mathcal{N}(0,\sigma_t^2)$$
+where $\sigma_t^2 = \text{Var}(\mathbf{t}\cdot\mathbf{X}_i) = \mathbf{t}'\mathbf{\Gamma}\mathbf{t}.$ By Cramer-Wold device and the fact, the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Dec 2020 21:23:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-3.10-limit-theorem-in-Rd</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.10-limit-theorem-in-Rd</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>(PTE) 3.6. Poisson convergence</title>
+        <description>&lt;p&gt;I would like to finish reviewing &lt;em&gt;Probability theory I&lt;/em&gt; by briefly mentioning the &lt;em&gt;Poisson convergence&lt;/em&gt; (section 3.6) and &lt;em&gt;limit theorems in $\mathbb{R}^d$&lt;/em&gt; (3.10).&lt;/p&gt;
+
+&lt;p&gt;Poisson convergence is about limiting laws of a sequence of independent discrete Bernoulli-like random variables with $ES_n$ converges to a constant $\lambda.$ I used the term “Bernoulli-like” because for large enough $n,$ such $X_n$ should behave similar to Bernoulli random variables. For those sequences, the limiting law is not normal, but actually Poisson.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#basic-poisson-convergence&quot; id=&quot;markdown-toc-basic-poisson-convergence&quot;&gt;Basic Poisson convergence&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#general-poisson-convergence&quot; id=&quot;markdown-toc-general-poisson-convergence&quot;&gt;General Poisson convergence&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#total-variation-and-weak-convergence&quot; id=&quot;markdown-toc-total-variation-and-weak-convergence&quot;&gt;Total variation and weak convergence&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-poisson-convergence&quot;&gt;Basic Poisson convergence&lt;/h2&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;3.6.1&quot;&gt;
+Let $(X_{nk})_{k=1}^n$ be a rowwise independent triangular array with $P(X_{nk}=1)=p_{nk}$ and $P(X_{nk}=0)=1-p_{nk}.$ As $n\to\infty,$ if &lt;br /&gt;
+(i) $\sum_{k=1}^n p_{nk} \to \lambda \in (0,\infty).$&lt;br /&gt;
+(ii) $\max_{1\le k\le n} p_{nk} \to 0.$&lt;br /&gt;
+Then $S_n=\sum_{k=1}^n X_{nk} \overset{w}{\to} \mathcal{P}(\lambda).$
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+As in the proof of the CLT, it suffices to show $\varphi_{S_n}(t) \to \exp(\lambda(e^{it}-1)).$
+$$\begin{aligned}
+\varphi_{S_n}(t)
+  &amp;amp;= \prod_{k=1}^n \varphi_{nk}(t) \\
+  &amp;amp;= \prod_{k=1}^n \left( p_{nk}(e^{it}-1) + 1 \right).
+\end{aligned}$$
+Thus
+$$\begin{aligned}
+&amp;amp;\left| \varphi_{S_n} - e^{\lambda(e^{it}-1)} \right| \\
+&amp;amp;= \left| \prod_{k=1}^n \left( p_{nk}(e^{it}-1) + 1 \right) - \prod_{k=1}^n e^{p_{nk}(e^{it}-1)} \right| \\
+&amp;amp;= \sum_{k=1}^n \left| p_{nk}(e^{it}-1)+1 - e^{p_{nk}(e^{it}-1)} \right| \\
+&amp;amp;\;\;\;\;(b = p_{nk}(e^{it}-1),~ |b| \le 2p_{nk} \le 1 \text{ for large n.}) \\
+&amp;amp;\le \sum_{k=1}^n p_{nk}^2 |e^{it}-1|^2 
+ \le 4 \sum_{k=1}^n p_{nk}^2 \\
+&amp;amp;\le 4 \max_{1\le k\le n} p_{nk} \sum_{k=1}^n p_{nk} \to 0.
+\end{aligned}$$
+The first inequality is from the lemmas we covered before
+$$\begin{aligned}
+&amp;amp;|p_{nk}(e^{it}-1)+1| \le 1-p_{nk}+p_{nk}|e^{it}| \le 1.\\
+&amp;amp;|e^{p_{nk}(e^{it}-1)}| \le e^{p_{nk} |e^{it}-1|} \le e^{2p_{nk}} \le 1 \text{ for large } n.
+\end{aligned}$$
+&lt;/div&gt;&lt;/details&gt;
+
+&lt;p&gt;For a special case, consider $X_k \overset{\text{iid}}{\sim} \mathcal{B}(p_n)$ for $k=1,\cdots,n$ where $np_n\to\mu.$ Then $S_n \overset{w}{\to} \mathcal{P}(\mu).$&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;general-poisson-convergence&quot;&gt;General Poisson convergence&lt;/h2&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Poisson convergence&quot;&gt;
+Let $(X_{nk})_{k=1}^n$ be rowwise independent, non-negative, integer-valued triangular arrays with $P(X_{nk}=1) = p_{nk}$ and $P(X_{nk} \ge 2) = \epsilon_{nk}.$ As $n\to\infty$ if &lt;br /&gt;
+ (i) $\sum_{k=1}^n p_{nk} \to \lambda \in (0,\infty).$&lt;br /&gt;
+ (ii) $\max_{1\le k\le n} p_{nk} \to 0.$&lt;br /&gt;
+ (iii) $\sum_{k=1}^n \epsilon_{nk} \to 0.$&lt;br /&gt;
+then $S_n = \sum_{k=1}^n X_{nk} \overset{w}{\to} \mathcal{P}(\lambda).$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_{nk}' = X_{nk}$ if $X_{nk}=1$ and $0$ otherwise. Then
+$$\begin{aligned}
+P(S_n \ne S_n') \le \sum_{k=1}^n P(X_{nk} \ge 2) = \sum_{k=1}^n \epsilon_{nk} \to 0.
+\end{aligned}$$
+By basic Poisson convergence theorem, $S_n' \overset{w}{\to} \mathcal{P}(\lambda).$ By the &lt;a href=&quot;https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence#converging-together-lemmas&quot;&gt;converging together lemma&lt;/a&gt;, we get the desired result.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;total-variation-and-weak-convergence&quot;&gt;Total variation and weak convergence&lt;/h2&gt;
+&lt;p&gt;Lastly, I will introduce &lt;em&gt;total variation&lt;/em&gt;, a metric on a space of discrete probability measures. Like Levy metric, convergence in total variation distance is equivalent to weak convergence on such space.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;total variation&quot;&gt;
+Let $\mu,\nu$ be measures on countable space $\mathcal{S}.$&lt;br /&gt;
+$$\begin{aligned}
+\|\mu-\nu\| 
+ &amp;amp;:= \frac{1}{2} \sum_{z\in\mathcal{S}} |\mu(z) - \nu(z)| \\
+ &amp;amp;= \sup_{A\subset\mathcal{S}} |\mu(A) - \nu(A)|
+\end{aligned}$$
+is the total variation distance between $\mu$ and $\nu.$
+&lt;/div&gt;
+
+&lt;p&gt;While the first formula is the definition, the second one is a derived property. Note that
+\(\begin{aligned}
+\sum_{z\in\mathcal{S}}\|\mu(z)-\nu(z)\| 
+ &amp;amp;\ge \|\mu(A) - \nu(A)\| + \|\mu(A^c)-\nu(A^c)\| \\
+ &amp;amp;= 2\|\mu(A)-\nu(A)\|.
+\end{aligned}\)
+Let $A=\{z:~ \mu(z) \ge \nu(z)\}$ then the equality holds.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;total variation and weak convergence&quot;&gt;
+(i) $d(\mu, \nu) = \|\mu-\nu\|$ is a metric on the space of probability measures on $\mathbb{Z}.$ &lt;br /&gt;
+(ii) $\|\mu_n-\mu\|\to0$ if and only if $\mu_n(z)\to\mu(z)$ for all $z\in\mathbb{Z}.$ (i.e. $\mu_n \overset{w}{\to} \mu.$)
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(ii)&lt;br /&gt;
+($\Rightarrow$) Given $z\in\mathbb{Z},$
+$$\begin{aligned}
+|\mu_n(z)-\mu(z)| \le \sup_{A\subset\mathbb{Z}}|\mu_n(A)-\mu(A)| \to 0.
+\end{aligned}$$
+($\Leftarrow$) $\mu_n \overset{w}{\to} \mu$ then 
+$$\begin{aligned}
+\frac{1}{2}\sum_{z\in\mathbb{Z}} |\mu_n(z)-\mu(z)|
+ = \sum_{z\in\mathbb{Z}} (\mu_(z)-\mu(z))^+ \to 0
+\end{aligned}$$ by DCT.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Dec 2020 20:24:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-3.6-poisson-convergence</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.6-poisson-convergence</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 3.4. Central limit theorem</title>
@@ -78,14 +300,12 @@ $$\varphi_S(t) = \left(\varphi\left(\frac{t}{\sigma\sqrt n}\right)\right)^n \\
 = \left(1-\frac{t^2}{2n} + o\left(\frac{t^2}{\sigma^2n}\right)\right)^n \\
 = \left(1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right)\right)^n.$$
 This with the lemmas gives us
-\[
-\begin{aligned}
+$$\begin{aligned}
 &amp;amp;\left|\varphi_S(t) - \left(1-\frac{t^2}{2n}\right)^n\right| \\
 &amp;amp;= \left| \left(\varphi\left(\frac{t}{\sigma\sqrt n}\right) \right)^n - \left(1-\frac{t^2}{2n}\right)^n \right| \\
 &amp;amp;\le n \left| \varphi\left(\frac{t}{\sigma \sqrt n}\right) - \left( 1-\frac{t^2}{2n} \right) \right| \\
 &amp;amp;= n \cdot o\left(\frac{1}{n}\right) \to 0
-\end{aligned}
-\]
+\end{aligned}$$
 as $n\to\infty$ and the proof is done.
 &lt;/div&gt;
 &lt;/details&gt;
@@ -94,36 +314,30 @@ as $n\to\infty$ and the proof is done.
 
 &lt;div class=&quot;example&quot;&gt;
 Let $\xi_1,\xi_2\cdots$ are i.i.d. with $P(\xi_1=z)=\frac{1}{2}$ if $z=1$ and $\frac{1}{2}$ if $z=-1.$ Define $X_i$'s as follows:
-\[
-\begin{aligned}
+$$\begin{aligned}
  &amp;amp; X_1 = \xi_1, \\
  &amp;amp; X_2 = X_1\xi_2, \\
  &amp;amp; X_3 = X_1\xi_3,~ X_4 = X_2\xi_3 \\
  &amp;amp; X_5 = X_1\xi_4,~ X_6 = X_2\xi_4,~ X_7 = X_4\xi_4 ,\cdots
-\end{aligned}
-\]
+\end{aligned}$$
 Then $X_i$'s are pairwise independent because $X_i$'s are products of different sets of $\xi_j$'s. Let 
-\[
-\begin{aligned}
+$$\begin{aligned}
 S_{2^n} &amp;amp;= \sum\limits_{i=1}^{2^n} X_i \\
   &amp;amp;= \xi_1(1+\xi_2)\cdots(1+\xi_{n+1}) \\
   &amp;amp;=\begin{cases}
  \pm 2^n &amp;amp;,~ \text{with probability } \frac{1}{2^n} \\
  0         &amp;amp;,~ \text{with probability } 1-\frac{1}{2^n}
 \end{cases}
-\end{aligned}
-\]
+\end{aligned}$$
 so that $ES_{2^n}=0$ and $\text{Var}(S_{2^n}) = 2^{n-2}.$ Then
-\[
-\begin{aligned}
+$$\begin{aligned}
 \frac{S_{2^n}}{\sqrt{2^n}\sqrt{2^{n-2}}} 
  &amp;amp;= \frac{S_{2^n}}{s^{n-1}} \\
  &amp;amp;= \begin{cases}
   \pm 2^{\frac{n}{2}+1}   &amp;amp;,~ \text{with probability } \frac{1}{2^n} \\
   0   &amp;amp;,~ \text{with probability } 1-\frac{1}{2^n}
 \end{cases}
-\end{aligned}
-\]
+\end{aligned}$$
 and it does not converge weakly to $\mathcal{ N}(0,1).$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -146,8 +360,7 @@ $\forall\epsilon&amp;gt;0,~ \lim_n \frac{1}{s_n^2} \sum\limits_{k=1}^{r_n} \int_
   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $S_n = X_{n1}+\cdots+X_{nr_n}$ be the rowwise sum and $\varphi_{nk}$ be ch.f. of $X_{nk}.$ Without loss of generality assume that $s_n^2 = 1.$ Then $\varphi_{S_n}(t) = \prod_{k=1}^{r_n}\varphi_{nk}(t).$ so
-\[
-\begin{aligned}
+$$\begin{aligned}
 &amp;amp;|\varphi_{S_n}(t) - e^{-\frac{t^2}{2}}| \\
   &amp;amp;= \left| \prod_{k=1}^{r_n} \varphi_{nk}(t) - \prod_{k=1}^{r_n} e^{-\frac{1}{2}\sigma_{nk}^2 t^2} \right| \\
   &amp;amp;\le \sum_{k=1}^{r_n} |\varphi_{nk}(t) - e^{-\frac{1}{2}\sigma_{nk}^2 t^2}| \\
@@ -155,40 +368,32 @@ Let $S_n = X_{n1}+\cdots+X_{nr_n}$ be the rowwise sum and $\varphi_{nk}$ be ch.f
    \underbrace{\left|\varphi_{nk}(t) - (1-\frac{1}{2}\sigma_{nk}^2t^2)\right|}_\text{(i)} 
    + \underbrace{\left|(1-\frac{1}{2}\sigma_{nk}^2t^2) - e^{-\frac{1}{2}\sigma_{nk}^2 t^2}\right|}_\text{(ii)} 
   \right\}
-\end{aligned}
-\]&lt;br /&gt; 
-\[
-\begin{aligned}
+\end{aligned}$$
+&lt;br /&gt; 
+$$\begin{aligned}
 \text{(i)} &amp;amp;\le E\left( \frac{|tX_{nk}|^3}{3!} \wedge \frac{2|tX_{nk}|^2}{2!} \right) \\
 &amp;amp;\le E\left( |tX_{nk}|^3 \wedge |tX_{nk}|^2 \right) \\
 &amp;amp;= \int_{|X_{nk}|\le\epsilon} |tX_{nk}|^3 \wedge |tX_{nk}|^2 dP + \int_{|X_{nk}|&amp;gt;\epsilon} |tX_{nk}|^3 \wedge |tX_{nk}|^2 dP \\
 &amp;amp;\le \int_{|X_{nk}|\le\epsilon} |tX_{nk}|^3 dP + t^2 \int_{|X_{nk}|&amp;gt;\epsilon} X_{nk}^2 dP \\
 &amp;amp;\le \epsilon |t|^3 s_n^2 + t^2 \int_{|X_{nk}|&amp;gt;\epsilon} X_{nk}^2 dP
-\end{aligned} 
-\]
+\end{aligned}$$
 By the Lindeberg condition, right-most term goes to 0 as $n\to\infty.$ Since was $\epsilon&amp;gt;0$ was arbitrary, $\text{(i)}\to0.$&lt;br /&gt;
 
 &amp;ensp; Now observe that for small $|t|,$ $|-\frac{1}{2}\sigma_{nk}^2 t^2| &amp;lt; 1$ so by the lemma 
-\[
-|e^{-\frac{1}{2}\sigma_{nk}^2 t^2} - (1-\frac{1}{2}\sigma_{nk}^2 t^2)| \le |-\frac{1}{2}\sigma_{nk}^2 t^2| = \frac{1}{4}\sigma_{nk}^4 t^4
-\]
+$$|e^{-\frac{1}{2}\sigma_{nk}^2 t^2} - (1-\frac{1}{2}\sigma_{nk}^2 t^2)| \le |-\frac{1}{2}\sigma_{nk}^2 t^2| = \frac{1}{4}\sigma_{nk}^4 t^4$$
 and it follows:
-\[
-\begin{aligned}
+$$\begin{aligned}
 \text{(ii)} 
 &amp;amp;\le \sum\limits_{k=1}^{r_n} \frac{1}{4} \sigma_{nk}^4 t^4 \\
 &amp;amp;\le \frac{1}{4} t^4 \sum\limits_{k=1}^{r_n} \max_{1\le k\le r_n} \sigma_{nk}^2 \cdot \sigma_{nk}^2 \\
 &amp;amp;= \frac{1}{4} t^4 \max_{1\le k\le r_n} \sigma_{nk}^2.
-\end{aligned}
-\]
+\end{aligned}$$
 Note that
-\[
-\begin{aligned}
+$$\begin{aligned}
 \sigma_{nk}^2 
  &amp;amp;= \int_{|X_{nk}|\le\epsilon} X_{nk}^2 dP + \int_{|X_{nk}|&amp;gt;\epsilon} X_{nk}^2 dP \\
  &amp;amp;\le \epsilon^2 + \sum\limits_{k=1}^{r_n} \int_{|X_{nk}|&amp;gt;\epsilon} X_{nk}^2 dP
-\end{aligned}
-\]
+\end{aligned}$$
 and the last term is independent to $k.$ By the Lindeberg condition, $\max_{1\le k\le r_n}\sigma_{nk}^2 \to 0$ and $\text{(ii)} \to 0.$&lt;br /&gt;
 &amp;ensp; $\therefore \varphi_{S_n}(t) \to e^{-\frac{t^2}{2}}.$
 &lt;/div&gt;&lt;/details&gt;
@@ -217,24 +422,20 @@ Let $\{X_{nk}\}_{k=1}^{r_n}$ be a rowwise independent triangular array. $\{X_{nk
 If $\{X_{nk}\}_{k=1}^{r_n}$ satisfies Lyapounov condition, then it satisfies Lindeberg condition as well.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-\[
-\begin{aligned}
+$$\begin{aligned}
 &amp;amp;\frac{1}{s_n^2} \sum\limits_{k=1}^{r_n} \int_{|X_{nk}|&amp;gt;\epsilon s_n} X_{nk}^2 dP \\
 &amp;amp;= \frac{1}{s_n^2} \sum\limits_{k=1}^{r_n} \int_{\frac{|X_{nk}|}{\epsilon s_n}&amp;gt;1} X_{nk}^2 dP \\
 &amp;amp;\le \frac{1}{s_n^2} \sum\limits_{k=1}^{r_n} \int_{\frac{|X_{nk}|}{\epsilon s_n}&amp;gt;1} \left( \frac{|X_{nk}|}{\epsilon s_n} \right)^\delta \cdot X_{nk}^2 dP \\
 &amp;amp;\le \frac{1}{\epsilon^\delta} \frac{1}{s_n^{2+\delta}} \sum\limits_{k=1}^{r_n} \int |X_{nk}|^{2+\delta} dP \to 0.
-\end{aligned}
-\]
+\end{aligned}$$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;lindeberg-and-lyapounov-conditions-of-higher-order&quot;&gt;Lindeberg and Lyapounov conditions of higher order&lt;/h3&gt;
 &lt;p&gt;In fact, the condition introduced above is sometimes phrased &lt;em&gt;Lyapounov condition of order $r=2+\delta.$&lt;/em&gt; Corresponding Lindeberg condition of order $r&amp;gt;2$ is as follows.&lt;/p&gt;
 
-&lt;div class=&quot;definition&quot; text=&quot;Lindeberge condition of order r&quot;&gt;
-\[
-\forall \epsilon&amp;gt;0,~ \frac{1}{s_n^r}\sum\limits_{k=1}^{r_n} \int_{|X_{nk}|&amp;gt;\epsilon s_n} |X_{nk}|^r dP \to 0 \text{ as } n \to \infty.
-\]
+&lt;div class=&quot;definition&quot; text=&quot;Lindeberg condition of order r&quot;&gt;
+$$\forall \epsilon&amp;gt;0,~ \frac{1}{s_n^r}\sum\limits_{k=1}^{r_n} \int_{|X_{nk}|&amp;gt;\epsilon s_n} |X_{nk}|^r dP \to 0 \text{ as } n \to \infty.$$
 &lt;/div&gt;
 
 &lt;p&gt;It can be shown that both conditions are equivalent in order $r&amp;gt;2.$&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -246,13 +447,11 @@ If $\{X_{nk}\}_{k=1}^{r_n}$ satisfies Lyapounov condition, then it satisfies Lin
 ($\Rightarrow$)&lt;br /&gt;
 (i) Suppose $\sum_n P(|X_n|&amp;gt;A)=\infty.$ Then by the second Borel-Cantelli lemma, $P(|X_n|&amp;gt;A \text{ i.o.}) = 1$ and $\sum_{n=1}^\infty X_n$ does not converge ($\rightarrow\!\leftarrow$).&lt;br /&gt;
 (ii) Suppose $\sum_n \text{Var}(Y_n) = \infty.$ Let $c_n = sum_{k=1}^n \text{Var}(Y_k),$ $u_{nk} = \frac{Y_k - EY_k}{\sqrt c_n},$ then $Eu_{nk} = 0$ and $s_n^2 = \sum_{k=1}^n \text{Var}(u_{nk}) = 1.$ Since for all $\epsilon&amp;gt;0,$ $|u_{nk}|\le \frac{2A}{\sqrt c_n} &amp;lt; \epsilon$ for large $n,$ $\int_{|u_{nk}|&amp;gt;\epsilon} u_{nk}^2 dP = 0$ and Lindeberg condition is met. Hence $\sum_{k=1}^n u_{nk} \overset{w}{\to} \mathcal{N}(0,1). \;(*)$ From this result, we get
-\[
-\begin{aligned}
+$$\begin{aligned}
 &amp;amp;\sum_n P(|X_n|&amp;gt;A) &amp;lt; \infty \\
 &amp;amp;\implies P(X_n=Y_n \text{ eventually}) = 1 \\
 &amp;amp;\implies \sum_n X_n \text{ converges iff } \sum_n Y_n \text{ converges}
-\end{aligned} 
-\]
+\end{aligned}$$
 By (i), $\sum_n Y_n$ converges and $\frac{\sum_{k=1}^n Y_k}{\sqrt c_n}\to0 \text{ a.s.} \;(**)$&lt;br /&gt;
 &amp;ensp; By $(*),(**)$ and Slutsky's theorem, $-\frac{1}{\sqrt c_n}\sum_{k=1}^n EY_k \overset{w}{\to} \mathcal{N}(0,1)$ which is the contradiction since a sequence of real numbers cannot converge to a distribution.&lt;br /&gt;
 (iii) By (ii), $\sum_n Y_n$ converges a.s. $\sum_n (Y_n - EY_n)$ also converges by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.5-convergence-of-random-series#kolmogorovs-three-series-theorem&quot;&gt;theorem 2.5.6&lt;/a&gt;. Thus $\sum_n EY_n$ converges.
@@ -1533,275 +1732,6 @@ $$
         <pubDate>Sun, 20 Dec 2020 22:23:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.2. Weak laws of large numbers</title>
-        <description>&lt;p&gt;We say a random variable $X_n$ &lt;strong&gt;converges in probability&lt;/strong&gt; (or $P$-converges) to another random variable $X$ and write $X_n \overset{P}{\to} X$ if $\lim_n P(|X_n - X| &amp;gt; \epsilon) = 0$ for all $\epsilon &amp;gt;0.$ We can also define convergence in probability to a constant by letting $X = c\in\mathbb{R}$. It is easy yet useful to know that $X_n \overset{L^p}{\to} X$ with $p &amp;gt; 0$ implies $X_n \overset{P}{\to} X$ by &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.5-Convergence-theorems-and-inequalities#inequalities&quot;&gt;Markov-Chebyshev inequality&lt;/a&gt; with $\varphi(x) = |x|^p$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;Week law of large numbers is about convergence of the sample mean of independent random variables to their expectation in probability. In this section, we cover variants of the week law of large numbers (WLLN), from the simplest $L^2$-WLLN to the most familiar form which only requires $L^1$ condition.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#l2-weak-law&quot; id=&quot;markdown-toc-l2-weak-law&quot;&gt;$L^2$ weak law&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#weak-law-for-triangular-arrays&quot; id=&quot;markdown-toc-weak-law-for-triangular-arrays&quot;&gt;Weak law for triangular arrays&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#weak-law-of-large-numbers&quot; id=&quot;markdown-toc-weak-law-of-large-numbers&quot;&gt;Weak law of large numbers&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;l2-weak-law&quot;&gt;$L^2$ weak law&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;uncorrelatedness&quot;&gt;
-$X_1, X_2$ are uncorrelated if $EX_1X_2 = EX_1 EX_2.$
-&lt;/div&gt;
-
-&lt;p&gt;If $X_n$’s are independent then it is uncorrelated but the converse does not hold. It is also clear that if $X_i$’s are uncorrelated then $\text{Var}(X_1+\cdots+X_n) = \sum_{i=1}^n \text{Var}(X_i).$ Using Chebyshev’s inequality we can easier get our first WLLN for uncorrelated random variables.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;L² weak law&quot;&gt;
-Let $X_i$'s be uncorrelated with $EX_i = \mu$ and $\text{Var}(X_i) \le C &amp;lt; \infty$ for all $i$. Let $S_n = X_1 + \cdots + X_n.$ Then $S_n/n \to \mu$ in probability and in $L^2$.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By chebyshev's inequality, given $\epsilon &amp;gt; 0$,
-$$\begin{align}
-P(|S_n/n - \mu| &amp;gt; \epsilon) \le \text{Var}(S_n/n)/\epsilon^2 \le C/\epsilon^2n \to 0
-\end{align}
-$$
-and by definition of variance,
-$$
-E|S_n/n - \mu|^2 = \text{Var}(S_n/n) \le C/n \to 0.
-$$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-An example of $L^2$ weak law is in &lt;a href=&quot;https://naturale0.github.io/probability/high-dimensional-box&quot;&gt;high-dimensional problem&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Theorem 1 requires strong conditions that $X_i$’s should have the same expectation and their variance should be uniformly bounded. Theorem 2 relieves these so that the result could be more useful.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.2.6&quot;&gt;
-Let $\mu_n = ES_n$, $\sigma_n^2 = \text{Var}(S_n)$.&lt;br /&gt;
-$\frac{\sigma_n^2}{b_n^2} \to_n 0 \implies \frac{S_n - \mu_n}{b_n} \overset{P}{\to} 0.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$\sigma_n^2 / b_n^2 = E\left(\frac{S_n - \mu_n}{b_n}\right)^2 \to 0.$
-&lt;/div&gt;
-
-&lt;p&gt;This can be used in any kind of sequence of random variable $(S_n)_{n\in\mathbb{N}}$. (Even the uncorrelatedness is not required!) &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;weak-law-for-triangular-arrays&quot;&gt;Weak law for triangular arrays&lt;/h2&gt;
-
-&lt;p&gt;Many topics in probability theory concerns &lt;em&gt;triangular arrays&lt;/em&gt; $(X_{nk})_{1\le k \le n}$ such that $X_{nk}$, $k=1,\cdots,n$ are independent (row-wise independent). We are interested in limiting behaviors of row-wise sum $S_n := X_{n1} + \cdots + X_{nn}$.&lt;/p&gt;
-
-&lt;p&gt;To deal with the case where the finite second moment condition is not ensured, we introduce truncated random variables.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;truncation&quot;&gt;&lt;br /&gt;
-$\bar X := X\mathbf{1}_{(|X| \le M)} = \begin{cases}
-X &amp;amp;,~ \text{if } |X| \le M \\
-0 &amp;amp;,~ \text{otherwise}
-\end{cases}$
-&lt;/div&gt;
-
-&lt;p&gt;By ignoring the tail part of $X$, truncated random variable $\bar X$ always has finite moments.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Weak law for triangular arrays&quot;&gt;
-For each $n$, $X_{nk}$, $k=1\cdots,n$ are independent.&lt;br /&gt;
-Let $b_n &amp;gt; 0$, $b_n \to_n \infty$. &lt;br /&gt;
-Define $\bar X_{nk} := X_{nk} \mathbf{1}_{(|X_{nk}| \le b_n)}.$&lt;br /&gt;
-(i) $\sum_{k=1}^n P(|X_{nk}| &amp;gt; b_n) \to_n 0.$ &lt;br /&gt;
-(ii) $\frac{1}{b_n^2} \sum_{k=1}^n E\bar X_{nk}^2 \to_n 0.$ &lt;br /&gt;
-$\implies \frac{S_n - a_n}{b_n} \overset{P}{\to} 0$, where $a_n = \sum_{k=1}^n E\bar X_{nk}.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $\bar S_n = \bar X_{n1} + \cdots + \bar X_{nn}$ so that $a_n = E\bar S_n.$ Then for an arbitrary $\epsilon&amp;gt;0$, $P( |\frac{S_n - a_n}{b_n}|  &amp;gt; \epsilon) \le \underbrace{P(S_n \ne \bar S_n)}_\text{(i)} + \underbrace{P(|\frac{\bar S_n - a_n}{b_n}| &amp;gt; \epsilon)}_\text{(ii)}.$&lt;br /&gt;
-For the first part,
-$$\begin{align}
-\text{(i)} &amp;amp;\le P(\bigcup\limits_{k=1}^n \{X_{nk} \ne \bar X_{nk}\}) \le \sum\limits_{k=1}^n P(X_{nk} \ne \bar X_{nk}) \\
-  &amp;amp; = \sum\limits_{k=1}^n P(|X_{nk}| &amp;gt; b_n) \to_n 0
-\end{align}
-$$
-and for the latter,
-$$
-\begin{align}
-\text{(ii)} &amp;amp;\le E(\frac{\bar S_n - a_n}{b_n})^2 / \epsilon^2 \le \text{Var}(\bar S_n) / \epsilon^2b_n^2 \\
-  &amp;amp;= \sum\limits_{k=1}^n \text{Var}(\bar S_n) / \epsilon^2b_n^2 \\
-  &amp;amp;= \sum\limits_{k=1}^n E\bar X_{nk}^2 / \epsilon^2b_n^2 \to_n 0
-\end{align}
-$$
-$\therefore P(|\frac{S_n - a_n}{b_n}| &amp;gt; \epsilon) \to_n 0$ for all $\epsilon &amp;gt;0.$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;weak-law-of-large-numbers&quot;&gt;Weak law of large numbers&lt;/h2&gt;
-&lt;p&gt;Result for triangular arrays paves the way for general weak law of large numbers. Before we get to it, let’s take a look at a highly useful lemma.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot;&gt;
-Let $Y \ge 0$ be a random variable and $p&amp;gt;0.$&lt;br /&gt;
-$\implies EY^p = \int_0^\infty py^{p-1} P(Y &amp;gt; y) dy.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$$
-\begin{align}
-\int_0^\infty py^{p-1} P(Y &amp;gt; y) dy 
-  &amp;amp;= \int_0^\infty \int_{(Y&amp;gt;y)} py^{p-1} dP dy \\
-  &amp;amp;= \int_\Omega \int_0^Y py^{p-1} dy dP \\
-  &amp;amp;= \int_\Omega Y^p dP = EY^p.
-\end{align}
-$$
-The second equality comes from the Fubini's theorem.
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.2.12&quot;&gt;
-$X_1,X_2,\cdots$ are i.i.d. $S_n = \sum\limits_{i=1}^n X_i.$&lt;br /&gt;
-$x P(|X_i| &amp;gt; x) \to 0$ as $x \to \infty.$&lt;br /&gt;
-$\implies S_n/n - \mu_n \overset{P}{\to} 0$ where $\mu_n = EX_1 \mathbf{1}_{(|X_1|\le n)}.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-&amp;ensp;
-Use the weak law for triangular arrays. Let $X_{nk} = X_k$ and $b_n = n.$&lt;br /&gt;
-&amp;ensp; (i) $\sum\limits_{i=1}^n P(|X_i| &amp;gt; n) = n P(|X_1| &amp;gt; n) \to_n 0.$&lt;br /&gt;
-&amp;ensp; (ii) Let $\bar X_k = X_k\mathbf{1}_{(|X_k|\le n)}.$ Then $\frac{1}{n^2} \sum\limits_{k=1}^n E\bar X_k^2 = \frac{1}{n} E\bar X_1^2.$ By the lemma, $E\bar X_1^2 = \int_0^n 2xP(X_1 &amp;gt; x) dx$ so $\frac{1}{n} E\bar X_1^2 \to 0$ as $x\to\infty.$&lt;br /&gt;
-&amp;ensp; By (i) and (ii) and theorem 3, $S_n/n - \mu_n \overset{P}{\to} 0.$
-&lt;/div&gt;
-
-&lt;p&gt;Use this to get the weak law of large numbers.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;weak law of large numbers&quot;&gt;
-$X_1, X_2, \cdots$ are i.i.d. with $E|X_i| &amp;lt; \infty.$ &lt;br /&gt;
-Let $S_n = X_1 + \cdots X_n$, $\mu = EX_1.$&lt;br /&gt;
-$\implies S_n/n \overset{P}{\to} \mu.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $x P(|X_1| &amp;gt; x) = x E\mathbf{1}_{(|X_1| &amp;gt; x)} \le E|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)}.$ Since $|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)} \le |X_1|$ and $E|X_1| &amp;lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| &amp;gt; x)} \to 0$ as $x\to\infty.$&lt;br /&gt;
-(ii) Let $\mu_n = E|X_1|\mathbf{1}_{(|X_1| \le n)}.$ Since $|X_1|\mathbf{1}_{(|X_1| \le n)} \le |X_1|$ and $E|X_1| &amp;lt; \infty$ by DCT $E|X_1|\mathbf{1}_{(|X_1| \le n)} \to_n \mu.$&lt;br /&gt;
-By theorem 5, $S_n/n - \mu_n \overset{P}{\to} 0$. Since $\mu_n \overset{P}{\to} \mu$, the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;Note that we do not need finite second moment condition.&lt;/p&gt;
-
-&lt;p&gt;While I will leave other examples as further readings, I would like to discuss the example of coupon collector’s problem (example 2.2.7).&lt;/p&gt;
-
-&lt;div class=&quot;example&quot; text=&quot;coupon collector's problem&quot;&gt;
-$X_1,X_2,\cdots \overset{\text{iid}}{\sim} \mathcal{U}\{1,2,\cdots,n\}.$ Define a &lt;i&gt;stopping time&lt;/i&gt; $\tau_k^n = \inf\{m:~ |\{X_1,\cdots,X_m\}| = k\}$ and let $T_n = \tau_n^n.$ Then $\frac{T_n}{n\log{n}} \overset{P}{\to} 1.$
-&lt;/div&gt;
-
-&lt;p&gt;Here, $\mathcal{U}\{1,2,\cdots,n\}$ is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Discrete_uniform_distribution&quot;&gt;discrete uniform distribution&lt;/a&gt; from one to $n$. In this example it can be interpreted that $n$ is the total number of different coupons and $\tau_k^n$ represents the number of trials until $k$ different kinds of coupons are collected, $T_n$ is the number of trials until all of the coupons are collected. This example says that asymptotically $n\log n$ trials are required for all $n$ coupons to be collected. Likewise, asymptotic rate of a stochastic process can be calculated using the weak laws.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot; text=&quot;example 1&quot;&gt;
-Let $X_{nk} = \tau_k^n - \tau_{k-1}^n$, $k=1,\cdots,n.$ Then $X_{nk} \sim \text{Geo}(p)$ where $p=1-\frac{k-1}{n}.$ The memoryless property of Benoulli process implies $X_{nk} \perp X_{nj}$, $j=1,\cdots,k-1$ and $T_n = X_{n1} + \cdots + X_{nn}.$&lt;br /&gt;
-Let $b_n = n\log n$ then it satisfies the condition of theorem 2.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Relationship between $L^p$ convergence, convergence in probability, almost sure convergence will be covered later in detail. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 20 Dec 2020 18:39:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.1. Independence</title>
-        <description>&lt;p&gt;First chapter was about the essential of measure theory. We especially focused on important result for finite measure or at least $\sigma$-finite measures. We defined a probability space as a measure space and a random variable as a measurable function in it.&lt;/p&gt;
-
-&lt;p&gt;Following chapters will cover two fundamental theory in convergence of random variables: &lt;strong&gt;the strong law of large numbers&lt;/strong&gt; (Chapter 2) and &lt;strong&gt;the central limit theorem&lt;/strong&gt; (Chapter 3). We start by assumung nice but in many real cases inadequate condition - mutual independence of random variables - and modify the result to achieve the stronger one. As a starting point, this subsection covers the notion of independence. The rest of the chapter is about law of large numbers.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#independence-of-random-variables&quot; id=&quot;markdown-toc-independence-of-random-variables&quot;&gt;Independence of random variables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#existence-of-a-sequence-of-independent-random-variables&quot; id=&quot;markdown-toc-existence-of-a-sequence-of-independent-random-variables&quot;&gt;Existence of a sequence of independent random variables&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;independence-of-random-variables&quot;&gt;Independence of random variables&lt;/h2&gt;
-
-&lt;p&gt;As I pointed out earlier, it is natural to define a property of a function as a property of the related set (its domain). We do the same here: we define independence of $\sigma$-fields first.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;independence 1&quot;&gt;
-Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_1, \cdots, \mathcal{F}_n \subset \mathcal{F}$ be sub $\sigma$-fields, $E_1, \cdots, E_n$, $E_i \in \mathcal{F}_i$ be the events.&lt;br /&gt;
-(i) $E_1,\cdots,E_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i).$&lt;br /&gt;
-(ii) $\mathcal{F}_1,\cdots,\mathcal{F}_n$ are independent if $P(\bigcap\limits_{i=1}^n E_i) = \prod\limits_{i=1}^n P(E_i)$ for all $E_i \in \mathcal{F}_i.$
-&lt;/div&gt;
-
-&lt;p&gt;In fact to be extra specific we say it is &lt;em&gt;$P$-mutually independent&lt;/em&gt; if the above condition is met. It gives us extra information about regarding probability measure ($P$) and that it is mutual. If we just write “independence” it means mutual independence. We drop $P$ if the measure is clear without confusion.&lt;/p&gt;
-
-&lt;p&gt;Independence of random variables are defined as independence of generated $\sigma$-fields.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;independence 2&quot;&gt;
-Let $X_1,\cdots,X_n$ be random variables in $(\Omega, \mathcal{F}, P)$. $X_1,\cdots,X_n$ are independent if $\sigma(X_i)$, $i=1,\cdots,n$ are independent.
-&lt;/div&gt;
-
-&lt;p&gt;We sometimes write $X \perp Y$ for independence between $X$ and $Y$.&lt;/p&gt;
-
-&lt;p&gt;It is not necessary to check all possible products of the events just to check the independence of $\sigma$-fields. We can use $\pi$-$\lambda$ theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.1.7&quot;&gt;
-$\mathcal{A}, \mathcal{B}$ are $\pi$-systems and are subsets of $\mathcal{F}$. If $P(A\cap B) = P(A)P(B)$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then $\sigma(\mathcal{A}), \sigma(\mathcal{B})$ are independent.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-&amp;ensp; (1) For a fixed $A \in \mathcal{A}$, let $\mathcal{L}_A = \{ B \in \mathcal{F}:  P(A \cap B) = P(A)P(B) \}$ be a $\lambda$-system containing $\mathcal{B}$. By $\pi$-$\lambda$ theorem,  $\sigma(\mathcal{B}) \subset \mathcal{L}_A$. &lt;br /&gt;
-&amp;ensp; (2) Now for fixed $B \in \sigma(\mathcal{B})$ let $\mathcal{L}_B = \{ A \in \mathcal{F}: \mu(A \cap B) = \mu(A)\mu(B) \}$. Then similar to the above, $\mathcal{L}_B$ is a $\lambda$-system that contains $\mathcal{A}$ and $\sigma(\mathcal{A}) \subset \mathcal{L}_B$ follows.
-&lt;/div&gt;
-
-&lt;p&gt;It is clear that $\mathcal{P} = \{ X^{-1}(-\infty, x]:~ x\in (-\infty, \infty]\}$ is a $\pi$-system and $\sigma(\mathcal{P}) = \sigma(X)$, so the corollary directly follows.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;2.1.8&quot;&gt;
-$X_1,\cdots,X_n$ are independent if and only if $P(X_1 \le x_1, \cdots, X_n \le x_n) = \prod\limits_{i=1}^n P(X_i \le x_i)$ for all $x_i \in (-\infty, \infty].$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;existence-of-a-sequence-of-independent-random-variables&quot;&gt;Existence of a sequence of independent random variables&lt;/h2&gt;
-
-&lt;p&gt;In the following chapters, we will construct a sequence of independent random variables to state and prove limiting laws. It is important to mention that such sequence exists.&lt;/p&gt;
-
-&lt;p&gt;For a finite number $n\in\mathbb{N}$, we can construct $n$ independent random variables using &lt;a href=&quot;https://naturale0.github.io/probability/PTE-1.7-product-space&quot;&gt;product space&lt;/a&gt;. Given distribution functions $F_i$, $i=1,\cdots,n$, let $X_i$ with $P(X_i \le x) = F_i(x)$ and $X_i(\omega_1,\cdots,\omega_n)=\omega_i$. (i.e. $X_i$ is the coordinate-wise projection.) Let $(\Omega, \mathcal{F}, P) = (\mathbb{R}^n, \mathcal{B}(\mathbb{R}), P)$ where $P((a_1,b_1]\times\cdots\times(a_n,b_n]) = \prod\limits_{i=1}^n (F_i(b_i) - F_i(a_i))$ then $X_i$’s are independent.&lt;/p&gt;
-
-&lt;p&gt;Now we need infinite number of independent random variables. Consider $\mathbb{R}^\infty := \{(x_1,x_2,\cdots):~ x_i \in \mathbb{R}\}$, an infinite-dimensional product space of $\mathbb{R}$ and corresponding product $\sigma$-field $\mathcal{R}^\infty$.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Kolmogorov’s extension theorem states that we can construct a unique probability measure on this space.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's extension&quot;&gt;
-Given probability measures $P_n$ on $(\mathbb{R}^n, \mathcal{R}^n)$ that satisfies
-$$
-P_{n+1}((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n])
-$$
-there uniquely exists a probability measure $P$ on $(\mathbb{R}^\infty, \mathcal{R}^\infty)$ such that
-$$
-P((a_1,b_1]\times\cdots\times(a_n,b_n]\times\mathbb{R}^{\infty-n}) = P_n((a_1,b_1]\times\cdots\times(a_n,b_n]).
-$$
-&lt;/div&gt;
-
-&lt;p&gt;Furthermore, if a measurable space $(S, \mathcal{S})$ is &lt;strong&gt;nice&lt;/strong&gt;, that is, there is a one-to-one map $\varphi: S \to \mathbb{R}$ so that $\varphi$, $\varphi^{-1}$ are both measurable, then we can also construct a sequence of random &lt;em&gt;elements&lt;/em&gt; $\{X_n\}_{n\in\mathbb{N}}: \Omega \to S.$&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I will cover the detail later when reviewing &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition (Billingsley, 1999). &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 20 Dec 2020 11:25:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.1-independence</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.1-independence</guid>
         
         
         <category>probability</category>

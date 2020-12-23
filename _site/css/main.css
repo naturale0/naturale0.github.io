@@ -340,7 +340,7 @@ body { counter-reset: theorem; counter-reset: definition; counter-reset: fact; c
 
 .proof[text]:before { content: "(Proof of " attr(text) ")\a"; white-space: pre; }
 
-.proof:after { content: " \20EB"; float: none; }
+.proof:after { content: " \25A1"; float: none; }
 
 .definition { display: block; margin: 12px 0; font-style: normal; counter-increment: definition; }
 
