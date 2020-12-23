@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 22:05:51 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 22:05:51 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 22:07:07 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 22:07:07 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -27,7 +27,7 @@
 $F:\mathbb{R}^d\to\mathbb{R}$ is a distribution function if it is&lt;br /&gt;
 (i) non-decreasing.&lt;br /&gt;
 (ii) right-continuous.&lt;br /&gt;
-(iii) $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1.$ Where $x\to\infty$ means $x_i\to\infty$ for all $i=1,\cdots,d$ and $x\downarrow x$ means $y_i\downarrow x_i$ for all $i.$ &amp;lt;/br&amp;gt;
+(iii) $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1.$ Where $x\to\infty$ means $x_i\to\infty$ for all $i=1,\cdots,d$ and $x\downarrow x$ means $y_i\downarrow x_i$ for all $i.$ &lt;br /&gt;
 (iv) $\Delta_A F := P(X\in A) \ge 0$ for all rectangle $A,$ where $P(X\in A) = \sum_{v\in V}\text{sgn}(v)F(v),$ $A=(a_1,b_1]\times\cdots\times(a_d,b_d],$ $V=\{a_1,b_1\}\times\cdots\times\{a_d,b_d\},$ $\text{sgn}(v) = (-1)^{(\text{\# of } a_i \text{'s in } v)}.$
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -88,7 +88,8 @@ $$\mathbf{\theta}\cdot\mathbf{X}_n \overset{w}{\to} \mathbf{\theta}\cdot\mathbf{
 &lt;p&gt;Cramer-Wold device implies if every linear combination converges weakly to the same random variable, then the random vector itself weakly converges. In fact for normal random vector we can prove that $\mathbf{X} \sim \mathcal{N}_d(0,\mathbf{\Gamma})$ if and only if $\mathbf{t}\cdot\mathbf{X} \sim \mathcal{N}(0,\mathbf{t}’\mathbf{\Gamma}\mathbf{t})$ for all $\mathbf{t} \in \mathbb{R}^d.$&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;central limit theorem&quot;&gt;
-$\mathbf{X}_i$'s are i.i.d. random vectors with $E\mathbf{X}_i=\mathbf{\mu},$ $\Gamma_{ij} = E(X_{ni}-\mu_i)(X_{nj}-\mu_j).$ Let $\mathbf{S}_n = \mathbf{X}_1+\cdots+\mathbf{X}_n$, then $\frac{\mathbf{S}_n - n\mathbf{\mu}}{\sqrt n} \overset{w}{\to} \mathcal{N}_d(\mathbf{0}, \mathbf{\Gamma}).$
+$\mathbf{X}_i$'s are i.i.d. random vectors with $E\mathbf{X}_i=\mathbf{\mu},$ $\Gamma_{ij} = E(X_{ni}-\mu_i)(X_{nj}-\mu_j).$ &lt;br /&gt;
+Let $\mathbf{S}_n = \mathbf{X}_1+\cdots+\mathbf{X}_n$, then $\frac{\mathbf{S}_n - n\mathbf{\mu}}{\sqrt n} \overset{w}{\to} \mathcal{N}_d(\mathbf{0}, \mathbf{\Gamma}).$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Without loss of generality, let $\mathbf{\mu}=0.$ Given $\mathbf{t} \in \mathbb{R}^d,$
