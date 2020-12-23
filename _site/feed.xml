@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2020 22:07:07 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2020 22:07:07 +0900</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 22:10:36 +0900</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 22:10:36 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -165,7 +165,7 @@ $$\begin{aligned}
 
 &lt;h2 id=&quot;general-poisson-convergence&quot;&gt;General Poisson convergence&lt;/h2&gt;
 &lt;div class=&quot;theorem&quot; text=&quot;Poisson convergence&quot;&gt;
-Let $(X_{nk})_{k=1}^n$ be rowwise independent, non-negative, integer-valued triangular arrays with $P(X_{nk}=1) = p_{nk}$ and $P(X_{nk} \ge 2) = \epsilon_{nk}.$ As $n\to\infty$ if &lt;br /&gt;
+Let $(X_{nk})_{k=1}^n$ be rowwise independent, non-negative, integer-valued triangular array with $P(X_{nk}=1) = p_{nk}$ and $P(X_{nk} \ge 2) = \epsilon_{nk}.$ As $n\to\infty$ if &lt;br /&gt;
  (i) $\sum_{k=1}^n p_{nk} \to \lambda \in (0,\infty).$&lt;br /&gt;
  (ii) $\max_{1\le k\le n} p_{nk} \to 0.$&lt;br /&gt;
  (iii) $\sum_{k=1}^n \epsilon_{nk} \to 0.$&lt;br /&gt;
