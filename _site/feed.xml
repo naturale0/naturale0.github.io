@@ -6,9 +6,473 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 25 Dec 2020 00:00:24 +0900</pubDate>
-    <lastBuildDate>Fri, 25 Dec 2020 00:00:24 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 02:03:24 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 02:03:24 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.1. Conditional expectation</title>
+        <description>&lt;p&gt;In this chapter we study convergence of a sequence of random variables with dependency. To be specific, I will cover theory of martingales. The first subsection is about conditional expectation which is essential for defining martingales.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#definition&quot; id=&quot;markdown-toc-definition&quot;&gt;Definition&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#non-negative-random-variables&quot; id=&quot;markdown-toc-non-negative-random-variables&quot;&gt;Non-negative random variables&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#general-case&quot; id=&quot;markdown-toc-general-case&quot;&gt;General case&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#uniqueness&quot; id=&quot;markdown-toc-uniqueness&quot;&gt;Uniqueness&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#examples-and-insight&quot; id=&quot;markdown-toc-examples-and-insight&quot;&gt;Examples and insight&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#properties&quot; id=&quot;markdown-toc-properties&quot;&gt;Properties&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#inequalities&quot; id=&quot;markdown-toc-inequalities&quot;&gt;Inequalities&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#smoothing-property&quot; id=&quot;markdown-toc-smoothing-property&quot;&gt;Smoothing property&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;definition&quot;&gt;Definition&lt;/h2&gt;
+&lt;div class=&quot;definition&quot; text=&quot;conditional expectation&quot;&gt;
+Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_0 \subset \mathcal{F}$ be a sub $\sigma$-algebra. For a random variable $X \in \mathcal{F}_0,$ $E|X|&amp;lt;\infty,$ we say $Y$ &lt;i&gt;a version of $E(X|\mathcal{F_0}),$ conditional expectation of $X$ given $\mathcal{F},$&lt;/i&gt; if (i) $Y \in \mathcal{F}$ and (ii) $\int_A X dP = \int_A Y dP$ for all $A \in \mathcal{F}.$ 
+&lt;/div&gt;
+
+&lt;p&gt;The term “versions” means they are almost surely equivalent. So in the following sections, I will just call such $Y$ a conditional expectation instead of a version.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;non-negative-random-variables&quot;&gt;Non-negative random variables&lt;/h3&gt;
+&lt;p&gt;We need to know the existence of such $Y$ and if it is unique (in almost sure sense) if exists at all. For a non-negative $X,$ it can be constructed as the Radon-Nikodym derivative.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;absolute continuity&quot;&gt;
+For measures $\mu,\nu$ on a measurable space $(\Omega,\mathcal{F}),$ we say $\nu$ is absolutely continuous to $\mu$ and write $\nu \ll \mu$ if $\mu(A)=0$ implies $\nu(A)$ for all $A\in\mathcal{F}.$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Radon-Nikodym&quot;&gt;
+Let $(\Omega,\mathcal{F})$ be a measurable space and $\mu,\nu$ be $\sigma$-finite measures. If $\nu \ll \mu,$ then there exists $f=\frac{d\nu}{d\mu}\in\mathcal{F}$ such that $f \ge 0$ almost everywhere and $\nu(A) = \int_A{f}d\mu$ for all $A\in\mathcal{F}.$ $f=\frac{d\nu}{d\mu}$ is called the Radon-Nikodym derivative of $\nu$ with respect to $\mu.$
+&lt;/div&gt;
+
+&lt;p&gt;Let $Q(A)=\int_A{X}dP$ for all $A \in \mathcal{F}0$ then $Q$ is a $\sigma$-finite measure such that $Q \ll P.$ Thus by Radon-Nikodym theorem, there exists $\frac{dQ}{dP} \in \mathcal{F}_0$ such that $\int_A X dP = \int_A \frac{dQ}{dP}dP$ for all $A\in\mathcal{F}_0.$ By definition $\frac{dQ}{dP}$ satisfies conditions for being a conditional expectation of $X$ given $\mathcal{F}.$&lt;/p&gt;
+
+&lt;p&gt;Notice that for a non-negative random variable, conditional expectation exists even for random variables that are not integrable.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;general-case&quot;&gt;General case&lt;/h3&gt;
+
+&lt;p&gt;For a general $X,$ let $Y^+, Y^-$ be conditional expectations of $X^+,X^-$ respectively. Let $E(X|\mathcal{F}_0) = Y^+ - Y^-,$ then clearly $Y \in \mathcal{F}_0)$ and for given $A \in \mathcal{F}_0,$
+\(\begin{aligned}
+\int_A{X}dP 
+ &amp;amp;= \int_A{X^+}dP - \int_A{X^-}dP \\
+ &amp;amp;= \int_A{Y^+}dP - \int_A{Y^-}dP = \int_A{Y}dP.
+\end{aligned}\)&lt;/p&gt;
+
+&lt;h3 id=&quot;uniqueness&quot;&gt;Uniqueness&lt;/h3&gt;
+&lt;p&gt;Suppose $Y,Y’$ are $E(X|\mathcal{F}0)$ Then $\int_A (Y-Y’) dP = 0$ for all $A \in \mathcal{F}_0.$ Let $A_1 = \{Y-Y’ \ge 0\}$ and $A_2 = \{Y-Y’ \le 0\},$ $A_1,A_2 \in \mathcal{F}_0.$
+\(\int_{A_1} (Y-Y') dP = 0 \implies Y-Y'=0 \text{ on } A_1.\\
+\int_{A_2} (Y-Y') dP = 0 \implies Y-Y'=0 \text{ on } A_2.\\\)
+Thus $Y=Y’$ almost surely.&lt;/p&gt;
+
+&lt;p&gt;Not only we get $Y=Y’ \text{ a.s.}$ but we can also be sure that for any $X_1, X_2 \in \mathcal{F}$ that satisfy $\int_A X_1 dP = \int_A X_2 dP$ for all $A \in \mathcal{F},$ it always follows $X_1=X_2 \text { a.s.}$&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;examples-and-insight&quot;&gt;Examples and insight&lt;/h2&gt;
+&lt;p&gt;Think of $\mathcal{F}_0 \subset \mathcal{F}$ as the information we have at our disposal. For $A \in \mathcal{F}_0,$ we can interpret it as an event that we know whether $A$ occurred or not. In this sense, $E(X|\mathcal{F}_0)$ is our best guess of $X$ given the information we have.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;best guess&quot;&gt;
+Let $X$ be a random variable such that $EX^2 &amp;lt; \infty.$ Let $\mathcal{C} = \{Y\in\mathcal{F}_0:~ EY^2 &amp;lt; \infty\} \subset L^2.$ Then
+$$E[X-E(X|\mathcal{F}_0)]^2 = \inf_{Y\in\mathcal{C}}E(X-Y)^2.$$
+&lt;/div&gt;
+
+&lt;p&gt;The proof requires a property yet to be mentioned, so I will leave it until the end of the section. The following examples will help getting a grasp of the intuition behind conditional expectations. Proofs are clear so I will not mention it.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;perfect information&quot;&gt;
+$$X \in \mathcal{F}_0 \implies E(X|\mathcal{F}_0) = X \text{ a.s.}$$
+&lt;/div&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;no information&quot;&gt;
+$$X \perp \mathcal{F}_0 \implies E(X|\mathcal{F}_0) = EX \text{ a.s.}$$
+&lt;/div&gt;
+
+&lt;p&gt;Here $X \perp \mathcal{F}_0$ means
+\(P((X\in B)\cap A) = P(X\in B)P(A),~ \forall B \in \mathcal{B}(\mathbb{R}), A\in\mathcal{F}_0.\)&lt;/p&gt;
+
+&lt;p&gt;As an extension of undergraduate definition, we can define conditional probability.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;conditional probability&quot;&gt;
+(i) For $(\Omega, \mathcal{F}, P),$ suppose $\Omega = \cup_{i=1}^\infty \Omega_i,$ where $\Omega_i$'s are disjoint and $P(\Omega_i)&amp;gt;0$ for all $i.$ Let $\mathcal{F}_0 = \sigma(\Omega_1,\Omega_2,\cdots),$ then 
+$$E(X|\mathcal{F}_0) = \sum_{i=1}^\infty \frac{\int_{\Omega_i} X dP}{P(\Omega_i)}\mathbf{1}_{\Omega_i}.$$
+i.e.
+$$E(X|\mathcal{F}_0) = \frac{\int_{\Omega_i} X dP}{P(\Omega_i)} \text{ on } \Omega_i.$$
+(ii) $$P(A|\mathcal{F}_0) := E(\mathbf{1}_A|\mathcal{F}_0).\\
+     P(A|B) := \frac{P(A\cap B)}{P(B)}.$$
+&lt;/div&gt;
+&lt;p&gt;(ii) follows naturally from (i).&lt;/p&gt;
+
+&lt;p&gt;In undergraduate statistics, instead of giving $\sigma$-field, we gave random variables. This can be regarded as a special case of our definition.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;conditional expectation given random variable&quot;&gt;
+$$E(Y|X) := E(Y|\sigma(X)).$$
+&lt;/div&gt;
+
+&lt;p&gt;Furthermore, we get some form of “conditional density”.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;conditional density&quot;&gt;
+(i) Suppose $X,Y$ have a joint density $f(x,y).$ i.e. $P((X,Y)\in B) = \int_B f(x,y)dxdy$ for all $B \in \mathcal{B}(\mathbb{R}^2).$ If $E|g(X)| &amp;lt; \infty,$ then
+$$E(g(X)|Y) = h(Y), \text{ where } h(y)\int f(x,y) dx = \int g(x)f(x,y) dx.$$
+(ii) $X\perp Y,$ $\varphi:\mathbb{R}^2\to\mathbb{R}$ is a Borel function such that $E|\varphi(X,Y)|&amp;lt;\infty,$ then
+$$E(\varphi(X,Y)|X) = h(X), \text{ where } h(x) = E\varphi(x,Y).$$
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) Since $f,g$ are Borel, $h$ is also a Borel function. Let $(X,Y)$ be a random vector on a product space $(\Omega, \mathcal{F}, P)$ of $(\Omega_X, \mathcal{F}_X, P_X)$ and $(\Omega_Y, \mathcal{F}_Y, P_Y)$. Given $A \in \sigma(Y),$ let $B\in\mathcal{B}(\mathbb{R})$ so that $A = Y^{-1}(B).$
+$$\begin{aligned}
+\int_A g(X) dP 
+ &amp;amp;= \int g(X) \mathbf{1}_A dP \\
+ &amp;amp;= \int g(X) \mathbf{1}_B(Y) dP \\
+ &amp;amp;= \int\int g(X) \mathbf{1}_B(Y) dP_X dP_Y \\
+ &amp;amp;= \int\int g(x) \mathbf{1}B(Y) f(x,y) dxdy \\
+ &amp;amp;= \int_B\int g(x) f(x,y) dxdy \\
+ &amp;amp;= \int_B h(y) \int f(x,y) dx dy \\
+ &amp;amp;= \int_A h(Y) dP.
+\end{aligned}$$
+
+The third and the fifth equality is from the Fubini's theorem.&lt;br /&gt;
+(ii) By the Fubini's theorem, $h \in \sigma(X).$ Given $A \in \sigma(X),$ let $B\in\mathcal{B}(\mathbb{R})$ so that $A = X^{-1}(B).$ Similar to (i), we get
+$$\begin{aligned}
+\int_A h(X) dP_X
+ &amp;amp;= \int\int \varphi(X,Y) dP_Y \mathbf{1}_B(X) dP_X \\
+ &amp;amp;= \int \varphi(X,Y)\mathbf{1}_B(X) dP \\
+ &amp;amp;= \int_A \varphi(X,Y) dP_X
+\end{aligned}$$
+
+The second equality is from the Fubini's theorem.
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;properties&quot;&gt;Properties&lt;/h2&gt;
+
+&lt;p&gt;Next I would like to cover fundamental properties of conditional expectations. These will be used throughout this chapter.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot;&gt;
+Suppose $E|X|&amp;lt;\infty,$ $E|Y|&amp;lt;\infty.$&lt;br /&gt;
+(i) $E(aX+bY|\mathcal{F}_0) = aE(X|\mathcal{F}_0) + bE(Y|\mathcal{F}_0).$&lt;br /&gt;
+(ii) $X\ge 0$ a.s. $\implies E(X|\mathcal{F}_0) \ge 0$ a.s.&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Notable result from (ii) is that $&lt;/td&gt;
+      &lt;td&gt;E(X&lt;/td&gt;
+      &lt;td&gt;\mathcal{F}_0)&lt;/td&gt;
+      &lt;td&gt;\le E(&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;\mathcal{F}_0).$&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;inequalities&quot;&gt;Inequalities&lt;/h3&gt;
+
+&lt;p&gt;These are conditional version of some of the inequalities that we covered earlier in chapter 1.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Markov&quot;&gt;
+Suppose $E|X|&amp;lt;\infty,$ $X \ge 0.$
+$$P(X \ge a | \mathcal{F}_0) \le \frac{1}{a} E(X|\mathcal{F}_0).$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$P(X \ge a | \mathcal{F}_0) 
+ \le E(\mathbf{1}_{X \ge a} \frac{X}{a} | \mathcal{F}_0)
+ \le \frac{1}{a} E(X|\mathcal{F}_0).$$ 
+&lt;/div&gt;
+
+&lt;p&gt;Similarly, Chebyshev’s inequality also holds for conditional expectation.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Jensen&quot;&gt;
+$E|X|&amp;lt;\infty,$ $\varphi:\mathbb{R}\to\mathbb{R}$ is convex, $E|\varphi(X)|&amp;lt;\infty.$ Then $E(\varphi(X)|\mathcal{F}_0) \ge \varphi(E(X|\mathcal{F}_0)).$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Note that $\varphi(x) = \sup\{ax+b:~ (a,b)\in S\}$ where $S=\{(a,b):~ ax+b \le \varphi(x), \forall x\}.$ So $\varphi(X) \ge aX+b$ for all $(a,b) \in S.$
+$$\begin{aligned}
+E(\varphi(X)|\mathcal{F}_0) 
+ &amp;amp;\ge aE(X|\mathcal{F}_0)+b,~ \forall(a,b)\in S.\\
+E(\varphi(X)|\mathcal{F}_0) 
+ &amp;amp;\ge \sup\{aE(X|\mathcal{F}0)+b:~ (a,b)\in S\} \\
+ &amp;amp;= \varphi(E(X|\mathcal{F}_0)).
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;MCT&quot;&gt;
+If $X_n \ge 0$ a.s. and $X_n \uparrow X$ a.s. with $E|X| &amp;lt;\infty,$ then $E(X_n|\mathcal{F}_0) \uparrow E(X|\mathcal{F}_0)$ a.s.
+&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;In fact, the condition \(E&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;&amp;lt;\infty\) is not required since we can always define conditional expectation for non-negative random variables as the Radon-Nikodym derivative. I wrote the condition only because Durrett did so.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Note that $E(X_n|\mathcal{F}_0) \le E(X_{n+1}|\mathcal{F}_0) \le E(X|\mathcal{F}_0)$ for all $n.$ Given $A\in\mathcal{F}_0,$ by using MCT twice,
+$$\begin{aligned}
+\int_A \lim_n E(X_n|\mathcal{F}_0) dP
+ &amp;amp;= \lim_n\int_A E(X_n|\mathcal{F}_0) dP \\
+ &amp;amp;= \lim_n \int_A X_n dP \\
+ &amp;amp;= \int_A X dP \\
+ &amp;amp;= \int_A E(X|\mathcal{F}) dP.
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;DCT&quot;&gt;
+$X_n\to X$ a.s. and $|X_n|\le Y$ for all $n$ where $EY &amp;lt; \infty.$ Then $E(X_n|\mathcal{F}_0) \to E(X|\mathcal{F}_0)$ a.s.
+&lt;/div&gt;
+
+&lt;p&gt;The proof is similar to that of conditional MCT.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Fatou&quot;&gt;
+$X\ge0$ a.s. Then $E(\liminf_n X_n|\mathcal{F}_0) \le \liminf_n E(X_n | \mathcal{F}_0).$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Given $M&amp;gt;0,$ $X_n \wedge M$ is dominated by $M.$ There exists a subsequence $(X_{n_k})$ such that $X_{n_k} \to \liminf_n X_n.$ By conditional DCT,
+$$\begin{aligned}
+E(\liminf_n X_n \wedge M | \mathcal{F}) 
+ &amp;amp;= \lim_k E(X_{n_k} \wedge M | \mathcal{F}_0) \\
+ &amp;amp;\le \liminf_n E(X_n | \mathcal{F}),~ \forall M&amp;gt;0.
+\end{aligned}$$
+By conditional MCT, letting $M\uparrow\infty$ gives the result.
+&lt;/div&gt;
+
+&lt;p&gt;The obvious consequences are
+\(B_n \subset B_{n+1} \uparrow B,~ B=\cup_{n=1}^\infty B_n \implies P(B_n|\mathcal{F}_0) \uparrow P(B|\mathcal{F}_0).\)
+and
+\(C_n\in\mathcal{F}_0 \text{ are disjoint} \implies P(\cup_{n=1}^\infty C_n|\mathcal{F}_0) = \sum_{n=1}^\infty P(C_n|\mathcal{F}_0).\)&lt;/p&gt;
+
+&lt;h3 id=&quot;smoothing-property&quot;&gt;Smoothing property&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;smoothing property&quot;&gt;
+(i) $X\in\mathcal{F}_0,$ $E|Y|&amp;lt;\infty,$ $E|XY|&amp;lt;\infty.$ Then $E(XY|\mathcal{F}_0) = XE(Y|\mathcal{F}_0).$&lt;br /&gt;
+(ii) $\mathcal{F}_1\subset\mathcal{F}_2$ are sub $\sigma$-fields. $E|X|&amp;lt;\infty.$ Then
+$$\begin{aligned}
+&amp;amp;E[E(X|\mathcal{F}_1)|\mathcal{F}_2] = E(X|\mathcal{F}_1) \\
+\text{and } &amp;amp;E[E(X|\mathcal{F}_2)|\mathcal{F}_1] = E(X|\mathcal{F}_1).
+\end{aligned}$$
+&lt;/div&gt;
+&lt;p&gt;(i) is clear by using the standard machine. (ii) is also clear by the definition of (nested) conditional expectations.&lt;/p&gt;
+
+&lt;p&gt;Finishing the section, let me prove the second theorem of this section.&lt;/p&gt;
+&lt;div style=&quot;display: none&quot;&gt;
+$\DeclareMathOperator*{\argmin}{arg\,min}$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot; text=&quot;the best guess&quot;&gt;
+$$\begin{aligned}
+E(X-Y)^2 
+ &amp;amp;= E[X - E(X|\mathcal{F}_0) + E(X|\mathcal{F}_0) - Y]^2 \\
+ &amp;amp;= E[X-E(X|\mathcal{F}_0)]^2 + E[E(X|\mathcal{F}_0)-Y]^2 \\
+ &amp;amp;\;\;\;\;+ 2\cancel{E[(E(X|\mathcal{F}_0)-Y)E((X-E(X|\mathcal{F}_0))|\mathcal{F}_0)]}
+\end{aligned}$$
+The canceled term in the second equality is by the smoothing property. Thus $E(X|\mathcal{F}_0) = \argmin_{Y\in\mathcal{C}}E(X-Y)^2.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;There is a formal notion of (regular) conditional distribution. The actual conditional distribution is a function defined on a product space of $\mathcal{B}(\mathbb{R})$ and $\Omega.$ &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 27 Dec 2020 01:12:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.1-conditional-expectation</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.1-conditional-expectation</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>(PTE) 3.9. Infinitely divisible distributions</title>
+        <description>&lt;p&gt;A certain kind of well behaving distributions has characteristic functions that can be represented in canonical form. In this section we cover conditions that such distributions have and its canonical representation.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#infinitely-divisible-distributions&quot; id=&quot;markdown-toc-infinitely-divisible-distributions&quot;&gt;Infinitely divisible distributions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#canonical-representation&quot; id=&quot;markdown-toc-canonical-representation&quot;&gt;Canonical representation&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#sufficiency&quot; id=&quot;markdown-toc-sufficiency&quot;&gt;Sufficiency&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#necessity&quot; id=&quot;markdown-toc-necessity&quot;&gt;Necessity&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;infinitely-divisible-distributions&quot;&gt;Infinitely divisible distributions&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;infinitely divisible distribution&quot;&gt;
+Let $F$ be a distribution with characteristic function $\varphi.$ $F$ is inifinitely divisible (ID for short) if one of the followings hold.&lt;br /&gt;
+(i) There exists a squence of distributions $(F_n)$ such that $F=F_n*\cdots* F_n$ for all $n\in\mathbb{N}.$ &lt;br /&gt;
+(ii) There exists random variables $X,X_{nk}$ in a probability space $(\Omega, \mathcal{F}, P)$ such that $X\overset{d}{=}X_{n1}+\cdots+X_{nn}$ for all $n,$ where $X\sim F$, $X_{nk}\sim F_n$ for all $k$ and $X_{nk}$'s are rowwise independent. &lt;br /&gt;
+(iii) There exists a sequence of characteristic functions $(\varphi_n)$ such that $\varphi = (\varphi_n)^n.$
+&lt;/div&gt;
+
+&lt;p&gt;Here $*$ denotes convolution. In fact all three conditions are equivalent. As an example, we can easily check that a normal distribution $X\sim\mathcal{N}(\mu,\sigma^2)$ is infinitely divisible since $X\overset{d}{=}X_{n1}+\cdots+X_{nn}$ for rowwise independent $X_{nk}\sim\mathcal{N}(\frac{\mu}{n},\frac{\sigma^2}{n}).$&lt;/p&gt;
+
+&lt;p&gt;First important property is that characteristic functions of ID distributions always have non-zero values. For this, we need a lemma that applies to all characteristic functions.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot;&gt;
+For a ch.f. $\varphi,$
+$$1-|\varphi(2t)|^2 \le 4(1-|\varphi(t)|^2).$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Proof is simple using elementary trigonometrics. Notice that $|\varphi|^2$ is a real-valued ch.f. so it suffices to show that $\text{Re}(1-\varphi(2t)) \le 4\text{Re}(1-\varphi(t))$ for a given $\varphi.$
+$$\begin{aligned}
+\text{Re}(1-\varphi(t))
+ &amp;amp;= \int(1-\cos tx)dF(x) \\
+ &amp;amp;= \int2\sin^2 \frac{t}{2}dF(x) \\
+ &amp;amp;= \int\frac{\sin^2 tx}{2\cos^2\frac{t}{2}x}dF(x) \\
+ &amp;amp;= \int\frac{1}{2}\sin^2 tx dF(x) \\
+ &amp;amp;= \int\frac{1}{4}(1-\cos 2tx) dF(x) \\
+ &amp;amp;= \frac{1}{4}\text{Re}(1-\varphi(2t)).
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+$$\text{For an infinitly divisible $\varphi$,}~ \varphi(t)\ne0,~ \forall t.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Proof is by induction. Since $\varphi$ is ID, there exists $\varphi_n$ such that $\varphi=(\varphi_n)^n.$ We know that $\varphi\to1$ as $t\to0,$ so there exists $a&amp;gt;0$ such that $|\varphi(t)|&amp;gt;0$ for all $|t|\le a.$&lt;br /&gt;
+
+Given $t$ that $|t|\le a,$
+$$|\varphi_n(t)| = |\varphi(t)^\frac{1}{n}| \ge \left(\inf_{|t|\le a}|\varphi(t)|\right)^\frac{1}{n} \to_n 1.$$ so
+for all $0\le\epsilon\le1,$ there exists $N&amp;gt;0$ such that $|\varphi_n(t)| &amp;gt; 1-\epsilon$ for all $n\ge N.$ By the lemma, for $n\ge N$ and $|t|\le a,$
+$$1-|\varphi_n(2t)|^2 \le 4(1-(1-\epsilon)^2) \le 8\epsilon.$$
+Thus for large n, $|\varphi_n(2t)|^2 \ge 1-8\epsilon &amp;gt; 0,$ for all $0 &amp;lt; \epsilon &amp;lt; 1/8.$ This gives $\varphi(2t) \ne 0$ for all $|t|\le a.$ Repeatedly apply the process to get $\varphi \ne 0$ for all $t.$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;canonical-representation&quot;&gt;Canonical representation&lt;/h2&gt;
+
+&lt;p&gt;Characteristic functions of Infinitely divisible distributions can be uniquely represented in a certain form. Furthermore, if a characteristic function can be written in such form, then it is infinitly divisible. We call it a &lt;i&gt;canonical form&lt;/i&gt;. While there are several equivalent canonical representations, I would like to cover the one by Kolmogorov. The first theorem is about sufficiency of ID distribution.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;sufficiency&quot;&gt;Sufficiency&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's canonical representation i&quot;&gt;
+Let $\varphi$ be a characteristic function. If
+$$\varphi(t) = \exp\left\{ \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\mu(x) \right\},~ \forall t$$
+for some finite measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R})),$ then $\varphi$ is infinitely divisible with mean 0 and variance $\mu(\mathbb{R}).$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(case 1. $\mu$ has a mass only at 0.)&lt;br /&gt;
+Let $\sigma^2 = \mu(\mathbb{R}) = \mu\{0\}&amp;gt;0$ then $\varphi(t) = e^\frac{t^2\sigma^2}{2}$ which is the ch.f. of $\mathcal{N}(0,\sigma^2)$ so it is ID.&lt;br /&gt;
+(case 2. $\mu$ has a mass only at $x\ne0.$)&lt;br /&gt;
+Let $\mu\{x\}=\lambda x^2$ for some $\lambda&amp;gt;0.$ Then $\varphi(t)=e^{\lambda(e^{itx}-1-itx)}$ which is a ch.f. of $x(Z_\lambda-\lambda)$ where $Z\sim\mathcal{P}(\lambda).$ Let $X_{nk}\overset{\text{iid}}{\sim} \mathcal{P}(\frac{\lambda}{n})$ for $1\le k\le n.$ $x(Z_\lambda-\lambda) \overset{d}{=} x\sum_{k=1}^n(X_{nk}-\frac{\lambda}{n})$ so it is ID.&lt;br /&gt;
+(case 3. $\mu$ has masses at $x_1,\cdots,x_k.$)&lt;br /&gt;
+Let $\mu\{x_i\}=\delta_i&amp;gt;0$ and $\varphi_i(t) = \exp\{ \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\mu_i(x) \}$ where $\mu_i(\mathbb{R})=\delta_i.$ By case 2, $\varphi_i$ is ID with mean 0 and variance $\delta_i.$ Thus for all $n,$ there exists ch.f.s $\varphi_{jn}$ such that $\varphi_n = (\varphi_{jn})^n.$ It follows that $\varphi = \prod_{j=1}^k \varphi_j = \left(\prod_{j=1}^k \varphi_{jn}\right)^n$ thus $\varphi$ is ID. Let $X\sim\varphi$ and $X_i\overset{\text{indep}}{\sim} \varphi_i$ then $X\overset{d}{=}X_1+\cdots+X_k$ so $EX=0,\text{Var}(X)=\mu\{x_1,\cdots,x_k\}.$&lt;br /&gt;
+(case 4. general finite $\mu$.)&lt;br /&gt;
+Let $\mu_k\{j\cdot2^{-k}\} = \mu(j\cdot2^{-k}, (j+1)2^{-k}],$ $j\in J_k = \{0,\pm1,\pm2,\cdots,\pm2^{2k}\}.$ Then $\mu_k$ has masses on $\{j\cdot2^{-k}:~ j \in J_k\}.$ Since $\mu_k(\mathbb{R}) \to \mu(\mathbb{R}) &amp;gt; 0$ as $k\to\infty,$ $\mu_k(\mathbb{R})&amp;gt;0$ for all large $k.$&lt;br /&gt;
+Now assume that $f:\mathbb{R}\to\mathbb{R}$ is continuous and vanishes at infinity (i.e. $\lim_{|x|\to\infty}f(x)=0$). Let
+$$f_k = \begin{cases}
+ f(j\cdot2^{-k})  &amp;amp;,~  x\in (j\cdot2^{-k}, (j+1)2^{-k}] \\
+ 0  &amp;amp;,~ \text{otherwise}
+\end{cases}$$
+be a step function, then $\int{f}d\mu_k = \int{f_k}d\mu.$ As $k\to\infty,$ $f_k\to f.$ Since $|f_k| \le |f| \le \sup_x |f(x)| &amp;lt; \infty,$ apply BCT and we get $\int{f_k}d\mu \to \int{f}d\mu.$&lt;br /&gt;
+By the case 3, $\varphi_k(t) = \exp\{ \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\mu_k(x) \}$ is ID. since the integrand is continuous and vanishes at infinity, $\varphi_k \to \varphi$ as $k\to\infty.$ Since $\varphi(0)=1$ and $\varphi$ is continuous at 0, by continuity theorem $\varphi$ is a ch.f. for some random variable.&lt;br /&gt;
+In addition, $EX^2 \le \liminf_k EX_k^2 &amp;lt; \infty$ for $X\sim\varphi$ and $X_k\sim\varphi_k.$ By moment generating property of ch.f., $iEX = \varphi'(0) = 0$ and $-\text{Var}(X) = -\mu(\mathbb{R}).$ Let another $\psi_n(t) = \exp\{ \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\frac{\mu}{n}(x) \}$ then it is a ch.f. Observe that $\varphi = (\psi_n)^n$ so $\varphi$ is ID.
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;In other words,
+\(\log \varphi(t) = \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\mu(x).\)
+We call the right hand side the &lt;i&gt;canonical representation of $\varphi$&lt;/i&gt; and $\mu$ the &lt;i&gt;canonical measure&lt;/i&gt;. Note that $\frac{|e^{itx}-1-itx|}{x^2} \le t^2$ so the integral is well-defined. For $x=0,$ we define $\frac{e^{itx}-1-itx}{x^2} \big\vert_{x=0} = -\frac{t^2}{2}$ by continuity. Also note that
+\(\frac{|e^{itx}-1-itx|}{x^2} \le t^2 \wedge \frac{2|t|}{|x|} \to 0 \text{ as } |x|\to\infty.\)
+This follows from error estimation of the second-order Taylor series.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;necessity&quot;&gt;Necessity&lt;/h3&gt;
+
+&lt;p&gt;To show the necessity part for more general class of characteristic functions, we define the condition R.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;condition R&quot;&gt;
+A rowwise independent triangular array $(X_{nk})_{k=1}^{r_n}$ satisfies R if the followings hold.&lt;br /&gt;
+(i) $EX_{nk}=0,$ $\sigma_{nk}^2 = EX_{nk}^2 &amp;lt; \infty,$ $s_n^2 = \sum_{k=1}^{r_n} \sigma_{nk}^2 &amp;gt; 0.$&lt;br /&gt;
+(ii) $\sup_n s_n^2 &amp;lt; \infty.$&lt;br /&gt;
+(iii) $\max_{1\le k\le r_n} \sigma_{nk}^2 \to 0$ as $n\to\infty.$
+&lt;/div&gt;
+
+&lt;p&gt;For the proof of the next theorem, we need the following lemma.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot;&gt;
+Let $(\mu_n)$ be a sequence of finite measures with $\sup_n \mu_n(\mathbb{R}) &amp;lt; \infty.$ There exists a subsequence $(\mu_{nk})$ and a finite measure $\mu$ such that $\mu_{nk} \overset{w}{\to} \mu$ and $\int{h}d\mu_{nk} \to \int{h}d\mu$ for all $h$ that is continuous and vanishes at infinity.
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's canonical representation ii&quot;&gt;
+Let $F$ be the limiting distribution of $S_n=X_{n1}+\cdots+X_{nr_n}$ for some $(X_{nk})$ that satisfies R. Then $\varphi,$ the ch.f. of $F,$ has a unique canonical representation:
+$$\varphi(t) = \text{exp}\left\{ \int_{-\infty}^\infty \frac{e^{itx}-1-itx}{x^2} d\mu(x) \right\}.$$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$\begin{aligned}
+\bigg| \underbrace{\prod_{k=1}^{r_n} \varphi_{nk}(t)}_\text{(i)} - \underbrace{\prod_{k=1}^{r_n} e^{\varphi_{nk}(t)-1}}_\text{(ii)} \bigg|
+ &amp;amp;\le \sum_{k=1}^{r_n} |\varphi_{nk}(t) -  e^{\varphi_{nk}(t)-1}| \\
+ &amp;amp;\le \sum_{k=1}^{r_n} |\varphi_{nk}(t) - 1|^2 \\
+ &amp;amp;\le \sum_{k=1}^{r_n} (t^2\sigma_{nk}^2)^2 \\
+ &amp;amp;\le t^4 \max_{1\le k\le r_n} \sigma_{nk}^2 \cdot s_n^2 \to 0.
+\end{aligned}$$
+The first inequality is from 3.4.3, the second is from 3.4.4, the third is from 3.3.19, and $\to0$ is by condition R. In addition,
+$$\text{(i)} \to \varphi \text{ as } n\to\infty$$
+also by condition R.
+$$\begin{aligned}
+\text{(ii)}
+ &amp;amp;= \sum_{k=1}^{r_n} \int(e^{itx}-1) dF_{nk}(x) \\
+ &amp;amp;= \sum_{k=1}^{r_n} \int\frac{e^{itx}-1-itx}{x^2} x^2 dF_{nk}(x) \\
+ &amp;amp;= \int\frac{e^{itx}-1-itx}{x^2} d\left(\sum_{k=1}^{r_n}x^2 F_{nk}(x)\right)
+\end{aligned}$$
+Let $\mu_n(-\infty,x] = \sum_{k=1}^{r_n} \int_{-\infty}^xy^2 dF_{nk}(y),$ then
+$$\text{(ii)}
+ = \int\frac{e^{itx}-1-itx}{x^2} d\mu_n(x)$$
+and $\mu_n(\mathbb{R}) = s_n^2.$ So $\sup_n \mu_n(\mathbb{R}) &amp;lt; \infty$ and there exists $(\mu_{nj}),\mu$ such that $\mu_{nj} \overset{w}{\to} \mu$ and $\int{h}d\mu_{nj} \to \int{h}d\mu$ for all $h$ that is continuous and vanishes at infinity. By the above mentioned fact,
+$$\int\frac{e^{itx}-1-itx}{x^2} d\mu_{nj}(x) \to \int\frac{e^{itx}-1-itx}{x^2} d\mu(x).$$
+By convergence of (i) and (ii), the existence part of the proof is done.&lt;br /&gt;
+For the uniqueness part, we only need to show that such $\mu$ is unique. Suppose
+$$\int\frac{e^{itx}-1-itx}{x^2} d\mu(x) = \int\frac{e^{itx}-1-itx}{x^2} d\nu(x),~ \forall t.$$
+This implies $\int e^{itx}d\mu(x) = \int e^{itx}d\nu(x).$ Put $t=0$ to both sides and we get $c:=\mu(\mathbb{R})=\nu(\mathbb{R}).$ Dividing both sides with $c,$ $\mu/c$ and $\nu/c$ becomes probabilty measures with identical ch.f.s and the proof is done.
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Fri, 25 Dec 2020 16:39:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-3.9-infinitely-divisible-distributions</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.9-infinitely-divisible-distributions</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 3.10. Limit theorems in ℝᵈ</title>
@@ -1334,406 +1798,6 @@ Let $Y_k = X_k \mathbf{1}_{|X_k|\le k^{1/p}}$ then we can check it satisfies the
         <pubDate>Mon, 21 Dec 2020 21:14:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-2.5-convergence-of-random-series</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.5-convergence-of-random-series</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.4. Strong law of large numbers</title>
-        <description>&lt;p&gt;Putting together all the topics we have covered so far, we now move on to one of the most impactful theorem in probability theory: the strong law of large numbers (SLLN).&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#strong-law-of-large-numbers&quot; id=&quot;markdown-toc-strong-law-of-large-numbers&quot;&gt;Strong law of large numbers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#application-of-the-strong-law&quot; id=&quot;markdown-toc-application-of-the-strong-law&quot;&gt;Application of the strong law&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#1-extension-of-the-strong-law&quot; id=&quot;markdown-toc-1-extension-of-the-strong-law&quot;&gt;1. Extension of the strong law&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-renewal-theory&quot; id=&quot;markdown-toc-2-renewal-theory&quot;&gt;2. Renewal theory&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3-glivenko-cantelli-theorem&quot; id=&quot;markdown-toc-3-glivenko-cantelli-theorem&quot;&gt;3. Glivenko-Cantelli theorem&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#4-law-of-iterated-logarithm&quot; id=&quot;markdown-toc-4-law-of-iterated-logarithm&quot;&gt;4. Law of iterated logarithm&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;strong-law-of-large-numbers&quot;&gt;Strong law of large numbers&lt;/h2&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;strong law of large numbers&quot;&gt;
-Let $X_1, X_2, \cdots$ be pairwise independent, identically distributed. $S_n = \sum_{i=1}^n X_i.$&lt;br /&gt;
-$E|X_1| = \mu &amp;lt; \infty \implies \frac{S_n}{n} \to \mu \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;p&gt;The strong law not only requires less conditions (pairwise rather than mutual independence) than the weak law but provides convergence in almost sure sense. We use the proof scheme similar to that of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#generalization-of-the-second-lemma&quot;&gt;(2.3.9)&lt;/a&gt;. In addition, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cesàro_summation&quot;&gt;Cesàro’s mean&lt;/a&gt; will be used: if $\lim_k Y_k = a$ then $\lim_n \frac{1}{n} \sum_{k=1}^n Y_k = a.$&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot; text=&quot;the strong law&quot;&gt;
-&amp;ensp; Without loss of generality, we only need to prove the case where $X_i \ge 0.$ Let $Y_k = X_k \mathbf{1}_{X_k \le k}$ and $T_n = \sum_{i=1}^n Y_i.$&lt;br /&gt;&lt;br /&gt;
-
-&lt;i&gt;(Step 1. &lt;b&gt;Claim&lt;/b&gt;: $|\frac{T_n}{n} - \frac{ET_n}{n}| \to 0 \text{ a.s.} \implies \frac{S_n}{n} \to \mu \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
-(i) $\sum_{k=1}^\infty P(X_k &amp;gt; k) \le EX_1 &amp;lt; \infty.$ By the first Borel-Cantelli lemma, $P(X_k&amp;gt;k \text{ i.o.}) = P(X_k \ne Y_k \text{ i.o.}) = 0$ and $X_k \ne Y_k$ for at most finitely many $k$'s. Thus there exists $R$ such that $|T_n - S_n| \le R &amp;lt; \infty$ almost surely for all $n$ and $|\frac{T_n}{n}-\frac{S_n}{n}| \to 0 \text{ a.s.}$ as $n \to \infty.$&lt;br /&gt;
-(ii) $\frac{ET_n}{n} = \frac{1}{n} \sum_{k=1}^n EY_k$ and $\lim_k EY_k = EX_1 = \mu$ by MCT. By the Cesàro mean, $\frac{ET_n}{n} \to \mu.$&lt;br /&gt;
-Combine (i) and (ii) and the claim is proved.&lt;br /&gt;&lt;br /&gt;
-
-&lt;i&gt;(Step 2. $\exists k(n)$ s.t. $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$)&lt;/i&gt;&lt;br /&gt;
-$$
-\begin{align}
-&amp;amp;\;\;\;\;P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &amp;gt; \epsilon\right) \\
- &amp;amp;\le \frac{1}{\epsilon^2 k(n)^2} \text{Var}(T_{k(n)}) \\
- &amp;amp;= \frac{1}{\epsilon^2 k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m)
-\end{align}
-$$
-We want the sum of probabilities
-$$
-\begin{align}
-&amp;amp;\;\;\;\;\sum\limits_{n=1}^\infty P\left(\vert\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}\vert &amp;gt; \epsilon\right) \\
- &amp;amp;\le \frac{1}{\epsilon^2} \sum\limits_{n=1}^\infty \frac{1}{k(n)^2} \sum\limits_{m=1}^{k(n)} \text{Var}(Y_m) \\
- &amp;amp;= \frac{1}{\epsilon^2} \sum\limits_{m=1}^\infty \text{Var}(Y_m) \sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2}
-\end{align}
-$$
-to be finite. Let $k(n) = \lfloor \alpha^n \rfloor$ for $\alpha &amp;gt; 1$ then since $\lfloor \alpha^n \rfloor \ge \frac{1}{2} \alpha^n$,
-$$
-\begin{align}
-&amp;amp;\;\;\;\;\sum\limits_{n:k(n)\ge m} \frac{1}{k(n)^2} \\
-&amp;amp;=\sum\limits_{n:k(n)\ge m} \frac{1}{\lfloor \alpha^n \rfloor^2} \\
-&amp;amp;\le 4 \sum\limits_{n:k(n)\ge m} \alpha^{-2n} \\
-&amp;amp;\le \frac{4}{m^2 (1-\alpha^{-2})} \approx \frac{c}{m^2}.
-\end{align}
-$$
-In order to show finiteness of the sum, we need to show $\sum_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k) &amp;lt; \infty.$ This comes from
-$$
-\begin{align}
-\text{Var}(Y_k) 
-&amp;amp;\le EY_k^2 = \int_0^k 2y P(X_1 &amp;gt; y) dy. \\
-\sum\limits_{k=1}^\infty \frac{1}{k^2} \text{Var}(Y_k)
-&amp;amp;\le \sum\limits_{k=1}^\infty \frac{1}{k^2} \int_0^k 2y P(X_1 &amp;gt; y) dy \\
-&amp;amp;= \int_0^\infty \left( \sum\limits_{k=1}^\infty \frac{1}{k^2} \mathbf{1}_{(y&amp;lt;k)} \right) 2y P(X_1 &amp;gt; y) dy \\
-&amp;amp;\le 4EX_1 &amp;lt; \infty.
-\end{align}
-$$
-The last inequality holds because 
-$$
-\begin{align}
-\sum\limits_{k:k&amp;gt;y} \frac{1}{k^2} 2y &amp;amp;= 2y\sum\limits_{k:k\ge \lfloor y \rfloor + 1} \frac{1}{k^2} \\
-&amp;amp;\le 2y \int_{\lfloor y \rfloor}^\infty \frac{1}{x^2} dx \\
-&amp;amp;= \frac{2y}{\lfloor y \rfloor} \le 4.
-\end{align}
-$$
-Hence $|\frac{T_{k(n)}}{k(n)} - \frac{ET_{k(n)}}{k(n)}| \to 0 \text{ a.s.}$&lt;br /&gt;&lt;br /&gt;
-
-&lt;i&gt;(Step 3. sandwich)&lt;/i&gt;&lt;br /&gt;
-&amp;ensp; $T_{k(n)} \le T_m \le T_{k(n+1)}$ for $m:~ k(n) \le m \le k(n+1).$ Since $k(n) \to \infty$, every $m\in\mathbb{N}$ has a $k(n)$ and $k(n+1)$ that sandwiches $m.$ As $n \to \infty$, $\frac{k(n)}{k(n+1)} = \frac{\lfloor \alpha^n \rfloor}{\lfloor \alpha^{n+1} \rfloor} \to \frac{1}{\alpha}.$ Take $\liminf$ and $\limsup$ to each sides of
-$$
-\frac{T_{k(n)}}{k(n+1)} \le \frac{T_m}{m} \le \frac{T_{k(n+1)}}{k(n)}
-$$ and we get
-$$
-\frac{1}{\alpha}\mu \le \liminf\limits_m\frac{T_m}{m}
- \le \limsup\limits_m\frac{T_m}{m}
- \le \alpha\mu \;\;\text{a.s.},~ \forall \alpha &amp;gt; 1.
-$$
-Since $\alpha$ was arbitrary, $\alpha \to 1$ then the proof is done.
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;application-of-the-strong-law&quot;&gt;Application of the strong law&lt;/h2&gt;
-&lt;p&gt;I would like to cover three important results that follow the strong law. The first example is about extending the theorem for the case where $EX_1 = \infty.$ The second will be about a simple form of renewal theory. The last will be the foundation of the theory of empirical processes: the Glivenko-Cantelli theorem. In addition to the results, I will mention the &lt;em&gt;law of iterated logarithm&lt;/em&gt;, which is not named in the textbook, but quite useful to know for the following section of martingales.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-extension-of-the-strong-law&quot;&gt;1. Extension of the strong law&lt;/h3&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;2.4.5&quot;&gt;
-$X_1,X_2,\cdots$ are i.i.d. with $EX_1^+ = \infty$, $EX_1^- &amp;lt; \infty.$&lt;br /&gt;
-$\implies \frac{S_n}{n} \to \infty \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;p&gt;This implies the strong law holds even if $EX_1$ is infinite.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-It suffices to show that $\sum_{i=1}^n X_i^+/n \to \infty$ a.s. Let $Y_i^m = X_i^+ \mathbf{1}_{(X_i^+ \le m)}$ so that $Y_i^m$'s be i.i.d. and integrable. By SLLN, $\sum_{i=1}^n X_i^+ / n \ge \sum_{i=1}^n Y_i^m \to EY_1^m$ a.s. By MCT, $EY_1^m \uparrow EX_1^+ = \infty$ as $m \uparrow \infty.$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-renewal-theory&quot;&gt;2. Renewal theory&lt;/h3&gt;
-&lt;p&gt;The following theorem is about a simple version of &lt;a href=&quot;https://en.wikipedia.org/wiki/Renewal_theory&quot;&gt;Renewal theory&lt;/a&gt; arose from the question: How frequently should the light bulbs be exchanged to a new one? We are interested in the rate of the number of lightbulbs go out until the time $t$ versus $t$. Intuitively we can guess that it would be one over the mean lifetime of a bulb. The theorem confirms it.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;renewal theory&quot;&gt;
-$X_1,X_2,\cdots$ are i.i.d. with $0 &amp;lt; X_i &amp;lt; \infty$ and $EX_i = \mu \le \infty$ for all $i=1,2,\cdots.$&lt;br /&gt;
-Let $T_n = X_1+\cdots+X_n$, $N_t = \sup\{n:~ T_n \le t\}.$&lt;br /&gt;
-$\implies \frac{N_t}{t} \to \frac{1}{\mu} \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;p&gt;Here, $X_i$ can be thought of as the lifetime of $i$th lightbulb and $N_t$ as the number of bulbs went out until the time $t$. We regard $1/\mu = \infty$ if $\mu = 0.$&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$T_n/n \to \mu$ a.s. by SLLN. Observe that $T_{N_t} \le t \le T_{N_t+1}.$ As $t \to \infty$, $N_t \to \infty$ a.s. and $\frac{N_t+1}{N_t} \to 1$ a.s. Taking $\lim_{t\to\infty}$ on each terms of 
-$$
-\frac{T_{N_t}}{N_t+1} \le \frac{t}{N_t} \le \frac{T_{N_t+1}}{N_t}
-$$
-we get the result we want.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-glivenko-cantelli-theorem&quot;&gt;3. Glivenko-Cantelli theorem&lt;/h3&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Glivenko-Cantelli&quot;&gt;
-Let $X_1,X_2,\cdots \overset{\text{iid}}{\sim} F.$&lt;br /&gt;
-Let $F_n(x) = \frac{1}{n} \sum_{k=1}^n \mathbf{1}_{(X_k \le x)}.$&lt;br /&gt;
-$\implies \sup_x |F_n(x) - F(x)| \to 0 \text{ a.s. as } n \to \infty$
-&lt;/div&gt;
-
-&lt;p&gt;The theorem states that as the number of independent observations grows, the empirical distribution approaches to the (unknown) population distribution almost surely.&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-&lt;i&gt;(1) pointwise convergence&lt;/i&gt;&lt;br /&gt;
-&amp;ensp; For a fixed $x\in\mathbb{R}$, $F_x(x) \to F(x)$ a.s. Let $Z_n = \mathbf{1}_{(X_n &amp;lt; x)}$ then $F_n(x^-)=\sum_{k=1}n Z_k \to F(x^-)$ a.s.
-&lt;br /&gt;&lt;br /&gt;
-&lt;i&gt;(2) uniform convergence at grid points&lt;/i&gt;&lt;br /&gt;
-&amp;ensp; Let $x_{jk} = \inf\{y:~ F(y) \ge j/k\}$, $1\le j\le k-1$, $x_{0k} = -\infty$, $x_{kk} = \infty.$ By (1), for each $k$ there exists $N_k \in\mathbb{N}$ such that if $n\ge N_k$ then $|F_n(x_{jk}) - F(x_{jk})| &amp;lt; 1/k$ and $|F_n(x_{jk}^-) - F(x_{jk}^-)| &amp;lt; 1/k$ for all $1 \le j \le k-1.$
-&lt;br /&gt;&lt;br /&gt;
-&lt;i&gt;(3) uniform convergence&lt;/i&gt;&lt;br /&gt;
-&amp;ensp; For all $x \in (x_{j-1,k}, x_{jk})$ and $n\ge N_k$,
-$$
-\begin{align}
-F_n(x) &amp;amp;\le F_n(x_{jk}^-) \le F(x_{jk}^-) + \frac{1}{k} \\
-&amp;amp;\le F(x_{j-1,k}) + \frac{2}{k} \le F(x) + \frac{2}{k}.
-\end{align}
-$$
-Similarly, $F_n(x) \ge F(x) - \frac{2}{k}.$ Hence the desired result follows.
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-law-of-iterated-logarithm&quot;&gt;4. Law of iterated logarithm&lt;/h3&gt;
-
-&lt;p&gt;I will finish this section by briefly stating &lt;a href=&quot;https://en.wikipedia.org/wiki/Law_of_the_iterated_logarithm&quot;&gt;the law&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;remark&quot;&gt;
-Let $X_1,X_2,\cdots$ be i.i.d. with $EX_1 = 0$ and $\text{Var}(X_1) = \sigma^2 &amp;lt; \infty.$ Let $S_n = X_1 + \cdots + X_n.$ Then 
-$$
-\limsup\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = 1 \text{ a.s.} \\
-\text{and } \liminf\limits_n \frac{S_n}{\sigma\sqrt{2n\log\log n}} = -1 \text{ a.s.}
-$$
-&lt;/div&gt;
-
-&lt;p&gt;This gives us not only the asymptotic rate of $S_n$ but also the intuition that such random walk, regardless of its distribution, fluctuates between the values $\pm \sqrt{2n\log\log n}.$ As noted in Wikipedia, it bridges the gap between the law of large numbers (which is about $\frac{S_n}{n}$) and the central limit theorem ($\frac{S_n}{\sqrt{n}}$).&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;https://naturale0.github.io/assets/fig/201221_lil.png&quot; alt=&quot;lil.png&quot; width=&quot;300&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Black: 100 trials of $(S_n)$. Red: $\pm\sqrt{2n\log\log n}$.&lt;/em&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 21 Dec 2020 19:43:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.3. Borel-Cantelli lemmas</title>
-        <description>&lt;p&gt;In this section I would like to cover the &lt;em&gt;Borel-Cantelli lemmas&lt;/em&gt;, or B-C lemmas for short. Borel-Cantelli lemmas are quintessential tools for analysis of &lt;em&gt;tail events&lt;/em&gt; and deriving almost sure convergence from $P$-convergence.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#limit-of-a-sequence-of-sets&quot; id=&quot;markdown-toc-limit-of-a-sequence-of-sets&quot;&gt;Limit of a sequence of sets&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#borel-cantelli-lemmas&quot; id=&quot;markdown-toc-borel-cantelli-lemmas&quot;&gt;Borel-Cantelli lemmas&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#tail-events-and-the-0-1-law&quot; id=&quot;markdown-toc-tail-events-and-the-0-1-law&quot;&gt;Tail events and the 0-1 law&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#application-of-borel-cantelli-lemmas&quot; id=&quot;markdown-toc-application-of-borel-cantelli-lemmas&quot;&gt;Application of Borel-Cantelli lemmas&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#application-of-the-first-lemma&quot; id=&quot;markdown-toc-application-of-the-first-lemma&quot;&gt;Application of the first lemma&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#application-of-the-second-lemma&quot; id=&quot;markdown-toc-application-of-the-second-lemma&quot;&gt;Application of the second lemma&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#generalization-of-the-second-lemma&quot; id=&quot;markdown-toc-generalization-of-the-second-lemma&quot;&gt;Generalization of the second lemma&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;limit-of-a-sequence-of-sets&quot;&gt;Limit of a sequence of sets&lt;/h2&gt;
-&lt;p&gt;Borel-Cantelli lemmas are statements about probability of “limit” of sets. To state and prove the lemma, we first define $\limsup$ and $\liminf$ of a sequence of sets.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot;&gt;&lt;br /&gt;
-Let $(A_n)_{n\in\mathbb{N}}$ be a sequence of sets.&lt;br /&gt;
-$\limsup\limits_n A_n = \bigcap_n \bigcup_{k\ge n} A_k = \{A_n \text{ i.o.}\}.$ &lt;br /&gt;
-$\liminf\limits_n A_n = \bigcup_n \bigcap_{k\ge n} A_k = \{A_n \text{ eventually}\}.$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;i.o.&lt;/em&gt; stands for “infinitely often”. We named these $\limsup, \liminf$ since there is a connection with those of functions. It is not difficult to show that $\limsup\limits_n \mathbf{1}_{A_n} = \mathbf{1}_{\limsup\limits_n A_n}$ and $\liminf\limits_n \mathbf{1}_{A_n} = \mathbf{1}_{\liminf\limits_n A_n}.$ As a remark, by de Morgan’s law, $\{A_n \text{ i.o.}\}^c = \{ A_n^c \text{ eventually} \}$ thus $P(A_n \text{ i.o.}) = 0$ is equivalent to $P(A_n^c \text{ eventually}) = 1.$&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;borel-cantelli-lemmas&quot;&gt;Borel-Cantelli lemmas&lt;/h2&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Borel-Cantelli&quot;&gt;
-(i) $\sum\limits_{n=1}^\infty P(A_n) &amp;lt; \infty \implies P(A_n \text{ i.o.}) = 0.$ &lt;br /&gt;
-(ii) If $A_n$'s are independent, $\sum\limits_{n=1}^\infty P(A_n) = \infty \implies P(A_n \text{ i.o.}) = 1.$ &lt;br /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $\sum\limits_{k=1}^n \mathbf{1}_{A_k} \uparrow \sum\limits_{n=1}^\infty \mathbf{1}_{A_n}$. By MCT $E\sum\limits_{n=1}^\infty \mathbf{1}_{A_n} = \sum\limits_{n=1}^\infty P(A_n) &amp;lt; \infty$ which leads to $\sum\limits_{n=1}^\infty \mathbf{1}_{A_n} &amp;lt; \infty$ a.s. &lt;br /&gt;
-(ii) Using the inequality $1-x \le e^{-x}$, \begin{align*}
-    P(\bigcap\limits_{k \geq m}{A_k}^c) &amp;amp;= \prod\limits_{k \geq m}\big( 1-P({A_k}) \big) \\
-    &amp;amp;\leq \prod\limits_{k \geq m}e^{-P(A_k)} = e^{-\sum\limits_{k \geq m} P(A_k)} = 0, \:\: \forall m&amp;gt;0
-\end{align*}
-$\therefore P(\bigcup\limits_{k \geq m}{A_k}) = 1$ and $P(\limsup\limits_n{A_n}) = P(A_n \text{ i.o.}) = 1.$
-&lt;/div&gt;
-
-&lt;p&gt;Using Borel-Cantelli lemmas, we can convert the sum of probabilities to probability of &lt;em&gt;tail events&lt;/em&gt;.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;tail-events-and-the-0-1-law&quot;&gt;Tail events and the 0-1 law&lt;/h3&gt;
-
-&lt;p&gt;I mentioned tail events several times but never actually defined it.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;tail event&quot;&gt;
-Let $(X_n)$ be a sequence of random variables. Let $\mathcal{G}_n = \sigma(X_n,X_{n+1},\cdots).$ We call $\mathcal{T}=\bigcap_n\mathcal{G}_n$ a &lt;b&gt;tail $\sigma$-field&lt;/b&gt; of $(X_n)$, $A\in\mathcal{T}$ a &lt;b&gt;tail event&lt;/b&gt;.
-&lt;/div&gt;
-
-&lt;p&gt;Simply put, a tail event is an event that does not depend on finite number of random variables. For instance,  $\{ \limsup_n S_n/C_n &amp;gt; x \} \in \mathcal{T}$ for $C_n, x \in \mathbb{R}$, $S_n=X_1 + \cdots + X_n$ if $X_n\to_n\infty$ while $\{\limsup_n S_n &amp;gt; 0\}\notin\mathcal{T}.$&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;P-trivial event&quot;&gt;
-An event $A$ is $P$-trivial if $P(A) = 0$ or $1.$&lt;br /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The next theorem implies that &lt;a href=&quot;https://naturale0.github.io/probability/Borel-Cantelli-lemmas&quot;&gt;Borel-Cantelli lemmas are converses of each other&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's 0-1 law&quot;&gt;
-If $X_1, X_2, \cdots$ are independent, $A \in \mathcal{T}$, where $\mathcal{T} := \bigcap_n \sigma(X_n, X_{n+1}, \cdots)$, then $A$ is a $P$-trivial event.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;
-Let $A \in \sigma(X_1, \cdots, X_k)$ and $B \in \sigma(X_{k+1}, \cdots, X_{k+j})$ for some $j$. Because $X_i$'s are independent, $A \perp B$. Thus $\sigma(X_1, \cdots, X_k) \perp \bigcup_j \sigma(X_{k+1}, \cdots, X_{k+j})$. Since both are $\pi$-systems, by Dynkin's $\pi$-$\lambda$ theorem,
-\begin{equation}
-    \sigma(X_1, \cdots, X_k) \perp \sigma(X_{k+1}, \cdots)
-\end{equation}
-
-Now, let $A \in \sigma(X_1, \cdots, X_j)$ for some $j$ and $B \in \mathcal{T} \subset \sigma(X_{j+1}, \cdots)$. By (1) and similar process, 
-\begin{equation}
-    \sigma(X_1, \cdots) \perp \mathcal{T}
-\end{equation}
-
-By (2), since $\mathcal{T} \subset \sigma(X_1, \cdots)$, $\mathcal{T}$ is independent of itself. &lt;br /&gt;
-$\therefore  A \in \mathcal{T} \to P(A) = P(A \cap A) = P(A)P(A)$.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;application-of-borel-cantelli-lemmas&quot;&gt;Application of Borel-Cantelli lemmas&lt;/h2&gt;
-&lt;h3 id=&quot;application-of-the-first-lemma&quot;&gt;Application of the first lemma&lt;/h3&gt;
-
-&lt;p&gt;The first application connects convergence in probability to almost sure convergence.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot;&gt;
-$X_n \overset{P}{\to} X$ if and only if for all subsequence $(X_{n_k})$, there exists a further subsequence $(X_{n_k(m)})$ such that $X_{n_k(m)} \to X$ a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-($\Rightarrow$) 
-Without loss of generality, we only have to prove that there exists a.s. convergent subsequence. Let $\epsilon_k&amp;gt;0$, $\epsilon_k \downarrow 0.$ There exists $n_k \in \mathbb{N}$ such that if $n \ge n_k$, $P(|X_n - X| &amp;gt; \epsilon_k) &amp;lt; \frac{1}{2^k}$ and $n_{k+1} &amp;gt; n_k.$ Hence $\sum\limits_{k=1}^\infty P(|X_{n_k} - X| \ge \epsilon_k) \le 1 &amp;lt; \infty$ and by the first Borel-Cantelli lemma, $P(|X_{n_k} - X| \ge \epsilon_k \text{ i.o.}) = 0.$&lt;br /&gt;
-($\Leftarrow$) 
-It is easy to show that for a sequence $(y_n)$ on a topological space, if for all subsequence there exists a further subsequence that converges to $y$, then $y_n \to y.$ Given $\delta &amp;gt; 0$, let $y_n = P(|X_n - X| &amp;gt; \delta)$ then it is a sequence on topological space $\mathbb{R}$ that converges to 0. By the condition, the result directly follows.
-&lt;/div&gt;
-
-&lt;p&gt;Another application is in the form of strong law of large numbers.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.3.5&quot;&gt;
-$X_1,\cdots,X_n$ are i.i.d. with $EX_1 = \mu$ and $EX_1^4 \le C &amp;lt; \infty.$ $\implies S_n/n \to \mu$ a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$$
-\begin{align}
-P(|S_n/n - \mu| &amp;gt; \epsilon) &amp;amp;= P(|S_n - n\mu| &amp;gt; n\epsilon) \\
-  &amp;amp;\le E(S_n - n\mu)^4 / n^4\epsilon^4 \le C / n^2\epsilon^4. 
-\end{align}
-$$
-$\sum\limits_{n=1}^\infty P(|S_n/n - \mu| &amp;gt; \epsilon) \le \sum\limits_{n=1}^\infty C_1 / n^2 &amp;lt; \infty$ for some $C_1.$ By the first Borel-Cantelli lemma, the result follows.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;application-of-the-second-lemma&quot;&gt;Application of the second lemma&lt;/h3&gt;
-
-&lt;p&gt;As a sneak peek of the next sction, the second Borel-Cantelli lemma leads to a necessary condition of the strong law of large numbers.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;necessity of the strong law&quot;&gt;
-$X_1,X_2,\cdots$ are i.i.d. with $E|X_1| = \infty$. $S_n = X_1 + \cdots + X_n.$&lt;br /&gt;
-$\begin{align}
-\implies &amp;amp;\text{(i) } P(|X_1|\ge n \text{ i.o.}) = 1. \\
-         &amp;amp;\text{(ii) } P(\lim_n S_n/n \text{ exists and finite}) = 0.
-\end{align}$
-&lt;/div&gt;
-
-&lt;p&gt;Note that this implies $E|X_1| &amp;lt; \infty$ is required for the strong law.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $E|X_1| = \int_0^\infty P(|X_1|&amp;gt;x)dx \le \sum\limits_{n=0}^\infty P(|X_1| \ge n) = \infty.$ By the second B-C lemma, $P(|X_1| \ge n \text{ i.o.}) = 1.$&lt;br /&gt;
-(ii) $\frac{S_n}{n}-\frac{S_{n+1}}{n+1} = \frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}.$ Let $C = \{\lim_n S_n/n \text{ exists and finite}\}$, then on $C$, $\lim_n \frac{S_n}{n(n+1)} = 0.$ On $C \cap (|X_i| \ge n \text{ i.o.})$, 
-$$
-\begin{align}
-\limsup\limits_n |\frac{S_n}{n}-\frac{S_{n+1}}{n+1}|
-&amp;amp;= \limsup\limits_n |\frac{S_n}{n(n+1)}-\frac{X_{n+1}}{n+1}| \\
-&amp;amp;\ge \limsup\limits_n |\frac{X_{n+1}}{n+1}| - \cancelto{0}{\lim_n |\frac{S_n}{n(n+1)}|} \ge 1.
-\end{align}
-$$
-By (i), the desired result follows.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;generalization-of-the-second-lemma&quot;&gt;Generalization of the second lemma&lt;/h3&gt;
-
-&lt;p&gt;Another important result is a generalization of the lemma.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.3.9&quot;&gt;
-Let $A_1,A_2,\cdots$ be pairwise independent events.&lt;br /&gt;
-$\sum\limits_{n=1}^\infty P(A_n) = \infty \implies \frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)}\to 1 \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_m = 1_{A_m}$, $S_n = X_1 + \cdots + X_n$. Note that $0 \le X_m \le 1.$&lt;br /&gt;
-(Step 1: $\frac{\sum_{m=1}^n \mathbf{1}_{A_m}}{\sum_{m=1}^n P(A_m)} = \frac{S_n}{ES_n} \overset{P}{\to} 1.$)&lt;br /&gt;
-&amp;ensp; $EX_n^2 = P(\mathbf{1}_{A_n}) &amp;lt; \infty.$ Thus $ES_n^2 = \sum_{i=1}^n EX_n^2 + 2\sum_{1\le i &amp;lt; j \le n}EX_i EX_j &amp;lt; \infty.$
-$$
-\begin{align}
-P(|\frac{S_n - ES_n}{ES_n}| &amp;gt; \epsilon) 
- &amp;amp;\le \frac{\text{Var}(S_n)}{\epsilon^2(ES_n)^2} \\
- &amp;amp;\le \frac{\sum_{i=1}^n EX_i^2}{\epsilon^2(ES_n)^2} \\
- &amp;amp;= \frac{\sum_{i=1}^n EX_i}{\epsilon^2(ES_n)^2} \\
- &amp;amp;= \frac{1}{\epsilon^2 ES_n} \to 0.
-\end{align}
-$$
-(Step 2: $\exists n_k$ s.t. $\frac{S_{n_k}}{ES_{n_k}} \to 1 \text{ a.s.}$)&lt;br /&gt;
-&amp;ensp; Let $n_k = \inf\{n:~ ES_n &amp;gt; k^2\}$ and $T_k = S_{n_k}$, then $k^2 \le ET_k \le (k+1)^2.$ Since $P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta) \le \frac{1}{\delta^2 ET_k} \le \frac{1}{\delta^2 k^2}$, $\sum_k P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta) \le \sum_k \frac{1}{k^2} / \delta^2 &amp;lt; \infty.$ By the first Borel-Cantelli lemma, $P(|\frac{T_k - ET_k}{ET_k}| &amp;gt; \delta \text{ i.o.}) = 0$, hence $\frac{T_k}{ET_k} \to 1$ a.s.&lt;br /&gt;
-(Step 3: sandwich)&lt;br /&gt;
-&amp;ensp; Let $\Omega_0 = \{\lim_k \frac{T_k}{ET_k} = 1\}$, then $P(\Omega_0) = 1.$ Pick $\omega \in \Omega_0$. Because $S_n$ is non-decreasing, for all $n$ there exists $k$ such that $T_k \le S_n \le T_{k+1}$ and $ET_k \le ES_n \le ET_{k+1}$ and thus $\frac{T_k(\omega)}{ET_{k+1}} \le \frac{S_n(\omega)}{ES_n} \le \frac{T_{k+1}(\omega)}{ET_k}.$ Since $\frac{T_k(\omega)}{ET_k} \to 1$ a.s. and $k^2 \le ET_k \le ET_{k+1} \le (k+2)^2$, by sandwich theorem $\frac{S_n(\omega)}{ES_n} \to 1$ and we get the result.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;As well as its implication, the proof scheme of it is important as it is used to prove almost sure convergence of bounded random variables in the form of fractions.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;p&gt;(TBD: example - head runs)&lt;/p&gt;
-</description>
-        <pubDate>Sun, 20 Dec 2020 22:23:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas</guid>
         
         
         <category>probability</category>
