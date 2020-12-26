@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 02:03:24 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 02:03:24 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 02:04:24 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 02:04:24 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -208,15 +208,7 @@ E(\varphi(X)|\mathcal{F}_0)
 If $X_n \ge 0$ a.s. and $X_n \uparrow X$ a.s. with $E|X| &amp;lt;\infty,$ then $E(X_n|\mathcal{F}_0) \uparrow E(X|\mathcal{F}_0)$ a.s.
 &lt;/div&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;In fact, the condition \(E&lt;/td&gt;
-      &lt;td&gt;X&lt;/td&gt;
-      &lt;td&gt;&amp;lt;\infty\) is not required since we can always define conditional expectation for non-negative random variables as the Radon-Nikodym derivative. I wrote the condition only because Durrett did so.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;In fact, the condition $E|X|&amp;lt;\infty$ is not required since we can always define conditional expectation for non-negative random variables as the Radon-Nikodym derivative. I wrote the condition only because Durrett did so.&lt;/p&gt;
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Note that $E(X_n|\mathcal{F}_0) \le E(X_{n+1}|\mathcal{F}_0) \le E(X|\mathcal{F}_0)$ for all $n.$ Given $A\in\mathcal{F}_0,$ by using MCT twice,
