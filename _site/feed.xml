@@ -6,13 +6,23 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 20:32:07 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 20:32:07 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 20:49:08 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 20:49:08 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>(PTE) 4.2. Martingales and a.s. convergence</title>
         <description>&lt;p&gt;Remaining sections in chapter 4 is about martingales and convergence of it. Regarding martingales, our first topic will be convergence in almost sure sense. Next we will look into convergence in $L^p,$ with $p&amp;gt;1$ and $p=1$ separately. In the meantime the theory of optional stopping will be covered.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#martingales&quot; id=&quot;markdown-toc-martingales&quot;&gt;Martingales&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#martingale-convergence-theorems&quot; id=&quot;markdown-toc-martingale-convergence-theorems&quot;&gt;Martingale convergence theorems&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#upcrossing-inequality&quot; id=&quot;markdown-toc-upcrossing-inequality&quot;&gt;Upcrossing inequality&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#martingale-convergence-theorems-1&quot; id=&quot;markdown-toc-martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;martingales&quot;&gt;Martingales&lt;/h2&gt;
 
@@ -20,7 +30,7 @@
 Let $(\cal{F}_n)_{n=1}^\infty$ be a sequence of sub $\sigma$-fields of $\cal{F},$ $(X_n)$ be a sequence of random variables with $X_n \in \cal{F}_n,$ $E|X_n|&amp;lt;\infty$ for all $n.$ $(X_n, \cal{F}_n)$ is a martingale if $E(X_{n+1}|\cal{F}_n) = X_n$ a.s., a submartingale if $E(X_{n+1}|\cal{F}_n) \ge X_n$ a.s., or a supermartingale if $E(X_{n+1}|\cal{F}_n) \le X_n$ a.s.
 &lt;/div&gt;
 
-&lt;p&gt;We say $X_n$ is adapted to $\cal{F}&lt;em&gt;n$ if $X_n \in \cal{F}_n$ for all $n.$ For simplicity instead of denoting $\cal{F}_n$ together, we could just say $X_n$ is a (sub/super)martingale if the adapted $\sigma$-fields are clear. If $X_n$ is a martingale, $\int_A X&lt;/em&gt;{n+1} dP = \int_A X_n dP$ for all $A \in \cal{F}n,$ so trivially $EX_{n+1} = EX_n$ for all $n.$ $X_n$ is a martingale if and only if $X_n$ is both a submartingale and a supermartingale. In addition, if $X_n$ is a submartingale, then $-X_n$ is a supermartingale.&lt;/p&gt;
+&lt;p&gt;We say $X_n$ is adapted to $\cal{F}_n$ if $X_n \in \cal{F}_n$ for all $n.$ For simplicity instead of denoting $\cal{F}_n$ together, we could just say $X_n$ is a (sub/super)martingale if the adapted $\sigma$-fields are clear. If $X_n$ is a martingale, $\int_A X_{n+1} dP = \int_A X_n dP$ for all $A \in \cal{F}n,$ so trivially $EX_{n+1} = EX_n$ for all $n.$ $X_n$ is a martingale if and only if $X_n$ is both a submartingale and a supermartingale. In addition, if $X_n$ is a submartingale, then $-X_n$ is a supermartingale.&lt;/p&gt;
 
 &lt;p&gt;The easiest but important examples are random walks and square martingales.&lt;/p&gt;
 
@@ -100,8 +110,8 @@ Let $H_m = \bf{1}_{m\le N}$ then it is a non-negative bounded predictable sequen
 Let $(X_n, \cal{F}_n)_{n\ge0}$ be a submartingale. For $a&amp;lt;b,$ define
 $$N_{2k-1} := \inf\{m&amp;gt;N_{2k-2}:~ X_m \le a\},\\
   N_{2k} := \inf\{m&amp;gt;N_{2k-1}:~ X_m \ge b\}, \\
-  N_0 := -1. \\
-  U_n = \sup\{k:~ N_{2k} \le n\}$$
+  N_0 := -1, \\
+  U_n = \sup\{k:~ N_{2k} \le n\}.$$
 For a submartingale $(X_n)_{n\ge0},$
 $$(b-a)EU_n \le E(X_n-a)^+ - E(X_0-a)^+.$$
 &lt;/div&gt;
@@ -136,15 +146,7 @@ E(Y_n-Y_0) &amp;amp;= E(H\cdot Y)_n + E(K\cdot Y)_n \\
 &lt;/div&gt;
 &lt;/details&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ +&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;).$ This will be the key to prove the martingale convergence.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ + |a|).$ This will be the key to prove the martingale convergence.&lt;/p&gt;
 
 &lt;h3 id=&quot;martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/h3&gt;
 
