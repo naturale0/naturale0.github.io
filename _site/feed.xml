@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 21:01:23 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 21:01:23 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 21:02:11 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 21:02:11 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -214,7 +214,7 @@ However, $E|X_n| = ES_{n\wedge N} = ES_0 = 1$ for all $n$ since $X_n$ is a marti
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
-        <pubDate>Sun, 27 Dec 2020 18:23:00 +0900</pubDate>
+        <pubDate>Sun, 27 Dec 2020 20:23:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.2-martingales</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.2-martingales</guid>
         
