@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 20:49:08 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 20:49:08 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 20:51:27 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 20:51:27 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -146,7 +146,7 @@ E(Y_n-Y_0) &amp;amp;= E(H\cdot Y)_n + E(K\cdot Y)_n \\
 &lt;/div&gt;
 &lt;/details&gt;
 
-&lt;p&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ + |a|).$ This will be the key to prove the martingale convergence.&lt;/p&gt;
+&lt;p&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ + |a|).$ This will be the key to prove the martingale convergence.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/h3&gt;
 
