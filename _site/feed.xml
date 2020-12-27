@@ -6,9 +6,220 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 02:14:10 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 02:14:10 +0900</lastBuildDate>
+    <pubDate>Sun, 27 Dec 2020 20:32:07 +0900</pubDate>
+    <lastBuildDate>Sun, 27 Dec 2020 20:32:07 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.2. Martingales and a.s. convergence</title>
+        <description>&lt;p&gt;Remaining sections in chapter 4 is about martingales and convergence of it. Regarding martingales, our first topic will be convergence in almost sure sense. Next we will look into convergence in $L^p,$ with $p&amp;gt;1$ and $p=1$ separately. In the meantime the theory of optional stopping will be covered.&lt;/p&gt;
+
+&lt;h2 id=&quot;martingales&quot;&gt;Martingales&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;martingale&quot;&gt;
+Let $(\cal{F}_n)_{n=1}^\infty$ be a sequence of sub $\sigma$-fields of $\cal{F},$ $(X_n)$ be a sequence of random variables with $X_n \in \cal{F}_n,$ $E|X_n|&amp;lt;\infty$ for all $n.$ $(X_n, \cal{F}_n)$ is a martingale if $E(X_{n+1}|\cal{F}_n) = X_n$ a.s., a submartingale if $E(X_{n+1}|\cal{F}_n) \ge X_n$ a.s., or a supermartingale if $E(X_{n+1}|\cal{F}_n) \le X_n$ a.s.
+&lt;/div&gt;
+
+&lt;p&gt;We say $X_n$ is adapted to $\cal{F}&lt;em&gt;n$ if $X_n \in \cal{F}_n$ for all $n.$ For simplicity instead of denoting $\cal{F}_n$ together, we could just say $X_n$ is a (sub/super)martingale if the adapted $\sigma$-fields are clear. If $X_n$ is a martingale, $\int_A X&lt;/em&gt;{n+1} dP = \int_A X_n dP$ for all $A \in \cal{F}n,$ so trivially $EX_{n+1} = EX_n$ for all $n.$ $X_n$ is a martingale if and only if $X_n$ is both a submartingale and a supermartingale. In addition, if $X_n$ is a submartingale, then $-X_n$ is a supermartingale.&lt;/p&gt;
+
+&lt;p&gt;The easiest but important examples are random walks and square martingales.&lt;/p&gt;
+
+&lt;div class=&quot;example&quot;&gt;
+Suppose $\xi_1, \xi_2, \cdots$ are i.i.d. with mean 0 and variance $\sigma^2.$ Let $\cal{F}_n = \sigma(\xi_1,\cdots,\xi_n).$ Then&lt;br /&gt;
+(i) $X_n := \xi_1 + \cdots \xi_n$ is a martingale.&lt;br /&gt;
+(ii) $X_n := (\xi_1 + \cdots + \xi_n)^2 - n\sigma^2$ is a martingale.
+&lt;/div&gt;
+
+&lt;p&gt;Though we cannot guarantee that functions of martingales are also martingales, we can say for sure that a function of martingale is a submartingale if the function is convex.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.2.6&quot;&gt;
+For a martingale $X_n,$ if $\varphi$ is convex and $E|\varphi(X_n)|&amp;lt;\infty$ for all $n,$ then $\varphi(X_n)$ is a submartingale.
+&lt;/div&gt;
+
+&lt;p&gt;The proof is direct by conditional Jensen’s inequality. The obvious corollary is for submartingales.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;4.2.7&quot;&gt;
+For a submartingale $X_n,$ if $\varphi$ is convex, increasing and $E|\varphi(X_n)|&amp;lt;\infty$ for all $n,$ then $\varphi(X_n)$ is a submartingale.
+&lt;/div&gt;
+
+&lt;p&gt;The following two examples will be useful in the section comes later.&lt;/p&gt;
+&lt;div class=&quot;example&quot;&gt;
+(i) If $X_n$ is a submartingale, then $(X_n-a)^+$ is a submartingale.&lt;br /&gt;
+(ii) If $X_n$ is a supermartingale, then $X_n \wedge a$ is a supermartingale.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;martingale-convergence-theorems&quot;&gt;Martingale convergence theorems&lt;/h2&gt;
+&lt;p&gt;For martingale convergence theorems, we need to define and prove predictable sequences, stopping times, upcrossing inequality and related properties.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;upcrossing-inequality&quot;&gt;Upcrossing inequality&lt;/h3&gt;
+&lt;div class=&quot;definition&quot; text=&quot;filtration&quot;&gt;
+Let $\cal{F}_n$ be a sequence of sub $\sigma$-fields of $\cal{F}.$ $\cal{F}_n$ is a filtration if $F_n \subset \cal{F}_{n+1}$ for all $n.$
+&lt;/div&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;predictable sequence&quot;&gt;
+For a filtration $(\cal{F}_n)_{n\ge0},$ a sequence of random variables $H_n$ is predictable if $H_{n+1} \in \cal{F}n$ for all $n \ge 0.$
+&lt;/div&gt;
+
+&lt;p&gt;Intuitively, consider $n$ as time index. The term “predictable” is from the fact that we knows every information about the behavior of $H_{n+1}$ in the time point $n.$&lt;/p&gt;
+
+&lt;p&gt;We get the result that the sum of submartingale increments weighted by a bounded predictable sequence is also a submartingale.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.2.8&quot;&gt;
+Let $X_n$ be a submartingale adapted to a filtration $(\cal{F}_n)_{n\ge0}.$ Let $H_n$ be a non-negative predictable sequence with $|H_n| \le M_n$ for some $M_n&amp;gt;0$ for all $n.$ Then
+$$(H\cdot X)_n := \sum_{m=1}^n H_m(X_m-X_{m-1})$$ is a submartingale.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) $E|(H\cdot X)_n| \le \sum_{m=1}^n M_nE(|X_m|+|X_{m-1}|) &amp;lt; \infty$ for all $n.$&lt;br /&gt;
+(ii) Clearly, $(H\cdot X)_n \in \cal{F}_n$ for all $n.$&lt;br /&gt;
+(iii) $$\begin{aligned}
+E((H\cdot X)_{n+1} | \cal{F}_n) 
+ &amp;amp;= (H\cdot X)_n + E(H_{n+1}(X_{n+1}-X_n)|\cal{F}_n) \\
+ &amp;amp;= (H\cdot X)_n + H_{n+1}\cancel{\{E(X_{n+1}|\cal{F}_n)-X_n\}}.
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;p&gt;We already get a glimpse of stopping times while studying &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers#weak-law-of-large-numbers&quot;&gt;coupon collector’s problem&lt;/a&gt; and &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#2-renewal-theory&quot;&gt;renewal theory&lt;/a&gt;. They were random variables that specifies the time that an event occurs. Here, we define it formally.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;stopping time&quot;&gt;
+Let $N$ be a random variable taking values $0,1,\cdots,\infty.$ $N$ is a stopping time if $\{N=n\}\in\cal{F}_n$ for all $n=0,1,\cdots,\infty.$
+&lt;/div&gt;
+
+&lt;p&gt;It is highly useful to define a predictable sequence as an indicator function related to stopping times. With such sequence, we can easily derive the following theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.2.9&quot;&gt;
+Let $N$ be a stopping time, $X_n$ be a submartingale. Then $X_{n\wedge N}$ is a submartingale.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $H_m = \bf{1}_{m\le N}$ then it is a non-negative bounded predictable sequence since $\{m\le N\} = \{N \le m-1\}^c \in \cal{F}_{m-1}.$ By theorem 4.2.8 $X_{n\wedge N}-X_0$ is a submartingale, so $X_{n\wedge N}$ is also a submartingale.
+&lt;/div&gt;
+
+&lt;p&gt;As an example and a lemma for our main theorem - martingale convergence - I will state and prove the upcrossing inequality.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;upcrossing inequality&quot;&gt;
+Let $(X_n, \cal{F}_n)_{n\ge0}$ be a submartingale. For $a&amp;lt;b,$ define
+$$N_{2k-1} := \inf\{m&amp;gt;N_{2k-2}:~ X_m \le a\},\\
+  N_{2k} := \inf\{m&amp;gt;N_{2k-1}:~ X_m \ge b\}, \\
+  N_0 := -1. \\
+  U_n = \sup\{k:~ N_{2k} \le n\}$$
+For a submartingale $(X_n)_{n\ge0},$
+$$(b-a)EU_n \le E(X_n-a)^+ - E(X_0-a)^+.$$
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+First we show that $N_m$'s are stopping times. For given $n,$
+$$\{N_1=n\} = \{X_0&amp;gt;a, \cdots, X_{n-1}&amp;gt;a,X_n\le a\} \in \cal{F}_n. \\
+  \{N_1=n\} = \bigcup_{\ell=1}^{n-1}\{N_1=\ell, X_{\ell+1}&amp;lt;b,\cdots, X_{n-1}&amp;lt;b,X_n\ge b\} \in \cal{F}_n. \\
+  \cdots$$
+Thus $N_m$'s are stopping times. Next, we define $Y_n = a + (X_n-a)^+$ so that $Y_{N_{2k}} \ge b$ and $Y_{N_{2k-1}} = a$ for all $k.$ Since $x\mapsto a + (x-a)^+$ is increasing and convex, $Y_n$ is also a submartingale.&lt;br /&gt;
+$$\begin{aligned}
+(b-a)EU_n 
+ &amp;amp;\le \sum_{k=1}^{U_n}(Y_{N_{2k}}-Y_{N_{2k-1}}) \\
+ &amp;amp;= \sum_{k=1}^{U_n} \sum_{i\in J_k}(Y_i-Y_{i-1}),\\
+ &amp;amp;\;\;\;\;\text{where } J_k=\{N_{2k-1}+1,\cdots,N_{2k}\} \\
+ &amp;amp;= \sum_{m\in J} (Y_m - Y_{m-1}),\\
+ &amp;amp;\;\;\;\;\text{where } J=\cup_{k=1}^{U_n} J_k \\
+ &amp;amp;\le \sum_{m=1}^n \bf{1}_{m\in J}(Y_m - Y_{m-1}).
+\end{aligned}$$ 
+Let $H_m = \bf{1}_{m\in J},$ then since 
+$$\{m\in J\} = \{N_{2k-1} &amp;lt; m \le N_{2k} \text{ for some } k\}$$
+$H_m$ is a bounded, non-negative predictable sequence. Thus
+$$(b-a)U_n \le (H\cdot Y)_n$$ and the right hand side is a submartingale. Let $K_m = 1-H_m$ then similarly $(K\cdot Y)_n$ is a submartingale and $E(K\cdot Y)_n \ge 0.$ Hence
+$$\begin{aligned}
+E(Y_n-Y_0) &amp;amp;= E(H\cdot Y)_n + E(K\cdot Y)_n \\
+ &amp;amp;\ge E(H\cdot Y)_n \ge (b-a)EU_n.
+\end{aligned}$$
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ +&lt;/td&gt;
+      &lt;td&gt;a&lt;/td&gt;
+      &lt;td&gt;).$ This will be the key to prove the martingale convergence.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/h3&gt;
+
+&lt;p&gt;We get our first convergence theorem for dependent sequence.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;submartingale convergence&quot;&gt;
+For a submartingale $X_n,$ if $\sup_n X_n^+&amp;lt;\infty,$ then there exists $X \in L^1$ such that $X_n \to X$ a.s.
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Given $a&amp;lt;b,$ let $U_n[a,b]$ be the number of upcrossings of $X_1,\cdots,X_n$ over $[a,b].$ By the upcrossing inequality, $EU_n[a,b] \le \frac{EX_n^++|a|}{b-a}.$ Let $U[a,b] = \lim_n U_n[a,b]$ then 
+$$EU[a,b] = \lim_n EU_n[a,b] \le \sup_n \frac{EX_n^++|a|}{b-a} &amp;lt; \infty.$$
+Thus by Markov's inequality, $0\le U[a,b]\le \infty$ a.s.&lt;br /&gt;
+Now suppose $\liminf_n X_n &amp;lt; \limsup_n X_n.$ Then for some $a&amp;lt;b,$ $X_n&amp;lt;a$ and $X_n&amp;gt;b$ infinitely often. Thus
+$$\begin{aligned}
+P(\liminf_n X_n &amp;lt; \limsup_n X_n)
+ &amp;amp;= P(\liminf_n X_n &amp;lt; a &amp;lt; b&amp;lt; \limsup_n X_n \text{ for some } a,b\in\Bbb{Q}) \\
+ &amp;amp;\le \sum_{a,b\in\Bbb{Q}}P(\liminf_n X_n &amp;lt;a&amp;lt;b&amp;lt; \limsup_n X_n) \\
+ &amp;amp;= \sum_{a,b\in\Bbb{Q}}P(U[a,b]=\infty) = 0
+\end{aligned}$$
+so there exists $X$ such that $X_n \to X$ a.s. We now need to show that such $X$ is integrable. By Fatou's lemma,
+$$\begin{aligned}
+EX^+ &amp;amp;\le \liminf_nEX_n^+ \le \sup_n EX_n^+ &amp;lt; \infty.\\
+EX^- &amp;amp;\le \liminf_nEX_n^- = \liminf_nE(X_n^+-X_n) \\
+     &amp;amp;\le \sup_nEX_n^+ - EX_0 &amp;lt; \infty.
+\end{aligned}$$
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;As a corollary, we get supermartingale convergence and closability of negative submartingales.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;supermartingale convergence&quot;&gt;
+Let $X_n\ge0$ be a supermartingale. There exists $X\in L^1$ such that $X_n\to X$ a.s. and $EX_n \le EX_0.$
+&lt;/div&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;closability&quot;&gt;
+If $X_n, n=1,2,\cdots$ is a negative submartingale, then $X_n, n=1,2,\cdots,\infty$ is also a negative submartingale.
+&lt;/div&gt;
+
+&lt;p&gt;The next example show that even if a martingale converges almost surely, we cannot guarantee $L^p$ convergence. The following sections will be about in which condition does a martingale converges in $L^p$.&lt;/p&gt;
+
+&lt;div class=&quot;example&quot;&gt;
+Let $\xi_1,\cdots$ be i.i.d. with $P(\xi_1=1)=P(\xi_1=-1)=\frac{1}{2}.$ Let $S_n = \xi_1 + \cdots + \xi_n,$ $S_0=1$ and $\cal{F}_n = \sigma(\xi_1,\cdots,\xi_n),$ $\cal{F}_0 = \{\phi,\Omega\}$ then $S_n$ is a martingale. Let $N = \inf\{n\ge1:~ S_n=0\}$ be a stopping time, then $X_n := S_{n\wedge N} \ge 0$ is also a martingale. $X_n \to 0$ a.s. but $X_n \to 1$ in $L^1.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+By supermartingale convergence, $X_n \to X$ for some $X\in L^1.$ Note that on $(N=\infty),$ $X_n = S_n.$ By the law of iterated logarithm, $P(\liminf_n S_n = -\infty, \limsup_n S_n = \infty)=1.$ It follows that
+$$\begin{aligned}
+P(N=\infty)
+ &amp;amp;= P(N=\infty, \liminf_n S_n = -\infty, \limsup_n S_n = \infty) \\
+ &amp;amp;= P(N=\infty, \liminf_n X_n = -\infty, \limsup_n X_n = \infty) \\
+ &amp;amp;\le P(\liminf_n X_n = -\infty, \limsup_nX_n = \infty) = 0.
+\end{aligned}
+$$
+and $N&amp;lt;\infty$ a.s. Hence $X=\lim_nS_{n\wedge N} = S_N = 0$ a.s.&lt;br /&gt;
+However, $E|X_n| = ES_{n\wedge N} = ES_0 = 1$ for all $n$ since $X_n$ is a martingale.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Sun, 27 Dec 2020 18:23:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.2-martingales</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.2-martingales</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 4.1. Conditional expectation</title>
@@ -60,7 +271,7 @@ Let $(\Omega,\mathcal{F})$ be a measurable space and $\mu,\nu$ be $\sigma$-finit
 \int_A{X}dP 
  &amp;amp;= \int_A{X^+}dP - \int_A{X^-}dP \\
  &amp;amp;= \int_A{Y^+}dP - \int_A{Y^-}dP = \int_A{Y}dP.
-\end{aligned}\)&lt;/p&gt;
+\end{aligned}\)&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;uniqueness&quot;&gt;Uniqueness&lt;/h3&gt;
 &lt;p&gt;Suppose $Y,Y’$ are $E(X|\mathcal{F}0)$ Then $\int_A (Y-Y’) dP = 0$ for all $A \in \mathcal{F}_0.$ Let $A_1 = \{Y-Y’ \ge 0\}$ and $A_2 = \{Y-Y’ \le 0\},$ $A_1,A_2 \in \mathcal{F}_0.$
@@ -158,19 +369,8 @@ Suppose $E|X|&amp;lt;\infty,$ $E|Y|&amp;lt;\infty.$&lt;br /&gt;
 (ii) $X\ge 0$ a.s. $\implies E(X|\mathcal{F}_0) \ge 0$ a.s.&lt;br /&gt;
 &lt;/div&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Notable result from (ii) is that $&lt;/td&gt;
-      &lt;td&gt;E(X&lt;/td&gt;
-      &lt;td&gt;\mathcal{F}_0)&lt;/td&gt;
-      &lt;td&gt;\le E(&lt;/td&gt;
-      &lt;td&gt;X&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;\mathcal{F}_0).$&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;Notable result from (ii) is that 
+\(\|E(X\|\mathcal{F}_0)\| \le E(\|X\|\|\mathcal{F}_0).\)&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;inequalities&quot;&gt;Inequalities&lt;/h3&gt;
 
@@ -201,6 +401,7 @@ E(\varphi(X)|\mathcal{F}_0)
  &amp;amp;= \varphi(E(X|\mathcal{F}_0)).
 \end{aligned}$$
 &lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
 
@@ -243,7 +444,7 @@ By conditional MCT, letting $M\uparrow\infty$ gives the result.
 &lt;p&gt;The obvious consequences are
 \(B_n \subset B_{n+1} \uparrow B,~ B=\cup_{n=1}^\infty B_n \implies P(B_n|\mathcal{F}_0) \uparrow P(B|\mathcal{F}_0).\)
 and
-\(C_n\in\mathcal{F}_0 \text{ are disjoint} \implies P(\cup_{n=1}^\infty C_n|\mathcal{F}_0) = \sum_{n=1}^\infty P(C_n|\mathcal{F}_0).\)&lt;/p&gt;
+\(C_n\in\mathcal{F}_0 \text{ are disjoint} \implies P(\cup_{n=1}^\infty C_n|\mathcal{F}_0) = \sum_{n=1}^\infty P(C_n|\mathcal{F}_0).\)&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;smoothing-property&quot;&gt;Smoothing property&lt;/h3&gt;
 
@@ -1676,120 +1877,6 @@ Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $
         <pubDate>Mon, 21 Dec 2020 21:46:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.5. Convergence of random series</title>
-        <description>&lt;p&gt;As the last section in chapter 2, we cover convergence of random series. Especially, since I already explained &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.3-B-C-lemmas#tail-events-and-the-0-1-law&quot;&gt;what tail $\sigma$-fields and tail events are&lt;/a&gt;, our focus will be on &lt;em&gt;Kolmogorov’s maximal inequality&lt;/em&gt; and the &lt;em&gt;three series theorem&lt;/em&gt;.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#kolmogorovs-maximal-inequality&quot; id=&quot;markdown-toc-kolmogorovs-maximal-inequality&quot;&gt;Kolmogorov’s maximal inequality&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#kolmogorovs-three-series-theorem&quot; id=&quot;markdown-toc-kolmogorovs-three-series-theorem&quot;&gt;Kolmogorov’s three series theorem&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#application&quot; id=&quot;markdown-toc-application&quot;&gt;Application&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;kolmogorovs-maximal-inequality&quot;&gt;Kolmogorov’s maximal inequality&lt;/h2&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's maximal inequality&quot;&gt;
-If $X_i$'s are independent, $EX_i=0$, $\mathrm{Var}(X_i) &amp;lt; \infty$, $S_n := \sum\limits_{k=1}^n X_k$, then the following inequality holds.
-
-$$P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x) \leq \frac{1}{x^2} \mathrm{Var}(S_n)$$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $A_k = \{ S_k &amp;gt; x,\: S_j \leq x,\: 1\leq j \leq n \}$. $A_k$'s are disjoint and $\bigcup\limits_{k=1}^n A_k = \{ \max_{1 \leq k \leq n} |S_k| &amp;gt; x \}$.
-
-$$\begin{align} 
-  \mathrm{Var}(S_n) &amp;amp;= \mathrm{E}S_n^2 \geq \mathrm{E}(S_n^2; \cup_{k=1}^n A_k)\\
-    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} S_n^2 \: dP \\
-    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k + S_k)^2 \: dP \\
-    &amp;amp;= \sum\limits_{k=1}^n \int_{A_k} (S_n - S_k)^2 + S_k^2 + 2S_k (S_n - S_k) \: dP \\
-    &amp;amp;\geq \sum\limits_{k=1}^n \big\{ \int_{A_k} S_k^2 + 2\int_{\Omega}S_k\boldsymbol{1}_{A_k}\: dP \int_{\Omega}(S_n - S_k) \: dP \big\}\\
-    &amp;amp;= \cancel{\sum\limits_{k=1}^n 2 \int \mathbf{1}_{A_k} S_k dP \cdot \int S_n - S_k dP} + \sum\limits_{k=1}^n \int_{A_k} S_k^2 \: dP \\
-    &amp;amp;\geq \sum\limits_{k=1}^n \int_{A_k} x^2 \: dP \\
-    &amp;amp;= x^2P(\cup_{k=1}^n A_k) \\
-    &amp;amp;= x^2 P(\max_{1 \leq k \leq n} |S_k| &amp;gt; x)
-\end{align}$$
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;As a result we get the result similar to that of Chebyshev’s inequality for maximum of a random series. In the previous post, I also proved that &lt;a href=&quot;https://naturale0.github.io/probability/Kolmogorov's-maximal-inequality-with-shifted-starting-point&quot;&gt;the same results holds with series of shifted starting points&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;kolmogorovs-three-series-theorem&quot;&gt;Kolmogorov’s three series theorem&lt;/h2&gt;
-&lt;p&gt;We need two more theorems to prove convergence of random series with certain conditions.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot;&gt;
-If $(X_n)$ decreases almost surely, then $X_n \overset{P}{\to} 0$ if and only if $X_n \to 0 \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.5.6&quot;&gt;
-$X_1,X_2,\cdots$ are independent with $EX_i = 0$, $\sum_{n=1}^\infty \text{Var}(X_n) &amp;lt; \infty$.&lt;br /&gt;
-$\implies S_n$ converges a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $W_m = \sup_{n,k \ge m} |S_n - S_k|$ be a sequence monotonically decreasing to 0. By the maximal inequality, 
-$$
-P(\max_{m\le k\le N} |S_k - S_m| &amp;gt; \epsilon) \le \frac{1}{\epsilon^2}\sum\limits_{k=m+1}^N \text{Var}(X_k).
-$$
-Take $N \to \infty$ to both sides then as $m\to\infty$,
-$$
-P(\sup_{k \ge m} |S_k - S_m| &amp;gt; \epsilon) \le \frac{1}{\epsilon^2}\sum\limits_{k=m+1}^\infty \text{Var}(X_k) \to 0.
-$$
-This implies $W_m \overset{P}{\to} 0.$ By the lemma $W_m \to 0$ a.s. This means for any $\omega \in \Omega_0 = \{W_m \text{ converges}\}$, $P(\Omega_0) = 1$ and $(S_n(\omega))$ is a Cauchy sequence on $\mathbb{R}.$ Hence $S_n$ converges a.s.
-&lt;/div&gt;
-
-&lt;p&gt;Now we state the main theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Kolmogorov's three series&quot;&gt;
-$X_1,X_2,\cdots$ are independent. Let $Y_i = X_i \mathbf{1}_{|X_i|\le A}$ for $A &amp;gt; 0.$ Then, $S_n=X_1+\cdots+X_n$ converges a.s. if and only if the followings hold.&lt;br /&gt;
-(i) $\sum_{n=1}^\infty P(|X_n|&amp;gt;A) &amp;lt; \infty.$&lt;br /&gt;
-(ii) $\sum_{n=1}^\infty EY_n$ converges.&lt;br /&gt;
-(iii) $\sum_{n=1}^\infty \text{Var}(Y_n) &amp;lt; \infty.$
-&lt;/div&gt;
-
-&lt;p&gt;Intuitively, (i) assures that $X_n = Y_n$ eventually. (ii) and (iii) makes the series $S_n$ to be convergent with the help of the theorem 2.5.6. We will only prove the $\Leftarrow$ direction and leave the other direction for the next chapter.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-($\Leftarrow$) Let $Z_n = Y_n - EY_n.$ Then $Z_n$'s are independent with mean 0 and $\sum_{n=1}^\infty \text{Var}(Z_n) &amp;lt;\infty.$ By 2.5.6, $\sum_{n=1}^\infty Z_n$ converges a.s. and thus by (ii), $\sum_{n=1}^\infty Y_n$ also converges a.s. Since the first B-C lemma and (i) implies that $X_n = Y_n$ for all but finite $n$'s, it yields $\sum_{n=1}^\infty X_n$ to be almost surely convergent.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;application&quot;&gt;Application&lt;/h3&gt;
-&lt;p&gt;The three series theorem can be used to determine convergence of series. It is especially useful to determine aymptotic rate of series, as in conjunction with the Kronecker’s lemma, it can be applied to the form $\frac{S_n}{f(n)}$ (just like &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#4-law-of-iterated-logarithm&quot;&gt;LIL&lt;/a&gt;!). The next theorem is one example.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot; text=&quot;Kronecker&quot;&gt;
-$a_n \uparrow \infty$ and $\sum\limits_{n=1}^\infty \frac{b_n}{a_n}$ converges. Then $\frac{1}{a_n} \sum\limits_{k=1}^n b_k \to 0$ as $n \to \infty.$
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;2.5.12&quot;&gt;
-$X_1,X_2,\cdots$ are i.i.d. with $EX_1 = 0$, $E|X_1|^p &amp;lt; \infty$ for $1&amp;lt;p&amp;lt;2$.&lt;br /&gt;
-$\implies \frac{S_n}{n^{1/p}} \to 0 \text{ a.s.}$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $Y_k = X_k \mathbf{1}_{|X_k|\le k^{1/p}}$ then we can check it satisfies the conditions of the three series theorem.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Dec 2020 21:14:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.5-convergence-of-random-series</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.5-convergence-of-random-series</guid>
         
         
         <category>probability</category>
