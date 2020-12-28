@@ -6,9 +6,191 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Dec 2020 21:06:33 +0900</pubDate>
-    <lastBuildDate>Sun, 27 Dec 2020 21:06:33 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 21:16:29 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 21:16:29 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.4. Martingale inequalities and convergence in $L^p$</title>
+        <description>&lt;p&gt;In this section we look into the condition that makes a martingale converges in $L^p$, $p&amp;gt;1$ in detail. We start by proving &lt;i&gt;Doob’s inequality&lt;/i&gt;. By using this result we prove &lt;i&gt;martingale inequalities&lt;/i&gt; which will then be used to prove &lt;i&gt;Doob’s $L^p$ maximal inequality&lt;/i&gt;. $L^p$ convergence is direct from them. Lastly, as an extension of Doob’s inequality, I will brief a version of optional stopping.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#martingale-inequalities&quot; id=&quot;markdown-toc-martingale-inequalities&quot;&gt;Martingale inequalities&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#lp-convergence-theorem&quot; id=&quot;markdown-toc-lp-convergence-theorem&quot;&gt;$L^p$ convergence theorem&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bounded-optional-stopping&quot; id=&quot;markdown-toc-bounded-optional-stopping&quot;&gt;Bounded optional stopping&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;martingale-inequalities&quot;&gt;Martingale inequalities&lt;/h2&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Doob's inequality&quot;&gt;
+Let $X_n$ be a submartingale, $N$ be a stopping time such that $N \le k$ a.s. Then
+$$EX_0 \le EX_N \le EX_k.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) Observe that $X_{n\wedge N}$ is also a submartingale. Thus $EX_{0\wedge N} \le EX_{k\wedge N}$ and we get the first inequality.&lt;br /&gt;
+(ii) Let $K_n = \mathbf{1}_{N\le n-1}$ be a non-negative bounded predictable sequence then $(K\dot X)_n = X_n - X_{n\wedge N}$ is a submatringale. Thus $0 = E(K\cdot X)_0 \le E(K\cdot X)_k$ which leads to the second inequality.
+&lt;/div&gt;
+
+&lt;p&gt;This natural result will be the foundation of numerous theorems that will be introduced from now on. For simplicity, I will call stopping times with almost sure upper bound &lt;i&gt;bounded stopping times&lt;/i&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;submartingale inequality&quot;&gt;
+Let $X_n$ be a submartingale. Define $\bar X_n = \max_{0\le m\le n}X_m.$ For $\lambda &amp;gt; 0,$ 
+$$\lambda P(\bar X_n \ge \lambda) \le EX_n\mathbf{1}_{\bar X_n \ge \lambda}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $A=\{\bar X_n \ge \lambda\}.$ Let $N=\inf\{m: X_m\ge\lambda\}\wedge n$ be a bounded stopping time. Since $\lambda \mathbf{1}_A \le X_N \mathbf{1}_A,$ $\lambda P(A) \le EX_N \mathbf{1}_A.$&lt;br /&gt;
+On $A,$ $EX_N \le EX_n$ by Doob's inequality. On $A^c,$ $N=n$ a.s. Thus in either case $EX_N \mathbf{1}_A \le EX_n \mathbf{1}_A$ and we get the result.
+&lt;/div&gt;
+
+&lt;p&gt;A more comprehensive form might be
+\(P(\bar X_n \ge \lambda) \le \frac{1}{\lambda} EX_n\mathbf{1}_{\bar X_n \ge \lambda},\)
+which can be viewed as a version of inequality that resembles Chebyshev’s inequality.&lt;/p&gt;
+
+&lt;p&gt;Similarly, we can also derive supermartingale inequality.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;supermartingale inequality&quot;&gt;
+Let $X_n$ be a supermartingale. For $\lambda&amp;gt;0,$
+$$\lambda P(\bar X_n \ge \lambda) \le EX_0 - EX_n\mathbf{1}_{\bar X_n &amp;lt; \lambda}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $A$ and $N$ as in the proof of submartingale inequality. The result is direct from
+$$EX_0 \ge EX_N = EX_N\mathbf{1}_A + EX_N\mathbf{1}_{A^c}.$$
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lp-convergence-theorem&quot;&gt;$L^p$ convergence theorem&lt;/h2&gt;
+&lt;p&gt;With the help of submartingale inequality, we get the following theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Doob's maximal inequality&quot;&gt;
+Let $X_n$ be a non-negative submartingale. For $1&amp;lt;p&amp;lt;\infty,$
+$$E\bar X_n^p \le \left(\frac{p}{p-1}\right)^p EX_n^p.$$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $M&amp;gt;0.$ By properly using Foubini's theorem
+$$\begin{aligned}
+E(\bar X_n \wedge M)^p
+ &amp;amp;= \int_0^\infty P((\bar X_n \wedge M)^p \ge t) dt \\
+ &amp;amp;= \int_0^\infty P(\bar X_n \wedge M \ge \lambda)p\lambda^{p-1}d\lambda \\
+ &amp;amp;= \int_0^M P(\bar X_n \ge \lambda) p\lambda^{p-1}d\lambda \\
+ &amp;amp;\le \int_0^M \frac{1}{\lambda} EX_n\mathbf{1}_{\bar X_n \ge \lambda} p\lambda^{p-1}d\lambda \\
+ &amp;amp;= \int_0^M \int_\Omega X_n\mathbf{1}_{\bar X_n \ge \lambda}dP p\lambda^{p-2}d\lambda \\
+ &amp;amp;= \frac{p}{p-1} EX_n(\bar X_n \wedge M)^{p-1} \\
+ &amp;amp;\le \frac{p}{p-1} (EX_n^p)^{1/p} (E(\bar X_n \wedge M)^p)^{1/q}
+\end{aligned}$$
+The first inequality is follows submartingale inequality and the second one is from Holder's inequality. Transposition and applying MCT ($M\uparrow\infty$) leads to the result.
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;It is often called &lt;i&gt;$L^p$ maximal inequality&lt;/i&gt;. Note that we used $\bar X_n\wedge M$ in order to prove that the inequality holds even if $E\bar X_n$ is not finite. $L^p$ convergence of a martingale is derived from this.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Lᵖ convergence&quot;&gt;
+Let $X_n$ be a martingale with $\sup_n E|X_n|^p &amp;lt; \infty.$ For $p&amp;gt;1,$ there exists $X$ such that $X_n \to X$ a.s. &lt;i&gt;and&lt;/i&gt; in $L^p.$ 
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+By submartingale convergence, there exists $X\in L^1$ such that $X_n\to X$ a.s. By MCT and $L^p$ maximal inequality,
+$$\begin{aligned}
+E\sup_n|X_n|^p
+ &amp;amp;= \lim_n E\max_{0\le m\le n} |X_m|^p \\
+ &amp;amp;\le \lim_n \left(\frac{p}{p-1}\right)^p E|X_n|^p \\
+ &amp;amp;\le \left(\frac{p}{p-1}\right)^p \sup_n E|X_n|^p &amp;lt; \infty.
+\end{aligned}$$
+Thus $|X_n - X|^p \le (2\sup_n|X_n|^p)$ is integrable and by DCT, the result follows.
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;bounded-optional-stopping&quot;&gt;Bounded optional stopping&lt;/h2&gt;
+
+&lt;p&gt;As a sidenote, I would like to cover the fact that bounded stopping times preserve submartingale properties.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot;&gt;
+For a stopping time $\tau,$ 
+$$\mathcal{F}_\tau := \{A\in\mathcal{F}: A\cap(\tau=n)\in\mathcal{F}_n,\forall n\}$$
+&lt;/div&gt;
+
+&lt;p&gt;It is not difficult to check that $\mathcal{F}_\tau$ is a $sigma$-field with $\tau \in \mathcal{F}_\tau.$&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;bounded optional stopping&quot;&gt;
+Let $X_n$ be a submartingale, $\sigma,\tau$ be stopping times that $0\le\sigma\le\tau\le k$ a.s. Then $E(X_\tau|\mathcal{F}_\sigma) \ge X_\sigma$ a.s.
+&lt;/div&gt;
+
+&lt;p&gt;The proof can be done in two different ways. The first proof uses Doob’s inequality.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Since $Y_{n\wedge \tau}$ is a submartingale, by Doob's inequality $EY_\sigma \le EY_\tau.$ For given $A\in\mathcal{F}_\sigma,$ let 
+$$N = \begin{cases}
+ \sigma  &amp;amp;~\text{on } A\\
+ \tau  &amp;amp;~\text{on } A^c
+\end{cases}$$
+Then $N$ is a stopping time since
+$$(N=n) = ((\sigma=n)\cap A)\cup((\tau=n)\cap(\sigma \le n)\cap A^c) \in \mathcal{F}_n.$$ Hence
+$$\begin{gathered}
+EY_N = EY_\sigma\mathbf{1}_A + EY_\tau\mathbf{1}_A^c \le EY_\tau.\\
+\int_A Y_\sigma dP \le \int_A Y_\tau dP = \int_A E(Y_\tau|\mathcal{F}_\sigma) dP.
+\end{gathered}$$
+&lt;/div&gt;
+
+&lt;p&gt;The second approach uses the lemma and inductive process:&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot;&gt;
+$$E(X_\tau|\mathcal{F}_\sigma)\mathbf{1}_{\sigma=n} = E(X_\tau|\mathcal{F}_n)\mathbf{1}_{\sigma=n} \text{ a.s.}$$
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+We first show that the right hand side is $\mathcal{F}_\sigma$-measurable. Given $a\in\mathbb{R}$ and $k\ge0,$
+$$\begin{aligned}
+&amp;amp;(E(X_\tau|\mathcal{F}_n)\mathbf{1}_{\sigma=n}\le a) \cap (\sigma=k) \\
+&amp;amp;= \begin{cases}
+ (E(X_\tau|\mathcal{F}n) \le a)\cap (\sigma=k) \in \mathcal{F}_k  &amp;amp;,~ k=n \\
+ (0\le a)\cap(\sigma=k) \in \mathcal{F}_k  &amp;amp;,~ \text{otherwise}
+\end{cases}
+\end{aligned}$$
+Next for given $A \in \mathcal{F}_\sigma,$
+$$\begin{aligned}
+&amp;amp;\int_A E(X_\tau|\mathcal{F}_\sigma)\mathbf{1}_{\sigma=n} dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)} E(X_\tau|\mathcal{F}_\sigma) dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)} X_\tau dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)} E(X_\tau|\mathcal{F}_n) dP \\
+&amp;amp;= \int_A E(X_\tau|\mathcal{F}_n)\mathbf{1}_{\sigma=n} dP.
+\end{aligned}$$
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;div class=&quot;proof&quot; text=&quot;bounded optional stopping&quot;&gt;
+it sufficies to show that for all $A \in \mathcal{F}_n$
+$$\int_A E(X_\tau|\mathcal{F}_\sigma)\mathbf{1}_{\sigma=n} dP \ge E(X_\tau|\mathcal{F}_n)\mathbf{1}_{\sigma=n}.$$
+Given $A \in \mathcal{F}_n,$
+$$\begin{aligned}
+&amp;amp;\int_A E(X_\tau|\mathcal{F}_\sigma)\mathbf{1}_{\sigma=n} dP - E(X_\tau|\mathcal{F}_n)\mathbf{1}_{\sigma=n} \\
+&amp;amp;= \int_{A\cap(\sigma=n)} E(X_\tau|\mathcal{F}_n)-X_n dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)} X_\tau - X_n dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)\cap(\tau\ge n+1)} X_\tau - X_n dP \\
+&amp;amp;\ge \int_{A\cap(\sigma=n)\cap(\tau\ge n+1)} X_\tau - X_{n+1} dP \\
+&amp;amp;= \int_{A\cap(\sigma=n)\cap(\tau\ge n+2)} X_\tau - X_{n+1} dP \\
+&amp;amp;\;\;\vdots \\
+&amp;amp;\ge \int_{A\cap(\sigma=n)\cap(\tau=k)} X_\tau - X_k dP = 0.
+\end{aligned}$$
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 27 Dec 2020 20:57:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 4.2. Martingales and a.s. convergence</title>
@@ -89,7 +271,7 @@ E((H\cdot X)_{n+1} | \mathcal{F}_n)
 \end{aligned}$$
 &lt;/div&gt;
 
-&lt;p&gt;We already get a glimpse of stopping times while studying &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers#weak-law-of-large-numbers&quot;&gt;coupon collector’s problem&lt;/a&gt; and &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#2-renewal-theory&quot;&gt;renewal theory&lt;/a&gt;. They were random variables that specifies the time that an event occurs. Here, we define it formally.&lt;/p&gt;
+&lt;p&gt;We already get a glimpse of stopping times while studying &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers#weak-law-of-large-numbers&quot;&gt;coupon collector’s problem&lt;/a&gt; and &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#2-renewal-theory&quot;&gt;renewal theory&lt;/a&gt;. They were random variables that specify the time that an event occurs. Here, we define it formally.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;stopping time&quot;&gt;
 Let $N$ be a random variable taking values $0,1,\cdots,\infty.$ $N$ is a stopping time if $\{N=n\}\in\mathcal{F}_n$ for all $n=0,1,\cdots,\infty.$
@@ -180,7 +362,7 @@ EX^- &amp;amp;\le \liminf_nEX_n^- = \liminf_nE(X_n^+-X_n) \\
 &lt;/div&gt;
 &lt;/details&gt;
 
-&lt;p&gt;As a corollary, we get supermartingale convergence and closability of negative submartingales.&lt;/p&gt;
+&lt;p&gt;As corollaries, we get supermartingale convergence and closability of negative submartingales.&lt;/p&gt;
 
 &lt;div class=&quot;corollary&quot; text=&quot;supermartingale convergence&quot;&gt;
 Let $X_n\ge0$ be a supermartingale. There exists $X\in L^1$ such that $X_n\to X$ a.s. and $EX_n \le EX_0.$
@@ -190,7 +372,7 @@ Let $X_n\ge0$ be a supermartingale. There exists $X\in L^1$ such that $X_n\to X$
 If $X_n, n=1,2,\cdots$ is a negative submartingale, then $X_n, n=1,2,\cdots,\infty$ is also a negative submartingale.
 &lt;/div&gt;
 
-&lt;p&gt;The next example show that even if a martingale converges almost surely, we cannot guarantee $L^p$ convergence. The following sections will be about in which condition does a martingale converges in $L^p$.&lt;/p&gt;
+&lt;p&gt;The next example shows that even if a martingale converges almost surely, we cannot guarantee $L^p$ convergence to the same limit. The following sections will be about the condition that a martingale converges a.s. &lt;i&gt;and&lt;/i&gt; in $L^p$.&lt;/p&gt;
 
 &lt;div class=&quot;example&quot;&gt;
 Let $\xi_1,\cdots$ be i.i.d. with $P(\xi_1=1)=P(\xi_1=-1)=\frac{1}{2}.$ Let $S_n = \xi_1 + \cdots + \xi_n,$ $S_0=1$ and $\mathcal{F}_n = \sigma(\xi_1,\cdots,\xi_n),$ $\mathcal{F}_0 = \{\phi,\Omega\}$ then $S_n$ is a martingale. Let $N = \inf\{n\ge1:~ S_n=0\}$ be a stopping time, then $X_n := S_{n\wedge N} \ge 0$ is also a martingale. $X_n \to 0$ a.s. but $X_n \to 1$ in $L^1.$
@@ -217,6 +399,139 @@ However, $E|X_n| = ES_{n\wedge N} = ES_0 = 1$ for all $n$ since $X_n$ is a marti
         <pubDate>Sun, 27 Dec 2020 20:23:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.2-martingales</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.2-martingales</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>(PTE) 4.3. Applications of martingales</title>
+        <description>&lt;p&gt;For applications of martingales, I would like to cover the case of martingales with bounded increments and the branching process.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#martingales-with-bounded-increments&quot; id=&quot;markdown-toc-martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#braching-process&quot; id=&quot;markdown-toc-braching-process&quot;&gt;Braching process&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/h2&gt;
+
+&lt;p&gt;Before getting to the topic, I would like to state a very useful theorem when constructing a (sub)martingale.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Doob's decomposition&quot;&gt;
+Let $(X_n)$ be a submartingale. There uniquely exists $(M_n)$ and $(A_n)$ where the former is a martingale and the latter is an increasing predictable sequence with $A_0 = 0.$
+&lt;/div&gt;
+
+&lt;p&gt;The uniqueness in the statement is in almost sure sense.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $A_n = A_{n+1}+(E(X_n|\mathcal{F}_{n-1})-X_{n-1},$ $A_0=0.$ It is clear that $A_n$ is an increasing predictable sequence. Let $M_n = X_n - A_n$ accordingly, then it is a martingale.&lt;br /&gt;
+Now suppose $X_n = M_n+A_n = M_n'+A_n'.$ Then $M_n-M_n' = A_n'-A_n \in \mathcal{F}_{n-1}$ and
+$$\begin{aligned}
+&amp;amp;M_n-M_n' \\
+&amp;amp;= E(M_n-M_n'|\mathcal{F}_{n-1}) \\
+&amp;amp;= M_{n-1} - M_{n-1}'.
+\end{aligned}$$
+Thus $M_n - M_n' = A_0'-A_0 = 0$ for all $n$ and the uniqueness follows.
+&lt;/div&gt;
+
+&lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$ 
+\(\begin{aligned}
+A_n 
+ &amp;amp;= \sum_{m=1}^n \left( E(X_m|\mathcal{F}_{m-1})-X_{m-1} \right) \\
+ &amp;amp;= \sum_{m=1}^n E(X_m-X_{m-1}|\mathcal{F}_{m-1}).
+\end{aligned}\)
+This gives us a form of &lt;i&gt;conditional increment&lt;/i&gt;. In quite a lot of situations constructing a sequence like this leads to a (sub)martingale with bounded increments.&lt;/p&gt;
+
+&lt;p&gt;The main theorem of this subsection is a dichotomy that applies to martingales with bounded increments.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.3.1&quot;&gt;
+Let $(X_n)$ be a martingale with $|X_{n+1}-X_n| \le M &amp;lt; \infty$ for all $n.$ Let 
+$$\begin{gathered}
+C=\{X_n \text{ converges}\},\\
+D=\{\liminf_n X_n = -\infty, \limsup_n X_n = \infty\}.
+\end{gathered}$$
+Then $P(C\cup D)=1.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Without loss of generality, let $X_0=0.$ For $k&amp;gt;0,$ let $N_k = \inf\{n:X_n\le-k\}$ be a stopping time so that $X_{n\wedge N_k}$ also be a martingale. If $N_k = \infty,$ $X_{n\wedge N_k} = X_n &amp;gt; -k$ for all $n.$ If $N_k &amp;lt; \infty,$ $X_{N_k} \le -k$ and $X_t &amp;gt; -k$ for $t=1,2,\cdots,N_k-1,$ thus $X_{N_k} = X_{N_k-1} + (X_{N_k} - X_{N_k-1}) \ge -k-M.$ Since $X_{n\wedge N_k}+k+m$ is a non-negative martingale, by supermartingale convergence $X_{n\wedge N_k}$ converges a.s.&lt;br /&gt;
+This implies $X_n$ converges on $\{N_k=\infty\}.$ Since $\liminf_n X_n &amp;gt; -\infty$ implies $X_n \ge -k'$ for all but finite $n$'s, for some $k'$ and so $N_{k'+1}=\infty,$ we get
+$$\{\liminf_n X_n &amp;gt; -\infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
+Apply the same to $(-X_n)$ and we get 
+$$\{\limsup_n X_n &amp;lt; \infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
+Hence $D^c \subset C$ and it follows that $P(C\cup D) = 1.$
+&lt;/div&gt;
+
+&lt;p&gt;As a corollary we get an extension of the second Borel-Cantelli lemma for dependent sequence.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;the second B-C lemma (2)&quot;&gt;
+Let $(\mathcal{F}_n)_{n\ge 0}$ be a filtration with $\mathcal{F}_0 = \{\phi,\Omega\}.$ Suppose $A_n \in \mathcal{F}_n$ for all $n\ge 1.$ Then
+$$\{A_n \text{ i.o.}\} = \{\sum_{n=1}^\infty P(A_n|\mathcal{F}_{n-1})=\infty\}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_n = \sum_{m=1}^n (\mathbf{1}_{A_m} - P(A_m|\mathcal{F}_{m-1})),$ $X_0=0.$ Then it is easy to check that $X_n$ is a martingale with bounded increment.By the dichotomy, we get $C$ or $D$ almost surely.&lt;br /&gt;
+On $C,$ in order to make $X_n$ convergent,
+$$\sum_n \mathbf{1}_{A_n} = \infty \iff \sum_n P(A_n|\mathcal{F}_{n-1}) = \infty.$$
+On $D,$
+$$\begin{gathered}
+\sum_n \mathbf{1}_{A_n} \ge \limsup_n X_n = \infty, \\
+\sum_n P(A_n|\mathcal{F}_{n-1}) \ge \limsup_n (-X_n) = \infty.
+\end{gathered}$$
+Thus in any case, the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;Notice that $X_n$ in the proof is in the form of $A_n$ from Doob’s decomposition.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;braching-process&quot;&gt;Braching process&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;branching process&quot;&gt;
+Let $\xi_i^n$ be i.i.d. non-negative integer-valued random variables. Let
+$$Z_0=1,~ 
+Z_{n+1} = \begin{cases}
+ \xi_1^{n+1} + \cdots + \xi_{Z_n}^{n+1}  &amp;amp;,~ Z_n \ge 0 \\
+ 0  &amp;amp;,~ Z_n = 0
+\end{cases}$$
+and $\mathcal{F}_n = \sigma(\xi_i^m: i\ge0, 1\le m\le n).$ $(Z_n)$ is called a branching process.
+&lt;/div&gt;
+
+&lt;p&gt;Think of $\xi_i^n$ as the number of offsprings that $n$th individual produce in $i$th generation. $Z_n$ naturally be the total number of offsprings in $n$th generation. By construction, $Z_n$’s are independent.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;4.3.10&quot;&gt;
+Let $\mu = E\xi_i^n,$ then $(\frac{Z_n}{\mu^n}, \mathcal{F}_n)$ is a martingale.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+It is clear that $Z_n/\mu^n \in \mathcal{F}_n$ and is integrable for all $n.$
+$$\begin{aligned}
+E(Z_{n+1}|\mathcal{F}_n)
+ &amp;amp;= E(Z_{n+1} \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty E(Z_{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty E(\sum_{i=1}^{k}\xi_i^{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}k\mu \\
+ &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k} Z_n \mu = Z_n \mu.
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below 1.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.3.11&quot;&gt;
+If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$'s.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$P(Z_n &amp;gt; 0) = E\mathbf{1}_{Z_n &amp;gt; 0} \le EZ_n\mathbf{1}_{Z_n&amp;gt;0} = EZ_n.$ By the lemma, $E(\frac{Z_n}{\mu^n}) = E(\frac{Z_0}{\mu^0})=1$ thus $EZ_n = \mu^n.$
+$$\sum_{n=1}^\infty P(Z_n&amp;gt;0) \le \sum_{n=1}^\infty \mu^n &amp;lt; \infty.$$
+By the first Borel-Cantelli lemma, $P(Z_n = 0 \text{ eventually})=1.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Sun, 27 Dec 2020 19:20:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</guid>
         
         
         <category>probability</category>
@@ -255,14 +570,14 @@ Let $(\Omega, \mathcal{F}, P)$ be a probability space, $\mathcal{F}_0 \subset \m
 &lt;p&gt;We need to know the existence of such $Y$ and if it is unique (in almost sure sense) if exists at all. For a non-negative $X,$ it can be constructed as the Radon-Nikodym derivative.&lt;/p&gt;
 
 &lt;div class=&quot;definition&quot; text=&quot;absolute continuity&quot;&gt;
-For measures $\mu,\nu$ on a measurable space $(\Omega,\mathcal{F}),$ we say $\nu$ is absolutely continuous to $\mu$ and write $\nu \ll \mu$ if $\mu(A)=0$ implies $\nu(A)$ for all $A\in\mathcal{F}.$
+For measures $\mu,\nu$ on a measurable space $(\Omega,\mathcal{F}),$ we say $\nu$ is absolutely continuous to $\mu$ and write $\nu \ll \mu$ if $\mu(A)=0$ implies $\nu(A)=0$ for all $A\in\mathcal{F}.$
 &lt;/div&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Radon-Nikodym&quot;&gt;
 Let $(\Omega,\mathcal{F})$ be a measurable space and $\mu,\nu$ be $\sigma$-finite measures. If $\nu \ll \mu,$ then there exists $f=\frac{d\nu}{d\mu}\in\mathcal{F}$ such that $f \ge 0$ almost everywhere and $\nu(A) = \int_A{f}d\mu$ for all $A\in\mathcal{F}.$ $f=\frac{d\nu}{d\mu}$ is called the Radon-Nikodym derivative of $\nu$ with respect to $\mu.$
 &lt;/div&gt;
 
-&lt;p&gt;Let $Q(A)=\int_A{X}dP$ for all $A \in \mathcal{F}0$ then $Q$ is a $\sigma$-finite measure such that $Q \ll P.$ Thus by Radon-Nikodym theorem, there exists $\frac{dQ}{dP} \in \mathcal{F}_0$ such that $\int_A X dP = \int_A \frac{dQ}{dP}dP$ for all $A\in\mathcal{F}_0.$ By definition $\frac{dQ}{dP}$ satisfies conditions for being a conditional expectation of $X$ given $\mathcal{F}.$&lt;/p&gt;
+&lt;p&gt;Let $Q(A)=\int_A{X}dP$ for all $A \in \mathcal{F}_0$ then $Q$ is a $\sigma$-finite measure such that $Q \ll P.$ Thus by Radon-Nikodym theorem, there exists $\frac{dQ}{dP} \in \mathcal{F}_0$ such that $\int_A X dP = \int_A \frac{dQ}{dP}dP$ for all $A\in\mathcal{F}_0.$ By definition $\frac{dQ}{dP}$ satisfies conditions for being a conditional expectation of $X$ given $\mathcal{F}.$&lt;/p&gt;
 
 &lt;p&gt;Notice that for a non-negative random variable, conditional expectation exists even for random variables that are not integrable.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -1604,281 +1919,6 @@ As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
         <pubDate>Tue, 22 Dec 2020 14:52:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 3.2.1. Weak convergence</title>
-        <description>&lt;p&gt;Now that we covered convergence of point estimates (specifically, the sample mean) our next interest is in weaker concept of convergence where convergence in probability is not guaranteed. In undergraduate statistics, we call it convergence in distribution. Here we prefer borrowing terminology from measure theory and call it &lt;em&gt;weak convergence&lt;/em&gt; and write $X_n \overset{w}{\to} X$.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#definition&quot; id=&quot;markdown-toc-definition&quot;&gt;Definition&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#converging-together-lemmas&quot; id=&quot;markdown-toc-converging-together-lemmas&quot;&gt;Converging together lemmas&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#tools&quot; id=&quot;markdown-toc-tools&quot;&gt;Tools&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#skorohods-representation-theorem&quot; id=&quot;markdown-toc-skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#convergence-theorems&quot; id=&quot;markdown-toc-convergence-theorems&quot;&gt;Convergence theorems&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#continuous-mapping-theorem&quot; id=&quot;markdown-toc-continuous-mapping-theorem&quot;&gt;Continuous mapping theorem&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#portmanteau-theorem&quot; id=&quot;markdown-toc-portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#metric-for-weak-convergence&quot; id=&quot;markdown-toc-metric-for-weak-convergence&quot;&gt;Metric for weak convergence&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;definition&quot;&gt;Definition&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;weak convergence 1&quot;&gt;
-Let $(F_n)$ be a sequence of distribution functions. $F_n$ converges weakly to a distribution $F$, if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F.$ Likewise, a sequence of random variables $X_n$ converges weakly to a random variable $X$ if the corresponding distribution functions weakly converges.
-&lt;/div&gt;
-
-&lt;p&gt;The name “weak convergence” was named after &lt;a href=&quot;https://en.wikipedia.org/wiki/Weak_topology#The_weak_and_weak*_topologies&quot;&gt;weak topology&lt;/a&gt; generated by bounded continuous functions: Convergence in weak topology is weak convergence. Some textbook separates the usage of terms &lt;em&gt;weak convergence&lt;/em&gt; and &lt;em&gt;convergence in distribution&lt;/em&gt; by assigning the former to distribution functions and the latter to random variables. Durrett used the former for distribution and both for random variables.&lt;/p&gt;
-
-&lt;p&gt;While Durrett define the concept as pointwise convergence at continuity points, Billingsley&lt;sup id=&quot;fnref:billingsley&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; define it differently.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;weak convergence 2&quot;&gt;
-A sequence of probability measures $P_n$ converges weakly to a probability measure $P,$ if $\int f dP_n \to \int f dP_n$ for all bounded continuous function $f.$ $F_n \overset{w}{\to} F$ if their corresponding probability measures weakly converges. $X_n \overset{w}{\to} X$ if $Ef(X_n) \to Ef(X)$ for all bounded continuous $f.$
-&lt;/div&gt;
-
-&lt;p&gt;Equivalence of both definitions is not difficult to show. $1\rightarrow 2$ is trivial by the Skorohod’s representation theorem (&lt;a href=&quot;http://naturale0.github.io/probability/PTE-3.2-weak-convergence#skorohods-representation-theorem&quot;&gt;see below&lt;/a&gt;) and BCT. To show $2\rightarrow 1$, consider a function&lt;/p&gt;
-
-\[g_{x,\epsilon}(y) = \begin{cases}
- 1 &amp;amp;,~ y \le x \\
- 0 &amp;amp;,~ y \ge x+\epsilon \\
- \text{linear} &amp;amp;,~ x &amp;lt; y &amp;lt; x+\epsilon 
-\end{cases}\]
-
-&lt;p&gt;for $x$: a continuity point of $F$ and an arbitrary $\epsilon &amp;gt;0.$ Then $g_{x,\epsilon}$ is continuous and bounded with&lt;/p&gt;
-
-\[g_{x-\epsilon,\epsilon} \le \mathbf{1}_{y \le x} \le g_{x,\epsilon}\]
-
-&lt;p&gt;and we get&lt;/p&gt;
-
-\[F(x-\epsilon) \le \liminf\limits_n F_n(x) \le \limsup\limits_n F_n(x) \le F(x+\epsilon).\]
-
-&lt;p&gt;Since $x$ was a continuity point and $\epsilon&amp;gt;0$ was arbitrary, letting $\epsilon \to 0$ yields the result we want.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;converging-together-lemmas&quot;&gt;Converging together lemmas&lt;/h2&gt;
-
-&lt;div class=&quot;lemma&quot;&gt;&lt;br /&gt;
-(i) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_n+Y_n \overset{w}{\to} X+c.$&lt;br /&gt;
-(ii) $X_n\overset{w}{\to} X$ and $Y_n \overset{w}{\to} c$ for $c \in \mathbb{R}$ $\implies X_nY_n \overset{w}{\to} cX.$&lt;br /&gt;
-(iii) $X_n\overset{P}{\to}X$ $\implies X_n \overset{w}{\to} X.$&lt;br /&gt;
-(iv) $X_n\overset{w}{\to} c$ for $c\in\mathbb{R}$ $\implies X_n \overset{P}{\to} c.$&lt;br /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The proof is not difficult so I would like to leave it as an exercise.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
-&lt;h3 id=&quot;skorohods-representation-theorem&quot;&gt;Skorohod’s representation theorem&lt;/h3&gt;
-&lt;p&gt;Even though the weak convergence is weak, we can relate it with much stronger almost sure convergence. Skorohod’s representation theorem allows us to do so.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Skorohod's representation&quot;&gt;
-Suppose $F_n \overset{w}{\to} F_\infty.$ Then there exists random variables $Y_n \sim F_n$ and $Y_\infty \sim F_\infty$ such that $Y_n \to Y_\infty \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;p&gt;The proof is similar to that of &lt;a href=&quot;http://127.0.0.1:4000/probability/PTE-1.2-Distributions#distribution-functions&quot;&gt;theorem 1.2.2&lt;/a&gt;.&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $(\Omega, \mathcal{F}, P) = ((0,1), \mathcal{B}(0,1), \lambda)$ where $\lambda$ is the Lebesgue measure. Define $Y_n(\omega) = \sup\{y:~ F_n(y) &amp;lt; \omega\}$ so that $Y_n \sim F_n$ for $1\le n \le \infty$ which implies
-$$
-\begin{align}
-F(y) &amp;lt; \omega &amp;amp;\iff y &amp;lt; Y_\infty(\omega), \\
-F(z) &amp;gt; \omega &amp;amp;\iff z &amp;gt; Y_\infty(\omega).
-\end{align}
-$$
-&amp;ensp; We now need almost sure convergence. Let $a_\omega = \sup\{y:~ F_\infty(y)&amp;lt;\omega \}$, $b_\omega = \inf\{y:~ F_\infty(y)&amp;gt;\omega \}$, $\Omega_0 = \{\omega:~ (a_\omega, b_\omega) = \phi\}.$ Observe that $\omega \notin \Omega_0$ are at most countable since $(a_\omega, b_\omega)$'s are disjoint non-empty intervals containing distinct rational numbers. Thus $P(\Omega_0) = 1.$ Pick an arbitrary $\omega, \omega' \in \Omega_0$ such that $\omega &amp;lt; \omega'.$ Then for given $\epsilon &amp;gt;0$, $Y_n(\omega) \to Y_\infty(\omega)$ ($\omega$ is a continuity point of $Y_\infty$) implies for all large $n,$
-$$
-Y_\infty(\omega) - \epsilon &amp;lt; Y_n(\omega) &amp;lt; Y_\infty(\omega') + \epsilon.
-$$
-
-So it follows that 
-$$
-Y_\infty(\omega) \le \liminf\limits_n Y_n(\omega) \le \limsup\limits_n Y_n(\omega) \le Y_\infty(\omega').
-$$
-
-Let $\omega' \to \omega$ then for all $\omega \in \Omega_0$, $\lim_n Y_n(\omega) = Y_\infty(\omega).$
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;Note that $\Omega_0$ in the proof is the set where $F_\infty$ is strictly increasing. Hence $F_\infty^{-1}$ can be defined on $\Omega_0$. We defined $Y_n,Y$ to be $F_n^{-1}, F_\infty^{-1}$ on $\Omega_0$ respectively.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;convergence-theorems&quot;&gt;Convergence theorems&lt;/h3&gt;
-&lt;p&gt;The theorem allows us to use our favorites tools such as convergence theorems directly with minimum effort of proving it.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Fatou's lemma&quot;&gt;
-$g \ge 0$, $g$ is continuous, $X_n \overset{w}{\to} X_\infty.$ $\implies \liminf_n Eg(X_n) \ge Eg(X_\infty).$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $Y_n \sim F_n$ for $1 \le n \le \infty$ be random variables such that $Y_n \to Y$ a.s. By Fatou's lemma for almost surely convergent random variables, $\liminf_n Eg(Y_n) \ge Eg(Y_\infty).$ Since $X_n \overset{d}{=} Y_n$ for all $1\le n\le\infty$ the result follows.
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;DCT&quot;&gt;
-$g,h$ are continuous, $g&amp;gt;0,$ $\frac{|h(x)|}{g(x)} \to 0$ as $|x|\to\infty,$ $\int g dF_n &amp;lt; \infty.$ If $F_n \overset{w}{\to} F,$ then $\int h dF_n \to \int h dF.$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;continuous-mapping-theorem&quot;&gt;Continuous mapping theorem&lt;sup id=&quot;fnref:later1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:later1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;continuous mapping&quot;&gt;
-$g$ is a measurable function. $D_g=\{x:~ g \text{ is not continuous at} x\}.$ If $X_n \overset{w}{\to} X_\infty$ and $P(X_\infty \in D_g)=0,$ then $g(X_n) \overset{w}{\to} g(X_\infty).$
-&lt;/div&gt;
-
-&lt;p&gt;Such $D_g$ is called the &lt;em&gt;discontinuity set&lt;/em&gt; of $g.$ The theorem extends the possible choice of $g$ from continuous to measurable functions.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;portmanteau-theorem&quot;&gt;Portmanteau theorem&lt;sup id=&quot;fnref:billingsley:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:billingsley&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
-
-&lt;p&gt;The following theorem is so important that it is named portmanteau. It is actually equivalent definitions of weak convergence. I found that almost every theorem regarding weak convergence can be proved with this to some extent.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Portmanteau theorem&quot;&gt;
-For probability measures $P_n, P$ on a measurable space $(\Omega, \mathcal{F})$ where $\Omega$ is a metric space, the followings are equivalent.&lt;br /&gt;
-(i) $P_n \overset{w}{\to} P.$ &lt;br /&gt;
-(ii) $\limsup_n P_n(F) \le P(F),~ \forall \text{closed } F.$ &lt;br /&gt;
-(iii) $\liminf_n P_n(G) \ge P(G),~ \forall \text{open } G.$ &lt;br /&gt;
-(iv) $P_n(A) \to P(A),~ \forall A:~ P(\partial A)=0.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary style=&quot;cursor: pointer; color: #6F6F6F&quot;&gt;
-    &lt;span&gt;expand proof&lt;/span&gt;
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-((i)$\Rightarrow$(ii)) For given $\epsilon &amp;gt; 0$, let $f^\epsilon(x) = (1 - \inf_{y\in F}|x - y|/\epsilon)^+$ so that $\mathbf{1}_F \le f^\epsilon \le \mathbf{1}_{F^\epsilon}$ where $F^\epsilon = \{x: \inf_{y\in F}|x-y| &amp;lt; \epsilon\}.$ Then $f^\epsilon$ is continuous and bounded so 
-$$
-\limsup_n P_n(F) \le \limsup_n \int f^\epsilon dP_n = \int f^\epsilon dP \le P(F^\epsilon).
-$$
-Letting $\epsilon \to 0$ leads to the result.&lt;br /&gt;
-((ii)$\Leftrightarrow$(iii)) is trivial.&lt;br /&gt;
-((ii)&amp;amp;(iii)$\Rightarrow$(iv))
-$$
-\limsup_n P_n(A) \le \limsup_n P_n(\overline A) \le P(\overline A) = P(A). \\
-\liminf_n P_n(A) \ge \liminf_n P_n(A^\circ) \ge P(A^\circ) = P(A). 
-$$
-((iv)$\Rightarrow$(i)) Without loss of generality, let $f$ be a continuous function with $0 \le f \le 1.$ Note that $P(f=t) &amp;gt; 0$ for at most countably many $t$'s so that $P(\partial\{f&amp;gt;t\})=0.$ Hence by (iv),
-$$
-\begin{align}
-\int f dP_n &amp;amp;= \int_0^\infty P_n(f &amp;gt; t) dt \\
-&amp;amp;\to \int_0^\infty P(f &amp;gt; t) dt = \int f dP.
-\end{align}
-$$
-is the desired result.
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;metric-for-weak-convergence&quot;&gt;Metric for weak convergence&lt;/h2&gt;
-&lt;div class=&quot;definition&quot; text=&quot;Lévy metric&quot;&gt;
-$\rho(F,G) = \inf\{\epsilon:~ F(x-\epsilon)-\epsilon \le G(x) \le F(x+\epsilon)+\epsilon,\forall x\}$ is the Lévy metric.
-&lt;/div&gt;
-
-&lt;p&gt;The Lévy metric is a metric defined on a space of distribution functions that metrizes weak convergence. That is, $\rho(F_n,F_\infty)\to0$ if and only if $F_n \overset{w}{\to} F_\infty.$&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; With this measure we can regard a space of probability measures as a metric space, which is well studied.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;p&gt;This post is also based on the textbook &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition (Billingsley, 1999) and the lecture at SNU (instructor: Prof. Jaeyong Lee).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:billingsley&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Billingsley, 1999, &lt;em&gt;Convergence of Probability Measures&lt;/em&gt;, 2nd edition. &lt;a href=&quot;#fnref:billingsley&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:billingsley:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:later1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;I will prove it in more general form later when reviewing Billingsley (1999). &lt;a href=&quot;#fnref:later1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;TBD. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Tue, 22 Dec 2020 02:24:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.1-weak-convergence</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 2.S1. Convergence concepts</title>
-        <description>&lt;p&gt;This is a quick review of convergence concepts and their relations.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#relationship-between-convergence-concepts&quot; id=&quot;markdown-toc-relationship-between-convergence-concepts&quot;&gt;Relationship between convergence concepts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#counterexamples&quot; id=&quot;markdown-toc-counterexamples&quot;&gt;Counterexamples&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;relationship-between-convergence-concepts&quot;&gt;Relationship between convergence concepts&lt;/h2&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Lᵖ and P (1)&quot;&gt;
-$X_n \overset{L^p}{\to} X \implies X_n \overset{P}{\to} X.$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers&quot;&gt;I already mentioned the proof of it&lt;/a&gt;: Use Markov-Chebyshev inequality.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Lᵖ and P (2)&quot;&gt;
-Let $X_n, X \in L^p$ be random variables that $X_n \overset{P}{\to} X.$ If there exists $Y\in L^p$ such that $|X_n - X| \le Y$ for all $n$, then $X_n \overset{L^p}{\to} X.$
-&lt;/div&gt;
-
-&lt;p&gt;The result directly follows from the dominated convergence theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot;&gt;
-For $1\le q &amp;lt; p$, $X_n \overset{L^p}{\to} X \implies X_n \overset{L^q}{\to} X.$
-&lt;/div&gt;
-
-&lt;p&gt;This is from the Jensen’s inequality. Hölder’s inequality can also yield the result. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;img src=&quot;https://naturale0.github.io/assets/fig/201221_convergence.png&quot; alt=&quot;convergence.png&quot; width=&quot;250&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Relationship between convergence concepts.&lt;/em&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;counterexamples&quot;&gt;Counterexamples&lt;/h2&gt;
-
-&lt;div class=&quot;example&quot;&gt;&lt;br /&gt;
-Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.&lt;br /&gt;
-Let $X_{n,m}(\omega) = \begin{cases}
-1 &amp;amp;,~ \frac{m-1}{2^n} &amp;lt; \omega \le \frac{m}{2^n} \\
-0 &amp;amp;,~ \text{otherwise}
-\end{cases}$&lt;br /&gt;
-Let $\{Y_n:~ n\in\mathbb{N}\} = \{X_{1,1}, X_{1,2}, X_{2,1}, X_{2,2}, \cdots\}.$ Then $Y_n \overset{P}{\to} 0$ and $Y_n \overset{L^p}{\to} 0$, but $Y_n \not\to 0 \text{ a.s.}$
-&lt;/div&gt;
-
-&lt;div class=&quot;example&quot;&gt;&lt;br /&gt;
-Let $(\Omega, \mathcal{F}, P) = ((0,1], \mathcal{B}((0,1]), \lambda)$ where $\lambda$ is the Lebesgue measure.
-&lt;br /&gt;
-$X_n(\omega) := \begin{cases}
-2^n &amp;amp;,~ 0 &amp;lt; \omega \le \frac{1}{2^n}\\
-0 &amp;amp;,~ \text{otherwise}
-\end{cases}$
-&lt;br /&gt;
-Then $X_n \overset{P}{\to} 0$ but not in $L^p$ nor $a.s.$ In fact, it does not $L^p$-converge to a constant at all if $p &amp;gt; 1.$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Dec 2020 21:46:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-2.S1-convergence-concepts</guid>
         
         
         <category>probability</category>
