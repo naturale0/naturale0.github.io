@@ -6,9 +6,142 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 21:16:29 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 21:16:29 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 21:17:51 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 21:17:51 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.3. Applications of martingales</title>
+        <description>&lt;p&gt;For applications of martingales, I would like to cover the case of martingales with bounded increments and the branching process.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#martingales-with-bounded-increments&quot; id=&quot;markdown-toc-martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#braching-process&quot; id=&quot;markdown-toc-braching-process&quot;&gt;Braching process&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/h2&gt;
+
+&lt;p&gt;Before getting to the topic, I would like to state a very useful theorem when constructing a (sub)martingale.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Doob's decomposition&quot;&gt;
+Let $(X_n)$ be a submartingale. There uniquely exists $(M_n)$ and $(A_n)$ where the former is a martingale and the latter is an increasing predictable sequence with $A_0 = 0.$
+&lt;/div&gt;
+
+&lt;p&gt;The uniqueness in the statement is in almost sure sense.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $A_n = A_{n+1}+(E(X_n|\mathcal{F}_{n-1})-X_{n-1},$ $A_0=0.$ It is clear that $A_n$ is an increasing predictable sequence. Let $M_n = X_n - A_n$ accordingly, then it is a martingale.&lt;br /&gt;
+Now suppose $X_n = M_n+A_n = M_n'+A_n'.$ Then $M_n-M_n' = A_n'-A_n \in \mathcal{F}_{n-1}$ and
+$$\begin{aligned}
+&amp;amp;M_n-M_n' \\
+&amp;amp;= E(M_n-M_n'|\mathcal{F}_{n-1}) \\
+&amp;amp;= M_{n-1} - M_{n-1}'.
+\end{aligned}$$
+Thus $M_n - M_n' = A_0'-A_0 = 0$ for all $n$ and the uniqueness follows.
+&lt;/div&gt;
+
+&lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$ 
+\(\begin{aligned}
+A_n 
+ &amp;amp;= \sum_{m=1}^n \left( E(X_m|\mathcal{F}_{m-1})-X_{m-1} \right) \\
+ &amp;amp;= \sum_{m=1}^n E(X_m-X_{m-1}|\mathcal{F}_{m-1}).
+\end{aligned}\)
+This gives us a form of &lt;i&gt;conditional increment&lt;/i&gt;. In quite a lot of situations constructing a sequence like this leads to a (sub)martingale with bounded increments.&lt;/p&gt;
+
+&lt;p&gt;The main theorem of this subsection is a dichotomy that applies to martingales with bounded increments.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.3.1&quot;&gt;
+Let $(X_n)$ be a martingale with $|X_{n+1}-X_n| \le M &amp;lt; \infty$ for all $n.$ Let 
+$$\begin{gathered}
+C=\{X_n \text{ converges}\},\\
+D=\{\liminf_n X_n = -\infty, \limsup_n X_n = \infty\}.
+\end{gathered}$$
+Then $P(C\cup D)=1.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Without loss of generality, let $X_0=0.$ For $k&amp;gt;0,$ let $N_k = \inf\{n:X_n\le-k\}$ be a stopping time so that $X_{n\wedge N_k}$ also be a martingale. If $N_k = \infty,$ $X_{n\wedge N_k} = X_n &amp;gt; -k$ for all $n.$ If $N_k &amp;lt; \infty,$ $X_{N_k} \le -k$ and $X_t &amp;gt; -k$ for $t=1,2,\cdots,N_k-1,$ thus $X_{N_k} = X_{N_k-1} + (X_{N_k} - X_{N_k-1}) \ge -k-M.$ Since $X_{n\wedge N_k}+k+m$ is a non-negative martingale, by supermartingale convergence $X_{n\wedge N_k}$ converges a.s.&lt;br /&gt;
+This implies $X_n$ converges on $\{N_k=\infty\}.$ Since $\liminf_n X_n &amp;gt; -\infty$ implies $X_n \ge -k'$ for all but finite $n$'s, for some $k'$ and so $N_{k'+1}=\infty,$ we get
+$$\{\liminf_n X_n &amp;gt; -\infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
+Apply the same to $(-X_n)$ and we get 
+$$\{\limsup_n X_n &amp;lt; \infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
+Hence $D^c \subset C$ and it follows that $P(C\cup D) = 1.$
+&lt;/div&gt;
+
+&lt;p&gt;As a corollary we get an extension of the second Borel-Cantelli lemma for dependent sequence.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;the second B-C lemma (2)&quot;&gt;
+Let $(\mathcal{F}_n)_{n\ge 0}$ be a filtration with $\mathcal{F}_0 = \{\phi,\Omega\}.$ Suppose $A_n \in \mathcal{F}_n$ for all $n\ge 1.$ Then
+$$\{A_n \text{ i.o.}\} = \{\sum_{n=1}^\infty P(A_n|\mathcal{F}_{n-1})=\infty\}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_n = \sum_{m=1}^n (\mathbf{1}_{A_m} - P(A_m|\mathcal{F}_{m-1})),$ $X_0=0.$ Then it is easy to check that $X_n$ is a martingale with bounded increment.By the dichotomy, we get $C$ or $D$ almost surely.&lt;br /&gt;
+On $C,$ in order to make $X_n$ convergent,
+$$\sum_n \mathbf{1}_{A_n} = \infty \iff \sum_n P(A_n|\mathcal{F}_{n-1}) = \infty.$$
+On $D,$
+$$\begin{gathered}
+\sum_n \mathbf{1}_{A_n} \ge \limsup_n X_n = \infty, \\
+\sum_n P(A_n|\mathcal{F}_{n-1}) \ge \limsup_n (-X_n) = \infty.
+\end{gathered}$$
+Thus in any case, the desired result follows.
+&lt;/div&gt;
+
+&lt;p&gt;Notice that $X_n$ in the proof is in the form of $A_n$ from Doob’s decomposition.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;braching-process&quot;&gt;Braching process&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;branching process&quot;&gt;
+Let $\xi_i^n$ be i.i.d. non-negative integer-valued random variables. Let
+$$Z_0=1,~ 
+Z_{n+1} = \begin{cases}
+ \xi_1^{n+1} + \cdots + \xi_{Z_n}^{n+1}  &amp;amp;,~ Z_n \ge 0 \\
+ 0  &amp;amp;,~ Z_n = 0
+\end{cases}$$
+and $\mathcal{F}_n = \sigma(\xi_i^m: i\ge0, 1\le m\le n).$ $(Z_n)$ is called a branching process.
+&lt;/div&gt;
+
+&lt;p&gt;Think of $\xi_i^n$ as the number of offsprings that $n$th individual produce in $i$th generation. $Z_n$ naturally be the total number of offsprings in $n$th generation. By construction, $Z_n$’s are independent.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;4.3.10&quot;&gt;
+Let $\mu = E\xi_i^n,$ then $(\frac{Z_n}{\mu^n}, \mathcal{F}_n)$ is a martingale.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+It is clear that $Z_n/\mu^n \in \mathcal{F}_n$ and is integrable for all $n.$
+$$\begin{aligned}
+E(Z_{n+1}|\mathcal{F}_n)
+ &amp;amp;= E(Z_{n+1} \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty E(Z_{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty E(\sum_{i=1}^{k}\xi_i^{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
+ &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}k\mu \\
+ &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k} Z_n \mu = Z_n \mu.
+\end{aligned}$$
+&lt;/div&gt;
+
+&lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below 1.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.3.11&quot;&gt;
+If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$'s.
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$P(Z_n &amp;gt; 0) = E\mathbf{1}_{Z_n &amp;gt; 0} \le EZ_n\mathbf{1}_{Z_n&amp;gt;0} = EZ_n.$ By the lemma, $E(\frac{Z_n}{\mu^n}) = E(\frac{Z_0}{\mu^0})=1$ thus $EZ_n = \mu^n.$
+$$\sum_{n=1}^\infty P(Z_n&amp;gt;0) \le \sum_{n=1}^\infty \mu^n &amp;lt; \infty.$$
+By the first Borel-Cantelli lemma, $P(Z_n = 0 \text{ eventually})=1.$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Dec 2020 19:20:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 4.4. Martingale inequalities and convergence in $L^p$</title>
@@ -399,139 +532,6 @@ However, $E|X_n| = ES_{n\wedge N} = ES_0 = 1$ for all $n$ since $X_n$ is a marti
         <pubDate>Sun, 27 Dec 2020 20:23:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.2-martingales</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.2-martingales</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 4.3. Applications of martingales</title>
-        <description>&lt;p&gt;For applications of martingales, I would like to cover the case of martingales with bounded increments and the branching process.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#martingales-with-bounded-increments&quot; id=&quot;markdown-toc-martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#braching-process&quot; id=&quot;markdown-toc-braching-process&quot;&gt;Braching process&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;martingales-with-bounded-increments&quot;&gt;Martingales with bounded increments&lt;/h2&gt;
-
-&lt;p&gt;Before getting to the topic, I would like to state a very useful theorem when constructing a (sub)martingale.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Doob's decomposition&quot;&gt;
-Let $(X_n)$ be a submartingale. There uniquely exists $(M_n)$ and $(A_n)$ where the former is a martingale and the latter is an increasing predictable sequence with $A_0 = 0.$
-&lt;/div&gt;
-
-&lt;p&gt;The uniqueness in the statement is in almost sure sense.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $A_n = A_{n+1}+(E(X_n|\mathcal{F}_{n-1})-X_{n-1},$ $A_0=0.$ It is clear that $A_n$ is an increasing predictable sequence. Let $M_n = X_n - A_n$ accordingly, then it is a martingale.&lt;br /&gt;
-Now suppose $X_n = M_n+A_n = M_n'+A_n'.$ Then $M_n-M_n' = A_n'-A_n \in \mathcal{F}_{n-1}$ and
-$$\begin{aligned}
-&amp;amp;M_n-M_n' \\
-&amp;amp;= E(M_n-M_n'|\mathcal{F}_{n-1}) \\
-&amp;amp;= M_{n-1} - M_{n-1}'.
-\end{aligned}$$
-Thus $M_n - M_n' = A_0'-A_0 = 0$ for all $n$ and the uniqueness follows.
-&lt;/div&gt;
-
-&lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$ 
-\(\begin{aligned}
-A_n 
- &amp;amp;= \sum_{m=1}^n \left( E(X_m|\mathcal{F}_{m-1})-X_{m-1} \right) \\
- &amp;amp;= \sum_{m=1}^n E(X_m-X_{m-1}|\mathcal{F}_{m-1}).
-\end{aligned}\)
-This gives us a form of &lt;i&gt;conditional increment&lt;/i&gt;. In quite a lot of situations constructing a sequence like this leads to a (sub)martingale with bounded increments.&lt;/p&gt;
-
-&lt;p&gt;The main theorem of this subsection is a dichotomy that applies to martingales with bounded increments.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.3.1&quot;&gt;
-Let $(X_n)$ be a martingale with $|X_{n+1}-X_n| \le M &amp;lt; \infty$ for all $n.$ Let 
-$$\begin{gathered}
-C=\{X_n \text{ converges}\},\\
-D=\{\liminf_n X_n = -\infty, \limsup_n X_n = \infty\}.
-\end{gathered}$$
-Then $P(C\cup D)=1.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Without loss of generality, let $X_0=0.$ For $k&amp;gt;0,$ let $N_k = \inf\{n:X_n\le-k\}$ be a stopping time so that $X_{n\wedge N_k}$ also be a martingale. If $N_k = \infty,$ $X_{n\wedge N_k} = X_n &amp;gt; -k$ for all $n.$ If $N_k &amp;lt; \infty,$ $X_{N_k} \le -k$ and $X_t &amp;gt; -k$ for $t=1,2,\cdots,N_k-1,$ thus $X_{N_k} = X_{N_k-1} + (X_{N_k} - X_{N_k-1}) \ge -k-M.$ Since $X_{n\wedge N_k}+k+m$ is a non-negative martingale, by supermartingale convergence $X_{n\wedge N_k}$ converges a.s.&lt;br /&gt;
-This implies $X_n$ converges on $\{N_k=\infty\}.$ Since $\liminf_n X_n &amp;gt; -\infty$ implies $X_n \ge -k'$ for all but finite $n$'s, for some $k'$ and so $N_{k'+1}=\infty,$ we get
-$$\{\liminf_n X_n &amp;gt; -\infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
-Apply the same to $(-X_n)$ and we get 
-$$\{\limsup_n X_n &amp;lt; \infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
-Hence $D^c \subset C$ and it follows that $P(C\cup D) = 1.$
-&lt;/div&gt;
-
-&lt;p&gt;As a corollary we get an extension of the second Borel-Cantelli lemma for dependent sequence.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;the second B-C lemma (2)&quot;&gt;
-Let $(\mathcal{F}_n)_{n\ge 0}$ be a filtration with $\mathcal{F}_0 = \{\phi,\Omega\}.$ Suppose $A_n \in \mathcal{F}_n$ for all $n\ge 1.$ Then
-$$\{A_n \text{ i.o.}\} = \{\sum_{n=1}^\infty P(A_n|\mathcal{F}_{n-1})=\infty\}.$$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_n = \sum_{m=1}^n (\mathbf{1}_{A_m} - P(A_m|\mathcal{F}_{m-1})),$ $X_0=0.$ Then it is easy to check that $X_n$ is a martingale with bounded increment.By the dichotomy, we get $C$ or $D$ almost surely.&lt;br /&gt;
-On $C,$ in order to make $X_n$ convergent,
-$$\sum_n \mathbf{1}_{A_n} = \infty \iff \sum_n P(A_n|\mathcal{F}_{n-1}) = \infty.$$
-On $D,$
-$$\begin{gathered}
-\sum_n \mathbf{1}_{A_n} \ge \limsup_n X_n = \infty, \\
-\sum_n P(A_n|\mathcal{F}_{n-1}) \ge \limsup_n (-X_n) = \infty.
-\end{gathered}$$
-Thus in any case, the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;Notice that $X_n$ in the proof is in the form of $A_n$ from Doob’s decomposition.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;braching-process&quot;&gt;Braching process&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;branching process&quot;&gt;
-Let $\xi_i^n$ be i.i.d. non-negative integer-valued random variables. Let
-$$Z_0=1,~ 
-Z_{n+1} = \begin{cases}
- \xi_1^{n+1} + \cdots + \xi_{Z_n}^{n+1}  &amp;amp;,~ Z_n \ge 0 \\
- 0  &amp;amp;,~ Z_n = 0
-\end{cases}$$
-and $\mathcal{F}_n = \sigma(\xi_i^m: i\ge0, 1\le m\le n).$ $(Z_n)$ is called a branching process.
-&lt;/div&gt;
-
-&lt;p&gt;Think of $\xi_i^n$ as the number of offsprings that $n$th individual produce in $i$th generation. $Z_n$ naturally be the total number of offsprings in $n$th generation. By construction, $Z_n$’s are independent.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot; text=&quot;4.3.10&quot;&gt;
-Let $\mu = E\xi_i^n,$ then $(\frac{Z_n}{\mu^n}, \mathcal{F}_n)$ is a martingale.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-It is clear that $Z_n/\mu^n \in \mathcal{F}_n$ and is integrable for all $n.$
-$$\begin{aligned}
-E(Z_{n+1}|\mathcal{F}_n)
- &amp;amp;= E(Z_{n+1} \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
- &amp;amp;= \sum_{k=0}^\infty E(Z_{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
- &amp;amp;= \sum_{k=0}^\infty E(\sum_{i=1}^{k}\xi_i^{n+1} \mathbf{1}_{Z_n=k}|\mathcal{F}_n) \\
- &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k}k\mu \\
- &amp;amp;= \sum_{k=0}^\infty \mathbf{1}_{Z_n=k} Z_n \mu = Z_n \mu.
-\end{aligned}$$
-&lt;/div&gt;
-
-&lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below 1.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.3.11&quot;&gt;
-If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$'s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$P(Z_n &amp;gt; 0) = E\mathbf{1}_{Z_n &amp;gt; 0} \le EZ_n\mathbf{1}_{Z_n&amp;gt;0} = EZ_n.$ By the lemma, $E(\frac{Z_n}{\mu^n}) = E(\frac{Z_0}{\mu^0})=1$ thus $EZ_n = \mu^n.$
-$$\sum_{n=1}^\infty P(Z_n&amp;gt;0) \le \sum_{n=1}^\infty \mu^n &amp;lt; \infty.$$
-By the first Borel-Cantelli lemma, $P(Z_n = 0 \text{ eventually})=1.$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
-</description>
-        <pubDate>Sun, 27 Dec 2020 19:20:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</guid>
         
         
         <category>probability</category>
