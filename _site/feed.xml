@@ -6,13 +6,13 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 21:22:16 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 21:22:16 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 21:25:48 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 21:25:48 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>(PTE) 4.4. Martingale inequalities and convergence in $L^p$</title>
-        <description>&lt;p&gt;In this section we look into the condition that makes a martingale converges in $L^p$, $p&amp;gt;1$ in detail. We start by proving &lt;i&gt;Doob’s inequality&lt;/i&gt;. By using this result we prove &lt;i&gt;martingale inequalities&lt;/i&gt; which will then be used to prove &lt;i&gt;Doob’s $L^p$ maximal inequality&lt;/i&gt;. $L^p$ convergence is direct from them. Lastly, as an extension of Doob’s inequality, I will brief a version of optional stopping.&lt;/p&gt;
+        <description>&lt;p&gt;In this section we look into the condition that makes a martingale converges in $L^p$, $p&amp;gt;1$ in detail. We start by proving &lt;i&gt;Doob’s inequality&lt;/i&gt;. By using this result we prove &lt;i&gt;martingale inequalities&lt;/i&gt; which will then be used to prove &lt;i&gt;Doob’s $L^p$ maximal inequality&lt;/i&gt;. $L^p$ convergence is direct from them. Lastly, as an extension of Doob’s inequality, I will briefly state a version of optional stopping.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#martingale-inequalities&quot; id=&quot;markdown-toc-martingale-inequalities&quot;&gt;Martingale inequalities&lt;/a&gt;&lt;/li&gt;
