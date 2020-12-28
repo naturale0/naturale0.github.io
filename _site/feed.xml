@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 21:18:13 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 21:18:13 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 21:20:42 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 21:20:42 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -223,13 +223,15 @@ $$\begin{aligned}
 Thus $M_n - M_n' = A_0'-A_0 = 0$ for all $n$ and the uniqueness follows.
 &lt;/div&gt;
 
-&lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$ 
-\(\begin{aligned}
+&lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$&lt;/p&gt;
+
+\[\begin{aligned}
 A_n 
  &amp;amp;= \sum_{m=1}^n \left( E(X_m|\mathcal{F}_{m-1})-X_{m-1} \right) \\
  &amp;amp;= \sum_{m=1}^n E(X_m-X_{m-1}|\mathcal{F}_{m-1}).
-\end{aligned}\)
-This gives us a form of &lt;i&gt;conditional increment&lt;/i&gt;. In quite a lot of situations constructing a sequence like this leads to a (sub)martingale with bounded increments.&lt;/p&gt;
+\end{aligned}\]
+
+&lt;p&gt;This gives us a form of &lt;i&gt;conditional increment&lt;/i&gt;. In quite a lot of situations constructing a sequence like this leads to a (sub)martingale with bounded increments.&lt;/p&gt;
 
 &lt;p&gt;The main theorem of this subsection is a dichotomy that applies to martingales with bounded increments.&lt;/p&gt;
 
@@ -299,7 +301,7 @@ E(Z_{n+1}|\mathcal{F}_n)
 \end{aligned}$$
 &lt;/div&gt;
 
-&lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below 1.&lt;/p&gt;
+&lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below one.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;4.3.11&quot;&gt;
 If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$'s.
