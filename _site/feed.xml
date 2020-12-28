@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 21:20:42 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 21:20:42 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 21:22:16 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 21:22:16 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -193,7 +193,7 @@ $$\begin{aligned}
       </item>
     
       <item>
-        <title>(PTE) 4.3. Applications of martingales</title>
+        <title>(PTE) 4.3. Application of martingales</title>
         <description>&lt;p&gt;For applications of martingales, I would like to cover the case of martingales with bounded increments and the branching process.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
