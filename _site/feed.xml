@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 01:47:42 +0900</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 01:47:42 +0900</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 01:49:54 +0900</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 01:49:54 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -241,7 +241,7 @@ On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies condi
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
-        <pubDate>Tue, 19 Jan 2021 21:44:00 +0900</pubDate>
+        <pubDate>Wed, 13 Jan 2021 09:00:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</guid>
         
