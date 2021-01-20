@@ -6,9 +6,153 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 20 Jan 2021 15:43:03 +0900</pubDate>
-    <lastBuildDate>Wed, 20 Jan 2021 15:43:03 +0900</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 01:45:21 +0900</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 01:45:21 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.6.1. Uniform integrability and convergence in $L^1$</title>
+        <description>&lt;p&gt;In section 4.5, we covered the condition where martingales converges in $L^p.$ We only covered the case where $p&amp;gt;1.$ In this section, the notions of uniform integrability is introduced to compensate convergence in $p=1$ case.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#uniform-integrability&quot; id=&quot;markdown-toc-uniform-integrability&quot;&gt;Uniform integrability&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#l1-convergence-of-martingales&quot; id=&quot;markdown-toc-l1-convergence-of-martingales&quot;&gt;$L^1$ convergence of martingales&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;uniform-integrability&quot;&gt;Uniform integrability&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;If a random variable $X$ is integrable, $\int_{&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;\ge a}&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;dP &amp;lt; \epsilon$ for all $\epsilon &amp;gt; 0$ for large $a$ and vice versa. Intuitively, in order for a random variable to be integrable, integration of its tail part should be bounded for any small $\epsilon.$ Uniform integrability is defined accordingly.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;uniform integrability&quot;&gt;
+$(X_t)_{t\in T}$ is uniformly integrable if $\lim_a \sup_{t\in T} \int_{|X_t|\ge a} |X_t| dP = 0.$
+&lt;/div&gt;
+
+&lt;p&gt;If $X_t \le X$ for all $t\in T$ where $X$ is integrable, $(X_t)$ is uniformly integrable. If $(X_t), (Y_t)$ are uniformly integrable, then $(X_t + Y_t)$ is uniformly integrable since for given $a&amp;gt;0$&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp;\int_{|X_t+Y_t|\ge a} |X_t+Y_t| dP \\
+&amp;amp;\le \int_{|X_t|+|Y_t|\ge a, |X_t|\ge |Y_t|} |X_t|+|Y_t| dP \\
+ &amp;amp;\;\;\;\;+ \int_{|X_t|+|Y_t|\ge a, |X_t| &amp;lt; |Y_t|} |X_t|+|Y_t| dP \\
+&amp;amp;\le \int_{2|X_t|\ge a} 2|X_t| dP + \int_{2|Y_t|\ge a} 2|Y_t| dP.
+\end{aligned}\]
+
+&lt;p&gt;The next theorem which sometimes is referred to as Vitali’s lemma is about necessary and sufficient condition for uniform integrability.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+$(X_t)_{t\in T}$ is uniformly integrable if and only if the followings hold.&lt;br /&gt;
+(i) $\sup_{t\in T} E|X_t| &amp;lt; \infty.$ &lt;br /&gt;
+(ii) $\forall \epsilon&amp;gt;0,\exists\delta&amp;gt;0$ such that $\sup_{t\in T} \int_A |X_t|dP \le \epsilon$ for all $A\in\mathcal{F}$ where $P(A)\le\delta.$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+($\Rightarrow$) (i) is clear. Given $A \in \mathcal{F},$ $a&amp;gt;0,$
+$$\begin{aligned}
+&amp;amp;  \int_A |X_t| dP \\
+&amp;amp;= \int_{A\cap\{|X_t|\ge a\}} |X_t| dP + \int_{A\cap\{|X_t|&amp;lt; a\}} |X_t| dP \\
+&amp;amp;\le \int_{|X_t|\ge a} |X_t| dP + aP(A)
+\end{aligned}$$
+Thus $\sup_t \int_A |X_t| dP \le \epsilon/2 + a\delta.$&lt;br /&gt;
+($\Leftarrow$) Let $M = \sup_t E|X_t| &amp;lt; \infty,$ $a_0 = M/\delta.$ Since $P(|X_t|\ge a_0) \le E|X_t|/a_0 \le M/a_0 = \delta,$ $\sup_t \int_{|X_t|\ge a_0} |X_t| dP \le \epsilon.$
+&lt;/div&gt;
+
+&lt;p&gt;We state our main theorem of this subsection.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Vitali&quot;&gt;
+Suppose $X_n \to X,$ $X_n \in L^p,$ $p\ge 1.$ The followings are equivalent.&lt;br /&gt;
+(i) $(|X_n|^p)$ is uniformly integrable.&lt;br /&gt;
+(ii) $X_n \to X$ in $L^p.$ &lt;br /&gt;
+(iii) $E|X_n|^p \to E|X|^p &amp;lt; \infty.$ &lt;br /&gt;
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+((i)$\Rightarrow$(ii)) By Fatou's lemma, $E|X|^p \le \infty.$ $|X_n - X|^p \le 2^p(|X_n|^p+|X|^p)$ makes $|X_n-X|^p$ uniformly integrable. By the theorem, given $\epsilon&amp;gt;0$ there exists $\delta&amp;gt;0$ such that $\sup_{t\in T} \int_A |X_t|dP \le \epsilon$ for all $A\in\mathcal{F}$ where $P(A)\le\delta.$ There exists $N$ such that for all $n\ge N,$ $P(|X_n-X|^p \ge \epsilon) \le \delta.$ Thus
+$$E|X_n-X|^p = E|X_n-X|^p\mathbf{1}_{|X_n-X|^p\ge\epsilon}  + E|X_n-X|^p\mathbf{1}_{|X_n-X|^p&amp;lt;\epsilon} \le 2\epsilon.$$
+((ii)$\Rightarrow$(iii)) Trivial by $|\|X_n\|_p - \|X\|_p| \le \|X_n - X\|_p.$&lt;br /&gt;
+((iii)$\Rightarrow$(i)) Given $a\in\mathbb{R}$ such that $P(|X|^p=a)=0.$&lt;br /&gt;
+&lt;b&gt;claim:&lt;/b&gt; $|X_n|^p\mathbf{1}_{|X_n|^p \le a} \overset{P}{\to} |X|^p\mathbf{1}_{|X|^p \le a}.$&lt;br /&gt;
+For all $\delta&amp;gt;0,$
+$$\begin{aligned}
+&amp;amp;P(|\mathbf{1}_{|X_n|^p \le a} - \mathbf{1}_{|X|^p \le a}|&amp;gt;\epsilon)\\
+&amp;amp;\le P(|X_n|^p\le a, |X|^p&amp;gt;a) + P(|X_n|^p&amp;gt;a, |X|^p \le a) \\
+&amp;amp;\le P(|X_n|^p\le a, |X|^p&amp;gt;a+\delta) + P(|X_n|^p&amp;gt;a, a-\delta &amp;lt; |X|^p \le a) \\
+ &amp;amp;\;\;\;\;+ P(|X_n|^p &amp;gt; a, |X|^p \le a-\delta) + P(|X_n|^p&amp;gt;a, a-\delta &amp;lt; |X|^p \le a) \\
+&amp;amp;\le 2P(||X_n|^p-|X|^p|&amp;gt;\delta) + P(a&amp;lt;|X|^p\le a+\delta) + P(a-\delta&amp;lt;|X|^p\le a)
+\end{aligned}$$
+Thus as $\delta\to0,$
+$$\limsup_n P(|\mathbf{1}_{|X_n|^p \le a} - \mathbf{1}_{|X|^p \le a}|&amp;gt;\epsilon) \le 0 + P(|X|^p = a) = 0.$$
+By the claim and since $|X_n|^p\mathbf{1}_{|X_n|^p\le a}$ is bounded by $a,$ $(|X_n|^p\mathbf{1}_{|X_n|^p\le a})$ is uniformly integrable. By (i)$\Rightarrow$(ii)$\Rightarrow$(iii), $E|X_n|^p\mathbf{1}_{|X_n|^p \le a} \to E|X|^p\mathbf{1}_{|X|^p \le a}.$ In addition, by the assumption $E|X_n|^p\mathbf{1}_{|X_n|^p &amp;gt; a} \to E|X|^p\mathbf{1}_{|X|^p &amp;gt; a}.$
+For a given $\epsilon&amp;gt;0,$ there exists $a_0&amp;gt;0$ such that $E|X|^p\mathbf{1}_{|X|^p &amp;gt; a_0}&amp;lt;\epsilon/2$ and $P(|X|^p=a_0)=0.$ Pick $N$ such that $\left|E|X_n|^p\mathbf{1}_{|X_n|^p &amp;gt; a_0} - E|X|^p\mathbf{1}_{|X|^p &amp;gt; a_0}\right| &amp;lt; \epsilon/2$ for all $n\le N.$ Then for $n\ge N,$ $E|X_n|^p\mathbf{1}_{|X_n|^p &amp;gt; a_0} &amp;lt; \epsilon.$ For $n &amp;lt; N,$ there exists $a_1$ such that $\max_{n&amp;lt;N} E|X_n|^p\mathbf{1}_{|X_n|^p &amp;gt; a_0} &amp;lt; \epsilon.$
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;l1-convergence-of-martingales&quot;&gt;$L^1$ convergence of martingales&lt;/h2&gt;
+&lt;p&gt;With uniform integrability we get $L^1$-convergence of martingales. First we define regular and closable martingale for simplicity of the statement.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot;&gt;&lt;br /&gt;
+A martingale $(X_n)$ is regular if there exists a random variable $X \in L^1$ such that $X_n = E(X|\mathcal{F}_n)$ a.s.&lt;br /&gt;
+A martingale $(X_n)$ is closable if there exists a random variable $X_\infty \in L^1$ such that $X_n \to X_\infty$ a.s. and $E(X_\infty | \mathcal{F}_n) = X_n$ a.s. for all $n.$
+&lt;/div&gt;
+
+&lt;p&gt;If $X_n$ is closable, then it is clearly a regular martingale.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;4.6.7&quot;&gt;
+Let $X_n$ be a martingale. The followings are equivalent.&lt;br /&gt;
+(i) $X_n$ is regular. &lt;br /&gt;
+(ii) $X_n$ is uniformly integrable. &lt;br /&gt;
+(iii) $X_n$ converges a.s. and in $L^1$ &lt;br /&gt;
+(iv) $X_n$ is closable. &lt;br /&gt;
+&lt;/div&gt;
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+   
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+((i)$\Rightarrow$(ii)) There exists $X \in L^1$ such that $X_n = E(X|\mathcal{F}_n)$ a.s.
+$$\int_{|X_n|\ge a}|X_n|dP \le \int_{|X_n|\ge a} E(|X||\mathcal{F}_n)dP \le \int_{E(|X||\mathcal{F}_n)\ge a}|X|dP.$$
+Since $X$ is integrable, for a given $\epsilon&amp;gt;0$ there exists $\delta&amp;gt;0$ such that $\int_A |X|dP &amp;lt; \epsilon$ for all $A$ such that $P(A)\le\delta$ and there exists $a&amp;gt;0$ such that $P(E(|X||\mathcal{F}_n)\ge a)\le \frac{1}{a} E|X| &amp;lt; \delta.$&lt;br /&gt;
+((ii)$\Rightarrow$(iii)) Uniform integrability implies $\sup_n |X_n| &amp;lt; \infty$ so by submartingale convergence we get convergence in probability. By Vitali's lemma, we get the result.&lt;br /&gt;
+((iii)$\Rightarrow$(iv)) There exists $X \in L^1$ such that $E|X_n-X|\to0$ as $n\to\infty.$ Then $E|X_n| \to E|X|$ and $\sup_n E|X_n| &amp;lt;\infty.$ By submartingale inequality, there exists $X_\infty \in L^1$ such that $X_n\to X_\infty$ a.s. Notice that $X=X_\infty$ a.s. Let $m \ge n$ then
+$$\begin{aligned}
+&amp;amp;E\left| E(X_\infty|\mathcal{F}_n) - X_n \right| \\
+&amp;amp;= E\left| E(X_\infty|\mathcal{F}_n) - E(X_m|\mathcal{F}_n) \right| \\
+&amp;amp;\le E\left| E(|X_\infty - X_m| | \mathcal{F}_n) \right| \\
+&amp;amp;= E|X_\infty - X_m| \to 0
+\end{aligned}$$
+as $m\to\infty.$ Hence $E(X_\infty|\mathcal{F}_n) = X_n$ a.s.&lt;br /&gt;
+((iv)$\Rightarrow$(i)) Trivial.
+&lt;/div&gt;
+&lt;/details&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Jan 2021 22:52:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.6.-Uniform-integrability-and-convergence-in-L1</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.6.-Uniform-integrability-and-convergence-in-L1</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 4.5. Square integrable martingales</title>
@@ -101,6 +245,12 @@ On $(A_\infty &amp;lt; \infty),$ $X_n$ converges a.s.
 $$\frac{X_n}{\sum_{m=1}^n p_m} = \frac{\sum_{m=1}^n \mathbf{1}_{B_m}}{\sum_{m=1}^n p_m} - 1 \to 0 \text{ a.s. on } (\sum_{n=1}^\infty p_n = \infty).$$
 On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies conditions in (iv) of the previous theorem. Then $\frac{X_n}{f(A_n)} = \frac{X_n}{A_n \vee 1} \to 0$ a.s. on $(A_\infty = \infty).$ Since $A_n \le \sum_{m=1}^n p_m,$ we get $\frac{X_n}{\sum_{m=1}^n p_m} \to 0$ a.s. on $(A_\infty = \infty).$
 &lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Tue, 19 Jan 2021 21:44:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</link>
@@ -282,6 +432,12 @@ $$\begin{aligned}
 &amp;amp;\ge \int_{A\cap(\sigma=n)\cap(\tau=k)} X_\tau - X_k dP = 0.
 \end{aligned}$$
 &lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 28 Dec 2020 20:57:00 +0900</pubDate>
@@ -1546,336 +1702,6 @@ By (i), $\sum_n Y_n$ converges and $\frac{\sum_{k=1}^n Y_k}{\sqrt c_n}\to0 \text
         <pubDate>Wed, 23 Dec 2020 17:35:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.4-central-limit-theorem</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.4-central-limit-theorem</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 3.3. Characteristic functions</title>
-        <description>&lt;p&gt;In undergraduate statistics, we learned &lt;a href=&quot;https://en.wikipedia.org/wiki/Moment-generating_function&quot;&gt;moment generating functions&lt;/a&gt; and that it uniquely determines the distribution if exists. However moment generating function does not always exsits for all distributions. Characteristic functions always exists for all real-valued random variables and it provides alternative approach to working with distributions.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#characteristic-function&quot; id=&quot;markdown-toc-characteristic-function&quot;&gt;Characteristic function&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#inversion-formula&quot; id=&quot;markdown-toc-inversion-formula&quot;&gt;Inversion formula&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#continuity-theorem&quot; id=&quot;markdown-toc-continuity-theorem&quot;&gt;Continuity theorem&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#moment-generating-property&quot; id=&quot;markdown-toc-moment-generating-property&quot;&gt;Moment generating property&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#estimation-of-the-error-term&quot; id=&quot;markdown-toc-estimation-of-the-error-term&quot;&gt;Estimation of the error term&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;characteristic-function&quot;&gt;Characteristic function&lt;/h2&gt;
-&lt;div class=&quot;definition&quot; text=&quot;characteristic function&quot;&gt;
-For a random variable $X$,
-$$
-\varphi_X(t) = Ee^{itX}
-$$
-is the characteristic function of $X$, where $i$ is the complex unit.
-&lt;/div&gt;
-
-&lt;p&gt;Or we could just notate it &lt;em&gt;ch.f.&lt;/em&gt; for short. Every characteristic functions have the following properties regardless of the distribution.&lt;/p&gt;
-
-&lt;div class=&quot;prop&quot; text=&quot;properties of ch.f.&quot;&gt;
-(i) $\varphi_X(0) = 1.$ &lt;br /&gt;
-(ii) $\varphi_X(-t) = \overline{\varphi_X(t)}.$ &lt;br /&gt;
-(iii) $|\varphi_X(t)| \le 1.$ &lt;br /&gt;
-(iv) $\varphi_X$ is uniformly continuous. &lt;br /&gt;
-(v) $\varphi_{aX+b} = e^{itb}\varphi_X(at).$ &lt;br /&gt;
-(vi) $X_1 \perp X_2$ then $\varphi_{X_1+X_2} = \varphi_{X_1}\varphi_{X_2}.$ &lt;br /&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(iv)
-$$
-\begin{align}
-|\varphi(t+h) - \varphi(t)|
-  &amp;amp;= |E(e^{i(t+h)X - e^{itX}})| \\
-  &amp;amp;\le E\cancelto{1}{|e^{itX}|}|e^{ihX - 1}|
-\end{align}
-$$
-holds for all $t\in\mathbb{R}.$ By BCT, $E|e^{ihX}-1|\to0$ as $h\to\infty.$ Thus for all $\epsilon&amp;gt;0,$ there exists $h$ such that $|\varphi(t+h)-\varphi(t)|&amp;lt;\epsilon$ for all $t.$
-&lt;/div&gt;
-
-&lt;p&gt;other proofs are direct from the definition. Another property comes from the additivity of lebesgue integral.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot; text=&quot;3.3.9&quot;&gt;
-Let $F_1,\cdots,F_n$ be distributions that have $\varphi_1,\cdots,\varphi_n$ as ch.f.s respectively. Let $\lambda_i \ge 0,$ $\sum_{i=1}^n\lambda_i = 1.$&lt;br /&gt;
-$\implies \sum_{i=1}^n \lambda_i F_i$ has a ch.f. $\sum_{i=1}^n \lambda_i \varphi_i.$
-&lt;/div&gt;
-
-&lt;p&gt;This simply says that the mixture of distributions have the ch.f. which is also the mixture.&lt;/p&gt;
-
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$$
-\begin{align}
-&amp;amp;\varphi_{\sum_{i=1}^n\lambda_iF_i}
-  = \int e^{itx} d\left(\sum_{i=1}^n\lambda_iF_i(x)\right) \\
-&amp;amp; = \sum_{i=1}^n \lambda_i \int e^{itx} dF_n(x)
-  = \sum_{i=1}^n\lambda_i\varphi_i.
-\end{align}
-$$
-&lt;/div&gt;
-
-&lt;p&gt;Using the lemma we can show still another property.&lt;/p&gt;
-
-&lt;div class=&quot;lemma&quot;&gt;
-$\varphi$ is a ch.f. $\implies \text{Re}\varphi$ and $|\varphi|^2$ are also ch.f.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X\sim F$ and $(-X)\sim F'$ be independent.&lt;br /&gt;
-(i) Let $Y$ be a random variable with distribution $F_Y(x) = 0.5F(x) + 0.5F'(x).$ By the lemma, $\varphi_Y = \text{Re}\varphi_X.$&lt;br /&gt;
-(ii) $\varphi_{X+X'} = \varphi_X\overline{\varphi_{X}} = |\varphi_X|^2.$
-&lt;/div&gt;
-
-&lt;p&gt;Here are some of the ch.f.s of well-known distributions.
-exx.&lt;/p&gt;
-
-&lt;div class=&quot;example&quot;&gt;&lt;br /&gt;
-(i) (Poisson) $X \sim \mathcal{P}(\lambda).$ $\varphi_X(t) = e^{\lambda (e^{it}-1)}.$&lt;br /&gt;
-(ii) (Normal) $X\sim \mathcal{N}(0,1).$ $\varphi_X(t) = e^{-t^2/2}.$&lt;br /&gt;
-(iii) (Exponential) $X\sim\text{Exp}(1).$ $\varphi_X(t) = \frac{1}{1-it}.$&lt;br /&gt;
-(iv) (Double exponential) $X\sim\text{DE}(1).$ $\varphi_X(t) = \frac{1}{1+t^2}.$
-&lt;/div&gt;
-
-&lt;p&gt;Note that the ch.f. of $\text{DE}(1)$ is a density of the Cauchy distribution.&lt;/p&gt;
-
-&lt;p&gt;For a random variable that has a density with respect to the Lebesgue measure, Characteristic function is in fact the &lt;a href=&quot;https://mathworld.wolfram.com/FourierTransform.html&quot;&gt;Fourier transform&lt;/a&gt; of the distribution function of $X.$ So we can naturally deduce that a proper inversion might fully recover the distribution from ch.f. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;inversion-formula&quot;&gt;Inversion formula&lt;/h2&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;inversion formula&quot;&gt;
-Let $\varphi(t) = \int e^{itx}d\mu(x)$ be the ch.f. of a probability measure $\mu.$ If $a&amp;lt;b,$ then
-$$
-\lim_T \frac{1}{2\pi} \int_{-T}^T \frac{e^{-ita}-e^{-itb}}{it} \varphi(t) dt = \mu(a,b) + \frac{1}{2}\mu\{a,b\}.
-$$
-&lt;/div&gt;
-
-&lt;p&gt;Notice that it is not $\int_{-\infty}^\infty$ but $\lim_T \int_{-T}^T.$ We will find out why during the proof.&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $I_T$ be the integrand of the left hand side.
-$$
-\begin{align}
-I_T &amp;amp;= \int_{-T}^T \int \frac{e^{-ita}-e^{-itb}}{it} e^{itx} d\mu(x) dt \\
-    &amp;amp;= \int \int_{-T}^T \frac{1}{it}\left( e^{it(x-a)} - e^{it(x-b)} \right) dt d\mu(x) \\
-    &amp;amp;= \int \int_{-T}^T \frac{1}{t} \left( \sin t(x-a) = \sin t(x-b) \right) dt d\mu(x) \\
-    &amp;amp;= \int R(x-a, T) - R(x-b, T) d\mu(x)
-\end{align}
-$$
-where $R(\theta,T) = \int_{-T}^T\frac{\sin \theta t}{t} dt.$ The first equality comes from Fubini's theorem since 
-$$
-\frac{e^{-ita}-e^{-itb}}{it} = \int_a^b e^{-itx}dx \le b-a
-$$
-so it is integrable. Now observe that if we let $S(T)=\int_0^T \frac{\sin x}{x}dx,$
-$$
-R(\theta,T)=\begin{cases}
-\int_{-T\theta}^{T\theta} \frac{\sin x}{x} dx = 2\int_0^{T\theta} \frac{\sin x}{x}dx = 2S(T\theta) &amp;amp;,~ \theta\ge0 \\
--R(-\theta,T) = -2S(-T\theta) &amp;amp;,~ \theta &amp;lt; 0
-\end{cases}
-$$
-We get $R(\theta,T) = 2\text{sgn}(\theta)S(T|\theta|).$ By the result of exercise 1.7.5 of the textbook, $S(T) \to \frac{\pi}{2}$ as $T\to\infty.$ Thus 
-$$
-R(x-a,T)-T(x-b,T) \to \begin{cases}
-  2\pi &amp;amp;,~ a&amp;lt;x&amp;lt;b \\
-  \pi  &amp;amp;,~ x=a \text{ or } x=b \\
-  0    &amp;amp;,~ x&amp;lt;a \text{ or } x&amp;gt;b \\
-\end{cases}
-$$
-Since $|R(\theta,T)| \le 2\sup_y\int_0^y\frac{\sin t}{t}dt &amp;lt; \infty,$ with the help of BCT we get
-$$
-\begin{align}
-&amp;amp;\lim_T \frac{1}{2\pi} \int_{-T}^T \frac{e^{-ita}-e^{-itb}}{it} \varphi(t) dt \\
-&amp;amp;= \lim_T \frac{1}{2\pi} \int R(x-a,T) - R(x-b,T) d\mu(x) \\
-&amp;amp;= \frac{1}{2\pi} \int \lim_T \left( R(x-a,T)-R(x-b,T) \right) d\mu(x) \\
-&amp;amp;= \frac{1}{2\pi} \left( 2\pi\mu(a,b) + \pi\mu\{a,b\} \right) \\
-&amp;amp;= \mu(a,b) + \frac{1}{2}\mu\{a,b\}.
-\end{align}
-$$
-&lt;/div&gt;&lt;/details&gt;
-
-&lt;p&gt;By inversion formula, $\varphi_X$ is real if and only if $X$ is symmetric.&lt;/p&gt;
-
-&lt;p&gt;If we use $\int_{-\infty}^\infty$ instead then $\int_{-\infty}^\infty \frac{\sin \theta t}{t} dt$ would not be integrable. If we have $\int |\varphi(t)| dt &amp;lt; \infty,$ then it is possible to use $\int_{-\infty}^\infty.$ The next theorem is about this case.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;inversion formula for density&quot;&gt;
-If $\int |\varphi(t)| dt &amp;lt; \infty,$ then $\mu$ has a bounded continuous density $f$ such that
-$$
-f(y) = \frac{1}{2\pi} \int_{-\infty}^\infty e^{-ity} \varphi(t) dt.
-$$
-&lt;/div&gt;
-
-&lt;p&gt;Observe that it is exactly the same to the inverse Fourier transform. In fact, $\mu$ is &lt;em&gt;absolutely continuous&lt;/em&gt; to the Lebesgue measure and $f=\frac{d\mu}{d\lambda}.$&lt;/p&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;
-From the proof the inversion formula, $|\frac{e^{-ita}-e^{-itb}}{it}| \le |b-a|.$ Since $\int |\varphi(t)| dt &amp;lt; \infty,$
-$$
-\frac{1}{2\pi} \int_{-\infty}^\infty \frac{e^{-ita}-e^{-itb}}{it}\varphi(t)dt \le \frac{|b-a|}{2\pi} \int_{-\infty}^\infty |\varphi(t)|dt &amp;lt; \infty.
-$$
-Thus the inversion formula converges absolutely in this case and $\mu(a,b) = \frac{1}{2\pi} \int_{-\infty}^\infty \frac{e^{-ita}-e^{-itb}}{it}\varphi(t)dt.$ Letting $b \to a$ and it follows that $\mu$ has no point masses.&lt;br /&gt;
-&amp;ensp; Using the above and Fubini's theorem we get
-$$
-\begin{align}
-\mu(x,x+h)
-  &amp;amp;= \frac{1}{2\pi} \int_{-\infty}^\infty \frac{e^{-itx}-e^{-it(x+h)}}{it} \varphi(t)dt \\
-  &amp;amp;= \frac{1}{2\pi} \int_{-\infty}^\infty \int_x^{x+h} e^{-ity} dy \varphi(t)dt \\
-  &amp;amp;= \int_x^{x+h} \frac{1}{2\pi} \int_{-\infty}^\infty e^{-ity} \varphi(t) dt dy
-\end{align}
-$$
-so $\frac{1}{2\pi} \int e^{-ity} \varphi(t) dt$ is a density of $\mu.$&lt;br /&gt;
-&amp;ensp; $|f(y)| \le \frac{1}{2\pi} \int |\varphi(t)|dt &amp;lt; \infty$ and $f$ is bounded.&lt;br /&gt;
-&amp;ensp; $|f(y+h) - f(y)| 
-\le \frac{1}{2\pi} \int |e^{-ity}(e^{-ith}-1)\varphi(t)|dt 
-\le \frac{1}{\pi} \int |\varphi(t)|dt &amp;lt; \infty.$ By DCT  $|f(y+h) - f(y)|\to0$ as $h\to0$ and $f$ is continuous.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;The formula indicates that if the ch.f. is integrable, then the distribution has a continuous density and it can be directly calculated. As an example of the inversion, remember the ch.f. of double exponential being a density of Cauchy distribution? In fact, Cauchy distribution has the ch.f. that is the same to a density of double exponential distribution. &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;continuity-theorem&quot;&gt;Continuity theorem&lt;/h2&gt;
-
-&lt;p&gt;We now relate pointwise convergence of the characteristic function to weak convergence of distributions.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;continuity theorem&quot;&gt;
-Let $\mu_n$, $1\le n\le \infty$ be probability measures with ch.f. $\varphi_n.$ Then&lt;br /&gt;
-(i) $\mu_n \overset{w}{\to} \mu_\infty$ $\implies \varphi_n \to \varphi_\infty.$ &lt;br /&gt;
-(ii) If there exists $\varphi$ such that $\varphi_n \to \varphi$ and $\varphi$ is continuous at $0,$ then $\mu_n \overset{w}{\to} \mu$ where $\mu$ is a probability measure with $\varphi$ as its ch.f.
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) Trivial since $e^{itx}$ is bounded and continuous.&lt;br /&gt;
-(ii) First, show that $(\mu_n)$ is uniformly tight. Since $\varphi$ is continuous at $0,$ given $\epsilon&amp;gt;0,$ there exists $\delta&amp;gt;0$ such that $\frac{1}{\delta} \int_0^\delta (1-\varphi(t)) dt = \int 2(1-\frac{\sin \delta x}{\delta x}) d\mu(x) &amp;lt; \epsilon.$ So for large $n,$ $\frac{1}{\delta} (1-\varphi_n(t)) dt = \int 2(1-\frac{\sin \delta x}{\delta x}) d\mu_n(x) &amp;lt; 2\epsilon.$ The left hand side is bounded below by
-$$
-\begin{align}
-&amp;amp;\int 2 (1-\frac{\sin \delta x}{\delta x}) d\mu_n(x) \\
-&amp;amp;\ge \int 2(1-\frac{1}{\delta|x|}) d\mu_n(x) \\
-&amp;amp;\ge \int_{x:\frac{2}{\delta|x|}\le 1} 2(1-\frac{1}{\delta|x|}) d\mu_n(x) \\
-&amp;amp;\ge \int_{x:\frac{2}{\delta|x|}\le 1} 1 d\mu_n(x).
-\end{align}
-$$
-So $1-F_n(2/\delta)+F_n(-2/\delta) &amp;lt; 2\epsilon$ and $\mu_n$ is uniformly tight.&lt;br /&gt;
-&amp;ensp; By &lt;a href=&quot;http://naturale0.github.io/probability/PTE-3.2.2-vague-convergence#tightness-theorem&quot;&gt;tightness theorem&lt;/a&gt;, there exists a subsequence $\mu_{n_k}$ that converges weakly to some probability measure $\mu.$ We need to show that every subsequence has a further subsequence that weakly converges to the same $\mu.$ Given a subsequence $(\mu_{n_k}),$ again by tightness theorem there exists a further subsequence that converges weakly to some probability measure $\nu.$ By (i), $\varphi_{n_k} \to \varphi_\nu$ and since $\varphi_n \to \varphi,$ $\phi_\nu$ should be identical to $\varphi.$ Now given a bounded continuous function $f$, $(\int f d\mu_n)$ is a sequence on $\mathbb{R}.$ By the last result every subsequence of it has a further subsequence that converges to $\int f d\mu,$ so $\mu_n \overset{w}{\to} \mu.$
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;moment-generating-property&quot;&gt;Moment generating property&lt;/h2&gt;
-&lt;p&gt;The result during the proof of the continuity theorem implies that smoothness of ch.f. $\varphi$ is related to the tail probability of underlying measure $\mu.$ To be specific, for $\delta&amp;gt;0,$ the inequality holds:
-\(\mu(\{x:~ |x|&amp;gt;\frac{2}{\delta}\}) \le \frac{1}{\delta} \int_{-\delta}^\delta (1-\varphi(t))dt.\)&lt;/p&gt;
-
-&lt;p&gt;This leads to another relationship between the ch.f. and its distribution: differentiability and derivative of the characteristic function is directly related to moments of its distribution.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;3.3.18&quot;&gt;
-If $E|X|^n = \int |x|^n d\mu(x) &amp;lt; \infty,$ then $\varphi$ is $n$ times differentiable and $\varphi^{(n)}(t) = \int (ix)^n e^{itx} d\mu(x).$
-&lt;/div&gt;
-
-&lt;p&gt;The obvious corollary is that $\varphi^{(n)}(0) = i^nEX^n$ for $1\le n \le p$ if $X\in L^p(\mu).$ The next theorem implies the converse in $L^2$ case.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;3.3.21&quot;&gt;
-$\limsup_{h\downarrow 0} \frac{\varphi(h) + \varphi(-h) - 2\varphi(0)}{h^2} &amp;gt; -\infty$ $\implies EX^2 &amp;lt;\infty.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-For necessity of Fubini's theorem see $\frac{e^{ihx} + e^{-ihx} - 2}{h^2} = \frac{2(\cos hx -1)}{h^2} \le 0.$ In addition, $\lim_{h\to0}\frac{2(\cos hx -1)}{h^2} = \lim_{h\to0} -x^2\cos hx = -x^2.$
-
-$$
-\begin{align}
-EX^2 &amp;amp;= \int x^2 dF(x) \\
-  &amp;amp;\le \liminf\limits_{h\downarrow0} \int \frac{2(1- \cos hx)}{h^2} dF(x) \\
-  &amp;amp;= -\limsup\limits_{h\downarrow0} \frac{\varphi(h)+\varphi(-h)-2\varphi(0)}{h^2} \\
-  &amp;amp;&amp;lt; \infty.
-\end{align}
-$$
-The first equality is from the Fubini's theorem and the first inequality is from the Fatou's lemma.
-&lt;/div&gt;&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;estimation-of-the-error-term&quot;&gt;Estimation of the error term&lt;/h2&gt;
-&lt;p&gt;Before ending the section, I would like to cover the estimation of ch.f.s with Taylor series about 0. This will be used when proving the central limit theorem (the next section) and the existence of canonical representation of infinitely divisible distributions (section 3.9).&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;3.3.19&quot;&gt;
-$$
-\left|e^{ix} - \sum_{m=0}^n \frac{(ix)^m}{m!}\right| \le \frac{|x|^{n+1}}{(n+1)!} \wedge \frac{2|x|^n}{n!}.
-$$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $R_n(x) = e^{ix} - \sum_{m=0}^n \frac{(ix)^m}{m!}.$ We will prove by induction. For $n=0,$ $R_0(x) = e^{ix}-1 = \int_0^x ie^{iy}dy.$ Thus 
-$$
-|R_0(x)| = \begin{cases}
-|e^{ix}-1| \le |e^{ix}| + 1 = 2 \\
-|\int_0^x ie^{iy} dy| \le \int_0^x |ie^{iy}| dy = x
-\end{cases}
-$$
-Now suppose $|R_n(x)| \le \frac{|x|^{n+1}}{(n+1)!} \wedge \frac{2|x|^n}{n!}.$ $R_{n+1} = R_n(x) - \frac{(ix)^{n+1}}{(n+1)!} = \int_0^x iR_n(y)dy.$ This is from term-by-term integration of $iR_n.$
-$$
-\begin{align}
-|R_{n+1}| &amp;amp;\le \int_0^x |iR_n(y)| dy \\
-  &amp;amp;\le \int_0^x (\frac{|y|^{n+1}}{(n+1)!} \wedge \frac{2|y|^n}{n!}) dy \\
-  &amp;amp;= \frac{|x|^{n+2}}{(n+2)!} \wedge \frac{2|x|^{n+1}}{(n+1)!}.
-\end{align}
-$$ 
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;Using this, we can reduce the order of error to 2 (from 3) for second-order Taylor series. We write $g(x) = o(f(x))$ if $g(x)/f(x) \to 0$ as &lt;strong&gt;$x\to0.$&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;upper bound of the error&quot;&gt;
-$$EX^2 &amp;lt; \infty \implies \varphi(t) = 1 + itEX - \frac{t^2 EX^2}{2} + o(t^2).$$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By the previous theorem we get
-$$
-\begin{align}
-|ER_2(tX)| \le E|R_2(tX)| \\
-  \le E(\frac{|tX|^3}{3!} \wedge \frac{2|tX|^2}{2!}) \\
-  \le t^2 E(|t||X|^3 \wedge X^2).
-\end{align}
-$$
-As $t\to0,$ $|t||X|^3\wedge X^2 \to 0$ and $|t||X|^3\wedge X^2 \le X^2$ with $EX^2 &amp;lt;\infty.$ By DCT, $ER_2(tX)/t^2 \to 0$ as $t\to0$ so $ER_2(tX) = o(t^2).$
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 22 Dec 2020 23:55:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</guid>
         
         
         <category>probability</category>
