@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 01:45:21 +0900</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 01:45:21 +0900</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 01:45:50 +0900</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 01:45:50 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -145,7 +145,7 @@ as $m\to\infty.$ Hence $E(X_\infty|\mathcal{F}_n) = X_n$ a.s.&lt;br /&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
-        <pubDate>Wed, 20 Jan 2021 22:52:00 +0900</pubDate>
+        <pubDate>Thu, 21 Jan 2021 01:45:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.6.-Uniform-integrability-and-convergence-in-L1</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.6.-Uniform-integrability-and-convergence-in-L1</guid>
         
