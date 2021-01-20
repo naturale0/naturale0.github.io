@@ -6,13 +6,13 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 01:50:12 +0900</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 01:50:12 +0900</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 01:50:38 +0900</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 01:50:38 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>(PTE) 4.6.1. Uniform integrability and convergence in $L^1$</title>
-        <description>&lt;p&gt;In section 4.5, we covered the condition where martingales converges in $L^p.$ We only covered the case where $p&amp;gt;1.$ In this section, the notions of uniform integrability is introduced to compensate convergence in $p=1$ case.&lt;/p&gt;
+        <description>&lt;p&gt;In section 4.4, we covered the condition where martingales converges in $L^p.$ We only covered the case where $p&amp;gt;1.$ In this section, the notions of uniform integrability is introduced to compensate convergence in $p=1$ case.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#uniform-integrability&quot; id=&quot;markdown-toc-uniform-integrability&quot;&gt;Uniform integrability&lt;/a&gt;&lt;/li&gt;
