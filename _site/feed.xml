@@ -6,9 +6,110 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 21:28:48 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 21:28:48 +0900</lastBuildDate>
+    <pubDate>Wed, 20 Jan 2021 15:43:03 +0900</pubDate>
+    <lastBuildDate>Wed, 20 Jan 2021 15:43:03 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>(PTE) 4.5. Square integrable martingales</title>
+        <description>&lt;p&gt;In this section, we look into martingales with special property - square integrability. Square integrability gives martingale an upper bound for maximal expectation so that it can further be used to determine the convergence of the sequence.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#square-integrable-martingales&quot; id=&quot;markdown-toc-square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;square integrable martingale&quot;&gt;
+A martingale $X_n$ is square integrable if $EX_n^2 &amp;lt; \infty$ for all $n.$
+&lt;/div&gt;
+
+&lt;p&gt;In the following discussion, we assume $X_0 = 0.$ Notice that $X_n^2$ is a submartingale and if we let $A_n = A_{n-1} + E(X_n^2 | \mathcal{F}_{n-1}) - X_{n-1}^2,$ $A_0=0,$ which is from Doob’s decomposition, then $EX_n^2 = EA_n$ and&lt;/p&gt;
+
+\[\begin{aligned}
+A_n 
+ &amp;amp;= \sum\limits_{m=1}^n \left( E(X_m^2|\mathcal{F}_{m-1}) - X_{m-1}^2 \right) \\
+ &amp;amp;= \sum\limits_{m-1}^n E\left( (X_m - X_{m-1})^2 | \mathcal{F}_{m-1} \right).
+\end{aligned}\]
+
+&lt;div class=&quot;theorem&quot;&gt;
+For a square integrable martingale $X_n,$ let $A_\infty = \lim_n A_n.$ The followings hold.&lt;br /&gt;
+(i) $E \sup_n X_n^2 \le 4 EA_\infty.$ &lt;br /&gt;
+(ii) $E \sup_n |X_n| \le 3 EA_\infty^\frac{1}{2}$ &lt;br /&gt;
+(iii) $\lim_n X_n$ exists and is almost surely finite on $\{A_\infty &amp;lt; \infty\}.$ &lt;br /&gt;
+(iv) If $f:\mathbb{R} \to \mathbb{R}$ is increasing and $\int_0^\infty f^{-2}(t)dt &amp;lt; \infty,$ $f(t) \ge 1,\forall t,$ then $\frac{X_n}{f(A_n)} \to 0$ a.s. on $\{A_\infty = \infty\}.$ &lt;br /&gt;
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) is direct from $L^p$ maximal inequality.&lt;br /&gt;
+(ii) Let $N_a = \inf\{n: A_{n+1} &amp;gt; a^2\},$ then it is a stopping time.
+$$\begin{aligned}
+P(\sup_n|X_n| &amp;gt; a)
+ &amp;amp;= P(\sup_n |X_n| &amp;gt; a, N &amp;lt; \infty) + P(\sup_n |X_n| &amp;gt; a, N = \infty) \\
+ &amp;amp;\le P(N&amp;lt;\infty) + P(\sup_n |X_{n \wedge N} &amp;gt; a) \\
+ &amp;amp;= P(N&amp;lt;\infty) + \lim_n P(\sup_{m\le n} |X_{m \wedge N}| &amp;gt; a) \\
+ &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E|X_{n \wedge N}|^2 \\
+ &amp;amp;= P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E A_{n\wedge N} \\
+ &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} E(A_\infty \wedge a^2) \\
+ &amp;amp;= P(A_\infty &amp;gt; a^2) + \frac{1}{a^2} E(A_\infty \wedge a^2).
+\end{aligned}$$
+
+The last inequality is from the fact that 
+$$EA_{n\wedge N} \le EA_N \le a^2 \text{ on } \{N&amp;lt;\infty\}, \\
+EA_n \le EA_\infty \le a^2 \text{ on } \{N=\infty\}.$$
+
+Using this, Fubini's theorem and integration by substitution, we get
+$$\begin{aligned}
+E \sup_n |X_n| 
+ &amp;amp;= \int P(\sup_n |X_n| \ge a) da \\
+ &amp;amp;\le \int_0^\infty P(A_\infty^{1/2} &amp;gt; a) da + \int_0^\infty \frac{1}{a^2} E(A_\infty \wedge a^2) da \\
+ &amp;amp;= EA_\infty^{1/2} + \int_0^\infty \frac{1}{a^2} \int_0^{a^2} P(A_\infty &amp;gt; b) db da \\
+ &amp;amp;= 3EA_\infty^{1/2}.
+\end{aligned}$$
+
+(iii) Given $a&amp;gt;0,$ by (i), $E \sup_n X_{n \wedge N_a} \le 4a^2 &amp;lt; \infty.$ By submartingale convergence, $X_{n\wedge N_a}$ converges a.s. and in $L^2.$ Now let $C_k = \{X_{n\wedge N_k} \text{ converges}\},$ then $P(C_k) = 1$ and $P(\cap_k C_k) = 1$ as well. For an arbitrary $\omega \in (\cap_k C_k) \cap (A_\infty &amp;lt; \infty),$ $N_k(\omega) = \inf\{n: A_n(\omega)\ge k\} = \infty$ for large enough $k$ since $A_\infty(\omega) &amp;lt; \infty.$ Hence $X_{n\wedge N_k}(\omega) = X_n(\omega)$ converges.
+&lt;br /&gt;
+(iv) Let $H_m = \frac{1}{f(A_m)}$ be a bounded predictable sequence. Then $Y_n := (H \cdot X)_n = \sum\limits_{m=1}^n \frac{X_m - X_{m-1}}{f(A_m)}$ is a square integrable martingale. Let $B_n = \sum\limits_{m=1}^n E\left( (Y_m - Y_{m-1})^2 | \mathcal{F}_{m-1} \right),$ then
+
+$$\begin{aligned}
+B_\infty
+ &amp;amp;= \sum\limits_{m=0}^\infty \frac{A_{m+1} - A_m}{f(A_{m+1})^2} \\
+ &amp;amp;\le \sum\limits_{m=0}^\infty \int_{A_m}^{A_{m+1}} f^{-2}(t) dt \\
+ &amp;amp;\le \int_0^\infty f^{-2}(t) dt &amp;lt; \infty \text{ a.s.}
+\end{aligned}$$
+
+By (iii), $\lim_n Y_n$ exists and is finite almost surely. By Kronecker's lemma, it suffices to show that $f(A_n) \uparrow \infty.$ Since $\int_0^\infty f^{-2}(t) dt &amp;lt; \infty,$ $\lim_t f(t)$ should be $\infty$ otherwise it gives contradiction. Since $A_n, f$ is increasing and $f(A_\infty) = \infty$ on $(A_\infty = \infty),$ this is true.
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the facts, we get another form of conditional Borel-Cantelli lemma.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;the second B-C lemma (3)&quot;&gt;
+Let $B_n \in \mathcal{F}_n$ for all $n \ge 0$ and $p_n = P(B_n | \mathcal{F}_{n-1}), n\ge 1.$ Then
+$$\frac{\sum_{n=1}^\infty\mathbf{1}{B_n}}{\sum_{n=1}^\infty p_n} \to 1 \text{ a.s. on } \left\{\sum\limits_{n=1}^\infty p_n = \infty \right\}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_n = X_{n-1} + \mathbb{1}_{B_n} - P(B_n | \mathcal{F}_{n-1}),$ $X_0=0$ be a square integrable martingale. Then $A_n$ from Doob's decomposition yields $A_m - A_{m-1} = p_m - p_m^2$ and $A_n = \sum\limits_{m=1}^n p_m - p_m^2 \le \sum\limits_{m=1}^n p_n.$&lt;br /&gt;
+On $(A_\infty &amp;lt; \infty),$ $X_n$ converges a.s.
+$$\frac{X_n}{\sum_{m=1}^n p_m} = \frac{\sum_{m=1}^n \mathbf{1}_{B_m}}{\sum_{m=1}^n p_m} - 1 \to 0 \text{ a.s. on } (\sum_{n=1}^\infty p_n = \infty).$$
+On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies conditions in (iv) of the previous theorem. Then $\frac{X_n}{f(A_n)} = \frac{X_n}{A_n \vee 1} \to 0$ a.s. on $(A_\infty = \infty).$ Since $A_n \le \sum_{m=1}^n p_m,$ we get $\frac{X_n}{\sum_{m=1}^n p_m} \to 0$ a.s. on $(A_\infty = \infty).$
+&lt;/div&gt;
+</description>
+        <pubDate>Tue, 19 Jan 2021 21:44:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
     
       <item>
         <title>(PTE) 4.4. Martingale inequalities and convergence in $L^p$</title>
@@ -1775,152 +1876,6 @@ As $t\to0,$ $|t||X|^3\wedge X^2 \to 0$ and $|t||X|^3\wedge X^2 \le X^2$ with $EX
         <pubDate>Tue, 22 Dec 2020 23:55:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.3-characteristic-functions</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 3.2.2. Vague convergence and uniform tightness</title>
-        <description>&lt;p&gt;Our next interest is in whether a sequence of distribution functions converges weakly. To be more specific, subsequential convergence of distribution functions are is the topic of this subsection. Helly’s selection theorem shows there always exists a &lt;em&gt;vaguely&lt;/em&gt; convergent subsequence. Uniform tightness of a sequence strengthen this result to be weakly convergent.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#hellys-selection-theorem&quot; id=&quot;markdown-toc-hellys-selection-theorem&quot;&gt;Helly’s selection theorem&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#tightness-theorem&quot; id=&quot;markdown-toc-tightness-theorem&quot;&gt;Tightness theorem&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;hellys-selection-theorem&quot;&gt;Helly’s selection theorem&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;vague convergence&quot;&gt;
-A sequence of distribution $(F_n)$ vaguely converges to a function $F$ if $F_n(x) \to F(x)$ for all $x$ that is a continuity point of $F$ and write $F_n \to_{v.} F.$
-&lt;/div&gt;
-
-&lt;p&gt;Notice that unlike weak convergence, vague convergence does not guarantee that the limiting function $F$ is a distribution function.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Helly's selection&quot;&gt;
-For a sequence of distribution functions $(F_n)$, there always exists a subsequence $(F_{n_k})$ and a decreasing right-continuous function $F$ such that $F_{n_k} \to_{v.} F.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(Step 1. Diagonal argument)
-&amp;ensp; Let $q_1,q_2,\cdots \in \mathbb{Q}$ be enumeration of rationals. For $k=1,$ $\{F_1(q_1),F_2(q_1),\cdots\}$ is a bounded real sequence so has a limit point. Pick a subsequence $(n_{1k})$ such that $F_{1k}(q_1) \to G(q_1)$ for a limit point $G(q_1).$ For $k=2,$ we do the similar work. $\{F_{n_{11}}(q_2), F_{n_{12}}(q_2),\cdots\}$ is a bounded real sequence so has a limit point $G(q_2).$ Picka further subsequence $(n_{2k})\subset(n_{1k})$ such that $F_{2k}(q_2) \to G(q_2).$ Repeat this process for all consecutive $k\in\mathbb{N}$ and let $m_k = n_{kk}$ so that $F_{mk} \to G(q)$ for all $q \in \mathbb{Q}.$ Then by construction $G$ is non-decreasing. Let $F(x) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt; x\}.$&lt;br /&gt;&lt;br /&gt;
-
-(Step 2. $F \leftarrow_{v.} F_{m_k}$ is right-continuous)&lt;br /&gt;
-First we prove that $F$ is right-continuous.
-$$
-\begin{align}
-\lim_{x_n\downarrow x} F(x_n)
-&amp;amp;= \lim_{x_n\downarrow x} \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x_n\} \\
-&amp;amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x_n \text{ for some } n\} \\
-&amp;amp;= \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;x\} = F(x).
-\end{align}
-$$
-Next we show that $F_{m_k} \to_{v.} F.$ Given $x$ a continuity point of $F,$ pick $r_1,r_2,s\in\mathbb{Q}$ so that $r_1&amp;lt;r_2&amp;lt;x&amp;lt;s$ and $F(x)-\epsilon&amp;lt;F(r_1)\le F(r_2) \le F(x) \le F(s) &amp;lt; F(x)+\epsilon.$ Then
-$$
-F_{m_k}(r_2) \to G(r_2) \ge F(r_1) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;r_1\}, \\
-F_{m_k}(s) \to G(s) \le F(s) = \inf\{G(q):~ q\in\mathbb{Q}, q&amp;gt;s\}.
-$$
-Thus for all large $k$,
-$$
-F(x)-\epsilon &amp;lt; F_{m_k}(x) &amp;lt; F(x)+\epsilon.
-$$
-so $F_{m_k} \to_{v.} F.$
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tightness-theorem&quot;&gt;Tightness theorem&lt;/h2&gt;
-&lt;p&gt;While Helly’s thereom provides valuable result, vague convergence is not enough. We want additional condition that allows us to ensure weak convergence. Uniform tightness&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is the one.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;uniform tightness&quot;&gt;
-A set of measures $\{P_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&amp;gt;0$ there exists a compact set $K$ such that $\inf_n P_n(K) \ge 1-\epsilon.$ Likewise, We say a set of distribution functions $\{F_n\}_{n\in\mathbb{N}}$ is uniformly tight, if for all $\epsilon&amp;gt;0$ there exists $M\in\mathbb{R}$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$
-&lt;/div&gt;
-
-&lt;p&gt;Uniform tightness implies the measure of any set can be approximated from below by some compact set. This condition leads to a stronger result.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;tightness theorem&quot;&gt;
-Every subsequential limit of a sequence of distribution functions $(F_n)$ is a distribution function if and only if $(F_n)$ is uniformly tight.
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-($\Leftarrow$)
-We need to show that for $F_{n_k} \to_{v.} F,$ $F$ is a distribution function. It suffices to show $\lim_{x \to \infty} (1-F(x)+F(-x))=0.$ Given $\epsilon&amp;gt;0,$ there exists $M&amp;gt;0$ such that $\limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.$ Let $r&amp;lt;-M$ and $s&amp;gt;M$ be continuity points of $F.$
-$$
-\begin{align}
-1-F(s)+F(r) 
- &amp;amp;= \lim_k (1-F_{n_k}(s)+F_{n_k}(r)) \\
- &amp;amp;\le \limsup_n (1-F_n(M)+F_n(-M)) \le \epsilon.
-\end{align}
-$$
-Thus 
-$$
-\limsup\limits_{x\to\infty} (1-F(x)+F(-x)) \le \epsilon.
-$$
-
-($\Rightarrow$) Suppose $(F_n)$ is not tight and show that $F$ is not a distribution function in that case. There exists $\epsilon&amp;gt;0$ such that $\limsup_n(1-F_n(M)+F_n(M))&amp;gt;\epsilon$ for all $M.$ Let $r&amp;lt;0&amp;lt;s$ be continuity points of $F,$ then
-$$
-\begin{align}
-1-F(s)+F(r)
- &amp;amp;= \lim_j (1-F_{n(k_j)}(s)+F_{n(k_j)}(r)) \\
- &amp;amp;\ge \liminf\limits_j (1-F_{n(k_j)}(k_j)+F_{n(k_j)}(-k_j)) \ge \epsilon.
-\end{align}
-$$
-As $s\to\infty$ and $r\to-\infty,$ $\lim_{x\to\infty} (1-F(x)+F(-x))&amp;gt;0$ so $F$ is not a distribution function.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;There is a criterion for checking whether a sequence is uniformly tight.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;sufficiency of tightness&quot;&gt;
-For a sequence $(F_n),$ if there exists a function $\varphi \ge 0$ such that
-$$
-\begin{cases}
-\varphi(x) \to \infty \text{ as } |x|\to\infty. \\
-\sup_n \int \varphi dF_n &amp;lt; \infty.
-\end{cases}
-$$
-then $(F_n)$ is uniformly tight.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;
-$$
-\begin{align}
-&amp;amp;\;\;\;\;1-F_n(M)+F_n(-M) \\
- &amp;amp;= \int_{|x|&amp;gt;M} 1 dF_n(x) \\
- &amp;amp;\le \frac{\sup_n \int \varphi dF_n}{\inf_{|x|\ge M}\varphi(x)}.
-\end{align}
-$$
-As $M\to\infty$, $\inf_{|x|\ge M} \varphi(x) \to \infty$ and we get the result.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Many textbooks including Durrett and Billingsley use the term &lt;em&gt;tightness&lt;/em&gt; to describe this condition. However I want to separate the terms for clarity: &lt;em&gt;uniform tightness&lt;/em&gt; for a collection of measures, and &lt;em&gt;tightness&lt;/em&gt; for a measure. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Tue, 22 Dec 2020 14:52:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.2.2-vague-convergence</guid>
         
         
         <category>probability</category>
