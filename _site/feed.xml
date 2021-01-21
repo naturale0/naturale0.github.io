@@ -6,14 +6,21 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 15:07:42 +0900</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 15:07:42 +0900</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 15:11:13 +0900</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 15:11:13 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>(PTE) 4.6.2. Levy's theorem</title>
         <description>&lt;p&gt;Consider a sequence of conditional expectations $E(X|\mathcal{F}_n)$ with fixed $X.$ By using the theorem from previous subsection we can determine convergence of this sequence as well.
 &lt;br /&gt;&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#levys-theorem&quot; id=&quot;markdown-toc-levys-theorem&quot;&gt;Levy’s theorem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;levys-theorem&quot;&gt;Levy’s theorem&lt;/h2&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;Levy's theorem&quot;&gt;
 Let $X$ be an integrable random variable and $(\mathcal{F}_n)$ be a filtration. then $E(X|\mathcal{F}_n) \to E(X|\mathcal{F}_\infty)$ a.s. where $\mathcal{F}_\infty = \sigma\left(\cup_n \mathcal{F}_n \right).$
