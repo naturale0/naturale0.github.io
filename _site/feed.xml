@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Jan 2021 00:30:14 +0900</pubDate>
-    <lastBuildDate>Fri, 22 Jan 2021 00:30:14 +0900</lastBuildDate>
+    <pubDate>Fri, 22 Jan 2021 00:42:59 +0900</pubDate>
+    <lastBuildDate>Fri, 22 Jan 2021 00:42:59 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -163,6 +163,113 @@ Note that $\inf_n S_n \le S_{n\wedge T_b} \le b$ and $|S_{n\wedge T_b}| \le |\in
         <pubDate>Fri, 22 Jan 2021 00:30:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.8-optional-stopping</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.8-optional-stopping</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>(PTE) 4.5. Square integrable martingales</title>
+        <description>&lt;p&gt;In this section, we look into martingales with special property - square integrability. Square integrability gives martingale an upper bound for maximal expectation so that it can further be used to determine the convergence of the sequence.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#square-integrable-martingales&quot; id=&quot;markdown-toc-square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;square integrable martingale&quot;&gt;
+A martingale $X_n$ is square integrable if $EX_n^2 &amp;lt; \infty$ for all $n.$
+&lt;/div&gt;
+
+&lt;p&gt;In the following discussion, we assume $X_0 = 0.$ Notice that $X_n^2$ is a submartingale and if we let $A_n = A_{n-1} + E(X_n^2 | \mathcal{F}_{n-1}) - X_{n-1}^2,$ $A_0=0,$ which is from Doob’s decomposition, then $EX_n^2 = EA_n$ and&lt;/p&gt;
+
+\[\begin{aligned}
+A_n 
+ &amp;amp;= \sum\limits_{m=1}^n \left( E(X_m^2|\mathcal{F}_{m-1}) - X_{m-1}^2 \right) \\
+ &amp;amp;= \sum\limits_{m-1}^n E\left( (X_m - X_{m-1})^2 | \mathcal{F}_{m-1} \right).
+\end{aligned}\]
+
+&lt;div class=&quot;theorem&quot;&gt;
+For a square integrable martingale $X_n,$ let $A_\infty = \lim_n A_n.$ The followings hold.&lt;br /&gt;
+(i) $E \sup_n X_n^2 \le 4 EA_\infty.$ &lt;br /&gt;
+(ii) $E \sup_n |X_n| \le 3 EA_\infty^\frac{1}{2}$ &lt;br /&gt;
+(iii) $\lim_n X_n$ exists and is almost surely finite on $\{A_\infty &amp;lt; \infty\}.$ &lt;br /&gt;
+(iv) If $f:\mathbb{R} \to \mathbb{R}$ is increasing and $\int_0^\infty f^{-2}(t)dt &amp;lt; \infty,$ $f(t) \ge 1,\forall t,$ then $\frac{X_n}{f(A_n)} \to 0$ a.s. on $\{A_\infty = \infty\}.$ &lt;br /&gt;
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;
+    expand proof
+  &lt;/summary&gt;
+  
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) is direct from $L^p$ maximal inequality.&lt;br /&gt;
+(ii) Let $N_a = \inf\{n: A_{n+1} &amp;gt; a^2\},$ then it is a stopping time.
+$$\begin{aligned}
+P(\sup_n|X_n| &amp;gt; a)
+ &amp;amp;= P(\sup_n |X_n| &amp;gt; a, N &amp;lt; \infty) + P(\sup_n |X_n| &amp;gt; a, N = \infty) \\
+ &amp;amp;\le P(N&amp;lt;\infty) + P(\sup_n |X_{n \wedge N} &amp;gt; a) \\
+ &amp;amp;= P(N&amp;lt;\infty) + \lim_n P(\sup_{m\le n} |X_{m \wedge N}| &amp;gt; a) \\
+ &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E|X_{n \wedge N}|^2 \\
+ &amp;amp;= P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E A_{n\wedge N} \\
+ &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} E(A_\infty \wedge a^2) \\
+ &amp;amp;= P(A_\infty &amp;gt; a^2) + \frac{1}{a^2} E(A_\infty \wedge a^2).
+\end{aligned}$$
+
+The last inequality is from the fact that 
+$$EA_{n\wedge N} \le EA_N \le a^2 \text{ on } \{N&amp;lt;\infty\}, \\
+EA_n \le EA_\infty \le a^2 \text{ on } \{N=\infty\}.$$
+
+Using this, Fubini's theorem and integration by substitution, we get
+$$\begin{aligned}
+E \sup_n |X_n| 
+ &amp;amp;= \int P(\sup_n |X_n| \ge a) da \\
+ &amp;amp;\le \int_0^\infty P(A_\infty^{1/2} &amp;gt; a) da + \int_0^\infty \frac{1}{a^2} E(A_\infty \wedge a^2) da \\
+ &amp;amp;= EA_\infty^{1/2} + \int_0^\infty \frac{1}{a^2} \int_0^{a^2} P(A_\infty &amp;gt; b) db da \\
+ &amp;amp;= 3EA_\infty^{1/2}.
+\end{aligned}$$
+
+(iii) Given $a&amp;gt;0,$ by (i), $E \sup_n X_{n \wedge N_a} \le 4a^2 &amp;lt; \infty.$ By submartingale convergence, $X_{n\wedge N_a}$ converges a.s. and in $L^2.$ Now let $C_k = \{X_{n\wedge N_k} \text{ converges}\},$ then $P(C_k) = 1$ and $P(\cap_k C_k) = 1$ as well. For an arbitrary $\omega \in (\cap_k C_k) \cap (A_\infty &amp;lt; \infty),$ $N_k(\omega) = \inf\{n: A_n(\omega)\ge k\} = \infty$ for large enough $k$ since $A_\infty(\omega) &amp;lt; \infty.$ Hence $X_{n\wedge N_k}(\omega) = X_n(\omega)$ converges.
+&lt;br /&gt;
+(iv) Let $H_m = \frac{1}{f(A_m)}$ be a bounded predictable sequence. Then $Y_n := (H \cdot X)_n = \sum\limits_{m=1}^n \frac{X_m - X_{m-1}}{f(A_m)}$ is a square integrable martingale. Let $B_n = \sum\limits_{m=1}^n E\left( (Y_m - Y_{m-1})^2 | \mathcal{F}_{m-1} \right),$ then
+
+$$\begin{aligned}
+B_\infty
+ &amp;amp;= \sum\limits_{m=0}^\infty \frac{A_{m+1} - A_m}{f(A_{m+1})^2} \\
+ &amp;amp;\le \sum\limits_{m=0}^\infty \int_{A_m}^{A_{m+1}} f^{-2}(t) dt \\
+ &amp;amp;\le \int_0^\infty f^{-2}(t) dt &amp;lt; \infty \text{ a.s.}
+\end{aligned}$$
+
+By (iii), $\lim_n Y_n$ exists and is finite almost surely. By Kronecker's lemma, it suffices to show that $f(A_n) \uparrow \infty.$ Since $\int_0^\infty f^{-2}(t) dt &amp;lt; \infty,$ $\lim_t f(t)$ should be $\infty$ otherwise it gives contradiction. Since $A_n, f$ is increasing and $f(A_\infty) = \infty$ on $(A_\infty = \infty),$ this is true.
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the facts, we get another form of conditional Borel-Cantelli lemma.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;the second B-C lemma (3)&quot;&gt;
+Let $B_n \in \mathcal{F}_n$ for all $n \ge 0$ and $p_n = P(B_n | \mathcal{F}_{n-1}), n\ge 1.$ Then
+$$\frac{\sum_{n=1}^\infty\mathbf{1}{B_n}}{\sum_{n=1}^\infty p_n} \to 1 \text{ a.s. on } \left\{\sum\limits_{n=1}^\infty p_n = \infty \right\}.$$
+&lt;/div&gt;
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $X_n = X_{n-1} + \mathbb{1}_{B_n} - P(B_n | \mathcal{F}_{n-1}),$ $X_0=0$ be a square integrable martingale. Then $A_n$ from Doob's decomposition yields $A_m - A_{m-1} = p_m - p_m^2$ and $A_n = \sum\limits_{m=1}^n p_m - p_m^2 \le \sum\limits_{m=1}^n p_n.$&lt;br /&gt;
+On $(A_\infty &amp;lt; \infty),$ $X_n$ converges a.s.
+$$\frac{X_n}{\sum_{m=1}^n p_m} = \frac{\sum_{m=1}^n \mathbf{1}_{B_m}}{\sum_{m=1}^n p_m} - 1 \to 0 \text{ a.s. on } (\sum_{n=1}^\infty p_n = \infty).$$
+On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies conditions in (iv) of the previous theorem. Then $\frac{X_n}{f(A_n)} = \frac{X_n}{A_n \vee 1} \to 0$ a.s. on $(A_\infty = \infty).$ Since $A_n \le \sum_{m=1}^n p_m,$ we get $\frac{X_n}{\sum_{m=1}^n p_m} \to 0$ a.s. on $(A_\infty = \infty).$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+</description>
+        <pubDate>Fri, 22 Jan 2021 00:00:00 +0900</pubDate>
+        <link>https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</link>
+        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</guid>
         
         
         <category>probability</category>
@@ -1381,108 +1488,6 @@ This implies $\int e^{itx}d\mu(x) = \int e^{itx}d\nu(x).$ Put $t=0$ to both side
         <pubDate>Fri, 25 Dec 2020 16:39:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-3.9-infinitely-divisible-distributions</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.9-infinitely-divisible-distributions</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 3.10. Limit theorems in ℝᵈ</title>
-        <description>&lt;p&gt;This part covers limit theorems regarding random vectors $\mathbf{X} = (X_1,\cdots,X_d)’\in\mathbb{R}^d.$&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#definitions&quot; id=&quot;markdown-toc-definitions&quot;&gt;Definitions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#limit-theorems&quot; id=&quot;markdown-toc-limit-theorems&quot;&gt;Limit theorems&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#characteristic-functions-and-inversion&quot; id=&quot;markdown-toc-characteristic-functions-and-inversion&quot;&gt;Characteristic functions and inversion&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#central-limit-theorem-in-mathbbrd&quot; id=&quot;markdown-toc-central-limit-theorem-in-mathbbrd&quot;&gt;Central limit theorem in $\mathbb{R}^d$&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;definitions&quot;&gt;Definitions&lt;/h2&gt;
-&lt;div class=&quot;definition&quot; text=&quot;distribution function&quot;&gt;
-$F:\mathbb{R}^d\to\mathbb{R}$ is a distribution function if it is&lt;br /&gt;
-(i) non-decreasing.&lt;br /&gt;
-(ii) right-continuous.&lt;br /&gt;
-(iii) $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1.$ Where $x\to\infty$ means $x_i\to\infty$ for all $i=1,\cdots,d$ and $x\downarrow x$ means $y_i\downarrow x_i$ for all $i.$ &lt;br /&gt;
-(iv) $\Delta_A F := P(X\in A) \ge 0$ for all rectangle $A,$ where $P(X\in A) = \sum_{v\in V}\text{sgn}(v)F(v),$ $A=(a_1,b_1]\times\cdots\times(a_d,b_d],$ $V=\{a_1,b_1\}\times\cdots\times\{a_d,b_d\},$ $\text{sgn}(v) = (-1)^{(\text{\# of } a_i \text{'s in } v)}.$
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;limit-theorems&quot;&gt;Limit theorems&lt;/h2&gt;
-&lt;div class=&quot;definition&quot; text=&quot;Lipschitz continuity&quot;&gt;
-$f$ is Lipschitz continuous on a metric space $(S,\rho)$ if there exists $c\in\mathbb{R}$ such that $|f(x)-f(y)|\le c\cdot\rho(x,y)$ for all $x,y\in S.$
-&lt;/div&gt;
-
-&lt;p&gt;We arrive at another portmanteau theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Portmanteau theorem&quot;&gt;
-The followings are equivalent.&lt;br /&gt;
-(i) $Eg(X_n) \to Eg(X_\infty),~ \forall g:$ bounded, continuous. &lt;br /&gt;
-(ii) $Eg(X_n) \to Eg(X_\infty),~ \forall g:$ bounded, Lipschitz continuous. &lt;br /&gt;
-(iii) $\limsup_n P(X_n \in F) \le P(X_\infty \in F),~ \forall F:$ closed. &lt;br /&gt;
-(iv) $\liminf_n P(X_n \in G) \ge P(X_\infty \in G),~ \forall G:$ open. &lt;br /&gt;
-(v) $\lim_n P(X_n\in A) = P(X_\infty \in A),~ \forall A:~ P(X_\infty \in \partial A)=0.$ &lt;br /&gt;
-(vi) $Ef(X_n) \to Ef(X_\infty),~ \forall f:$ bounded and $P(X_\infty \in D_f) = 0.$ &lt;br /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;In addition, we get multi-dimensional version of tightness theorem.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;uniform tightness&quot;&gt;
-$(\mu_n)$ is uniformly tight if for all $\epsilon &amp;gt; 0,$ there exists $M$ such that $\liminf_n \mu_n([-M,M]^d) \ge 1-\epsilon.$
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Prohorov&quot;&gt;
-If $(\mu_n)$ is tight, there exists a weakly convergent subsequence.
-&lt;/div&gt;
-
-&lt;p&gt;The proof uses both Helly’s selection theorem and uniform tightness.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;characteristic-functions-and-inversion&quot;&gt;Characteristic functions and inversion&lt;/h2&gt;
-&lt;div class=&quot;definition&quot; text=&quot;characteristic function&quot;&gt;
-$$\varphi(\mathbf{t}) := Ee^{i\mathbf{t}\cdot\mathbf{X}} = Ee^{i(t_1X_2+\cdots+t_dX_d)}$$ where $\mathbf{t}=(t_1,\cdots,t_d)$ and $\mathbf{X}=(X_1,\cdots,X_d).$
-&lt;/div&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;inversion formula&quot;&gt;
-Let $A=[a_1,b_1]\times\cdots\times[a_d,b_d]$ such that $\mu(\partial A)=0.$ Let $\varphi$ be a ch.f. of $\mu.$ Define 
-$$\psi_j(t_j) = \frac{1}{it_j}\left( e^{-it_ja_j} - e^{-it_jb_j} \right)$$
-then
-$$\mu(A) = \lim_T \frac{1}{(2\pi)^d} \int_{[-T,T]^d} \prod_{j=1}^d \psi_j(t_j) \varphi(\mathbf{t})d\mathbf{t}.$$
-&lt;/div&gt;
-
-&lt;p&gt;We achieve the result by Fubini’s theorem and the inversion formula for random variables.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;central-limit-theorem-in-mathbbrd&quot;&gt;Central limit theorem in $\mathbb{R}^d$&lt;/h2&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Levy's convergence&quot;&gt;
-Let $\mathbf{X}_n$,  $1\le n\le\infty$ be random vectors with ch.f. $\varphi_n.$ then $\mathbf{X}_n \overset{w}{\to} \mathbf{X}_\infty$ if and only if $\varphi_n(\mathbf{t}) \to \varphi_\infty(\mathbf{t}).$
-&lt;/div&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;Cramer-Wold device&quot;&gt;
-$$\mathbf{\theta}\cdot\mathbf{X}_n \overset{w}{\to} \mathbf{\theta}\cdot\mathbf{X}_\infty,~ \forall \mathbf{\theta} \in \mathbb{R}^d \implies \mathbf{X}_n \overset{w}{\to} \mathbf{X}_\infty.$$
-&lt;/div&gt;
-
-&lt;p&gt;Cramer-Wold device implies if every linear combination converges weakly to the same random variable, then the random vector itself weakly converges. In fact for normal random vector we can prove that $\mathbf{X} \sim \mathcal{N}_d(0,\mathbf{\Gamma})$ if and only if $\mathbf{t}\cdot\mathbf{X} \sim \mathcal{N}(0,\mathbf{t}’\mathbf{\Gamma}\mathbf{t})$ for all $\mathbf{t} \in \mathbb{R}^d.$&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;central limit theorem&quot;&gt;
-$\mathbf{X}_i$'s are i.i.d. random vectors with $E\mathbf{X}_i=\mathbf{\mu},$ $\Gamma_{ij} = E(X_{ni}-\mu_i)(X_{nj}-\mu_j).$ &lt;br /&gt;
-Let $\mathbf{S}_n = \mathbf{X}_1+\cdots+\mathbf{X}_n$, then $\frac{\mathbf{S}_n - n\mathbf{\mu}}{\sqrt n} \overset{w}{\to} \mathcal{N}_d(\mathbf{0}, \mathbf{\Gamma}).$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Without loss of generality, let $\mathbf{\mu}=0.$ Given $\mathbf{t} \in \mathbb{R}^d,$
-$$\frac{1}{\sqrt n} \mathbf{t}\cdot\mathbf{S}_n = \frac{1}{\sqrt n} \sum\limits_{i=1}^n \mathbf{t}\cdot\mathbf{X}_i \overset{w}{\to} \mathcal{N}(0,\sigma_t^2)$$
-where $\sigma_t^2 = \text{Var}(\mathbf{t}\cdot\mathbf{X}_i) = \mathbf{t}'\mathbf{\Gamma}\mathbf{t}.$ By Cramer-Wold device and the fact, the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Johan Lim).&lt;/p&gt;
-</description>
-        <pubDate>Wed, 23 Dec 2020 21:23:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-3.10-limit-theorem-in-Rd</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-3.10-limit-theorem-in-Rd</guid>
         
         
         <category>probability</category>
