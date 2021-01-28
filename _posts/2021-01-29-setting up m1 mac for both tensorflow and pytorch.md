@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting up M1 mac for both TensorFlow and PyTorch"
+title: "Setting up M1 Mac for both TensorFlow and PyTorch"
 date:   2021-01-29 02:16:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
