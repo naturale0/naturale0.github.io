@@ -6,7 +6,7 @@ author: "Sihyung Park"
 categories: [machine learning]
 ---
 
-Macs with ARM64-based M1 chip, launched sequentially after Apple's initial announcement of their plan to migrate to Apple Silicon, got quite a lot of attention both from consumers and developers. It became headlines especially because of its outstanding performance, not in the ARM64-territory, but in all PC industry. 
+Macs with ARM64-based M1 chip, launched shortly after Apple's initial announcement of their plan to migrate to Apple Silicon, got quite a lot of attention both from consumers and developers. It became headlines especially because of its outstanding performance, not in the ARM64-territory, but in all PC industry. 
 
 As a student majoring in statistics with coding hobby, the one somewhere inbetween an consumer tech enthusiast and a programmer, I was one of the people who was dazzled by the benchmarks and early reviews emphasizing it. So after (almost) 7 years spent with my MBP (mid 2014), I decided to leave Intel and join M1.
 
