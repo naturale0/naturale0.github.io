@@ -19,7 +19,7 @@ This is the post written for myself, after running about in confutsion to set up
 
 It is not an elegant solution, but I am satisfied for the result, for now.
 
-<br><br>
+<br>
 
 ## Install `TensorFlow-macOS` for Apple Silicon M1
 
