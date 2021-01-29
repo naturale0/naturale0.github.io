@@ -13,7 +13,7 @@ As a student majoring in statistics with coding hobby, the one somewhere inbetwe
 This is the post written for myself, after running about in confutsion to set up the environment for machine learning on M1 mac. What I tried to achieve was
 
 * *Not* using the "system python" (`‌/usr/bin/python`).
-* [TensorFlow running natively on Apple Silicon](https://github.com/apple/tensorflow_macos).
+* [TensorFlow running natively on Apple Silicon](https://blog.tensorflow.org/2020/11/accelerating-tensorflow-performance-on-mac.html).
 * PyTorch running on Rosetta 2[^1].
 * Running everything else natively if possible.
 
