@@ -135,9 +135,9 @@ Just comment out the part of `~/.zshrc` to be
 ```
 (or change the content of `~/.bash_profile` similarly if you are using bash). Uncomment it whenever x86_64 version of miniforge is required.
 
-6. Finish setup by moving the environment directory so that ARM64 conda can detect and activate it.\
+6. Finish setup by symbolically linking the environment directory so that ARM64 conda can detect and activate it.\
 ```zsh
-mv ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
+ln -s ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
 ```
 7. Alias x86 versions of `conda`, `pip` and `python` so that you can manage packages without switching the entire environment to x86.\
 ```zsh
