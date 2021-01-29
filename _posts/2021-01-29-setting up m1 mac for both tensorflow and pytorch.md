@@ -56,7 +56,7 @@ pip install jupyter
 ```zsh
 python -m ipykernel install --name=tf_macos
 ```
-Then merly switching the kernel to `tf_macos` allows us to use TensorFlow optimized for M1 without a hassle.
+Then merely switching the ipython kernel to `tf_macos` allows us to use mlcompute-backend TensorFlow without a hassle.
 
 5. Install additional packages (optional)
 ```zsh
@@ -135,9 +135,25 @@ Just comment out the part of `~/.zshrc` to be
 ```
 (or change the content of `~/.bash_profile` similarly if you are using bash). Uncomment it whenever x86_64 version of miniforge is required.
 
+6. Finish setup by moving the environment directory so that ARM64 conda can detect and activate it.\
+```zsh
+mv ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
+```
+7. Alias x86 versions of `conda`, `pip` and `python` so that you can manage packages without switching the entire environment to x86.\
+```zsh
+echo 'alias condax86="arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda"' >> ~/.zshrc  # conda x86
+echo 'alias pipx86="arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip"' >> ~/.zshrc  # pip in pytorch_x86
+echo 'alias pythonx86="arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python"' >> ~/.zshrc  # python in pytorch_x86
+```
+<br>
+
 Then all is well! If you want to work on TensorFlow (runs natively, utilizing full potential of M1), activate `tf_macos` or select the jupyter kernel in notebook or ipython. If you want x86_64 environment with bug-free PyTorch, do the similar but with `pytorch_x86`.
-<br><br>
+
+One thing to consider is that ARM conda *can* activate the `pytorch_x86` environment[^2], but packages installed by ARM conda **cannot be imported** by x86 python. If you want to install packages, use **`condax86 install <pkg_name>`** to call x86 conda.
+
 
 ---
 
 [^1]: The reason I gave up installing PyTorch running natively on M1 is because it had an error that made the input layer of a neural net detached from the rest of the architecture. Although building from the source and installation of the wheel was successful, I could not handle this bug which made it useless.
+
+[^2]: ARM conda cannot activate x86 environment or behave strangely if x86 env is activated *inside (base) ARM environement*. So be sure to deactivate all (including base) ARM environment before activating x86 one.
