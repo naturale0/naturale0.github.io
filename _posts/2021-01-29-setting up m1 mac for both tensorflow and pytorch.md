@@ -87,7 +87,6 @@ conda create --name=pytorch_x86
 conda activate pytorch_x86
 conda install -y python=3.8
 ```
-The prefixed `arch -x86_64` is for Rosetta 2 emulation of the command.
 
 3. Install PyTorch and related packages.\
 ```zsh
@@ -116,6 +115,7 @@ Finish the kernel setup by editing the associated json file: Replace the content
  "language": "python"
 }
 ```
+The prefixed `arch -x86_64` is for Rosetta 2 emulation of the command.
 
 5. Revert miniforge back to ARM64 version (optional)\
 Since my goal was to run the other programs natively as possible, I reverted miniforge back to M1 build.<br>
