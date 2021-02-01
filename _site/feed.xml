@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Jan 2021 15:39:56 +0900</pubDate>
-    <lastBuildDate>Fri, 29 Jan 2021 15:39:56 +0900</lastBuildDate>
+    <pubDate>Sun, 31 Jan 2021 16:41:00 +0900</pubDate>
+    <lastBuildDate>Sun, 31 Jan 2021 16:41:00 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -16,16 +16,21 @@
 
 &lt;p&gt;As a student majoring in statistics with coding hobby, the one somewhere inbetween an consumer tech enthusiast and a programmer, I was one of the people who was dazzled by the benchmarks and early reviews emphasizing it. So after (almost) 7 years spent with my MBP (mid 2014), I decided to leave Intel and join M1.&lt;/p&gt;
 
-&lt;p&gt;This is the post written for myself, after running about in confutsion to set up the environment for machine learning on M1 mac. What I tried to achieve was&lt;/p&gt;
+&lt;p&gt;This is the post written for myself, after running about in confutsion to set up the environment for machine learning on M1 mac. What I tried to achieve were&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;Not&lt;/em&gt; using the “system python” (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;‌/usr/bin/python&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apple/tensorflow_macos&quot;&gt;TensorFlow running natively on Apple Silicon&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;PyTorch running on Rosetta 2&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.tensorflow.org/2020/11/accelerating-tensorflow-performance-on-mac.html&quot;&gt;Running TensorFlow natively on M1&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Running PyTorch on Rosetta 2&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
   &lt;li&gt;Running everything else natively if possible.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;It is not an elegant solution, but I am satisfied for the result, for now.&lt;/p&gt;
+&lt;p&gt;The result is not elegant for sure, but I am satisfied for now.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-tensorflow-macos-for-apple-silicon-m1&quot; id=&quot;markdown-toc-install-tensorflow-macos-for-apple-silicon-m1&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TensorFlow-macOS&lt;/code&gt; for Apple Silicon M1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-pytorch-for-x86_64-rosetta-2&quot; id=&quot;markdown-toc-install-pytorch-for-x86_64-rosetta-2&quot;&gt;Install PyTorch for x86_64 (Rosetta 2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -89,7 +94,6 @@ pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n
 conda activate pytorch_x86
 conda &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.8
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;The prefixed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arch -x86_64&lt;/code&gt; is for Rosetta 2 emulation of the command.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Install PyTorch and related packages.
     &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;torch torchvision
@@ -115,6 +119,7 @@ python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ipykernel &lt;span class
  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;language&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;The prefixed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arch -x86_64&lt;/code&gt; is for Rosetta 2 emulation of the command.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Revert miniforge back to ARM64 version (optional)&lt;br /&gt;
 Since my goal was to run the other programs natively as possible, I reverted miniforge back to M1 build.&lt;br /&gt;
@@ -136,8 +141,8 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;(or change the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt; similarly if you are using bash). Uncomment it whenever x86_64 version of miniforge is required.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Finish setup by moving the environment directory so that ARM64 conda can detect and activate it.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
+  &lt;li&gt;Finish setup by symbolically linking the environment directory so that ARM64 conda can detect and activate it.
+    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Alias x86 versions of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; so that you can manage packages without switching the entire environment to x86.
