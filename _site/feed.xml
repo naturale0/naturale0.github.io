@@ -6,14 +6,15 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Feb 2021 20:43:10 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Feb 2021 20:43:10 +0900</lastBuildDate>
+    <pubDate>Thu, 04 Feb 2021 20:45:14 +0900</pubDate>
+    <lastBuildDate>Thu, 04 Feb 2021 20:45:14 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>Understanding Neural Probabilistic Language Model</title>
-        <description>&lt;p&gt;Neural Probabilistic Language Model (NPLM for short; Bengio &lt;em&gt;et al&lt;/em&gt;., 2003) was a turning point when it comes to word embedding. Based on the n-gram language model and as an end-to-end model it proved that a neural network trained on predicting the following word given n-gram can be useful in embedding lexical context into vectors.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;Neural Probabilistic Language Model (NPLM for short; Bengio &lt;em&gt;et al&lt;/em&gt;., 2003) was a turning point when it comes to word embedding. Based on the n-gram language model and as an end-to-end model it proved that a neural network trained on predicting the following word given n-gram can be useful in embedding lexical context into vectors.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
 

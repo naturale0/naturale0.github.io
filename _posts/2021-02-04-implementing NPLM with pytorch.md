@@ -7,6 +7,7 @@ categories: [machine learning, natural language processing]
 ---
 
 Neural Probabilistic Language Model (NPLM for short; Bengio *et al*., 2003) was a turning point when it comes to word embedding. Based on the n-gram language model and as an end-to-end model it proved that a neural network trained on predicting the following word given n-gram can be useful in embedding lexical context into vectors.
+
 <br><br>
 
 ## Background
