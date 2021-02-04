@@ -6,8 +6,8 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Feb 2021 20:45:14 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Feb 2021 20:45:14 +0900</lastBuildDate>
+    <pubDate>Thu, 04 Feb 2021 20:48:45 +0900</pubDate>
+    <lastBuildDate>Thu, 04 Feb 2021 20:48:45 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -172,8 +172,8 @@ Full result from the model can be seen &lt;a href=&quot;&quot;&gt;here (Gist)&lt
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 04 Feb 2021 20:43:00 +0900</pubDate>
-        <link>https://naturale0.github.io/machine%20learning/natural%20language%20processing/implementing-NPLM-with-pytorch</link>
-        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/natural%20language%20processing/implementing-NPLM-with-pytorch</guid>
+        <link>https://naturale0.github.io/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</link>
+        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</guid>
         
         
         <category>machine learning</category>
