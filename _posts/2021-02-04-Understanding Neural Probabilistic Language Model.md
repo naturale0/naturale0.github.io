@@ -8,7 +8,7 @@ categories: [machine learning, natural language processing]
 
 Neural Probabilistic Language Model (NPLM for short; Bengio *et al*., 2003) was a turning point when it comes to word embedding. Based on the n-gram language model and as an end-to-end model it proved that a neural network trained on predicting the following word given n-gram can be useful in embedding lexical context into vectors.
 
-<br><br>
+<br>
 
 ## Background
 
@@ -27,9 +27,11 @@ The architecture of the neural net is as follows (Bengio et al., 2003).
 ![nplm.png](/assets/fig/210204_nplm.png)
 
 It is in essence a simple feed-forward network using only fully-connected layers.
-<br><br>
 
-## PyTorch implementation
+<br>
+
+## Implementation
+### with PyTorch
 Each sample is as follows:
 ```
 {
@@ -151,11 +153,41 @@ for i in range(1, N_EPOCH+1):
 torch.save(model.state_dict(), "./NPLM_SGD_lr0.01_momentum0.9_epoch200.pth")
 ```
 
+### with TensorFlow (v2.4)
+Similarly, it is not difficult to implement NPLM with `tf.keras`.
 
-<br><br>
-Full result from the model can be seen [here (Gist)]().
+```python
+import tensorflow as tf
 
-<script src="https://gist.github.com/naturale0/b0c15b0940c23e40d8775acfdb5a575e.js"></script>
+class NPLM(tf.keras.Model):
+    
+    def __init__(self, vocab_size, context_size, embedding_dim, hidden_dim):
+        super(NPLM, self).__init__()
+        self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+        # affine layers for tanh
+        self.flatten = tf.keras.layers.Flatten()
+        self.linear1 = tf.keras.layers.Dense(hidden_dim, activation="tanh")
+        self.linear2 = tf.keras.layers.Dense(vocab_size, use_bias=False)
+        # affine layer for residual connection
+        self.linear3 = tf.keras.layers.Dense(vocab_size)
+        
+    def call(self, x):
+        x = self.embedding(x)
+        x = self.flatten(x)
+        
+        x1 = self.linear1(x)
+        x1 = self.linear2(x1)
+        
+        x2 = self.linear3(x)
+        
+        x = x1 + x2
+        return x
+```
+
+
+<br>
+
+Full result of each implementation can be seen [here (Gist)](https://gist.github.com/naturale0/b0c15b0940c23e40d8775acfdb5a575e).
 
 <br>
 
