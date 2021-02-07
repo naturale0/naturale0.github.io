@@ -6,15 +6,193 @@
 </description>
     <link>https://naturale0.github.io/</link>
     <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Feb 2021 20:48:45 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Feb 2021 20:48:45 +0900</lastBuildDate>
+    <pubDate>Mon, 08 Feb 2021 02:53:33 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Feb 2021 02:53:33 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Understanding Skip Gram</title>
+        <description>&lt;p&gt;Skip gram is one of the most utilized word embedding model to date. It was introduced at the same time with continuous bag-of-words (CBoW) together named as Word2Vec by Google researchers.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#idea-vanilla-skip-gram&quot; id=&quot;markdown-toc-idea-vanilla-skip-gram&quot;&gt;Idea: vanilla skip gram&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#subsampling&quot; id=&quot;markdown-toc-subsampling&quot;&gt;Subsampling&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#negative-sampling&quot; id=&quot;markdown-toc-negative-sampling&quot;&gt;Negative sampling&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;PyTorch implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Skip gram is based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Distributionalism&quot;&gt;distributional hypothesis&lt;/a&gt; where words with similar distribution is considered to have similar meanings. Recall that even though the NLPM was simple, it had myriads of parameters to be optimized. Researchers of skip gram suggested a model with less parameters along with the novel methods to make optimization step more efficient.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;idea-vanilla-skip-gram&quot;&gt;Idea: vanilla skip gram&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png&quot; alt=&quot;https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Main idea is to optimize model so that if it is queried with a word, it should correctly guess all the context ($\pm$2 in the figure) words. That is,&lt;/p&gt;
+
+\[y = \text{softmax}(Ux)\]
+
+&lt;p&gt;where $x,y$ are one-hot encoded word vector, $U$ is the embedding matrix. With the same dataset, training set for skip gram can be much larger than that of NPLM since it can have $2c$ samples ($w_t:w_{t-c}$, $\cdots$, $w_t:w_{t-1}$, $w_t:w_{t+1}$, $\cdots$, $w_t:w_{t+2}$) while NPLM and other n-gram based models have one ($(w_{t-c}, \cdots w_{t-1}, w_{t+1}, \cdots, w_{t+2}):w_t$). In addition, $U$ is the only parameters to be optimized, which has $|V|\times D$ values in it where $|V|$ is the size of the vocabulary, $D$ is the embedding dimension.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;subsampling&quot;&gt;Subsampling&lt;/h2&gt;
+&lt;p&gt;To make optimization more efficient, the researchers subsampled the dataset so that words with high occurence can be ignored while training. To be specific, they calculated the &lt;em&gt;subsampling probability&lt;/em&gt; to be&lt;/p&gt;
+
+\[P(w_i) = \left( \sqrt{\frac{z(w_i)}{t}} + 1 \right) \times \frac{t}{z(w_i)}\]
+
+&lt;p&gt;where $t$ is a hyperparameter that suggested to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1e-3&lt;/code&gt;, $z(w_i)$ is the fraction of occurence of word $w_i$. We include $w_i$ to the training set with probability $P(w_i)$.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;random&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;subsample_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum_freq&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;words_subsample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subsample_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;negative-sampling&quot;&gt;Negative sampling&lt;/h2&gt;
+&lt;p&gt;The vanilla model has a softmax function as its final activation. The problem is it is computationally expensive since it has to output $|V|$-dimensional vector. To avoid calculating high-dimensional softmax, the researchers proposed &lt;em&gt;negative sampling&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Instead of training the model to output one word out of $|V|$ vocabulary when a word is feeded, we feed the model with a pair of two words and then train it to predict if it is the right pair (positive sample) or not (negative sample). The ratio between positive and negative samples is $1:2~5$ for large text and $1:5~20$ for small text.&lt;/p&gt;
+
+&lt;p&gt;When generating negative samples, it is better to use words with less frequency more often than its actual frequency. To be specific, we adjust the &lt;em&gt;negative sampling probability&lt;/em&gt; to be&lt;/p&gt;
+
+\[P(w_i) = \frac{f(w_i)^{3/4}}{\sum f(w_i)^{3/4}}\]
+
+&lt;p&gt;where $f(w_i)$ is the frequency of $i$th word.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build_sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    build dataset with negative sampling. Default context size is `c=2`.
+    Ratio between positive and negative samples will be 1:k (default: `k=2`).
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tqdm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;context_pos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# negative sampling probability
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reweight_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;context_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;choice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; 
+                                                 &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                                                 &lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                 &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# positive samples + negative samples
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;#context = context_pos + context_neg
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;#current = [current] * len(context)
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With negative sampling, out model becomes a binary classification model&lt;/p&gt;
+
+\[x = \{(t_+, c_+), (t_{-,j}, c_{-,j}): j=1, \cdots, k\}, \\
+u_i = Ut_i, \\
+v_i = Vc_i,\\
+\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
+
+&lt;p&gt;where $t_{ij}$ is the one-hot encoded target word vector, $v_{ij}$ is the context word vector, $U,V$ are embeddings, $y_{ij}\in{0, 1}$ is the target label.&lt;/p&gt;
+
+&lt;p&gt;Our goal is to maximize the cross entropy loss&lt;/p&gt;
+
+\[\text{CE}(y, \hat y) = - \sum_{i=+,-} \sum_{j=1}^k y_{ij} \log \hat y_{ij} + (1-y_{ij}) \log (1-\hat y_{ij}).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pytorch-implementation&quot;&gt;PyTorch implementation&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# embeddings
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# input should be of shape [batch_size, 1+k, 2]
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# split positive and negative sample
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_pos_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_neg_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_neg_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# log-likelihood w.r.t. x_pos
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# log-likelihood w.r.t. x_neg
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_neg_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_neg_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VOCAB_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EMBEDDING_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BCEWithLogitsLoss&lt;/code&gt; as loss function.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;optim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SGD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;momentum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;criterion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BCEWithLogitsLoss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Full result can be seen &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-2_skip-gram.ipynb&quot;&gt;here (GitHub repo)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mikolov et al. 2013. &lt;strong&gt;Efficient Estimation of Word Representations in Vector Space&lt;/strong&gt;. International Conference on Learning Representations.&lt;/li&gt;
+  &lt;li&gt;Mikolov et al. 2013. &lt;strong&gt;Distributed Representations of Words and Phrases and their Compositionality&lt;/strong&gt;. Advances in Neural Information Processing Systems, 26.&lt;/li&gt;
+  &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 08 Feb 2021 01:08:00 +0900</pubDate>
+        <link>https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram</link>
+        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram</guid>
+        
+        
+        <category>machine learning</category>
+        
+        <category>natural language processing</category>
+        
+      </item>
     
       <item>
         <title>Understanding Neural Probabilistic Language Model</title>
         <description>&lt;p&gt;Neural Probabilistic Language Model (NPLM for short; Bengio &lt;em&gt;et al&lt;/em&gt;., 2003) was a turning point when it comes to word embedding. Based on the n-gram language model and as an end-to-end model it proved that a neural network trained on predicting the following word given n-gram can be useful in embedding lexical context into vectors.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
 
@@ -36,10 +214,12 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/fig/210204_nplm.png&quot; alt=&quot;nplm.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;It is in essence a simple feed-forward network using only fully-connected layers.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;It is in essence a simple feed-forward network using only fully-connected layers.&lt;/p&gt;
 
-&lt;h2 id=&quot;pytorch-implementation&quot;&gt;PyTorch implementation&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+&lt;h3 id=&quot;with-pytorch&quot;&gt;with PyTorch&lt;/h3&gt;
 &lt;p&gt;Each sample is as follows:&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
     &quot;text&quot;: [&quot;&amp;lt;(t-3)th word&amp;gt;&quot;, &quot;&amp;lt;(t-2)th word&amp;gt;&quot;, &quot;&amp;lt;(t-1)th word&amp;gt;&quot;],
@@ -157,10 +337,39 @@ can be implemented as follows:&lt;/p&gt;
 &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;state_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./NPLM_SGD_lr0.01_momentum0.9_epoch200.pth&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;
-Full result from the model can be seen &lt;a href=&quot;&quot;&gt;here (Gist)&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;with-tensorflow-v24&quot;&gt;with TensorFlow (v2.4)&lt;/h3&gt;
+&lt;p&gt;Similarly, it is not difficult to implement NPLM with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf.keras&lt;/code&gt;.&lt;/p&gt;
 
-&lt;script src=&quot;https://gist.github.com/naturale0/b0c15b0940c23e40d8775acfdb5a575e.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NPLM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hidden_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NPLM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# affine layers for tanh
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hidden_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tanh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_bias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# affine layer for residual connection
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linear3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Full result of each implementation can be seen &lt;a href=&quot;https://gist.github.com/naturale0/b0c15b0940c23e40d8775acfdb5a575e&quot;&gt;here (Gist)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -1171,219 +1380,6 @@ By the first Borel-Cantelli lemma, $P(Z_n = 0 \text{ eventually})=1.$
         <pubDate>Mon, 28 Dec 2020 19:20:00 +0900</pubDate>
         <link>https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</link>
         <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 4.2. Martingales and a.s. convergence</title>
-        <description>&lt;p&gt;Remaining sections in chapter 4 is about martingales and convergence of it. Regarding martingales, our first topic will be convergence in almost sure sense. Next we will look into convergence in $L^p,$ with $p&amp;gt;1$ and $p=1$ separately. In the meantime the theory of optional stopping will be covered.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#martingales&quot; id=&quot;markdown-toc-martingales&quot;&gt;Martingales&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#martingale-convergence-theorems&quot; id=&quot;markdown-toc-martingale-convergence-theorems&quot;&gt;Martingale convergence theorems&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#upcrossing-inequality&quot; id=&quot;markdown-toc-upcrossing-inequality&quot;&gt;Upcrossing inequality&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#martingale-convergence-theorems-1&quot; id=&quot;markdown-toc-martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;martingales&quot;&gt;Martingales&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;martingale&quot;&gt;
-Let $(\mathcal{F}_n)_{n=1}^\infty$ be a sequence of sub $\sigma$-fields of $\mathcal{F},$ $(X_n)$ be a sequence of random variables with $X_n \in \mathcal{F}_n,$ $E|X_n|&amp;lt;\infty$ for all $n.$ $(X_n, \mathcal{F}_n)$ is a martingale if $E(X_{n+1}|\mathcal{F}_n) = X_n$ a.s., a submartingale if $E(X_{n+1}|\mathcal{F}_n) \ge X_n$ a.s., or a supermartingale if $E(X_{n+1}|\mathcal{F}_n) \le X_n$ a.s.
-&lt;/div&gt;
-
-&lt;p&gt;We say $X_n$ is adapted to $\mathcal{F}_n$ if $X_n \in \mathcal{F}_n$ for all $n.$ For simplicity instead of denoting $\mathcal{F}_n$ together, we could just say $X_n$ is a (sub/super)martingale if the adapted $\sigma$-fields are clear. If $X_n$ is a martingale, $\int_A X_{n+1} dP = \int_A X_n dP$ for all $A \in \mathcal{F}n,$ so trivially $EX_{n+1} = EX_n$ for all $n.$ $X_n$ is a martingale if and only if $X_n$ is both a submartingale and a supermartingale. In addition, if $X_n$ is a submartingale, then $-X_n$ is a supermartingale.&lt;/p&gt;
-
-&lt;p&gt;The easiest but important examples are random walks and square martingales.&lt;/p&gt;
-
-&lt;div class=&quot;example&quot;&gt;
-Suppose $\xi_1, \xi_2, \cdots$ are i.i.d. with mean 0 and variance $\sigma^2.$ Let $\mathcal{F}_n = \sigma(\xi_1,\cdots,\xi_n).$ Then&lt;br /&gt;
-(i) $X_n := \xi_1 + \cdots \xi_n$ is a martingale.&lt;br /&gt;
-(ii) $X_n := (\xi_1 + \cdots + \xi_n)^2 - n\sigma^2$ is a martingale.
-&lt;/div&gt;
-
-&lt;p&gt;Though we cannot guarantee that functions of martingales are also martingales, we can say for sure that a function of martingale is a submartingale if the function is convex.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.2.6&quot;&gt;
-For a martingale $X_n,$ if $\varphi$ is convex and $E|\varphi(X_n)|&amp;lt;\infty$ for all $n,$ then $\varphi(X_n)$ is a submartingale.
-&lt;/div&gt;
-
-&lt;p&gt;The proof is direct by conditional Jensen’s inequality. The obvious corollary is for submartingales.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;4.2.7&quot;&gt;
-For a submartingale $X_n,$ if $\varphi$ is convex, increasing and $E|\varphi(X_n)|&amp;lt;\infty$ for all $n,$ then $\varphi(X_n)$ is a submartingale.
-&lt;/div&gt;
-
-&lt;p&gt;The following two examples will be useful in the section comes later.&lt;/p&gt;
-&lt;div class=&quot;example&quot;&gt;
-(i) If $X_n$ is a submartingale, then $(X_n-a)^+$ is a submartingale.&lt;br /&gt;
-(ii) If $X_n$ is a supermartingale, then $X_n \wedge a$ is a supermartingale.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;martingale-convergence-theorems&quot;&gt;Martingale convergence theorems&lt;/h2&gt;
-&lt;p&gt;For martingale convergence theorems, we need to define and prove predictable sequences, stopping times, upcrossing inequality and related properties.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;upcrossing-inequality&quot;&gt;Upcrossing inequality&lt;/h3&gt;
-&lt;div class=&quot;definition&quot; text=&quot;filtration&quot;&gt;
-Let $\mathcal{F}_n$ be a sequence of sub $\sigma$-fields of $\mathcal{F}.$ $\mathcal{F}_n$ is a filtration if $F_n \subset \mathcal{F}_{n+1}$ for all $n.$
-&lt;/div&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;predictable sequence&quot;&gt;
-For a filtration $(\mathcal{F}_n)_{n\ge0},$ a sequence of random variables $H_n$ is predictable if $H_{n+1} \in \mathcal{F}n$ for all $n \ge 0.$
-&lt;/div&gt;
-
-&lt;p&gt;Intuitively, consider $n$ as time index. The term “predictable” is from the fact that we knows every information about the behavior of $H_{n+1}$ in the time point $n.$&lt;/p&gt;
-
-&lt;p&gt;We get the result that the sum of submartingale increments weighted by a bounded predictable sequence is also a submartingale.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.2.8&quot;&gt;
-Let $X_n$ be a submartingale adapted to a filtration $(\mathcal{F}_n)_{n\ge0}.$ Let $H_n$ be a non-negative predictable sequence with $|H_n| \le M_n$ for some $M_n&amp;gt;0$ for all $n.$ Then
-$$(H\cdot X)_n := \sum_{m=1}^n H_m(X_m-X_{m-1})$$ is a submartingale.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) $E|(H\cdot X)_n| \le \sum_{m=1}^n M_nE(|X_m|+|X_{m-1}|) &amp;lt; \infty$ for all $n.$&lt;br /&gt;
-(ii) Clearly, $(H\cdot X)_n \in \mathcal{F}_n$ for all $n.$&lt;br /&gt;
-(iii) $$\begin{aligned}
-E((H\cdot X)_{n+1} | \mathcal{F}_n) 
- &amp;amp;= (H\cdot X)_n + E(H_{n+1}(X_{n+1}-X_n)|\mathcal{F}_n) \\
- &amp;amp;= (H\cdot X)_n + H_{n+1}\cancel{\{E(X_{n+1}|\mathcal{F}_n)-X_n\}}.
-\end{aligned}$$
-&lt;/div&gt;
-
-&lt;p&gt;We already get a glimpse of stopping times while studying &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.2-Weak-laws-of-large-numbers#weak-law-of-large-numbers&quot;&gt;coupon collector’s problem&lt;/a&gt; and &lt;a href=&quot;https://naturale0.github.io/probability/PTE-2.4-strong-law-of-large-numbers#2-renewal-theory&quot;&gt;renewal theory&lt;/a&gt;. They were random variables that specify the time that an event occurs. Here, we define it formally.&lt;/p&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;stopping time&quot;&gt;
-Let $N$ be a random variable taking values $0,1,\cdots,\infty.$ $N$ is a stopping time if $\{N=n\}\in\mathcal{F}_n$ for all $n=0,1,\cdots,\infty.$
-&lt;/div&gt;
-
-&lt;p&gt;It is highly useful to define a predictable sequence as an indicator function related to stopping times. With such sequence, we can easily derive the following theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.2.9&quot;&gt;
-Let $N$ be a stopping time, $X_n$ be a submartingale. Then $X_{n\wedge N}$ is a submartingale.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $H_m = \mathbf{1}_{m\le N}$ then it is a non-negative bounded predictable sequence since $\{m\le N\} = \{N \le m-1\}^c \in \mathcal{F}_{m-1}.$ By theorem 4.2.8 $X_{n\wedge N}-X_0$ is a submartingale, so $X_{n\wedge N}$ is also a submartingale.
-&lt;/div&gt;
-
-&lt;p&gt;As an example and a lemma for our main theorem - martingale convergence - I will state and prove the upcrossing inequality.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;upcrossing inequality&quot;&gt;
-Let $(X_n, \mathcal{F}_n)_{n\ge0}$ be a submartingale. For $a&amp;lt;b,$ define
-$$N_{2k-1} := \inf\{m&amp;gt;N_{2k-2}:~ X_m \le a\},\\
-  N_{2k} := \inf\{m&amp;gt;N_{2k-1}:~ X_m \ge b\}, \\
-  N_0 := -1, \\
-  U_n = \sup\{k:~ N_{2k} \le n\}.$$
-For a submartingale $(X_n)_{n\ge0},$
-$$(b-a)EU_n \le E(X_n-a)^+ - E(X_0-a)^+.$$
-&lt;/div&gt;
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-First we show that $N_m$'s are stopping times. For given $n,$
-$$\{N_1=n\} = \{X_0&amp;gt;a, \cdots, X_{n-1}&amp;gt;a,X_n\le a\} \in \mathcal{F}_n. \\
-  \{N_1=n\} = \bigcup_{\ell=1}^{n-1}\{N_1=\ell, X_{\ell+1}&amp;lt;b,\cdots, X_{n-1}&amp;lt;b,X_n\ge b\} \in \mathcal{F}_n. \\
-  \cdots$$
-Thus $N_m$'s are stopping times. Next, we define $Y_n = a + (X_n-a)^+$ so that $Y_{N_{2k}} \ge b$ and $Y_{N_{2k-1}} = a$ for all $k.$ Since $x\mapsto a + (x-a)^+$ is increasing and convex, $Y_n$ is also a submartingale.&lt;br /&gt;
-$$\begin{aligned}
-(b-a)EU_n 
- &amp;amp;\le \sum_{k=1}^{U_n}(Y_{N_{2k}}-Y_{N_{2k-1}}) \\
- &amp;amp;= \sum_{k=1}^{U_n} \sum_{i\in J_k}(Y_i-Y_{i-1}),\\
- &amp;amp;\;\;\;\;\text{where } J_k=\{N_{2k-1}+1,\cdots,N_{2k}\} \\
- &amp;amp;= \sum_{m\in J} (Y_m - Y_{m-1}),\\
- &amp;amp;\;\;\;\;\text{where } J=\cup_{k=1}^{U_n} J_k \\
- &amp;amp;\le \sum_{m=1}^n \mathbf{1}_{m\in J}(Y_m - Y_{m-1}).
-\end{aligned}$$ 
-Let $H_m = \mathbf{1}_{m\in J},$ then since 
-$$\{m\in J\} = \{N_{2k-1} &amp;lt; m \le N_{2k} \text{ for some } k\}$$
-$H_m$ is a bounded, non-negative predictable sequence. Thus
-$$(b-a)U_n \le (H\cdot Y)_n$$ and the right hand side is a submartingale. Let $K_m = 1-H_m$ then similarly $(K\cdot Y)_n$ is a submartingale and $E(K\cdot Y)_n \ge 0.$ Hence
-$$\begin{aligned}
-E(Y_n-Y_0) &amp;amp;= E(H\cdot Y)_n + E(K\cdot Y)_n \\
- &amp;amp;\ge E(H\cdot Y)_n \ge (b-a)EU_n.
-\end{aligned}$$
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;We call $U_n$ the number of upcrossings. An important fact directly follows from the theorem is $EU_n \le \frac{1}{b-a}(EX_n^+ + |a|).$ This will be the key to prove the martingale convergence.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;martingale-convergence-theorems-1&quot;&gt;Martingale convergence theorems&lt;/h3&gt;
-
-&lt;p&gt;We get our first convergence theorem for dependent sequence.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;submartingale convergence&quot;&gt;
-For a submartingale $X_n,$ if $\sup_n X_n^+&amp;lt;\infty,$ then there exists $X \in L^1$ such that $X_n \to X$ a.s.
-&lt;/div&gt;
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-   
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Given $a&amp;lt;b,$ let $U_n[a,b]$ be the number of upcrossings of $X_1,\cdots,X_n$ over $[a,b].$ By the upcrossing inequality, $EU_n[a,b] \le \frac{EX_n^++|a|}{b-a}.$ Let $U[a,b] = \lim_n U_n[a,b]$ then 
-$$EU[a,b] = \lim_n EU_n[a,b] \le \sup_n \frac{EX_n^++|a|}{b-a} &amp;lt; \infty.$$
-Thus by Markov's inequality, $0\le U[a,b]\le \infty$ a.s.&lt;br /&gt;
-Now suppose $\liminf_n X_n &amp;lt; \limsup_n X_n.$ Then for some $a&amp;lt;b,$ $X_n&amp;lt;a$ and $X_n&amp;gt;b$ infinitely often. Thus
-$$\begin{aligned}
-P(\liminf_n X_n &amp;lt; \limsup_n X_n)
- &amp;amp;= P(\liminf_n X_n &amp;lt; a &amp;lt; b&amp;lt; \limsup_n X_n \text{ for some } a,b\in\mathbb{Q}) \\
- &amp;amp;\le \sum_{a,b\in\mathbb{Q}}P(\liminf_n X_n &amp;lt;a&amp;lt;b&amp;lt; \limsup_n X_n) \\
- &amp;amp;= \sum_{a,b\in\mathbb{Q}}P(U[a,b]=\infty) = 0
-\end{aligned}$$
-so there exists $X$ such that $X_n \to X$ a.s. We now need to show that such $X$ is integrable. By Fatou's lemma,
-$$\begin{aligned}
-EX^+ &amp;amp;\le \liminf_nEX_n^+ \le \sup_n EX_n^+ &amp;lt; \infty.\\
-EX^- &amp;amp;\le \liminf_nEX_n^- = \liminf_nE(X_n^+-X_n) \\
-     &amp;amp;\le \sup_nEX_n^+ - EX_0 &amp;lt; \infty.
-\end{aligned}$$
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;As corollaries, we get supermartingale convergence and closability of negative submartingales.&lt;/p&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;supermartingale convergence&quot;&gt;
-Let $X_n\ge0$ be a supermartingale. There exists $X\in L^1$ such that $X_n\to X$ a.s. and $EX_n \le EX_0.$
-&lt;/div&gt;
-
-&lt;div class=&quot;corollary&quot; text=&quot;closability&quot;&gt;
-If $X_n, n=1,2,\cdots$ is a negative submartingale, then $X_n, n=1,2,\cdots,\infty$ is also a negative submartingale.
-&lt;/div&gt;
-
-&lt;p&gt;The next example shows that even if a martingale converges almost surely, we cannot guarantee $L^p$ convergence to the same limit. The following sections will be about the condition that a martingale converges a.s. &lt;i&gt;and&lt;/i&gt; in $L^p$.&lt;/p&gt;
-
-&lt;div class=&quot;example&quot;&gt;
-Let $\xi_1,\cdots$ be i.i.d. with $P(\xi_1=1)=P(\xi_1=-1)=\frac{1}{2}.$ Let $S_n = \xi_1 + \cdots + \xi_n,$ $S_0=1$ and $\mathcal{F}_n = \sigma(\xi_1,\cdots,\xi_n),$ $\mathcal{F}_0 = \{\phi,\Omega\}$ then $S_n$ is a martingale. Let $N = \inf\{n\ge1:~ S_n=0\}$ be a stopping time, then $X_n := S_{n\wedge N} \ge 0$ is also a martingale. $X_n \to 0$ a.s. but $X_n \to 1$ in $L^1.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By supermartingale convergence, $X_n \to X$ for some $X\in L^1.$ Note that on $(N=\infty),$ $X_n = S_n.$ By the law of iterated logarithm, $P(\liminf_n S_n = -\infty, \limsup_n S_n = \infty)=1.$ It follows that
-$$\begin{aligned}
-P(N=\infty)
- &amp;amp;= P(N=\infty, \liminf_n S_n = -\infty, \limsup_n S_n = \infty) \\
- &amp;amp;= P(N=\infty, \liminf_n X_n = -\infty, \limsup_n X_n = \infty) \\
- &amp;amp;\le P(\liminf_n X_n = -\infty, \limsup_nX_n = \infty) = 0.
-\end{aligned}
-$$
-and $N&amp;lt;\infty$ a.s. Hence $X=\lim_nS_{n\wedge N} = S_N = 0$ a.s.&lt;br /&gt;
-However, $E|X_n| = ES_{n\wedge N} = ES_0 = 1$ for all $n$ since $X_n$ is a martingale.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
-</description>
-        <pubDate>Sun, 27 Dec 2020 20:23:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.2-martingales</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.2-martingales</guid>
         
         
         <category>probability</category>
