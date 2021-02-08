@@ -86,7 +86,7 @@ class FastText(nn.Module):
         return x
 ```
 
-As the code talks by itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.
+As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.
 
 Full results can be found [here (notebook)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb).
 
