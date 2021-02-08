@@ -3,6 +3,7 @@ _site
 .jekyll-metadata
 *-cache/
 */.DS_Store
+vendor/
 
 ### NPM ###
 /node_modules/

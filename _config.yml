@@ -45,6 +45,12 @@ url: "https://naturale0.github.io"
 # paginate
 paginate: 5
 paginate_path: "/page/:num"
+defaults:
+  -
+    scope:
+      path: "page"
+    values:
+      sitemap: false
 
 # permalink
 permalink: /:categories/:title
