@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>De Novo</title>
-    <description>Notes on Probability and Statistics.
+    <description>A blog on Probability and Statistics.
 </description>
-    <link>https://naturale0.github.io/</link>
-    <atom:link href="https://naturale0.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 08 Feb 2021 02:53:33 +0900</pubDate>
-    <lastBuildDate>Mon, 08 Feb 2021 02:53:33 +0900</lastBuildDate>
-    <generator>Jekyll v4.2.0</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 08 Feb 2021 13:35:05 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Feb 2021 13:35:05 +0900</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
     
       <item>
         <title>Understanding Skip Gram</title>
@@ -85,7 +85,7 @@
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;right&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -115,7 +115,7 @@
 \[x = \{(t_+, c_+), (t_{-,j}, c_{-,j}): j=1, \cdots, k\}, \\
 u_i = Ut_i, \\
 v_i = Vc_i,\\
-\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
+\hat y_i = \sigma\left( u_i&apos;v_i \right) = \frac{1}{1 + e^{-u_i&apos;v_i}}\]
 
 &lt;p&gt;where $t_{ij}$ is the one-hot encoded target word vector, $v_{ij}$ is the context word vector, $U,V$ are embeddings, $y_{ij}\in{0, 1}$ is the target label.&lt;/p&gt;
 
@@ -178,8 +178,8 @@ v_i = Vc_i,\\
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 08 Feb 2021 01:08:00 +0900</pubDate>
-        <link>https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram</link>
-        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram</guid>
+        <link>http://localhost:4000/machine%20learning/natural%20language%20processing/understanding-skip-gram</link>
+        <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/understanding-skip-gram</guid>
         
         
         <category>machine learning</category>
@@ -381,8 +381,8 @@ can be implemented as follows:&lt;/p&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 04 Feb 2021 20:43:00 +0900</pubDate>
-        <link>https://naturale0.github.io/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</link>
-        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</guid>
+        <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</link>
+        <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</guid>
         
         
         <category>machine learning</category>
@@ -506,8 +506,8 @@ python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ipykernel &lt;span class
 Since my goal was to run the other programs natively as possible, I reverted miniforge back to M1 build.&lt;br /&gt;
 Just comment out the part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; to be
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# # !! Contents within this block are managed by 'conda init' !!&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# __conda_setup=&quot;$('/Users/$(whoami)/miniforge3_x86_64/bin/conda' 'shell.zsh' 'hook' 2&amp;gt; /dev/null)&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# # !! Contents within this block are managed by &apos;conda init&apos; !!&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# __conda_setup=&quot;$(&apos;/Users/$(whoami)/miniforge3_x86_64/bin/conda&apos; &apos;shell.zsh&apos; &apos;hook&apos; 2&amp;gt; /dev/null)&quot;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# if [ $? -eq 0 ]; then&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#     eval &quot;$__conda_setup&quot;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# else&lt;/span&gt;
@@ -527,9 +527,9 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Alias x86 versions of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; so that you can manage packages without switching the entire environment to x86.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias condax86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# conda x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pipx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# pip in pytorch_x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pythonx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# python in pytorch_x86&lt;/span&gt;
+    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias condax86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# conda x86&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias pipx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# pip in pytorch_x86&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias pythonx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# python in pytorch_x86&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -553,8 +553,8 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 &lt;/div&gt;
 </description>
         <pubDate>Fri, 29 Jan 2021 02:16:00 +0900</pubDate>
-        <link>https://naturale0.github.io/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</link>
-        <guid isPermaLink="true">https://naturale0.github.io/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</guid>
+        <link>http://localhost:4000/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</link>
+        <guid isPermaLink="true">http://localhost:4000/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</guid>
         
         
         <category>machine learning</category>
@@ -579,7 +579,7 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 Let $(X_n)$ be a uniformly integrable submartingale and $N$ be a stopping time. Then $(X_{n\wedge N})$ is a uniformly integrable submartingale.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-It is shown that $(X_{n\wedge N})$ is a submartingale in theorem 4.2.9. By Vitali's lemma $X_n$ converges almost surely and in $L^1$ to some $X_\infty.$ Since $x \mapsto x^+$  is convex and increasing, $X_n^+, X_{n\wedge N}^+$ are submartingales. Let $\tau=n, \sigma=n\wedge N$ then $\tau,\sigma$ are bounded stopping times. By Doob's inequality, $EX_{n\wedge N}^+ \le EX_n^+$ and $$\sup_n EX_{n\wedge N}^+ \le \sup_n EX_n^+ \le \sup_n E|X_n| &amp;lt; \infty.$$
+It is shown that $(X_{n\wedge N})$ is a submartingale in theorem 4.2.9. By Vitali&apos;s lemma $X_n$ converges almost surely and in $L^1$ to some $X_\infty.$ Since $x \mapsto x^+$  is convex and increasing, $X_n^+, X_{n\wedge N}^+$ are submartingales. Let $\tau=n, \sigma=n\wedge N$ then $\tau,\sigma$ are bounded stopping times. By Doob&apos;s inequality, $EX_{n\wedge N}^+ \le EX_n^+$ and $$\sup_n EX_{n\wedge N}^+ \le \sup_n EX_n^+ \le \sup_n E|X_n| &amp;lt; \infty.$$
 By Submartingale convergence, $X_{n\wedge N} \to X_N$ a.s. and $E|X_N| &amp;lt; \infty.$
 $$\begin{aligned}
 &amp;amp;E|X_{n\wedge N}| \mathbf{1}_{|X_{n\wedge N}| \ge a} \\
@@ -597,9 +597,9 @@ $$EX_0 \le EX_N \le EX_\infty$$
 where $X_\infty = \lim_n X_n$ a.s.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By the previous theorem $X_{n\wedge N}$ is a uniformly integrable submartingale. By Doob's inequality
+By the previous theorem $X_{n\wedge N}$ is a uniformly integrable submartingale. By Doob&apos;s inequality
 $$EX_0 \le EX_{n\wedge N} \le EX_n.$$
-By Vitali's lemma, $EX_n \to EX_\infty$ and
+By Vitali&apos;s lemma, $EX_n \to EX_\infty$ and
 $$\begin{aligned}
 \lim_n X_{n\wedge N} = 
  \begin{cases}
@@ -607,7 +607,7 @@ $$\begin{aligned}
  X_\infty = X_N &amp;amp;,~ N=\infty
  \end{cases}
 \end{aligned}$$
-Thus $X_{n\wedge N} \to X_N$ a.s. with $E|X_N| &amp;lt; \infty$ by Vitali's lemma and the desired result follows.
+Thus $X_{n\wedge N} \to X_N$ a.s. with $E|X_N| &amp;lt; \infty$ by Vitali&apos;s lemma and the desired result follows.
 &lt;/div&gt;
 
 &lt;p&gt;Finally we state and prove the main theorem.&lt;/p&gt;
@@ -712,8 +712,8 @@ Note that $\inf_n S_n \le S_{n\wedge T_b} \le b$ and $|S_{n\wedge T_b}| \le |\in
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Fri, 22 Jan 2021 00:30:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.8-optional-stopping</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.8-optional-stopping</guid>
+        <link>http://localhost:4000/probability/PTE-4.8-optional-stopping</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.8-optional-stopping</guid>
         
         
         <category>probability</category>
@@ -774,7 +774,7 @@ The last inequality is from the fact that
 $$EA_{n\wedge N} \le EA_N \le a^2 \text{ on } \{N&amp;lt;\infty\}, \\
 EA_n \le EA_\infty \le a^2 \text{ on } \{N=\infty\}.$$
 
-Using this, Fubini's theorem and integration by substitution, we get
+Using this, Fubini&apos;s theorem and integration by substitution, we get
 $$\begin{aligned}
 E \sup_n |X_n| 
  &amp;amp;= \int P(\sup_n |X_n| \ge a) da \\
@@ -794,7 +794,7 @@ B_\infty
  &amp;amp;\le \int_0^\infty f^{-2}(t) dt &amp;lt; \infty \text{ a.s.}
 \end{aligned}$$
 
-By (iii), $\lim_n Y_n$ exists and is finite almost surely. By Kronecker's lemma, it suffices to show that $f(A_n) \uparrow \infty.$ Since $\int_0^\infty f^{-2}(t) dt &amp;lt; \infty,$ $\lim_t f(t)$ should be $\infty$ otherwise it gives contradiction. Since $A_n, f$ is increasing and $f(A_\infty) = \infty$ on $(A_\infty = \infty),$ this is true.
+By (iii), $\lim_n Y_n$ exists and is finite almost surely. By Kronecker&apos;s lemma, it suffices to show that $f(A_n) \uparrow \infty.$ Since $\int_0^\infty f^{-2}(t) dt &amp;lt; \infty,$ $\lim_t f(t)$ should be $\infty$ otherwise it gives contradiction. Since $A_n, f$ is increasing and $f(A_\infty) = \infty$ on $(A_\infty = \infty),$ this is true.
 &lt;/div&gt;
 &lt;/details&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -806,7 +806,7 @@ Let $B_n \in \mathcal{F}_n$ for all $n \ge 0$ and $p_n = P(B_n | \mathcal{F}_{n-
 $$\frac{\sum_{n=1}^\infty\mathbf{1}{B_n}}{\sum_{n=1}^\infty p_n} \to 1 \text{ a.s. on } \left\{\sum\limits_{n=1}^\infty p_n = \infty \right\}.$$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_n = X_{n-1} + \mathbb{1}_{B_n} - P(B_n | \mathcal{F}_{n-1}),$ $X_0=0$ be a square integrable martingale. Then $A_n$ from Doob's decomposition yields $A_m - A_{m-1} = p_m - p_m^2$ and $A_n = \sum\limits_{m=1}^n p_m - p_m^2 \le \sum\limits_{m=1}^n p_n.$&lt;br /&gt;
+Let $X_n = X_{n-1} + \mathbb{1}_{B_n} - P(B_n | \mathcal{F}_{n-1}),$ $X_0=0$ be a square integrable martingale. Then $A_n$ from Doob&apos;s decomposition yields $A_m - A_{m-1} = p_m - p_m^2$ and $A_n = \sum\limits_{m=1}^n p_m - p_m^2 \le \sum\limits_{m=1}^n p_n.$&lt;br /&gt;
 On $(A_\infty &amp;lt; \infty),$ $X_n$ converges a.s.
 $$\frac{X_n}{\sum_{m=1}^n p_m} = \frac{\sum_{m=1}^n \mathbf{1}_{B_m}}{\sum_{m=1}^n p_m} - 1 \to 0 \text{ a.s. on } (\sum_{n=1}^\infty p_n = \infty).$$
 On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies conditions in (iv) of the previous theorem. Then $\frac{X_n}{f(A_n)} = \frac{X_n}{A_n \vee 1} \to 0$ a.s. on $(A_\infty = \infty).$ Since $A_n \le \sum_{m=1}^n p_m,$ we get $\frac{X_n}{\sum_{m=1}^n p_m} \to 0$ a.s. on $(A_\infty = \infty).$
@@ -819,8 +819,8 @@ On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies condi
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Fri, 22 Jan 2021 00:00:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.5-square-integrable-martingales</guid>
+        <link>http://localhost:4000/probability/PTE-4.5-square-integrable-martingales</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.5-square-integrable-martingales</guid>
         
         
         <category>probability</category>
@@ -828,7 +828,7 @@ On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies condi
       </item>
     
       <item>
-        <title>(PTE) 4.6.3. Riez's decomposition</title>
+        <title>(PTE) 4.6.3. Riez&apos;s decomposition</title>
         <description>&lt;p&gt;We know that any submartingales can be decomposed into a martingale and a predictable sequence (Doob’s decomposition). Riez’s decomposition allows us to do the similar to uniformly integrable non-negative supermartingales.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
@@ -852,21 +852,21 @@ By supermartingale convergence, there exists $X_\infty$ such that $X_n \to X_\in
 $$E(V_{n+1}|\mathcal{F}_n) = E(X_{n+1}|\mathcal{F}_n) - E(M_{n+1}|\mathcal{F}_n) \le X_n - M_n = V_n \text{ a.s.}$$
 Thus $V_n$ is a supermartingale.
 $$E(X_\infty|\mathcal{F}_n) \le \liminf_m E(X_m|\mathcal{F}_n) \le X_n \text{ a.s.}$$
-for all fixed $n.$ Thus $V_n \ge 0$ for all $n.$ Now by Levy's theorem,
+for all fixed $n.$ Thus $V_n \ge 0$ for all $n.$ Now by Levy&apos;s theorem,
 $$
 \lim_n V_n = X_\infty - \lim_n E(X_\infty|\mathcal{F}_n) = 0 \text{ a.s.}
 $$
-Since $(X_n), (M_n)$ are uniformly integrable, $(V_n)$ is also. By Vitali's lemma $EV_n \to E\lim_n V_n = 0.$ Thus $V_n$ is a potential.&lt;br /&gt;
-For the uniqueness part, let $M_n+V_n = M_n'+V_n',$ $M_n = E(\eta_1|\mathcal{F}_n)$ a.s. and $M_n' = E(\eta_2|\mathcal{F}_n)$ a.s.
-$$M_n-M_n' = V_n'-V_n = E(\eta_1|\mathcal{F}_n) - E(\eta_2|\mathcal{F}_n) \to 0 \text{ a.s.}$$
-since $V_n, V_n'$ are potentials. By Levy's theorem this implies $E(\eta_1|\mathcal{F}_\infty) - E(\eta_2|\mathcal{F}_\infty) = 0$ a.s.
+Since $(X_n), (M_n)$ are uniformly integrable, $(V_n)$ is also. By Vitali&apos;s lemma $EV_n \to E\lim_n V_n = 0.$ Thus $V_n$ is a potential.&lt;br /&gt;
+For the uniqueness part, let $M_n+V_n = M_n&apos;+V_n&apos;,$ $M_n = E(\eta_1|\mathcal{F}_n)$ a.s. and $M_n&apos; = E(\eta_2|\mathcal{F}_n)$ a.s.
+$$M_n-M_n&apos; = V_n&apos;-V_n = E(\eta_1|\mathcal{F}_n) - E(\eta_2|\mathcal{F}_n) \to 0 \text{ a.s.}$$
+since $V_n, V_n&apos;$ are potentials. By Levy&apos;s theorem this implies $E(\eta_1|\mathcal{F}_\infty) - E(\eta_2|\mathcal{F}_\infty) = 0$ a.s.
 $$\begin{aligned}
 M_n 
  &amp;amp;= E\left( E(\eta_1|\mathcal{F}_\infty) | \mathcal{F}_n \right) \\
  &amp;amp;= E\left( E(\eta_2|\mathcal{F}_\infty) | \mathcal{F}_n \right) \\
- &amp;amp;= E(\eta_2|\mathcal{F}_n) = M_n' \text{ a.s.}
+ &amp;amp;= E(\eta_2|\mathcal{F}_n) = M_n&apos; \text{ a.s.}
 \end{aligned}$$
-Equivalence of $V_n,V_n'$ directly follows.
+Equivalence of $V_n,V_n&apos;$ directly follows.
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -876,8 +876,8 @@ Equivalence of $V_n,V_n'$ directly follows.
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 Jan 2021 22:47:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.6.3-Riez-decomposition</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.6.3-Riez-decomposition</guid>
+        <link>http://localhost:4000/probability/PTE-4.6.3-Riez-decomposition</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.6.3-Riez-decomposition</guid>
         
         
         <category>probability</category>
@@ -885,7 +885,7 @@ Equivalence of $V_n,V_n'$ directly follows.
       </item>
     
       <item>
-        <title>(PTE) 4.6.2. Levy's theorem</title>
+        <title>(PTE) 4.6.2. Levy&apos;s theorem</title>
         <description>&lt;p&gt;Consider a sequence of conditional expectations $E(X|\mathcal{F}_n)$ with fixed $X.$ By using the theorem from previous subsection we can determine convergence of this sequence as well.
 &lt;br /&gt;&lt;/p&gt;
 
@@ -896,7 +896,7 @@ Equivalence of $V_n,V_n'$ directly follows.
 
 &lt;h2 id=&quot;levys-theorem&quot;&gt;Levy’s theorem&lt;/h2&gt;
 
-&lt;div class=&quot;theorem&quot; text=&quot;Levy's theorem&quot;&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Levy&apos;s theorem&quot;&gt;
 Let $X$ be an integrable random variable and $(\mathcal{F}_n)$ be a filtration. then $E(X|\mathcal{F}_n) \to E(X|\mathcal{F}_\infty)$ a.s. where $\mathcal{F}_\infty = \sigma\left(\cup_n \mathcal{F}_n \right).$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
@@ -912,7 +912,7 @@ Suppose $X_n \to X$ a.s., $|X_n| \le Z, \forall n,$ $E|Z|&amp;lt;\infty$ then $E
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $W_n = \sup_{k,l \ge n} |X_k - X_l|$ then $W_n \downarrow 0$ a.s. and $|X_n-X| \le W_m$ for all $m \le n$ and $W_n \le 2Z.$ By the previous theorem we only need to show $E(\left|X_n-X\right||\mathcal{F}_n) \to 0$ a.s. Given $m,$
 $$\limsup_n E(\left|X_n-X\right||\mathcal{F}_n) \le \lim_n E(W_m|\mathcal{F}_n) = E(W_m|\mathcal{F}_\infty).$$
-By conditional DCT, $E(W_m|\mathcal{F}_\infty) \to 0$ a.s. as $m\to\infty.$ Thus $E(\left|X_n-X\right||\mathcal{F}_n) \to 0$ a.s. With Levy's theorem and triangle inequality the desired result follows.
+By conditional DCT, $E(W_m|\mathcal{F}_\infty) \to 0$ a.s. as $m\to\infty.$ Thus $E(\left|X_n-X\right||\mathcal{F}_n) \to 0$ a.s. With Levy&apos;s theorem and triangle inequality the desired result follows.
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -922,8 +922,8 @@ By conditional DCT, $E(W_m|\mathcal{F}_\infty) \to 0$ a.s. as $m\to\infty.$ Thus
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 Jan 2021 15:07:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.6.2-Levy-s-theorem</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.6.2-Levy-s-theorem</guid>
+        <link>http://localhost:4000/probability/PTE-4.6.2-Levy-s-theorem</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.6.2-Levy-s-theorem</guid>
         
         
         <category>probability</category>
@@ -989,7 +989,7 @@ Suppose $X_n \to X,$ $X_n \in L^p,$ $p\ge 1.$ The followings are equivalent.&lt;
   &lt;/summary&gt;
   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-((i)$\Rightarrow$(ii)) By Fatou's lemma, $E|X|^p \le \infty.$ $|X_n - X|^p \le 2^p(|X_n|^p+|X|^p)$ makes $|X_n-X|^p$ uniformly integrable. By the theorem, given $\epsilon&amp;gt;0$ there exists $\delta&amp;gt;0$ such that $\sup_{t\in T} \int_A |X_t|dP \le \epsilon$ for all $A\in\mathcal{F}$ where $P(A)\le\delta.$ There exists $N$ such that for all $n\ge N,$ $P(|X_n-X|^p \ge \epsilon) \le \delta.$ Thus
+((i)$\Rightarrow$(ii)) By Fatou&apos;s lemma, $E|X|^p \le \infty.$ $|X_n - X|^p \le 2^p(|X_n|^p+|X|^p)$ makes $|X_n-X|^p$ uniformly integrable. By the theorem, given $\epsilon&amp;gt;0$ there exists $\delta&amp;gt;0$ such that $\sup_{t\in T} \int_A |X_t|dP \le \epsilon$ for all $A\in\mathcal{F}$ where $P(A)\le\delta.$ There exists $N$ such that for all $n\ge N,$ $P(|X_n-X|^p \ge \epsilon) \le \delta.$ Thus
 $$E|X_n-X|^p = E|X_n-X|^p\mathbf{1}_{|X_n-X|^p\ge\epsilon}  + E|X_n-X|^p\mathbf{1}_{|X_n-X|^p&amp;lt;\epsilon} \le 2\epsilon.$$
 ((ii)$\Rightarrow$(iii)) Trivial by $|\|X_n\|_p - \|X\|_p| \le \|X_n - X\|_p.$&lt;br /&gt;
 ((iii)$\Rightarrow$(i)) Given $a\in\mathbb{R}$ such that $P(|X|^p=a)=0.$&lt;br /&gt;
@@ -1035,7 +1035,7 @@ Let $X_n$ be a martingale. The followings are equivalent.&lt;br /&gt;
 ((i)$\Rightarrow$(ii)) There exists $X \in L^1$ such that $X_n = E(X|\mathcal{F}_n)$ a.s.
 $$\int_{|X_n|\ge a}|X_n|dP \le \int_{|X_n|\ge a} E(|X||\mathcal{F}_n)dP \le \int_{E(|X||\mathcal{F}_n)\ge a}|X|dP.$$
 Since $X$ is integrable, for a given $\epsilon&amp;gt;0$ there exists $\delta&amp;gt;0$ such that $\int_A |X|dP &amp;lt; \epsilon$ for all $A$ such that $P(A)\le\delta$ and there exists $a&amp;gt;0$ such that $P(E(|X||\mathcal{F}_n)\ge a)\le \frac{1}{a} E|X| &amp;lt; \delta.$&lt;br /&gt;
-((ii)$\Rightarrow$(iii)) Uniform integrability implies $\sup_n |X_n| &amp;lt; \infty$ so by submartingale convergence we get convergence in probability. By Vitali's lemma, we get the result.&lt;br /&gt;
+((ii)$\Rightarrow$(iii)) Uniform integrability implies $\sup_n |X_n| &amp;lt; \infty$ so by submartingale convergence we get convergence in probability. By Vitali&apos;s lemma, we get the result.&lt;br /&gt;
 ((iii)$\Rightarrow$(iv)) There exists $X \in L^1$ such that $E|X_n-X|\to0$ as $n\to\infty.$ Then $E|X_n| \to E|X|$ and $\sup_n E|X_n| &amp;lt;\infty.$ By submartingale inequality, there exists $X_\infty \in L^1$ such that $X_n\to X_\infty$ a.s. Notice that $X=X_\infty$ a.s. Let $m \ge n$ then
 $$\begin{aligned}
 &amp;amp;E\left| E(X_\infty|\mathcal{F}_n) - X_n \right| \\
@@ -1055,8 +1055,8 @@ as $m\to\infty.$ Hence $E(X_\infty|\mathcal{F}_n) = X_n$ a.s.&lt;br /&gt;
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 Jan 2021 01:45:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.6.1-Uniform-integrability-and-convergence-in-L1</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.6.1-Uniform-integrability-and-convergence-in-L1</guid>
+        <link>http://localhost:4000/probability/PTE-4.6.1-Uniform-integrability-and-convergence-in-L1</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.6.1-Uniform-integrability-and-convergence-in-L1</guid>
         
         
         <category>probability</category>
@@ -1075,7 +1075,7 @@ as $m\to\infty.$ Hence $E(X_\infty|\mathcal{F}_n) = X_n$ a.s.&lt;br /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;martingale-inequalities&quot;&gt;Martingale inequalities&lt;/h2&gt;
-&lt;div class=&quot;theorem&quot; text=&quot;Doob's inequality&quot;&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Doob&apos;s inequality&quot;&gt;
 Let $X_n$ be a submartingale, $N$ be a stopping time such that $N \le k$ a.s. Then
 $$EX_0 \le EX_N \le EX_k.$$
 &lt;/div&gt;
@@ -1092,7 +1092,7 @@ $$\lambda P(\bar X_n \ge \lambda) \le EX_n\mathbf{1}_{\bar X_n \ge \lambda}.$$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $A=\{\bar X_n \ge \lambda\}.$ Let $N=\inf\{m: X_m\ge\lambda\}\wedge n$ be a bounded stopping time. Since $\lambda \mathbf{1}_A \le X_N \mathbf{1}_A,$ $\lambda P(A) \le EX_N \mathbf{1}_A.$&lt;br /&gt;
-On $A,$ $EX_N \le EX_n$ by Doob's inequality. On $A^c,$ $N=n$ a.s. Thus in either case $EX_N \mathbf{1}_A \le EX_n \mathbf{1}_A$ and we get the result.
+On $A,$ $EX_N \le EX_n$ by Doob&apos;s inequality. On $A^c,$ $N=n$ a.s. Thus in either case $EX_N \mathbf{1}_A \le EX_n \mathbf{1}_A$ and we get the result.
 &lt;/div&gt;
 
 &lt;p&gt;A more comprehensive form might be
@@ -1114,7 +1114,7 @@ $$EX_0 \ge EX_N = EX_N\mathbf{1}_A + EX_N\mathbf{1}_{A^c}.$$
 &lt;h2 id=&quot;lp-convergence-theorem&quot;&gt;$L^p$ convergence theorem&lt;/h2&gt;
 &lt;p&gt;With the help of submartingale inequality, we get the following theorem.&lt;/p&gt;
 
-&lt;div class=&quot;theorem&quot; text=&quot;Doob's maximal inequality&quot;&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Doob&apos;s maximal inequality&quot;&gt;
 Let $X_n$ be a non-negative submartingale. For $1&amp;lt;p&amp;lt;\infty,$
 $$E\bar X_n^p \le \left(\frac{p}{p-1}\right)^p EX_n^p.$$
 &lt;/div&gt;
@@ -1125,7 +1125,7 @@ $$E\bar X_n^p \le \left(\frac{p}{p-1}\right)^p EX_n^p.$$
   &lt;/summary&gt;
   
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $M&amp;gt;0.$ By properly using Foubini's theorem
+Let $M&amp;gt;0.$ By properly using Foubini&apos;s theorem
 $$\begin{aligned}
 E(\bar X_n \wedge M)^p
  &amp;amp;= \int_0^\infty P((\bar X_n \wedge M)^p \ge t) dt \\
@@ -1136,7 +1136,7 @@ E(\bar X_n \wedge M)^p
  &amp;amp;= \frac{p}{p-1} EX_n(\bar X_n \wedge M)^{p-1} \\
  &amp;amp;\le \frac{p}{p-1} (EX_n^p)^{1/p} (E(\bar X_n \wedge M)^p)^{1/q}
 \end{aligned}$$
-The first inequality is follows submartingale inequality and the second one is from Holder's inequality. Transposition and applying MCT ($M\uparrow\infty$) leads to the result.
+The first inequality is follows submartingale inequality and the second one is from Holder&apos;s inequality. Transposition and applying MCT ($M\uparrow\infty$) leads to the result.
 &lt;/div&gt;
 &lt;/details&gt;
 
@@ -1175,7 +1175,7 @@ Let $X_n$ be a submartingale, $\sigma,\tau$ be stopping times that $0\le\sigma\l
 &lt;p&gt;The proof can be done in two different ways. The first proof uses Doob’s inequality.&lt;/p&gt;
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Since $Y_{n\wedge \tau}$ is a submartingale, by Doob's inequality $EY_\sigma \le EY_\tau.$ For given $A\in\mathcal{F}_\sigma,$ let 
+Since $Y_{n\wedge \tau}$ is a submartingale, by Doob&apos;s inequality $EY_\sigma \le EY_\tau.$ For given $A\in\mathcal{F}_\sigma,$ let 
 $$N = \begin{cases}
  \sigma  &amp;amp;~\text{on } A\\
  \tau  &amp;amp;~\text{on } A^c
@@ -1243,8 +1243,8 @@ $$\begin{aligned}
 
 </description>
         <pubDate>Mon, 28 Dec 2020 20:57:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp</guid>
+        <link>http://localhost:4000/probability/PTE-4.4-martingale-convergence-in-Lp</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.4-martingale-convergence-in-Lp</guid>
         
         
         <category>probability</category>
@@ -1265,7 +1265,7 @@ $$\begin{aligned}
 
 &lt;p&gt;Before getting to the topic, I would like to state a very useful theorem when constructing a (sub)martingale.&lt;/p&gt;
 
-&lt;div class=&quot;theorem&quot; text=&quot;Doob's decomposition&quot;&gt;
+&lt;div class=&quot;theorem&quot; text=&quot;Doob&apos;s decomposition&quot;&gt;
 Let $(X_n)$ be a submartingale. There uniquely exists $(M_n)$ and $(A_n)$ where the former is a martingale and the latter is an increasing predictable sequence with $A_0 = 0.$
 &lt;/div&gt;
 
@@ -1273,13 +1273,13 @@ Let $(X_n)$ be a submartingale. There uniquely exists $(M_n)$ and $(A_n)$ where 
 
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Let $A_n = A_{n+1}+(E(X_n|\mathcal{F}_{n-1})-X_{n-1},$ $A_0=0.$ It is clear that $A_n$ is an increasing predictable sequence. Let $M_n = X_n - A_n$ accordingly, then it is a martingale.&lt;br /&gt;
-Now suppose $X_n = M_n+A_n = M_n'+A_n'.$ Then $M_n-M_n' = A_n'-A_n \in \mathcal{F}_{n-1}$ and
+Now suppose $X_n = M_n+A_n = M_n&apos;+A_n&apos;.$ Then $M_n-M_n&apos; = A_n&apos;-A_n \in \mathcal{F}_{n-1}$ and
 $$\begin{aligned}
-&amp;amp;M_n-M_n' \\
-&amp;amp;= E(M_n-M_n'|\mathcal{F}_{n-1}) \\
-&amp;amp;= M_{n-1} - M_{n-1}'.
+&amp;amp;M_n-M_n&apos; \\
+&amp;amp;= E(M_n-M_n&apos;|\mathcal{F}_{n-1}) \\
+&amp;amp;= M_{n-1} - M_{n-1}&apos;.
 \end{aligned}$$
-Thus $M_n - M_n' = A_0'-A_0 = 0$ for all $n$ and the uniqueness follows.
+Thus $M_n - M_n&apos; = A_0&apos;-A_0 = 0$ for all $n$ and the uniqueness follows.
 &lt;/div&gt;
 
 &lt;p&gt;The theorem insists that every submartingales can be decomposed into an increasing sequence and a martingale. The important part is where we constructed $A_n.$ Since $A_0=0,$&lt;/p&gt;
@@ -1304,7 +1304,7 @@ Then $P(C\cup D)=1.$
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 Without loss of generality, let $X_0=0.$ For $k&amp;gt;0,$ let $N_k = \inf\{n:X_n\le-k\}$ be a stopping time so that $X_{n\wedge N_k}$ also be a martingale. If $N_k = \infty,$ $X_{n\wedge N_k} = X_n &amp;gt; -k$ for all $n.$ If $N_k &amp;lt; \infty,$ $X_{N_k} \le -k$ and $X_t &amp;gt; -k$ for $t=1,2,\cdots,N_k-1,$ thus $X_{N_k} = X_{N_k-1} + (X_{N_k} - X_{N_k-1}) \ge -k-M.$ Since $X_{n\wedge N_k}+k+m$ is a non-negative martingale, by supermartingale convergence $X_{n\wedge N_k}$ converges a.s.&lt;br /&gt;
-This implies $X_n$ converges on $\{N_k=\infty\}.$ Since $\liminf_n X_n &amp;gt; -\infty$ implies $X_n \ge -k'$ for all but finite $n$'s, for some $k'$ and so $N_{k'+1}=\infty,$ we get
+This implies $X_n$ converges on $\{N_k=\infty\}.$ Since $\liminf_n X_n &amp;gt; -\infty$ implies $X_n \ge -k&apos;$ for all but finite $n$&apos;s, for some $k&apos;$ and so $N_{k&apos;+1}=\infty,$ we get
 $$\{\liminf_n X_n &amp;gt; -\infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
 Apply the same to $(-X_n)$ and we get 
 $$\{\limsup_n X_n &amp;lt; \infty\} \subset \bigcup_{k=1}^\infty \{N_k = \infty\}.$$
@@ -1363,7 +1363,7 @@ E(Z_{n+1}|\mathcal{F}_n)
 &lt;p&gt;Using this, we can confirm our naturale guess that the population will be extinct if the average number of offsprings per individual is below one.&lt;/p&gt;
 
 &lt;div class=&quot;theorem&quot; text=&quot;4.3.11&quot;&gt;
-If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$'s.
+If $\mu &amp;lt; 1$ then $Z_n=0$ a.s. for all but finite $n$&apos;s.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
 $P(Z_n &amp;gt; 0) = E\mathbf{1}_{Z_n &amp;gt; 0} \le EZ_n\mathbf{1}_{Z_n&amp;gt;0} = EZ_n.$ By the lemma, $E(\frac{Z_n}{\mu^n}) = E(\frac{Z_0}{\mu^0})=1$ thus $EZ_n = \mu^n.$
@@ -1378,8 +1378,8 @@ By the first Borel-Cantelli lemma, $P(Z_n = 0 \text{ eventually})=1.$
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
 </description>
         <pubDate>Mon, 28 Dec 2020 19:20:00 +0900</pubDate>
-        <link>https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</link>
-        <guid isPermaLink="true">https://naturale0.github.io/probability/PTE-4.3-application-of-martingales</guid>
+        <link>http://localhost:4000/probability/PTE-4.3-application-of-martingales</link>
+        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.3-application-of-martingales</guid>
         
         
         <category>probability</category>

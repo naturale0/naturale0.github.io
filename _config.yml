@@ -9,12 +9,12 @@
 title: De Novo
 email: naturale0@snu.ac.kr
 description: > # this means to ignore newlines until "baseurl:"
-  Notes on Probability and Statistics.
+  A blog on Probability and Statistics.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 twitter_username: naturale0
 instagram_username: naturale0
-github_username:  naturale0
+github_username: naturale0
 
 # Build settings
 markdown: kramdown
@@ -32,6 +32,7 @@ excerpt_separator: <!--description-->
 
 exclude:
   - .jekyll-cache
+  - vendor
 
 plugins:
   - jekyll-paginate
@@ -50,7 +51,7 @@ permalink: /:categories/:title
 
 # SEO Tags
 author: Sihyung Park
-tagline: Notes on Probability and Statistics
+tagline: A blog on Probability and Statistics
 twitter:
   username: naturale0
   card: summary
