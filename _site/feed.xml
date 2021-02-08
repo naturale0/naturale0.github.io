@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Feb 2021 01:36:22 +0900</pubDate>
-    <lastBuildDate>Tue, 09 Feb 2021 01:36:22 +0900</lastBuildDate>
+    <pubDate>Tue, 09 Feb 2021 02:12:47 +0900</pubDate>
+    <lastBuildDate>Tue, 09 Feb 2021 02:12:47 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -33,7 +33,7 @@
 
 &lt;h2 id=&quot;fasttext&quot;&gt;FastText&lt;/h2&gt;
 
-&lt;p&gt;Aside from the fact that it uses subword vectors to characterize word vectors, it is more or less the same as &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;skip gram&lt;/a&gt;. It uses &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#subsampling&quot;&gt;subsampling&lt;/a&gt;, &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#negative-sampling&quot;&gt;negative sampling&lt;/a&gt; just like skip gram, and its also a binary classification model.&lt;/p&gt;
+&lt;p&gt;Aside from the fact that it uses subword vectors to characterize word vectors, it is more or less the same as &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;skip gram&lt;/a&gt;. It uses &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#subsampling&quot;&gt;subsampling&lt;/a&gt;, &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#negative-sampling&quot;&gt;negative sampling&lt;/a&gt; just like skip gram, and it is also a binary classification model.&lt;/p&gt;
 
 \[s_{i,g} \in \mathcal{G}_{t_i}, \\
 z_{i,g} = Zs_{i,g}, \\
@@ -92,7 +92,7 @@ u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;As the code talks by itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.&lt;/p&gt;
+&lt;p&gt;As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.&lt;/p&gt;
 
 &lt;p&gt;Full results can be found &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb&quot;&gt;here (notebook)&lt;/a&gt;.&lt;/p&gt;
 
