@@ -53,7 +53,7 @@ words_subsample = [w for w in words if random.random() < subsample_prob(w)]
 ## Negative sampling
 The vanilla model has a softmax function as its final activation. The problem is it is computationally expensive since it has to output $\|V\|$-dimensional vector. To avoid calculating high-dimensional softmax, the researchers proposed *negative sampling*.
 
-Instead of training the model to output one word out of $\|V\|$ vocabulary when a word is feeded, we feed the model with a pair of two words and then train it to predict if it is the right pair (positive sample) or not (negative sample). The ratio between positive and negative samples is $1:2~5$ for large text and $1:5~20$ for small text.
+Instead of training the model to output one word out of $\|V\|$ vocabulary when a word is feeded, we feed the model with a pair of two words and then train it to predict if it is the right pair (positive sample) or not (negative sample). The ratio between positive and negative samples is $1:2\sim5$ for large text and $1:5\sim20$ for small text.
 
 When generating negative samples, it is better to use words with less frequency more often than its actual frequency. To be specific, we adjust the *negative sampling probability* to be
 
