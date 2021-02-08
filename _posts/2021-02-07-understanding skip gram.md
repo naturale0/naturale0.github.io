@@ -16,7 +16,7 @@ Skip gram is based on the [distributional hypothesis](https://en.wikipedia.org/w
 
 <br>
 
-## Idea: vanilla skip gram
+## Vanilla skip gram
 
 ![https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png](https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png)
 
@@ -24,7 +24,7 @@ Main idea is to optimize model so that if it is queried with a word, it should c
 
 $$y = \text{softmax}(Ux)$$
 
-where $x,y$ are one-hot encoded word vector, $U$ is the embedding matrix. With the same dataset, training set for skip gram can be much larger than that of NPLM since it can have $2c$ samples ($w_t:w_{t-c}$, $\cdots$, $w_t:w_{t-1}$, $w_t:w_{t+1}$, $\cdots$, $w_t:w_{t+2}$) while NPLM and other n-gram based models have one ($(w_{t-c}, \cdots w_{t-1}, w_{t+1}, \cdots, w_{t+2}):w_t$). In addition, $U$ is the only parameters to be optimized, which has $\|V\|\times D$ values in it where $\|V\|$ is the size of the vocabulary, $D$ is the embedding dimension.
+where $x,y$ are one-hot encoded word vector, $U$ is the embedding matrix. With the same dataset, training set for skip gram can be much larger than that of NPLM since it can have $2c$ samples ($w_t:w_{t-c}$, $\cdots$, $w_t:w_{t-1}$, $w_t:w_{t+1}$, $\cdots$, $w_t:w_{t+c}$) while NPLM and other n-gram based models have one ($(w_{t-c}, \cdots w_{t-1}, w_{t+1}, \cdots, w_{t+c}):w_t$). In addition, $U$ is the only parameters to be optimized, which has $\|V\|\times D$ values in it where $\|V\|$ is the size of the vocabulary, $D$ is the embedding dimension.
 
 <br>
 

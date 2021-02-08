@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /CLIPick
+Disallow: /CLIPick/
 
 Sitemap: https://naturale0.github.io/sitemap.xml
