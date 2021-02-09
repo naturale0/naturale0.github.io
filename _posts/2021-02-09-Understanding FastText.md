@@ -88,6 +88,24 @@ class FastText(nn.Module):
 
 As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.
 
+<br>
+
+## Embedding quality
+
+Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. Only the 150 most frequent words are plotted.
+
+![fasttext.png](/assets/fig/210208_fasttext.png)
+
+Results are similar to [that of skip gram](/machine%20learning/natural%20language%20processing/understanding-skip-gram#embedding-quality), but FastText tends to embed words with similar morphology closer to each other (for example, `(are, were)` and `(then, when)`).
+
+Top 5 most similar words result implies this property as well. Compare it to the result from skip gram.
+
+    QUERY   RESULTS
+    angel : ['angels', 'strangely', 'thus', 'saith', 'lord']
+    snow  : ['blue', 'figures', 'rolls', 'like', 'mud']
+    love  : ['loved', 'lovers', 'lover', 'my', 'thy']
+    death : ['thee', 'mercy', 'life', 'breath', 'judgment']
+
 Full results can be found [here (notebook)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb).
 
 <br>

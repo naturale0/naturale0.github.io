@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Feb 2021 02:12:47 +0900</pubDate>
-    <lastBuildDate>Tue, 09 Feb 2021 02:12:47 +0900</lastBuildDate>
+    <pubDate>Tue, 09 Feb 2021 13:07:18 +0900</pubDate>
+    <lastBuildDate>Tue, 09 Feb 2021 13:07:18 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -18,6 +18,7 @@
   &lt;li&gt;&lt;a href=&quot;#subwords&quot; id=&quot;markdown-toc-subwords&quot;&gt;Subwords&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#fasttext&quot; id=&quot;markdown-toc-fasttext&quot;&gt;FastText&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;PyTorch implementation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#embedding-quality&quot; id=&quot;markdown-toc-embedding-quality&quot;&gt;Embedding quality&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -94,6 +95,25 @@ u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
 
 &lt;p&gt;As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;embedding-quality&quot;&gt;Embedding quality&lt;/h2&gt;
+
+&lt;p&gt;Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. Only the 150 most frequent words are plotted.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_fasttext.png&quot; alt=&quot;fasttext.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Results are similar to &lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram#embedding-quality&quot;&gt;that of skip gram&lt;/a&gt;, but FastText tends to embed words with similar morphology closer to each other (for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(are, were)&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(then, when)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Top 5 most similar words result implies this property as well. Compare it to the result from skip gram.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULTS
+angel : [&apos;angels&apos;, &apos;strangely&apos;, &apos;thus&apos;, &apos;saith&apos;, &apos;lord&apos;]
+snow  : [&apos;blue&apos;, &apos;figures&apos;, &apos;rolls&apos;, &apos;like&apos;, &apos;mud&apos;]
+love  : [&apos;loved&apos;, &apos;lovers&apos;, &apos;lover&apos;, &apos;my&apos;, &apos;thy&apos;]
+death : [&apos;thee&apos;, &apos;mercy&apos;, &apos;life&apos;, &apos;breath&apos;, &apos;judgment&apos;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;Full results can be found &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb&quot;&gt;here (notebook)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -125,6 +145,7 @@ u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
   &lt;li&gt;&lt;a href=&quot;#subsampling&quot; id=&quot;markdown-toc-subsampling&quot;&gt;Subsampling&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#negative-sampling&quot; id=&quot;markdown-toc-negative-sampling&quot;&gt;Negative sampling&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;PyTorch implementation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#embedding-quality&quot; id=&quot;markdown-toc-embedding-quality&quot;&gt;Embedding quality&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -274,6 +295,21 @@ v_i = Vc_i,\\
 &lt;p&gt;Full result can be seen &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-2_skip-gram.ipynb&quot;&gt;here (GitHub repo)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;embedding-quality&quot;&gt;Embedding quality&lt;/h2&gt;
+
+&lt;p&gt;Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. The 150 most frequent words are plotted.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_skipgram.png&quot; alt=&quot;skipgram.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Top 5 most similar words result seems good as well.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULT
+angel : [&apos;isaiah&apos;, &apos;spake&apos;, &apos;jesus&apos;, &apos;lord&apos;, &apos;rachel&apos;]
+snow  : [&apos;mid&apos;, &apos;ice&apos;, &apos;storm&apos;, &apos;bodily&apos;, &apos;wind&apos;]
+love  : [&apos;sing&apos;, &apos;esteem&apos;, &apos;faith&apos;, &apos;tempt&apos;, &apos;rejoice&apos;]
+death : [&apos;life&apos;, &apos;hell&apos;, &apos;presence&apos;, &apos;battle&apos;, &apos;dead&apos;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 

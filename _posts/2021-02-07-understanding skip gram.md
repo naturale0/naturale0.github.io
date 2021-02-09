@@ -171,6 +171,20 @@ Full result can be seen [here (GitHub repo)](https://github.com/naturale0/NLP-Do
 
 <br>
 
+## Embedding quality
+
+Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. The 150 most frequent words are plotted.
+
+![skipgram.png](/assets/fig/210208_skipgram.png)
+
+Top 5 most similar words result seems good as well.
+
+    QUERY   RESULT
+    angel : ['isaiah', 'spake', 'jesus', 'lord', 'rachel']
+    snow  : ['mid', 'ice', 'storm', 'bodily', 'wind']
+    love  : ['sing', 'esteem', 'faith', 'tempt', 'rejoice']
+    death : ['life', 'hell', 'presence', 'battle', 'dead']
+
 ***References***
 
 * Mikolov et al. 2013. **Efficient Estimation of Word Representations in Vector Space**. International Conference on Learning Representations.
