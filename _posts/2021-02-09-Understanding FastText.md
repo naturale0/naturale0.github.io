@@ -54,36 +54,20 @@ class FastText(nn.Module):
         
     def forward(self, x):
         # input should be of shape [batch_size, 1+k, 2]
-        # split positive and negative sample
-        x_pos_1, x_pos_2 = x[:, 0, :].T
-        x_neg_1, x_neg_2 = x[:, 1:, :].T
+        x_1, x_2 = x.T
         
         # get subwords
-        ## positive
-        x_pos_1_sub = get_subword(x_pos_1)
-        ## negative
-        k = x_neg_1.shape[0]
-        x_neg_1_sub = [get_subword(x_neg_1[i]) for i in range(k)]
+        k = x_1.shape[0]
+        x_1_sub = [get_subword(x_1[i]) for i in range(k)]
         
-        # log-likelihood w.r.t. positive sample
-        ## sum up subword vectors to get word vector
-        u = [self.embedding_z(torch.cuda.LongTensor(subwords)).sum(dim=0)\
-             for subwords in x_pos_1_sub]
-        u = torch.stack(u)
-        v = self.embedding_v(x_pos_2)
-        x_pos = (u * v).sum(dim=1).view(1, -1)
-        
-        # log-likelihood w.r.t. negative sample
-        ## sum up subword vectors to get word vector
+        # log-likelihood: sum up subword vectors to get word vector
         u = [torch.stack([self.embedding_z(torch.cuda.LongTensor(subwords)).sum(dim=0)\
-                        for subwords in x_neg_1_sub[i]]) for i in range(k)]
+                        for subwords in x_1_sub[i]]) for i in range(k)]
         u = torch.stack(u)
-        v = self.embedding_v(x_neg_2)
-        x_neg = (u * v).sum(dim=2)
+        v = self.embedding_v(x_2)
+        y = (u * v).sum(dim=2).T
         
-        x = torch.cat((x_pos, x_neg)).T
-        
-        return x
+        return y
 ```
 
 As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.
