@@ -48,29 +48,34 @@ class FastText(nn.Module):
     def __init__(self, subvocab_size, vocab_size, embedding_dim):
         super(FastText, self).__init__()
         
+        # adjust Long according to device type
+        self.Long = torch.LongTensor if (device.type == "cpu") else torch.cuda.LongTensor
+        
         # embeddings
-        self.embedding_z = nn.Embedding(subvocab_size, embedding_dim)
+        self.embedding_z = nn.EmbeddingBag(subvocab_size+1, embedding_dim, mode="sum") # +1 for empty
+        self.embedding_z.weight.data[-1] = 0
         self.embedding_v = nn.Embedding(vocab_size, embedding_dim)
         
     def forward(self, x):
+        
         # input should be of shape [batch_size, 1+k, 2]
         x_1, x_2 = x.T
         
         # get subwords
         k = x_1.shape[0]
-        x_1_sub = [get_subword(x_1[i]) for i in range(k)]
+        x_1_sub = self.Long([get_subword(x_1[i]) for i in range(k)])
         
         # log-likelihood: sum up subword vectors to get word vector
-        u = [torch.stack([self.embedding_z(torch.cuda.LongTensor(subwords)).sum(dim=0)\
-                        for subwords in x_1_sub[i]]) for i in range(k)]
-        u = torch.stack(u)
+        u = torch.stack([self.embedding_z(subwords) for subwords in x_1_sub])
         v = self.embedding_v(x_2)
         y = (u * v).sum(dim=2).T
         
         return y
 ```
 
-As the code speaks for itself, it is a bad implementation that just barely works. I could not optimize better than this. Discussion is always welcomed.
+I used `torch.nn.EmbeddingBag` to speed up computing time. The computational graph looks like this:
+
+![fasttext_graph.png](/assets/fig/210208_fasttext_graph.png)
 
 <br>
 
