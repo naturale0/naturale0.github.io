@@ -94,6 +94,10 @@ Top 5 most similar words result implies this property as well. Compare it to the
     love  : ['loved', 'lovers', 'lover', 'my', 'thy']
     death : ['thee', 'mercy', 'life', 'breath', 'judgment']
 
+Cosine similarity heatmap agrees with the results.
+
+![fasttext_cos.png](/assets/fig/210208_fasttext_cosine.png)
+
 Full results can be found [here (notebook)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb).
 
 <br>
