@@ -57,7 +57,6 @@ class FastText(nn.Module):
         self.embedding_v = nn.Embedding(vocab_size, embedding_dim)
         
     def forward(self, x):
-        
         # input should be of shape [batch_size, 1+k, 2]
         x_1, x_2 = x.T
         
