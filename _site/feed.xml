@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Feb 2021 15:16:48 +0900</pubDate>
-    <lastBuildDate>Tue, 09 Feb 2021 15:16:48 +0900</lastBuildDate>
+    <pubDate>Wed, 10 Feb 2021 02:37:06 +0900</pubDate>
+    <lastBuildDate>Wed, 10 Feb 2021 02:37:06 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -64,7 +64,6 @@ u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        
         &lt;span class=&quot;c1&quot;&gt;# input should be of shape [batch_size, 1+k, 2]
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
         
@@ -102,6 +101,10 @@ snow  : [&apos;blue&apos;, &apos;figures&apos;, &apos;rolls&apos;, &apos;like&ap
 love  : [&apos;loved&apos;, &apos;lovers&apos;, &apos;lover&apos;, &apos;my&apos;, &apos;thy&apos;]
 death : [&apos;thee&apos;, &apos;mercy&apos;, &apos;life&apos;, &apos;breath&apos;, &apos;judgment&apos;]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cosine similarity heatmap agrees with the results.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_fasttext_cosine.png&quot; alt=&quot;fasttext_cos.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Full results can be found &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb&quot;&gt;here (notebook)&lt;/a&gt;.&lt;/p&gt;
 
