@@ -7,9 +7,19 @@ categories: [bayesian, machine learning, natural language processing]
 
 ---
 
-
-
 In [the last article](/natural%20language%20processing/LDA-1-background-topic-modelling), topic models frequently used at the time of development of LDA was covered. At the end of the post, I briefly introduced the rationale behind LDA. In this post, I would like to elaborate on details of the model architecture.
+
+
+
+> ***This article is the second part of the series "Understanding Latent Dirichlet Allocation".***
+>
+> 1. [Backgrounds](https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
+> 2. [Model architecture](https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
+> 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
+> 4. inference - Gibbs sampling
+> 5. smooth LDA
+
+
 
 - TOC
 {:toc}
@@ -46,7 +56,7 @@ $\theta = (\theta_1, \cdots, \theta_M) \in \mathbb{R}^{M \times k}$ can be seen 
 
 
 
-<div text-align="center">
+<div style="text-align:center">
     <img src="/assets/fig/210214_lda.png">
 </div>
 

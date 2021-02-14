@@ -6,13 +6,287 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Feb 2021 23:28:32 +0900</pubDate>
-    <lastBuildDate>Sun, 14 Feb 2021 23:28:32 +0900</lastBuildDate>
+    <pubDate>Mon, 15 Feb 2021 02:27:46 +0900</pubDate>
+    <lastBuildDate>Mon, 15 Feb 2021 02:27:46 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Understanding Latent Dirichlet Allocation (3) Variational EM</title>
+        <description>&lt;p&gt;Now that we know the structure of the model, it is time to train the model parameters with real data. Among the possible inference methods, in this article I would like to explain the &lt;em&gt;variational expectation-maximization&lt;/em&gt; algorithm.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the third part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;inference - variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;inference - Gibbs sampling&lt;/li&gt;
+    &lt;li&gt;smooth LDA&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#variational-inference&quot; id=&quot;markdown-toc-variational-inference&quot;&gt;Variational inference&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#variational-em&quot; id=&quot;markdown-toc-variational-em&quot;&gt;Variational EM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#python-implementation-from-scratch&quot; id=&quot;markdown-toc-python-implementation-from-scratch&quot;&gt;Python implementation from scratch&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#e-step&quot; id=&quot;markdown-toc-e-step&quot;&gt;E-step&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#m-step&quot; id=&quot;markdown-toc-m-step&quot;&gt;M-step&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#results&quot; id=&quot;markdown-toc-results&quot;&gt;Results&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;variational-inference&quot;&gt;Variational inference&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Variational inference (VI)&lt;/em&gt; is a method to approximate complicated distributions with a family of simpler surrogate distributions. In order to compute posterior distribution of latent variables given a document $\mathbf{w}_d$ in training data&lt;/p&gt;
+
+\[p(\theta_d,\mathbf{z}_d|\mathbf{w_d},\alpha,\beta) = \frac{p(\theta_d, \mathbf{z}_d, \mathbf{w_d}|\alpha,\beta)}{p(\mathbf{w_d}|\alpha,\beta)},\]
+
+&lt;p&gt;it is necessary to compute the denominator&lt;/p&gt;
+
+\[p(\mathbf{w_d}|\alpha,\beta) = \frac{\Gamma(\sum_i \alpha_i)}{\prod_i \Gamma(\alpha_i)} \int \left( \prod_{i=1}^k \theta_{di}^{\alpha_i-1} \right) \left( \prod_{n=1}^{N}\prod_{i=1}^k\prod_{j=1}^V (\theta_{di} \beta_{ij})^{w_{dn}^j} \right) d\theta.\]
+
+&lt;p&gt;However, this is intractable due to the coupling of $\theta$ and $\beta$ at the inner most parenthesis. Because of this, we utilize VI and Jensen’s inequality to achieve lower bound of the log likelihood $\log p(\mathbf{w}|\alpha,\beta)$ for parameter estimation of LDA.&lt;/p&gt;
+
+&lt;p&gt;To be specific, we let the variational distribution $q$ to be parametrized by the variational parameters $\gamma=\gamma(\mathbf{w})$ and $\phi=\phi(\mathbf{w})$, each works similarly to $\alpha$ and $\beta$ of the true distribution, respectively. To be specific, we set the variational distribution as&lt;/p&gt;
+
+\[q(\theta_d, \mathbf{z}_d|\gamma(\mathbf{w}_d),\phi(\mathbf{w}_d)) = q(\theta_d|\gamma(\mathbf{w}_d)) \prod_{n=1}^{N_d} q(z_{dn}|\phi_n(\mathbf{w}_d))\]
+
+&lt;p&gt;where&lt;/p&gt;
+
+\[\theta_d \sim \mathcal{D}_k(\gamma(\mathbf{w}_d)), \\
+z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
+
+&lt;p&gt;Graphical representation of the surrogate is depicted in the figure 5 of Blei et al. (2003).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210215_lda-vem.png&quot; alt=&quot;lda-variational-inference&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;variational-em&quot;&gt;Variational EM&lt;/h2&gt;
+
+&lt;p&gt;Expectation maximization is a special case of minorization-maximization (MM) algorithm. To maximize a target likelihood function $f(x)$, EM algorithm works in the following way:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set a family of simpler surrogate functions $\mathcal{G}$.&lt;/li&gt;
+  &lt;li&gt;Repeat until convergence:
+    &lt;ol&gt;
+      &lt;li&gt;(E-step) Minorize $f$ at $x^{(t)}$ with $g^{(t+1)}\in\mathcal{G}$.&lt;/li&gt;
+      &lt;li&gt;(M-step) Update $x^{(t+1)}=\arg\max g^{(t+1)}(x).$&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Variational EM follows the framework of expectation-maximization, while uses variational inference to minorize the target function at the E-step. By Jensen’s inequality, we get the lower bound on the log likelihood with respect to the variational distribution defined above:&lt;/p&gt;
+
+\[\begin{aligned}
+\log p(\mathbf{w}|\alpha,\beta)
+  \ge \text{E}_q\log p(\theta,\mathbf{z},\mathbf{w}|\alpha,\beta) - \text{E}_q\log q(\theta,\mathbf{z}) =: L(\gamma,\phi|\alpha,\beta).
+\end{aligned}\]
+
+&lt;p&gt;Then variational EM algorithm for solving LDA is as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Repeat until convergence:
+    &lt;ol&gt;
+      &lt;li&gt;(E-step) Update $(\gamma^{(t+1)},\phi^{(t+1)}) = \arg\max_{(\gamma,\phi)} L(\gamma,\phi|\alpha^{(t)},\beta^{(t)})$.&lt;/li&gt;
+      &lt;li&gt;(M-step) Update $(\alpha^{(t+1)},\beta^{(t+1)}) = \arg\max_{(\alpha,\beta)} L(\gamma^{(t+1)},\phi^{(t+1)}|\alpha,\beta)$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To be specific, for $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. For $\alpha$ and $\beta$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}’$, we use linear-time Newton-Raphson algorithm to update them.&lt;/p&gt;
+
+&lt;p&gt;To summarize,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In the E-step, for $d=1,\cdots,M$,
+    &lt;ol&gt;
+      &lt;li&gt;For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
+        &lt;ol&gt;
+          &lt;li&gt;$\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi(\sum_{j=1}^k) \gamma_j^{(t)} \right)$.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.&lt;/li&gt;
+      &lt;li&gt;$\gamma_d^{(t+1)}=\alpha^{(t)}+\sum_{n=1}^{N_d} \phi_{dn}^{(t+1)}$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the M-step,
+    &lt;ul&gt;
+      &lt;li&gt;repeat until convergence:
+        &lt;ol&gt;
+          &lt;li&gt;$\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^N \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.&lt;/li&gt;
+          &lt;li&gt;Update $\alpha^{(t+1)}$ with linear-time Newton method.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here, $\Psi$ is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Digamma_function&quot;&gt;digamma function&lt;/a&gt;. I have not clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), and I will replace the explanation with Python implementation that follows.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;python-implementation-from-scratch&quot;&gt;Python implementation from scratch&lt;/h2&gt;
+
+&lt;h3 id=&quot;e-step&quot;&gt;E-step&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;E_step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Minorize the joint likelihood function via variational inference.
+    This is the E-step of variational EM algorithm for LDA.
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# optimize phi
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# Normalize phi
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isnan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ValueError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;phi nan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# optimize gamma
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It is the exact translation of the update equation at the above.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;m-step&quot;&gt;M-step&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;M_step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    maximize the lower bound of the likelihood.
+    This is the M-step of variational EM algorithm for (smoothed) LDA.
+    
+    update of alpha follows from appendix A.2 of Blei et al., 2003.
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# update alpha
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# update beta
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_phi_dot_w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is also the exact replication of the equations, but with some abstraction for readability.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_update()&lt;/code&gt; is the implementation of linear-time Newton-Raphson algorithm.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;warnings&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vi_var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    From appendix A.2 of Blei et al., 2003.
+    For hessian with shape `H = diag(h) + 1z1&apos;`
+    
+    To update alpha, input var=alpha and vi_var=gamma, const=M.
+    To update eta, input var=eta and vi_var=lambda, const=k.
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# store old value
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;var0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# g: gradient 
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;psi_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi_var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; \
+            &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi_var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi_sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# H = diag(h) + 1z1&apos;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;polygamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# z: Hessian constant component
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;polygamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;# h: Hessian diagonal component
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# update var
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# check convergence
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;crit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tol&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;warnings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;max_iter=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_iter&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; reached: values might not be optimal.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_phi_dot_w()&lt;/code&gt; is the implementation of $\sum_{n=1}^{N_d} ϕ_{dni} w_{dn}^j$.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_phi_dot_w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    \sum_{n=1}^{N_d} ϕ_{dni} w_{dn}^j
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;results&quot;&gt;Results&lt;/h3&gt;
+
+&lt;p&gt;I ran LDA inference on $M=2000$ documents of Reuters News title data with $k=10$ topics. Top 9 important words in each topic (a mixture of word distribution) extracted from fitted LDA is as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TOPIC 00: [&apos;ec&apos; &apos;csr&apos; &apos;loss&apos; &apos;bank&apos; &apos;icco&apos; &apos;unit&apos; &apos;cocoa&apos; &apos;fob&apos; &apos;petroleum&apos;]
+TOPIC 01: [&apos;raises&apos; &apos;acquisition&apos; &apos;prices&apos; &apos;prime&apos; &apos;rate&apos; &apos;w&apos; &apos;completes&apos; &apos;mar&apos;
+ &apos;imports&apos;]
+TOPIC 02: [&apos;year&apos; &apos;sets&apos; &apos;sees&apos; &apos;net&apos; &apos;stock&apos; &apos;dividend&apos; &apos;l&apos; &apos;industries&apos; &apos;corp&apos;]
+TOPIC 03: [&apos;pct&apos; &apos;cts&apos; &apos;gdp&apos; &apos;opec&apos; &apos;shr&apos; &apos;february&apos; &apos;plc&apos; &apos;ups&apos; &apos;rose&apos;]
+TOPIC 04: [&apos;u&apos; &apos;japan&apos; &apos;fed&apos; &apos;trade&apos; &apos;gaf&apos; &apos;ems&apos; &apos;says&apos; &apos;dlr&apos; &apos;gnp&apos;]
+TOPIC 05: [&apos;usda&apos; &apos;f&apos; &apos;ag&apos; &apos;international&apos; &apos;sell&apos; &apos;report&apos; &apos;ge&apos; &apos;corn&apos; &apos;wheat&apos;]
+TOPIC 06: [&apos;k&apos; &apos;market&apos; &apos;money&apos; &apos;rate&apos; &apos;eep&apos; &apos;treasury&apos; &apos;prime&apos; &apos;says&apos; &apos;mln&apos;]
+TOPIC 07: [&apos;qtr&apos; &apos;note&apos; &apos;4th&apos; &apos;net&apos; &apos;loss&apos; &apos;ico&apos; &apos;corp&apos; &apos;1st&apos; &apos;group&apos;]
+TOPIC 08: [&apos;dlrs&apos; &apos;mln&apos; &apos;bp&apos; &apos;march&apos; &apos;corp&apos; &apos;week&apos; &apos;canada&apos; &apos;e&apos; &apos;bank&apos;]
+TOPIC 09: [&apos;unit&apos; &apos;buy&apos; &apos;says&apos; &apos;sale&apos; &apos;c&apos; &apos;sells&apos; &apos;completes&apos; &apos;american&apos; &apos;grain&apos;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Topic-word distribution ($\beta$) and document-topic distribution ($\theta$) recovered from LDA is as follows. $i$-th column from the figure left represents probabilities of each words to be generated given the topic $z_i$  so it sums to 1. Similarly, $d$-th row from the figure right represents the $d$-th document($\mathbf{w}_d$)’s mixture weights on topics, so it also sums to 1.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210215_lda-result.png&quot; alt=&quot;LDA-result&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 15 Feb 2021 02:26:00 +0900</pubDate>
+        <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM</link>
+        <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM</guid>
+        
+        
+        <category>bayesian</category>
+        
+        <category>machine learning</category>
+        
+        <category>natural language processing</category>
+        
+      </item>
     
       <item>
         <title>Understanding Latent Dirichlet Allocation (2) The Model</title>
         <description>&lt;p&gt;In &lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;the last article&lt;/a&gt;, topic models frequently used at the time of development of LDA was covered. At the end of the post, I briefly introduced the rationale behind LDA. In this post, I would like to elaborate on details of the model architecture.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the second part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;inference - variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;inference - Gibbs sampling&lt;/li&gt;
+    &lt;li&gt;smooth LDA&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#generative-process&quot; id=&quot;markdown-toc-generative-process&quot;&gt;Generative process&lt;/a&gt;&lt;/li&gt;
@@ -50,7 +324,7 @@
 
 &lt;p&gt;$\theta = (\theta_1, \cdots, \theta_M) \in \mathbb{R}^{M \times k}$ can be seen as the document-specific random topic matrix as $\theta_d$ generates topic for each words in $d$-th document as in the process.&lt;/p&gt;
 
-&lt;div text-align=&quot;center&quot;&gt;
+&lt;div style=&quot;text-align:center&quot;&gt;
     &lt;img src=&quot;/assets/fig/210214_lda.png&quot; /&gt;
 &lt;/div&gt;
 
@@ -124,6 +398,18 @@
       <item>
         <title>Understanding Latent Dirichlet Allocation (1) Backgrounds</title>
         <description>&lt;p&gt;Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model that is frequently used for topic modelling and document classification. First proposed to infer population structure from genotype data, LDA not only allows to represent words as mixtures of topics, but to represent documents as a mixture of words, which makes it a powerful generative probabilistic model.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the first part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;inference - variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;inference - Gibbs sampling&lt;/li&gt;
+    &lt;li&gt;smooth LDA&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;In this series of posts, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.&lt;/p&gt;
 
@@ -1225,52 +1511,6 @@ Equivalence of $V_n,V_n&apos;$ directly follows.
         <pubDate>Thu, 21 Jan 2021 22:47:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-4.6.3-Riez-decomposition</link>
         <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.6.3-Riez-decomposition</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 4.6.2. Levy&apos;s theorem</title>
-        <description>&lt;p&gt;Consider a sequence of conditional expectations $E(X|\mathcal{F}_n)$ with fixed $X.$ By using the theorem from previous subsection we can determine convergence of this sequence as well.
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#levys-theorem&quot; id=&quot;markdown-toc-levys-theorem&quot;&gt;Levy’s theorem&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;levys-theorem&quot;&gt;Levy’s theorem&lt;/h2&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;Levy&apos;s theorem&quot;&gt;
-Let $X$ be an integrable random variable and $(\mathcal{F}_n)$ be a filtration. then $E(X|\mathcal{F}_n) \to E(X|\mathcal{F}_\infty)$ a.s. where $\mathcal{F}_\infty = \sigma\left(\cup_n \mathcal{F}_n \right).$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_n = E(X|\mathcal{F}_n)$ then $X_n$ is a closable, thus regular, martingale and there exists $X_\infty$ such that $X_n \to X_\infty$ a.s. It suffices to show that $X_\infty = E(X|\mathcal{F}_\infty)$ a.s. We show this with $\pi\text{-}\lambda$ theorem. Let $\mathcal{L} = \{A: \int_A X_\infty dP = \int_A X dP\}$ be a $\lambda$-system. Then $\cup_n \mathcal{F}n \subset \mathcal{L}$ and $\cup_n \mathcal{F}_n$ is a $\pi$-system. By $\pi\text{-}\lambda$ theorem $\mathcal{F}_\infty \subset \mathcal{L}$ thus $X_\infty = E(X|\mathcal{F}_\infty)$ a.s.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Similar result holds for a sequence $(X_n)$ uniformly dominated by an integrable random variable.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot;&gt;
-Suppose $X_n \to X$ a.s., $|X_n| \le Z, \forall n,$ $E|Z|&amp;lt;\infty$ then $E(X_n|\mathcal{F}_n) \to E(X|\mathcal{F}_\infty)$ a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $W_n = \sup_{k,l \ge n} |X_k - X_l|$ then $W_n \downarrow 0$ a.s. and $|X_n-X| \le W_m$ for all $m \le n$ and $W_n \le 2Z.$ By the previous theorem we only need to show $E(\left|X_n-X\right||\mathcal{F}_n) \to 0$ a.s. Given $m,$
-$$\limsup_n E(\left|X_n-X\right||\mathcal{F}_n) \le \lim_n E(W_m|\mathcal{F}_n) = E(W_m|\mathcal{F}_\infty).$$
-By conditional DCT, $E(W_m|\mathcal{F}_\infty) \to 0$ a.s. as $m\to\infty.$ Thus $E(\left|X_n-X\right||\mathcal{F}_n) \to 0$ a.s. With Levy&apos;s theorem and triangle inequality the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
-</description>
-        <pubDate>Thu, 21 Jan 2021 15:07:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-4.6.2-Levy-s-theorem</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.6.2-Levy-s-theorem</guid>
         
         
         <category>probability</category>

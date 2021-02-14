@@ -9,6 +9,14 @@ categories: [natural language processing]
 
 Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model that is frequently used for topic modelling and document classification. First proposed to infer population structure from genotype data, LDA not only allows to represent words as mixtures of topics, but to represent documents as a mixture of words, which makes it a powerful generative probabilistic model.
 
+> ***This article is the first part of the series "Understanding Latent Dirichlet Allocation".***
+>
+> 1. [Backgrounds](https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
+> 2. [Model architecture](https://naturale0.github.io/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
+> 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
+> 4. inference - Gibbs sampling
+> 5. smooth LDA
+
 In this series of posts, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.
 
 
