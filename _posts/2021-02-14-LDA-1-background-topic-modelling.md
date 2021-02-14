@@ -17,7 +17,7 @@ Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model t
 > 4. inference - Gibbs sampling
 > 5. smooth LDA
 
-In this series of posts, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.
+In this series of articles, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.
 
 
 
