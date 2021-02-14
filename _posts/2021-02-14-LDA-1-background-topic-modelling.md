@@ -15,7 +15,7 @@ In this series of posts, I would like to explain backgrounds and model structure
 
 - TOC
 {:toc}
-
+<br>
 
 Before we get into it, I would like to mention and define terms that will be used frequently hereafter. 
 
