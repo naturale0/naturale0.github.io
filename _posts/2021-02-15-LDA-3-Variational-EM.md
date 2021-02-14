@@ -243,6 +243,10 @@ Topic-word distribution ($\beta$) and document-topic distribution ($\theta$) rec
 
 ![LDA-result](/assets/fig/210215_lda-result.png)
 
+
+
+*Full code and result are available [here (GitHub)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-1.%20latent%20dirichlet%20allocation.ipynb).*
+
 <br>
 
 
