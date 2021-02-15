@@ -228,7 +228,7 @@ def _phi_dot_w(docs, phi, d, j):
     """
     \sum_{n=1}^{N_d} ϕ_{dni} w_{dn}^j
     """
-    return (docs[d] == j) @ phi[m, :N[d], :]
+    return (docs[d] == j) @ phi[d, :N[d], :]
 ```
 
 <br>
