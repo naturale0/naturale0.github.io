@@ -132,7 +132,9 @@ def E_step(docs, phi, gamma, alpha, beta):
     """
     # optimize phi
     for m in range(M):
-        phi[m, :N[m], :] = (beta[:, docs[m]] * np.exp(psi(gamma[m, :]) - psi(gamma[m, :].sum())).reshape(-1, 1)).T
+        phi[m, :N[m], :] = (beta[:, docs[m]] * np.exp(
+            psi(gamma[m, :]) - psi(gamma[m, :].sum())
+        ).reshape(-1, 1)).T
 
         # Normalize phi
         phi[m, :N[m]] /= phi[m, :N[m]].sum(axis=1).reshape(-1, 1)
@@ -164,7 +166,9 @@ def M_step(docs, phi, gamma, alpha, beta, M):
     
     # update beta
     for j in range(V):
-        beta[:, j] = np.array([_phi_dot_w(docs, phi, m, j) for m in range(M)]).sum(axis=0)
+        beta[:, j] = np.array(
+            [_phi_dot_w(docs, phi, m, j) for m in range(M)]
+        ).sum(axis=0)
     beta /= beta.sum(axis=1).reshape(-1, 1)
 
     return alpha, beta
@@ -195,8 +199,10 @@ def _update(var, vi_var, const, max_iter=10000, tol=1e-6):
             + (psi(vi_var) - psi_sum).sum(axis=0)
 
         # H = diag(h) + 1z1'
-        z = const * polygamma(1, var.sum())  # z: Hessian constant component
-        h = -const * polygamma(1, var)       # h: Hessian diagonal component
+        ## z: Hessian constant component
+        ## h: Hessian diagonal component
+        z = const * polygamma(1, var.sum())
+        h = -const * polygamma(1, var)
         c = (g / h).sum() / (1./z + (1./h).sum())
 
         # update var
