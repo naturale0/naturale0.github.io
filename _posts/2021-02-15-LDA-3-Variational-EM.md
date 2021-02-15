@@ -7,7 +7,7 @@ categories: [bayesian, machine learning, natural language processing]
 
 ---
 
-Now that we know the structure of the model, it is time to train the model parameters with real data. Among the possible inference methods, in this article I would like to explain the *variational expectation-maximization* algorithm.
+Now that we know the structure of the model, it is time to fit the model parameters with real data. Among the possible inference methods, in this article I would like to explain the *variational expectation-maximization* algorithm.
 
 > ***This article is the third part of the series "Understanding Latent Dirichlet Allocation".***
 >
@@ -25,8 +25,7 @@ Now that we know the structure of the model, it is time to train the model param
 
 ## Variational inference
 
-*Variational inference (VI)* is a method to approximate complicated distributions with a family of simpler surrogate distributions. In order to compute posterior distribution of latent variables given a document $\mathbf{w}_d$ in training data
-
+*Variational inference (VI)* is a method to approximate complicated distributions with a family of simpler surrogate distributions. In order to compute posterior distribution of latent variables given a document $\mathbf{w}_d$ 
 
 $$
 p(\theta_d,\mathbf{z}_d|\mathbf{w_d},\alpha,\beta) = \frac{p(\theta_d, \mathbf{z}_d, \mathbf{w_d}|\alpha,\beta)}{p(\mathbf{w_d}|\alpha,\beta)},
@@ -41,9 +40,9 @@ p(\mathbf{w_d}|\alpha,\beta) = \frac{\Gamma(\sum_i \alpha_i)}{\prod_i \Gamma(\al
 $$
 
 
-However, this is intractable due to the coupling of $\theta$ and $\beta$ at the inner most parenthesis. Because of this, we utilize VI and Jensen's inequality to achieve lower bound of the log likelihood $\log p(\mathbf{w}\|\alpha,\beta)$ for parameter estimation of LDA.
+However, it is intractable due to the coupling of $\theta$ and $\beta$ at the inner most parenthesis. Because of this, we utilize VI and Jensen's inequality to achieve lower bound of the log likelihood $\log p(\mathbf{w}\|\alpha,\beta)$ for parameter estimation of LDA.
 
-To be specific, we let the variational distribution $q$ to be parametrized by the variational parameters $\gamma=\gamma(\mathbf{w})$ and $\phi=\phi(\mathbf{w})$, each works similarly to $\alpha$ and $\beta$ of the true distribution, respectively. To be specific, we set the variational distribution as 
+To be specific, we let the variational distribution $q$ to be parametrized by the variational parameters $\gamma=\gamma(\mathbf{w})$ and $\phi=\phi(\mathbf{w})$, each works similarly to $\alpha$ and $\beta$ of the true distribution, respectively. We set the variational distribution 
 
 
 $$
@@ -70,7 +69,7 @@ Graphical representation of the surrogate is depicted in the figure 5 of Blei et
 
 ## Variational EM
 
-Expectation maximization is a special case of minorization-maximization (MM) algorithm. To maximize a target likelihood function $f(x)$, EM algorithm works in the following way:
+Expectation maximization is a special case of [minorization-maximization (MM)](https://en.wikipedia.org/wiki/MM_algorithm) algorithm. I would like to use terminology from MM since it is more intuitive to explain the variational EM. To maximize a target likelihood function $f(x)$, EM algorithm works in the following way:
 
 1. Set a family of simpler surrogate functions $\mathcal{G}$.
 2. Repeat until convergence:
@@ -94,9 +93,9 @@ Then variational EM algorithm for solving LDA is as follows:
     1. (E-step) Update $(\gamma^{(t+1)},\phi^{(t+1)}) = \arg\max_{(\gamma,\phi)} L(\gamma,\phi\|\alpha^{(t)},\beta^{(t)})$.
     2. (M-step) Update $(\alpha^{(t+1)},\beta^{(t+1)}) = \arg\max_{(\alpha,\beta)} L(\gamma^{(t+1)},\phi^{(t+1)}\|\alpha,\beta)$.
 
-To be specific, for $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. For $\alpha$ and $\beta$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}'$, we use linear-time Newton-Raphson algorithm to update them.
+To be specific, for $\beta$, $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. For $\alpha$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}'$, we use linear-time Newton-Raphson algorithm to update it.
 
-To summarize,
+To summarize, LDA solving variational EM algorithm repeats the following until the parameters converge.
 
 * In the E-step, for $d=1,\cdots,M$,
     1. For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
@@ -104,11 +103,20 @@ To summarize,
     2. Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.
     3. $\gamma_d^{(t+1)}=\alpha^{(t)}+\sum_{n=1}^{N_d} \phi_{dn}^{(t+1)}$.
 * In the M-step,
-    * repeat until convergence:
-        1. $\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^N \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.
-        2. Update $\alpha^{(t+1)}$ with linear-time Newton method.
+    1. $\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^N \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.
+    2. Update $\alpha^{(t+1)}$ with linear-time Newton method.
 
-Here, $\Psi$ is the [digamma function](https://en.wikipedia.org/wiki/Digamma_function). I have not clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), and I will replace the explanation with Python implementation that follows.
+Here, $\Psi$ is the [digamma function](https://en.wikipedia.org/wiki/Digamma_function). I have yet clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), which in its core is a mere application of the block matrix inversion formula 
+
+
+$$
+(A+BCD)^{-1} = A^{-1} - A^{-1}B(C^{-1}+DA^{-1}B)^{-1}DA^{-1}.
+$$
+
+
+
+
+So I will replace the explanation to Python implementation (`_update()`) below.
 
 <br>
 
@@ -207,7 +215,7 @@ def _update(var, vi_var, const, max_iter=10000, tol=1e-6):
 
 
 
-`_phi_dot_w()` is the implementation of $\sum_{n=1}^{N_d} ϕ_{dni} w_{dn}^j$.
+`_phi_dot_w()` computes $\sum_{n=1}^{N_d} ϕ_{dni} w_{dn}^j$.
 
 ```python
 def _phi_dot_w(docs, phi, d, j):
@@ -225,8 +233,7 @@ I ran LDA inference on $M=2000$ documents of Reuters News title data with $k=10$
 
 ```
 TOPIC 00: ['ec' 'csr' 'loss' 'bank' 'icco' 'unit' 'cocoa' 'fob' 'petroleum']
-TOPIC 01: ['raises' 'acquisition' 'prices' 'prime' 'rate' 'w' 'completes' 'mar'
- 'imports']
+TOPIC 01: ['raises' 'acquisition' 'prices' 'prime' 'rate' 'w' 'completes' 'mar', 'imports']
 TOPIC 02: ['year' 'sets' 'sees' 'net' 'stock' 'dividend' 'l' 'industries' 'corp']
 TOPIC 03: ['pct' 'cts' 'gdp' 'opec' 'shr' 'february' 'plc' 'ups' 'rose']
 TOPIC 04: ['u' 'japan' 'fed' 'trade' 'gaf' 'ems' 'says' 'dlr' 'gnp']
@@ -239,7 +246,9 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
 
 
 
-Topic-word distribution ($\beta$) and document-topic distribution ($\theta$) recovered from LDA is as follows. $i$-th column from the figure left represents probabilities of each words to be generated given the topic $z_i$  so it sums to 1. Similarly, $d$-th row from the figure right represents the $d$-th document($\mathbf{w}_d$)'s mixture weights on topics, so it also sums to 1. 
+Topic-word distribution ($\beta$) and document-topic distribution ($\theta$) recovered from LDA is as follows. $i$-th column from the figure left represents probabilities of each words to be generated given the topic $z_i$  so it sums to 1. Similarly, $d$-th row from the figure right represents the $d$-th document($\mathbf{w}_d$)'s mixture weights on topics, so it also sums to 1.
+
+ 
 
 ![LDA-result](/assets/fig/210215_lda-result.png)
 
