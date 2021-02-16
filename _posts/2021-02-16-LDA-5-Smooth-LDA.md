@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Understanding Latent Dirichlet Allocation (5) Smooth LDA"
-date:   2021-02-16 20:57:00 +0900
+date:   2021-02-17 00:51:00 +0900
 author: "Sihyung Park"
 categories: [bayesian, machine learning, natural language processing]
 
