@@ -13,9 +13,9 @@ Now that we know the structure of the model, it is time to fit the model paramet
 >
 > 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
 > 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
-> 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. [inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
-> 5. smooth LDA
+> 3. [Inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
+> 4. [Inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
+> 5. [Smooth LDA](/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA)
 
 
 

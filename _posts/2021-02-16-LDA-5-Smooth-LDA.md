@@ -9,13 +9,15 @@ categories: [bayesian, machine learning, natural language processing]
 
 From background to two inference processes, I covered all the important details of LDA so far. One thing left over is a difference between (basic) LDA and *smooth LDA*. Consider this last post as a cherry on top.
 
+
+
 > ***This article is the fifth and the final part of the series "Understanding Latent Dirichlet Allocation".***
 >
 > 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
 > 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
-> 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. [inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
-> 5. smooth LDA
+> 3. [Inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
+> 4. [Inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
+> 5. [Smooth LDA](/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA)
 
 
 
@@ -51,7 +53,7 @@ So why would we want to make a model fully Bayesian? This is because of generabi
 
 ## Variational EM for smooth LDA
 
-I already explained inference methods for smooth LDA: [Gibbs sampling with Metropolis-Hastings rule](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#gibbs-sampling) proposed by Pritchard et al. (2000), and [Collapsed gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling) that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look into the previous articles before moving on.
+I already explained inference methods for smooth LDA: [Gibbs sampling with Metropolis-Hastings rule](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#gibbs-sampling) proposed by Pritchard et al. (2000), and [Collapsed gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling) that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look at [the previous articles](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM) before moving on.
 
 <br>
 
