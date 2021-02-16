@@ -80,7 +80,7 @@ $$
 $$
 
 
-where $n_{ij}$ the number of occurrence of word $j$ under topic $i$, $m_{di}$ is the number of loci in $d$-th individual that originated from population $k$.
+where $n_{ij}$ the number of occurrence of word $j$ under topic $i$, $m_{di}$ is the number of loci in $d$-th individual that originated from population $i$.
 
 1. Update $\beta^{(t+1)}$ with a sample from $\beta_i\|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\lambda+\mathbf{n}_i)$.
 
