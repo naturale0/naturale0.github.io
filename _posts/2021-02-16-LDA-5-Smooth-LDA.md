@@ -43,7 +43,7 @@ In order to extend the model to be fully Bayesian, all we need to do is to regar
 
 
 
-So why would we want to make a model fully Bayesian? This is because of generability. If we use fixed point estimate for $\beta$, we get word-topic assignment that assigns probability zero to words that were not in training data. By giving $\beta$ a distribution, we can smooth it out to assign positive probability to all known and unknown words. In this perspective, it can be seen as a smoothing method.
+So why would we want to make a model fully Bayesian? This is because of generability. If we use fixed point estimate for $\beta$, we get word-topic assignment that assigns probability zero to words that were not in training data. By giving $\beta$ a distribution, we can smooth it out to assign positive probability to all known and unknown words. In this perspective, fuller Bayes method can be seen as a smoothing method for hierarchical models.
 
 
 
