@@ -6,9 +6,158 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Feb 2021 18:58:30 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Feb 2021 18:58:30 +0900</lastBuildDate>
+    <pubDate>Wed, 17 Feb 2021 00:44:09 +0900</pubDate>
+    <lastBuildDate>Wed, 17 Feb 2021 00:44:09 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Understanding Latent Dirichlet Allocation (5) Smooth LDA</title>
+        <description>&lt;p&gt;From background to two inference processes, I covered all the important details of LDA so far. One thing left over is a difference between (basic) LDA and &lt;em&gt;smooth LDA&lt;/em&gt;. Consider this last post as a cherry on top.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the fifth and the final part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;inference - variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;inference - Gibbs sampling&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;smooth LDA&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#empirical-vs-fuller-bayes&quot; id=&quot;markdown-toc-empirical-vs-fuller-bayes&quot;&gt;Empirical vs. fuller Bayes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#smooth-lda&quot; id=&quot;markdown-toc-smooth-lda&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#variational-em-for-smooth-lda&quot; id=&quot;markdown-toc-variational-em-for-smooth-lda&quot;&gt;Variational EM for smooth LDA&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#e-step&quot; id=&quot;markdown-toc-e-step&quot;&gt;E-step&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#m-step&quot; id=&quot;markdown-toc-m-step&quot;&gt;M-step&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;empirical-vs-fuller-bayes&quot;&gt;Empirical vs. fuller Bayes&lt;/h2&gt;
+
+&lt;p&gt;Not every Bayesian approches are the same. One of the most important aspect when applying Bayesian model to real-world data is decision of hyperparameters. For the task, empirical Bayes method “fit” the model to the data to derive, in many times, &lt;em&gt;point estimate&lt;/em&gt; of hyperparameter, while standard (fuller) Bayes predefine the &lt;em&gt;prior distribution&lt;/em&gt; before any data and update it later using the data as an evidence.&lt;/p&gt;
+
+&lt;p&gt;Recall the basic LDA that I explained from &lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;the first&lt;/a&gt; to &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;the third&lt;/a&gt; articles. Pay attention to the part that hyperparameter $\beta$ does not have a distribution; it is assumed to be an unknown but &lt;em&gt;fixed&lt;/em&gt; value. This makes the basic LDA an empirical Bayes model. Can we extend this to make a fuller Bayes model?&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;smooth-lda&quot;&gt;Smooth LDA&lt;/h2&gt;
+
+&lt;p&gt;In order to extend the model to be fully Bayesian, all we need to do is to regard $\beta$ as another hidden parameter by adding a Dirichlet prior $\beta \sim \mathcal{D}(\lambda)$ to it. Blei et al. (2003) provides a graphical representation of this extended, or &lt;strong&gt;smoothed&lt;/strong&gt; version of LDA. I added a modified variational distribution for it next to the figure.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210216_smooth-lda-vem.png&quot; alt=&quot;210216_smooth-lda-vem&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So why would we want to make a model fully Bayesian? This is because of generability. If we use fixed point estimate for $\beta$, we get word-topic assignment that assigns probability zero to words that were not in training data. By giving $\beta$ a distribution, we can smooth it out to assign positive probability to all known and unknown words. In this perspective, it can be seen as a smoothing method.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;variational-em-for-smooth-lda&quot;&gt;Variational EM for smooth LDA&lt;/h2&gt;
+
+&lt;p&gt;I already explained inference methods for smooth LDA: &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#gibbs-sampling&quot;&gt;Gibbs sampling with Metropolis-Hastings rule&lt;/a&gt; proposed by Pritchard et al. (2000), and &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling&quot;&gt;Collapsed gibbs sampling&lt;/a&gt; that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look into the previous articles before moving on.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;e-step&quot;&gt;E-step&lt;/h3&gt;
+
+&lt;p&gt;As in the figure that I put next to the Figure 7, we add additional variational parameter $\eta$ that acts as a surrogate of $\lambda$ and consider $\beta_i \sim \mathcal{D}_V(\lambda)$ for all $i=1,\cdots,k$ by exchangeability. Then the variational distribution becomes&lt;/p&gt;
+
+\[q(\theta, \mathbf{z}, \beta|\gamma,\phi,\lambda) = \prod_{i=1}^k \mathcal{D}_V(\beta_i|\lambda_i) \prod_{d=1}^M q\big(\theta_d, \mathbf{z}_d|\gamma(\mathbf{w}_d),\phi(\mathbf{w}_d)\big)\]
+
+&lt;p&gt;Since $\beta$ part is multiplicative to the others, update rule for $\phi$ and $\gamma$ remains the same. (Actually, update rule of $\phi$ changes a little as it contained a term $\beta$ which is now considered a random variable.) Update rule for $\lambda$ is easy to derive by (again) differentiating the variational lower bound $L$.&lt;/p&gt;
+
+&lt;p&gt;There were no derivation depicted in the Blei et al. (2003), so I did one by myself. The variational lower bound $L$ is&lt;/p&gt;
+
+\[\begin{aligned}
+L(\gamma,\phi,\lambda | \alpha,\eta)
+  &amp;amp;= M\sum_{i=1}^k \biggr( \log\Gamma\biggr(\sum_{j=1}^V\eta_j\biggr) - \sum_{j=1}^V\log\Gamma(\eta_j) + \sum_{j=1}^V (\eta_j\cancel{-1})\big(\Psi(\lambda_i) - \Psi(V\lambda_i)\big) \biggr) \\
+  &amp;amp;+ \sum_{d=1}^M\left(\log\Gamma\biggr(\sum_{i=1}^k\alpha_i\biggr) - \sum_{i=1}^k \log\Gamma(\alpha_i) + \sum_{i=1}^k(\alpha_i-1)\left( \Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr) \right)\right) \\
+  &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\left(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\right) \\
+  &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k\sum_{j=1}^V \phi_{dni}w_{dn}^j\big( \Psi(\lambda_i) - \Psi(V\lambda_i) \big) \\
+  &amp;amp;- M\sum_{i=1}^k \biggr( \log\Gamma(V\lambda_i) - V\log\Gamma(\lambda_i) + V(\lambda_i\cancel{-1})\big( \Psi(\lambda_i)-\Psi(V\lambda_i) \big) \biggr) \\
+  &amp;amp;- \sum_{d=1}^M \left( \log\Gamma\biggr(\sum_{i=1}^k \gamma_{di}\biggr) - \sum_{i=1}^k \log\Gamma(\gamma_{di}) + \sum_{i=1}^k(\gamma_{di}-1)\biggr(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\biggr) \right)  \\
+  &amp;amp;- \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\log\phi_{dni}  .
+\end{aligned}\]
+
+&lt;p&gt;Organize only the terms with $\lambda$ and differentiate it then we get&lt;/p&gt;
+
+\[\begin{aligned}
+\frac{\partial L}{\partial \lambda_i}
+  = &amp;amp;- \Psi\left(V \lambda_{i}\right) + V \Psi\left(\lambda_{i}\right) \\
+    &amp;amp;- \cancel{V \big( \Psi(\lambda_{i}) - \Psi\left( V \lambda_{i} \right) \big)} \\
+    &amp;amp;- V (\lambda_{i}\cancel{-1})\big(\Psi&apos;(\lambda_{i}) - \Psi&apos;\left(V \lambda_{i}\right)\big) \\
+    &amp;amp;+ \sum_{n=1}^{N_d}\sum_{j=1}^V \phi_{dni} w_{dn}^j \big( \Psi&apos;(\lambda_i) - \Psi&apos;(V\lambda_i) \big) \\
+    &amp;amp;+ \sum_{j=1}^V(\eta_j-1)\big( \Psi&apos;(\lambda_i) - \Psi&apos;(V\lambda_i) \big)
+\end{aligned}\]
+
+&lt;p&gt;Thus letting it zero yields the update rule for $\lambda$:&lt;/p&gt;
+
+\[\lambda_i^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t)}w_{dn}^j.\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;m-step&quot;&gt;M-step&lt;/h3&gt;
+
+&lt;p&gt;Update rule for $\alpha$ is the same: we update it using linear-time Newton-Raphson. What is important is that update rule for $\eta$ is also the same as $\alpha$. It can be confirmed by organizing only the terms with $\eta$.&lt;/p&gt;
+
+\[L_{[\eta]} = \sum_{i=1}^k \left( \log\Gamma\biggr(\sum_{j=1}^V \eta_j\biggr) - \sum_{j=1}^V\log\Gamma(\eta_j) + \sum_{j=1}^V (\eta_j-1)\biggr( \Psi(\lambda_{ij}) - \Psi\biggr(\sum_{j=1}^V\lambda_{ij}\biggr) \biggr) \right).\]
+
+&lt;p&gt;This is exactly the same as $L_{[\alpha]}$ if replacing $\eta$ with $\alpha$, $k$ with $M$, and $\eta$ with $\gamma$. Thus by exactly the same algorithm, we can update $\eta$.&lt;/p&gt;
+
+&lt;p&gt;To summarize, the &lt;strong&gt;whole process of variational EM is as follows&lt;/strong&gt;: First, initialize $\phi_{dni}^{(0)} := 1/k$ for all $i=1,\cdots,k$ and $n=1,\cdots,N_d$ along with $\gamma_{di}^{(0)} := \alpha_i^{(0)} + N/k$ for all $i=1,\cdots,k$. Then repeat the following until convergence.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In the E-step, for $d=1,\cdots,M$,
+    &lt;ol&gt;
+      &lt;li&gt;For $n=1$ to $N$ and $i=1$ to $k$,
+        &lt;ol&gt;
+          &lt;li&gt;$\phi_{dni}^{(t+1)} = \exp\left(\Psi(\lambda_i^{(t)} - \Psi\big(V \lambda_{i}^{(t)}\big) + \Psi(\gamma_{di}^{(t)} - \Psi\big(\sum_{j=1}^k \gamma_{dj}^{(t)}\big)\right)$.&lt;/li&gt;
+          &lt;li&gt;For $j=1, \cdots, V$,
+            &lt;ol&gt;
+              &lt;li&gt;$\lambda_{ij}^{(t+1)} = \eta + \sum_{d=1}^M \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} w_{dn}^j$.&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Normalize $\phi_{dn}^{(t+1)}$ to sum to 1.&lt;/li&gt;
+      &lt;li&gt;$\gamma_d^{(t+1)} = \alpha + \sum_{n=1}^N \phi_{dn}^{(t+1)}$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the M-step,
+    &lt;ol&gt;
+      &lt;li&gt;Update $\alpha^{(t+1)}$ with linear-time Newton-Raphson.&lt;/li&gt;
+      &lt;li&gt;Update $\eta^{(t+1)}$ with linear-time Newton-Raphson.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Python code for the algorithm is in the last part of &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-1.%20latent%20dirichlet%20allocation.ipynb&quot;&gt;this notebook (GitHub)&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 16 Feb 2021 20:57:00 +0900</pubDate>
+        <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</link>
+        <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</guid>
+        
+        
+        <category>bayesian</category>
+        
+        <category>machine learning</category>
+        
+        <category>natural language processing</category>
+        
+      </item>
     
       <item>
         <title>Understanding Latent Dirichlet Allocation (4) Gibbs Sampling</title>
@@ -62,7 +211,7 @@
 &lt;p&gt;Generative process of genotype of $d$-th individual $\mathbf{w}_{d}$ with $k$ predefined populations described on the paper is a little different than that of Blei et al. (2003).&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;$\beta_k \sim \mathcal{D}_V(\eta)$.&lt;/li&gt;
+  &lt;li&gt;$\beta_k \sim \mathcal{D}_V(\lambda)$.&lt;/li&gt;
   &lt;li&gt;$\theta_d \sim \mathcal{D}_k(\alpha)$. $\theta_{di}$ is the probability that $d$-th individual’s genome is originated from population $i$.&lt;/li&gt;
   &lt;li&gt;for $n=1,\cdots,N$:
     &lt;ol&gt;
@@ -104,7 +253,7 @@
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Update $\beta^{(t+1)}$ with a sample from $\beta_i|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\eta+\mathbf{n}_i)$.&lt;/p&gt;
+    &lt;p&gt;Update $\beta^{(t+1)}$ with a sample from $\beta_i|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\lambda+\mathbf{n}_i)$.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Update $\theta^{(t+1)}$ with a sample from $\theta_d|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_k(\alpha^{(t)}+\mathbf{m}_d)$.&lt;/p&gt;
@@ -135,7 +284,7 @@
 
 &lt;p&gt;Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta | \mathbf{z})$ over $\beta$ from &lt;em&gt;smoothed&lt;/em&gt; LDA, we get the posterior topic-word assignment probability&lt;/p&gt;
 
-\[P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\eta)}{\Gamma(\eta)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\eta)}{\Gamma(n_{i\cdot}+V\eta)}\]
+\[P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\lambda)}{\Gamma(\lambda)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\lambda)}{\Gamma(n_{i\cdot}+V\lambda)}\]
 
 &lt;p&gt;where $n_{ij}$ is the number of times word $j$ has been assigned to topic $i$, just as in the vanilla Gibbs sampler. Marginalizing another Dirichlet-multinomial $P(\mathbf{z},\theta)$ over $\theta$ yields&lt;/p&gt;
 
@@ -143,7 +292,7 @@
 
 &lt;p&gt;where $n_{di}$ is the number of times a word from document $d$ has been assigned to topic $i$. Multiplying these two equations, we get&lt;/p&gt;
 
-\[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
+\[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\lambda}{n_{(-dn),i\cdot}+V\lambda} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
 
 &lt;p&gt;where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
 
@@ -151,7 +300,7 @@
 
 &lt;p&gt;After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with&lt;/p&gt;
 
-\[\hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\
+\[\hat\beta_{iw_n} = \frac{n_{iw_n}+\lambda}{n_{i\cdot}+V\lambda}, \\
 \hat\theta_{di} = \frac{n_{di}+\alpha}{n_{d\cdot}+k\alpha},\]
 
 &lt;p&gt;which are marginalized versions of the first and second term of the last equation, respectively.&lt;/p&gt;
@@ -203,7 +352,7 @@
             &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sampled &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_init_gibbs()&lt;/code&gt;, instantiate variables (numbers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k&lt;/code&gt; and hyperparameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alpha&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eta&lt;/code&gt; and counters and assignment table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_init_gibbs()&lt;/code&gt;, instantiate variables (numbers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k&lt;/code&gt; and hyperparameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alpha&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lam&lt;/code&gt; and counters and assignment table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;).&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_init_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
@@ -243,7 +392,7 @@
     
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;# P(w_dn | z_i)
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;# P(z_i | d)
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
@@ -265,7 +414,7 @@
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
@@ -274,7 +423,7 @@
 
 &lt;p&gt;Finally we can plot it as a heatmap.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210215_lda_gibbs-result.png&quot; alt=&quot;LDA_gibbs-result&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210216_lda_gibbs-result.png&quot; alt=&quot;LDA_gibbs-result&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -398,7 +547,7 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
     &lt;ol&gt;
       &lt;li&gt;For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
         &lt;ol&gt;
-          &lt;li&gt;$\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi(\sum_{j=1}^k) \gamma_j^{(t)} \right)$.&lt;/li&gt;
+          &lt;li&gt;$\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{j=1}^k \gamma_j^{(t)}\big) \right)$.&lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
       &lt;li&gt;Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.&lt;/li&gt;
@@ -1646,113 +1795,6 @@ Note that $\inf_n S_n \le S_{n\wedge T_b} \le b$ and $|S_{n\wedge T_b}| \le |\in
         <pubDate>Fri, 22 Jan 2021 00:30:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-4.8-optional-stopping</link>
         <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.8-optional-stopping</guid>
-        
-        
-        <category>probability</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 4.5. Square integrable martingales</title>
-        <description>&lt;p&gt;In this section, we look into martingales with special property - square integrability. Square integrability gives martingale an upper bound for maximal expectation so that it can further be used to determine the convergence of the sequence.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#square-integrable-martingales&quot; id=&quot;markdown-toc-square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;square-integrable-martingales&quot;&gt;Square integrable martingales&lt;/h2&gt;
-
-&lt;div class=&quot;definition&quot; text=&quot;square integrable martingale&quot;&gt;
-A martingale $X_n$ is square integrable if $EX_n^2 &amp;lt; \infty$ for all $n.$
-&lt;/div&gt;
-
-&lt;p&gt;In the following discussion, we assume $X_0 = 0.$ Notice that $X_n^2$ is a submartingale and if we let $A_n = A_{n-1} + E(X_n^2 | \mathcal{F}_{n-1}) - X_{n-1}^2,$ $A_0=0,$ which is from Doob’s decomposition, then $EX_n^2 = EA_n$ and&lt;/p&gt;
-
-\[\begin{aligned}
-A_n 
- &amp;amp;= \sum\limits_{m=1}^n \left( E(X_m^2|\mathcal{F}_{m-1}) - X_{m-1}^2 \right) \\
- &amp;amp;= \sum\limits_{m-1}^n E\left( (X_m - X_{m-1})^2 | \mathcal{F}_{m-1} \right).
-\end{aligned}\]
-
-&lt;div class=&quot;theorem&quot;&gt;
-For a square integrable martingale $X_n,$ let $A_\infty = \lim_n A_n.$ The followings hold.&lt;br /&gt;
-(i) $E \sup_n X_n^2 \le 4 EA_\infty.$ &lt;br /&gt;
-(ii) $E \sup_n |X_n| \le 3 EA_\infty^\frac{1}{2}$ &lt;br /&gt;
-(iii) $\lim_n X_n$ exists and is almost surely finite on $\{A_\infty &amp;lt; \infty\}.$ &lt;br /&gt;
-(iv) If $f:\mathbb{R} \to \mathbb{R}$ is increasing and $\int_0^\infty f^{-2}(t)dt &amp;lt; \infty,$ $f(t) \ge 1,\forall t,$ then $\frac{X_n}{f(A_n)} \to 0$ a.s. on $\{A_\infty = \infty\}.$ &lt;br /&gt;
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-  
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-(i) is direct from $L^p$ maximal inequality.&lt;br /&gt;
-(ii) Let $N_a = \inf\{n: A_{n+1} &amp;gt; a^2\},$ then it is a stopping time.
-$$\begin{aligned}
-P(\sup_n|X_n| &amp;gt; a)
- &amp;amp;= P(\sup_n |X_n| &amp;gt; a, N &amp;lt; \infty) + P(\sup_n |X_n| &amp;gt; a, N = \infty) \\
- &amp;amp;\le P(N&amp;lt;\infty) + P(\sup_n |X_{n \wedge N} &amp;gt; a) \\
- &amp;amp;= P(N&amp;lt;\infty) + \lim_n P(\sup_{m\le n} |X_{m \wedge N}| &amp;gt; a) \\
- &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E|X_{n \wedge N}|^2 \\
- &amp;amp;= P(N&amp;lt;\infty) + \frac{1}{a^2} \lim_n E A_{n\wedge N} \\
- &amp;amp;\le P(N&amp;lt;\infty) + \frac{1}{a^2} E(A_\infty \wedge a^2) \\
- &amp;amp;= P(A_\infty &amp;gt; a^2) + \frac{1}{a^2} E(A_\infty \wedge a^2).
-\end{aligned}$$
-
-The last inequality is from the fact that 
-$$EA_{n\wedge N} \le EA_N \le a^2 \text{ on } \{N&amp;lt;\infty\}, \\
-EA_n \le EA_\infty \le a^2 \text{ on } \{N=\infty\}.$$
-
-Using this, Fubini&apos;s theorem and integration by substitution, we get
-$$\begin{aligned}
-E \sup_n |X_n| 
- &amp;amp;= \int P(\sup_n |X_n| \ge a) da \\
- &amp;amp;\le \int_0^\infty P(A_\infty^{1/2} &amp;gt; a) da + \int_0^\infty \frac{1}{a^2} E(A_\infty \wedge a^2) da \\
- &amp;amp;= EA_\infty^{1/2} + \int_0^\infty \frac{1}{a^2} \int_0^{a^2} P(A_\infty &amp;gt; b) db da \\
- &amp;amp;= 3EA_\infty^{1/2}.
-\end{aligned}$$
-
-(iii) Given $a&amp;gt;0,$ by (i), $E \sup_n X_{n \wedge N_a} \le 4a^2 &amp;lt; \infty.$ By submartingale convergence, $X_{n\wedge N_a}$ converges a.s. and in $L^2.$ Now let $C_k = \{X_{n\wedge N_k} \text{ converges}\},$ then $P(C_k) = 1$ and $P(\cap_k C_k) = 1$ as well. For an arbitrary $\omega \in (\cap_k C_k) \cap (A_\infty &amp;lt; \infty),$ $N_k(\omega) = \inf\{n: A_n(\omega)\ge k\} = \infty$ for large enough $k$ since $A_\infty(\omega) &amp;lt; \infty.$ Hence $X_{n\wedge N_k}(\omega) = X_n(\omega)$ converges.
-&lt;br /&gt;
-(iv) Let $H_m = \frac{1}{f(A_m)}$ be a bounded predictable sequence. Then $Y_n := (H \cdot X)_n = \sum\limits_{m=1}^n \frac{X_m - X_{m-1}}{f(A_m)}$ is a square integrable martingale. Let $B_n = \sum\limits_{m=1}^n E\left( (Y_m - Y_{m-1})^2 | \mathcal{F}_{m-1} \right),$ then
-
-$$\begin{aligned}
-B_\infty
- &amp;amp;= \sum\limits_{m=0}^\infty \frac{A_{m+1} - A_m}{f(A_{m+1})^2} \\
- &amp;amp;\le \sum\limits_{m=0}^\infty \int_{A_m}^{A_{m+1}} f^{-2}(t) dt \\
- &amp;amp;\le \int_0^\infty f^{-2}(t) dt &amp;lt; \infty \text{ a.s.}
-\end{aligned}$$
-
-By (iii), $\lim_n Y_n$ exists and is finite almost surely. By Kronecker&apos;s lemma, it suffices to show that $f(A_n) \uparrow \infty.$ Since $\int_0^\infty f^{-2}(t) dt &amp;lt; \infty,$ $\lim_t f(t)$ should be $\infty$ otherwise it gives contradiction. Since $A_n, f$ is increasing and $f(A_\infty) = \infty$ on $(A_\infty = \infty),$ this is true.
-&lt;/div&gt;
-&lt;/details&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;From the facts, we get another form of conditional Borel-Cantelli lemma.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;the second B-C lemma (3)&quot;&gt;
-Let $B_n \in \mathcal{F}_n$ for all $n \ge 0$ and $p_n = P(B_n | \mathcal{F}_{n-1}), n\ge 1.$ Then
-$$\frac{\sum_{n=1}^\infty\mathbf{1}{B_n}}{\sum_{n=1}^\infty p_n} \to 1 \text{ a.s. on } \left\{\sum\limits_{n=1}^\infty p_n = \infty \right\}.$$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_n = X_{n-1} + \mathbb{1}_{B_n} - P(B_n | \mathcal{F}_{n-1}),$ $X_0=0$ be a square integrable martingale. Then $A_n$ from Doob&apos;s decomposition yields $A_m - A_{m-1} = p_m - p_m^2$ and $A_n = \sum\limits_{m=1}^n p_m - p_m^2 \le \sum\limits_{m=1}^n p_n.$&lt;br /&gt;
-On $(A_\infty &amp;lt; \infty),$ $X_n$ converges a.s.
-$$\frac{X_n}{\sum_{m=1}^n p_m} = \frac{\sum_{m=1}^n \mathbf{1}_{B_m}}{\sum_{m=1}^n p_m} - 1 \to 0 \text{ a.s. on } (\sum_{n=1}^\infty p_n = \infty).$$
-On $(A_\infty = \infty),$ let $f(t) = 1 \vee t$ so that such $f$ satisfies conditions in (iv) of the previous theorem. Then $\frac{X_n}{f(A_n)} = \frac{X_n}{A_n \vee 1} \to 0$ a.s. on $(A_\infty = \infty).$ Since $A_n \le \sum_{m=1}^n p_m,$ we get $\frac{X_n}{\sum_{m=1}^n p_m} \to 0$ a.s. on $(A_\infty = \infty).$
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 Jan 2021 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-4.5-square-integrable-martingales</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.5-square-integrable-martingales</guid>
         
         
         <category>probability</category>

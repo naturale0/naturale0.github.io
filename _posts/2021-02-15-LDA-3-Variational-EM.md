@@ -99,7 +99,7 @@ To summarize, LDA solving variational EM algorithm repeats the following until t
 
 * In the E-step, for $d=1,\cdots,M$,
     1. For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
-        1. $\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi(\sum_{j=1}^k) \gamma_j^{(t)} \right)$.
+        1. $\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{j=1}^k \gamma_j^{(t)}\big) \right)$.
     2. Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.
     3. $\gamma_d^{(t+1)}=\alpha^{(t)}+\sum_{n=1}^{N_d} \phi_{dn}^{(t+1)}$.
 * In the M-step,
