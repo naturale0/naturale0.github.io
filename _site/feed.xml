@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Feb 2021 13:50:44 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Feb 2021 13:50:44 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Feb 2021 13:53:53 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Feb 2021 13:53:53 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -141,7 +141,7 @@
 
 \[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),dj}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
 
-&lt;p&gt;where $\mathbf{z}&lt;em&gt;{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n&lt;/em&gt;{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
+&lt;p&gt;where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
 
 &lt;p&gt;The first term can be viewed as a (posterior) probability of $w_{dn}|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ as follows&lt;/p&gt;
 
@@ -156,19 +156,16 @@
 
 &lt;p&gt;Here, I would like to implement the collapsed Gibbs sampler only, which is more memory-efficient and easy to code.&lt;/p&gt;
 
-&lt;TBD&gt;
+&lt;p&gt;[TBD]&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-
-
-&lt;br /&gt;
-
-***References***
-
-* Pritchard, Stephens, Donnelly. 2000. **Inference of Population Structure Using Multilocus Genotype Data**. Genetics. 155: 945–959.
-* Griffiths, Steyvers. 2004. **Finding scientific topics**. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.
-&lt;/TBD&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pritchard, Stephens, Donnelly. 2000. &lt;strong&gt;Inference of Population Structure Using Multilocus Genotype Data&lt;/strong&gt;. Genetics. 155: 945–959.&lt;/li&gt;
+  &lt;li&gt;Griffiths, Steyvers. 2004. &lt;strong&gt;Finding scientific topics&lt;/strong&gt;. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Tue, 16 Feb 2021 13:50:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</link>

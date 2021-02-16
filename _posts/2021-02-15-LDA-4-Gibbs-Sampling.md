@@ -132,7 +132,7 @@ P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\e
 $$
 
 
-where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$. 
+where $\mathbf{z}\_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$. 
 
 The first term can be viewed as a (posterior) probability of $w_{dn}\|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). After sampling $\mathbf{z}\|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ as follows
 
@@ -151,13 +151,15 @@ which are marginalized versions of the first and second term of the last equatio
 
 Here, I would like to implement the collapsed Gibbs sampler only, which is more memory-efficient and easy to code.
 
-<TBD>
+[TBD]
 
 
 
 
 
 <br>
+
+
 
 ***References***
 
