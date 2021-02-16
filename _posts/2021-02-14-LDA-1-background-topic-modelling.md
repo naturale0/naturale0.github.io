@@ -14,7 +14,7 @@ Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model t
 > 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
 > 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
 > 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. inference - Gibbs sampling
+> 4. [inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
 > 5. smooth LDA
 
 In this series of articles, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.

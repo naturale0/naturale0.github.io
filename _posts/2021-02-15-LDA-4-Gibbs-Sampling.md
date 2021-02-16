@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Understanding Latent Dirichlet Allocation (4) Gibbs Sampling"
-date:   2021-02-16 13:50:00 +0900
+date:   2021-02-16 18:40:00 +0900
 author: "Sihyung Park"
 categories: [bayesian, machine learning, natural language processing]
 
@@ -16,7 +16,7 @@ In [the last article](/bayesian/machine%20learning/natural%20language%20processi
 > 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
 > 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
 > 3. [inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. inference - Gibbs sampling
+> 4. [inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
 > 5. smooth LDA
 
 
@@ -128,7 +128,7 @@ where $n_{di}$ is the number of times a word from document $d$ has been assigned
 
 
 $$
-P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),dj}+\alpha}{n_{(-dn),d\cdot}+k\alpha},
+P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},
 $$
 
 
@@ -151,9 +151,129 @@ which are marginalized versions of the first and second term of the last equatio
 
 Here, I would like to implement the collapsed Gibbs sampler only, which is more memory-efficient and easy to code.
 
-[TBD]
+<br>
+
+### The sampler
+
+This is the entire process of gibbs sampling, with some abstraction for readability.
+
+```python
+def run_gibbs(docs, vocab, n_topic, n_gibbs=2000, verbose=True):
+    """
+    Run collapsed Gibbs sampling
+    """
+    # initialize required variables
+    _init_gibbs(docs, vocab, n_topic, n_gibbs)
+    
+    if verbose:
+        print("\n", "="*10, "START SAMPLER", "="*10)
+    
+    # run the sampler
+    for t in range(n_gibbs):
+        for d in range(M):
+            for n in range(N[d]):
+                w_dn = docs[d][n]
+                
+                # decrement counter
+                i_t = assign[d, n, t]  # previous assignment
+                n_iw[i_t, w_dn] -= 1
+                n_di[d, i_t] -= 1
+
+                # assign new topics
+                prob = _conditional_prob(w_dn, d)
+                i_tp1 = np.argmax(np.random.multinomial(1, prob))
+
+                # increment counter with new assignment
+                n_iw[i_tp1, w_dn] += 1
+                n_di[d, i_tp1] += 1
+                assign[d, n, t+1] = i_tp1
+        
+        # print out status
+        if verbose & ((t+1) % 50 == 0):
+            print(f"Sampled {t+1}/{n_gibbs}")
+```
+
+In `_init_gibbs()`, instantiate variables (numbers `V`, `M`, `N`, `k` and hyperparameters `alpha`, `eta` and counters and assignment table `n_iw`, `n_di`, `assign`).
+
+```python
+def _init_gibbs(docs, vocab, n_topic, n_gibbs=2000):
+    """
+    Initialize t=0 state for Gibbs sampling.
+    Replace initial word-topic assignment 
+    ndarray (M, N, N_GIBBS) in-place.
+    """
+    # initialize variables
+    init_lda(docs, vocab, n_topic=n_topic, gibbs=True)
+    
+    # word-topic assignment
+    global assign
+    N_max = max(N)
+    assign = np.zeros((M, N_max, n_gibbs+1), dtype=int)
+    print(f"assign: dim {assign.shape}")
+    
+    # initial assignment
+    for d in range(M):
+        for n in range(N[d]):
+            # randomly assign topic to word w_{dn}
+            w_dn = docs[d][n]
+            assign[d, n, 0] = np.random.randint(k)
+
+            # increment counters
+            i = assign[d, n, 0]
+            n_iw[i, w_dn] += 1
+            n_di[d, i] += 1
+```
+
+`_conditional_prob()` is the function that calculates $P(z_{dn}^i=1 \| \mathbf{z}_{(-dn)},\mathbf{w})$ using the multiplicative equation above.
+
+```python
+def _conditional_prob(w_dn, d):
+    """
+    P(z_{dn}^i=1 | z_{(-dn)}, w)
+    """
+    prob = np.empty(k)
+    
+    for i in range(k):
+        # P(w_dn | z_i)
+        _1 = (n_iw[i, w_dn] + eta) / (n_iw[i, :].sum() + V*eta)
+        # P(z_i | d)
+        _2 = (n_di[d, i] + alpha) / (n_di[d, :].sum() + k*alpha)
+        
+        prob[i] = _1 * _2
+    
+    return prob / prob.sum()
+```
+
+After running `run_gibbs()` with appropriately large `n_gibbs`, we get the counter variables `n_iw`, `n_di` from posterior, along with the assignment history `assign` where `[:, :, t]` values of it are word-topic assignment at sampling $t$-th iteration.
+
+<br>
+
+### Recover $\hat\beta$ and $\hat\theta$
+
+Now we need to recover topic-word and document-topic distribution from the sample.
+
+```python
+β̂ = np.empty((k, V))
+θ̂ = np.empty((M, k))
+
+for j in range(V):
+    for i in range(k):
+        β̂[i, j] = (n_iw[i, j] + eta) / (n_iw[i, :].sum() + V*eta)
+
+for d in range(M):
+    for i in range(k):
+        θ̂[d, i] = (n_di[d, i] + alpha) / (n_di[d, :].sum() + k*alpha)
+```
+
+Finally we can plot it as a heatmap.
+
+![LDA_gibbs-result](/assets/fig/210215_lda_gibbs-result.png)
+
+<br>
 
 
+
+*Full code and result are available [here (GitHub)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-1.%20latent%20dirichlet%20allocation.ipynb).*
 
 
 
