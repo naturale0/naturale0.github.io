@@ -87,7 +87,7 @@ where $n_{ij}$ the number of occurrence of word $j$ under topic $i$, $m_{di}$ is
 2. Update $\theta^{(t+1)}$ with a sample from $\theta_d\|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_k(\alpha^{(t)}+\mathbf{m}_d)$.
 
 3. Update $\mathbf{z}_d^{(t+1)}$ with a sample by probability
-    
+   
     $$
     P(z_{dn}^i=1|\mathbf{w},\beta^{(t+1)}) = \frac{\theta_{di}\beta_{iw_{dn}}^{(t+1)}}{\sum_{d=1}^M \theta_{di}\beta_{iw_{dn}}^{(t+1)}}.
     $$
@@ -106,7 +106,7 @@ The update rule in step 4 is called [**Metropolis-Hastings algorithm**](https://
 
 ## Collapsed Gibbs sampling
 
-While the proposed sampler works, in topic modelling we only need to estimate document-topic distribution $\theta$ and topic-word distribution $\beta$. Griffiths and Steyvers (2002) boiled the process down to evaluating the posterior $P(\mathbf{z}\|\mathbf{w}) \propto P(\mathbf{w}\|\mathbf{z})P(\mathbf{z})$ which was intractable. Notice that we marginalized the target posterior over $\alpha$ and $\theta$. This makes it a **collapsed Gibbs sampler**; the posterior is *collapsed* with respect to $\alpha,\theta$.
+While the proposed sampler works, in topic modelling we only need to estimate document-topic distribution $\theta$ and topic-word distribution $\beta$. Griffiths and Steyvers (2002) boiled the process down to evaluating the posterior $P(\mathbf{z}\|\mathbf{w}) \propto P(\mathbf{w}\|\mathbf{z})P(\mathbf{z})$ which was intractable. Notice that we marginalized the target posterior over $\beta$ and $\theta$. This makes it a **collapsed Gibbs sampler**; the posterior is *collapsed* with respect to $\beta,\theta$.
 
 Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta \| \mathbf{z})$ over $\beta$ from *smoothed* LDA, we get the posterior topic-word assignment probability
 
@@ -134,8 +134,9 @@ $$
 
 where $\mathbf{z}\_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$. 
 
-The first term can be viewed as a (posterior) probability of $w_{dn}\|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). After sampling $\mathbf{z}\|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ as follows
+The first term can be viewed as a (posterior) probability of $w_{dn}\|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). We run sampling by sequentially sample $z_{dn}^{(t+1)}$ given $\mathbf{z}_{(-dn)}^{(t)}, \mathbf{w}$ after one another.
 
+After sampling $\mathbf{z}\|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with
 
 $$
 \hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\

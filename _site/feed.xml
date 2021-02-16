@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Feb 2021 18:40:12 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Feb 2021 18:40:12 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Feb 2021 18:58:30 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Feb 2021 18:58:30 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -131,7 +131,7 @@
 
 &lt;h2 id=&quot;collapsed-gibbs-sampling&quot;&gt;Collapsed Gibbs sampling&lt;/h2&gt;
 
-&lt;p&gt;While the proposed sampler works, in topic modelling we only need to estimate document-topic distribution $\theta$ and topic-word distribution $\beta$. Griffiths and Steyvers (2002) boiled the process down to evaluating the posterior $P(\mathbf{z}|\mathbf{w}) \propto P(\mathbf{w}|\mathbf{z})P(\mathbf{z})$ which was intractable. Notice that we marginalized the target posterior over $\alpha$ and $\theta$. This makes it a &lt;strong&gt;collapsed Gibbs sampler&lt;/strong&gt;; the posterior is &lt;em&gt;collapsed&lt;/em&gt; with respect to $\alpha,\theta$.&lt;/p&gt;
+&lt;p&gt;While the proposed sampler works, in topic modelling we only need to estimate document-topic distribution $\theta$ and topic-word distribution $\beta$. Griffiths and Steyvers (2002) boiled the process down to evaluating the posterior $P(\mathbf{z}|\mathbf{w}) \propto P(\mathbf{w}|\mathbf{z})P(\mathbf{z})$ which was intractable. Notice that we marginalized the target posterior over $\beta$ and $\theta$. This makes it a &lt;strong&gt;collapsed Gibbs sampler&lt;/strong&gt;; the posterior is &lt;em&gt;collapsed&lt;/em&gt; with respect to $\beta,\theta$.&lt;/p&gt;
 
 &lt;p&gt;Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta | \mathbf{z})$ over $\beta$ from &lt;em&gt;smoothed&lt;/em&gt; LDA, we get the posterior topic-word assignment probability&lt;/p&gt;
 
@@ -147,7 +147,9 @@
 
 &lt;p&gt;where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
 
-&lt;p&gt;The first term can be viewed as a (posterior) probability of $w_{dn}|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ as follows&lt;/p&gt;
+&lt;p&gt;The first term can be viewed as a (posterior) probability of $w_{dn}|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). We run sampling by sequentially sample $z_{dn}^{(t+1)}$ given $\mathbf{z}_{(-dn)}^{(t)}, \mathbf{w}$ after one another.&lt;/p&gt;
+
+&lt;p&gt;After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with&lt;/p&gt;
 
 \[\hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\
 \hat\theta_{di} = \frac{n_{di}+\alpha}{n_{d\cdot}+k\alpha},\]
@@ -287,7 +289,7 @@
   &lt;li&gt;Griffiths, Steyvers. 2004. &lt;strong&gt;Finding scientific topics&lt;/strong&gt;. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Tue, 16 Feb 2021 13:50:00 +0900</pubDate>
+        <pubDate>Tue, 16 Feb 2021 18:40:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</link>
         <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</guid>
         
