@@ -90,8 +90,8 @@ Organize only the terms with $\lambda$ and differentiate it then we get
 $$
 \begin{aligned}
 \frac{\partial L}{\partial \lambda_i}
-  = &- \Psi\left(V \lambda_{i}\right) + V \Psi\left(\lambda_{i}\right) \\
-    &- \cancel{V \big( \Psi(\lambda_{i}) - \Psi\left( V \lambda_{i} \right) \big)} \\
+  = &- \Psi'\left(V \lambda_{i}\right) + V \Psi'\left(\lambda_{i}\right) \\
+    &- \cancel{V \big( \Psi'(\lambda_{i}) - \Psi'\left( V \lambda_{i} \right) \big)} \\
     &- V (\lambda_{i}\cancel{-1})\big(\Psi'(\lambda_{i}) - \Psi'\left(V \lambda_{i}\right)\big) \\
     &+ \sum_{n=1}^{N_d}\sum_{j=1}^V \phi_{dni} w_{dn}^j \big( \Psi'(\lambda_i) - \Psi'(V\lambda_i) \big) \\
     &+ \sum_{j=1}^V(\eta_j-1)\big( \Psi'(\lambda_i) - \Psi'(V\lambda_i) \big)
