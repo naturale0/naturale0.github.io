@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Feb 2021 03:05:04 +0900</pubDate>
-    <lastBuildDate>Thu, 18 Feb 2021 03:05:04 +0900</lastBuildDate>
+    <pubDate>Thu, 18 Feb 2021 03:24:27 +0900</pubDate>
+    <lastBuildDate>Thu, 18 Feb 2021 03:24:27 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -212,7 +212,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 &lt;p&gt;Generative process of genotype of $d$-th individual $\mathbf{w}_{d}$ with $k$ predefined populations described on the paper is a little different than that of Blei et al. (2003).&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;$\beta_k \sim \mathcal{D}_V(\lambda)$.&lt;/li&gt;
+  &lt;li&gt;$\beta_k \sim \mathcal{D}_V(\eta)$.&lt;/li&gt;
   &lt;li&gt;$\theta_d \sim \mathcal{D}_k(\alpha)$. $\theta_{di}$ is the probability that $d$-th individual’s genome is originated from population $i$.&lt;/li&gt;
   &lt;li&gt;for $n=1,\cdots,N$:
     &lt;ol&gt;
@@ -254,7 +254,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Update $\beta^{(t+1)}$ with a sample from $\beta_i|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\lambda+\mathbf{n}_i)$.&lt;/p&gt;
+    &lt;p&gt;Update $\beta^{(t+1)}$ with a sample from $\beta_i|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\eta+\mathbf{n}_i)$.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Update $\theta^{(t+1)}$ with a sample from $\theta_d|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_k(\alpha^{(t)}+\mathbf{m}_d)$.&lt;/p&gt;
@@ -285,7 +285,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 &lt;p&gt;Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta | \mathbf{z})$ over $\beta$ from &lt;em&gt;smoothed&lt;/em&gt; LDA, we get the posterior topic-word assignment probability&lt;/p&gt;
 
-\[P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\lambda)}{\Gamma(\lambda)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\lambda)}{\Gamma(n_{i\cdot}+V\lambda)}\]
+\[P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\eta)}{\Gamma(\eta)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\eta)}{\Gamma(n_{i\cdot}+V\eta)}\]
 
 &lt;p&gt;where $n_{ij}$ is the number of times word $j$ has been assigned to topic $i$, just as in the vanilla Gibbs sampler. Marginalizing another Dirichlet-multinomial $P(\mathbf{z},\theta)$ over $\theta$ yields&lt;/p&gt;
 
@@ -293,7 +293,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 &lt;p&gt;where $n_{di}$ is the number of times a word from document $d$ has been assigned to topic $i$. Multiplying these two equations, we get&lt;/p&gt;
 
-\[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\lambda}{n_{(-dn),i\cdot}+V\lambda} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
+\[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
 
 &lt;p&gt;where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
 
@@ -301,7 +301,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 &lt;p&gt;After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with&lt;/p&gt;
 
-\[\hat\beta_{iw_n} = \frac{n_{iw_n}+\lambda}{n_{i\cdot}+V\lambda}, \\
+\[\hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\
 \hat\theta_{di} = \frac{n_{di}+\alpha}{n_{d\cdot}+k\alpha},\]
 
 &lt;p&gt;which are marginalized versions of the first and second term of the last equation, respectively.&lt;/p&gt;
@@ -353,7 +353,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
             &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sampled &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_init_gibbs()&lt;/code&gt;, instantiate variables (numbers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k&lt;/code&gt; and hyperparameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alpha&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lam&lt;/code&gt; and counters and assignment table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_init_gibbs()&lt;/code&gt;, instantiate variables (numbers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k&lt;/code&gt; and hyperparameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alpha&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eta&lt;/code&gt; and counters and assignment table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;).&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_init_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
@@ -393,7 +393,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
     
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;# P(w_dn | z_i)
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;# P(z_i | d)
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
@@ -415,7 +415,7 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
@@ -539,7 +539,9 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;To be specific, for $\beta$, $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. For $\alpha$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}’$, we use linear-time Newton-Raphson algorithm to update it.&lt;/p&gt;
+&lt;p&gt;For $\beta$, $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. I will leave this part for reading since it is a trivial, exhausting calculation well-described in appendix A.3 (Blei et al., 2003).&lt;/p&gt;
+
+&lt;p&gt;For $\alpha$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}’$, we use linear-time Newton-Raphson algorithm to update it.&lt;/p&gt;
 
 &lt;p&gt;To summarize, LDA solving variational EM algorithm repeats the following until the parameters converge.&lt;/p&gt;
 
@@ -548,7 +550,7 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
     &lt;ol&gt;
       &lt;li&gt;For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
         &lt;ol&gt;
-          &lt;li&gt;$\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{j=1}^k \gamma_j^{(t)}\big) \right)$.&lt;/li&gt;
+          &lt;li&gt;$\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{i=1}^k \gamma_{di}^{(t)}\big) \right)$.&lt;/li&gt;
         &lt;/ol&gt;
       &lt;/li&gt;
       &lt;li&gt;Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.&lt;/li&gt;
@@ -557,13 +559,13 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
   &lt;/li&gt;
   &lt;li&gt;In the M-step,
     &lt;ol&gt;
-      &lt;li&gt;$\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^N \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.&lt;/li&gt;
+      &lt;li&gt;$\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.&lt;/li&gt;
       &lt;li&gt;Update $\alpha^{(t+1)}$ with linear-time Newton method.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Here, $\Psi$ is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Digamma_function&quot;&gt;digamma function&lt;/a&gt;. I have yet clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), which in its core is a mere application of the block matrix inversion formula&lt;/p&gt;
+&lt;p&gt;Here, $\Psi$ is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Digamma_function&quot;&gt;digamma function&lt;/a&gt;. I have yet clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), which in its core is a mere block matrix inversion formula&lt;/p&gt;
 
 \[(A+BCD)^{-1} = A^{-1} - A^{-1}B(C^{-1}+DA^{-1}B)^{-1}DA^{-1}.\]
 

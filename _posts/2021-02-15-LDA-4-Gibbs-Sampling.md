@@ -45,7 +45,7 @@ In population genetics setup, our notations are as follows:
 
 Generative process of genotype of $d$-th individual $\mathbf{w}_{d}$ with $k$ predefined populations described on the paper is a little different than that of Blei et al. (2003).
 
-1. $\beta_k \sim \mathcal{D}_V(\lambda)$.
+1. $\beta_k \sim \mathcal{D}_V(\eta)$.
 2. $\theta_d \sim \mathcal{D}_k(\alpha)$. $\theta\_{di}$ is the probability that $d$-th individual's genome is originated from population $i$.
 3. for $n=1,\cdots,N$:
     1. $z_{dn}$ is chosen with probability $P(z_{dn}^i=1\|\theta_d,\beta)=\theta_{di}$.
@@ -82,7 +82,7 @@ $$
 
 where $n_{ij}$ the number of occurrence of word $j$ under topic $i$, $m_{di}$ is the number of loci in $d$-th individual that originated from population $i$.
 
-1. Update $\beta^{(t+1)}$ with a sample from $\beta_i\|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\lambda+\mathbf{n}_i)$.
+1. Update $\beta^{(t+1)}$ with a sample from $\beta_i\|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\eta+\mathbf{n}_i)$.
 
 2. Update $\theta^{(t+1)}$ with a sample from $\theta_d\|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_k(\alpha^{(t)}+\mathbf{m}_d)$.
 
@@ -112,7 +112,7 @@ Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta \| \ma
 
 
 $$
-P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\lambda)}{\Gamma(\lambda)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\lambda)}{\Gamma(n_{i\cdot}+V\lambda)}
+P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\eta)}{\Gamma(\eta)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\eta)}{\Gamma(n_{i\cdot}+V\eta)}
 $$
 
 
@@ -128,7 +128,7 @@ where $n_{di}$ is the number of times a word from document $d$ has been assigned
 
 
 $$
-P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\lambda}{n_{(-dn),i\cdot}+V\lambda} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},
+P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},
 $$
 
 
@@ -139,7 +139,7 @@ The first term can be viewed as a (posterior) probability of $w_{dn}\|z_i$ (i.e.
 After sampling $\mathbf{z}\|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with
 
 $$
-\hat\beta_{iw_n} = \frac{n_{iw_n}+\lambda}{n_{i\cdot}+V\lambda}, \\
+\hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\
 \hat\theta_{di} = \frac{n_{di}+\alpha}{n_{d\cdot}+k\alpha},
 $$
 
@@ -194,7 +194,7 @@ def run_gibbs(docs, vocab, n_topic, n_gibbs=2000, verbose=True):
             print(f"Sampled {t+1}/{n_gibbs}")
 ```
 
-In `_init_gibbs()`, instantiate variables (numbers `V`, `M`, `N`, `k` and hyperparameters `alpha`, `lam` and counters and assignment table `n_iw`, `n_di`, `assign`).
+In `_init_gibbs()`, instantiate variables (numbers `V`, `M`, `N`, `k` and hyperparameters `alpha`, `eta` and counters and assignment table `n_iw`, `n_di`, `assign`).
 
 ```python
 def _init_gibbs(docs, vocab, n_topic, n_gibbs=2000):
@@ -236,7 +236,7 @@ def _conditional_prob(w_dn, d):
     
     for i in range(k):
         # P(w_dn | z_i)
-        _1 = (n_iw[i, w_dn] + lam) / (n_iw[i, :].sum() + V*lam)
+        _1 = (n_iw[i, w_dn] + eta) / (n_iw[i, :].sum() + V*eta)
         # P(z_i | d)
         _2 = (n_di[d, i] + alpha) / (n_di[d, :].sum() + k*alpha)
         
@@ -259,7 +259,7 @@ Now we need to recover topic-word and document-topic distribution from the sampl
 
 for j in range(V):
     for i in range(k):
-        β̂[i, j] = (n_iw[i, j] + lam) / (n_iw[i, :].sum() + V*lam)
+        β̂[i, j] = (n_iw[i, j] + eta) / (n_iw[i, :].sum() + V*eta)
 
 for d in range(M):
     for i in range(k):
