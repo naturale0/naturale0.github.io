@@ -93,20 +93,22 @@ Then variational EM algorithm for solving LDA is as follows:
     1. (E-step) Update $(\gamma^{(t+1)},\phi^{(t+1)}) = \arg\max_{(\gamma,\phi)} L(\gamma,\phi\|\alpha^{(t)},\beta^{(t)})$.
     2. (M-step) Update $(\alpha^{(t+1)},\beta^{(t+1)}) = \arg\max_{(\alpha,\beta)} L(\gamma^{(t+1)},\phi^{(t+1)}\|\alpha,\beta)$.
 
-To be specific, for $\beta$, $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. For $\alpha$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}'$, we use linear-time Newton-Raphson algorithm to update it.
+For $\beta$, $\phi$ and $\gamma$, closed form update formula can be easily derived by differentiating $L$, forming the Lagrangian and setting it to zero. I will leave this part for reading since it is a trivial, exhausting calculation well-described in appendix A.3 (Blei et al., 2003).
+
+For $\alpha$, since $L$ has Hessian of the form $\text{diag}(h) + \mathbf{1}z\mathbf{1}'$, we use linear-time Newton-Raphson algorithm to update it.
 
 To summarize, LDA solving variational EM algorithm repeats the following until the parameters converge.
 
 * In the E-step, for $d=1,\cdots,M$,
     1. For $n=1,\cdots,N_d$ and $i=1,\cdots,k$,
-        1. $\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{j=1}^k \gamma_j^{(t)}\big) \right)$.
+        1. $\phi_{dni}^{(t+1)}=\beta_{iw_{dn}}\exp\left( \Psi(\gamma_{di}^{(t)}) - \Psi\big(\sum_{i=1}^k \gamma_{di}^{(t)}\big) \right)$.
     2. Normalize $\phi_{dn}^{(t+1)}$ to sum to $1$.
     3. $\gamma_d^{(t+1)}=\alpha^{(t)}+\sum_{n=1}^{N_d} \phi_{dn}^{(t+1)}$.
 * In the M-step,
-    1. $\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^N \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.
+    1. $\beta_{ij}^{(t+1)} = \sum_{d=1}^M \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} \mathbf{w}_{dn}^j$.
     2. Update $\alpha^{(t+1)}$ with linear-time Newton method.
 
-Here, $\Psi$ is the [digamma function](https://en.wikipedia.org/wiki/Digamma_function). I have yet clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), which in its core is a mere application of the block matrix inversion formula 
+Here, $\Psi$ is the [digamma function](https://en.wikipedia.org/wiki/Digamma_function). I have yet clarified the update rule of linear-time Newton-Raphson algorithm. This is in appendix A.4.2 of Blei et al. (2003), which in its core is a mere block matrix inversion formula 
 
 
 $$
