@@ -37,7 +37,7 @@ Recall the basic LDA that I explained from [the first](/natural%20language%20pro
 
 ## Smooth LDA
 
-In order to extend the model to be fully Bayesian, all we need to do is to regard $\beta$ as another hidden parameter by adding a Dirichlet prior $\beta \sim \mathcal{D}(\lambda)$ to it. Blei et al. (2003) provides a graphical representation of this extended, or **smoothed** version of LDA. I added a modified variational distribution for it next to the figure.
+In order to extend the model to be fully Bayesian, all we need to do is to regard $\beta$ as another hidden parameter by endowing $\beta$ a Dirichlet prior $\beta_i \sim \mathcal{D}_V(\vec\eta)$ for all $i=1,\cdots,k$ where $\vec\eta=(\eta,\cdots,\eta)$ is a $V$-length vectors of **the same elements $\eta $** by exchangeability. Blei et al. (2003) provides a graphical representation of this extended, or **smoothed** version of LDA. I added a modified variational distribution for it next to the figure.
 
 
 
@@ -59,7 +59,7 @@ I already explained inference methods for smooth LDA: [Gibbs sampling with Metro
 
 ### E-step
 
-As in the figure that I put next to the Figure 7, we add additional variational parameter $\eta$ that acts as a surrogate of $\lambda$ and consider $\beta_i \sim \mathcal{D}_V(\lambda)$ for all $i=1,\cdots,k$ by exchangeability. Then the variational distribution becomes
+As in the figure that I put next to the Figure 7, we add additional variational parameter $\lambda$ that acts as a surrogate of $\eta$ and consider $\beta_i \sim \mathcal{D}_V(\lambda_i)$ for $i=1,\cdots,k$. Then the variational distribution becomes
 
 
 $$
@@ -67,7 +67,7 @@ q(\theta, \mathbf{z}, \beta|\gamma,\phi,\lambda) = \prod_{i=1}^k \mathcal{D}_V(\
 $$
 
 
-Since $\beta$ part is multiplicative to the others, update rule for $\phi$ and $\gamma$ remains the same. (Actually, update rule of $\phi$ changes a little as it contained a term $\beta$ which is now considered a random variable.) Update rule for $\lambda$ is easy to derive by (again) differentiating the variational lower bound $L$.
+Since $\beta$ part is multiplicative to the others, update rule for $\phi$ and $\gamma$ remains the same. (Actually, update rule of $\phi$ changes a little as it contains a $\beta$ term which is now considered a random variable.) Update rule for $\lambda$ is easy to derive by (again) differentiating the variational lower bound $L$ and setting it to zero.
 
 There were no derivation depicted in the Blei et al. (2003), so I did one by myself. The variational lower bound $L$ is
 
@@ -75,28 +75,28 @@ There were no derivation depicted in the Blei et al. (2003), so I did one by mys
 $$
 \begin{aligned}
 L(\gamma,\phi,\lambda | \alpha,\eta)
-  &= M\sum_{i=1}^k \biggr( \log\Gamma\biggr(\sum_{j=1}^V\eta_j\biggr) - \sum_{j=1}^V\log\Gamma(\eta_j) + \sum_{j=1}^V (\eta_j\cancel{-1})\big(\Psi(\lambda_i) - \Psi(V\lambda_i)\big) \biggr) \\
+  &= \sum_{i=1}^k \left( \log\Gamma(V\eta) - V\log\Gamma(\eta) + (\eta\cancel{-1}) \sum_{j=1}^V \bigg(\Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg)\bigg) \right) \\
   &+ \sum_{d=1}^M\left(\log\Gamma\biggr(\sum_{i=1}^k\alpha_i\biggr) - \sum_{i=1}^k \log\Gamma(\alpha_i) + \sum_{i=1}^k(\alpha_i-1)\left( \Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr) \right)\right) \\
   &+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\left(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\right) \\
-  &+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k\sum_{j=1}^V \phi_{dni}w_{dn}^j\big( \Psi(\lambda_i) - \Psi(V\lambda_i) \big) \\
-  &- M\sum_{i=1}^k \biggr( \log\Gamma(V\lambda_i) - V\log\Gamma(\lambda_i) + V(\lambda_i\cancel{-1})\big( \Psi(\lambda_i)-\Psi(V\lambda_i) \big) \biggr) \\
+  &+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k\sum_{j=1}^V \phi_{dni}w_{dn}^j\left( \Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) \\
+  &- \sum_{i=1}^k \left( \log\Gamma\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) - \sum_{j=1}^V\log\Gamma(\lambda_{ij}) + \sum_{j=1}^V(\lambda_{ij}\cancel{-1})\bigg( \Psi(\lambda_{ij})-\Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \bigg) \right) \\
   &- \sum_{d=1}^M \left( \log\Gamma\biggr(\sum_{i=1}^k \gamma_{di}\biggr) - \sum_{i=1}^k \log\Gamma(\gamma_{di}) + \sum_{i=1}^k(\gamma_{di}-1)\biggr(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\biggr) \right)  \\
   &- \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\log\phi_{dni}  .
 \end{aligned}
 $$
 
 
-Organize only the terms with $\lambda$ and differentiate it then we get
+Organize only the terms with $\lambda_{ij}$ and differentiate it then we get
 
 
 $$
 \begin{aligned}
-\frac{\partial L}{\partial \lambda_i}
-  = &- \Psi'\left(V \lambda_{i}\right) + V \Psi'\left(\lambda_{i}\right) \\
-    &- \cancel{V \big( \Psi'(\lambda_{i}) - \Psi'\left( V \lambda_{i} \right) \big)} \\
-    &- V (\lambda_{i}\cancel{-1})\big(\Psi'(\lambda_{i}) - \Psi'\left(V \lambda_{i}\right)\big) \\
-    &+ \sum_{n=1}^{N_d}\sum_{j=1}^V \phi_{dni} w_{dn}^j \big( \Psi'(\lambda_i) - \Psi'(V\lambda_i) \big) \\
-    &+ \sum_{j=1}^V(\eta_j-1)\big( \Psi'(\lambda_i) - \Psi'(V\lambda_i) \big)
+\frac{\partial L}{\partial \lambda_{ij}}
+  = &~ \eta \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
+    &+ \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni} w_{dn}^j \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
+    &- \cancel{ M \left( \Psi\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) - \Psi\left(\lambda_{ij}\right) \right) } \\
+    &- \cancel{ M \left( \Psi(\lambda_{ij}) - \Psi\bigg( \sum_{j=1}^V \lambda_{ij} \bigg) \right) } \\
+    &- \lambda_{ij} \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) \right) } \\
 \end{aligned}
 $$
 
@@ -107,7 +107,7 @@ Thus letting it zero yields the update rule for $\lambda$:
 
 
 $$
-\lambda_i^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t)}w_{dn}^j.
+\lambda_{ij}^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t)}w_{dn}^j.
 $$
 
 
@@ -120,24 +120,24 @@ Update rule for $\alpha$ is the same: we update it using linear-time Newton-Raph
 
 
 $$
-L_{[\eta]} = \sum_{i=1}^k \left( \log\Gamma\biggr(\sum_{j=1}^V \eta_j\biggr) - \sum_{j=1}^V\log\Gamma(\eta_j) + \sum_{j=1}^V (\eta_j-1)\biggr( \Psi(\lambda_{ij}) - \Psi\biggr(\sum_{j=1}^V\lambda_{ij}\biggr) \biggr) \right).
+L_{[\eta]} = \sum_{i=1}^k \left( \log\Gamma(V \eta) - V\log\Gamma(\eta) + (\eta-1) \sum_{j=1}^V \bigg( \Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \bigg) \right).
 $$
 
 
-This is exactly the same as $L_{[\alpha]}$ if replacing $\eta$ with $\alpha$, $k$ with $M$, and $\eta$ with $\gamma$. Thus by exactly the same algorithm, we can update $\eta$.
+This is exactly the same as $L_{[\alpha]}$ if replacing $\eta$ with $\alpha$, $k$ with $M$, and $\eta$ with $\gamma$. (Recall that $\vec\eta$ is a vector of all the same elements) Thus by exactly the same algorithm (implemented as `_update()`), we can update $\eta$.
 
-To summarize, the **whole process of variational EM is as follows**: First, initialize $\phi_{dni}^{(0)} := 1/k$ for all $i=1,\cdots,k$ and $n=1,\cdots,N_d$ along with $\gamma_{di}^{(0)} := \alpha_i^{(0)} + N/k$ for all $i=1,\cdots,k$. Then repeat the following until convergence.
+To summarize, the **whole process of variational EM is as follows**: First, initialize $\phi_{dni}^{(0)} := 1/k$ for all $i=1,\cdots,k$, $n=1,\cdots,N_d$ and $d=1,\cdots,M$ along with $\gamma_{di}^{(0)} := \alpha_i^{(0)} + N/k$ for all $i=1,\cdots,k$, $d=1,\cdots,M$. Then repeat the following until convergence.
 
 3. In the E-step, for $d=1,\cdots,M$,
     1. For $n=1$ to $N$ and $i=1$ to $k$,
-        1. $\phi_{dni}^{(t+1)} = \exp\left(\Psi(\lambda_i^{(t)} - \Psi\big(V \lambda_{i}^{(t)}\big) + \Psi(\gamma_{di}^{(t)} - \Psi\big(\sum_{j=1}^k \gamma_{dj}^{(t)}\big)\right)$.
+        1. $\phi_{dni}^{(t+1)} = \exp\left(\Psi(\lambda_{ij}^{(t)}) - \Psi\big(\sum_{j=1}^V \lambda_{ij}^{(t)}\big) + \Psi(\gamma_{di}^{(t)} - \Psi\big(\sum_{i=1}^k \gamma_{di}^{(t)}\big)\right)$.
         2. For $j=1, \cdots, V$,
-            1. $\lambda_{ij}^{(t+1)} = \eta + \sum_{d=1}^M \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} w_{dn}^j$.
+            1. $\lambda_{ij}^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} w_{dn}^j$.
     2. Normalize $\phi_{dn}^{(t+1)}$ to sum to 1.
-    3. $\gamma_d^{(t+1)} = \alpha + \sum_{n=1}^N \phi_{dn}^{(t+1)}$.
+    3. $\gamma_d^{(t+1)} = \alpha + \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)}$.
 2. In the M-step,
     1. Update $\alpha^{(t+1)}$ with linear-time Newton-Raphson.
-    2. Update $\eta^{(t+1)}$ with linear-time Newton-Raphson.
+    2. Update $\vec\eta^{(t+1)}$ with linear-time Newton-Raphson.
 
 <br>
 
@@ -152,3 +152,6 @@ To summarize, the **whole process of variational EM is as follows**: First, init
 ***References***
 
 * Blei, Ng, Jordan. 2003. **Latent Dirichlet Allocation**. Journal of Machine Learning Research. 3 (4–5): 993–1022.
+
+
+
