@@ -53,6 +53,7 @@ class PageObject(object):
 
   def _page_objects_from_files(self, file_names):
     page_objects = []
+    file_names.sort()
     for file_name in file_names:
       page_objects.append(self._page_object_from_file(file_name))
     return page_objects
@@ -89,7 +90,6 @@ class PageObject(object):
     query = r"<loc>http://.*(.*{}.*)</loc>".format(title)
     site = re.search(query, sitemap, re.IGNORECASE).group(0)
     permalink = re.search(r'<loc>http://.*?(/.*)</loc>', site, re.IGNORECASE)
-    print(permalink.group(1))
     if permalink:
       return permalink.group(1).strip()
     return None
@@ -320,7 +320,7 @@ def update_pages(page_objects, search_ids, top_matches):
   for index, match_row in enumerate(top_matches):
     page_elements = '<div id="related" class="clearfix">\n'
     page_elements += '  \n '
-    page_elements += '  <h3>Related Posts</h3>\n'
+    page_elements += '  <h3>You might also like...</h3>\n'
     page_elements += '  <ul>'
     print("{}".format(page_objects[search_ids[index]]['title']))
     for match in match_row:
@@ -347,6 +347,7 @@ def update_pages(page_objects, search_ids, top_matches):
     #     file.close()
 
 if __name__ == "__main__":
-  page_objects = PageObject(None).objects_for_directory('./_posts/')
-  search_ids, top_matches = LatentSemanticAnalysis(page_objects).top_matches()
-  update_pages(page_objects, search_ids, top_matches)
+    page_objects = PageObject(None).objects_for_directory('./_posts/')
+    search_ids, top_matches = LatentSemanticAnalysis(page_objects).top_matches()
+    top_matches = [sorted(match_row, key=lambda x: x["index"]) for match_row in top_matches]
+    update_pages(page_objects, search_ids, top_matches)
