@@ -25,8 +25,8 @@ kramdown:
 # Third-party services
 # just leave someone empty to disable it
 google_analytics: 'UA-99089561-2'
-disqus_url: http://disqus.com/by/naturale0
-disqus_id: naturale0-github-io
+#disqus_url: http://disqus.com/by/naturale0
+#disqus_id: naturale0-github-io
 
 # used this for post_excerpt at index_page
 excerpt_separator: <!--description-->
