@@ -20,17 +20,17 @@ layout: default
 
   <!--<hr/>-->
 
-  {% include author.html %}
-  
-  <hr/>
-
-  <!-- Related Content -->
-  {% capture processed_path %}
+    <!-- Related Content -->
+    {% capture processed_path %}
     {{- page.path | replace: " ", "-" -}}
   {% endcapture %}
   
-    {% include related/{{processed_path}}.html %}
+  {% include related/{{processed_path}}.html %}
+  
+  <hr/>
 
+  {% include author.html %}
+  
   <!--<hr style="border-top: dotted 1px;" />-->
 
   </footer>
