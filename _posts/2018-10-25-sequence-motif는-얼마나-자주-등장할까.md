@@ -89,15 +89,4 @@ $P(\cup_{i=1}^{m} A_i) = \sum_{i=1}^{m} (-1)^{i+1} \binom{n-i(k-1)}{i} 4^{-ki}$
 
 
 
-<div id="related" class="clearfix">
-  <br><br>
-<hr>
-   <h3>Related Posts</h3>
-  <ul>
-    <li><a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a></li>
-    <li><a href="/probability/Borel-Cantelli-lemmas">"Borel-Cantelli lemmas are converses of each other"</a></li>
-    <li><a href="/probability/PTE-2.5-convergence-of-random-series">(PTE) 2.5. Convergence of random series</a></li>
-    <li><a href="/probability/SLLN">"Strong law of large numbers"</a></li>
-    <li><a href="/probability/PTE-3.4-central-limit-theorem">(PTE) 3.4. Central limit theorem</a></li>
-  </ul>
-</div>
+ 

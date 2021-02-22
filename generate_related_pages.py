@@ -166,10 +166,10 @@ class PageObject(object):
     return ' '.join(alpha_numeric.lower().split())
 
   def _extract_needs_related(self, html):
-    date = re.search('<div id="related" class="clearfix">(.*?)</div>', \
-                     html, re.DOTALL)
-    if date:
-      return True
+    # date = re.search('<div id="related" class="clearfix">(.*?)</div>', \
+    #                  html, re.DOTALL)
+    # if date:
+    return True
     return False
 
 class LatentSemanticAnalysis(object):
@@ -319,7 +319,7 @@ def create_page_element(page_object):
 def update_pages(page_objects, search_ids, top_matches):
   for index, match_row in enumerate(top_matches):
     page_elements = '<div id="related" class="clearfix">\n'
-    page_elements += '  <br><br>\n<hr>\n '
+    page_elements += '  \n '
     page_elements += '  <h3>Related Posts</h3>\n'
     page_elements += '  <ul>'
     print("{}".format(page_objects[search_ids[index]]['title']))
@@ -331,15 +331,19 @@ def update_pages(page_objects, search_ids, top_matches):
     page_elements += '\n  </ul>'
     page_elements += '\n</div>'
 
-    file_to_update = page_objects[search_ids[index]]['file_name']
-    with open(file_to_update, 'r') as file:
-      file_contents = file.read()
-      file.close()
-      new_file_contents = re.sub('<div id="related" class="clearfix">.*</div>', \
-                                 page_elements, file_contents, flags=re.DOTALL)
-      with open(file_to_update, 'w') as file:
-        file.write(new_file_contents)
-        file.close()
+    # file_to_update = page_objects[search_ids[index]]['file_name']
+    fname = page_objects[search_ids[index]]['file_name'][2:]
+    if not fname.startswith("-"):
+      with open(f"./_includes/related/{fname}.html", "w") as w:
+        w.write(page_elements)
+    # with open(file_to_update, 'r') as file:
+    #   file_contents = file.read()
+    #   file.close()
+    #   new_file_contents = re.sub('<div id="related" class="clearfix">.*</div>', \
+    #                              page_elements, file_contents, flags=re.DOTALL)
+    #   with open(file_to_update, 'w') as file:
+    #     file.write(new_file_contents)
+    #     file.close()
 
 if __name__ == "__main__":
   page_objects = PageObject(None).objects_for_directory('./_posts/')

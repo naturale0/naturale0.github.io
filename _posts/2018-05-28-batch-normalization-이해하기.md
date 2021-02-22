@@ -178,15 +178,4 @@ net = slim.conv2d(input, 64, [5,5], padding="SAME",
 
 
 
-<div id="related" class="clearfix">
-  <br><br>
-<hr>
-   <h3>Related Posts</h3>
-  <ul>
-    <li><a href="/probability/application-of-pi-lambda-theorem">"Application of Dynkin's π-λ theorem"</a></li>
-    <li><a href="/probability/PTE-1.1-Measure-theory">(PTE) 1.1. Basics on measure theory</a></li>
-    <li><a href="/probability/PTE-4.1-conditional-expectation">(PTE) 4.1. Conditional expectation</a></li>
-    <li><a href="/probability/PTE-1.7-product-space">(PTE) 1.7. Product space</a></li>
-    <li><a href="/probability/PTE-2.1-independence">(PTE) 2.1. Independence</a></li>
-  </ul>
-</div>
+ 
