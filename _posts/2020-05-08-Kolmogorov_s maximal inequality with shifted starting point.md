@@ -41,3 +41,18 @@ which means
 $$P(\max_{m \leq k \leq n} |S_k - S_m| > x) \leq \frac{1}{x^2} \mathrm{Var}(S_n - S_m)$$
 
 Thus, even with different starting point of summation, and even if $X_i$'s are *not identically distributed*, the same form of inequality can be used. This result is useful when proving Kolmogorov's three-series theorem.
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/probability/PTE-2.5-convergence-of-random-series">(PTE) 2.5. Convergence of random series</a></li>
+    <li><a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a></li>
+    <li><a href="/linear%20model/limitation-of-R-sq">"Limitation of $R^2$"</a></li>
+    <li><a href="/probability/determination-of-random-variables-and-random-number-generation">"Determination of random variables and random number generation"</a></li>
+    <li><a href="/probability/PTE-2.4-strong-law-of-large-numbers">(PTE) 2.4. Strong law of large numbers</a></li>
+  </ul>
+</div>

@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Feb 2021 11:32:42 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Feb 2021 11:32:42 +0900</lastBuildDate>
+    <pubDate>Mon, 22 Feb 2021 13:50:43 +0900</pubDate>
+    <lastBuildDate>Mon, 22 Feb 2021 13:50:43 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -146,6 +146,18 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
   &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Understanding Latent Dirichlet Allocation (3) Variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Understanding Latent Dirichlet Allocation (2) The Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-FastText&quot;&gt;Understanding FastText&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Wed, 17 Feb 2021 00:51:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</link>
@@ -438,6 +450,19 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
   &lt;li&gt;Pritchard, Stephens, Donnelly. 2000. &lt;strong&gt;Inference of Population Structure Using Multilocus Genotype Data&lt;/strong&gt;. Genetics. 155: 945–959.&lt;/li&gt;
   &lt;li&gt;Griffiths, Steyvers. 2004. &lt;strong&gt;Finding scientific topics&lt;/strong&gt;. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Understanding Latent Dirichlet Allocation (2) The Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Understanding Latent Dirichlet Allocation (3) Variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Tue, 16 Feb 2021 18:40:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</link>
@@ -709,6 +734,19 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
 &lt;ul&gt;
   &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Understanding Latent Dirichlet Allocation (2) The Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA&quot;&gt;Understanding Latent Dirichlet Allocation (5) Smooth LDA&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Mon, 15 Feb 2021 02:26:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM</link>
@@ -825,6 +863,18 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
 
 &lt;hr /&gt;
 
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Understanding Latent Dirichlet Allocation (3) Variational EM&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
@@ -943,6 +993,18 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
 
 &lt;hr /&gt;
 
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Understanding Latent Dirichlet Allocation (2) The Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-FastText&quot;&gt;Understanding FastText&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
@@ -1066,6 +1128,19 @@ death : ['thee', 'mercy', 'life', 'breath', 'judgment']
   &lt;li&gt;Bojanowski et al. 2017. &lt;strong&gt;Enriching Word Vectors with Subword Information&lt;/strong&gt;. Transactions of the Association for Computational Linguistics, 5, 135-146.&lt;/li&gt;
   &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch&quot;&gt;Setting up M1 Mac for both TensorFlow and PyTorch&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Understanding Latent Dirichlet Allocation (3) Variational EM&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Tue, 09 Feb 2021 01:36:00 +0900</pubDate>
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-FastText</link>
@@ -1260,6 +1335,19 @@ death : ['life', 'hell', 'presence', 'battle', 'dead']
   &lt;li&gt;Mikolov et al. 2013. &lt;strong&gt;Distributed Representations of Words and Phrases and their Compositionality&lt;/strong&gt;. Advances in Neural Information Processing Systems, 26.&lt;/li&gt;
   &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-FastText&quot;&gt;Understanding FastText&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch&quot;&gt;Setting up M1 Mac for both TensorFlow and PyTorch&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Mon, 08 Feb 2021 01:08:00 +0900</pubDate>
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/understanding-skip-gram</link>
@@ -1463,6 +1551,19 @@ can be implemented as follows:&lt;/p&gt;
   &lt;li&gt;Bengio et al. 2003. &lt;strong&gt;A neural probabilistic language model&lt;/strong&gt;. The journal of machine learning research, 3, 1137-1155.&lt;/li&gt;
   &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-FastText&quot;&gt;Understanding FastText&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch&quot;&gt;Setting up M1 Mac for both TensorFlow and PyTorch&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Understanding Latent Dirichlet Allocation (4) Gibbs Sampling&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Thu, 04 Feb 2021 20:43:00 +0900</pubDate>
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model</link>
@@ -1625,6 +1726,18 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 
 &lt;hr /&gt;
 
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;Understanding Skip Gram&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model&quot;&gt;Understanding Neural Probabilistic Language Model&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/machine%20learning/natural%20language%20processing/Understanding-FastText&quot;&gt;Understanding FastText&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Understanding Latent Dirichlet Allocation (1) Backgrounds&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/2020/05/29 22:41:00 +0900/.html&quot;&gt;&quot;Degrees of freedom in standardized regression&quot;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
@@ -1737,7 +1850,7 @@ Thus $Z$ is integrable and $X_{n\wedge N}$ is uniformly integrable. $EX_0 \le EX
   &lt;summary&gt;
     expand proof
   &lt;/summary&gt;
-  
+
 &lt;div class=&quot;proof&quot; text=&quot;(b)&quot;&gt;
 (b) Let $T_a \wedge T_b$ be a stopping time. By law of iterated logarithm,
 $$\begin{aligned}
@@ -1794,6 +1907,19 @@ Note that $\inf_n S_n \le S_{n\wedge T_b} \le b$ and $|S_{n\wedge T_b}| \le |\in
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
+
+&lt;div id=&quot;related&quot; class=&quot;clearfix&quot;&gt;
+  &lt;br /&gt;&lt;br /&gt;
+&lt;hr /&gt;
+   &lt;h3&gt;Related Posts&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;/probability/PTE-4.3-application-of-martingales&quot;&gt;(PTE) 4.3. Application of martingales&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/probability/PTE-4.2-martingales&quot;&gt;(PTE) 4.2. Martingales and a.s. convergence&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/probability/PTE-4.5-square-integrable-martingales&quot;&gt;(PTE) 4.5. Square integrable martingales&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/probability/PTE-4.4-martingale-convergence-in-Lp&quot;&gt;(PTE) 4.4. Martingale inequalities and convergence in $L^p$&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/probability/PTE-2.4-strong-law-of-large-numbers&quot;&gt;(PTE) 2.4. Strong law of large numbers&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Fri, 22 Jan 2021 00:30:00 +0900</pubDate>
         <link>http://localhost:4000/probability/PTE-4.8-optional-stopping</link>

@@ -286,3 +286,20 @@ Finally we can plot it as a heatmap.
 
 * Pritchard, Stephens, Donnelly. 2000. **Inference of Population Structure Using Multilocus Genotype Data**. Genetics. 155: 945–959.
 * Griffiths, Steyvers. 2004. **Finding scientific topics**. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.
+
+
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model">Understanding Latent Dirichlet Allocation (2) The Model</a></li>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM">Understanding Latent Dirichlet Allocation (3) Variational EM</a></li>
+    <li><a href="/natural%20language%20processing/LDA-1-background-topic-modelling">Understanding Latent Dirichlet Allocation (1) Backgrounds</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/understanding-skip-gram">Understanding Skip Gram</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model">Understanding Neural Probabilistic Language Model</a></li>
+  </ul>
+</div>

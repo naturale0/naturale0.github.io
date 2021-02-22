@@ -86,3 +86,18 @@ $P(\cup_{i=1}^{m} A_i) = \sum_{i=1}^{m} (-1)^{i+1} \binom{n-i(k-1)}{i} 4^{-ki}$
 ## 참고
 - 위 방법을 구현한 [스크립트를 공개해두었다](https://github.com/naturale0/MotifOccur).
 - [DFA라는 방식을 사용해서 해답을 제시한 글이 있다](https://ro-che.info/articles/2018-08-01-probability-of-regex). 본 글에서 소개한 방법보다 일반적이고 우수한 방법인 듯하다.
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/probability/PTE-2.3-B-C-lemmas">(PTE) 2.3. Borel-Cantelli lemmas</a></li>
+    <li><a href="/probability/Borel-Cantelli-lemmas">"Borel-Cantelli lemmas are converses of each other"</a></li>
+    <li><a href="/probability/PTE-2.5-convergence-of-random-series">(PTE) 2.5. Convergence of random series</a></li>
+    <li><a href="/probability/SLLN">"Strong law of large numbers"</a></li>
+    <li><a href="/probability/PTE-3.4-central-limit-theorem">(PTE) 3.4. Central limit theorem</a></li>
+  </ul>
+</div>

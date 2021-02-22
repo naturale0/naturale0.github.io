@@ -13,3 +13,17 @@ Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element
 
 
 This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling">Understanding Latent Dirichlet Allocation (4) Gibbs Sampling</a></li>
+    <li><a href="/probability/PTE-2.4-strong-law-of-large-numbers">(PTE) 2.4. Strong law of large numbers</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model">Understanding Neural Probabilistic Language Model</a></li>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM">Understanding Latent Dirichlet Allocation (3) Variational EM</a></li>
+    <li><a href="/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch">Setting up M1 Mac for both TensorFlow and PyTorch</a></li>
+  </ul>
+</div>

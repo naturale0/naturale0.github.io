@@ -72,3 +72,19 @@ The last example does not actually utilize $\pi-\lambda$ theorem, but it uses si
 <div class="theorem" text="extension to random variable">
 $\mathcal{A} \subset \mathcal{F}$ satisfies $\sigma(\mathcal{A}) = \mathcal{B}(\mathbb{R})$. $X: (\Omega, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is a function defined on a probability space. If $X^{-1}(A) \in \mathcal{F}$, $\forall A \in \mathcal{A}$, then $X$ is a random variable.
 </div>
+
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/probability/PTE-1.1-Measure-theory">(PTE) 1.1. Basics on measure theory</a></li>
+    <li><a href="/probability/PTE-4.1-conditional-expectation">(PTE) 4.1. Conditional expectation</a></li>
+    <li><a href="/probability/PTE-2.1-independence">(PTE) 2.1. Independence</a></li>
+    <li><a href="/probability/PTE-1.3-Random-variables">(PTE) 1.3. Random variables</a></li>
+    <li><a href="/probability/PTE-4.6.2-Levy-s-theorem">(PTE) 4.6.2. Levy's theorem</a></li>
+  </ul>
+</div>

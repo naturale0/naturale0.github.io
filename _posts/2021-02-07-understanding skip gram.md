@@ -190,3 +190,20 @@ Top 5 most similar words result seems good as well.
 * Mikolov et al. 2013. **Efficient Estimation of Word Representations in Vector Space**. International Conference on Learning Representations.
 * Mikolov et al. 2013. **Distributed Representations of Words and Phrases and their Compositionality**. Advances in Neural Information Processing Systems, 26.
 * Lee. 2019. **한국어 임베딩 (Embedding Korean)**. 에이콘 출판사. 
+
+
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/machine%20learning/natural%20language%20processing/Understanding-FastText">Understanding FastText</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model">Understanding Neural Probabilistic Language Model</a></li>
+    <li><a href="/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch">Setting up M1 Mac for both TensorFlow and PyTorch</a></li>
+    <li><a href="/natural%20language%20processing/LDA-1-background-topic-modelling">Understanding Latent Dirichlet Allocation (1) Backgrounds</a></li>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling">Understanding Latent Dirichlet Allocation (4) Gibbs Sampling</a></li>
+  </ul>
+</div>

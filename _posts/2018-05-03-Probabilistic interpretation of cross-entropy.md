@@ -139,3 +139,17 @@ $$ \hat{\theta}^{MLE} = argmax_{\theta}(\log{L}) = argmin_{\theta}(-\log{L}) =ar
 - [이 글](https://taeoh-kim.github.io/blog/cross-entropy의-정확한-확률적-의미/)을 많이 참고했다. 이 글을 바탕으로 노테이션을 정리하고 수식 유도를 풀어 쓴 정도다.
 - Odds에 대해서는 [이 글](http://www.incodom.kr/Odds_ratio)을 참고했다.
 
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/machine%20learning/%EC%9D%B8%EA%B3%B5%EC%8B%A0%EA%B2%BD%EB%A7%9D-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-%EC%84%A0%ED%98%95-%EB%B6%84%EB%A5%98%EA%B8%B0">인공신경망 이해하기 (1) 선형 분류기</a></li>
+    <li><a href="/probability/PTE-2.4-strong-law-of-large-numbers">(PTE) 2.4. Strong law of large numbers</a></li>
+    <li><a href="/linear%20model/limitation-of-R-sq">"Limitation of $R^2$"</a></li>
+    <li><a href="/probability/PTE-3.4-central-limit-theorem">(PTE) 3.4. Central limit theorem</a></li>
+    <li><a href="/probability/PTE-3.3-characteristic-functions">(PTE) 3.3. Characteristic functions</a></li>
+  </ul>
+</div>

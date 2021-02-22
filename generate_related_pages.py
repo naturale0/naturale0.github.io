@@ -61,7 +61,8 @@ class PageObject(object):
     file = open(file_name, 'r')
     file_contents = file.read()
     # TODO: check page_contents length and drop short pages
-    page_url = self._extract_permalink(file_contents)
+    processed_fname = str(file_name[20:-3].encode()).replace(r"\x", "%").replace(" ", "-")[2:-1]
+    page_url = self._extract_permalink(processed_fname)
     page_date = self._extract_date(file_name, file_contents)
     page_title = self._extract_title(file_contents)
     if not page_url:
@@ -80,8 +81,15 @@ class PageObject(object):
     file.close()
     return page_object
 
-  def _extract_permalink(self, html):
-    permalink = re.search('permalink: (.*)', html)
+  def _extract_permalink(self, title):
+    if title.startswith("-"):
+      return
+    with open("_site/sitemap.xml") as r:
+      sitemap = r.read()
+    query = r"<loc>http://.*(.*{}.*)</loc>".format(title)
+    site = re.search(query, sitemap, re.IGNORECASE).group(0)
+    permalink = re.search(r'<loc>http://.*?(/.*)</loc>', site, re.IGNORECASE)
+    print(permalink.group(1))
     if permalink:
       return permalink.group(1).strip()
     return None
@@ -172,7 +180,7 @@ class LatentSemanticAnalysis(object):
     self.page_objects = page_objects
     self.document_space = self._generate_document_space(document_term_matrix)
 
-  def top_matches(self, count=3):
+  def top_matches(self, count=5):
     search_ids = self._list_search_ids(self.page_objects)
     return search_ids, self._top_matches(search_ids, self.document_space, count)
 
@@ -210,7 +218,7 @@ class LatentSemanticAnalysis(object):
     word_dict = {}
     word_index = 0
     # create a dictionary of words and give them id numbers
-    for key, value in raw_word_dict.iteritems():
+    for key, value in raw_word_dict.items():
       # the words must appear in more than 1 document
       if value > 1:
         word_dict[key] = word_index
@@ -219,10 +227,10 @@ class LatentSemanticAnalysis(object):
 
   def _generate_document_space(self, term_doc_matrix):
     M = numpy.asmatrix(term_doc_matrix)
-    U, singular_values, Vt = numpy.linalg.svd(M, full_matrices=True)
+    U, singular_values, Vt = numpy.linalg.svd(M, full_matrices=False)
     
     k = self._get_k_limit(singular_values)
-    for x in xrange(k, len(singular_values)):
+    for x in range(k, len(singular_values)):
       singular_values[x] = 0
 
     s = numpy.diag(singular_values)
@@ -279,7 +287,7 @@ class LatentSemanticAnalysis(object):
     numerator = 0
     denominatorA = 0
     denominatorB = 0
-    for index in xrange(0, len(search_document)):
+    for index in range(0, len(search_document)):
       numerator += search_document[index] * current_document[index]
       denominatorA += search_document[index] * search_document[index]
       denominatorB += current_document[index] * current_document[index]
@@ -289,36 +297,39 @@ class LatentSemanticAnalysis(object):
 
 
 def create_page_element(page_object):
-  page_element = '<div class="card">'
-  if page_object['image']:
-    page_element += '<img class="card-img-top" '
-    page_element += 'src="{}"'.format(page_object['image'])
-    page_element += 'alt="{}">'.format(page_object['title'])
-  page_element += '<div class="card-body">'
+  #page_element = '<div class="card">'
+  #if page_object['image']:
+  #  page_element += '<img class="card-img-top" '
+  #  page_element += 'src="{}"'.format(page_object['image'])
+  #  page_element += 'alt="{}">'.format(page_object['title'])
+  #page_element += '\n        <div class="card-body">'
+  page_element = ''
   if page_object['url']:
-    page_element += '<a href="{}">'.format(page_object['url'])
-    page_element += '<h5 class="card-title">{}'.format(page_object['title'])
-    page_element += '</h5></a>'
+    page_element += '    <li><a href="{}">{}</a></li>'.format(page_object['url'], page_object['title'])
   else:
-    page_element += '<h5 class="card-title">{}</h5>'.format(page_object['title'])
-  page_element += '<p class="card-text">'
-  page_element += '<small class="text-muted">{}'.format(page_object['date'])
-  page_element += '</small></p>'
-  page_element += '</div></div>'
+    #page_element += '<h5 class="card-title">{}</h5>'.format(page_object['title'])
+    pass
+  #page_element += '<p class="card-text">'
+  #page_element += '<small class="text-muted">{}'.format(page_object['date'])
+  #page_element += '</small></p>'
+  #page_element += '\n        </div>'
+  #page_element += '\n      </div>'
   return page_element
 
 def update_pages(page_objects, search_ids, top_matches):
   for index, match_row in enumerate(top_matches):
-    page_elements = '<div id="related" class="clearfix">'
-    page_elements = '<div class="card mt-3">'
-    page_elements = '<div class="card-header">Related Posts</div>'
-    page_elements = '<div class="card-body"><div class="card-group bg-faded">'
-    print "{}".format(page_objects[search_ids[index]]['title'])
+    page_elements = '<div id="related" class="clearfix">\n'
+    page_elements += '  <br><br>\n<hr>\n '
+    page_elements += '  <h3>Related Posts</h3>\n'
+    page_elements += '  <ul>'
+    print("{}".format(page_objects[search_ids[index]]['title']))
     for match in match_row:
       match_index = match['index']
+      page_elements += '\n'
       page_elements += create_page_element(page_objects[match_index])
-      print " {:.5f} -- {}".format(match['value'], page_objects[match_index]['title'])
-    page_elements += '</div></div></div></div>'
+      print(" {:.5f} -- {}".format(match['value'], page_objects[match_index]['title']))
+    page_elements += '\n  </ul>'
+    page_elements += '\n</div>'
 
     file_to_update = page_objects[search_ids[index]]['file_name']
     with open(file_to_update, 'r') as file:

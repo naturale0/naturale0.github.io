@@ -126,3 +126,20 @@ where $P(\theta_d\|\alpha)$ are weights and $\prod_{n=1}^{N_d} P(w_{dn}\|\theta_
 ---
 
 [^1]: The number of words in a document is determined by Poisson distribution ($N \sim \mathcal{P}(\xi)$). I omitted this part because $N$ is an ancillary variable and it does not make the model description different even if it is considered as a constant.
+
+
+
+
+
+<div id="related" class="clearfix">
+  <br><br>
+<hr>
+   <h3>Related Posts</h3>
+  <ul>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling">Understanding Latent Dirichlet Allocation (4) Gibbs Sampling</a></li>
+    <li><a href="/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM">Understanding Latent Dirichlet Allocation (3) Variational EM</a></li>
+    <li><a href="/natural%20language%20processing/LDA-1-background-topic-modelling">Understanding Latent Dirichlet Allocation (1) Backgrounds</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/Understanding-Neural-Probabilistic-Language-Model">Understanding Neural Probabilistic Language Model</a></li>
+    <li><a href="/machine%20learning/natural%20language%20processing/understanding-skip-gram">Understanding Skip Gram</a></li>
+  </ul>
+</div>
