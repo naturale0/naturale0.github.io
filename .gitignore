@@ -1,9 +1,11 @@
 _site
 .sass-cache
 .jekyll-metadata
+*/.jekyll-cache/*
 *-cache/
 */.DS_Store
 vendor/
+.bundle/
 
 ### NPM ###
 /node_modules/

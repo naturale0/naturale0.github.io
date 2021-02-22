@@ -17,6 +17,7 @@ instagram_username: naturale0
 github_username: naturale0
 
 # Build settings
+lsi: false
 markdown: kramdown
 kramdown:
   input: GFM

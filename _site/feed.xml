@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Feb 2021 03:24:27 +0900</pubDate>
-    <lastBuildDate>Thu, 18 Feb 2021 03:24:27 +0900</lastBuildDate>
+    <pubDate>Mon, 22 Feb 2021 11:32:42 +0900</pubDate>
+    <lastBuildDate>Mon, 22 Feb 2021 11:32:42 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -86,11 +86,11 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
 
 \[\begin{aligned}
 \frac{\partial L}{\partial \lambda_{ij}}
-  = &amp;amp;~ \eta \color{blue}{ \left( \Psi&apos;(\lambda_{ij}) - \Psi&apos;\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
-    &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni} w_{dn}^j \color{blue}{ \left( \Psi&apos;(\lambda_{ij}) - \Psi&apos;\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
+  = &amp;amp;~ \eta \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
+    &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni} w_{dn}^j \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
     &amp;amp;- \cancel{ M \left( \Psi\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) - \Psi\left(\lambda_{ij}\right) \right) } \\
     &amp;amp;- \cancel{ M \left( \Psi(\lambda_{ij}) - \Psi\bigg( \sum_{j=1}^V \lambda_{ij} \bigg) \right) } \\
-    &amp;amp;- \lambda_{ij} \color{blue}{ \left( \Psi&apos;(\lambda_{ij}) - \Psi&apos;\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) \right) } \\
+    &amp;amp;- \lambda_{ij} \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) \right) } \\
 \end{aligned}\]
 
 &lt;p&gt;Thus letting it zero yields the update rule for $\lambda$:&lt;/p&gt;
@@ -634,7 +634,7 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vi_var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
     From appendix A.2 of Blei et al., 2003.
-    For hessian with shape `H = diag(h) + 1z1&apos;`
+    For hessian with shape `H = diag(h) + 1z1'`
     
     To update alpha, input var=alpha and vi_var=gamma, const=M.
     To update eta, input var=eta and vi_var=lambda, const=k.
@@ -648,7 +648,7 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
         &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; \
             &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;psi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vi_var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psi_sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-        &lt;span class=&quot;c1&quot;&gt;# H = diag(h) + 1z1&apos;
+        &lt;span class=&quot;c1&quot;&gt;# H = diag(h) + 1z1'
 &lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;## z: Hessian constant component
 &lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;## h: Hessian diagonal component
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;polygamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
@@ -684,16 +684,16 @@ z_{dn} \sim \mathcal{M}_k(\phi(\mathbf{w}_d)).\]
 
 &lt;p&gt;I ran LDA inference on $M=2000$ documents of Reuters News title data with $k=10$ topics. Top 9 important words in each topic (a mixture of word distribution) extracted from fitted LDA is as follows:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TOPIC 00: [&apos;ec&apos; &apos;csr&apos; &apos;loss&apos; &apos;bank&apos; &apos;icco&apos; &apos;unit&apos; &apos;cocoa&apos; &apos;fob&apos; &apos;petroleum&apos;]
-TOPIC 01: [&apos;raises&apos; &apos;acquisition&apos; &apos;prices&apos; &apos;prime&apos; &apos;rate&apos; &apos;w&apos; &apos;completes&apos; &apos;mar&apos;, &apos;imports&apos;]
-TOPIC 02: [&apos;year&apos; &apos;sets&apos; &apos;sees&apos; &apos;net&apos; &apos;stock&apos; &apos;dividend&apos; &apos;l&apos; &apos;industries&apos; &apos;corp&apos;]
-TOPIC 03: [&apos;pct&apos; &apos;cts&apos; &apos;gdp&apos; &apos;opec&apos; &apos;shr&apos; &apos;february&apos; &apos;plc&apos; &apos;ups&apos; &apos;rose&apos;]
-TOPIC 04: [&apos;u&apos; &apos;japan&apos; &apos;fed&apos; &apos;trade&apos; &apos;gaf&apos; &apos;ems&apos; &apos;says&apos; &apos;dlr&apos; &apos;gnp&apos;]
-TOPIC 05: [&apos;usda&apos; &apos;f&apos; &apos;ag&apos; &apos;international&apos; &apos;sell&apos; &apos;report&apos; &apos;ge&apos; &apos;corn&apos; &apos;wheat&apos;]
-TOPIC 06: [&apos;k&apos; &apos;market&apos; &apos;money&apos; &apos;rate&apos; &apos;eep&apos; &apos;treasury&apos; &apos;prime&apos; &apos;says&apos; &apos;mln&apos;]
-TOPIC 07: [&apos;qtr&apos; &apos;note&apos; &apos;4th&apos; &apos;net&apos; &apos;loss&apos; &apos;ico&apos; &apos;corp&apos; &apos;1st&apos; &apos;group&apos;]
-TOPIC 08: [&apos;dlrs&apos; &apos;mln&apos; &apos;bp&apos; &apos;march&apos; &apos;corp&apos; &apos;week&apos; &apos;canada&apos; &apos;e&apos; &apos;bank&apos;]
-TOPIC 09: [&apos;unit&apos; &apos;buy&apos; &apos;says&apos; &apos;sale&apos; &apos;c&apos; &apos;sells&apos; &apos;completes&apos; &apos;american&apos; &apos;grain&apos;]
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TOPIC 00: ['ec' 'csr' 'loss' 'bank' 'icco' 'unit' 'cocoa' 'fob' 'petroleum']
+TOPIC 01: ['raises' 'acquisition' 'prices' 'prime' 'rate' 'w' 'completes' 'mar', 'imports']
+TOPIC 02: ['year' 'sets' 'sees' 'net' 'stock' 'dividend' 'l' 'industries' 'corp']
+TOPIC 03: ['pct' 'cts' 'gdp' 'opec' 'shr' 'february' 'plc' 'ups' 'rose']
+TOPIC 04: ['u' 'japan' 'fed' 'trade' 'gaf' 'ems' 'says' 'dlr' 'gnp']
+TOPIC 05: ['usda' 'f' 'ag' 'international' 'sell' 'report' 'ge' 'corn' 'wheat']
+TOPIC 06: ['k' 'market' 'money' 'rate' 'eep' 'treasury' 'prime' 'says' 'mln']
+TOPIC 07: ['qtr' 'note' '4th' 'net' 'loss' 'ico' 'corp' '1st' 'group']
+TOPIC 08: ['dlrs' 'mln' 'bp' 'march' 'corp' 'week' 'canada' 'e' 'bank']
+TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain']
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Topic-word distribution ($\beta$) and document-topic distribution ($\theta$) recovered from LDA is as follows. $i$-th column from the figure left represents probabilities of each words to be generated given the topic $z_i$  so it sums to 1. Similarly, $d$-th row from the figure right represents the $d$-th document($\mathbf{w}_d$)’s mixture weights on topics, so it also sums to 1.&lt;/p&gt;
@@ -989,7 +989,7 @@ TOPIC 09: [&apos;unit&apos; &apos;buy&apos; &apos;says&apos; &apos;sale&apos; &a
 \[s_{i,g} \in \mathcal{G}_{t_i}, \\
 z_{i,g} = Zs_{i,g}, \\
 u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
-\hat y_i = \sigma\left( u_i&apos;v_i \right) = \frac{1}{1 + e^{-u_i&apos;v_i}}\]
+\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
 
 &lt;p&gt;where $s_{i,g}$’s are subwords of $i$th word $t_i$, $c_i$ is the context word, $Z$ is the subword embedding, $V$ is the word embedding, $y_i\in{0, 1}$ is the target label. Note that subword-level embedding was not used for context words.&lt;/p&gt;
 
@@ -1046,10 +1046,10 @@ u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
 &lt;p&gt;Top 5 most similar words result implies this property as well. Compare it to the result from skip gram.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULTS
-angel : [&apos;angels&apos;, &apos;strangely&apos;, &apos;thus&apos;, &apos;saith&apos;, &apos;lord&apos;]
-snow  : [&apos;blue&apos;, &apos;figures&apos;, &apos;rolls&apos;, &apos;like&apos;, &apos;mud&apos;]
-love  : [&apos;loved&apos;, &apos;lovers&apos;, &apos;lover&apos;, &apos;my&apos;, &apos;thy&apos;]
-death : [&apos;thee&apos;, &apos;mercy&apos;, &apos;life&apos;, &apos;breath&apos;, &apos;judgment&apos;]
+angel : ['angels', 'strangely', 'thus', 'saith', 'lord']
+snow  : ['blue', 'figures', 'rolls', 'like', 'mud']
+love  : ['loved', 'lovers', 'lover', 'my', 'thy']
+death : ['thee', 'mercy', 'life', 'breath', 'judgment']
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Cosine similarity heatmap agrees with the results.&lt;/p&gt;
@@ -1154,7 +1154,7 @@ death : [&apos;thee&apos;, &apos;mercy&apos;, &apos;life&apos;, &apos;breath&apo
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;right&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -1184,7 +1184,7 @@ death : [&apos;thee&apos;, &apos;mercy&apos;, &apos;life&apos;, &apos;breath&apo
 \[x = \{(t_+, c_+), (t_{-,j}, c_{-,j}): j=1, \cdots, k\}, \\
 u_i = Ut_i, \\
 v_i = Vc_i,\\
-\hat y_i = \sigma\left( u_i&apos;v_i \right) = \frac{1}{1 + e^{-u_i&apos;v_i}}\]
+\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
 
 &lt;p&gt;where $t_{ij}$ is the one-hot encoded target word vector, $v_{ij}$ is the context word vector, $U,V$ are embeddings, $y_{ij}\in{0, 1}$ is the target label.&lt;/p&gt;
 
@@ -1247,10 +1247,10 @@ v_i = Vc_i,\\
 &lt;p&gt;Top 5 most similar words result seems good as well.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULT
-angel : [&apos;isaiah&apos;, &apos;spake&apos;, &apos;jesus&apos;, &apos;lord&apos;, &apos;rachel&apos;]
-snow  : [&apos;mid&apos;, &apos;ice&apos;, &apos;storm&apos;, &apos;bodily&apos;, &apos;wind&apos;]
-love  : [&apos;sing&apos;, &apos;esteem&apos;, &apos;faith&apos;, &apos;tempt&apos;, &apos;rejoice&apos;]
-death : [&apos;life&apos;, &apos;hell&apos;, &apos;presence&apos;, &apos;battle&apos;, &apos;dead&apos;]
+angel : ['isaiah', 'spake', 'jesus', 'lord', 'rachel']
+snow  : ['mid', 'ice', 'storm', 'bodily', 'wind']
+love  : ['sing', 'esteem', 'faith', 'tempt', 'rejoice']
+death : ['life', 'hell', 'presence', 'battle', 'dead']
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
@@ -1590,8 +1590,8 @@ python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ipykernel &lt;span class
 Since my goal was to run the other programs natively as possible, I reverted miniforge back to M1 build.&lt;br /&gt;
 Just comment out the part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; to be
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# # !! Contents within this block are managed by &apos;conda init&apos; !!&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# __conda_setup=&quot;$(&apos;/Users/$(whoami)/miniforge3_x86_64/bin/conda&apos; &apos;shell.zsh&apos; &apos;hook&apos; 2&amp;gt; /dev/null)&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# # !! Contents within this block are managed by 'conda init' !!&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# __conda_setup=&quot;$('/Users/$(whoami)/miniforge3_x86_64/bin/conda' 'shell.zsh' 'hook' 2&amp;gt; /dev/null)&quot;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# if [ $? -eq 0 ]; then&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#     eval &quot;$__conda_setup&quot;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# else&lt;/span&gt;
@@ -1611,9 +1611,9 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Alias x86 versions of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; so that you can manage packages without switching the entire environment to x86.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias condax86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# conda x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias pipx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# pip in pytorch_x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;alias pythonx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# python in pytorch_x86&lt;/span&gt;
+    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias condax86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# conda x86&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pipx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# pip in pytorch_x86&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pythonx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# python in pytorch_x86&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -1663,7 +1663,7 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
 Let $(X_n)$ be a uniformly integrable submartingale and $N$ be a stopping time. Then $(X_{n\wedge N})$ is a uniformly integrable submartingale.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-It is shown that $(X_{n\wedge N})$ is a submartingale in theorem 4.2.9. By Vitali&apos;s lemma $X_n$ converges almost surely and in $L^1$ to some $X_\infty.$ Since $x \mapsto x^+$  is convex and increasing, $X_n^+, X_{n\wedge N}^+$ are submartingales. Let $\tau=n, \sigma=n\wedge N$ then $\tau,\sigma$ are bounded stopping times. By Doob&apos;s inequality, $EX_{n\wedge N}^+ \le EX_n^+$ and $$\sup_n EX_{n\wedge N}^+ \le \sup_n EX_n^+ \le \sup_n E|X_n| &amp;lt; \infty.$$
+It is shown that $(X_{n\wedge N})$ is a submartingale in theorem 4.2.9. By Vitali's lemma $X_n$ converges almost surely and in $L^1$ to some $X_\infty.$ Since $x \mapsto x^+$  is convex and increasing, $X_n^+, X_{n\wedge N}^+$ are submartingales. Let $\tau=n, \sigma=n\wedge N$ then $\tau,\sigma$ are bounded stopping times. By Doob's inequality, $EX_{n\wedge N}^+ \le EX_n^+$ and $$\sup_n EX_{n\wedge N}^+ \le \sup_n EX_n^+ \le \sup_n E|X_n| &amp;lt; \infty.$$
 By Submartingale convergence, $X_{n\wedge N} \to X_N$ a.s. and $E|X_N| &amp;lt; \infty.$
 $$\begin{aligned}
 &amp;amp;E|X_{n\wedge N}| \mathbf{1}_{|X_{n\wedge N}| \ge a} \\
@@ -1681,9 +1681,9 @@ $$EX_0 \le EX_N \le EX_\infty$$
 where $X_\infty = \lim_n X_n$ a.s.
 &lt;/div&gt;
 &lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By the previous theorem $X_{n\wedge N}$ is a uniformly integrable submartingale. By Doob&apos;s inequality
+By the previous theorem $X_{n\wedge N}$ is a uniformly integrable submartingale. By Doob's inequality
 $$EX_0 \le EX_{n\wedge N} \le EX_n.$$
-By Vitali&apos;s lemma, $EX_n \to EX_\infty$ and
+By Vitali's lemma, $EX_n \to EX_\infty$ and
 $$\begin{aligned}
 \lim_n X_{n\wedge N} = 
  \begin{cases}
@@ -1691,7 +1691,7 @@ $$\begin{aligned}
  X_\infty = X_N &amp;amp;,~ N=\infty
  \end{cases}
 \end{aligned}$$
-Thus $X_{n\wedge N} \to X_N$ a.s. with $E|X_N| &amp;lt; \infty$ by Vitali&apos;s lemma and the desired result follows.
+Thus $X_{n\wedge N} \to X_N$ a.s. with $E|X_N| &amp;lt; \infty$ by Vitali's lemma and the desired result follows.
 &lt;/div&gt;
 
 &lt;p&gt;Finally we state and prove the main theorem.&lt;/p&gt;
