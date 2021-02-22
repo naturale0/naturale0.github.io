@@ -227,7 +227,7 @@ class LatentSemanticAnalysis(object):
 
   def _generate_document_space(self, term_doc_matrix):
     M = numpy.asmatrix(term_doc_matrix)
-    U, singular_values, Vt = numpy.linalg.svd(M, full_matrices=False)
+    U, singular_values, Vt = numpy.linalg.svd(M, full_matrices=True)
     
     k = self._get_k_limit(singular_values)
     for x in range(k, len(singular_values)):
