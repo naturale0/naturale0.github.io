@@ -17,7 +17,7 @@ Attention, residual connection 등 현대적인 딥러닝 모델을 디자인할
 ## 기존 방법의 문제점
 BatchNorm이 어떤 의미를 가지는지를 알기 위해서는 BatchNorm이 고안되기 이전의 딥러닝 모형 초기화 및 학습 과정 표준화 과정을 둘러볼 필요가 있다.
 
-뉴럴넷이 안정적으로 잘 학습되기 위해서는 입력층에 넣을 인풋과 각 층의 weight를 표준화할 필요가 있다. BatchNorm이 고안되기 전에는 두 가지 방법을 주로 사용했는데, 이전 포스트[[1](/machine%20learning/인공신경망-이해하기-3-학습-과정-개요), [2](/machine%20learning/인공신경망-이해하기-4-학습-과정-디테일)]에서 각각의 방법을 간단히 다룬 바 있다. 간단히 복기하자면 이렇다: (1) 인풋은 centering과 scaling하고 (2) 인풋 뉴런 $n$개인 층의 weight를 $\div \sqrt{n/2}$로 표준화한다. 단순한 방법이지만 표준화하지 않은 입력, 가중치값을 사용했을 때에 비해 더 빨리, 더 좋은 성능으로 수렴하는 것을 경험적으로 확인할 수 있다.
+뉴럴넷이 안정적으로 잘 학습되기 위해서는 입력층에 넣을 인풋과 각 층의 weight를 표준화할 필요가 있다. BatchNorm이 고안되기 전에는 두 가지 방법을 주로 사용했는데, 이전 포스트[[1](/machine%20learning/neural-net-3-training-intro), [2](/machine%20learning/neural-net-4-training-detail)]에서 각각의 방법을 간단히 다룬 바 있다. 간단히 복기하자면 이렇다: (1) 인풋은 centering과 scaling하고 (2) 인풋 뉴런 $n$개인 층의 weight를 $\div \sqrt{n/2}$로 표준화한다. 단순한 방법이지만 표준화하지 않은 입력, 가중치값을 사용했을 때에 비해 더 빨리, 더 좋은 성능으로 수렴하는 것을 경험적으로 확인할 수 있다.
 
 여기서 중요한 문제가 발생한다. 입력층에 넣는 인풋은 표준화할 수 있다. 뉴럴넷에 넣기 전에 우리가 원하는 방식으로 원하는 만큼 preprocessing을 하면 된다. 그 결과 입력층의 input distribution은 항상 비슷한 형태로 유지가 되고 안정적으로 가중치 학습을 진행할 수 있다.
 
@@ -119,7 +119,7 @@ $$\hat{\mu} \gets \alpha \hat{\mu} + (1-\alpha) \mu_{\mathcal{B}}^{(i)} \\
 <br>
 
 ### BatchNorm layer
-[ReLU activation을 뉴럴넷의 레이어로 나타낼 수 있듯](/machine%20learning/convnet-이해하기/) BatchNorm 또한 레이어로 표현할 수 있다. BN layer는 raw activation과 activation function 사이에 위치한다. Convolutional layer에 BatchNorm을 적용하고 싶을 때에도 동일하게 raw feature map과 ReLU layer 사이에 BN layer를 추가하면 된다.
+[ReLU activation을 뉴럴넷의 레이어로 나타낼 수 있듯](/machine%20learning/convnet/) BatchNorm 또한 레이어로 표현할 수 있다. BN layer는 raw activation과 activation function 사이에 위치한다. Convolutional layer에 BatchNorm을 적용하고 싶을 때에도 동일하게 raw feature map과 ReLU layer 사이에 BN layer를 추가하면 된다.
 
 ![180528_4.png](/assets/fig/180528_4.png)
 
