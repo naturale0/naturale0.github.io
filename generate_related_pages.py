@@ -333,6 +333,7 @@ def update_pages(page_objects, search_ids, top_matches):
 
     # file_to_update = page_objects[search_ids[index]]['file_name']
     fname = page_objects[search_ids[index]]['file_name'][2:]
+    fname = fname.replace(" ", "-")
     if not fname.startswith("-"):
       with open(f"./_includes/related/{fname}.html", "w") as w:
         w.write(page_elements)

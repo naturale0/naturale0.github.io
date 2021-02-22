@@ -24,7 +24,12 @@ layout: default
   
   <hr/>
 
-  {%include related/{{page.path}}.html %}
+  <!-- Related Content -->
+  {% capture processed_path %}
+    {{- page.path | replace: " ", "-" -}}
+  {% endcapture %}
+  
+    {% include related/{{processed_path}}.html %}
 
   <!--<hr style="border-top: dotted 1px;" />-->
 
