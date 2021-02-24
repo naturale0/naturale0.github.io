@@ -77,7 +77,7 @@ class PageObject(object):
       'title': page_title,
       'image': self._extract_image(file_contents),
       'contents': self._extract_text(file_contents),
-      'needs_related': self._extract_needs_related(file_contents)
+      'needs_related': self._extract_needs_related(processed_fname)
     }
     file.close()
     return page_object
@@ -88,11 +88,13 @@ class PageObject(object):
     with open("_site/sitemap.xml") as r:
       sitemap = r.read()
     query = r"<loc>http://.*(.*{}.*)</loc>".format(title)
-    site = re.search(query, sitemap, re.IGNORECASE).group(0)
-    permalink = re.search(r'<loc>http://.*?(/.*)</loc>', site, re.IGNORECASE)
-    if permalink:
-      return permalink.group(1).strip()
-    return None
+    try:
+      site = re.search(query, sitemap, re.IGNORECASE).group(0)
+      permalink = re.search(r'<loc>http://.*?(/.*)</loc>', site, re.IGNORECASE)
+      if permalink:
+        return permalink.group(1).strip()
+    except:
+      return None
 
   def _extract_date(self, file_name, html):
     date = re.search('date: (.*)', html)
@@ -165,11 +167,11 @@ class PageObject(object):
     # TODO: stem all words
     return ' '.join(alpha_numeric.lower().split())
 
-  def _extract_needs_related(self, html):
+  def _extract_needs_related(self, processed_fname):
     # date = re.search('<div id="related" class="clearfix">(.*?)</div>', \
     #                  html, re.DOTALL)
-    # if date:
-    return True
+    if not processed_fname.startswith("-"):
+      return True
     return False
 
 class LatentSemanticAnalysis(object):

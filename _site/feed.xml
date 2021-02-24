@@ -6,9 +6,209 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Feb 2021 17:19:16 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Feb 2021 17:19:16 +0900</lastBuildDate>
+    <pubDate>Wed, 24 Feb 2021 16:01:56 +0900</pubDate>
+    <lastBuildDate>Wed, 24 Feb 2021 16:01:56 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Understanding ELMo</title>
+        <description>&lt;p&gt;Word2Vec and FastText paved the way to quality word embedding by utilizing context information, either word-level or character-level. ELMo (&lt;strong&gt;e&lt;/strong&gt;mbeddings from &lt;strong&gt;l&lt;/strong&gt;anguage &lt;strong&gt;mo&lt;/strong&gt;del) improved upon those with not only single context, but with both character and word-level contexts by dedicated architecture for the tasks.&lt;/p&gt;
+
+&lt;p&gt;ELMo is composed of two structures: bidirectional language model (biLM) and the task-specific layer. Pretrained on large data, BiLM provides enough context to task-specific layer that facilitates hi-quality embedding.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-architecture&quot; id=&quot;markdown-toc-the-architecture&quot;&gt;The architecture&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#bidirectional-language-model&quot; id=&quot;markdown-toc-bidirectional-language-model&quot;&gt;Bidirectional language model&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#character-level-cnn&quot; id=&quot;markdown-toc-character-level-cnn&quot;&gt;Character-level CNN&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#bidirectional-lstm&quot; id=&quot;markdown-toc-bidirectional-lstm&quot;&gt;Bidirectional LSTM&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#task-specific-layer&quot; id=&quot;markdown-toc-task-specific-layer&quot;&gt;Task specific layer&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;Pytorch implementation&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#character-level-cnn-1&quot; id=&quot;markdown-toc-character-level-cnn-1&quot;&gt;Character-level CNN&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bidirectional-lstm-1&quot; id=&quot;markdown-toc-bidirectional-lstm-1&quot;&gt;Bidirectional LSTM&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bidirectional-language-model-1&quot; id=&quot;markdown-toc-bidirectional-language-model-1&quot;&gt;Bidirectional language model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#intermediate-results&quot; id=&quot;markdown-toc-intermediate-results&quot;&gt;Intermediate results&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-architecture&quot;&gt;The architecture&lt;/h2&gt;
+
+&lt;h3 id=&quot;bidirectional-language-model&quot;&gt;Bidirectional language model&lt;/h3&gt;
+
+&lt;h4 id=&quot;character-level-cnn&quot;&gt;Character-level CNN&lt;/h4&gt;
+
+&lt;p&gt;character-level tokens goes through convolutional layers with different kernel sizes. The original “small” ELMo model uses kernels of size 1, 2, 3, 4, 5, 6, 7 with 32, 32, 64, 128, 256, 512, 1024 channels, respectively. Outputs from each convolutional layers are then max-pooled and concatenated to yield $32+32+64+128+256+512+1024=2048$-length vector. This concatenated vector can be used as a word embedding. Since convolutional layer is well known for its feature-extracting property, this can be regarded as a character-level context extraction process.&lt;/p&gt;
+
+&lt;h4 id=&quot;bidirectional-lstm&quot;&gt;Bidirectional LSTM&lt;/h4&gt;
+
+&lt;p&gt;$L$-layer bi-LSTM is used to account for word/sentence-level information. Originally $L=2$ is used for ELMo. By using bidirectional LSTM, we can efficiently train the language model to encode contexts from the full sentence to embeddings.&lt;/p&gt;
+
+&lt;p&gt;According to the authors of ELMo, output from the first layer is reported to produce better result when used for POS tagging (Belinkov et al., 2017), while output from the top most layer (here, the second layer) was known for learning word-sense representations (Melamud et al., 2016).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210224_elmo-architecture.png&quot; alt=&quot;ELMo-architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;task-specific-layer&quot;&gt;Task specific layer&lt;/h3&gt;
+
+&lt;p&gt;Task specific layer is a mere weighted sum and scaling of biLM outputs. All intermediate outputs from pretrained biLM, from character-level CNN and each layer of bi-LSTM, is used to train task specific layer.&lt;/p&gt;
+
+&lt;p&gt;Output from this layer can be further passed to other layers for downstream task such as classification. We train the whole model after freezing the pretrained biLM weights.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pytorch-implementation&quot;&gt;Pytorch implementation&lt;/h2&gt;
+
+&lt;p&gt;Here I pretrained the biLM using IMDB data in order to further use the pretrained model to sentiment analysis, which is positive/negative binary classification in this case.&lt;/p&gt;
+
+&lt;h3 id=&quot;character-level-cnn-1&quot;&gt;Character-level CNN&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CharConv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    character-level convolutional network
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CharConv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# Embedding layer
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_embedding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_VOCAB_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# Conv layers
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAR_EMBED_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv7&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_pool2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;squeeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I used smaller numbers of channels, even compared to the “small” model. So final output from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CharConv&lt;/code&gt; will be only 128-length vector per sample.&lt;/p&gt;
+
+&lt;h3 id=&quot;bidirectional-lstm-1&quot;&gt;Bidirectional LSTM&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BiLSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BiLSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# Bi-LSTM
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bidirectional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bidirectional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# 1st LSTM layer
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# main connection
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# skip connection
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repeat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# 2nd LSTM layer
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Return both outputs from the first and the second layer for later use.&lt;/p&gt;
+
+&lt;h3 id=&quot;bidirectional-language-model-1&quot;&gt;Bidirectional language model&lt;/h3&gt;
+
+&lt;p&gt;Stack &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CharConv&lt;/code&gt; on top of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BiLM&lt;/code&gt; to build a biLM module.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BiLangModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Bidirectional language model (will be pretrained)
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BiLangModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# Highway connection
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;CHAR_EMBEDDING_DIM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;highway&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;
+        
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# Character-level convolution
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# highway
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;highway&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;c_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_gate&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# Bi-LSTM
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note there is a highway connection between character-level CNN and bi-LSTM.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;intermediate-results&quot;&gt;Intermediate results&lt;/h3&gt;
+
+&lt;TBD&gt;
+
+
+
+&amp;lt;TBD: task specific layer&amp;gt;
+
+&lt;br /&gt;
+
+
+
+Python code for the algorithm is in the last part of [this notebook (GitHub)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-2.%20ELMo.ipynb).
+
+&lt;br /&gt;
+
+
+
+***References***
+
+* Peters et al. 2018. **Deep contextualized word representations**. https://arxiv.org/abs/1802.05365
+&lt;/TBD&gt;
+</description>
+        <pubDate>Wed, 24 Feb 2021 16:01:00 +0900</pubDate>
+        <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-ELMo</link>
+        <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-ELMo</guid>
+        
+        
+        <category>machine learning</category>
+        
+        <category>natural language processing</category>
+        
+      </item>
     
       <item>
         <title>Understanding Latent Dirichlet Allocation (5) Smooth LDA</title>
@@ -1645,166 +1845,6 @@ Just comment out the part of &lt;code class=&quot;language-plaintext highlighter
         
         
         <category>machine learning</category>
-        
-      </item>
-    
-      <item>
-        <title>(PTE) 4.8. Optional stopping theorem</title>
-        <description>&lt;p&gt;In this section, we generalize the &lt;a href=&quot;https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp#bounded-optional-stopping&quot;&gt;bounded version of optional stopping&lt;/a&gt;. After that as an example we will cover theorem regarding assymetric random walk.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#optional-stopping-theorem&quot; id=&quot;markdown-toc-optional-stopping-theorem&quot;&gt;Optional stopping theorem&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#assymetric-random-walk&quot; id=&quot;markdown-toc-assymetric-random-walk&quot;&gt;Assymetric random walk&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;optional-stopping-theorem&quot;&gt;Optional stopping theorem&lt;/h2&gt;
-
-&lt;p&gt;Our first theorem will be the extension of theorem 4.2.9.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.8.1&quot;&gt;
-Let $(X_n)$ be a uniformly integrable submartingale and $N$ be a stopping time. Then $(X_{n\wedge N})$ is a uniformly integrable submartingale.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-It is shown that $(X_{n\wedge N})$ is a submartingale in theorem 4.2.9. By Vitali's lemma $X_n$ converges almost surely and in $L^1$ to some $X_\infty.$ Since $x \mapsto x^+$  is convex and increasing, $X_n^+, X_{n\wedge N}^+$ are submartingales. Let $\tau=n, \sigma=n\wedge N$ then $\tau,\sigma$ are bounded stopping times. By Doob's inequality, $EX_{n\wedge N}^+ \le EX_n^+$ and $$\sup_n EX_{n\wedge N}^+ \le \sup_n EX_n^+ \le \sup_n E|X_n| &amp;lt; \infty.$$
-By Submartingale convergence, $X_{n\wedge N} \to X_N$ a.s. and $E|X_N| &amp;lt; \infty.$
-$$\begin{aligned}
-&amp;amp;E|X_{n\wedge N}| \mathbf{1}_{|X_{n\wedge N}| \ge a} \\
-&amp;amp;\le E|X_{n\wedge N}| \mathbf{1}_{|X_{n\wedge N}| \ge a, N \le n} + E|X_{n\wedge N}| \mathbf{1}_{|X_{n\wedge N}| \ge a, N&amp;gt;n} \\
-&amp;amp;= E|X_N| \mathbf{1}_{|X_N| \ge a} + E|X_n| \mathbf{1}_{|X_n| \ge a}.
-\end{aligned}$$
-Since both terms on the right-hand side goes to 0 as $a\to\infty,$ $X_{n\wedge N}$ is uniformly integrable.
-&lt;/div&gt;
-
-&lt;p&gt;Next theorem is the unbounded version of Doob’s inequality.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.8.3&quot;&gt;
-Let $(X_n)$ be a uniformly integrable submartingale, $N$ be a stopping time. Then
-$$EX_0 \le EX_N \le EX_\infty$$
-where $X_\infty = \lim_n X_n$ a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-By the previous theorem $X_{n\wedge N}$ is a uniformly integrable submartingale. By Doob's inequality
-$$EX_0 \le EX_{n\wedge N} \le EX_n.$$
-By Vitali's lemma, $EX_n \to EX_\infty$ and
-$$\begin{aligned}
-\lim_n X_{n\wedge N} = 
- \begin{cases}
- X_N &amp;amp;,~ N&amp;lt;\infty \\
- X_\infty = X_N &amp;amp;,~ N=\infty
- \end{cases}
-\end{aligned}$$
-Thus $X_{n\wedge N} \to X_N$ a.s. with $E|X_N| &amp;lt; \infty$ by Vitali's lemma and the desired result follows.
-&lt;/div&gt;
-
-&lt;p&gt;Finally we state and prove the main theorem.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;optional stopping&quot;&gt;
-Let $L \le M$ be stopping times and $(Y_{n\wedge M})$ be a uniformly integrable submartingale. Then $EY_L \le EY_M$ and $Y_L \le E(Y_M | \mathcal{F}_L)$ a.s.
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-Let $X_n = Y_{n\wedge M}$ then it directly follows that $EY_L \le EY_M.$ The rest of the proof is the same as the first proof of &lt;a href=&quot;https://naturale0.github.io/probability/PTE-4.4-martingale-convergence-in-Lp#bounded-optional-stopping&quot;&gt;bounded stopping theorem&lt;/a&gt;.
-&lt;/div&gt;
-
-&lt;p&gt;Note that we do not need uniform integrability of $Y_n.$ The next theorem guarantees uniform integrability of stopped martingale of submartingale with uniformly bounded conditional increment.&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.8.5&quot;&gt;
-Let $X_n$ be a submartingale with $E\left(\left|X_{n+1}-X_n\right| | \mathcal{F}_n\right) \le B$ a.s. and $N$ be a stopping time with $EN &amp;lt; \infty.$ Then $X_{n\wedge N}$ is uniformly integrable and $EX_0 \le EX_N.$
-&lt;/div&gt;
-&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
-$$X_{n\wedge N} = X_0 + \sum\limits_{m=1}^n (X_m - X_{m-1}) \mathbf{1}_{m \le N}\\
-|X_{n\wedge N}| \le |X_0| + \sum\limits_{m=1}^n |X_m - X_{m-1}| \mathbf{1}_{m \le N}$$
-Let $Z$ be the right-hand side of the inequality.
-$$\begin{aligned}
-E|Z| 
- &amp;amp;\le E|X_0| + \sum_m |X_m - X_{m-1}| \mathbf{1}_{m \le N} \\
- &amp;amp;\le E|X_0| + \sum_m E\left( \mathbf{1}_{m\le N} E(\left|X_m - X_{m-1}\right| | \mathcal{F}_{m-1}) \right) \\
- &amp;amp;\le E|X_0| + B \cdot \sum_m P(m \le N) \\
- &amp;amp;= E|X_0| + B\cdot EN &amp;lt; \infty.
-\end{aligned}$$
-Thus $Z$ is integrable and $X_{n\wedge N}$ is uniformly integrable. $EX_0 \le EX_N$ follows directly.
-&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;assymetric-random-walk&quot;&gt;Assymetric random walk&lt;/h2&gt;
-&lt;p&gt;As an application of optional stopping, we look into properties of assymetric random walk. We define assymetric random walk $S_n = \xi_1 + \cdots + \xi_n,$ $S_0 = 0$ where $\xi_i$’s are i.i.d. with $P(\xi_1=1)=p,$ $P(\xi_1=-1)=q,$ $p+q=1.$ Let $\text{Var}(\xi_1) = \sigma^2 &amp;lt; \infty$ and $\mathcal{F}_n = \sigma(\xi_1,\cdots,\xi_n)$ for $n\ge 1,$ $\mathcal{F}_0$ be a trivial $\sigma$-field. Let $\varphi(x) = (\frac{1-p}{p})^x.$&lt;/p&gt;
-
-&lt;div class=&quot;theorem&quot; text=&quot;4.8.9&quot;&gt;
-(a) $0 &amp;lt; p &amp;lt; 1 \implies \varphi(S_n)$ is a martingale.&lt;br /&gt;
-(b) $T_x := \inf\{n: S_n=x\},$ $x\in\mathbb{Z}$ is a stopping time and $P(T_a &amp;lt; T_b) = \frac{\varphi(b)-\varphi(0)}{\varphi(b)-\varphi(a)}$ for $a&amp;lt;0&amp;lt;b.$&lt;br /&gt;
-(c) $1/2&amp;lt;p&amp;lt;1$ and $a&amp;lt;0&amp;lt;b \implies$ $T_b &amp;lt; \infty$ a.s. and $P(T_a &amp;lt; \infty) &amp;lt; 1.$&lt;br /&gt;
-(d) $1/2&amp;lt;p&amp;lt;1 \implies$ $ET_b = \frac{b}{2p-1},$ $b&amp;gt;0.$
-&lt;/div&gt;
-
-&lt;details&gt;
-  &lt;summary&gt;
-    expand proof
-  &lt;/summary&gt;
-
-&lt;div class=&quot;proof&quot; text=&quot;(b)&quot;&gt;
-(b) Let $T_a \wedge T_b$ be a stopping time. By law of iterated logarithm,
-$$\begin{aligned}
-\limsup_n \frac{S_n - n(p-q)}{\sigma \sqrt{2n\log\log n}} &amp;amp;= 1 \text{ a.s.} \\
-\liminf_n \frac{S_n - n(p-q)}{\sigma \sqrt{2n\log\log n}} &amp;amp;= -1 \text{ a.s.}
-\end{aligned}$$
-thus $S_n \approx n(p-q) \pm \sigma\sqrt{2n\log\log n}.$ If $p&amp;gt;q,$ $\lim_n S_n = \infty$ a.s. and $T_b &amp;lt; \infty$ a.s. Similarly $T_a$ or $T_b$ is almost surely finite in any cases, so $N &amp;lt; \infty$ a.s. If $N \ge n,$ $a \le S_{n\wedge N} = S_n \le b.$ If $N &amp;lt; n,$ $S_{n\wedge N} = S_N = a$ or $b.$ $\varphi(S_{n\wedge N})$ is a bounded, thus uniformly integrable and closable martingale. Note that $S_N = a\mathbf{1}_{T_a &amp;lt; T_b} + b\mathbb{1}_{T_a &amp;gt; T_b}.$ Also note that $E\varphi(S_N) = 1$ since $1 = E\varphi(S_0) = E\varphi(S_{n\wedge N}) \to E\varphi(S_N).$
-$$\begin{aligned}
-1 = E\varphi(S_N)
-&amp;amp;= \varphi(a) P(T_a &amp;lt; T_b) + \varphi(b) P(T_a &amp;gt; T_b) \\
-&amp;amp;= (\varphi(a) - \varphi(b)) P(T_a &amp;lt; T_b) + \varphi(b).
-\end{aligned}$$
-Organizing both sides gives the result.
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot; text=&quot;(c)&quot;&gt;
-Observe that $T_\alpha &amp;lt; T_\beta$ for all $\beta&amp;lt;\alpha&amp;lt;0.$ Thus $\lim_{a\to-\infty} T_a = \infty.$
-$$\begin{aligned}
-P(T_b &amp;lt; \infty)
- &amp;amp;= \lim_{a\to-\infty} P(T_b&amp;lt;T_a) \\
- &amp;amp;= \lim_{a\to-\infty} \left(1 - \frac{\varphi(b) - 1}{\varphi(b) - \varphi(a)}\right) \\
- &amp;amp;= \lim_{a\to-\infty} \frac{1-\varphi(a)}{\varphi(b) - \varphi(a)} = 1.
-\end{aligned}$$
-Similarly, $P(T_a &amp;lt; \infty) = 1/\varphi(a) &amp;lt; 1.$
-&lt;/div&gt;
-
-&lt;div class=&quot;proof&quot; text=&quot;(d)&quot;&gt;
-Observe that if $a&amp;lt;0,$ $(\inf_n S_n \le a) = (T_a &amp;lt; \infty).$
-Since 
-$$P(\inf_n S_n \le a) = P(T_a &amp;lt; \infty) = \begin{cases}
-\left(\frac{1-p}{p}\right)^{-a}  &amp;amp;,~ a&amp;lt;0 \\
-1  &amp;amp;,~ a\ge 0
-\end{cases}$$
-we get
-$$\begin{aligned}
-E|\inf_n S_n|
- &amp;amp;= \sum_{a=-\infty}^\infty |a| P(\inf_n S_n = a) \\
- &amp;amp;= \sum_{a=-\infty}^\infty |a| \left( \left(\frac{1-p}{p}\right)^{-a} - \left(\frac{1-p}{p}\right)^{-(a-1)} \right) \\
- &amp;amp;= \sum_{a=-\infty}^\infty |a| \left(\frac{1-p}{p}\right)^{-a} \left(1 - \frac{1-p}{p}\right) &amp;lt; \infty.
-\end{aligned}$$
-Thus $\inf_n S_n$ is integrable. Let $X_n = S_n - n(p-q)$ then $X_n$ is a martingale. Since $T_b &amp;lt; \infty$ a.s., $X_{n\wedge T_b}$ is also a martingale. 
-$$\begin{aligned}
-ES_{n\wedge T_b}
- &amp;amp;= EX_{n\wedge T_b} + (p-q)E(T_b\wedge n) \\
- &amp;amp;= \cancel{EX_0} + (p-q)E(T_b\wedge n).
-\end{aligned}$$
-
-Note that $\inf_n S_n \le S_{n\wedge T_b} \le b$ and $|S_{n\wedge T_b}| \le |\inf_n S_n| + b$ for all $n.$ By DCT, $ES_{n\wedge T_b} \to ES_{T_b} = b.$ By MCT, $E(T_b \wedge n) \uparrow ET_b.$ Thus the desired result follows.
-&lt;/div&gt;
-&lt;/details&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Acknowledgement&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This post series is based on the textbook &lt;em&gt;Probability: Theory and Examples&lt;/em&gt;, 5th edition (Durrett, 2019) and the lecture at Seoul National University, Republic of Korea (instructor: Prof. Sangyeol Lee).&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 22 Jan 2021 00:30:00 +0900</pubDate>
-        <link>http://localhost:4000/probability/PTE-4.8-optional-stopping</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/PTE-4.8-optional-stopping</guid>
-        
-        
-        <category>probability</category>
         
       </item>
     
