@@ -29,7 +29,9 @@ character-level tokens goes through convolutional layers with different kernel s
 
 $L$-layer bi-LSTM is used to account for word/sentence-level information. Originally $L=2$ is used for ELMo. By using bidirectional LSTM, we can efficiently train the language model to encode contexts from the full sentence to embeddings.
 
-According to the authors of ELMo, output from the first layer is reported to produce better result when used for POS tagging (Belinkov et al., 2017), while output from the top most layer (here, the second layer) was known for learning word-sense representations (Melamud et al., 2016).
+One thing to note is that unlike common bi-LSTM, the one that used in ELMo *separates connections between forward and backward LSTM*. After the input is processed separately in each LSTM layer in each direction, only then the resulting vectors are concatenated.
+
+According to the citation of the authors of ELMo, output from the first layer is reported to produce better result when used for POS tagging (Belinkov et al., 2017), while output from the top most layer (here, the second layer) was known for learning word-sense representations (Melamud et al., 2016).
 
 ![ELMo-architecture](/assets/fig/210224_elmo-architecture.png)
 
@@ -53,9 +55,7 @@ Here I pretrained the biLM using IMDB data in order to further use the pretraine
 
 ```python
 class CharConv(nn.Module):
-    """
-    character-level convolutional network
-    """
+    
     def __init__(self):
         super(CharConv, self).__init__()
         
@@ -74,16 +74,17 @@ class CharConv(nn.Module):
             self.conv1, self.conv2, 
             self.conv3, self.conv4, 
             self.conv5, self.conv6, 
-            self.conv7
+            self.conv7,
         ]
         
     
     def forward(self, x):
+        # character-level convolution
         x = self.char_embedding(x).permute(0,3,1,2)
         x = [conv(x) for conv in self.convs]
         x = [F.max_pool2d(x_c, kernel_size=(1, x_c.shape[3])) for x_c in x]
         x = [torch.squeeze(x_p, dim=3) for x_p in x]
-        x = torch.hstack(x)
+        x = torch.hstack(x)  # 1, n_batch, concat_length
         
         return x
 ```
@@ -97,30 +98,41 @@ class BiLSTM(nn.Module):
     def __init__(self):
         super(BiLSTM, self).__init__()
         # Bi-LSTM
-        self.lstm1 = nn.LSTM(128, 1024, bidirectional=True)
+        self.lstm_f1 = nn.LSTM(128, 128)
+        self.lstm_r1 = nn.LSTM(128, 128)
         self.dropout = nn.Dropout(0.1)
-        self.proj = nn.Linear(2*1024, 2*128, bias=False)
-        self.lstm2 = nn.LSTM(2*128, 1024, bidirectional=True)
+        self.proj = nn.Linear(128, 64, bias=False)
+        self.lstm_f2 = nn.LSTM(64, 128)
+        self.lstm_r2 = nn.LSTM(64, 128)
     
     def forward(self, x):
+        ## input shape:
+        # seq_len, batch_size, 128
+        
         # 1st LSTM layer
-        o, (h1, __) = self.lstm1(x)
-        o = self.dropout(o)
+        x_f = x
+        x_r = x.flip(dims=[0])
+        ## forward feed
+        o_f1, (h_f1, __) = self.lstm_f1(x_f)
+        o_f1 = self.dropout(o_f1)
+        ## backward feed
+        o_r1, (h_r1, __) = self.lstm_r1(x_r)
+        o_r1 = self.dropout(o_r1)
+        h1 = torch.stack((h_f1, h_r1)).squeeze(dim=1)
         
-        # main connection
-        p = self.proj(o)
-        
-        # skip connection
-        x2 = x.repeat(1,1,2)
-        x3 = x2 + p
+        # main + skip connection
+        x2_f = self.proj(o_f1 + x_f)
+        x2_r = self.proj(o_r1 + x_r)
         
         # 2nd LSTM layer
-        _, (h2, __) = self.lstm2(x3)
+        _, (h_f2, __) = self.lstm_f2(x2_f)
+        _, (h_r2, __) = self.lstm_r2(x2_r)
+        h2 = torch.stack((h_f2, h_r2)).squeeze(dim=1)
         
         return h1, h2
 ```
 
-Return both outputs from the first and the second layer for later use.
+Note that feeding and forwarding into each direction is processed separately. Return from both LSTM layers were preserved for later use.
 
 ### Bidirectional language model
 
@@ -135,7 +147,6 @@ class BiLangModel(nn.Module):
         super(BiLangModel, self).__init__()
         
         # Highway connection
-        CHAR_EMBEDDING_DIM = 16
         self.highway = nn.Linear(128, 128)
         self.transform = nn.Linear(128, 128)
         self.char_cnn = char_cnn
@@ -150,25 +161,29 @@ class BiLangModel(nn.Module):
         h = self.highway(x)
         t_gate = torch.sigmoid(self.transform(x))
         c_gate = 1 - t_gate
-        x = h * t_gate + x * c_gate
+        x_ = h * t_gate + x * c_gate
         
         # Bi-LSTM
-        x1, x2 = self.bi_lstm(x)
+        x1, x2 = self.bi_lstm(x_)
         
-        return x1, x2
+        return x, x1, x2
 ```
 
-Note there is a highway connection between character-level CNN and bi-LSTM.
+Although I did not mention it before, there is in fact a [highway connection](https://arxiv.org/abs/1505.00387) between character-level CNN and bi-LSTM. `BiLangModel` returns all three outputs from intermediate layers (character-level CNN and two bi-LSTM layers).
 
 <br>
 
 ### Intermediate results
 
-<TBD>
+I produced an "embedding vector" simply by averaging results from each layer.
 
 
 
-<TBD: task specific layer>
+Cosine similarity heatmap 
+
+
+
+[TBD: task specific layer]
 
 <br>
 
@@ -183,3 +198,4 @@ Python code for the algorithm is in the last part of [this notebook (GitHub)](ht
 ***References***
 
 * Peters et al. 2018. **Deep contextualized word representations**. https://arxiv.org/abs/1802.05365
+* Network paramters were tweaked from ["small" ELMo model](https://allennlp.org/elmo).
