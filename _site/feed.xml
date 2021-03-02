@@ -6,9 +6,224 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 24 Feb 2021 16:01:56 +0900</pubDate>
-    <lastBuildDate>Wed, 24 Feb 2021 16:01:56 +0900</lastBuildDate>
+    <pubDate>Wed, 03 Mar 2021 02:06:15 +0900</pubDate>
+    <lastBuildDate>Wed, 03 Mar 2021 02:06:15 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>[Statistical Learning] 1. Overview of Supervised Learning</title>
+        <description>&lt;p&gt;This is a summary of &lt;em&gt;The Elements of Statistical Learning&lt;/em&gt; (ESL) and also a lecture note of &lt;em&gt;Advanced Data Mining&lt;/em&gt;. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.&lt;/p&gt;
+
+&lt;p&gt;The first chapter (actually the second in ESL) is an overview of supervised learning, especially the two extremes - linear regression and k-nearest neighbor - their weakness and methods to overcome those.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#notations&quot; id=&quot;markdown-toc-notations&quot;&gt;Notations&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linear-regression-vs-k-nearest-neighbor&quot; id=&quot;markdown-toc-linear-regression-vs-k-nearest-neighbor&quot;&gt;Linear regression vs. k-nearest neighbor&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#regression-problem&quot; id=&quot;markdown-toc-regression-problem&quot;&gt;Regression problem&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#ols-regression&quot; id=&quot;markdown-toc-ols-regression&quot;&gt;OLS regression&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#k-nearest-neighbor&quot; id=&quot;markdown-toc-k-nearest-neighbor&quot;&gt;k-nearest neighbor&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#ols-again-as-empirical-risk-minimization&quot; id=&quot;markdown-toc-ols-again-as-empirical-risk-minimization&quot;&gt;OLS again, as empirical risk minimization.&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#classification-problem&quot; id=&quot;markdown-toc-classification-problem&quot;&gt;Classification problem&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;display: none;&quot;&gt;
+    $\newcommand{\argmin}{\mathop{\mathrm{argmin}}\limits}$
+    $\newcommand{\argmax}{\mathop{\mathrm{argmax}}\limits}$
+&lt;/div&gt;
+
+&lt;h2 id=&quot;notations&quot;&gt;Notations&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\mathbf{X} \in \mathbb{R}^p$ is the covariate (input).&lt;/li&gt;
+  &lt;li&gt;$Y \in \mathcal{Y}$ is the response (output).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We assume $(Y,\mathbf{X}) \sim P$ for unknown distribution $P$. If $\mathcal{Y}=\mathbb{R}$, then the problem to solve becomes a regression one. If $\mathcal{Y}={0,1}$, the problem is now a binary classification.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\phi$ is the true relationship (system) between $X$ and $Y$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That is, $Y=\phi(X,\epsilon)$ is the true model with error $\epsilon$ that is intrinsic to the system. Our goal is to find a model that best approximates $\phi$. In order to do so,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set a loss function $\ell(y,a)$.&lt;/li&gt;
+  &lt;li&gt;Set a family of functions $\mathcal{F}$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Under this setting, our best approximation to $\phi$ would be&lt;/p&gt;
+
+\[f^0 := \argmin_{f\in\mathcal{F}} E_{\mathbf{X},Y} \ell(Y, f\left(\mathbf{X})\right).\]
+
+&lt;p&gt;The minimand in the right hand side is called the &lt;em&gt;expected prediction error (EPE)&lt;/em&gt;. In other words, $f^0 := \arg\min_{f\in\mathcal{F}} \text{EPE}(f).$&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, we cannot compute $E_{\mathbf{X},Y}$ since $P$ is unknown. We need to further approximate $f^0$ by $\hat f$, using the observed data&lt;/p&gt;
+
+\[\mathcal{L} := \{(y_i, \mathbf{x}_i): (y_i, \mathbf{x}_i) \overset{\text{iid}}{\sim} P,~ i=1,\cdots,n\},\]
+
+&lt;p&gt;which we denote the training data. With the help of $\mathcal{L}$, our model finally becomes $\hat f(\mathbf{x}) = f(\mathbf{x},\mathcal{L}).$ With this model, we can predict the unknown response $y^*$ associated with new input $\mathbf{x}^*$ with $\hat f(\mathbf{x}^*).$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;linear-regression-vs-k-nearest-neighbor&quot;&gt;Linear regression vs. k-nearest neighbor&lt;/h2&gt;
+
+&lt;p&gt;In this section, linear model and k-NN will be compared in uncomplicated regression and classification problems.&lt;/p&gt;
+
+&lt;h3 id=&quot;regression-problem&quot;&gt;Regression problem&lt;/h3&gt;
+
+&lt;p&gt;In this regression setting, $\ell(y, a) = (y-a)^2$ would be the loss and $\text{EPE}(f) = E_{\mathbf{X},Y} \left(Y - f(\mathbf{X})\right)^2$ is to be minimized.&lt;/p&gt;
+
+&lt;p&gt;From all possible functions, our best choice will be&lt;/p&gt;
+
+\[f^0 = \argmin_{f} \text{EPE}(f) = E(Y|X).\]
+
+&lt;p&gt;This can be easily proved by conditioning the EPE as follows:&lt;/p&gt;
+
+\[\begin{aligned}
+E_{\mathbf{X},Y} \left(Y - f(\mathbf{X})\right)^2 = E_{\mathbf{X}} E_{Y|\mathbf{X}} \left( \left(Y-f(\mathbf{X})\right)^2 \vert \mathbf{X}) \right)
+\end{aligned}.\]
+
+&lt;p&gt;We call this the regression function. Linear regression and k-NN both approximate $f^0$, but in different ways.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;ols-regression&quot;&gt;OLS regression&lt;/h4&gt;
+
+&lt;p&gt;Assume that the model is in fact quite linear:&lt;/p&gt;
+
+\[f^0(\mathbf{x}) \approx \beta^0_0 + \sum_{k=1}^p x_k\beta^0_k.\]
+
+&lt;p&gt;We start by constraining the model by setting a family of linear functions.&lt;/p&gt;
+
+\[\mathcal{F}=\left\{\beta_0 + \sum_{k=1}^p x_k \beta_k : \beta_k \in \mathbb{R}, i=1,\cdots,p\right\}.​\]
+
+&lt;p&gt;As we can see, any function in $\mathcal{F}$ is characterized by corresponding values of $\mathbf{\beta}$. In other words, $f \in \mathcal{F}$ is &lt;strong&gt;parametrized&lt;/strong&gt; by parameters $\mathbf{\beta}.$ Thus the process of finding $\hat f$ that approximates $f^0$ becomes the process of finding $\hat{\mathbf{\beta}}$ that approximates $\mathbf{\beta}^0$. In this setting and perspective,&lt;/p&gt;
+
+\[\text{EPE}(f) = E(Y-\mathbf{X}\beta)^\intercal(Y-\mathbf{X}\beta)\]
+
+&lt;p&gt;Hence,&lt;/p&gt;
+
+\[\beta^0 = [E(XX^\intercal)]^{-1} E(XY).\]
+
+&lt;p&gt;Hence OLS estimator $\hat\beta$ can be interpreted as a method-of-moment (MOM) estimator for $\beta^0.$&lt;/p&gt;
+
+\[\hat\beta = \left( \frac{1}{n} \sum_{i=1}^n \mathbf{x}_i\mathbf{x}_i^\intercal \right) \left( \frac{1}{n} \sum_{i=1}^n \mathbf{x}_i y_i \right).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;k-nearest-neighbor&quot;&gt;k-nearest neighbor&lt;/h4&gt;
+
+&lt;p&gt;On the other hand, k-NN starts by defining &lt;em&gt;k-nearest neighbors of $x$&lt;/em&gt;&lt;/p&gt;
+
+\[N_k(\mathbf{x}) := \{i: \mathbf{x}_i \text{ are the $k$ closest points of $\mathbf{x}$, } (y_i, \mathbf{x_i})\in \mathcal{L}\}.\]
+
+&lt;p&gt;This can be seen as an approximaton of conditionality $(\cdot \vert \mathbf{X}=\mathbf{x})$. By averaging responses associated with training data in $N_k(\mathbf{x})$, k-NN model can also be regarded as a MOM estimator.&lt;/p&gt;
+
+\[\hat f (\mathbf{x}) = \frac{1}{k} \sum_{i \in N_k(\mathbf{x})} y_i = \text{Average}\left(y_i \vert i \in N_k(\mathbf{x})\right).\]
+
+&lt;p&gt;It is known that $\hat f(\mathbf{x}) \to f^0 (\mathbf{x})$ for all $\mathbf{x} \in \mathbb{R}^p$ as $n,k\to\infty$ and $\frac{k}{n} \to 0.$ Note that since the complexity of the model becomes higher as the tuning paramter $k$ grows (in fact the complexity is inversely proportionate to $k$). So the $\frac{k}{n}\to0$ part tells us to adjust $k$ to be small relative to $n.$&lt;/p&gt;
+
+&lt;p&gt;Unlike OLS, k-NN model cannot be represented analytically. Such model is sometimes referred to as a data model. Also note that the model function is not parametrized.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;ols-again-as-empirical-risk-minimization&quot;&gt;OLS again, as empirical risk minimization.&lt;/h4&gt;
+
+&lt;p&gt;Until now, the general process was:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Find $f^0 = \arg\min_f \text{EPE}(f).$&lt;/li&gt;
+  &lt;li&gt;Approximate $f^0$ with $\hat f$.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;From here on throughout the lecture, we would like to interpret each model as a result of &lt;strong&gt;empirical risk minimization&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Approximate the EPE with an &lt;em&gt;empirical risk&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Find $\hat f = \arg\min_f (\text{empirical risk of $f$}).$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For example, by setting an empricial risk of $f$ as&lt;/p&gt;
+
+\[\frac{1}{n} \sum_{i=1}^n \left(y_i - f(\mathbf{x_i})\right)^2,\]
+
+&lt;p&gt;OLS regression can be seen as an empricial risk minimizer since&lt;/p&gt;
+
+\[\hat \beta = \argmin_\beta \frac{1}{n} \sum_{i=1}^n \left(y_i - f(\mathbf{x_i})\right)^2.\]
+
+&lt;p&gt;In this interpretation, we hope that for large enough $n$’s, $\hat \beta$ would also be the minimizer of EPE. However, we need uniform convergence $g_n \to g$ to ensure convergence of $\arg\min_x g_n(x) \to \arg\min_xg(x).$ This will not be covered in this lecture.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;classification-problem&quot;&gt;Classification problem&lt;/h3&gt;
+
+&lt;p&gt;Here, we consider a classification problem with $J$ possible classes. That is, $\mathcal{Y} = {1,\cdots,J}.$ Expected predictive error becomes&lt;/p&gt;
+
+\[\begin{aligned}
+\text{EPE}(f) &amp;amp;= E_{\mathbf{X},Y} \ell(Y, f(\mathbf{X})) \\
+  &amp;amp;= E_\mathbf{X} E_{Y\vert\mathbf{X}} \left( \ell\left(Y, f(\mathbf{X}) \vert \mathbf{X}\right) \right) \\
+  &amp;amp;= E_\mathbf{X} \sum_{j=1}^J \ell(j, f\left(\mathbf{X})\right) P(Y=j \vert \mathbf{X}).
+\end{aligned}\]
+
+&lt;p&gt;Thus by pointwisely minimizing it we get the minimizer&lt;/p&gt;
+
+\[f^0(x) = \argmin_{k=1,\cdots,J} \sum_{j=1}^J \ell(j, f(\mathbf{x})) P(Y=j|\mathbf{X}=\mathbf{x}).\]
+
+&lt;p&gt;If we set the 0-1 loss $\ell(y,a) = \mathbf{1}(y \ne a)$ as the loss function,&lt;/p&gt;
+
+\[\begin{aligned}
+f^0(\mathbf{x})
+  &amp;amp;= \argmin_{k=1,\cdots,J} P(Y\ne k | \mathbf{X}=\mathbf{x}) \\
+  &amp;amp;= \argmax_{k=1,\cdots,J} P(Y=k|\mathbf{X} = \mathbf{x}).
+\end{aligned}\]
+
+&lt;p&gt;becomes the optimal classifier. This is very intuitive since we select the class that maximizes the (posterior) probability given observed data. This form of classifier is called a &lt;strong&gt;Bayes classifier (Bayers rule)&lt;/strong&gt;, and the EPE of Bayes classifier is called the &lt;strong&gt;Bayes risk&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are several remarks on Bayes risk:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;No other classifier better performs that Bayes classifier.&lt;/li&gt;
+  &lt;li&gt;Bayes risk is not zero.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Thus even if we have as many data as we want, we cannot lower the error smaller than the Bayes risk.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Bayes risk is unknown and need to be guessed.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Estimation of the Bayes risk is done by approximating the probability $\phi_j(\mathbf{x}) := P(Y=k|\mathbf{X}=\mathbf{x}).$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;k-nearest neighbor&lt;/strong&gt; approximates it as an empirical probability&lt;/p&gt;
+
+\[\hat \phi_k (\mathbf{x}) = \frac{1}{k} \sum_{i\in N_k(\mathbf{x}) \mathbf{1}} (y_i=j).\]
+
+&lt;p&gt;Although OLS regression is not suitable since it does not guarantee the values in $[0, 1],$ &lt;strong&gt;logistic regression&lt;/strong&gt; can be used to approximate $\phi_j$.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Hastie, Tibshirani, Friedman. 2008. &lt;strong&gt;The Elements of Statistical Learning&lt;/strong&gt;. 2nd edition. Springer.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Advanced Data Mining (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Yongdai Kim).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 02 Mar 2021 00:13:00 +0900</pubDate>
+        <link>http://localhost:4000/machine%20learning/decision%20theory/Statistical-Learning-1-Overview-of-Supervised-Learning</link>
+        <guid isPermaLink="true">http://localhost:4000/machine%20learning/decision%20theory/Statistical-Learning-1-Overview-of-Supervised-Learning</guid>
+        
+        
+        <category>machine learning</category>
+        
+        <category>decision theory</category>
+        
+      </item>
     
       <item>
         <title>Understanding ELMo</title>
@@ -30,7 +245,6 @@
       &lt;li&gt;&lt;a href=&quot;#character-level-cnn-1&quot; id=&quot;markdown-toc-character-level-cnn-1&quot;&gt;Character-level CNN&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#bidirectional-lstm-1&quot; id=&quot;markdown-toc-bidirectional-lstm-1&quot;&gt;Bidirectional LSTM&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#bidirectional-language-model-1&quot; id=&quot;markdown-toc-bidirectional-language-model-1&quot;&gt;Bidirectional language model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#intermediate-results&quot; id=&quot;markdown-toc-intermediate-results&quot;&gt;Intermediate results&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -48,7 +262,9 @@
 
 &lt;p&gt;$L$-layer bi-LSTM is used to account for word/sentence-level information. Originally $L=2$ is used for ELMo. By using bidirectional LSTM, we can efficiently train the language model to encode contexts from the full sentence to embeddings.&lt;/p&gt;
 
-&lt;p&gt;According to the authors of ELMo, output from the first layer is reported to produce better result when used for POS tagging (Belinkov et al., 2017), while output from the top most layer (here, the second layer) was known for learning word-sense representations (Melamud et al., 2016).&lt;/p&gt;
+&lt;p&gt;One thing to note is that unlike common bi-LSTM, the one that used in ELMo &lt;em&gt;separates connections between forward and backward LSTM&lt;/em&gt;. After the input is processed separately in each LSTM layer in each direction, only then the resulting vectors are concatenated.&lt;/p&gt;
+
+&lt;p&gt;According to the citation of the authors of ELMo, output from the first layer is reported to produce better result when used for POS tagging (Belinkov et al., 2017), while output from the top most layer (here, the second layer) was known for learning word-sense representations (Melamud et al., 2016).&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/fig/210224_elmo-architecture.png&quot; alt=&quot;ELMo-architecture&quot; /&gt;&lt;/p&gt;
 
@@ -69,9 +285,7 @@
 &lt;h3 id=&quot;character-level-cnn-1&quot;&gt;Character-level CNN&lt;/h3&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CharConv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    character-level convolutional network
-    &quot;&quot;&quot;&lt;/span&gt;
+    
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CharConv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         
@@ -90,17 +304,18 @@
             &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
             &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
             &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv7&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         
     
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# character-level convolution
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conv&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;convs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_pool2d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;squeeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 1, n_batch, concat_length
+&lt;/span&gt;        
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -112,30 +327,41 @@
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BiLSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;# Bi-LSTM
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bidirectional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_r1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bidirectional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_f2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_r2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;## input shape:
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# seq_len, batch_size, 128
+&lt;/span&gt;        
         &lt;span class=&quot;c1&quot;&gt;# 1st LSTM layer
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x_f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;## forward feed
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;o_f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;o_f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o_f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;## backward feed
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;o_r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;o_r1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o_r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h_r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;squeeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
-        &lt;span class=&quot;c1&quot;&gt;# main connection
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# skip connection
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repeat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# main + skip connection
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x2_f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o_f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x2_r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o_r1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
         &lt;span class=&quot;c1&quot;&gt;# 2nd LSTM layer
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstm_r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h_r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;squeeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h2&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Return both outputs from the first and the second layer for later use.&lt;/p&gt;
+&lt;p&gt;Note that feeding and forwarding into each direction is processed separately. Return from both LSTM layers were preserved for later use.&lt;/p&gt;
 
 &lt;h3 id=&quot;bidirectional-language-model-1&quot;&gt;Bidirectional language model&lt;/h3&gt;
 
@@ -149,8 +375,7 @@
         &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BiLangModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         
         &lt;span class=&quot;c1&quot;&gt;# Highway connection
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;CHAR_EMBEDDING_DIM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;highway&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;highway&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;char_cnn&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;
@@ -164,40 +389,32 @@
 &lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;highway&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigmoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;c_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_gate&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t_gate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_gate&lt;/span&gt;
         
         &lt;span class=&quot;c1&quot;&gt;# Bi-LSTM
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bi_lstm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Note there is a highway connection between character-level CNN and bi-LSTM.&lt;/p&gt;
+&lt;p&gt;Although I did not mention it before, there is in fact a &lt;a href=&quot;https://arxiv.org/abs/1505.00387&quot;&gt;highway connection&lt;/a&gt; between character-level CNN and bi-LSTM. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BiLangModel&lt;/code&gt; returns all three outputs from intermediate layers (character-level CNN and two bi-LSTM layers).&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;intermediate-results&quot;&gt;Intermediate results&lt;/h3&gt;
+&lt;p&gt;[TBD: task specific layer and results]&lt;/p&gt;
 
-&lt;TBD&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
+&lt;p&gt;Python code for the algorithm is in the last part of &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-2.%20ELMo.ipynb&quot;&gt;this notebook (GitHub)&lt;/a&gt;.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&amp;lt;TBD: task specific layer&amp;gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;br /&gt;
-
-
-
-Python code for the algorithm is in the last part of [this notebook (GitHub)](https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-2.%20ELMo.ipynb).
-
-&lt;br /&gt;
-
-
-
-***References***
-
-* Peters et al. 2018. **Deep contextualized word representations**. https://arxiv.org/abs/1802.05365
-&lt;/TBD&gt;
+&lt;ul&gt;
+  &lt;li&gt;Peters et al. 2018. &lt;strong&gt;Deep contextualized word representations&lt;/strong&gt;. https://arxiv.org/abs/1802.05365&lt;/li&gt;
+  &lt;li&gt;Network paramters were tweaked from &lt;a href=&quot;https://allennlp.org/elmo&quot;&gt;“small” ELMo model&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Wed, 24 Feb 2021 16:01:00 +0900</pubDate>
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-ELMo</link>
@@ -1675,176 +1892,6 @@ can be implemented as follows:&lt;/p&gt;
         <category>machine learning</category>
         
         <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Setting up M1 Mac for both TensorFlow and PyTorch</title>
-        <description>&lt;p&gt;Macs with ARM64-based M1 chip, launched shortly after Apple’s initial announcement of their plan to migrate to Apple Silicon, got quite a lot of attention both from consumers and developers. It became headlines especially because of its outstanding performance, not in the ARM64-territory, but in all PC industry.&lt;/p&gt;
-
-&lt;p&gt;As a student majoring in statistics with coding hobby, somewhere inbetween a consumer tech enthusiast and a programmer, I was one of the people who was dazzled by the benchmarks and early reviews emphasizing it. So after (almost) 7 years spent with my MBP (mid 2014), I decided to leave Intel and join M1.&lt;/p&gt;
-
-&lt;p&gt;This is the post written for myself, after running about in confutsion to set up the environment for machine learning on M1 mac. What I tried to achieve were&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;Not&lt;/em&gt; using the “system python” (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;‌/usr/bin/python&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.tensorflow.org/2020/11/accelerating-tensorflow-performance-on-mac.html&quot;&gt;Running TensorFlow natively on M1&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Running PyTorch on Rosetta 2&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
-  &lt;li&gt;Running everything else natively if possible.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The result is not elegant for sure, but I am satisfied for now.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#install-tensorflow-macos-for-apple-silicon-m1&quot; id=&quot;markdown-toc-install-tensorflow-macos-for-apple-silicon-m1&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TensorFlow-macOS&lt;/code&gt; for Apple Silicon M1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#install-pytorch-for-x86_64-rosetta-2&quot; id=&quot;markdown-toc-install-pytorch-for-x86_64-rosetta-2&quot;&gt;Install PyTorch for x86_64 (Rosetta 2)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;install-tensorflow-macos-for-apple-silicon-m1&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TensorFlow-macOS&lt;/code&gt; for Apple Silicon M1&lt;/h2&gt;
-
-&lt;p&gt;It is easy to install it with the system python since the installation script is given by Apple. However, my goal was to install it with other python so that I can install additional packages for data science without difficulty.&lt;/p&gt;
-
-&lt;p&gt;I mainly followed instructions from &lt;a href=&quot;https://laptrinhx.com/tensorflow-2-4-on-apple-silicon-m1-installation-under-conda-environment-2235153130/&quot;&gt;here&lt;/a&gt; to install tensorflow-macos, and then created ipykernel of it so that I can run this environment any time by switching the kernel inside jupyter notebook.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;First install &lt;a href=&quot;https://github.com/conda-forge/miniforge#download&quot;&gt;miniforge, which natively supports M1&lt;/a&gt;. The installation defaults to directory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/miniforge3/&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Create virtual environment named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf_macos&lt;/code&gt; with conda and install Python 3.8.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conda create &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; tf_macos
-conda activate tf_macos
-conda &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;I specified the version 3.8 so that it matches requirement of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tensorflow-macos&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Download and install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tensorflow-macos&lt;/code&gt; from &lt;a href=&quot;https://github.com/apple/tensorflow_macos&quot;&gt;Apple Github&lt;/a&gt;.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/apple/tensorflow_macos.git
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;tensorflow_macos/arm64
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--force&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;20.2.4 wheel setuptools cached-property six
-pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--no-dependencies&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--force&lt;/span&gt; numpy-1.18.5-cp38-cp38-macosx_11_0_arm64.whl grpcio-1.33.2-cp38-cp38-macosx_11_0_arm64.whl h5py-2.10.0-cp38-cp38-macosx_11_0_arm64.whl tensorflow_addons-0.11.2+mlcompute-cp38-cp38-macosx_11_0_arm64.whl
-pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;absl-py astunparse flatbuffers gast google_pasta keras_preprocessing opt_einsum protobuf tensorflow_estimator termcolor typing_extensions wrapt wheel tensorboard typeguard
-pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--force&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--no-dependencies&lt;/span&gt; tensorflow_macos-0.1a1-cp38-cp38-macosx_11_0_arm64.whl
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Add the environment as jupyter kernel.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jupyter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ipykernel &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;tf_macos
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;Then merely switching the ipython kernel to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf_macos&lt;/code&gt; allows us to use mlcompute-backend TensorFlow without a hassle.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install additional packages (optional)
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conda &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;scipy pandas matplotlib
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;install-pytorch-for-x86_64-rosetta-2&quot;&gt;Install PyTorch for x86_64 (Rosetta 2)&lt;/h2&gt;
-
-&lt;p&gt;Miniforge installed when installing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tensorflow-macos&lt;/code&gt; defaults to python for ARM64 architecture. PyTorch for Rosetta 2 emulation requires Python for x86_64. Although the system python supports both architectures, to avoid using it I chose to install another miniforge, this time built for x86_64.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.byran.tech/techblogs/MakeRosetta2Terminal.html&quot;&gt;&lt;strong&gt;Open Terminal with Rosetta 2&lt;/strong&gt;&lt;/a&gt; and follow the instruction below.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Install miniforge for x86_64. 
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# install miniforge x86_64 in another directory&lt;/span&gt;
-/bin/bash Miniforge3-MacOSX-x86_64 &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /Users/&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;whoami&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;/miniforge_x86_64
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;Be careful not to install it in the same directory as previously installed miniforge (ARM64).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Create virtual environment.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;conda create &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pytorch_x86
-conda activate pytorch_x86
-conda &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install PyTorch and related packages.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;torch torchvision
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;and that’s it for the package installation.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install jupyter and add ipykernel.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jupyter
-python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; ipykernel &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pytorch_x86
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;Finish the kernel setup by editing the associated json file: Replace the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/share/jupyter/kernels/pytorch_x86/kernel.json&lt;/code&gt; to&lt;/p&gt;
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;argv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;arch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-x86_64&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Users/$(whoami)/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-m&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ipykernel_launcher&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-f&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;{connection_file}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;display_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pytorch_x86&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;language&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;The prefixed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arch -x86_64&lt;/code&gt; is for Rosetta 2 emulation of the command.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Revert miniforge back to ARM64 version (optional)&lt;br /&gt;
-Since my goal was to run the other programs natively as possible, I reverted miniforge back to M1 build.&lt;br /&gt;
-Just comment out the part of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; to be
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# # !! Contents within this block are managed by 'conda init' !!&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# __conda_setup=&quot;$('/Users/$(whoami)/miniforge3_x86_64/bin/conda' 'shell.zsh' 'hook' 2&amp;gt; /dev/null)&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# if [ $? -eq 0 ]; then&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#     eval &quot;$__conda_setup&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# else&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#     if [ -f &quot;/Users/$(whoami)/miniforge3_x86_64/etc/profile.d/conda.sh&quot; ]; then&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#         . &quot;/Users/$(whoami)/miniforge3_x86_64/etc/profile.d/conda.sh&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#     else&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#         export PATH=&quot;/Users/$(whoami)/miniforge3_x86_64/bin:$PATH&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#     fi&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# fi&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# unset __conda_setup&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# # &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;(or change the content of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bash_profile&lt;/code&gt; similarly if you are using bash). Uncomment it whenever x86_64 version of miniforge is required.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Finish setup by symbolically linking the environment directory so that ARM64 conda can detect and activate it.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; ~/miniforge3_x86_64/envs/pytorch_x86 ~/miniforge3/envs/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Alias x86 versions of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; so that you can manage packages without switching the entire environment to x86.
-    &lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias condax86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/condabin/conda&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# conda x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pipx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python -m pip&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# pip in pytorch_x86&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'alias pythonx86=&quot;arch -x86_64 /Users/PSH/miniforge3_x86_64/envs/pytorch_x86/bin/python&quot;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.zshrc  &lt;span class=&quot;c&quot;&gt;# python in pytorch_x86&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Then all is well! If you want to work on TensorFlow (runs natively, utilizing full potential of M1), activate &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tf_macos&lt;/code&gt; or select the jupyter kernel in notebook or ipython. If you want x86_64 environment with bug-free PyTorch, do the similar but with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pytorch_x86&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;One thing to consider is that ARM conda &lt;em&gt;can&lt;/em&gt; activate the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pytorch_x86&lt;/code&gt; environment&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, but packages installed by ARM conda &lt;strong&gt;cannot be imported&lt;/strong&gt; by x86 python. If you want to install packages, use &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;condax86 install &amp;lt;pkg_name&amp;gt;&lt;/code&gt;&lt;/strong&gt; to call x86 conda.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;The reason I gave up installing PyTorch running natively on M1 is because it had an error that made the input layer of a neural net detached from the rest of the architecture. Although building from the source and installation of the wheel was successful, I could not handle this bug which made it useless. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;ARM conda cannot activate x86 environment or behave strangely if x86 env is activated &lt;em&gt;inside (base) ARM environement&lt;/em&gt;. So be sure to deactivate all (including base) ARM environment before activating x86 one. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Fri, 29 Jan 2021 02:16:00 +0900</pubDate>
-        <link>http://localhost:4000/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</link>
-        <guid isPermaLink="true">http://localhost:4000/machine%20learning/setting-up-m1-mac-for-both-tensorflow-and-pytorch</guid>
-        
-        
-        <category>machine learning</category>
         
       </item>
     
