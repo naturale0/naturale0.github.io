@@ -173,17 +173,9 @@ Although I did not mention it before, there is in fact a [highway connection](ht
 
 <br>
 
-### Intermediate results
-
-I produced an "embedding vector" simply by averaging results from each layer.
 
 
-
-Cosine similarity heatmap 
-
-
-
-[TBD: task specific layer]
+[TBD: task specific layer and results]
 
 <br>
 
