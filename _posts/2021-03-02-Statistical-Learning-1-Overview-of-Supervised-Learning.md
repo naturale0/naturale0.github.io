@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Statistical Learning] 1. Overview of Supervised Learning"
-date:   2021-03-02 00:13:00 +0900
+date:   2021-03-03 00:13:00 +0900
 author: "Sihyung Park"
 categories: [machine learning, decision theory]
 
@@ -13,12 +13,8 @@ The first chapter (actually the second in ESL) is an overview of supervised lear
 
 - TOC
 {:toc}
-<br> 
+<br>
 
-<div style="display: none;">
-    $\newcommand{\argmin}{\mathop{\mathrm{argmin}}\limits}$
-    $\newcommand{\argmax}{\mathop{\mathrm{argmax}}\limits}$
-</div>
 
 
 
