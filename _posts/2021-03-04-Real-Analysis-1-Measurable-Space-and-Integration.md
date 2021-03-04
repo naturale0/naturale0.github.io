@@ -194,9 +194,7 @@ Using the facts, we can generalize positive functions to functions. Details are 
 
 
 
-<div class="remark">
-    
-</div>
+<div class="remark"><br>
 
 (i) If $f,g$ are measurable, then $\max\\{f,g\\}$ and $\min\\{f,g\\}$ are measurable.<br>
 
