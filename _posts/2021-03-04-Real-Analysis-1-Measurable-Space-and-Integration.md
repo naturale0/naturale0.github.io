@@ -59,7 +59,7 @@ The following properties are direct from the definition and basic properties of 
 
 
 
-<div class="prop" text="properties of $\sigma$-algebra"><br>
+<div class="prop" text="properties of $\sigma$-algebra">
 
 (i) $\phi \in \mathfrak{M}.$<br>
 (ii) $A_1,A_2,\cdots \in \mathfrak{M} \implies \cap_{i=1}^\infty A_i \in \mathfrak{M}.$<br>
