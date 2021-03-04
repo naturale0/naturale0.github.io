@@ -6,9 +6,296 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Mar 2021 17:43:46 +0900</pubDate>
-    <lastBuildDate>Wed, 03 Mar 2021 17:43:46 +0900</lastBuildDate>
+    <pubDate>Thu, 04 Mar 2021 20:00:30 +0900</pubDate>
+    <lastBuildDate>Thu, 04 Mar 2021 20:00:30 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>[Real Analysis] 1-1. Measurable Space and Integration</title>
+        <description>&lt;p&gt;This is a lecture note of &lt;em&gt;Real Analysis (Spring, 2021)&lt;/em&gt; by Prof. Insuk Seo. The lecture follows the table of contents of &lt;em&gt;Real and Complex Analysis (3rd ed.)&lt;/em&gt; by Rudin, with minor changes in order.&lt;/p&gt;
+
+&lt;p&gt;In the first chapter, we define measurablility, measure, Borel space and integration with respect to a measure. The first part will be a mere list of definitions and properties and I will skip proofs that are easy to be shown.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#measurable-space&quot; id=&quot;markdown-toc-measurable-space&quot;&gt;Measurable space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#measurable-functions&quot; id=&quot;markdown-toc-measurable-functions&quot;&gt;Measurable functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#borel-sigma-algebra&quot; id=&quot;markdown-toc-borel-sigma-algebra&quot;&gt;Borel $\sigma$-algebra&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#measures&quot; id=&quot;markdown-toc-measures&quot;&gt;Measures&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#to-be-appended&quot; id=&quot;markdown-toc-to-be-appended&quot;&gt;(To be appended)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;measurable-space&quot;&gt;Measurable space&lt;/h2&gt;
+
+&lt;p&gt;We want to define a “measure” that measures the “volumes” of subsets of $\mathbb{R}.$ By volumes, i meant a function $\mu$ with the following properties.&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp;\text{(i) }   \mu([0,1]) = 1.\\
+&amp;amp;\text{(ii) }  A,B \text{ are disjoint } \implies \mu(A\cup B) = \mu(A) + \mu(B). \\
+&amp;amp;\text{(iii) } A \equiv B \implies \mu(A) = \mu(B).
+\end{aligned}
+
+\tag{1}\]
+
+&lt;p&gt;We start by defining measurable spaces: candidates for a domain of “measure” functions.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;measurable space&quot;&gt;&lt;br /&gt;
+
+For a set $X$, a collection of subsets of $X$ $\mathfrak{M}$ is a $\sigma$-algebra of $X$ if &lt;br /&gt;
+(i) $X \in \mathfrak{M}.$&lt;br /&gt;
+(ii) $A \in \mathfrak{M} \implies A^c \in \mathfrak{M}.$&lt;br /&gt;
+(iii) $A_1,A_2,\cdots \in \mathfrak{M} \implies \cup_{i=1}^\infty A_i \in \mathfrak{M}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;We say a set $A$ is measurable if $A \in \mathfrak{M}.$ For any set $X$, we can easily derive two $\sigma$-algebras.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;$\mathfrak{M}_1 := \{\phi, X\}.$&lt;/li&gt;
+  &lt;li&gt;$\mathfrak{M}_2 := 2^X.$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The first one is called the &lt;em&gt;trivial $\sigma$-algebra&lt;/em&gt;, and the second is called the &lt;em&gt;discrete $\sigma$-algebra&lt;/em&gt;. Measures in trivial $\sigma$-algebra of $\mathbb{R}$ is unimportant since their properties are not so complicated. Measure with property (1) in discrete $\sigma$-algebra of $\mathbb{R}$ cannot be defined and it is proved as &lt;a href=&quot;https://en.wikipedia.org/wiki/Banach%E2%80%93Tarski_paradox&quot;&gt;the Banach-Tarski paradox&lt;/a&gt;. Our focus of interest will be non-trivial $\sigma$-algebras that are inbetween these two. As an example of such, we can easily prove that $\mathfrak{M}_3 := \{A \subset X: A \text{ or } A^c \text{ is countable}\}$ is a $\sigma$-algebra. ($\mathfrak{M}_3$ is sometimes called a &lt;em&gt;countable-cocountable $\sigma$-algebra&lt;/em&gt;.)&lt;/p&gt;
+
+&lt;p&gt;The following properties are direct from the definition and basic properties of set operations.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;properties of $\sigma$-algebra&quot;&gt;&lt;br /&gt;
+
+(i) $\phi \in \mathfrak{M}.$&lt;br /&gt;
+(ii) $A_1,A_2,\cdots \in \mathfrak{M} \implies \cap_{i=1}^\infty A_i \in \mathfrak{M}.$&lt;br /&gt;
+(iii) $A, B \in \mathfrak{M} \implies A\setminus B \in \mathfrak{M}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;measurable-functions&quot;&gt;Measurable functions&lt;/h2&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;topology&quot;&gt;&lt;br /&gt;
+For a set $X$, a collection of subsets $\tau$ is a topology on $X$ if&lt;br /&gt;
+
+(i) $\phi, X \in \tau.$ &lt;br /&gt;
+(ii) $A_i \in \tau,~ i \in I \implies \cup_{i \in I} A_i \in \tau.$&lt;br /&gt;
+(iii) $A_1,\cdots,A_n \in \tau \implies \cap_{i=1}^n A_i \in \tau.$
+
+&lt;/div&gt;
+
+&lt;p&gt;We call $(X, \tau)$ a topological space and say a subset $V$ is &lt;em&gt;open in $X$&lt;/em&gt; if $V \in \tau.$ Similar to that from the above, we can define trivial and discrete topology for all sets. In addition, we can always define topology from a metric space $(X, d)$ by defining open sets as sets that are countable unions of open balls.&lt;/p&gt;
+
+&lt;p&gt;Properties of functions usually follows, and named after, that of image/preimage of them. Measurable functions are functions that have inverse images of open sets as measurable sets.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;measurable function&quot;&gt;&lt;br /&gt;
+
+$(X, \mathfrak{M})$ is a measurable space, $(Y, \tau)$ is a topological space. $f: X \to Y$ is a measurable function if $f^{-1}(V) \in \mathfrak{M}$ for all $V \in \tau.$
+&lt;/div&gt;
+
+&lt;p&gt;Our first theorem states that composition with continuous function preserves measurability of functions.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.7&quot;&gt;
+
+$X$ is a measurable space and $Y$ is a topological space. $g: Y \to Z$ is continuous. Then&lt;br /&gt;
+
+(i) $f: X \to Y$ is continous $\implies$ $(g\circ f)$ is continuous.&lt;br /&gt;
+(ii) $f: X \to Y$ is measurable $\implies$ $(g \circ f)$ is measurable.
+
+&lt;/div&gt;
+
+&lt;p&gt;Another useful theorem is about composition with multivariate function.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.8&quot;&gt;
+
+$f, g : X \to \mathbb{R}$ are measurable functions. $\Phi: \mathbb{R}^2 \to Y$ is a continuous mapping to topological space $Y.$ Then $h(x) := \Phi\left(f(x), g(x)\right)$ is measurable.
+
+&lt;/div&gt;
+
+&lt;p&gt;The proof uses the general fact that any open set in $\mathbb{R}^2$ can be represented as a countable union of rectangles. Theorem (1.8) is important since it results in common operations such as addition to retain measurability of functions. In addition, since any complex function $f$ can be represented with two real functions $u, v$ as $f = u + iv$, it is (mostly) enough to study real functions.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.9&quot;&gt;
+
+If $f: X \to \mathbb{C}$ is measurable, there exists a complex measurable function $\alpha: X \to \mathbb{C}$ such that&lt;br /&gt;
+
+(i) $|\alpha|=1.$&lt;br /&gt;
+
+(ii) $f = \alpha |f|.$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $\alpha = \varphi(f + \chi_E)$, where $E = \{f=0\}$ and $\varphi(z) = z/|z|.$ Then $\alpha$ is measurable and satisfies the conditions.
+
+&lt;/div&gt;
+
+&lt;p&gt;Limits of measurable functions are also measurable, if exists. For the discussion, we think of functions in extended real number system $\overline{\mathbb{R}}$. To prove so, we need this lemma.&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;1.12(c)&quot;&gt;
+
+For $f: X \to \overline{\mathbb{R}},$ $f$ is measurable if and only if $f^{-1}(a, \infty] \in \mathfrak{M}$ for all $a \in \mathbb{R}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;With the help of the lemma, we get&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.14&quot;&gt;
+
+Let $(f_n: X \to \overline{\mathbb{R}})_{n=1}^\infty$ be a sequence of measurable functions. Then the followings are also measurable.&lt;br /&gt;
+
+(i) $\sup_n f_n.$&lt;br /&gt;
+
+(ii) $\inf_n f_n.$&lt;br /&gt;
+
+(iii) $\limsup_n f_n.$&lt;br /&gt;
+
+(iv) $\liminf_n f_n.$&lt;br /&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Since $\inf_n f_n = - \sup_n (-f_n)$ and $\liminf,$ $\limsup$ are defined as $\sup$ and $\inf,$ it is enough to prove that $\sup_n f_n$ is measurable. It comes directly from
+
+
+$$
+\{\sup_n f_n &amp;gt; a \} = \{ f_n &amp;gt; a \text{ for some } n\in\mathbb{N}\}.
+$$
+
+
+&lt;/div&gt;
+
+&lt;p&gt;And finally,&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot;&gt;
+
+If $f_n$'s are measurable and $\lim_n f_n = f,$ then $f$ is measurable.
+
+&lt;/div&gt;
+
+&lt;p&gt;Using the facts, we can generalize positive functions to functions. Details are on the remark.&lt;/p&gt;
+
+&lt;div class=&quot;remark&quot;&gt;
+    
+&lt;/div&gt;
+
+&lt;p&gt;(i) If $f,g$ are measurable, then $\max\{f,g\}$ and $\min\{f,g\}$ are measurable.&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;(ii) $f$ is measurable if and only if $f^+, f^-$ are measurable, where 
+\(f^+ := \max\{f, 0\},~ f^- := -\min\{f, 0\}.\)
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Rationale behind decomposition of $f$ into $f^+$ and $f^-$ not by other positive functions are by the following proposition.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot;&gt;
+Let $g, h$ be positive functions so that $f = g - h.$ Then $g \ge f^+$ and $h \ge f^-.$
+&lt;/div&gt;
+
+&lt;p&gt;Thus $f^+$ and $f^-$ is a positive functions that decomposes $f$ without superflous information.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;borel-sigma-algebra&quot;&gt;Borel $\sigma$-algebra&lt;/h2&gt;
+
+&lt;p&gt;In real number system, in many cases we want open sets to be measurable sets. Borel $\sigma$-algebra is the minimal $\sigma$-algebra that contains all open sets. The existence of it is trivial by the theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.10&quot;&gt;
+
+For a set $X$ and a collection of subsets $\mathcal{F},$ there exists the smallest $\sigma$-algebra $\mathfrak{M}^*$ that contains $\mathcal{F}.$
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\mathfrak{M}^* := \bigcap_{\mathcal{F} \subset \mathfrak{M},\\\mathfrak{M} \text{ is a } \sigma\text{-alg}} \mathfrak{M}.
+$$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;Borel set&quot;&gt;&lt;br /&gt;
+For a topological space $(X, \tau),$ $\mathcal{B}:= \cap_{\tau \subset \mathfrak{M}} \mathfrak{M}$ is the Borel $\sigma$-algebra. $B \in \mathcal{B}$ is a borel set. For a topological space $Y,$ $f:X\to Y$ is a borel function if $f^{-1}(V) \in \mathcal{B}$ for all open $V \subset Y.$
+
+&lt;/div&gt;
+
+&lt;p&gt;Borel $\sigma$-algebras are important non-trivial $\sigma$-algebras that are inbetween $\mathfrak{M}_1$ and $\mathfrak{M}_2.$ Notable examples of Borel sets include, but not limited to &lt;a href=&quot;https://en.wikipedia.org/wiki/F%CF%83_set&quot;&gt;$F_\sigma$&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/G%CE%B4_set&quot;&gt;$G_\delta$&lt;/a&gt; sets. By definition, all continuous functions are Borel functions. On $\mathbb{R},$ Borel sets include sets of the form $(a, b],$ [a, b) and $\{\frac{1}{n}: n\in\mathbb{N}\}.$ In fact, almost all sets that we can imagine are Borel sets.&lt;/p&gt;
+
+&lt;p&gt;The next theorem generalizes the results until now.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;1.12&quot;&gt;
+
+$(X, \mathfrak{M})$ is a measurable space, $Y, Z$ are topological spaces, and $Y$ is equipped with Borel $\sigma$-algebra $\mathcal{B}.$ Then&lt;br /&gt;
+
+(i) For $f: X \to Y,$ $\Omega:=\{E \subset Y: f^{-1}(E) \in \mathfrak{M}\}$ is a $\sigma$-algebra.&lt;br /&gt;
+
+(ii) For a measurable $f: X \to Y,$ $f^{-1}(E) \in \mathfrak{M}$ for $E \in \mathcal{B}.$ &lt;br /&gt;
+
+(iii) For a measurable $f: X \to Y$ and a Borel $g: Y \to Z,$ $h:=(g \circ f)$ is measurable.
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;measures&quot;&gt;Measures&lt;/h2&gt;
+
+&lt;p&gt;For simplicity, denote $\overline{\mathbb{R}^+}=[0, \infty].$&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;positive measure&quot;&gt;
+
+ For a measurable space $(X, \mathfrak{M}),$ a function $\mu: \mathfrak{M} \to \overline{\mathbb{R}^+}$ is a measure, if&lt;br /&gt;
+
+(i) &lt;b&gt;($\sigma$-additivity)&lt;/b&gt; $A_1,A_2,\cdots \in \mathfrak{M}$ are disjoint $\implies \mu(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i).$&lt;br /&gt;
+
+(ii) $\mu(E) &amp;lt; \infty$ for some $E \in \mathfrak{M}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;We say a measurable space equipped with a measure $(X, \mathfrak{M}, \mu)$ a &lt;em&gt;measure space&lt;/em&gt;. The second condition is for non-trivial result (to avoid $\mu(E)=\infty$ for all measurable $E$). Throughout this lecture, we merely denote “measures” for positive measures unless otherwise noted. If codomain of such function is $\mathbb{R},$ we call it a real measure. Similarly, for such function of codomain $\mathbb{C},$ we call it a complex measure.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;properties of measures&quot;&gt;
+(i) $\mu(\phi) = 0.$&lt;br /&gt;
+
+(ii) $A_1,\cdots,A_n$ are disjoint $\implies$ $\mu(\cup_{i=1}^n A_i) = \sum_{i=1}^n \mu(A_i).$&lt;br /&gt;
+
+(iii) $A \subset B$ $\implies$ $\mu(A) \le \mu(B).$ &lt;br /&gt;
+
+(iv) &lt;b&gt;(continuity from below)&lt;/b&gt; $A_n \uparrow A$ $\implies$ $\mu(A_n) \uparrow \mu(A).$&lt;br /&gt;
+
+(v) &lt;b&gt;(continuity from above)&lt;/b&gt; $A_n \downarrow A,$ $\mu(A_1) &amp;lt; \infty$ $\implies$ $\mu(A_n) \downarrow \mu(A).$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+(i) through (iii) are trivial. For (iv), consider $B_i := A_i \setminus A_{i-1}$ for $i \ge 2.$ For (v), consider $C_i := A_1 \setminus A_i.$
+
+&lt;/div&gt;
+
+&lt;p&gt;Examples of measures include counting measure and Lebesgue measure. Counting measure $c$ counts the number of elements of sets. To be specific, For a measurable space $(X, \mathfrak{M})$ where $\mathfrak{M}=2^X,$&lt;/p&gt;
+
+\[c(E) = \begin{cases}
+  |A|,~ A \text{ is finite.} \\
+  \infty,~ A \text{ is infinite.}
+\end{cases}\]
+
+&lt;p&gt;Lebesgue measure $m$ (on $\mathbb{R}$) is the one that satisfy (1) and will be our focus in the later chapter.&lt;/p&gt;
+
+\[m\left((a,b)\right) = b-a,~~ a&amp;lt;b\in\mathbb{R}.\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;to-be-appended&quot;&gt;(To be appended)&lt;/h2&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rudin. 1986. &lt;strong&gt;Real and Complex Analysis&lt;/strong&gt;. 3rd edition. McGraw-Hill.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Real Analysis (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Insuk Seo).&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 04 Mar 2021 14:59:00 +0900</pubDate>
+        <link>http://localhost:4000/real%20analysis/Real-Analysis-1-1-Measurable-Space-and-Integration</link>
+        <guid isPermaLink="true">http://localhost:4000/real%20analysis/Real-Analysis-1-1-Measurable-Space-and-Integration</guid>
+        
+        
+        <category>real analysis</category>
+        
+      </item>
     
       <item>
         <title>[Nonparametric] 1. Brief Introduction to Nonparametric function estimation</title>
@@ -1601,201 +1888,6 @@ death : ['thee', 'mercy', 'life', 'breath', 'judgment']
         <pubDate>Tue, 09 Feb 2021 01:36:00 +0900</pubDate>
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-FastText</link>
         <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-FastText</guid>
-        
-        
-        <category>machine learning</category>
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding Skip Gram</title>
-        <description>&lt;p&gt;Skip gram is one of the most utilized word embedding model to date. It was introduced at the same time with continuous bag-of-words (CBoW) together named as Word2Vec by Google researchers.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#vanilla-skip-gram&quot; id=&quot;markdown-toc-vanilla-skip-gram&quot;&gt;Vanilla skip gram&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#subsampling&quot; id=&quot;markdown-toc-subsampling&quot;&gt;Subsampling&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#negative-sampling&quot; id=&quot;markdown-toc-negative-sampling&quot;&gt;Negative sampling&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;PyTorch implementation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#embedding-quality&quot; id=&quot;markdown-toc-embedding-quality&quot;&gt;Embedding quality&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Skip gram is based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Distributionalism&quot;&gt;distributional hypothesis&lt;/a&gt; where words with similar distribution is considered to have similar meanings. Recall that even though the NLPM was simple, it had myriads of parameters to be optimized. Researchers of skip gram suggested a model with less parameters along with the novel methods to make optimization step more efficient.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;vanilla-skip-gram&quot;&gt;Vanilla skip gram&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png&quot; alt=&quot;https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Main idea is to optimize model so that if it is queried with a word, it should correctly guess all the context ($\pm$2 in the figure) words. That is,&lt;/p&gt;
-
-\[y = \text{softmax}(Ux)\]
-
-&lt;p&gt;where $x,y$ are one-hot encoded word vector, $U$ is the embedding matrix. With the same dataset, training set for skip gram can be much larger than that of NPLM since it can have $2c$ samples ($w_t:w_{t-c}$, $\cdots$, $w_t:w_{t-1}$, $w_t:w_{t+1}$, $\cdots$, $w_t:w_{t+c}$) while NPLM and other n-gram based models have one ($(w_{t-c}, \cdots w_{t-1}, w_{t+1}, \cdots, w_{t+c}):w_t$). In addition, $U$ is the only parameters to be optimized, which has $|V|\times D$ values in it where $|V|$ is the size of the vocabulary, $D$ is the embedding dimension.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;subsampling&quot;&gt;Subsampling&lt;/h2&gt;
-&lt;p&gt;To make optimization more efficient, the researchers subsampled the dataset so that words with high occurence can be ignored while training. To be specific, they calculated the &lt;em&gt;subsampling probability&lt;/em&gt; to be&lt;/p&gt;
-
-\[P(w_i) = \left( \sqrt{\frac{z(w_i)}{t}} + 1 \right) \times \frac{t}{z(w_i)}\]
-
-&lt;p&gt;where $t$ is a hyperparameter that suggested to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1e-3&lt;/code&gt;, $z(w_i)$ is the fraction of occurence of word $w_i$. We include $w_i$ to the training set with probability $P(w_i)$.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;random&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;subsample_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum_freq&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;words_subsample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subsample_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;negative-sampling&quot;&gt;Negative sampling&lt;/h2&gt;
-&lt;p&gt;The vanilla model has a softmax function as its final activation. The problem is it is computationally expensive since it has to output $|V|$-dimensional vector. To avoid calculating high-dimensional softmax, the researchers proposed &lt;em&gt;negative sampling&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Instead of training the model to output one word out of $|V|$ vocabulary when a word is feeded, we feed the model with a pair of two words and then train it to predict if it is the right pair (positive sample) or not (negative sample). The ratio between positive and negative samples is $1:2\sim5$ for large text and $1:5\sim20$ for small text.&lt;/p&gt;
-
-&lt;p&gt;When generating negative samples, it is better to use words with less frequency more often than its actual frequency. To be specific, we adjust the &lt;em&gt;negative sampling probability&lt;/em&gt; to be&lt;/p&gt;
-
-\[P(w_i) = \frac{f(w_i)^{3/4}}{\sum f(w_i)^{3/4}}\]
-
-&lt;p&gt;where $f(w_i)$ is the frequency of $i$th word.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build_sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    build dataset with negative sampling. Default context size is `c=2`.
-    Ratio between positive and negative samples will be 1:k (default: `k=2`).
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tqdm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;context_pos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;# negative sampling probability
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;searchsorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos_idx_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;side&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'right'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use_neg_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reweight_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;freq_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;context_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_to_ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;choice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; 
-                                                 &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-                                                 &lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                                 &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;probs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;# positive samples + negative samples
-&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;#context = context_pos + context_neg
-&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;#current = [current] * len(context)
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])))&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With negative sampling, out model becomes a binary classification model&lt;/p&gt;
-
-\[x = \{(t_+, c_+), (t_{-,j}, c_{-,j}): j=1, \cdots, k\}, \\
-u_i = Ut_i, \\
-v_i = Vc_i,\\
-\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
-
-&lt;p&gt;where $t_{ij}$ is the one-hot encoded target word vector, $v_{ij}$ is the context word vector, $U,V$ are embeddings, $y_{ij}\in{0, 1}$ is the target label.&lt;/p&gt;
-
-&lt;p&gt;Our goal is to maximize the cross entropy loss&lt;/p&gt;
-
-\[\text{CE}(y, \hat y) = - \sum_{i=+,-} \sum_{j=1}^k y_{ij} \log \hat y_{ij} + (1-y_{ij}) \log (1-\hat y_{ij}).\]
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;pytorch-implementation&quot;&gt;PyTorch implementation&lt;/h2&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# embeddings
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# input should be of shape [batch_size, 1+k, 2]
-&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# split positive and negative sample
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x_pos_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_pos_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x_neg_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_neg_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# log-likelihood w.r.t. x_pos
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# log-likelihood w.r.t. x_neg
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_neg_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_neg_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x_neg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SkipGram&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VOCAB_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EMBEDDING_DIM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BCEWithLogitsLoss&lt;/code&gt; as loss function.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;optim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SGD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;momentum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;criterion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BCEWithLogitsLoss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Full result can be seen &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-2_skip-gram.ipynb&quot;&gt;here (GitHub repo)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;embedding-quality&quot;&gt;Embedding quality&lt;/h2&gt;
-
-&lt;p&gt;Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. The 150 most frequent words are plotted.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_skipgram.png&quot; alt=&quot;skipgram.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Top 5 most similar words result seems good as well.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULT
-angel : ['isaiah', 'spake', 'jesus', 'lord', 'rachel']
-snow  : ['mid', 'ice', 'storm', 'bodily', 'wind']
-love  : ['sing', 'esteem', 'faith', 'tempt', 'rejoice']
-death : ['life', 'hell', 'presence', 'battle', 'dead']
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Mikolov et al. 2013. &lt;strong&gt;Efficient Estimation of Word Representations in Vector Space&lt;/strong&gt;. International Conference on Learning Representations.&lt;/li&gt;
-  &lt;li&gt;Mikolov et al. 2013. &lt;strong&gt;Distributed Representations of Words and Phrases and their Compositionality&lt;/strong&gt;. Advances in Neural Information Processing Systems, 26.&lt;/li&gt;
-  &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Mon, 08 Feb 2021 01:08:00 +0900</pubDate>
-        <link>http://localhost:4000/machine%20learning/natural%20language%20processing/understanding-skip-gram</link>
-        <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/understanding-skip-gram</guid>
         
         
         <category>machine learning</category>
