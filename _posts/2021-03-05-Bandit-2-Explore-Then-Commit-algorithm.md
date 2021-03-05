@@ -26,7 +26,7 @@ $$
 $$
 
 
-The algorithm $a$ interact with bandits through time $t=1,\cdots,T.$ At each time $t$ the algorithm choose an arm $a(t) \in \mathcal{A}.$ Then the reward $r_i(t) \sim P_{\theta_{a(t)}}$ is generated and revealed to the algorithm. Such interactions (action-reward pairs) between the algorithm and the environment is logged into history $\mathcal{H}$ where
+The algorithm interact with bandits through time $t=1,\cdots,T.$ At each time $t$ the algorithm choose an arm $a(t) \in \mathcal{A}.$ Then the reward $r_i(t) \sim P_{\theta_{a(t)}}$ is generated and revealed to the algorithm. Such interactions (action-reward pairs) between the algorithm and the environment is logged into history $\mathcal{H}$ where
 
 
 $$
