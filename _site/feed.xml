@@ -6,9 +6,234 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Mar 2021 12:27:54 +0900</pubDate>
-    <lastBuildDate>Fri, 05 Mar 2021 12:27:54 +0900</lastBuildDate>
+    <pubDate>Fri, 05 Mar 2021 15:10:09 +0900</pubDate>
+    <lastBuildDate>Fri, 05 Mar 2021 15:10:09 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>[Bandit] 2. Explore-Then-Commit algorithm</title>
+        <description>&lt;p&gt;Here, we continue to describe the multi-armed bandit problem in detail. The notion of regret will be introduced. Then our first bandit algorithm, explore-then-commit (ETC) will be described.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#multi-armed-bandit-continued&quot; id=&quot;markdown-toc-multi-armed-bandit-continued&quot;&gt;Multi-armed bandit (continued)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exploration-exploitation-trade-off&quot; id=&quot;markdown-toc-exploration-exploitation-trade-off&quot;&gt;Exploration-exploitation trade-off&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#theoretical-tools&quot; id=&quot;markdown-toc-theoretical-tools&quot;&gt;Theoretical tools&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#markov-and-chebeshevs-inequality&quot; id=&quot;markdown-toc-markov-and-chebeshevs-inequality&quot;&gt;Markov and Chebeshev’s inequality&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#subgaussianity&quot; id=&quot;markdown-toc-subgaussianity&quot;&gt;subgaussianity&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bernstein-inequality&quot; id=&quot;markdown-toc-bernstein-inequality&quot;&gt;Bernstein inequality&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#explore-then-commit-etc&quot; id=&quot;markdown-toc-explore-then-commit-etc&quot;&gt;Explore-then-Commit (ETC)&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#the-algorithm&quot; id=&quot;markdown-toc-the-algorithm&quot;&gt;The algorithm&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#regret-analysis&quot; id=&quot;markdown-toc-regret-analysis&quot;&gt;Regret analysis&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;multi-armed-bandit-continued&quot;&gt;Multi-armed bandit (continued)&lt;/h2&gt;
+
+&lt;p&gt;Suppose we have a set of possible actions $\mathcal{A}$ and a &lt;strong&gt;stochastic bandit&lt;/strong&gt; (a collection of bandits) $\nu$ where&lt;/p&gt;
+
+\[\nu := (P_{\theta_i})_{i \in \mathcal{A}}.\]
+
+&lt;p&gt;The algorithm $a$ interact with bandits through time $t=1,\cdots,T.$ At each time $t$ the algorithm choose an arm $a(t) \in \mathcal{A}.$ Then the reward $r_i(t) \sim P_{\theta_{a(t)}}$ is generated and revealed to the algorithm. Such interactions (action-reward pairs) between the algorithm and the environment is logged into history $\mathcal{H}$ where&lt;/p&gt;
+
+\[\mathcal{H}_{t-1} := \{\left(a(t), r(t)\right): t=1,\cdots,t-1\}.\]
+
+&lt;p&gt;The algorithm can be characterized by a sequence of probabilities $(\pi_t)_{t=1,\cdots,T}.$ Arms are chosen according to conditional probability given history $\pi_t = \pi(\cdot|\mathcal{H}_{t-1}).$ Our goal is to find $(\pi_t)$ that chooses the best actions at each $t.$&lt;/p&gt;
+
+&lt;p&gt;Usually such problem is solved by not maximizing the cumulative reward, but by minimizing the &lt;strong&gt;regret function&lt;/strong&gt; $R$. As the name implies, $R$ is the value that represents the total loss that we had under our choices. To formally define the regret, let $\mu_i$ be the (unknown) expected reward from the $i$th arm, and $\mu_{i^*}$ be the expected reward from the (also unknown) best $i^*$th arm.&lt;/p&gt;
+
+\[\mu_i = E r_i(t) \tag{1}, \\
+\mu_{i^*} \ge \mu_j,~ \forall j \ne i^*.\]
+
+&lt;p&gt;Let $\Delta_j$ be the difference between the mean reward from the best choice and the choice $j$.&lt;/p&gt;
+
+\[\Delta_j := \mu_{i^*} - \mu_j.\]
+
+&lt;p&gt;The regret $R$ is defines as follows:&lt;/p&gt;
+
+\[\begin{aligned}
+R(T)
+ &amp;amp;:= E \sum_{t=1}^T \left( \mu_{i^*} - r_{a(t)}(t) \right) \\
+ &amp;amp;= \sum_{t=1}^T \Delta_{a(t)}.
+\end{aligned}\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;exploration-exploitation-trade-off&quot;&gt;Exploration-exploitation trade-off&lt;/h2&gt;
+
+&lt;p&gt;What makes the bandit problem so challenging is that only a small portion of rewards are revealed: we do not know underlying $P_{\theta_i}$’s unless we chose them to get enough samples. This problem is called &lt;strong&gt;exploration-exploitation trade-off&lt;/strong&gt;. Simply put, we need to find &lt;em&gt;and&lt;/em&gt; use the best among $\nu$ in limited amount of time $T.$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Exploration: Try different arms to get information about $P_{\theta_i}.$&lt;/li&gt;
+  &lt;li&gt;Exploitation: Pick the best arm according to estimates of rewards based on current information about $P_{\theta_i}.$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One thing to note is that in exploitation, we not only need to get the estimate, but also the &lt;em&gt;variabiliy of it&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;theoretical-tools&quot;&gt;Theoretical tools&lt;/h2&gt;
+
+&lt;p&gt;The followings are some of the tools that will be used in regret analysis.&lt;/p&gt;
+
+&lt;h3 id=&quot;markov-and-chebeshevs-inequality&quot;&gt;Markov and Chebeshev’s inequality&lt;/h3&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Markov&quot;&gt;
+For a random variable $X \ge 0$ and $\epsilon &amp;gt; 0,$
+$$
+P(X \ge \epsilon) \le \frac{EX}{\epsilon}.
+$$
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Chebyshev&quot;&gt;
+
+For a random variable $X$ and $\epsilon &amp;gt; 0,$
+$$
+P(|X - EX| \ge \epsilon) \le \frac{\text{Var}(X)}{\epsilon^2}.
+$$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;subgaussianity&quot;&gt;subgaussianity&lt;/h3&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;sub-gaussianity&quot;&gt;&lt;br /&gt;
+A random variable $X$ is $\sigma$-subgaussian, if there exists a $\sigma&amp;gt;0$ such that 
+$$
+E e^{\lambda X} \le e^{\lambda^2\sigma^2/2}.
+$$
+That is, the MGF of $X$ is bounded above by another random variable that follows $\mathcal{N}(0,\sigma^2).$
+
+&lt;/div&gt;
+
+&lt;p&gt;A $\sigma$-subgaussian $X$ can be viewed as a random variable that has tail probabilities smaller than that of $\mathcal{N}(0, \sigma^2).$ To be specific, the right tail probablity can be achieved by &lt;strong&gt;Chernoff method&lt;/strong&gt;. Be careful since the bound is not tight for normal random variables.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Chernoff&quot;&gt;
+
+For a $\sigma$-subgaussian random variable $X,$
+$$
+P(X \ge \epsilon) \le e^{-\frac{\epsilon^2}{2\sigma^2}}.
+$$
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $\lambda = \epsilon / \sigma^2,$ then
+$$
+\begin{aligned}
+P(X \ge \epsilon)
+ &amp;amp;= P(e^{\lambda X} \ge e^{\lambda \epsilon}) \\
+ &amp;amp;\le Ee^{\lambda X}/e^{\lambda \epsilon} \\
+ &amp;amp;\le e^{\lambda^2\sigma^2/2}/e^{\lambda\epsilon} \\
+ &amp;amp;= e^{-\frac{\epsilon^2}{2\sigma^2}}.
+\end{aligned}
+$$
+The first inequality follows from Markov's inequality and the second follows from subgaussianity.
+
+&lt;/div&gt;
+
+&lt;p&gt;Similarly the same inequality holds for the lower tail, thus we get the bound&lt;/p&gt;
+
+\[P(|X| \ge \epsilon) \le 2 e^{-\frac{\epsilon^2}{2\sigma^2}},\]
+
+&lt;p&gt;which is (as we set $\delta = 2e^{-\frac{\epsilon^2}{2\sigma^2}}$) equivalent to&lt;/p&gt;
+
+\[P\left(|X| \ge \sqrt{2\sigma^2 \log\left(\frac{2}{\delta}\right)}\right) \le \delta.\]
+
+&lt;div class=&quot;lemma&quot; text=&quot;5.4&quot;&gt;
+
+$X$ is $\sigma$-subgaussian, $X_1, X_2$ are $\sigma_1$- and $\sigma_2$-subgaussian, respectively. Then&lt;br /&gt;
+
+(i) $EX=0$ and $\text{Var}(X) \le \sigma^2.$&lt;br /&gt;
+
+(ii) $cX$ is $|c|\sigma$-subgaussian for all $c \in \mathbb{R}.$&lt;br /&gt;
+
+(iii) $X_1+X_2$ is $\sqrt{\sigma_1^2 + \sigma_2^2}$-subgaussian.
+
+&lt;/div&gt;
+
+&lt;p&gt;With the help of the lemma, applying Chernoff bound to the sample mean $\hat \mu=\frac{\sum_{t=1}^T X_t}{T}$ of $\sigma$-subgaussian $X$ yields&lt;/p&gt;
+
+\[P(|\hat \mu - \mu| \ge \epsilon) \le 2 e^{-T\frac{\epsilon^2}{2\sigma^2}}.\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;bernstein-inequality&quot;&gt;Bernstein inequality&lt;/h3&gt;
+
+&lt;div class=&quot;lemma&quot;&gt;
+If $P(|X| \le c) = 1$ and $EX=0,$ $\text{Var}(X)=\sigma^2,$ then for any $t&amp;gt;0,$
+$$
+Ee^{tX} \le \exp\left( t^2\sigma^2\frac{e^{tc} - 1 - tc}{(tc)^2} \right).
+$$
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+Ee^{tX}
+ &amp;amp;= E\left(1 + tX + \sum_{r=2}^\infty \frac{t^rX^r}{r!} \right) \\
+ &amp;amp;= 1 + t^2\sigma^2F \\
+ &amp;amp;\le e^{t^2\sigma^2F}
+\end{aligned}
+$$
+
+
+
+where $F=\sum_{r=2}^\infty \frac{t^{r-2}}{\sigma^2} \frac{EX^r}{r!}.$ Since $EX^r \le c^{r-2}\sigma^2$ for $r\ge2,$ we get the desired result.
+
+&lt;/div&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;Bernstein&quot;&gt;
+
+Let $X_t$'s be independent random variables with $P(|X_t| \le c) = 1$ and $EX_i=0,$ $\sigma^2 = \sum_{t=1}^T \text{Var}(X_t).$ Then for any $\epsilon&amp;gt;0,$
+$$
+P(|\hat \mu| \ge \epsilon) \le 2 \exp\left( -\frac{T\epsilon^2}{2\sigma^2 + 2c\epsilon/3} \right).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;explore-then-commit-etc&quot;&gt;Explore-then-Commit (ETC)&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-algorithm&quot;&gt;The algorithm&lt;/h3&gt;
+
+&lt;p&gt;The first and probably the simplest form of the bandit algorithm is explore-then-commit (ETC). As the name speaks for it self, ETC divides total time $T$ into exploration step and exploitation step.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Exploration step.&lt;/strong&gt; During rounds $1,\cdots,mN,$ the algorithm plays each $N$ arms $m$ times.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Exploitation step.&lt;/strong&gt; The algorithm selects the arm with the highest empirical mean reward&lt;/p&gt;
+
+\[a = \argmax_{i=1,\cdots,N} \hat \mu_i (mN)\]
+
+    &lt;p&gt;where&lt;/p&gt;
+
+\[\hat \mu_i(t) := \frac{\sum_{\tau=1}^t r_i(\tau) \mathbf{1}(i=a(\tau))}{\sum_{\tau=1}^t \mathbf{1}(i=a(\tau))}.\]
+
+    &lt;p&gt;During the rest $mN+1,\cdots,T$ rounds, the algorithm chooses that $a$. That is, $a(t) = a$ for all $t=mN+1,\cdots,T.$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Although the algorithm is simple, it is (quite predictively) not a great performing one. Choice of the exploration parameter $m$ depends on the underlying knowledge of $\Delta_i$’s, which is not available. In addition, the algorithm is suboptimal in regret analysis.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;regret-analysis&quot;&gt;Regret analysis&lt;/h3&gt;
+
+&lt;p&gt;[To be appended]&lt;/p&gt;
+</description>
+        <pubDate>Fri, 05 Mar 2021 12:31:00 +0900</pubDate>
+        <link>http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-2-Explore-Then-Commit-algorithm</link>
+        <guid isPermaLink="true">http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-2-Explore-Then-Commit-algorithm</guid>
+        
+        
+        <category>adaptive sequential decision making</category>
+        
+      </item>
     
       <item>
         <title>[Bandit] 1. Introduction to Multi-armed Bandit</title>
@@ -39,7 +264,7 @@
 
 &lt;h3 id=&quot;multi-armed-bandit&quot;&gt;Multi-armed bandit&lt;/h3&gt;
 
-&lt;p&gt;The problem discussed in the above can be described by multiple one-armed bandits, or &lt;strong&gt;multi-armed bandit (MAB)&lt;/strong&gt;. Condiser a row of $N$ different slot machines (also known as one-armed bandits). Each bandit, denoted as $i\in\{1,\cdots,N\}$, has probability distribution $P_{\theta_i(t)}$ parametrized by $\theta_i(t)$ that generates random rewards $r_i(t)$ at each time step $t.$ A &lt;strong&gt;bandit algorithm&lt;/strong&gt;, or just &lt;strong&gt;bandit&lt;/strong&gt;, choose one of the possible arms (actions) $a(t)$ at each time point $t$. Our goal is to find a bandit $a$ that finds and chooses the arms in each step that maximizes the total expected rewards.&lt;/p&gt;
+&lt;p&gt;The problem discussed in the above can be described by multiple one-armed bandits, or &lt;strong&gt;multi-armed bandit (MAB)&lt;/strong&gt;. Condiser a row of $N$ different slot machines (also known as one-armed bandits). Each bandit, denoted as $i\in\{1,\cdots,N\}$, has probability distribution $P_{\theta_i(t)}$ parametrized by $\theta_i(t)$ that generates random rewards $r_i(t)$ at each time step $t.$ A &lt;strong&gt;bandit algorithm&lt;/strong&gt; choose one of the possible arms (or actions, or bandits) $a(t)$ at each time point $t$. Our goal is to find a bandit $a$ that finds and chooses the arms in each step that maximizes the total expected rewards.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/fig/210305_multi-armed_bandit.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -77,7 +302,7 @@
   &lt;li&gt;&lt;strong&gt;Seminar in Recent Development of Applied Statistics (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Myunghee Cho Paik).&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 04 Mar 2021 20:38:00 +0900</pubDate>
+        <pubDate>Fri, 05 Mar 2021 12:28:00 +0900</pubDate>
         <link>http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-1-Introduction-to-Adaptive-Multi-armed-Bandit</link>
         <guid isPermaLink="true">http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-1-Introduction-to-Adaptive-Multi-armed-Bandit</guid>
         
@@ -1732,120 +1957,6 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
         <category>bayesian</category>
         
         <category>machine learning</category>
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding Latent Dirichlet Allocation (1) Backgrounds</title>
-        <description>&lt;p&gt;Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model that is frequently used for topic modelling and document classification. First proposed to infer population structure from genotype data, LDA not only allows to represent words as mixtures of topics, but to represent documents as a mixture of words, which makes it a powerful generative probabilistic model.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the first part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Inference - variational EM&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Inference - Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In this series of articles, I would like to explain backgrounds and model structure, and to implement it from scratch with numpy.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#tf-idf-matrix&quot; id=&quot;markdown-toc-tf-idf-matrix&quot;&gt;TF-IDF matrix&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#latent-semantic-analysis&quot; id=&quot;markdown-toc-latent-semantic-analysis&quot;&gt;Latent Semantic Analysis&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#probabilistic-lsa&quot; id=&quot;markdown-toc-probabilistic-lsa&quot;&gt;Probabilistic LSA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#latent-dirichlet-allocation&quot; id=&quot;markdown-toc-latent-dirichlet-allocation&quot;&gt;Latent Dirichlet Allocation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Before we get into the detail, I would like to mention and define terms that will be used frequently hereafter.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Tokens&lt;/strong&gt; (or &lt;strong&gt;words&lt;/strong&gt;) are grammatical and/or semantic unit of language, usually separated with each other in a sentence by a space&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. &lt;strong&gt;Documents&lt;/strong&gt; (or &lt;strong&gt;sentence&lt;/strong&gt;) are collection of words in specific orders. A &lt;strong&gt;Corpus&lt;/strong&gt; is a collection of documents. &lt;strong&gt;Vocabulary&lt;/strong&gt; is the set of all words in a corpus.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Topics&lt;/strong&gt; are latent structure of documents that cannot be explicitly observed, but can be represented as sets of similar words. &lt;strong&gt;Bayesian hierarchical model&lt;/strong&gt; is a statistical model that sequentially conditioning random variables and their parameters with higher-order hyperparameters. &lt;strong&gt;Topic modelling&lt;/strong&gt; is a process to identify such structure with statistically modeling the documents. &lt;strong&gt;Generative models&lt;/strong&gt;, unlike discriminative models, learn the underlying distributional structure so that it can &lt;em&gt;generate&lt;/em&gt; the random data.&lt;/p&gt;
-
-&lt;p&gt;While the terms might not be familiar to some, it will become clear with real model description in the next post.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tf-idf-matrix&quot;&gt;TF-IDF matrix&lt;/h2&gt;
-
-&lt;p&gt;In the beginning of embedding documents to numeric vectors, TF-IDF matrix was frequently used. Term frequency-inverse document frequency (TF-IDF) is a simple yet useful index to quickly convert documents into vectors. TF-IDF is calculated as follows. First, term frequency (TF) is defined for each words in vocabulary ($v_i$) and documents($\mathbf{w}_d$).&lt;/p&gt;
-
-\[\text{TF}(v_i, \mathbf{w}_d) = (\text{# of occurence of $v_i$ in } \mathbf{w}_d)\]
-
-&lt;p&gt;This is sometimes refered to as &lt;em&gt;raw&lt;/em&gt; term frequency.&lt;/p&gt;
-
-&lt;p&gt;Inverse document frequency (IDF) is defined as an adjusted inverse of document frequency (DF).&lt;/p&gt;
-
-\[\text{DF}(v_i) = (\text{# of documents contaning } v_i) \\
-\text{IDF}(v_i, D) = \log\left(\frac{\text{# of documents in } D}{1 + \text{DF}(v_i)}\right)\]
-
-&lt;p&gt;Finally, TF-IDF is a product of TF and IDF.&lt;/p&gt;
-
-\[\text{TF-IDF}(v_i, \mathbf{w}_d, D) = \text{TF}(v_i, \mathbf{w}_d) \cdot \text{IDF}(v_i, D)\]
-
-&lt;p&gt;Computing TF-IDF for all documents and words in a corpus yields a document-term matrix. Row vectors of the matrix can be viewed as document embeddings.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;latent-semantic-analysis&quot;&gt;Latent Semantic Analysis&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210214_lsa.png&quot; alt=&quot;lsa.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;TF-IDF LSA is just a singular value decomposition of TF-IDF matrix. The rationale is to capture lower-dimensional latent structure behind terms and documents. While TF-IDF reveals provides information, the matrix is sparse and the dimension of each word vector is as large as the size of vocabulary (usually in the order of millions). By applying $r$-&lt;a href=&quot;https://en.wikipedia.org/wiki/Singular_value_decomposition#Truncated_SVD&quot;&gt;truncated singular value decomposition&lt;/a&gt; to TF-IDF matrix of size $M\times V$ where $M$ is the size of corpus (total number of documents) and $V$ is the size of vocabulary, we get two matrices of size $M\times r$ and $r \times V$. The first matrix can be used as a document embedding, and the second as a word embedding.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;probabilistic-lsa&quot;&gt;Probabilistic LSA&lt;/h2&gt;
-
-&lt;p&gt;pLSA is an attempt to model the latent topics as mixture distributions. While LSA is an exact decomposition of TF-IDF matrix, pLSA poses distributional assumptions to word and document generation and finds parameters that best explain it. In this model, &lt;strong&gt;words are realized random variables that follow mixtures of multinomial distributions&lt;/strong&gt; and such &lt;strong&gt;mixtures can be veiwed as topics&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-	&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Plsi_1.svg/300px-Plsi_1.svg.png&quot; /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;It was a paradigm shift to use hierarchical model for topic modelling, but pLSA has weakness: While pLSA is a generative model for words, it is not generative in terms of (unseen) documents. Hence as the number of documents in the training set grows, the number of parameters of the model linearly grows as well which makes it non-scalable and vulnerable to overfitting.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;latent-dirichlet-allocation&quot;&gt;Latent Dirichlet Allocation&lt;/h2&gt;
-
-&lt;p&gt;LDA solves the exact problem that pLSA had: it additionally models documents as mixture distribution of topics starting from the meaning behind &lt;a href=&quot;https://en.wikipedia.org/wiki/Bag-of-words_model&quot;&gt;bag-of-words assumption&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Under BoW assumption, order of words in a document, and in extension, order of documents in a corpus is disregarded. To put it in a statistical statement, BoW assumes that words and documents are &lt;em&gt;exchangeable&lt;/em&gt;. de Finetti’s theorem states that the distribution of a sequence of exchangeable random variables can be represented as a mixture (weighted mean) of distributions of IID random variables. &lt;strong&gt;Thus a desired generative model has not only mixture representations of words, but also of documents.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;The result of consideration is LDA, Details of which will be covered in the next post.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;While tokens are actually processed words by stemming/lemmatizing processes, I will not separate the two here. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 14 Feb 2021 14:14:00 +0900</pubDate>
-        <link>http://localhost:4000/natural%20language%20processing/LDA-1-background-topic-modelling</link>
-        <guid isPermaLink="true">http://localhost:4000/natural%20language%20processing/LDA-1-background-topic-modelling</guid>
-        
         
         <category>natural language processing</category>
         

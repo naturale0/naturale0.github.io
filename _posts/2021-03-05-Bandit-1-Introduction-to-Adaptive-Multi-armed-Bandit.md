@@ -4,8 +4,8 @@ title: "[Bandit] 1. Introduction to Multi-armed Bandit"
 date:   2021-03-05 12:28:00 +0900
 author: "Sihyung Park"
 categories: [adaptive sequential decision making]
-
 ---
+
 
 The `[Bandit]` series of posts is my memo on the lecture *Seminar in Recent Development of Applied Statistics (Spring, 2021)* by Prof. Myunghee Cho Paik. This lecture focuses on adaptive sequential decision making. To be more specific, it covers wide variants of bandit problems.
 
@@ -27,7 +27,7 @@ Our goal is to build an algorithm that maximizes the expected cumulative rewards
 
 ### Multi-armed bandit
 
-The problem discussed in the above can be described by multiple one-armed bandits, or **multi-armed bandit (MAB)**. Condiser a row of $N$ different slot machines (also known as one-armed bandits). Each bandit, denoted as $i\in\\{1,\cdots,N\\}$, has probability distribution $P_{\theta_i(t)}$ parametrized by $\theta_i(t)$ that generates random rewards $r_i(t)$ at each time step $t.$ A **bandit algorithm**, or just **bandit**, choose one of the possible arms (actions) $a(t)$ at each time point $t$. Our goal is to find a bandit $a$ that finds and chooses the arms in each step that maximizes the total expected rewards.
+The problem discussed in the above can be described by multiple one-armed bandits, or **multi-armed bandit (MAB)**. Condiser a row of $N$ different slot machines (also known as one-armed bandits). Each bandit, denoted as $i\in\\{1,\cdots,N\\}$, has probability distribution $P_{\theta_i(t)}$ parametrized by $\theta_i(t)$ that generates random rewards $r_i(t)$ at each time step $t.$ A **bandit algorithm** choose one of the possible arms (or actions, or bandits) $a(t)$ at each time point $t$. Our goal is to find a bandit $a$ that finds and chooses the arms in each step that maximizes the total expected rewards.
 
 
 
