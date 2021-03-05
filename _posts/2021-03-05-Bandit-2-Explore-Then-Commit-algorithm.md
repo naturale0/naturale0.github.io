@@ -249,3 +249,22 @@ Although the algorithm is simple, it is (quite predictively) not a great perform
 ### Regret analysis
 
 [To be appended]
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+***References***
+
+* Lattimore, Szepesvari. 2020. **Bandit Algorithms**. Cambridge University .
+* **Seminar in Recent Development of Applied Statistics (Spring, 2021)** @ Seoul National University, Republic of Korea (instructor: Prof. Myunghee Cho Paik).
