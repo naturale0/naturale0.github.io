@@ -6,13 +6,89 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Mar 2021 20:28:45 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Mar 2021 20:28:45 +0900</lastBuildDate>
+    <pubDate>Fri, 05 Mar 2021 12:27:54 +0900</pubDate>
+    <lastBuildDate>Fri, 05 Mar 2021 12:27:54 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
+        <title>[Bandit] 1. Introduction to Multi-armed Bandit</title>
+        <description>&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Bandit]&lt;/code&gt; series of posts is my memo on the lecture &lt;em&gt;Seminar in Recent Development of Applied Statistics (Spring, 2021)&lt;/em&gt; by Prof. Myunghee Cho Paik. This lecture focuses on adaptive sequential decision making. To be more specific, it covers wide variants of bandit problems.&lt;/p&gt;
+
+&lt;p&gt;The first course is a beginner’s guide to the problem settings.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-bandit-problem&quot; id=&quot;markdown-toc-the-bandit-problem&quot;&gt;The bandit problem&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#adaptive-sequential-decision-making&quot; id=&quot;markdown-toc-adaptive-sequential-decision-making&quot;&gt;Adaptive sequential decision making&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#multi-armed-bandit&quot; id=&quot;markdown-toc-multi-armed-bandit&quot;&gt;Multi-armed bandit&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#assumptions-on-rewards&quot; id=&quot;markdown-toc-assumptions-on-rewards&quot;&gt;Assumptions on rewards&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#external-context&quot; id=&quot;markdown-toc-external-context&quot;&gt;External context&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-bandit-problem&quot;&gt;The bandit problem&lt;/h2&gt;
+
+&lt;h3 id=&quot;adaptive-sequential-decision-making&quot;&gt;Adaptive sequential decision making&lt;/h3&gt;
+
+&lt;p&gt;Adative sequential decision making is a family of problems and solutions where the data becomes available in a &lt;strong&gt;sequential&lt;/strong&gt; order as time $t$ progresses. The algorithm (sometimes referred to as &lt;em&gt;player&lt;/em&gt; or &lt;em&gt;user&lt;/em&gt;) choose the action at time $t$ given the data in hand, which makes it &lt;strong&gt;adaptive&lt;/strong&gt;. Each time the algorithm selects an action, the &lt;em&gt;reward&lt;/em&gt; associated to that action is revealed.&lt;/p&gt;
+
+&lt;p&gt;Our goal is to build an algorithm that maximizes the expected cumulative rewards, under uncertainty. In other words, &lt;em&gt;we want to identify the best action and choose it by observing rewards (with intrinsic randomness) of our choice at each time step&lt;/em&gt;. The problem can be viewed as a special case of &lt;a href=&quot;https://en.wikipedia.org/wiki/Reinforcement_learning#:~:text=Reinforcement%20learning%20(RL)%20is%20an,supervised%20learning%20and%20unsupervised%20learning.&quot;&gt;reinforcement learning&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Online_machine_learning&quot;&gt;online learning&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-armed-bandit&quot;&gt;Multi-armed bandit&lt;/h3&gt;
+
+&lt;p&gt;The problem discussed in the above can be described by multiple one-armed bandits, or &lt;strong&gt;multi-armed bandit (MAB)&lt;/strong&gt;. Condiser a row of $N$ different slot machines (also known as one-armed bandits). Each bandit, denoted as $i\in\{1,\cdots,N\}$, has probability distribution $P_{\theta_i(t)}$ parametrized by $\theta_i(t)$ that generates random rewards $r_i(t)$ at each time step $t.$ A &lt;strong&gt;bandit algorithm&lt;/strong&gt;, or just &lt;strong&gt;bandit&lt;/strong&gt;, choose one of the possible arms (actions) $a(t)$ at each time point $t$. Our goal is to find a bandit $a$ that finds and chooses the arms in each step that maximizes the total expected rewards.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210305_multi-armed_bandit.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;em&gt;Fig 1. Diagram of multi-armed bandit problem. Only the reward from the chosen arm (double-bordered) is revealed.&lt;/em&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Unlike standard supervised learning settings, only the reward from the chosen arm is revealed. Some variants of multi-armed bandit consider a setting where the rewards from not only the chosen but some rejected arms are also revealed (&lt;em&gt;partial information&lt;/em&gt;). In order to identify the best arm, we need to explore for possible best one while also exploit the identified one.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;assumptions-on-rewards&quot;&gt;Assumptions on rewards&lt;/h2&gt;
+
+&lt;p&gt;Variants of multi-armed bandits assumes one of the followings on rewards.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;IID rewards.&lt;/strong&gt; Rewards in each arms are independent and identically distributed.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Adversarial rewards.&lt;/strong&gt; Rewards can be arbitrary. This assumes some rewards as attacks to fool the algorithm.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Stochastic rewards.&lt;/strong&gt; Rewards are independent over time $t.$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;external-context&quot;&gt;External context&lt;/h2&gt;
+
+&lt;p&gt;Fixing an arm as the best choice in all conditions might not perform well in real world situations. Observing some external context and choosing the action accordingly might be helpful. Bandit algorithms that takes context into account  are called &lt;strong&gt;contextual bandits&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;While it is similar to reinforcement learning, the difference lies in the nature of context. If contexts does not depend on the previous actions, contextual bandits are suitable. Reinforcement learning is utilized when current context depends on past actions.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lattimore, Szepesvari. 2020. &lt;strong&gt;Bandit Algorithms&lt;/strong&gt;. Cambridge University .&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Seminar in Recent Development of Applied Statistics (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Myunghee Cho Paik).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 04 Mar 2021 20:38:00 +0900</pubDate>
+        <link>http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-1-Introduction-to-Adaptive-Multi-armed-Bandit</link>
+        <guid isPermaLink="true">http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-1-Introduction-to-Adaptive-Multi-armed-Bandit</guid>
+        
+        
+        <category>adaptive sequential decision making</category>
+        
+      </item>
+    
+      <item>
         <title>[Real Analysis] Ch 1. Measurable Space and Integration</title>
-        <description>&lt;p&gt;This is a lecture note of &lt;em&gt;Real Analysis (Spring, 2021)&lt;/em&gt; by Prof. Insuk Seo. The lecture follows the table of contents of &lt;em&gt;Real and Complex Analysis (3rd ed.)&lt;/em&gt; by Rudin, with minor changes in order.&lt;/p&gt;
+        <description>&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Real Analysis]&lt;/code&gt; series of posts is my memo on the lecture &lt;em&gt;Real Analysis (Spring, 2021)&lt;/em&gt; by Prof. Insuk Seo. The lecture follows the table of contents of &lt;em&gt;Real and Complex Analysis (3rd ed.)&lt;/em&gt; by Rudin, with minor changes in order.&lt;/p&gt;
 
 &lt;p&gt;In the first chapter, we define measurablility, measure, Borel space and integration with respect to a measure. The first part will be a mere list of definitions and properties and I will skip proofs that are easy to be shown.&lt;/p&gt;
 
@@ -59,7 +135,7 @@ For a set $X$, a collection of subsets of $X$ $\mathfrak{M}$ is a $\sigma$-algeb
 
 &lt;p&gt;The following properties are direct from the definition and basic properties of set operations.&lt;/p&gt;
 
-&lt;div class=&quot;prop&quot; text=&quot;properties of $\sigma$-algebra&quot;&gt;&lt;br /&gt;
+&lt;div class=&quot;prop&quot; text=&quot;properties of $\sigma$-algebra&quot;&gt;
 
 (i) $\phi \in \mathfrak{M}.$&lt;br /&gt;
 (ii) $A_1,A_2,\cdots \in \mathfrak{M} \implies \cap_{i=1}^\infty A_i \in \mathfrak{M}.$&lt;br /&gt;
@@ -170,15 +246,15 @@ If $f_n$'s are measurable and $\lim_n f_n = f,$ then $f$ is measurable.
 
 &lt;p&gt;Using the facts, we can generalize positive functions to functions. Details are on the remark.&lt;/p&gt;
 
-&lt;div class=&quot;remark&quot;&gt;
-    
+&lt;div class=&quot;remark&quot;&gt;&lt;br /&gt;
+
+(i) If $f,g$ are measurable, then $\max\{f,g\}$ and $\min\{f,g\}$ are measurable.&lt;br /&gt;
+
+(ii) $f$ is measurable if and only if $f^+, f^-$ are measurable, where 
+$$
+f^+ := \max\{f, 0\},~ f^- := -\min\{f, 0\}.
+$$
 &lt;/div&gt;
-
-&lt;p&gt;(i) If $f,g$ are measurable, then $\max\{f,g\}$ and $\min\{f,g\}$ are measurable.&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;(ii) $f$ is measurable if and only if $f^+, f^-$ are measurable, where 
-\(f^+ := \max\{f, 0\},~ f^- := -\min\{f, 0\}.\)
-&amp;lt;/div&amp;gt;&lt;/p&gt;
 
 &lt;p&gt;Rationale behind decomposition of $f$ into $f^+$ and $f^-$ not by other positive functions are by the following proposition.&lt;/p&gt;
 
@@ -299,7 +375,7 @@ $(X, \mathfrak{M})$ is a measurable space, $Y, Z$ are topological spaces, and $Y
     
       <item>
         <title>[Nonparametric] 1. Brief Introduction to Nonparametric function estimation</title>
-        <description>&lt;p&gt;This is a lecture note of &lt;em&gt;Nonparametric Function Estimation (Spring, 2021)&lt;/em&gt; by Prof. Byeong U. Park. The lecture is mainly focused on kernel smoothing, while it also briefly covers other nonparametric methods such as MARS.&lt;/p&gt;
+        <description>&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Nonparametric]&lt;/code&gt; series of posts is my memo on the lecture &lt;em&gt;Nonparametric Function Estimation (Spring, 2021)&lt;/em&gt; by Prof. Byeong U. Park. The lecture is mainly focused on kernel smoothing, while also briefly covers other nonparametric methods such as MARS.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#nonparametric-model&quot; id=&quot;markdown-toc-nonparametric-model&quot;&gt;Nonparametric model&lt;/a&gt;&lt;/li&gt;
@@ -417,7 +493,7 @@ $(X, \mathfrak{M})$ is a measurable space, $Y, Z$ are topological spaces, and $Y
     
       <item>
         <title>[Statistical Learning] 1. Overview of Supervised Learning</title>
-        <description>&lt;p&gt;This is a summary of &lt;em&gt;The Elements of Statistical Learning&lt;/em&gt; (ESL) and also a lecture note of &lt;em&gt;Advanced Data Mining&lt;/em&gt;. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.&lt;/p&gt;
+        <description>&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Statistical Learning]&lt;/code&gt; series of posts are my summary of &lt;em&gt;The Elements of Statistical Learning&lt;/em&gt; (ESL) and a memo on the lecture &lt;em&gt;Advanced Data Mining (Spring, 2021)&lt;/em&gt; by Prof. Yongdai Kim. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.&lt;/p&gt;
 
 &lt;p&gt;The first chapter (actually the second in ESL) is an overview of supervised learning, especially the two extremes - linear regression and k-nearest neighbor - their weakness and methods to overcome those.&lt;/p&gt;
 
@@ -615,13 +691,11 @@ f^0(\mathbf{x})
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 03 Mar 2021 00:13:00 +0900</pubDate>
-        <link>http://localhost:4000/machine%20learning/decision%20theory/Statistical-Learning-1-Overview-of-Supervised-Learning</link>
-        <guid isPermaLink="true">http://localhost:4000/machine%20learning/decision%20theory/Statistical-Learning-1-Overview-of-Supervised-Learning</guid>
+        <link>http://localhost:4000/statistical%20learning/Statistical-Learning-1-Overview-of-Supervised-Learning</link>
+        <guid isPermaLink="true">http://localhost:4000/statistical%20learning/Statistical-Learning-1-Overview-of-Supervised-Learning</guid>
         
         
-        <category>machine learning</category>
-        
-        <category>decision theory</category>
+        <category>statistical learning</category>
         
       </item>
     
@@ -1772,125 +1846,6 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
         <link>http://localhost:4000/natural%20language%20processing/LDA-1-background-topic-modelling</link>
         <guid isPermaLink="true">http://localhost:4000/natural%20language%20processing/LDA-1-background-topic-modelling</guid>
         
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding FastText</title>
-        <description>&lt;p&gt;While previous word embedding models focused on word-level features such as n-gram, FastText additionally focused on character-level features (subwords) to add flexibility to the model.&lt;/p&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#subwords&quot; id=&quot;markdown-toc-subwords&quot;&gt;Subwords&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#fasttext&quot; id=&quot;markdown-toc-fasttext&quot;&gt;FastText&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#pytorch-implementation&quot; id=&quot;markdown-toc-pytorch-implementation&quot;&gt;PyTorch implementation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#embedding-quality&quot; id=&quot;markdown-toc-embedding-quality&quot;&gt;Embedding quality&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;subwords&quot;&gt;Subwords&lt;/h2&gt;
-
-&lt;p&gt;Suppose that a word &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where&lt;/code&gt; was not in the training set. Previous to FastText, if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where&lt;/code&gt; appears on the test set, then embedding models ignore unseen words and only use words in training set to embed sentences. This might seem reasonable, but we are missing quite information while doing so.&lt;/p&gt;
-
-&lt;p&gt;The key idea behind FastText is that subwords, character-level n-gram of each word, can be used to train word representation. The rationale is that similarly shaped words is more likely to have similar meanings (&lt;em&gt;morphology&lt;/em&gt;). For example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;who&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;when&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;why&lt;/code&gt; all have the 2-gram subword &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wh&lt;/code&gt; in common. This similarity in character composition has information that these words have similar semantics: the interogative.&lt;/p&gt;
-
-&lt;p&gt;Researchers carefully split words into subwords by adding special boundary symbols &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; which symbolize start of frame (sof) and end of frame (eof) respectively. Boundary symbols help the model to identify difference between similar but semantically different subwords. For instance, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;where&amp;gt;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;her&amp;gt;&lt;/code&gt; both have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;her&lt;/code&gt; as their 3-gram subword. However nearby subwords of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;her&amp;gt;&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;he&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;er&amp;gt;&lt;/code&gt;) is quite different than those of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;where&amp;gt;&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;whe&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ere&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;fasttext&quot;&gt;FastText&lt;/h2&gt;
-
-&lt;p&gt;Aside from the fact that it uses subword vectors to characterize word vectors, it is more or less the same as &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram&quot;&gt;skip gram&lt;/a&gt;. It uses &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#subsampling&quot;&gt;subsampling&lt;/a&gt;, &lt;a href=&quot;https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#negative-sampling&quot;&gt;negative sampling&lt;/a&gt; just like skip gram, and it is also a binary classification model.&lt;/p&gt;
-
-\[s_{i,g} \in \mathcal{G}_{t_i}, \\
-z_{i,g} = Zs_{i,g}, \\
-u_i = \sum_{g\in\mathcal{G}_{t_i}} z_{i,g},~ v_i = Vc_i, \\
-\hat y_i = \sigma\left( u_i'v_i \right) = \frac{1}{1 + e^{-u_i'v_i}}\]
-
-&lt;p&gt;where $s_{i,g}$’s are subwords of $i$th word $t_i$, $c_i$ is the context word, $Z$ is the subword embedding, $V$ is the word embedding, $y_i\in{0, 1}$ is the target label. Note that subword-level embedding was not used for context words.&lt;/p&gt;
-
-&lt;p&gt;Our goal is to maximize the cross entropy loss&lt;/p&gt;
-
-\[\text{CE}(y, \hat y) = - \sum_{i=+,-} \sum_{j=1}^k y_{ij} \log \hat y_{ij} + (1-y_{ij}) \log (1-\hat y_{ij}).\]
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;pytorch-implementation&quot;&gt;PyTorch implementation&lt;/h2&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FastText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subvocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FastText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# adjust Long according to device type
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LongTensor&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cuda&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LongTensor&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# embeddings
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EmbeddingBag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subvocab_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# +1 for empty
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;embedding_dim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# input should be of shape [batch_size, 1+k, 2]
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;x_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# get subwords
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x_1_sub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_subword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# log-likelihood: sum up subword vectors to get word vector
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subwords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subwords&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_1_sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;embedding_v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torch.nn.EmbeddingBag&lt;/code&gt; to speed up computing time. The computational graph looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_fasttext_graph.png&quot; alt=&quot;fasttext_graph.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;embedding-quality&quot;&gt;Embedding quality&lt;/h2&gt;
-
-&lt;p&gt;Use t-SNE to reduce the dimension of embedding to 2, and plot each word vectors. Only the 150 most frequent words are plotted.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_fasttext.png&quot; alt=&quot;fasttext.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Results are similar to &lt;a href=&quot;/machine%20learning/natural%20language%20processing/understanding-skip-gram#embedding-quality&quot;&gt;that of skip gram&lt;/a&gt;, but FastText tends to embed words with similar morphology closer to each other (for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(are, were)&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(then, when)&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Top 5 most similar words result implies this property as well. Compare it to the result from skip gram.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;QUERY   RESULTS
-angel : ['angels', 'strangely', 'thus', 'saith', 'lord']
-snow  : ['blue', 'figures', 'rolls', 'like', 'mud']
-love  : ['loved', 'lovers', 'lover', 'my', 'thy']
-death : ['thee', 'mercy', 'life', 'breath', 'judgment']
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Cosine similarity heatmap agrees with the results.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210208_fasttext_cosine.png&quot; alt=&quot;fasttext_cos.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Full results can be found &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/2_word_embedding/2-3_fasttext.ipynb&quot;&gt;here (notebook)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Bojanowski et al. 2017. &lt;strong&gt;Enriching Word Vectors with Subword Information&lt;/strong&gt;. Transactions of the Association for Computational Linguistics, 5, 135-146.&lt;/li&gt;
-  &lt;li&gt;Lee. 2019. &lt;strong&gt;한국어 임베딩 (Embedding Korean)&lt;/strong&gt;. 에이콘 출판사.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 09 Feb 2021 01:36:00 +0900</pubDate>
-        <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-FastText</link>
-        <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-FastText</guid>
-        
-        
-        <category>machine learning</category>
         
         <category>natural language processing</category>
         

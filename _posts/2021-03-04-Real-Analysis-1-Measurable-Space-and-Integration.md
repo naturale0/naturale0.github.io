@@ -7,7 +7,7 @@ categories: [real analysis]
 
 ---
 
-This is a lecture note of *Real Analysis (Spring, 2021)* by Prof. Insuk Seo. The lecture follows the table of contents of *Real and Complex Analysis (3rd ed.)* by Rudin, with minor changes in order.
+The `[Real Analysis]` series of posts is my memo on the lecture *Real Analysis (Spring, 2021)* by Prof. Insuk Seo. The lecture follows the table of contents of *Real and Complex Analysis (3rd ed.)* by Rudin, with minor changes in order.
 
 In the first chapter, we define measurablility, measure, Borel space and integration with respect to a measure. The first part will be a mere list of definitions and properties and I will skip proofs that are easy to be shown.
 

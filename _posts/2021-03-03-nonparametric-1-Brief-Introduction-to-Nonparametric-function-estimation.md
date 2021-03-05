@@ -7,7 +7,7 @@ categories: [non-parametric]
 
 ---
 
-This is a lecture note of *Nonparametric Function Estimation (Spring, 2021)* by Prof. Byeong U. Park. The lecture is mainly focused on kernel smoothing, while it also briefly covers other nonparametric methods such as MARS.
+The `[Nonparametric]` series of posts is my memo on the lecture *Nonparametric Function Estimation (Spring, 2021)* by Prof. Byeong U. Park. The lecture is mainly focused on kernel smoothing, while also briefly covers other nonparametric methods such as MARS.
 
 - TOC
 {:toc}

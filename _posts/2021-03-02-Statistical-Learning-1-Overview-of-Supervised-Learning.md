@@ -3,11 +3,11 @@ layout: post
 title: "[Statistical Learning] 1. Overview of Supervised Learning"
 date:   2021-03-03 00:13:00 +0900
 author: "Sihyung Park"
-categories: [machine learning, decision theory]
+categories: [statistical learning]
 
 ---
 
-This is a summary of *The Elements of Statistical Learning* (ESL) and also a lecture note of *Advanced Data Mining*. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.
+The `[Statistical Learning]` series of posts are my summary of *The Elements of Statistical Learning* (ESL) and a memo on the lecture *Advanced Data Mining (Spring, 2021)* by Prof. Yongdai Kim. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.
 
 The first chapter (actually the second in ESL) is an overview of supervised learning, especially the two extremes - linear regression and k-nearest neighbor - their weakness and methods to overcome those.
 
