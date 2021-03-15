@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Mar 2021 01:25:54 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Mar 2021 01:25:54 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Mar 2021 01:27:56 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Mar 2021 01:27:56 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -82,7 +82,7 @@ G(x)
   &lt;li&gt;$\hat \Sigma_j = \frac{1}{n_j-1}(x_i - \hat \mu_j)(x_i - \hat \mu_j)^\intercal$&lt;/li&gt;
   &lt;li&gt;$n_j = \sum_{i=1}^n \mathbf{1}(y_i=j)$&lt;/li&gt;
   &lt;li&gt;$\pi_j = n_j/n$&lt;/li&gt;
-  &lt;li&gt;$\hat\Sigma = \frac{1}{n-2}\bigr{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \bigr}$&lt;/li&gt;
+  &lt;li&gt;$\hat\Sigma = \frac{1}{n-2}\big\{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \big\}$&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -136,6 +136,8 @@ p^{(t)} = \big[ \phi(x_i, \boldsymbol{\beta}^{(t)}) \big]_{i=1}^n.\]
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;lda-vs-logistic-regression&quot;&gt;LDA vs. Logistic regression&lt;/h2&gt;
+
+&lt;p&gt;[TBD]&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 

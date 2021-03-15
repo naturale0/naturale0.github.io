@@ -102,7 +102,7 @@ In practice, we use sample version of parameters instead:
 * $\hat \Sigma_j = \frac{1}{n_j-1}(x_i - \hat \mu_j)(x_i - \hat \mu_j)^\intercal$
 * $n_j = \sum_{i=1}^n \mathbf{1}(y_i=j)$
 * $\pi_j = n_j/n$
-* $\hat\Sigma = \frac{1}{n-2}\bigr\{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \bigr\}$
+* $\hat\Sigma = \frac{1}{n-2}\big\\{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \big\\}$
 
 <br>
 
