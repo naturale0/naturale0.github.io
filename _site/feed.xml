@@ -6,9 +6,615 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Mar 2021 15:10:09 +0900</pubDate>
-    <lastBuildDate>Fri, 05 Mar 2021 15:10:09 +0900</lastBuildDate>
+    <pubDate>Mon, 15 Mar 2021 15:13:23 +0900</pubDate>
+    <lastBuildDate>Mon, 15 Mar 2021 15:13:23 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>[Nonparametric] 2. Univariate Kernel Density Estimation</title>
+        <description>&lt;p&gt;From histogram, we will start discussing nonparametric kernel methods.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#problem-setting&quot; id=&quot;markdown-toc-problem-setting&quot;&gt;Problem setting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#histogram&quot; id=&quot;markdown-toc-histogram&quot;&gt;Histogram&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#motivation&quot; id=&quot;markdown-toc-motivation&quot;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#maximum-likelihood-property&quot; id=&quot;markdown-toc-maximum-likelihood-property&quot;&gt;Maximum likelihood property&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#error-analysis&quot; id=&quot;markdown-toc-error-analysis&quot;&gt;Error analysis&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#problems-and-remedies&quot; id=&quot;markdown-toc-problems-and-remedies&quot;&gt;Problems and remedies&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#corner-effect&quot; id=&quot;markdown-toc-corner-effect&quot;&gt;corner effect&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#bin-edge-effect&quot; id=&quot;markdown-toc-bin-edge-effect&quot;&gt;Bin edge effect&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#kernel-smoother&quot; id=&quot;markdown-toc-kernel-smoother&quot;&gt;Kernel smoother&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#motivation-1&quot; id=&quot;markdown-toc-motivation-1&quot;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#kernel-density-estimator&quot; id=&quot;markdown-toc-kernel-density-estimator&quot;&gt;Kernel density estimator&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#error-analysis-1&quot; id=&quot;markdown-toc-error-analysis-1&quot;&gt;Error analysis&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#optimal-kernel-function&quot; id=&quot;markdown-toc-optimal-kernel-function&quot;&gt;Optimal kernel function&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#boundary-problem&quot; id=&quot;markdown-toc-boundary-problem&quot;&gt;Boundary problem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#asymptotic-normality&quot; id=&quot;markdown-toc-asymptotic-normality&quot;&gt;Asymptotic normality&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#estimation-of-density-derivative&quot; id=&quot;markdown-toc-estimation-of-density-derivative&quot;&gt;Estimation of density derivative&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-setting&quot;&gt;Problem setting&lt;/h2&gt;
+
+&lt;p&gt;$X_1,\cdots,X_n \in \mathbb{R}$ are i.i.d. random variables with density $p$ with respect to the Lebesgue measure. Our goal is to estimate $p$ with the data $\{X_1, \cdots, X_n\}.$ Note that this problem is ill-defined: No element in the class $\{p: p\ge 0, \int p = 1\}$ maximizes $\prod_{i=1}^n p(X_i).$&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Suppose there exists a maximizer $p.$ Let $p'$ be a density that has greater mass than p along the region containing $X_i,$ then $\prod_{i=1}^n p'(X_i) &amp;gt; \prod_{i=1}^n p(X_i).$
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;histogram&quot;&gt;Histogram&lt;/h2&gt;
+
+&lt;p&gt;Histogram is probably the most intuitive and simple approach to nonparametric density estimation.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;histogram&quot;&gt;&lt;br /&gt;
+Let $B_j$ be the $j$th bin. i.e. $\{B_j\}_j$ is a partition of $\mathbb{R}.$ Let $b_j$ be the width of the $j$th bin. Then
+$$\begin{aligned}
+  \hat p(x) 
+    &amp;amp;= \frac{1}{nb_j} \sum_{i=1}^n \mathbf{1}_{B_j}(X_i),~ x \in B_j \\
+    &amp;amp;= \frac{1}{nb_j} \sum_{i=1}^n \sum_{i=1}^n \sum_j \mathbf{1}_{B_j} (X_i) \mathbf{1}_{B_j}(x).
+\end{aligned}$$
+
+
+
+is the histogram estimator of $p.$
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;motivation&quot;&gt;Motivation&lt;/h3&gt;
+
+&lt;p&gt;We can think of relative frequency as a density estimation method.&lt;/p&gt;
+
+\[\begin{aligned}
+p(x)
+ &amp;amp;\approx \frac{1}{n}(\text{frequency of $B_j$}) \\
+ &amp;amp;\approx \mathbb{P}(X_1 \in B_j), ~~~~~~~~~~~ (1) \\
+ &amp;amp;= \int_{B_j} p(u)du \\
+ &amp;amp;\approx p(x) \cdot b_j, ~~~~~~~~~~~~~~~~\:\; (2)
+\end{aligned}\]
+
+&lt;p&gt;Here, (1) gives bad approximation if $b_j$ is too small relative to $n$. This is because frequency of $B_j$ merely becomes 0. On the other hand, (2) gives bad approximation if $b_j$ is too large, since the density is estimated by a constant function at its extreme.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;maximum-likelihood-property&quot;&gt;Maximum likelihood property&lt;/h3&gt;
+
+&lt;p&gt;Let&lt;/p&gt;
+
+\[\begin{aligned}
+\mathcal{F} 
+ &amp;amp;= \left\{p: p\ge0, \int p = 1, p=c_j \text{ on } B_j, c_j \in \mathbb{R}\right\} \\
+ &amp;amp;= \left\{\sum_{j=1}^\infty c_j\cdot\mathbf{1}_{B_j}: c_j \ge 0, \sum_{j=1}^\infty b_jc_j = 1\right\}.
+\end{aligned}\]
+
+&lt;p&gt;Then $\hat p = \argmax_{f \in \mathcal{F}} \prod_{i=1}^n p(X_i).$ That is, histogram is the maximizer of likelihood among the step functions.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+\ell(p)
+ &amp;amp;= \sum_{i=1}^n \log p(X_i) \\
+ &amp;amp;= \sum_{i=1}^n \log \left( \sum_{j=1} c_j \mathbf{1}_{B_j}(X_i) \right) \\
+ &amp;amp;= \sum_{j=1}^\infty \sum_{i=1}^n \mathbf{1}_{B_j}(X_i) \log{c_j} \\
+ &amp;amp;= \sum_{j=1}^\infty f_j\log c_j,~ f_j := \sum_{i=1}^n \mathbf{1}_{B_j}(X_i)\\
+ &amp;amp;=: \ell(c_1,c_2,\cdots)
+\end{aligned}
+$$
+
+
+$$
+\text{Maximize } \ell(c_1,\cdots) \text{ subject to } \sum_{j=1}^\infty b_jc_j = 1,~ c_j \ge 0. \\
+\iff \text{Maximize } \ell(a_1,\cdots) \text{ subject to } \sum_{j=1}^\infty a_j = 1,~ a_j \ge 0. \\
+\implies \begin{cases}
+  f_j=0,&amp;amp;~ a_j=0 \text{ maximizes } \ell &amp;amp;\Rightarrow c_j=0 \\ 
+  f_j&amp;gt;0,&amp;amp;~ a_j &amp;gt; 0 &amp;amp;\Rightarrow c_j\ne0
+  \end{cases}
+$$
+
+
+Let $f_{(1)}, \cdots, f_{(k)} &amp;gt; 0$ be the subset of $\{f_j\}$ with positive values only. Then
+
+
+$$
+\begin{aligned}
+\ell(c_1,\cdots)
+ &amp;amp;= \ell(c_{(1)}, \cdots, c_{(k)}) \\
+ &amp;amp;= \sum_{i=1}^k f_{(i)} \log c_{(i)} \\
+ &amp;amp;= \sum_{i=1}^{k-1} f_{(i)} \log c_{(i)} + f_{(k)} \log\left( 1 - \sum_{i=1}^{k-1} c_{(i)} \right)
+\end{aligned}
+$$
+Checking the second order optimality we get
+$$
+\hat c_{(i)} = \frac{f_{(i)}}{nb_{(i)}},~ i=1,\cdots,k.
+$$
+
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;error-analysis&quot;&gt;Error analysis&lt;/h3&gt;
+
+&lt;p&gt;For function estimation, we frequently use mean integrated squared error (MISE) as an error metric. MISE is defined as follows:
+\(\begin{aligned}
+\text{MISE}(\hat p)
+  &amp;amp;:= E\int \left(\hat p(x) - p(x)\right)^2 dx \\
+  &amp;amp;= E \int \text{MSE}(\hat p(x)) dx.
+\end{aligned}\)&lt;/p&gt;
+
+&lt;p&gt;Since MSE can be decomposed into squared bias and variance, in order to compute MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; we get&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot;&gt;&lt;br /&gt;
+
+$$
+\begin{aligned}
+\text{bias}(\hat p (x))
+ &amp;amp;= p'\left((j(x) - \frac{1}{2})h \right) \left\{ (j(x) - \frac{1}{2})h - x \right\} + o(h), \\
+\text{Var}(\hat p(x))
+ &amp;amp;= \frac{1}{nh}p(x) + o\left(\frac{1}{nh}\right)
+\end{aligned}
+$$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Since $f_j \sim \mathcal{B}(n, \mathbb{P}(X_1 \in B_j)),$ we get
+$$
+E\hat p(x) = \frac{1}{nh}n\mathbb{P}(X_1 \in B_j) = \frac{1}{h} \int_{(j-1)h}^{jh} p(x)dx,
+$$
+where $j = j(x).$ Thus
+$$
+\begin{aligned}
+\text{bias}(\hat p(x))
+ =&amp;amp; \frac{1}{h} \int_{(j-1)h}^{jh} p(t)-p(x)~dt \\
+ =&amp;amp; \frac{1}{h} \int_{(j-1)h}^{jh} (t-x)p'(x)~dt
+    + (t-x)\int_0^1 p'(x+u(t-x)) - p'(x) ~du~dt \\
+ =&amp;amp; \frac{1}{h} \int_{(j-1)h}^{jh} (t-x)p'(x)~dt
+    + \int_0^1 \int_{(j-1)h}^{jh} \frac{t-x}{h} \{p'(x+u(t-x)) - p'(x)\} ~dt~du \\
+ =&amp;amp; \left((j-\frac{1}{2})h - x\right) p'(x)
+    + \int_0^1 \int_{(j-1)h}^{jh} \frac{t-x}{h} \{p'(x+u(t-x)) - p'(x)\} ~dt~du \\
+ =&amp;amp; \left((j-\frac{1}{2})h - x\right) p'\left((j-\frac{1}{2})h\right) \\
+    &amp;amp;+ \int_0^1 \int_{(j-1)h}^{jh} \frac{t-x}{h} \{p'(x+u(t-x)) - p'(x)\} ~dt~du \\
+    &amp;amp;+ o(h).
+\end{aligned}
+$$
+
+
+We get the desired result since 
+$$
+\begin{aligned}
+|(\text{2nd term})| 
+ &amp;amp;\le \int_0^1 \int_{(j-1)h}^{jh} \left|\frac{t-x}{h}\right| \left|p'(x+u(t-x)) - p'(x)\right| ~dt~du \\
+ &amp;amp;\le \int_0^1 \int_{(j-1)h}^{jh} 1 \cdot \sup_{|y|&amp;lt;h}|p'(x+u(t-x)) - p'(x)| ~dt~du \\
+ &amp;amp;= h \cdot \sup_{|y|&amp;lt;h} |p'(x+y) - p'(x)| \\
+ &amp;amp;= o(h).
+\end{aligned}
+$$
+For variance, derivation is easier.
+$$
+\begin{aligned}
+\text{Var}(\hat p(x))
+ &amp;amp;= \frac{1}{n^2h^2} \text{Var}(f_j) \\
+ &amp;amp;= \frac{1}{nh^2} \mathbb{P}(X_1 \in B_j) \left(1 - \mathbb{P}(X_1 \in B_j) \right) \\
+ &amp;amp;= \frac{1}{nh}\frac{1}{h} \int_{(j-1)h}^{jh} p(x)dx \cdot (1 - o(1)) \\
+ &amp;amp;= \frac{1}{nh}(p(x) + o(1))(1 - o(1)) \\
+ &amp;amp;= \frac{1}{nh}p(x) + o\left(\frac{1}{nh}\right).
+\end{aligned}
+$$
+&lt;/div&gt;
+
+&lt;p&gt;From this, we can guess MISE to be somewhat similar to
+\(\frac{1}{nh} + \frac{1}{12}h^2 \int (p')^2 + o\left(\frac{1}{nh} + h^2\right).\)
+In fact, this is the MISE of histogram estimator. However the formal derivation requires a little more than sum of MSE.&lt;/p&gt;
+
+&lt;div class=&quot;prop&quot; text=&quot;MISE of histogram&quot;&gt;
+$$
+\text{MISE}(\hat p) = \frac{1}{nh} + \frac{1}{12}h^2 \int (p')^2 + o\left(\frac{1}{nh} + h^2\right).
+$$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+\int \text{bias}^2(\hat p(x))dx
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \int_{B_k} \text{bias}^2 (\hat p(x)) dx \\
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \int_{B_k} \left( (k-\frac{1}{2})h - x \right)^2 \left( p'\left((k-\frac{1}{2})h - x\right) \right)^2 dx + o(h^2) \\
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \left(p'\left( (k-\frac{1}{2})h \right)\right)^2 \int_{B_k} \left( (k-\frac{1}{2})h \right)^2 dx + o(h^2) \\
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \left(p'\left( (k-\frac{1}{2})h \right)\right)^2 \int_{(k-1)h}^{kh} \left( (k-\frac{1}{2})^2h^2 - 2(k-\frac{1}{2})hx + x^2 \right) dx + o(h^2) \\
+ &amp;amp;= \frac{1}{12}h^3 \sum_{k\in\mathbb{Z}} \left(p'\left( (k-\frac{1}{2})h \right)\right)^2 + o(h^2) \\
+ &amp;amp;= \frac{1}{12}h^3 \sum_{k\in\mathbb{Z}} \frac{1}{h} \int_{B_k} (p'(x))^2 dx + o(h^2) \\
+ &amp;amp;= \frac{1}{12}h^2 \int (p')^2 + o(h^2).
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+\int \text{Var}(\hat p(x)) dx
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \int_{B_k} \text{Var}(\hat p(x)) dx \\
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \int_{B_k} \frac{1}{nh^2}\mathbb{P}(X_1 \in B_k) (1 - \mathbb{P}(X_1 \in B_k)) dx \\
+ &amp;amp;= \sum_{k\in\mathbb{Z}} \frac{1}{nh} \mathbb{P}(X_1 \in B_k) (1 - \mathbb{P}(X_1 \in B_k)) \\
+ &amp;amp;= \frac{1}{nh} \left( 1 - \sum_{k\in\mathbb{Z}} \mathbb{P}(X_1 \in B_k)^2 \right) \\
+ &amp;amp;= \frac{1}{nh} + o\left(\frac{1}{nh}\right).
+\end{aligned}
+$$
+Thus the desired result follows.
+
+&lt;/div&gt;
+
+&lt;p&gt;We call the MISE without the approximated term the approximate MISE (AMISE). By the first order optimality condition, we can easily check that
+\(h_\text{opt} = \left( \frac{6}{n \int (p')^2} \right)^{1/3}\)
+maximizes AMISE of $\hat p.$&lt;/p&gt;
+
+&lt;p&gt;A parametric model have MISE $\sim n^{-1}$ if the model assumption is correct, and $\sim n^0$ otherwise. Under $h_\text{opt},$ $\text{AMISE}(h_\text{opt}) \sim n^{-2/3}$ and also $\text{MISE}(h_\text{opt}) \sim n^{-2/3}$. Comparing to a parametric approach, this is an improvement since it provides similar error rate without any model assumption.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;problems-and-remedies&quot;&gt;Problems and remedies&lt;/h3&gt;
+
+&lt;p&gt;In this section, we will cover two intrinsic problems that histogram estimator has and remedies of it, which will be a bridging concept to kernel smoother.&lt;/p&gt;
+
+&lt;h4 id=&quot;corner-effect&quot;&gt;corner effect&lt;/h4&gt;
+
+&lt;p&gt;Corner effect states that histogram estimates that the density at the corners of each bin is the same as in the midpoint. This takes place because a histogram estimates density as a constant inside every bins. To address the problem, we estimate density around $x$ by thinking of a bin centered at $x.$&lt;/p&gt;
+
+\[\begin{aligned}
+\hat p(x)
+ &amp;amp;= \frac{1}{nh} \sum_{i=1}^n \mathbf{1}_{(x-h/2,~x+h/2)}(X_i) \\
+ &amp;amp;= \frac{1}{n} \sum_{i=1}^n \frac{1}{h} \mathbf{1}_{(-1/2,~1/2)} \left( \frac{x-X_i}{h} \right).
+\end{aligned} \tag{1}\]
+
+&lt;h4 id=&quot;bin-edge-effect&quot;&gt;Bin edge effect&lt;/h4&gt;
+
+&lt;p&gt;Bin edge effect states that even if we use the exactly same data and same $h$ for density estimation, estimators differ if locations of bins are different.&lt;/p&gt;
+
+&lt;p&gt;To solve the problem, &lt;strong&gt;average shifted histogram (ASH)&lt;/strong&gt; was developed. AST is an average of $m$ different histograms with same data and same $h$, but with $\frac{h}{m}$-shifted bins.&lt;/p&gt;
+
+\[\begin{aligned}
+A_{j,l} &amp;amp;:= \bigg[(j-1)h + l\frac{h}{m},~ jh + l\frac{h}{m}\bigg),\\
+\hat p_{m,l}(x) &amp;amp;:= \frac{1}{nh} \sum_{i=1}^n \sum_{j\in\mathbb{Z}} \mathbf{1}_{A_{j,l}}(x) \mathbf{1}_{A_{j,l}}(X_i),~ 0\le l \le m-1, \\
+\hat p_m(x) &amp;amp;:= \frac{1}{m} \sum_{l=0}^{m-1} \hat p_{m,l}(x).
+\end{aligned}\]
+
+&lt;p&gt;$\hat p(m)$ is the $m$-ASH. It is known that as $m \to \infty,$&lt;/p&gt;
+
+\[\hat p_m(x) \to \frac{1}{nh} \sum_{i=1}^n \left(1 - \left|\frac{x-X_i}{h}\right|\right) \mathbf{1}\left(\left|\frac{x-X_i}{h}\right| &amp;lt; 1\right). \tag{2}\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;kernel-smoother&quot;&gt;Kernel smoother&lt;/h2&gt;
+
+&lt;h3 id=&quot;motivation-1&quot;&gt;Motivation&lt;/h3&gt;
+
+&lt;p&gt;Note that both $(1)$ and $(2)$ can be represented in the form&lt;/p&gt;
+
+\[\hat p(x) = \frac{1}{n} \sum_{i=1}^n \frac{1}{h}K\left(\frac{x-X_i}{h}\right),\]
+
+&lt;p&gt;where for $(1),$ $K(x) = \mathbf{1}_{(-1/2,~ 1/2)}(x)$ and for $(2),$ $K(x) = (1-|x|)\mathbf{1}(|x|&amp;lt;1).$ What if we use a function $K$ that can generalize the family of functions of interest and better estimates density?&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;kernel-density-estimator&quot;&gt;Kernel density estimator&lt;/h3&gt;
+
+&lt;p&gt;A kernel density estimator is defined as&lt;/p&gt;
+
+\[\begin{aligned}
+\hat p(x) 
+ &amp;amp;= \frac{1}{n} \sum_{i=1}^n \frac{1}{h}K\left(\frac{x-X_i}{h}\right) \\
+ &amp;amp;= \frac{1}{n} \sum_{i=1}^n K_h(x-X_i),
+\end{aligned}\]
+
+&lt;p&gt;where $K_h(x) := \frac{1}{h}K(\frac{x}{h}).$ Here we call $h$ a &lt;strong&gt;bandwidth&lt;/strong&gt; and such function $K$ (or $K_h$) a &lt;strong&gt;kernel function&lt;/strong&gt;. Usually kernel functions are set to be symmetric and satisfy $\int K(x)p(x)dx = 1$ for $\int \hat p(x)dx = 1.$&lt;/p&gt;
+
+&lt;p&gt;Support of $K$ determines the local region of averaging. For instantce, if $\text{supp.}K = [-1,1],$ then $\hat p(x)$ is the local weighted average on data $X_i$’s inside the interval $[x-h,~x+h].$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;error-analysis-1&quot;&gt;Error analysis&lt;/h3&gt;
+
+&lt;p&gt;Since the expectation of $\hat p(x)$ is a convolution of $K_h$ and $p(x)$:&lt;/p&gt;
+
+\[\begin{aligned}
+E\hat p(x)
+ &amp;amp;= E K_h(x-X_1) \\
+ &amp;amp;= \int K_h(x-u)p(u)du \\
+ &amp;amp;= K_h * p(x),
+\end{aligned}\]
+
+&lt;p&gt;expansion of $K_h * p(x)$ would be helpful for error analysis.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+
+Suppose (A1) and (A2) hold.&lt;br /&gt;
+
+(A1) $p$ is $r$ times continuously differentiable at $x$, and $p^{(r)} \in L^1.$  &lt;br /&gt;
+
+(A2) $|u|^{r+1} K(u) \to 0$ as $|u| \to \infty,$ and $\int |u|^r K(u) du &amp;lt; \infty.$ &lt;br /&gt;
+
+Then as $h \to 0,$
+$$
+K_h * p(x) = \sum_{j=1}^r \frac{(-1)^j h^j}{j}\mu_j(K) p^{(j)}(x) + o(h^r),
+$$
+where $\mu_j(K) := \int u^j K(u)du.$
+
+&lt;/div&gt;
+
+&lt;p&gt;If $\text{supp.}K$ is compact, (A2) is automatically true. Note that $\mu_0(K) = 1$ if $\int K =1$ and $\mu_1(K) = 0$ if $K$ is symmetric. Thus in most cases, second-order expansion is enough.&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;bias&quot;&gt;
+Suppose (A3) and (A4) hold.&lt;br /&gt;
+
+(A3) $\iff$ (A1) with $r=2.$&lt;br /&gt;
+
+(A4) $\iff$ (A2) with $r=2$, and $\int K = 1$ and $K$ is symmetric.&lt;br /&gt;
+
+Then as $h \to 0,$
+$$
+\text{bias}(\hat p(x)) = \frac{1}{2} h^2 \mu_2(K)p''(x) + o(h^2).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;This follows from the expansion theorem. The bias of KDE is of order $\mathcal{O}(h^2)$ which is far smaller than histogram’s $\mathcal{O}(h).$&lt;/p&gt;
+
+&lt;div class=&quot;corollary&quot; text=&quot;variance&quot;&gt;
+
+Suppose (A5) and (A6) hold.&lt;br /&gt;
+
+(A5) $p$ is continuous at $x$.&lt;br /&gt;
+
+(A6) $|u|K(u) \to 0$ as $|u|\to\infty,$ and $\int K^2 &amp;lt; \infty.$&lt;br /&gt;
+
+Then as $h\to0$ and $nh\to\infty$ as $n\to\infty,$
+$$
+\text{Var}(\hat p(x)) = \frac{1}{nh} \mu_0(K^2)p(x) + o\left(\frac{1}{nh}\right).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Similar to histogram, we can derive MISE.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+
+(i) If (A3) holds and $\int u^2K(u)du &amp;lt; \infty$ and $\int K = 1$ and $K$ is symmetric, then
+$$
+\int \text{bias}^2(\hat p(x)) dx = \frac{1}{4}h^4 \mu_2(K)^2 \int (p'')^2 + o(h^4).
+$$
+(ii) If $p$ is bounded on $\mathbb{R}$ and $\int K^2 &amp;lt; \infty,$ then
+$$
+\int \text{Var}(\hat p(x)) dx = \frac{1}{nh} \int K^2 + o\left(\frac{1}{nh}\right).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Thus&lt;/p&gt;
+
+\[\text{MISE}(\hat p;h) = \frac{1}{4}h^4 \mu_2(K)^2 \int (p'')^2 + \frac{1}{nh} \int K^2 + o\left(\frac{1}{nh}\right).\]
+
+&lt;p&gt;By differentiating MISE with respect to $h$ and setting it to zero, we get the maximizer&lt;/p&gt;
+
+\[h_\text{opt} = \left( \frac{\int K^2}{\mu_2(K)^2 \int (p'')^2} \right)^{1/5} n^{-1/5},\]
+
+&lt;p&gt;and&lt;/p&gt;
+
+\[\text{MISE}(h_\text{opt}) = \frac{5}{4} \left( \mu_2(K) \left( \int K^2 \right)^2 \right)^{2/5} \left( \int (p'')^2 \right)^{1/5} n^{-4/5} + o(n^{-4/5}).\]
+
+&lt;p&gt;We get a noticebly lower $\sim n^{-4/5}$ order of error compared to $\sim n^{-2/3}$ of histogram.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;optimal-kernel-function&quot;&gt;Optimal kernel function&lt;/h3&gt;
+
+&lt;p&gt;Along with $h_\text{opt},$ we can further maximize MISE by selecting the best $K.$ The following two lemmas are useful for derivation of such $K.$&lt;/p&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;property of MISE&quot;&gt;
+Suppose $K \ge 0$ and $K$ is symmetric.&lt;br /&gt;
+
+(i) $\mu_2(K) \left(\int K^2\right)^2 = \mu_2(K_\sigma)\left(\int K_\sigma^2\right)^2$ for all $\sigma &amp;gt; 0.$&lt;br /&gt;
+
+(ii) $K^*$ minimizes $\int K^2$ subject to $\mu_2(K)=1.$&lt;br /&gt;
+
+$\;\;\;\implies K^*$ minimizes $\mu_2(K)\big(\int K^2\big)^2.$&lt;br /&gt;
+
+(iii) $K^*$ minimizes $\int K^2$ subject to $\mu_2(K)=1.$&lt;br /&gt;
+
+$\;\;\;\implies K_\sigma^*$ minimizes $\int K^2$ subject to $\mu_2(K)=1$ for all $\sigma &amp;gt; 0.$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;lemma&quot; text=&quot;methods of undetermined multiplier&quot;&gt;
+Let $F_1,\cdots,F_{m+1}:S \to \mathbb{R}.$ Suppose $u^0$ maximizes (or minimizes)
+$$
+F_{m+1}(u) + \sum_{i=1}^m k_i F_i(u) \\
+\text{ subject to } F_i(u) = c_i,~ 1\le i \le m.
+$$
+Then $u^0$ maximizes (or minimizes) $F_{m+1}(u)$ subject to $F_i(u)=c_i,$ $1\le i\le m.$
+
+&lt;/div&gt;
+
+&lt;p&gt;From the two lemmas, we get the optimal kernel&lt;/p&gt;
+
+\[K^* := \argmin_{K: \mu_2(K)=1,~\int K=1,~K\ge0} \int K^2\]
+
+&lt;p&gt;which leads to&lt;/p&gt;
+
+&lt;p&gt;\(K^*(u) = \frac{3}{4\sqrt{5}} \left(1 - \frac{u^2}{5}\right) \mathbf{1}_{(-\sqrt{5},~\sqrt{5})}(u).\)
+By scale invariance ((i) of the first lemma), we get the &lt;strong&gt;Epanechnikov kernel&lt;/strong&gt;:&lt;/p&gt;
+
+\[K^*(u) = \frac{3}{4}(1-u^2) \mathbf{1}_{(-1,~1)}(u).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;boundary-problem&quot;&gt;Boundary problem&lt;/h3&gt;
+
+&lt;p&gt;KDE is free of bin edge effect and corner effect, but has a problem that underestimates density at the boundary of support of $p.$ This is called the boundary problem.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;https://d3i71xaburhd42.cloudfront.net/e9553a310852ac03e02ae7ac2225d0be84922fe2/8-Figure5-1.png&quot; alt=&quot;boundary_problem.png&quot; width=&quot;400&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt;Boundary problem: estimated density at left and right boundaries drops to zero even though the data are densely located.(&lt;a href=&quot;https://d3i71xaburhd42.cloudfront.net/e9553a310852ac03e02ae7ac2225d0be84922fe2/8-Figure5-1.png&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s look closer into the left-bounded case. Suppose $\text{supp.}p = [0,\infty)$ and $\text{supp.}K = [-1,1].$ Let $x=\alpha h,$ $0\le \alpha &amp;lt; 1$ be a point close to the left boundary of the $\text{supp.}p.$ Then&lt;/p&gt;
+
+\[\begin{aligned}
+K_h * p(x)
+ &amp;amp;= \int_0^\infty K_h(x-u)p(u) du,~~ \text{substitute } w=\frac{x-u}{h} \\
+ &amp;amp;= \int_{-\infty}^\frac{x}{h} K(w) p(x-hw) dw.
+\end{aligned}\]
+
+&lt;p&gt;Let $\alpha = x/h,$ and define the “incompelte” moment as the expansion term:&lt;/p&gt;
+
+\[\mu_j(K;\alpha) := \int_{-1}^\alpha u^j K(u)du.\]
+
+&lt;p&gt;Then we get an expansion theorem similar to that from unbounded density.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;expansion for left-bounded density&quot;&gt;
+
+Suppose (A1) with $x=0$ and (A2) hold. Then
+$$
+K_h * p(x) = \sum_{j=0}^r \frac{(-1)^j h^j}{j!} \mu_j(K;\alpha) p^{(j)}(x) + o(h^r).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;By the theorem, if $p’’$ is right-continuous at $0,$&lt;/p&gt;
+
+\[\begin{aligned}
+K_h * p(x)
+ =&amp;amp;\; \mu_0(K;\alpha) - h\mu_1(K;\alpha)p'(x) + \frac{1}{2}h^2 \mu_2(K;\alpha) p''(x) + o(h^2) \\
+ =&amp;amp;\; \mu_0(K;\alpha)p(0+) \\
+  &amp;amp;+ h\big( \alpha\mu_0(K;\alpha) - \mu_1(K;\alpha) \big) p'(0+) \\
+  &amp;amp;+ \frac{1}{2}h^2 \big( \alpha^2 \mu_0(K;\alpha) - 2\alpha\mu_1(K;\alpha) + \mu_2(K;\alpha) \big) p''(0) \\
+  &amp;amp;+ o(h^2).
+\end{aligned}\]
+
+&lt;p&gt;The second equality comes from taylor expansion of $p(x)=p(\alpha h)$ at 0. Hence we get bias and variance at the boundary as follows.&lt;/p&gt;
+
+\[\begin{aligned}
+\text{bias}(\hat p(x)) &amp;amp;= \begin{cases}
+  \mathcal{O}(1),&amp;amp;~ \text{if } p(0+) &amp;gt; 0 \\
+  \mathcal{O}(h),&amp;amp;~ \text{if } p(0+) = 0,~ p'(0+) \ne 0 \\
+  \mathcal{O}(h^2),&amp;amp;~ \text{if } p(0+) &amp;gt; 0,~ p'(0+) = 0,~ p''(0+) \ne 0 
+\end{cases}\\
+\text{Var}(\hat p(x)) &amp;amp;= \frac{1}{nh} \mu_0(K^2;\alpha)p(x) + o\left(\frac{1}{nh}\right).
+\end{aligned}\]
+
+&lt;p&gt;One possible solution is to adjust $K$ according to $\alpha.$ Simply multiplying a linear function to $K$ might help.&lt;/p&gt;
+
+\[K(u;\alpha) := \big(a(\alpha) + b(\alpha)u\big)\cdot K(u)\]
+
+&lt;p&gt;Find $K(u;\alpha)$ that satisfies both&lt;/p&gt;
+
+\[\begin{cases}
+\mu_0\big( K(\cdot;\alpha); \alpha\big) = \int_{-1}^\alpha K(u;\alpha) du = 1, \\
+\mu_1\big( K(\cdot;\alpha); \alpha\big) = \int_{-1}^\alpha u K(u;\alpha) du = 0.
+\end{cases}\]
+
+&lt;p&gt;The solution to the system&lt;/p&gt;
+
+\[K(u;\alpha) = \frac{\mu_2(K;\alpha) - \mu_1(K;\alpha)u}{\mu_0(K;\alpha) \mu_2(K;\alpha) - \mu_1(K;\alpha)^2} K(u) \mathbf{1}_{(-1,~ \alpha)}(u)\]
+
+&lt;p&gt;is called the &lt;strong&gt;boundary kernel&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/fig/210315_boundary_kernel.png&quot; alt=&quot;210315_boundary_kernel.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The figure above is an example of the boundary kernel. I used the simplest kernel function $K(u) = \frac{1}{2}\mathbf{1}_{[-1,~1]}$ which is the pdf of uniform distribution $\mathcal{U}[-1, 1].$ As shown, the boundary kernel gives more “weight” to each data points as $\alpha$ gets smaller.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;asymptotic-normality&quot;&gt;Asymptotic normality&lt;/h3&gt;
+
+&lt;p&gt;Given $x,$ the KDE $\hat p(x)$ asymptotically follows normal distribution.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;asymptotic normality&quot;&gt;
+
+Suppose (A5) and (A6) hold. Then
+$$
+\frac{\hat p(x) - E\hat p(x)}{\sqrt{\text{Var}(\hat p(x))}} \overset{d}{\to} \mathcal{N}(0,1)
+$$
+as $h\to0$ and $nh\to\infty$ as $n \to \infty.$
+
+&lt;/div&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+Let $Y_{ni} = K_h(x-X_i) - K_h * p(x),$ then
+$$
+\frac{1}{\sigma_n} \sum_{i=1}^n Y_{ni} = \frac{1}{\sqrt{\text{Var}(\hat p(x))}} \big( \hat p(x) - E\hat p(x) \big),
+$$
+where $\sigma_n^2 = \sum_{i=1}^n \text{Var}(Y_i).$ By Lindeberg-Feller theorem, the desired result follows.
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;estimation-of-density-derivative&quot;&gt;Estimation of density derivative&lt;/h3&gt;
+
+\[\begin{aligned}
+\hat p^{(r)}(x)
+ &amp;amp;:= \frac{1}{nh^{r+1}} \sum_{i=1}^n K^{(r)}\left(\frac{x-X_i}{h}\right) \\
+ &amp;amp;= \frac{1}{nh^r} \sum_{i=1}^n \big(K^{(r)}\big)_h\left(\frac{x-X_i}{h}\right)
+\end{aligned}\]
+
+&lt;p&gt;is the estimate for the $r$th derivative of $p.$&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot;&gt;
+
+(i) If (A1) with $r+2$ and (A4) hold, then
+$$
+\text{bias}(\hat p^{(r)}(x)) = \frac{1}{2}h^2 p^{(r+2)}(x) + o(h^2).
+$$
+(ii) If (A5) and (A6) with $K^{(r)}$ instead of $K$ hold, then
+$$
+\text{Var}(\hat p^{(r)}(x)) = \frac{1}{nh^{2r+1}} \mu_0\big((K^{(r)})^2\big) p(x) + o\left(\frac{1}{nh^{2r+1}}\right).
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Similiar computation as before yields&lt;/p&gt;
+
+\[h_\text{opt} \sim n^{-1/(2r+5)}, \\
+\text{MISE}(h_\text{opt}) \sim n^{-4/(2r+5)}.\]
+
+&lt;p&gt;This implies derivatives of density are much harder to estimate since deviation in $\hat p$ is amplifieds as $r$ increases.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Nonparametric Function Estimation (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Byeong U. Park).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Essentially, this condition means $h$ retains to be big, but at the same time small enough relative to the growing $n.$ &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sat, 13 Mar 2021 15:35:00 +0900</pubDate>
+        <link>http://localhost:4000/non-parametric/Nonparametric-2-Univariate-Kernel-Density-Estimation</link>
+        <guid isPermaLink="true">http://localhost:4000/non-parametric/Nonparametric-2-Univariate-Kernel-Density-Estimation</guid>
+        
+        
+        <category>non-parametric</category>
+        
+      </item>
     
       <item>
         <title>[Bandit] 2. Explore-Then-Commit algorithm</title>
@@ -37,7 +643,7 @@
 
 \[\nu := (P_{\theta_i})_{i \in \mathcal{A}}.\]
 
-&lt;p&gt;The algorithm $a$ interact with bandits through time $t=1,\cdots,T.$ At each time $t$ the algorithm choose an arm $a(t) \in \mathcal{A}.$ Then the reward $r_i(t) \sim P_{\theta_{a(t)}}$ is generated and revealed to the algorithm. Such interactions (action-reward pairs) between the algorithm and the environment is logged into history $\mathcal{H}$ where&lt;/p&gt;
+&lt;p&gt;The algorithm interact with bandits through time $t=1,\cdots,T.$ At each time $t$ the algorithm choose an arm $a(t) \in \mathcal{A}.$ Then the reward $r_i(t) \sim P_{\theta_{a(t)}}$ is generated and revealed to the algorithm. Such interactions (action-reward pairs) between the algorithm and the environment is logged into history $\mathcal{H}$ where&lt;/p&gt;
 
 \[\mathcal{H}_{t-1} := \{\left(a(t), r(t)\right): t=1,\cdots,t-1\}.\]
 
@@ -225,6 +831,15 @@ $$
 &lt;h3 id=&quot;regret-analysis&quot;&gt;Regret analysis&lt;/h3&gt;
 
 &lt;p&gt;[To be appended]&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lattimore, Szepesvari. 2020. &lt;strong&gt;Bandit Algorithms&lt;/strong&gt;. Cambridge University .&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Seminar in Recent Development of Applied Statistics (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Myunghee Cho Paik).&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Fri, 05 Mar 2021 12:31:00 +0900</pubDate>
         <link>http://localhost:4000/adaptive%20sequential%20decision%20making/Bandit-2-Explore-Then-Commit-algorithm</link>
@@ -1831,127 +2446,6 @@ TOPIC 09: ['unit' 'buy' 'says' 'sale' 'c' 'sells' 'completes' 'american' 'grain'
         <pubDate>Mon, 15 Feb 2021 02:26:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM</link>
         <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM</guid>
-        
-        
-        <category>bayesian</category>
-        
-        <category>machine learning</category>
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding Latent Dirichlet Allocation (2) The Model</title>
-        <description>&lt;p&gt;In &lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;the last article&lt;/a&gt;, topic models frequently used at the time of development of LDA was covered. At the end of the post, I briefly introduced the rationale behind LDA. In this post, I would like to elaborate on details of the model architecture.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the second part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Inference - variational EM&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Inference - Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#generative-process&quot; id=&quot;markdown-toc-generative-process&quot;&gt;Generative process&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mixture-representations&quot; id=&quot;markdown-toc-mixture-representations&quot;&gt;Mixture representations&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#words&quot; id=&quot;markdown-toc-words&quot;&gt;Words&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#documents&quot; id=&quot;markdown-toc-documents&quot;&gt;Documents&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;generative-process&quot;&gt;Generative process&lt;/h2&gt;
-
-&lt;p&gt;Suppose we have a corpus with vocabulary of size $V$ and every words $w$ and every topics $z$ are &lt;a href=&quot;https://en.wikipedia.org/wiki/One-hot&quot;&gt;one-hot encoded&lt;/a&gt; (i.e. $w^i=1$ and $w^j=0, j\ne i$ if $w$ is the i-th term in the vocabulary). Define a document $\mathbf{w}$ as a finite sequence of $N$ words&lt;/p&gt;
-
-\[\mathbf{w} = (w_1, \cdots, w_N)\]
-
-&lt;p&gt;and denote a corpus $D$ of $M$ documents&lt;/p&gt;
-
-\[D = \{\mathbf{w}_1, \cdots, \mathbf{w}_M\}.\]
-
-&lt;p&gt;For $k$ prespecified number of topics, LDA assumes that a $d$-th document $\mathbf{w}_d \in D$ with length $N_d$ is “generated” in the following steps&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;$\theta_d \sim \mathcal{D}_k(\alpha)$. The multinomial parameter $\theta_d \in \mathbb{R}^k$ is drawn from $k$-dimensional Dirichlet distribution.&lt;/li&gt;
-  &lt;li&gt;For each words $w_{dn}, n=1,\cdots,N_d$ in the document:
-    &lt;ol&gt;
-      &lt;li&gt;$z_{dn} \sim \mathcal{M}_k(1, \theta_d)$. A topic $z_{dn}$ for a word $w_{dn}$ is drawn from $k$-dim multinomial distribution.&lt;/li&gt;
-      &lt;li&gt;$w_{dn} | z_{dn}, \beta \sim \mathcal{M}_V(1, \beta_{i:z_{dn}^i=1})$. A word $w_{dn}$ given the topic $z_{dn}$ is drawn from $V$-dim multinomial distribution.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;$\alpha \in \mathbb{R}^k, \beta \in \mathbb{R}^{k \times V}$ are hyperparameters that is common to all of the documents in a corpus. $\beta$ is an unknown constant that satisfies $\beta_{ij} = P(w^j=1|z^i=1)$. That is, given a topic $z$ such that $z^i = 1$, probability of $w_n$ given $\beta$ follows multinomial distribution with parameter $\beta_i$.&lt;/p&gt;
-
-&lt;p&gt;$\theta = (\theta_1, \cdots, \theta_M) \in \mathbb{R}^{M \times k}$ can be seen as the document-specific random topic matrix as $\theta_d$ generates topic for each words in $d$-th document as in the process.&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-    &lt;img src=&quot;/assets/fig/210214_lda.png&quot; /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Blei et al. presented a graphical representation of the model. This helps understanding the structure as it illustrates the “scope” of each parameters. Only the words $w_{dn}$’s, that are filled with grey, are observable. Note that each word $w$ is generated by $z$ which is generated by $\theta$ which is again generated by $\alpha$; This makes LDA a &lt;em&gt;three-level hierarchical model&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;mixture-representations&quot;&gt;Mixture representations&lt;/h2&gt;
-
-&lt;p&gt;In the previous article, I mentioned that under LDA model both words and documents can be represented as mixture distributions by de Finetti’s theorem. This property takes full advantage of bag-of-words assumption to reduce the number of parameters in large corpus and makes LDA a proper document model. Here, I would like to elaborate on it.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;words&quot;&gt;Words&lt;/h3&gt;
-
-&lt;p&gt;By marginalizing over topics $z$, the word distribution is given by&lt;/p&gt;
-
-\[P(w_{dn}|\theta_d, \beta) = \sum_z P(w_{dn}|z, \beta) P(z|\theta_d),\]
-
-&lt;p&gt;where it is a mixture distribution of mixture weights $P(z|\theta_d)$ and components $P(w_{dn}|z,\beta)$.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;documents&quot;&gt;Documents&lt;/h3&gt;
-
-&lt;p&gt;We assumed in LDA that words are generated by topics and topics are exchangable within a document. Thus the joint density of $\theta_d, \mathbf{z}_d, \mathbf{w}_d$ is&lt;/p&gt;
-
-\[p(\theta_d, \mathbf{z}_d, \mathbf{w}_d|\alpha, \beta) = P(\theta_d|\alpha)\prod_{n=1}^{N_d} P(z_{dn}|\theta_d)p(w_{dn}|z_{dn}, \beta)\]
-
-&lt;p&gt;Marginalize it over $z$ and use the mixture representation of word distribution to get&lt;/p&gt;
-
-\[p(\theta_d, \mathbf{w}_d | \alpha, \beta) = P(\theta_d|\alpha)\prod_{n=1}^{N_d} P(w_{dn}|\theta_d, \beta).\]
-
-&lt;p&gt;Marginalize again with respect to $\theta_d$ and we get the continuous mixture representation of the document $\mathbf{w}_d$&lt;/p&gt;
-
-\[p(\mathbf{w}_d | \alpha, \beta) = \int P(\theta_d|\alpha)\prod_{n=1}^{N_d} P(w_{dn}|\theta_d, \beta) ~d\theta_d,\]
-
-&lt;p&gt;where $P(\theta_d|\alpha)$ are weights and $\prod_{n=1}^{N_d} P(w_{dn}|\theta_d, \beta)$ are components.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;The number of words in a document is determined by Poisson distribution ($N \sim \mathcal{P}(\xi)$). I omitted this part because $N$ is an ancillary variable and it does not make the model description different even if it is considered as a constant. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 14 Feb 2021 21:49:00 +0900</pubDate>
-        <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model</link>
-        <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model</guid>
         
         
         <category>bayesian</category>
