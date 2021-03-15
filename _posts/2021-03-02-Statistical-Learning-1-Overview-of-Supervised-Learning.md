@@ -4,8 +4,8 @@ title: "[Statistical Learning] 1. Overview of Supervised Learning"
 date:   2021-03-03 00:13:00 +0900
 author: "Sihyung Park"
 categories: [statistical learning]
-
 ---
+
 
 The `[Statistical Learning]` series of posts are my summary of *The Elements of Statistical Learning* (ESL) and a memo on the lecture *Advanced Data Mining (Spring, 2021)* by Prof. Yongdai Kim. Main goal of the lecture is to interpret classical machine learning models in terms of statistics and decision theoretic framework.
 
@@ -244,6 +244,163 @@ $$
 
 
 Although OLS regression is not suitable since it does not guarantee the values in $[0, 1],$ **logistic regression** can be used to approximate $\phi_j$.
+
+<br>
+
+
+
+## Curse of dimensionality
+
+Although the k-NN seems to work well in low dimensional data, things get hostile in high dimensional world. I would like to cover three phenomena that describe difficulties in high-dimensional problems.
+
+### Absence of locality
+
+Let $\mathbf{X} = (X_1,\cdots,X_p) \sim \mathcal{U}[0,1]^p.$ Suppose we want to obtain $(r\times100)$% of the data from this $p$-dimensional unit cube. Picking the data at a hypercube centered at $\mathbf{X}$ with length of each segment equal to $e_p(r) = r^{1/p}$ will do it.
+
+However, even in 10-dimensional problem, we need to take a hypercube with segment length $e_10(0.1)\approx0.8$ to get the 10% of the data.
+
+<br>
+
+
+
+<div style="text-align:center">
+<img src="/assets/fig/210315_HTF_2.7.png" alt="210315_HTF_2.7.png" width="300"/>
+<br>
+<em> As dimension grows the concept of locality gets thin.<br>(source: Elements of Statistical Learning)</em>
+</div><br>
+
+<br>
+
+### Data is distributed along the boundary
+
+Let $\mathbf{X} = (X_1,\cdots,X_p)$ be a random vector from uniform distribution over a $p$-dimensional unit ball, centered at $\mathbf{0}.$ Let $R_i = \sqrt{\sum_{k=1}^p X_{ki}^2}$ be the distance of $\mathbf{X}_i.$ Let $R_{(1)}$ be the smallest of $R_1,\cdots,R_N.$ Then
+
+
+$$
+\begin{aligned}
+\mathbb{P}(R_i < r) &= r^p/1^p = r^p,~~ 0\le r\le 1.\\
+\mathbb{P}(R_{(1)} < r) 
+ &= \sum_{j=1}^N {N \choose j} (r^p)^j (1-r^p)^{N-j} \\
+ &= (r^p + 1 - r^p)^N - {N \choose 0}(r^p)^0 (1-r^p)^N.
+\end{aligned}
+$$
+
+
+Then the median $r$ of the distribution of $R_{(1)}$ is
+
+
+$$
+\begin{aligned}
+ &\mathbb{P}(R_{(1)} < r) = \frac{1}{2} \\
+ &\iff 1 - (1 - r^p)^N = \frac{1}{2} \\
+ &\iff (1-r^p)^N = \frac{1}{2} \\
+ &\iff 1 - r^p = \left(\frac{1}{2}\right)^{1/N} \\
+ &\iff r = \left(1 - \left(\frac{1}{2}\right)^{1/N}\right)^{1/p}.
+\end{aligned}
+$$
+
+
+Thus for $N=5000,$ $p=10,$ $r\approx0.52.$ This means more than half of the data is closer to the boundary than the center.
+
+<br>
+
+### Bias increases as dimension grows
+
+Suppose the true model is deterministic:
+
+
+$$
+y = e^{-8\|\mathbf{X}\|^2}.
+$$
+
+
+Consider the $1$-NN model at $x=0,$ then
+
+
+$$
+\text{bias} = 1-e^{-8\|\mathbf{X}_{(1)}\|^2},~~ \mathbf{X}_1 \in \mathcal{L},
+$$
+
+
+where $\mathcal{L}$ is the training data. Since the data gets closer to boundary as dimension increases, the bias increases as $p$ increases. This makes k-NN model impractical in high dimensional problems.
+
+<br>
+
+
+
+## Overfitting
+
+In the regression problem, since EPE cannot be computed, we try to estimate it using training error (TE). However, training error underestimates EPE because the training data $\mathcal{L}$ is used in both model building and TE calculation. In addition, TE monotonically decreases while EPE does not. This phenomenon in which EPE increases even though the TE decreses is called overfitting.
+
+Overfitting can be viewed as bias-variance trade-off. Suppose our true model is
+
+
+$$
+Y = f(X) + \epsilon,~ E\epsilon=0,~ \text{Var}(\epsilon)=0.
+$$
+
+
+where $\epsilon \perp X,\mathcal{L}$ and $f(X, \mathcal{L})$ is our trained model. Then the training error $\text{TE}$ is
+
+
+$$
+\begin{aligned}
+\text{TE}~
+ =&~ E_\mathcal{L}E_{(X,Y)} \big( Y - f(X, \mathcal{L}) \big)^2 \\
+ =&~ E_\mathcal{L}E_{(X,Y)} \big( Y - f(X) + f(X) - E_\mathcal{L}f(X, \mathcal{L})+E_\mathcal{L}f(X, \mathcal{L}) - f(X,\mathcal{L}) \big)^2 \\
+ =& E_{(X,Y)} \big(Y-f(X)\big)^2 + E_X\big(f(X)-E_\mathcal{L}f(X,\mathcal{L})\big)^2 + E_\mathcal{L}E_{(X,Y)} \big(E_\mathcal{L}f(X,\mathcal{L}) - f(X,\mathcal{L})\big)^2 \\
+ &+2\big\{ \underbrace{E_{(X,Y)}\big[(Y-f(X))(f(X) - E_\mathcal{L}f(X,\mathcal{L}))\big]}_{\text{(1)}} \\
+ &+\underbrace{E_\mathcal{L}E_{(X,Y)} \big[ (f(X) - E_\mathcal{L}f(X,\mathcal{L}))(E_\mathcal{L}f(X,\mathcal{L}) - f(X, \mathcal{L})) \big]}_{\text{(2)}} \\
+ &+ \underbrace{E_\mathcal{L}E_{(X,Y)} \big[ (Y-f(X))(E_\mathcal{L}f(X,\mathcal{L}) - f(X,\mathcal{L})) \big]}_{\text{(3)}}
+ \big\}.
+\end{aligned}
+$$
+
+
+where
+
+
+$$
+\begin{aligned}
+\text{(1)}
+ &= E_XE_{Y|X} \big[\epsilon (f(X) - E_\mathcal{L}f(X,\mathcal{L}))\big] \\
+ &= (E_{Y|X} \epsilon ) \cdot E_X\big[ f(X) - E_\mathcal{L}f(X,\mathcal{L}) \big] \\
+ &= 0,\\
+
+\text{(2)}
+ &= E_X \left[ \big( f(X) - E_\mathcal{L}f(X,\mathcal{L}) \big) \cdot \cancel{E_\mathcal{L}\big[ E_\mathcal{L}f(X, \mathcal{L}) - f(X, \mathcal{L}) \big]} \right] \\
+ &=0, \\
+ 
+\text{(3)}
+ &= E\left[ \epsilon \cdot \big( E_\mathcal{L}f(X, \mathcal{L}) - f(X, \mathcal{L}) \big) \right] \\
+ &= E\epsilon \cdot \big( E_\mathcal{L}f(X, \mathcal{L}) - E_\mathcal{L}f(X, \mathcal{L}) \big) \\
+ &=0.
+\end{aligned}
+$$
+
+
+Thus
+
+
+$$
+\text{TE} = \sigma^2 + E_X \text{bias}_\mathcal{L}^2(f\big(X,\mathcal{L})\big) + E_X \text{Var}_\mathcal{L}\big( f(X,\mathcal{L}) \big).
+$$
+
+
+As the model complexity increases, bias decreases but variance increases, which is an overfitting. In the case of k-NN, let $X_{(i)}$ be the $i$-th closest neighbor. Then
+
+
+$$
+\begin{aligned}
+\text{bias}_\mathcal{L}(f\big(X,\mathcal{L})\big) 
+ &= f(x) - \frac{1}{k}\sum_{i=1}^k f(X_{(i)}), \\
+\text{Var}_\mathcal{L}\big( f(X,\mathcal{L}) \big)
+ &= \frac{1}{k}\sigma^2.
+\end{aligned}
+$$
+
+
+Thus as $k$ decreases (i.e. complexity $\uparrow$), bias decreases but variance increases.
 
 
 

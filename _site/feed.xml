@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Mar 2021 15:13:23 +0900</pubDate>
-    <lastBuildDate>Mon, 15 Mar 2021 15:13:23 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Mar 2021 00:43:01 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Mar 2021 00:43:01 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -1349,6 +1349,13 @@ $(X, \mathfrak{M})$ is a measurable space, $Y, Z$ are topological spaces, and $Y
       &lt;li&gt;&lt;a href=&quot;#classification-problem&quot; id=&quot;markdown-toc-classification-problem&quot;&gt;Classification problem&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#curse-of-dimensionality&quot; id=&quot;markdown-toc-curse-of-dimensionality&quot;&gt;Curse of dimensionality&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#absence-of-locality&quot; id=&quot;markdown-toc-absence-of-locality&quot;&gt;Absence of locality&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#data-is-distributed-along-the-boundary&quot; id=&quot;markdown-toc-data-is-distributed-along-the-boundary&quot;&gt;Data is distributed along the boundary&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bias-increases-as-dimension-grows&quot; id=&quot;markdown-toc-bias-increases-as-dimension-grows&quot;&gt;Bias increases as dimension grows&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#overfitting&quot; id=&quot;markdown-toc-overfitting&quot;&gt;Overfitting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -1520,6 +1527,122 @@ f^0(\mathbf{x})
 \[\hat \phi_k (\mathbf{x}) = \frac{1}{k} \sum_{i\in N_k(\mathbf{x}) \mathbf{1}} (y_i=j).\]
 
 &lt;p&gt;Although OLS regression is not suitable since it does not guarantee the values in $[0, 1],$ &lt;strong&gt;logistic regression&lt;/strong&gt; can be used to approximate $\phi_j$.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;curse-of-dimensionality&quot;&gt;Curse of dimensionality&lt;/h2&gt;
+
+&lt;p&gt;Although the k-NN seems to work well in low dimensional data, things get hostile in high dimensional world. I would like to cover three phenomena that describe difficulties in high-dimensional problems.&lt;/p&gt;
+
+&lt;h3 id=&quot;absence-of-locality&quot;&gt;Absence of locality&lt;/h3&gt;
+
+&lt;p&gt;Let $\mathbf{X} = (X_1,\cdots,X_p) \sim \mathcal{U}[0,1]^p.$ Suppose we want to obtain $(r\times100)$% of the data from this $p$-dimensional unit cube. Picking the data at a hypercube centered at $\mathbf{X}$ with length of each segment equal to $e_p(r) = r^{1/p}$ will do it.&lt;/p&gt;
+
+&lt;p&gt;However, even in 10-dimensional problem, we need to take a hypercube with segment length $e_10(0.1)\approx0.8$ to get the 10% of the data.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;/assets/fig/210315_HTF_2.7.png&quot; alt=&quot;210315_HTF_2.7.png&quot; width=&quot;300&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt; As dimension grows the concept of locality gets thin.&lt;br /&gt;(source: Elements of Statistical Learning)&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;data-is-distributed-along-the-boundary&quot;&gt;Data is distributed along the boundary&lt;/h3&gt;
+
+&lt;p&gt;Let $\mathbf{X} = (X_1,\cdots,X_p)$ be a random vector from uniform distribution over a $p$-dimensional unit ball, centered at $\mathbf{0}.$ Let $R_i = \sqrt{\sum_{k=1}^p X_{ki}^2}$ be the distance of $\mathbf{X}&lt;em&gt;i.$ Let $R&lt;/em&gt;{(1)}$ be the smallest of $R_1,\cdots,R_N.$ Then&lt;/p&gt;
+
+\[\begin{aligned}
+\mathbb{P}(R_i &amp;lt; r) &amp;amp;= r^p/1^p = r^p,~~ 0\le r\le 1.\\
+\mathbb{P}(R_{(1)} &amp;lt; r) 
+ &amp;amp;= \sum_{j=1}^N {N \choose j} (r^p)^j (1-r^p)^{N-j} \\
+ &amp;amp;= (r^p + 1 - r^p)^N - {N \choose 0}(r^p)^0 (1-r^p)^N.
+\end{aligned}\]
+
+&lt;p&gt;Then the median $r$ of the distribution of $R_{(1)}$ is&lt;/p&gt;
+
+\[\begin{aligned}
+ &amp;amp;\mathbb{P}(R_{(1)} &amp;lt; r) = \frac{1}{2} \\
+ &amp;amp;\iff 1 - (1 - r^p)^N = \frac{1}{2} \\
+ &amp;amp;\iff (1-r^p)^N = \frac{1}{2} \\
+ &amp;amp;\iff 1 - r^p = \left(\frac{1}{2}\right)^{1/N} \\
+ &amp;amp;\iff r = \left(1 - \left(\frac{1}{2}\right)^{1/N}\right)^{1/p}.
+\end{aligned}\]
+
+&lt;p&gt;Thus for $N=5000,$ $p=10,$ $r\approx0.52.$ This means more than half of the data is closer to the boundary than the center.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;bias-increases-as-dimension-grows&quot;&gt;Bias increases as dimension grows&lt;/h3&gt;
+
+&lt;p&gt;Suppose the true model is deterministic:&lt;/p&gt;
+
+\[y = e^{-8\|\mathbf{X}\|^2}.\]
+
+&lt;p&gt;Consider the $1$-NN model at $x=0,$ then&lt;/p&gt;
+
+\[\text{bias} = 1-e^{-8\|\mathbf{X}_{(1)}\|^2},~~ \mathbf{X}_1 \in \mathcal{L},\]
+
+&lt;p&gt;where $\mathcal{L}$ is the training data. Since the data gets closer to boundary as dimension increases, the bias increases as $p$ increases. This makes k-NN model impractical in high dimensional problems.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;overfitting&quot;&gt;Overfitting&lt;/h2&gt;
+
+&lt;p&gt;In the regression problem, since EPE cannot be computed, we try to estimate it using training error (TE). However, training error underestimates EPE because the training data $\mathcal{L}$ is used in both model building and TE calculation. In addition, TE monotonically decreases while EPE does not. This phenomenon in which EPE increases even though the TE decreses is called overfitting.&lt;/p&gt;
+
+&lt;p&gt;Overfitting can be viewed as bias-variance trade-off. Suppose our true model is&lt;/p&gt;
+
+\[Y = f(X) + \epsilon,~ E\epsilon=0,~ \text{Var}(\epsilon)=0.\]
+
+&lt;p&gt;where $\epsilon \perp X,\mathcal{L}$ and $f(X, \mathcal{L})$ is our trained model. Then the training error $\text{TE}$ is&lt;/p&gt;
+
+\[\begin{aligned}
+\text{TE}~
+ =&amp;amp;~ E_\mathcal{L}E_{(X,Y)} \big( Y - f(X, \mathcal{L}) \big)^2 \\
+ =&amp;amp;~ E_\mathcal{L}E_{(X,Y)} \big( Y - f(X) + f(X) - E_\mathcal{L}f(X, \mathcal{L})+E_\mathcal{L}f(X, \mathcal{L}) - f(X,\mathcal{L}) \big)^2 \\
+ =&amp;amp; E_{(X,Y)} \big(Y-f(X)\big)^2 + E_X\big(f(X)-E_\mathcal{L}f(X,\mathcal{L})\big)^2 + E_\mathcal{L}E_{(X,Y)} \big(E_\mathcal{L}f(X,\mathcal{L}) - f(X,\mathcal{L})\big)^2 \\
+ &amp;amp;+2\big\{ \underbrace{E_{(X,Y)}\big[(Y-f(X))(f(X) - E_\mathcal{L}f(X,\mathcal{L}))\big]}_{\text{(1)}} \\
+ &amp;amp;+\underbrace{E_\mathcal{L}E_{(X,Y)} \big[ (f(X) - E_\mathcal{L}f(X,\mathcal{L}))(E_\mathcal{L}f(X,\mathcal{L}) - f(X, \mathcal{L})) \big]}_{\text{(2)}} \\
+ &amp;amp;+ \underbrace{E_\mathcal{L}E_{(X,Y)} \big[ (Y-f(X))(E_\mathcal{L}f(X,\mathcal{L}) - f(X,\mathcal{L})) \big]}_{\text{(3)}}
+ \big\}.
+\end{aligned}\]
+
+&lt;p&gt;where&lt;/p&gt;
+
+\[\begin{aligned}
+\text{(1)}
+ &amp;amp;= E_XE_{Y|X} \big[\epsilon (f(X) - E_\mathcal{L}f(X,\mathcal{L}))\big] \\
+ &amp;amp;= (E_{Y|X} \epsilon ) \cdot E_X\big[ f(X) - E_\mathcal{L}f(X,\mathcal{L}) \big] \\
+ &amp;amp;= 0,\\
+
+\text{(2)}
+ &amp;amp;= E_X \left[ \big( f(X) - E_\mathcal{L}f(X,\mathcal{L}) \big) \cdot \cancel{E_\mathcal{L}\big[ E_\mathcal{L}f(X, \mathcal{L}) - f(X, \mathcal{L}) \big]} \right] \\
+ &amp;amp;=0, \\
+ 
+\text{(3)}
+ &amp;amp;= E\left[ \epsilon \cdot \big( E_\mathcal{L}f(X, \mathcal{L}) - f(X, \mathcal{L}) \big) \right] \\
+ &amp;amp;= E\epsilon \cdot \big( E_\mathcal{L}f(X, \mathcal{L}) - E_\mathcal{L}f(X, \mathcal{L}) \big) \\
+ &amp;amp;=0.
+\end{aligned}\]
+
+&lt;p&gt;Thus&lt;/p&gt;
+
+\[\text{TE} = \sigma^2 + E_X \text{bias}_\mathcal{L}^2(f\big(X,\mathcal{L})\big) + E_X \text{Var}_\mathcal{L}\big( f(X,\mathcal{L}) \big).\]
+
+&lt;p&gt;As the model complexity increases, bias decreases but variance increases, which is an overfitting. In the case of k-NN, let $X_{(i)}$ be the $i$-th closest neighbor. Then&lt;/p&gt;
+
+\[\begin{aligned}
+\text{bias}_\mathcal{L}(f\big(X,\mathcal{L})\big) 
+ &amp;amp;= f(x) - \frac{1}{k}\sum_{i=1}^k f(X_{(i)}), \\
+\text{Var}_\mathcal{L}\big( f(X,\mathcal{L}) \big)
+ &amp;amp;= \frac{1}{k}\sigma^2.
+\end{aligned}\]
+
+&lt;p&gt;Thus as $k$ decreases (i.e. complexity $\uparrow$), bias decreases but variance increases.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
