@@ -47,7 +47,7 @@ $$
 
 ### Descriptive vs. generative model
 
-Descriptive model models $\mathbb{P}(y\|x),$ while generative model models both $\mathbb{P}(x\|y)$ and $\pi(y)$ which makes it possible to model the joint probability $\pi(x,y).$ While descriptive model generally requires less assumptions and performs better, generative model can "generate" the data according to modeled joint probability, thus more explainable.
+Descriptive model models $\mathbb{P}(y\|x),$ while generative model models both $\mathbb{P}(x\|y)$ and $\pi(y)$ which makes it possible to model the joint probability $\pi(x,y).$ While descriptive model generally requires less assumptions and performs better, generative model can "generate" the data according to modeled joint probability, thus more explainable and useful in semi-supervised settings.
 
 <br>
 
@@ -59,7 +59,7 @@ Linear discriminant analysis, or LDA, is a generative approach to classification
 
 
 $$
-f_j(x) = \mathbb{P}(x|y=j) := \phi_{(\mu_j, \Sigma_j)}(x),
+f_j(x) = p(x|Y=j) := \phi_{(\mu_j, \Sigma_j)}(x),
 $$
 
 
@@ -69,7 +69,7 @@ where $\phi_{(\mu, \Sigma)}$ is the density of $\mathcal{N}(\mu, \Sigma).$ Bayes
 $$
 \begin{aligned}
 G(x)
- &:= \text{sign}\left( \log\frac{\mathbb{P}(y=1|x)}{\mathbb{P}(y=-1|x)} \right) \\
+ &:= \text{sign}\left( \log\frac{\mathbb{P}(y=1|X=x)}{\mathbb{P}(y=-1|X=x)} \right) \\
  &= \text{sign} \big( \delta_1(x) - \delta_{-1}(x) \big)
 \end{aligned}
 $$
@@ -81,8 +81,8 @@ where
 $$
 \begin{aligned}
 \delta_j(x)
- &= \log \mathbb{P}(y=j|x) \\
- &= \log \mathbb{P}(x|y=j) + \log \pi_j \\
+ &= \log \mathbb{P}(Y=j|X=x) \\
+ &= \log p(x|Y=j) + \log \pi_j \\
  &= -\frac{1}{2}\log|\Sigma_j| -\frac{1}{2}(x-\mu_j)^\intercal \Sigma_j^{-1}(x-\mu_j) + \log\pi_j + C
 \end{aligned}
 $$
@@ -103,6 +103,12 @@ In practice, we use sample version of parameters instead:
 * $n_j = \sum_{i=1}^n \mathbf{1}(y_i=j)$
 * $\pi_j = n_j/n$
 * $\hat\Sigma = \frac{1}{n-2}\big\\{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \big\\}$
+
+<br>
+
+### Quadratic discriminant analysis
+
+Without the assumption $\Sigma_1 = \Sigma_{-1},$ since the quadratic term with respect to $x$ is not cancelled out, we get the quadratic discriminant function. We call the resulting model the quadratic discriminant analysis, or QDA for short.
 
 <br>
 
@@ -186,15 +192,124 @@ $$
 
 
 
-## LDA vs. Logistic regression
+### LDA vs. Logistic regression
 
-[TBD]
-
-
+LDA has a model for marginal of $X$ as
 
 
+$$
+p(x) = \pi_{1}\mathcal{N}(\mu_{1}, \Sigma) + \pi_{-1}\mathcal{N}(\mu_{-1}, \Sigma)
+$$
 
 
+thus can specifically model the joint distribution. However logistic regression only has specification of $\mathbb{P}(Y=1\|X=x)$ and marginal of $X$ is completely undertermined. One can show that if endowing a normal marginal distribution to $X,$ we get the same result as in LDA.
+
+<br>
+
+## Extension to multi-class problem
+
+From now on, our setting is extended to multi-class classification problem wherer $\mathcal{Y} = \{1,\cdots,K\}.$ We solve this problem by building $K$ different binary boundary functions $f_k,$ $k=1,\cdots,K$ where $f_k$ classifies the data into either `is k` or `is not k`. Our multi-class classifier will then be
+
+
+$$
+G(x) := \argmax_{k=1,\cdots,K} f_k(x).
+$$
+
+
+Note that if $k=2,$ then $f_2(x) = -f_1(x)$ and $G$ becomes the same as in the binary problem, so it is a well defined generalization.
+
+<br>
+
+### Linear regression
+
+While I did not mentioned it before, probably the most straightforward approach to classification is to model the probability with linear function.
+
+
+$$
+f_k(x) := \beta_{0k} + x'\boldsymbol\beta_k,~ k=1,\cdots,K. \\
+$$
+
+
+Motivation behind it is that linear regression models conditional expectation. Suppose we fit $f_k$ by minimizing RSS, as in other linear regression models. Note that in classification setting, the target is $y^{(k)} = \mathbf{1}(y=k).$
+
+
+$$
+\begin{aligned}
+E(Y^{(k)} | X=x)
+ &= 1\cdot\mathbb{P}(Y^{(k)}=1|X=x) + 0\cdot\mathbb{P}(Y^{(k)}=0|X=x) \\
+ &= \mathbb{P}(Y=k|X=x)
+\end{aligned}
+$$
+
+
+Thus the linear regression model will work reasonably well in binary settings.
+
+<br>
+
+***Masking effect***
+
+Although the theory behind linear regression seems to be ok, in practice it does not work well.
+
+
+
+<div style="text-align:center">
+<img src="/assets/fig/210316_HTF_4.2_4.3.png" alt="210316_HTF_4.2_4.3.png" width="600"/>
+<br>
+<em> In this simple setting where the data in three different classes ligned up in a traight line, linear regression fail to discriminate class 2 (green) since the discriminant function of class 2 is never a maximum. (source: Elements of Statistical Learning)</em>
+</div><br> 
+
+It is known as a rule of thumb that to discriminate data in $K$ classes well, we need $(K-1)$ order of polynomial regression. This makes linear regression impractical, so LDA (QDA) and logistic regression is here to help.
+
+<br>
+
+### LDA and QDA
+
+We model the likelihood for LDA as
+
+
+$$
+(X|Y=k) \sim \mathcal{N}(\mu_k, \Sigma)
+$$
+
+
+and for QDA as
+
+
+$$
+(X|Y=k) \sim \mathcal{N}(\mu_k, \Sigma_k)
+$$
+
+
+for $k=1,\cdots,K.$ We construct the (linear) discriminant functions as before, and define a classifier as an argmax of them.
+
+
+$$
+G(x) := \argmax_k \delta_k(x).
+$$
+
+
+<br>
+
+### Logistic regression
+
+A in the binary case, we model the log odds as a linear function:
+
+
+$$
+\log\frac{\mathbb{P}(Y=k|X=x)}{\mathbb{P}(Y\ne k|X=x)} \overset{\text{set}}{=} x^\intercal\boldsymbol{\beta}.
+$$
+
+
+Thus the resulting decision rule is
+
+
+$$
+\mathbb{P}(Y=k|X=x) \propto e^{x^\intercal\boldsymbol\beta_k}, \\
+\mathbb{P}(Y=k|X=x) = \frac{e^{x^\intercal\boldsymbol\beta_k}}{\sum_{l=1}^K e^{x^\intercal\boldsymbol\beta_l}},
+$$
+
+
+which is not idenfiable. We let $\boldsymbol\beta_1=\mathbf{0}$ for identifiability.
 
 
 

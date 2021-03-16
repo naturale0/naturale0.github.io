@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Mar 2021 01:27:56 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Mar 2021 01:27:56 +0900</lastBuildDate>
+    <pubDate>Tue, 16 Mar 2021 11:32:48 +0900</pubDate>
+    <lastBuildDate>Tue, 16 Mar 2021 11:32:48 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -19,9 +19,20 @@
       &lt;li&gt;&lt;a href=&quot;#descriptive-vs-generative-model&quot; id=&quot;markdown-toc-descriptive-vs-generative-model&quot;&gt;Descriptive vs. generative model&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#linear-discriminant-analysis&quot; id=&quot;markdown-toc-linear-discriminant-analysis&quot;&gt;Linear discriminant analysis&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#logistic-regression&quot; id=&quot;markdown-toc-logistic-regression&quot;&gt;Logistic regression&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#lda-vs-logistic-regression&quot; id=&quot;markdown-toc-lda-vs-logistic-regression&quot;&gt;LDA vs. Logistic regression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linear-discriminant-analysis&quot; id=&quot;markdown-toc-linear-discriminant-analysis&quot;&gt;Linear discriminant analysis&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#quadratic-discriminant-analysis&quot; id=&quot;markdown-toc-quadratic-discriminant-analysis&quot;&gt;Quadratic discriminant analysis&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#logistic-regression&quot; id=&quot;markdown-toc-logistic-regression&quot;&gt;Logistic regression&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#lda-vs-logistic-regression&quot; id=&quot;markdown-toc-lda-vs-logistic-regression&quot;&gt;LDA vs. Logistic regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#extension-to-multi-class-problem&quot; id=&quot;markdown-toc-extension-to-multi-class-problem&quot;&gt;Extension to multi-class problem&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#linear-regression&quot; id=&quot;markdown-toc-linear-regression&quot;&gt;Linear regression&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#lda-and-qda&quot; id=&quot;markdown-toc-lda-and-qda&quot;&gt;LDA and QDA&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#logistic-regression-1&quot; id=&quot;markdown-toc-logistic-regression-1&quot;&gt;Logistic regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -44,7 +55,7 @@
 
 &lt;h3 id=&quot;descriptive-vs-generative-model&quot;&gt;Descriptive vs. generative model&lt;/h3&gt;
 
-&lt;p&gt;Descriptive model models $\mathbb{P}(y|x),$ while generative model models both $\mathbb{P}(x|y)$ and $\pi(y)$ which makes it possible to model the joint probability $\pi(x,y).$ While descriptive model generally requires less assumptions and performs better, generative model can “generate” the data according to modeled joint probability, thus more explainable.&lt;/p&gt;
+&lt;p&gt;Descriptive model models $\mathbb{P}(y|x),$ while generative model models both $\mathbb{P}(x|y)$ and $\pi(y)$ which makes it possible to model the joint probability $\pi(x,y).$ While descriptive model generally requires less assumptions and performs better, generative model can “generate” the data according to modeled joint probability, thus more explainable and useful in semi-supervised settings.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -52,13 +63,13 @@
 
 &lt;p&gt;Linear discriminant analysis, or LDA, is a generative approach to classification. It assumes the density of $x$ given $y=j$ to be that of normal distribution. i.e.&lt;/p&gt;
 
-\[f_j(x) = \mathbb{P}(x|y=j) := \phi_{(\mu_j, \Sigma_j)}(x),\]
+\[f_j(x) = p(x|Y=j) := \phi_{(\mu_j, \Sigma_j)}(x),\]
 
 &lt;p&gt;where $\phi_{(\mu, \Sigma)}$ is the density of $\mathcal{N}(\mu, \Sigma).$ Bayes classifier can be easily achieved as&lt;/p&gt;
 
 \[\begin{aligned}
 G(x)
- &amp;amp;:= \text{sign}\left( \log\frac{\mathbb{P}(y=1|x)}{\mathbb{P}(y=-1|x)} \right) \\
+ &amp;amp;:= \text{sign}\left( \log\frac{\mathbb{P}(y=1|X=x)}{\mathbb{P}(y=-1|X=x)} \right) \\
  &amp;amp;= \text{sign} \big( \delta_1(x) - \delta_{-1}(x) \big)
 \end{aligned}\]
 
@@ -66,8 +77,8 @@ G(x)
 
 \[\begin{aligned}
 \delta_j(x)
- &amp;amp;= \log \mathbb{P}(y=j|x) \\
- &amp;amp;= \log \mathbb{P}(x|y=j) + \log \pi_j \\
+ &amp;amp;= \log \mathbb{P}(Y=j|X=x) \\
+ &amp;amp;= \log p(x|Y=j) + \log \pi_j \\
  &amp;amp;= -\frac{1}{2}\log|\Sigma_j| -\frac{1}{2}(x-\mu_j)^\intercal \Sigma_j^{-1}(x-\mu_j) + \log\pi_j + C
 \end{aligned}\]
 
@@ -84,6 +95,12 @@ G(x)
   &lt;li&gt;$\pi_j = n_j/n$&lt;/li&gt;
   &lt;li&gt;$\hat\Sigma = \frac{1}{n-2}\big\{ (n_1-1)\hat\Sigma_1 + (n_{-1}-1)\hat\Sigma_{-1} \big\}$&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;quadratic-discriminant-analysis&quot;&gt;Quadratic discriminant analysis&lt;/h3&gt;
+
+&lt;p&gt;Without the assumption $\Sigma_1 = \Sigma_{-1},$ since the quadratic term with respect to $x$ is not cancelled out, we get the quadratic discriminant function. We call the resulting model the quadratic discriminant analysis, or QDA for short.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -135,9 +152,87 @@ p^{(t)} = \big[ \phi(x_i, \boldsymbol{\beta}^{(t)}) \big]_{i=1}^n.\]
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;lda-vs-logistic-regression&quot;&gt;LDA vs. Logistic regression&lt;/h2&gt;
+&lt;h3 id=&quot;lda-vs-logistic-regression&quot;&gt;LDA vs. Logistic regression&lt;/h3&gt;
 
-&lt;p&gt;[TBD]&lt;/p&gt;
+&lt;p&gt;LDA has a model for marginal of $X$ as&lt;/p&gt;
+
+\[p(x) = \pi_{1}\mathcal{N}(\mu_{1}, \Sigma) + \pi_{-1}\mathcal{N}(\mu_{-1}, \Sigma)\]
+
+&lt;p&gt;thus can specifically model the joint distribution. However logistic regression only has specification of $\mathbb{P}(Y=1|X=x)$ and marginal of $X$ is completely undertermined. One can show that if endowing a normal marginal distribution to $X,$ we get the same result as in LDA.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;extension-to-multi-class-problem&quot;&gt;Extension to multi-class problem&lt;/h2&gt;
+
+&lt;p&gt;From now on, our setting is extended to multi-class classification problem wherer $\mathcal{Y} = {1,\cdots,K}.$ We solve this problem by building $K$ different binary boundary functions $f_k,$ $k=1,\cdots,K$ where $f_k$ classifies the data into either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is k&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is not k&lt;/code&gt;. Our multi-class classifier will then be&lt;/p&gt;
+
+\[G(x) := \argmax_{k=1,\cdots,K} f_k(x).\]
+
+&lt;p&gt;Note that if $k=2,$ then $f_2(x) = -f_1(x)$ and $G$ becomes the same as in the binary problem, so it is a well defined generalization.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;linear-regression&quot;&gt;Linear regression&lt;/h3&gt;
+
+&lt;p&gt;While I did not mentioned it before, probably the most straightforward approach to classification is to model the probability with linear function.&lt;/p&gt;
+
+\[f_k(x) := \beta_{0k} + x'\boldsymbol\beta_k,~ k=1,\cdots,K. \\\]
+
+&lt;p&gt;Motivation behind it is that linear regression models conditional expectation. Suppose we fit $f_k$ by minimizing RSS, as in other linear regression models. Note that in classification setting, the target is $y^{(k)} = \mathbf{1}(y=k).$&lt;/p&gt;
+
+\[\begin{aligned}
+E(Y^{(k)} | X=x)
+ &amp;amp;= 1\cdot\mathbb{P}(Y^{(k)}=1|X=x) + 0\cdot\mathbb{P}(Y^{(k)}=0|X=x) \\
+ &amp;amp;= \mathbb{P}(Y=k|X=x)
+\end{aligned}\]
+
+&lt;p&gt;Thus the linear regression model will work reasonably well in binary settings.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Masking effect&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Although the theory behind linear regression seems to be ok, in practice it does not work well.&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;/assets/fig/210316_HTF_4.2_4.3.png&quot; alt=&quot;210316_HTF_4.2_4.3.png&quot; width=&quot;600&quot; /&gt;
+&lt;br /&gt;
+&lt;em&gt; In this simple setting where the data in three different classes ligned up in a traight line, linear regression fail to discriminate class 2 (green) since the discriminant function of class 2 is never a maximum. (source: Elements of Statistical Learning)&lt;/em&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is known as a rule of thumb that to discriminate data in $K$ classes well, we need $(K-1)$ order of polynomial regression. This makes linear regression impractical, so LDA (QDA) and logistic regression is here to help.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;lda-and-qda&quot;&gt;LDA and QDA&lt;/h3&gt;
+
+&lt;p&gt;We model the likelihood for LDA as&lt;/p&gt;
+
+\[(X|Y=k) \sim \mathcal{N}(\mu_k, \Sigma)\]
+
+&lt;p&gt;and for QDA as&lt;/p&gt;
+
+\[(X|Y=k) \sim \mathcal{N}(\mu_k, \Sigma_k)\]
+
+&lt;p&gt;for $k=1,\cdots,K.$ We construct the (linear) discriminant functions as before, and define a classifier as an argmax of them.&lt;/p&gt;
+
+\[G(x) := \argmax_k \delta_k(x).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;logistic-regression-1&quot;&gt;Logistic regression&lt;/h3&gt;
+
+&lt;p&gt;A in the binary case, we model the log odds as a linear function:&lt;/p&gt;
+
+\[\log\frac{\mathbb{P}(Y=k|X=x)}{\mathbb{P}(Y\ne k|X=x)} \overset{\text{set}}{=} x^\intercal\boldsymbol{\beta}.\]
+
+&lt;p&gt;Thus the resulting decision rule is&lt;/p&gt;
+
+\[\mathbb{P}(Y=k|X=x) \propto e^{x^\intercal\boldsymbol\beta_k}, \\
+\mathbb{P}(Y=k|X=x) = \frac{e^{x^\intercal\boldsymbol\beta_k}}{\sum_{l=1}^K e^{x^\intercal\boldsymbol\beta_l}},\]
+
+&lt;p&gt;which is not idenfiable. We let $\boldsymbol\beta_1=\mathbf{0}$ for identifiability.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
