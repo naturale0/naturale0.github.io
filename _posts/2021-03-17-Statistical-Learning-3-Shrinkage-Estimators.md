@@ -262,7 +262,7 @@ A(\mathbf{x}) := \{j: g_j(\mathbf{x})=0\}.
 $$
 
 
-In addition, in many cases gradients $\nabla h_i(\mathbf{x}),$ $i=1,\cdots,m$ at $\mathbf{x}$ need to be linearly independent since otherwise $\mu$ is not identifiable. Similarly, $\nabla_j g_j(\mathbf{x})$ need to be linearly independent as well. If the point $\mathbf{x}^*$ satisfies these linearly independent gradient conditions, then we call $\mathbf{x}^*$ a **regular point**.
+In addition, in many cases gradients $\nabla h_i(\mathbf{x}),$ $i=1,\cdots,m$ at $\mathbf{x}$ need to be linearly independent since otherwise $\mu$ is not identifiable. Similarly, $\nabla_j g_j(\mathbf{x})$ need to be linearly independent as well. If the point $\mathbf{x}^\*$ satisfies these linearly independent gradient conditions, then we call $\mathbf{x}^\*$ a **regular point**.
 
 Now we discuss our first theorem: the Karuch-Kuhn-Tucker (KKT) necessary conditions.
 
