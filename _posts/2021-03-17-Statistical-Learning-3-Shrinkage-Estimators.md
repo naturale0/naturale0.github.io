@@ -217,7 +217,7 @@ $$
 
 where $f:\mathcal{X}\to\mathbb{R},$ $h=(h_1,\cdots,h_m):\mathcal{X} \to \mathbb{R}^m,$ $g=(g_1,\cdots,g_r):\mathcal{X} \to \mathbb{R}^r.$
 
-We call it a **convex optimization** if $f$ is convex and $h_i, g_j$ are linear for all $i,j.$ Furthermore, we call it a **quadratic program (QP)** if $f$ is quadratic function in particular. 
+We call it a **convex optimization** if $f$ is convex and $h_i, g_j$ are linear for all $i,j.$ Furthermore, we call it a **quadratic program (QP)** if $f$ is a quadratic function in particular. 
 
 We can easily show that the lasso problem with $\ell^2$-type objective function is a QP.
 
