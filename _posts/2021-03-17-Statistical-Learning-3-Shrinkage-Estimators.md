@@ -184,6 +184,7 @@ Note that unlike ridge, lasso objective function is non-differentiable with resp
 <div style="text-align:center">
 <img src="/assets/fig/210317_HTF_3.11.png" alt="210317_HTF_3.11.png" width="600"/>
 <br>
+<em>(source: Elements of Statistical Learning)</em>
 </div><br>  
 
 
