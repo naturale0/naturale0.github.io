@@ -8,7 +8,7 @@ categories: [statistical learning]
 
 
 
-As a remedy for overdetermines systems and variable selection rule, I would like to cover shrinkage methods in this section. Especially, I would like to focus on ridge and lasso penalization.
+As a remedy for overdetermined systems and variable selection rule, I would like to cover shrinkage methods in this section. Especially, I would like to focus on ridge and lasso penalization.
 
 
 
