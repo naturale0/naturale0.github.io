@@ -26,7 +26,7 @@ For this, we repeat the following for all $0\le k\le p.$
 
 1. Select the best set among possible choices of $k$ variables, and let the model $M_k$ be the one that used it.
 
-Then select the best performing model $M^*_k \in \\{M_k: 0\le k\le p\\}.$ This is a straightforward selection method, but as $\sum_{k=0}^p{p \choose k} = 2^p$ fitting of linear models is required, it is computationally inefficient. In addtion, since we either use a variable or not, it is a **hard decision rule** (or **hard-thresholding**) which makes the method unstable: small changes in the data leads to large change in estimator.
+Then select the best performing model $M^*\_k \in \\{M_k: 0\le k\le p\\}.$ This is a straightforward selection method, but as $\sum_{k=0}^p{p \choose k} = 2^p$ fitting of linear models is required, it is computationally inefficient. In addtion, since we either use a variable or not, it is a **hard decision rule** (or **hard-thresholding**) which makes the method unstable: small changes in the data leads to large change in estimator.
 
 <br>
 
