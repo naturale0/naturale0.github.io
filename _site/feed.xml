@@ -6,9 +6,309 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Mar 2021 11:32:48 +0900</pubDate>
-    <lastBuildDate>Tue, 16 Mar 2021 11:32:48 +0900</lastBuildDate>
+    <pubDate>Wed, 17 Mar 2021 21:05:00 +0900</pubDate>
+    <lastBuildDate>Wed, 17 Mar 2021 21:05:00 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>[Statistical Learning] 3. Shrinkage Estimators</title>
+        <description>&lt;p&gt;As a remedy for overdetermines systems and variable selection rule, I would like to cover shrinkage methods in this section. Especially, I would like to focus on ridge and lasso penalization.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#variable-selection&quot; id=&quot;markdown-toc-variable-selection&quot;&gt;Variable selection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ridge-estimator&quot; id=&quot;markdown-toc-ridge-estimator&quot;&gt;Ridge estimator&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#motivation-to-shrinkage-estimator&quot; id=&quot;markdown-toc-motivation-to-shrinkage-estimator&quot;&gt;Motivation to shrinkage estimator&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#1-to-achieve-nonsingular-gram-matrix&quot; id=&quot;markdown-toc-1-to-achieve-nonsingular-gram-matrix&quot;&gt;1. To achieve nonsingular Gram matrix&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#2-james-stein-estimator&quot; id=&quot;markdown-toc-2-james-stein-estimator&quot;&gt;2. James-Stein estimator&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#3-bayesian-perspective&quot; id=&quot;markdown-toc-3-bayesian-perspective&quot;&gt;3. Bayesian perspective&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ridge-logistic-regression&quot; id=&quot;markdown-toc-ridge-logistic-regression&quot;&gt;Ridge logistic regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#lasso-estimator&quot; id=&quot;markdown-toc-lasso-estimator&quot;&gt;LASSO estimator&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#optimization-of-lasso-problems&quot; id=&quot;markdown-toc-optimization-of-lasso-problems&quot;&gt;Optimization of LASSO problems&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#essentials-of-convex-optimization&quot; id=&quot;markdown-toc-essentials-of-convex-optimization&quot;&gt;Essentials of convex optimization&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#solution-path-algorithm&quot; id=&quot;markdown-toc-solution-path-algorithm&quot;&gt;Solution path algorithm&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;variable-selection&quot;&gt;Variable selection&lt;/h2&gt;
+
+&lt;p&gt;We want to have a model without colinearity that can be generalized into unseen data as well. As Occam’s razor states, it is helpful to select only subsets among total of $p$ variables.&lt;/p&gt;
+
+&lt;p&gt;For this, we repeat the following for all $0\le k\le p.$&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select the best set among possible choices of $k$ variables, and let the model $M_k$ be the one that used it.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then select the best performing model $M^*&lt;em&gt;k \in \{M_k: 0\le k\le p\}.$ This is a straightforward selection method, but as $\sum&lt;/em&gt;{k=0}^p{p \choose k} = 2^p$ fitting of linear models is required, it is computationally inefficient. In addtion, since we either use a variable or not, it is a &lt;strong&gt;hard decision rule&lt;/strong&gt; (or &lt;strong&gt;hard-thresholding&lt;/strong&gt;) which makes the method unstable: small changes in the data leads to large change in estimator.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ridge-estimator&quot;&gt;Ridge estimator&lt;/h2&gt;
+
+&lt;p&gt;Ridge estimator can be seen as a &lt;strong&gt;soft decision rule&lt;/strong&gt;. That is, it does not entirely drops a subset of variables, but rather gives weights to variables (&lt;strong&gt;proportional shrinkage&lt;/strong&gt;). It tends to give more stable and better cross-validation results than variable selection methods. Ridge estimator for linear regression can be derived as&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta}^\text{ridge} = \argmin_{\boldsymbol\beta} \sum_{i=1}^n \left( y_i - \beta_0 - \sum_{k=1}^p x_i^\intercal \beta_k \right)^2 \text{ subject to } \sum_{k=1}^p \beta_k^2 \le t.\]
+
+&lt;p&gt;This constrained form is equivalent to the penalized form below.&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta}^\text{ridge} = \argmin_{\boldsymbol\beta} \left[ \sum_{i=1}^n\left(y_i - \beta_0 - \sum_{k=1}^p x_i^\intercal \beta_k\right)^2 + \lambda \sum_{k=1}^p \beta_k^2 \right].\]
+
+&lt;p&gt;The latter form is more computationally efficient. In fact, we can easily derive closed form solution.&lt;/p&gt;
+
+&lt;p&gt;Notice that if the squared norm of the ordinary least squares estimator (LSE) is large so that $\| \hat{\boldsymbol\beta}^\text{LS} \| &amp;gt; t,$ then $\beta_k^\text{LS} &amp;gt; \beta_k^\text{ridge}$ and otherwise $\beta_k^{LS} = \beta_k^\text{ridge}.$ Thus we can say that the ridge penalization &lt;strong&gt;shrinks the LS estimator&lt;/strong&gt; towards zero.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;motivation-to-shrinkage-estimator&quot;&gt;Motivation to shrinkage estimator&lt;/h3&gt;
+
+&lt;p&gt;There are several motivation for the estimator that “shrinks” the ordinary LS estimator toward some other value (mostly zero).&lt;/p&gt;
+
+&lt;h4 id=&quot;1-to-achieve-nonsingular-gram-matrix&quot;&gt;1. To achieve nonsingular Gram matrix&lt;/h4&gt;
+
+&lt;p&gt;$X^\intercal X$ is refered to as the Gram matrix. Since the LS estimator is&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta}^\text{LS} = (X^\intercal X)^{-1}X^\intercal Y,\]
+
+&lt;p&gt;we need invertibility of $X^\intercal X$, or equivalently full ranked $X \in \mathbb{R}^{n\times p}.$ However in high dimensional setting, often the number of variables $p$ is larger than $n,$ which makes $X^\intercal X$ singular.&lt;/p&gt;
+
+&lt;p&gt;Hoerl and Kennard (1970) came up with the simple solution: make $X^\intercal X$ invertible by adding a constant $\lambda$ to diagonal elements. That is, replace $X^\intercal X$ by $X^\intercal X + \lambda I$ to get the estimator&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta} = (X^\intercal X + \lambda I)^{-1}X^\intercal Y.\]
+
+&lt;p&gt;This is the original derivation of ridge estimator.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;2-james-stein-estimator&quot;&gt;2. James-Stein estimator&lt;/h4&gt;
+
+&lt;p&gt;Another motivation is that in cases where $p \ge 3,$ shrinkage estimator actually performs better in terms of MSE.&lt;/p&gt;
+
+&lt;p&gt;Suppose we want to estimate $\boldsymbol{\theta}$ with a single sample&lt;/p&gt;
+
+\[\mathbf{X} = (X_1,\cdots,X_p) \sim \mathcal{N}_p(\boldsymbol{\theta}, \sigma^2 I).\]
+
+&lt;p&gt;Note that the MLE is $\mathbf{X}.$ However, unintuitively, $X$ is suboptimal if $p \ge 0.$ This phenomenon is called Stein’s paradox. James and Stein independently proved that there exists a better estimator&lt;/p&gt;
+
+\[\delta^\text{JS} = \left(1 - \frac{1}{\sum_{i=1}^p X_i^2}\right) \mathbf{X}.\]
+
+&lt;p&gt;Since we can safely assume that $\sum_{i=1}^p X_i^2 &amp;gt; 1$ for large $p,$ the James-Stein estimator $\delta^\text{JS}$ can be viewed as a shrinkage estimator that shrinks $\mathbf{X}$ toward zero.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;3-bayesian-perspective&quot;&gt;3. Bayesian perspective&lt;/h4&gt;
+
+&lt;p&gt;Last but not least, ridge estimator can be explained as a maximum a posteriori (MAP) estimator in Bayesian framework. Assume that $X$ and $\sigma^2$ and $\tau^2$ are known and fixed. Consider a Bayesian setting that gives normal prior to $\boldsymbol\beta.$&lt;/p&gt;
+
+\[Y = X{\boldsymbol\beta} + \epsilon,~ \epsilon \sim \mathcal{N}_n(0, \sigma^2I).\\
+{\boldsymbol\beta} \sim \mathcal{N}_p(0, \tau^2I).\]
+
+&lt;p&gt;Then&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;likelihood: $(Y|{\boldsymbol\beta}) \sim \mathcal{N}_n(X{\boldsymbol\beta},\sigma^2I).$&lt;/li&gt;
+  &lt;li&gt;posterior: $({\boldsymbol\beta}|Y) \propto p(Y|{\boldsymbol\beta})p({\boldsymbol\beta}).$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hence the MAP estimator maximizes the log posterior&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta}^\text{MAP} = \argmax_{\boldsymbol\beta} \left[ \sum_{i=1} \frac{1}{2\sigma^2}\left( y_i - \beta_0 - \sum_{k=1}^p x_k\beta_k \right)^2 + \frac{1}{\tau^2} \sum_{k=1}^p \beta_k^2 \right]\]
+
+&lt;p&gt;which is the same formulation as in penalized form of ridge estimator with $\lambda = \tau^2/\sigma^2.$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ridge-logistic-regression&quot;&gt;Ridge logistic regression&lt;/h3&gt;
+
+&lt;p&gt;Logistic regression with ridge penalization can be defined in a similar way.&lt;/p&gt;
+
+\[\hat{\boldsymbol\beta}^\text{ridge} = \argmax_{\boldsymbol\beta} \left[ \sum_{i=1}^n \left( -y_i(\beta_0 + x_i^\intercal {\boldsymbol\beta} - \log(1 + e^{\beta_0 + x_i^\intercal {\boldsymbol\beta}}) \right) + \lambda \sum_{k=1}^p \beta_k^2 \right].\]
+
+&lt;p&gt;We use IRLS as in unconstrained problem for optimization.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lasso-estimator&quot;&gt;LASSO estimator&lt;/h2&gt;
+
+&lt;p&gt;While ridge provide more robust estimator than LS estimator, it does not actually “select” a subset of variables. Tibshirani (1996) proposed a penalization that selects and shrinks the LS estimate simultaneously. He called it a LASSO (least absolute shrinkage and selection operator) estimator. Lasso is simply replaces $\ell^2$-norm penalty from ridge objective function with $\ell^1$-norm penalty.&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp;\text{minimize } \sum_{i=1}^n \ell(y_i, x_i^\intercal \boldsymbol\beta) \\
+&amp;amp;\text{subject to } \sum_{k=1}^p |\beta_k| \le t
+\end{aligned}\]
+
+&lt;p&gt;This is equivalent to&lt;/p&gt;
+
+\[\text{minimize } \sum_{i=1}^n \ell(y_i, x_i^\intercal \boldsymbol\beta) + \lambda \sum_{k=1}^p |\beta_k|.\]
+
+&lt;p&gt;Note that unlike ridge, lasso objective function is non-differentiable with respect to $\beta_k$’s’ at $\beta_k = 0.$ This property of lasso tends to makes it produce a &lt;strong&gt;sparse&lt;/strong&gt; model, i.e. a model with values of many $\beta_k$ is equal to zero. For simplicity of explanation, consider a model with $p=2$ variables $Y = \beta_0 + \beta_1 x_1 + \beta_2x_2.$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;img src=&quot;/assets/fig/210317_HTF_3.11.png&quot; alt=&quot;210317_HTF_3.11.png&quot; width=&quot;600&quot; /&gt;
+&lt;br /&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then the constraint region of lasso becomes a diamond $|\beta_1| + |\beta_2| \le t,$ which has corners. Since constraint optimization problem is to find the point that the objective function contour first touches the constrain region, lasso optimum is highly likely to be placed at one of the corners of the diamond. Since the corner implies one (or more, in $p \ge 3$ case) of $\beta_k$’s, this makes it produce a sparse model.&lt;/p&gt;
+
+&lt;p&gt;If sparsity is the only important property, then why don’t we use other $\ell^q$-norm penalties with $0&amp;lt;q&amp;lt;1$? In fact there is another property that makes optimization problem fairly easy. Ridge and lasso constraints are &lt;strong&gt;convex&lt;/strong&gt;. In optimization problem of convex objective function, first order optimality condition is sufficient for local optima searching, which makes the problem super efficient. It can be easily shown that &lt;strong&gt;the lasso penalty is the only $\ell^q$-norm penalty that is both convex and non-differentiable at the corners&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Similar to ridge estimator, lasso estimator can be justified as a Bayesian MAP estimator with double exponential prior given to $\boldsymbol\beta.$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;optimization-of-lasso-problems&quot;&gt;Optimization of LASSO problems&lt;/h3&gt;
+
+&lt;p&gt;Optimization of lasso objective function can be formed as a quadratic program (QP). Here, we first cover the essentials of convex optimization theory, and then describe details of three optimization algorithms for lasso problems.&lt;/p&gt;
+
+&lt;h4 id=&quot;essentials-of-convex-optimization&quot;&gt;Essentials of convex optimization&lt;/h4&gt;
+
+&lt;p&gt;Consider the minimization problem&lt;/p&gt;
+
+\[\begin{aligned}
+\text{minimize } ~&amp;amp;f(\mathbf{x}) \\
+\text{subject to } ~&amp;amp;h(\mathbf{x})=0, \\
+  &amp;amp;g(\mathbf{x}) \le 0
+\end{aligned} \tag{P}\]
+
+&lt;p&gt;where $f:\mathcal{X}\to\mathbb{R},$ $h=(h_1,\cdots,h_m):\mathcal{X} \to \mathbb{R}^m,$ $g=(g_1,\cdots,g_r):\mathcal{X} \to \mathbb{R}^r.$&lt;/p&gt;
+
+&lt;p&gt;We call it a &lt;strong&gt;convex optimization&lt;/strong&gt; if $f$ is convex and $h_i, g_j$ are linear for all $i,j.$ Furthermore, we call it a &lt;strong&gt;quadratic program (QP)&lt;/strong&gt; if $f$ is quadratic function in particular.&lt;/p&gt;
+
+&lt;p&gt;We can easily show that the lasso problem with $\ell^2$-type objective function is a QP.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+\text{minimize } &amp;amp; \|Y-X\boldsymbol\beta\|_2^2 \\
+\text{subject to } &amp;amp; \|\boldsymbol\beta\|_1 \le t \\
+\iff \text{minimize } &amp;amp; \|Y-X\boldsymbol\beta\|_2^2 \\
+  \text{subject to } &amp;amp; \sum_{k=1}^p \beta_k^+ + \sum_{k=1}^p \beta_k^- \le t, \\
+  &amp;amp; \beta_k^+ \ge 0,~ \beta_k^- \ge 0,~ k=1,\cdots,p.
+\end{aligned}
+$$
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;u&gt;From now on, we assume that the problem (P) is a convex optimization.&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;The problem (P) defined above is called the primal problem.&lt;/p&gt;
+
+\[L(\mathbf{x}, \lambda, \mu) := f(\mathbf{x}) + \lambda^\intercal h(\mathbf{x}) + \mu^\intercal g(\mathbf{x})\]
+
+&lt;p&gt;is the Lagrangian form of the problem (P), where $\lambda \in \mathbb{R}^m$ and $\mu \in \mathbb{R}^r.$&lt;/p&gt;
+
+&lt;p&gt;Suppose $\mathbf{x}^*$ be the optimum of the problem. For the $j$-th equality constraint, if the inequality is strict&lt;/p&gt;
+
+\[g_j(\mathbf{x}^*) &amp;lt; 0,\]
+
+&lt;p&gt;then this constraint is not actually limiting the optimum of objective function $x^*$ to be inside of the constraint region. We collect inequality constraints that achieves the boundary (zero) at a point $\mathbf{x}$ and call it &lt;strong&gt;active contraints&lt;/strong&gt; $A(\mathbf{x})$ at $\mathbf{x}$.&lt;/p&gt;
+
+\[A(\mathbf{x}) := \{j: g_j(\mathbf{x})=0\}.\]
+
+&lt;p&gt;In addition, in many cases gradients $\nabla h_i(\mathbf{x}),$ $i=1,\cdots,m$ at $\mathbf{x}$ need to be linearly independent since otherwise $\mu$ is not identifiable. Similarly, $\nabla_j g_j(\mathbf{x})$ need to be linearly independent as well. If the point $\mathbf{x}^&lt;em&gt;$ satisfies these linearly independent gradient conditions, then we call $\mathbf{x}^&lt;/em&gt;$ a &lt;strong&gt;regular point&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we discuss our first theorem: the Karuch-Kuhn-Tucker (KKT) necessary conditions.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;KKT necessarity&quot;&gt;
+
+$\mathbf{x}^*$ is a regular local minimum of the problem (P).&lt;br /&gt;
+
+$\implies$ There uniquely exist $\lambda^*$ and $\mu^*$ that satisfies the followings.&lt;br /&gt;
+
+(i) (stationarity) $\nabla_\mathbf{x} L(\mathbf{x}^*, \lambda^*, \mu^*) = 0.$&lt;br /&gt;
+
+(ii) (primal feasibility) $g(\mathbf{x}^*)\le0,$ $h(\mathbf{x}^*)=0.$&lt;br /&gt;
+
+(iii) (dual feasibility) $\mu^* \ge 0.$&lt;br /&gt;
+
+(iv) (complementary slackness) $\mu^{*\intercal} g(\mathbf{x}^*) = \mathbf{0}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;KKT necessary condition can be viewed as the first order optimality condition for constrained optimization problem. The next theorem is a second order &lt;em&gt;sufficient&lt;/em&gt; condition for constrained problem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;KKT second order sufficiency&quot;&gt;
+
+If $\mathbf{x}^*,$ $\lambda^*,$ $\mu^*$ satisfy the followings, then $\mathbf{x}^*$ is a strict local optimum. i.e. we get strict inequality $g(\mathbf{x}^*) &amp;lt; 0.$&lt;br /&gt;
+
+(i) (stationarity) $\nabla_\mathbf{x} L(\mathbf{x}^*, \lambda^*, \mu^*) = 0.$&lt;br /&gt;
+
+(ii) (primal feasibility) $g(\mathbf{x}^*)\le0,$ $h(\mathbf{x}^*)=0.$&lt;br /&gt;
+
+(iii) (strict complementarity) $\mu_j&amp;gt;0$ for $j\in A(\mathbf{x}^*)$ and $\mu_j=0$ for $j \notin A(\mathbf{x}^*).$&lt;br /&gt;
+
+(iv) (convex point) $\mathbf{s}\ne \mathbf{0},$ $\nabla h(\mathbf{x}^*)^\intercal\mathbf{s}=0,$ $\left[\nabla g_j(\mathbf{x}^*)\right]_{j\in A(\mathbf{x}^*)}^\intercal \mathbf{s} = 0$ $\implies$ $\mathbf{s}^\intercal \nabla_{\mathbf{x}\mathbf{x}}^2 L(\mathbf{x}^*,\lambda^*, \mu^*) \mathbf{s} &amp;gt; 0.$
+
+&lt;/div&gt;
+
+&lt;p&gt;We will also use Lagrangian duality later, so let’s define it here.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot; text=&quot;dual problem&quot;&gt;&lt;br /&gt;
+$$
+g(\lambda, \mu) := \inf_{\mathbf{x}\in\mathcal{X}} L(\mathbf{x}, \lambda, \mu)
+$$
+
+is the Lagrangian of the problem (P). The dual problem of (P) can be formed as
+$$
+\begin{aligned}
+\text{maximize } &amp;amp; g(\lambda, \mu) \\
+\text{subject to } &amp;amp; \mu \ge 0
+\end{aligned} \tag{D}
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Note that the dual problem is a maximization problem. Under some conditions, we can show that solving the dual problem (D) is equivalent to solving the primal (P). This is called the duality theorem.&lt;/p&gt;
+
+&lt;div class=&quot;theorem&quot; text=&quot;duality theorem&quot;&gt;
+
+$\mathbf{x}^*$ is an optimal solution of (P) and $(\lambda^*, \mu^*)$ is an optimal solution of (D), if and only if&lt;br /&gt;
+
+(i) (primal feasibility) $g(\mathbf{x}^*) \le 0,$ $h(\mathbf{x}^*)=0$.&lt;br /&gt;
+
+(ii) (dual feasibility) $\mu^* \ge 0.$&lt;br /&gt;
+
+(iii) (complementary slackness) $\mu^{*\intercal}g(\mathbf{x}^*)=0.$&lt;br /&gt;
+
+(iv) (local optimality) $\mathbf{x}^* \in \{\mathbf{x}: \argmin_\mathbf{x}L(\mathbf{x}, \lambda^*, \mu^*)\}.$
+
+&lt;/div&gt;
+
+&lt;p&gt;Why consider dual problem? Because it can be shown that dual problems are always convex optimization regardless of the primal problem. In addition, it is often much easier to solve the problem with respect to $\lambda$ and $\mu.$&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;solution-path-algorithm&quot;&gt;Solution path algorithm&lt;/h4&gt;
+
+&lt;p&gt;[TBD]&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Hastie, Tibshirani, Friedman. 2008. &lt;strong&gt;The Elements of Statistical Learning&lt;/strong&gt;. 2nd edition. Springer.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Advanced Data Mining (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Yongdai Kim).&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 17 Mar 2021 16:40:00 +0900</pubDate>
+        <link>http://localhost:4000/statistical%20learning/Statistical-Learning-3-Shrinkage-Estimators</link>
+        <guid isPermaLink="true">http://localhost:4000/statistical%20learning/Statistical-Learning-3-Shrinkage-Estimators</guid>
+        
+        
+        <category>statistical learning</category>
+        
+      </item>
     
       <item>
         <title>[Statistical Learning] 2. Linear classifiers</title>
@@ -2246,299 +2546,6 @@ L(\gamma,\phi,\lambda | \alpha,\eta)
         <pubDate>Wed, 17 Feb 2021 00:51:00 +0900</pubDate>
         <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</link>
         <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</guid>
-        
-        
-        <category>bayesian</category>
-        
-        <category>machine learning</category>
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding Latent Dirichlet Allocation (4) Gibbs Sampling</title>
-        <description>&lt;p&gt;In &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;the last article&lt;/a&gt;, I explained LDA parameter inference using variational EM algorithm and implemented it from scratch. In this post, let’s take a look at another algorithm proposed in the original paper that introduced LDA to derive approximate posterior distribution: &lt;em&gt;Gibbs sampling&lt;/em&gt;. In addition, I would like to introduce and implement from scratch a &lt;em&gt;collapsed Gibbs sampling method&lt;/em&gt; that can efficiently fit topic model to the data.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the fourth part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Inference - variational EM&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Inference - Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#problem-setting-in-the-original-paper&quot; id=&quot;markdown-toc-problem-setting-in-the-original-paper&quot;&gt;Problem setting in the original paper&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#model-with-admixture&quot; id=&quot;markdown-toc-model-with-admixture&quot;&gt;“Model with admixture”&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#gibbs-sampling&quot; id=&quot;markdown-toc-gibbs-sampling&quot;&gt;Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#collapsed-gibbs-sampling&quot; id=&quot;markdown-toc-collapsed-gibbs-sampling&quot;&gt;Collapsed Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#python-implementation-from-scratch&quot; id=&quot;markdown-toc-python-implementation-from-scratch&quot;&gt;Python implementation from scratch&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#the-sampler&quot; id=&quot;markdown-toc-the-sampler&quot;&gt;The sampler&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#recover-hatbeta-and-hattheta&quot; id=&quot;markdown-toc-recover-hatbeta-and-hattheta&quot;&gt;Recover $\hat\beta$ and $\hat\theta$&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;problem-setting-in-the-original-paper&quot;&gt;Problem setting in the original paper&lt;/h2&gt;
-
-&lt;p&gt;Pritchard and Stephens (2000) originally proposed the idea of solving population genetics problem with three-level hierarchical model. The problem they wanted to address was “inference of population struture using multilocus genotype data.” For those who are not familiar with population genetics, this is basically a clustering problem that aims to cluster individuals into clusters (population) based on similarity of genes (genotype) of multiple prespecified locations in DNA (multilocus).&lt;/p&gt;
-
-&lt;p&gt;The researchers proposed two models: one that only assigns one population to each individuals (“model without admixture”), and another that assigns mixture of populations (“model with admixture”). The latter is the model that later termed as LDA. Before we get to the inference step, I would like to briefly cover the original model with the terms in population genetics, but with notations I used in the previous articles.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-with-admixture&quot;&gt;“Model with admixture”&lt;/h2&gt;
-
-&lt;p&gt;In population genetics setup, our notations are as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$V$ is the total number of possible alleles in every loci.&lt;/li&gt;
-  &lt;li&gt;$w_n$: genotype of the $n$-th locus. One-hot encoded so that $w_n^i=1$ and $w_n^j=0, \forall j\ne i$ for one $i\in V$.&lt;/li&gt;
-  &lt;li&gt;$z_n$: population of origin of $w_n$.&lt;/li&gt;
-  &lt;li&gt;$\mathbf{w}_d=(w_{d1},\cdots,w_{dN})$: genotype of $d$-th individual at $N$ loci.&lt;/li&gt;
-  &lt;li&gt;$D = (\mathbf{w}_1,\cdots,\mathbf{w}_M)$: whole genotype data with $M$ individuals.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Generative process of genotype of $d$-th individual $\mathbf{w}_{d}$ with $k$ predefined populations described on the paper is a little different than that of Blei et al. (2003).&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;$\beta_k \sim \mathcal{D}_V(\eta)$.&lt;/li&gt;
-  &lt;li&gt;$\theta_d \sim \mathcal{D}_k(\alpha)$. $\theta_{di}$ is the probability that $d$-th individual’s genome is originated from population $i$.&lt;/li&gt;
-  &lt;li&gt;for $n=1,\cdots,N$:
-    &lt;ol&gt;
-      &lt;li&gt;$z_{dn}$ is chosen with probability $P(z_{dn}^i=1|\theta_d,\beta)=\theta_{di}$.&lt;/li&gt;
-      &lt;li&gt;$w_{dn}$ is chosen with probability $P(w_{dn}^i=1|z_{dn},\theta_d,\beta)=\beta_{ij}$.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Since $\beta$ is independent to $\theta_d$ and affects the choice of $w_{dn}$ only through $z_{dn}$, I think it is okay to write $P(z_{dn}^i=1|\theta_d)=\theta_{di}$ instead of formula at 2.1 and $P(w_{dn}^i=1|z_{dn},\beta)=\beta_{ij}$ instead of 2.2.&lt;/p&gt;
-
-&lt;p&gt;The only difference between this and (vanilla) LDA that I covered so far is that $\beta$ is considered a Dirichlet random variable here. In fact, this is exactly the same as &lt;strong&gt;smoothed LDA&lt;/strong&gt; described in Blei et al. (2003) which will be described in the next article.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;gibbs-sampling&quot;&gt;Gibbs sampling&lt;/h2&gt;
-
-&lt;p&gt;To estimate the intracktable posterior distribution, Pritchard and Stephens (2000) suggested using &lt;strong&gt;Gibbs sampling&lt;/strong&gt;. Gibbs sampling is a method of Markov chain Monte Carlo (MCMC) that approximates intractable joint distribution by consecutively sampling from conditional distributions. Suppose we want to sample from joint distribution $p(x_1,\cdots,x_n)$. Assume that even if directly sampling from it is impossible, sampling from conditional distributions $p(x_i|x_1\cdots,x_{i-1},x_{i+1},\cdots,x_n)$ is possible. Then repeatedly sampling from conditional distributions as follows&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Repeat:
-    &lt;ol&gt;
-      &lt;li&gt;Sample $x_1^{(t+1)}$ from $p(x_1|x_2^{(t)},\cdots,x_n^{(t)})$.&lt;/li&gt;
-      &lt;li&gt;Sample $x_2^{(t+1)}$ from $p(x_2|x_1^{(t+1)}, x_3^{(t)},\cdots,x_n^{(t)})$.&lt;/li&gt;
-      &lt;li&gt;$~~\vdots$&lt;/li&gt;
-      &lt;li&gt;Sample $x_n^{(t+1)}$ from $p(x_n|x_1^{(t+1)},\cdots,x_{n-1}^{(t+1)})$.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;gives us an approximate sample $(x_1^{(m)},\cdots,x_n^{(m)})$ that can be considered as sampled from the joint distribution for large enough $m$’s.&lt;/p&gt;
-
-&lt;p&gt;Below is a paraphrase, in terms of familiar notation, of the detail of the Gibbs sampler that samples from posterior of LDA. Let&lt;/p&gt;
-
-\[\mathbf{n}_i = (n_{i1},\cdots,n_{iV}) \\
-\mathbf{m}_d = (m_{d1},\cdots,m_{dk})\]
-
-&lt;p&gt;where $n_{ij}$ the number of occurrence of word $j$ under topic $i$, $m_{di}$ is the number of loci in $d$-th individual that originated from population $i$.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Update $\beta^{(t+1)}$ with a sample from $\beta_i|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_V(\eta+\mathbf{n}_i)$.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Update $\theta^{(t+1)}$ with a sample from $\theta_d|\mathbf{w},\mathbf{z}^{(t)} \sim \mathcal{D}_k(\alpha^{(t)}+\mathbf{m}_d)$.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Update $\mathbf{z}_d^{(t+1)}$ with a sample by probability&lt;/p&gt;
-
-\[P(z_{dn}^i=1|\mathbf{w},\beta^{(t+1)}) = \frac{\theta_{di}\beta_{iw_{dn}}^{(t+1)}}{\sum_{d=1}^M \theta_{di}\beta_{iw_{dn}}^{(t+1)}}.\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Update $\alpha^{(t+1)}$ by the following process:&lt;/p&gt;
-
-    &lt;ol&gt;
-      &lt;li&gt;Sample $\alpha’$ from $\mathcal{N}(\alpha^{(t)}, \sigma_{\alpha^{(t)}}^{2})$ for some $\sigma_{\alpha^{(t)}}^2$.&lt;/li&gt;
-      &lt;li&gt;Let $a = \frac{p(\alpha’|\theta^{(t)},\mathbf{w},\mathbf{z}^{(t)})}{p(\alpha^{(t)}|\theta^{(t)},\mathbf{w},\mathbf{z}^{(t)})} \cdot \frac{\phi_{\alpha’}(\alpha^{(t)})}{\phi_{\alpha^{(t)}}(\alpha’)}$.&lt;/li&gt;
-      &lt;li&gt;Do not update $\alpha^{(t+1)}$ if $\alpha’\le0$. Update $\alpha^{(t+1)}=\alpha’$ if $a \ge 1$, otherwise update it to $\alpha’$ with probability $a$.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The update rule in step 4 is called &lt;a href=&quot;https://en.wikipedia.org/wiki/Metropolis–Hastings_algorithm#Step-by-step_instructions&quot;&gt;&lt;strong&gt;Metropolis-Hastings algorithm&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;collapsed-gibbs-sampling&quot;&gt;Collapsed Gibbs sampling&lt;/h2&gt;
-
-&lt;p&gt;While the proposed sampler works, in topic modelling we only need to estimate document-topic distribution $\theta$ and topic-word distribution $\beta$. Griffiths and Steyvers (2002) boiled the process down to evaluating the posterior $P(\mathbf{z}|\mathbf{w}) \propto P(\mathbf{w}|\mathbf{z})P(\mathbf{z})$ which was intractable. Notice that we marginalized the target posterior over $\beta$ and $\theta$. This makes it a &lt;strong&gt;collapsed Gibbs sampler&lt;/strong&gt;; the posterior is &lt;em&gt;collapsed&lt;/em&gt; with respect to $\beta,\theta$.&lt;/p&gt;
-
-&lt;p&gt;Marginalizing the Dirichlet-multinomial distribution $P(\mathbf{w}, \beta | \mathbf{z})$ over $\beta$ from &lt;em&gt;smoothed&lt;/em&gt; LDA, we get the posterior topic-word assignment probability&lt;/p&gt;
-
-\[P(\mathbf{w}|\mathbf{z}) = \left( \frac{\Gamma(V\eta)}{\Gamma(\eta)^V} \right)^k \prod_{i=1}^k\frac{\prod_{j=1}^V \Gamma(n_{ij}+\eta)}{\Gamma(n_{i\cdot}+V\eta)}\]
-
-&lt;p&gt;where $n_{ij}$ is the number of times word $j$ has been assigned to topic $i$, just as in the vanilla Gibbs sampler. Marginalizing another Dirichlet-multinomial $P(\mathbf{z},\theta)$ over $\theta$ yields&lt;/p&gt;
-
-\[P(\mathbf{z}) = \left( \frac{\Gamma(k\alpha)}{\Gamma(\alpha)^k} \right)^M \prod_{d=1}^M \frac{\prod_{i=1}^k \Gamma(n_{di}+\alpha)}{\Gamma(n_{d\cdot}+k\alpha)}\]
-
-&lt;p&gt;where $n_{di}$ is the number of times a word from document $d$ has been assigned to topic $i$. Multiplying these two equations, we get&lt;/p&gt;
-
-\[P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w}) \propto \frac{n_{(-dn),iw_{dn}}+\eta}{n_{(-dn),i\cdot}+V\eta} \frac{n_{(-dn),di}+\alpha}{n_{(-dn),d\cdot}+k\alpha},\]
-
-&lt;p&gt;where $\mathbf{z}_{(-dn)}$ is the word-topic assignment for all but $n$-th word in $d$-th document, $n_{(-dn)}$ is the count that does not include current assignment of $z_{dn}$.&lt;/p&gt;
-
-&lt;p&gt;The first term can be viewed as a (posterior) probability of $w_{dn}|z_i$ (i.e. $\beta_{dni}$), and the second can be viewed as a probability of $z_i$ given document $d$ (i.e. $\theta_{di}$). We run sampling by sequentially sample $z_{dn}^{(t+1)}$ given $\mathbf{z}_{(-dn)}^{(t)}, \mathbf{w}$ after one another.&lt;/p&gt;
-
-&lt;p&gt;After sampling $\mathbf{z}|\mathbf{w}$ with Gibbs sampling, we recover $\theta$ and $\beta$ with&lt;/p&gt;
-
-\[\hat\beta_{iw_n} = \frac{n_{iw_n}+\eta}{n_{i\cdot}+V\eta}, \\
-\hat\theta_{di} = \frac{n_{di}+\alpha}{n_{d\cdot}+k\alpha},\]
-
-&lt;p&gt;which are marginalized versions of the first and second term of the last equation, respectively.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;python-implementation-from-scratch&quot;&gt;Python implementation from scratch&lt;/h2&gt;
-
-&lt;p&gt;Here, I would like to implement the collapsed Gibbs sampler only, which is more memory-efficient and easy to code.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;the-sampler&quot;&gt;The sampler&lt;/h3&gt;
-
-&lt;p&gt;This is the entire process of gibbs sampling, with some abstraction for readability.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    Run collapsed Gibbs sampling
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# initialize required variables
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_init_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;START SAMPLER&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# run the sampler
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-                
-                &lt;span class=&quot;c1&quot;&gt;# decrement counter
-&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;i_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# previous assignment
-&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-                &lt;span class=&quot;c1&quot;&gt;# assign new topics
-&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_conditional_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;i_tp1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multinomial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-                &lt;span class=&quot;c1&quot;&gt;# increment counter with new assignment
-&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i_tp1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i_tp1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i_tp1&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;# print out status
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sampled &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_init_gibbs()&lt;/code&gt;, instantiate variables (numbers &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;V&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k&lt;/code&gt; and hyperparameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alpha&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eta&lt;/code&gt; and counters and assignment table &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;).&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_init_gibbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    Initialize t=0 state for Gibbs sampling.
-    Replace initial word-topic assignment 
-    ndarray (M, N, N_GIBBS) in-place.
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# initialize variables
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;init_lda&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# word-topic assignment
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;N_max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N_max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_gibbs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;assign: dim &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# initial assignment
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;# randomly assign topic to word w_{dn}
-&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-            &lt;span class=&quot;c1&quot;&gt;# increment counters
-&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_conditional_prob()&lt;/code&gt; is the function that calculates $P(z_{dn}^i=1 | \mathbf{z}_{(-dn)},\mathbf{w})$ using the multiplicative equation above.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_conditional_prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    P(z_{dn}^i=1 | z_{(-dn)}, w)
-    &quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# P(w_dn | z_i)
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w_dn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# P(z_i | d)
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        
-        &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_2&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;After running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run_gibbs()&lt;/code&gt; with appropriately large &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_gibbs&lt;/code&gt;, we get the counter variables &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_iw&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n_di&lt;/code&gt; from posterior, along with the assignment history &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt; where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[:, :, t]&lt;/code&gt; values of it are word-topic assignment at sampling $t$-th iteration.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;recover-hatbeta-and-hattheta&quot;&gt;Recover $\hat\beta$ and $\hat\theta$&lt;/h3&gt;
-
-&lt;p&gt;Now we need to recover topic-word and document-topic distribution from the sample.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;θ&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;β&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_iw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;θ&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;̂&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_di&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally we can plot it as a heatmap.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210216_lda_gibbs-result.png&quot; alt=&quot;LDA_gibbs-result&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Full code and result are available &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-1.%20latent%20dirichlet%20allocation.ipynb&quot;&gt;here (GitHub)&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Pritchard, Stephens, Donnelly. 2000. &lt;strong&gt;Inference of Population Structure Using Multilocus Genotype Data&lt;/strong&gt;. Genetics. 155: 945–959.&lt;/li&gt;
-  &lt;li&gt;Griffiths, Steyvers. 2004. &lt;strong&gt;Finding scientific topics&lt;/strong&gt;. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 16 Feb 2021 18:40:00 +0900</pubDate>
-        <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</link>
-        <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling</guid>
         
         
         <category>bayesian</category>
