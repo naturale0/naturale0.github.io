@@ -6,13 +6,221 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Mar 2021 21:05:00 +0900</pubDate>
-    <lastBuildDate>Wed, 17 Mar 2021 21:05:00 +0900</lastBuildDate>
+    <pubDate>Fri, 19 Mar 2021 01:49:56 +0900</pubDate>
+    <lastBuildDate>Fri, 19 Mar 2021 01:49:56 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
+        <title>[Nonparametric] 3. Bandwidth Selection</title>
+        <description>&lt;p&gt;Recall that the optimal bandwidth $h_\text{opt}$ derived from MISE was given as the following:&lt;/p&gt;
+
+\[h_\text{opt} = \left( \frac{\int K^2}{\mu_2(K) \int p''(x)^2 dx} \right)^{1/5} n^{-1/5}.\]
+
+&lt;p&gt;However since $p$ is unknown, we cannot use this directly. Rather, we need an appropriate estimate of $\int p’‘(x) dx$ to do get a usable bandwidth.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#normal-reference&quot; id=&quot;markdown-toc-normal-reference&quot;&gt;Normal reference&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#oversmoothing&quot; id=&quot;markdown-toc-oversmoothing&quot;&gt;Oversmoothing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#least-squares-cross-validation&quot; id=&quot;markdown-toc-least-squares-cross-validation&quot;&gt;Least squares cross-validation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#k-fold-lscv&quot; id=&quot;markdown-toc-k-fold-lscv&quot;&gt;$k$-fold LSCV&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-selectors&quot; id=&quot;markdown-toc-other-selectors&quot;&gt;Other selectors&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#biased-cross-validation&quot; id=&quot;markdown-toc-biased-cross-validation&quot;&gt;Biased cross-validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#selectors-that-converges-faster&quot; id=&quot;markdown-toc-selectors-that-converges-faster&quot;&gt;Selectors that converges faster&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;normal-reference&quot;&gt;Normal reference&lt;/h2&gt;
+
+&lt;p&gt;If we assume that $p=\phi_\sigma,$ that is the true density $p$ is actually a density of normal distribution with mean zero and variance $\sigma^2,$ then using the properties of gaussian derivatives&lt;/p&gt;
+
+\[\phi'(x) = -x\phi(x), \\
+\phi''(x) = (x^2-1)\phi(x),\]
+
+&lt;p&gt;we get&lt;/p&gt;
+
+\[\begin{aligned}
+\int (p'')^2
+ &amp;amp;= \int \left( \frac{1}{\sigma^3}\phi''(x/\sigma) \right)^2 dx \\
+ &amp;amp;= \frac{1}{\sigma^5} \int \phi''(y)^2 dy \\
+ &amp;amp;= \frac{1}{\sigma^5} \frac{1}{\sqrt{4\pi}} \int (y^4 - 2y^2 + 1) \phi_\frac{1}{\sqrt{2}}(y) dy \\
+ &amp;amp;= \frac{1}{\sigma^5} \frac{1}{2\sqrt{\pi}} \int (z^4/4 - z^2 + 1) \phi(z) dz \\
+ &amp;amp;= \frac{1}{\sigma^5} \frac{1}{2\sqrt{\pi}} \left( \frac{1}{4} K \cancel{- 1} \cancel{+ 1} \right) \\
+ &amp;amp;= \frac{1}{\sigma^5} \frac{1}{2\sqrt{\pi}} \frac{3}{4} \\
+ &amp;amp;= \frac{3}{8\sqrt{\pi}}\frac{1}{\sigma^5}.
+\end{aligned}\]
+
+&lt;p&gt;By plugging this in, we get our &lt;strong&gt;normal reference bandwidth&lt;/strong&gt;&lt;/p&gt;
+
+\[\hat h_\text{NS} = \left( \frac{8\sqrt{\pi}}{3} \frac{\int K^2}{\mu_2(K)^2} \right)^{1/5}n^{-1/5} \cdot\hat\sigma^5,\]
+
+&lt;p&gt;where $\hat\sigma$ can be estimated in two different ways: (1) use sample standard deviation, or (2) use interquartile range (IQR). Motivation behind IQR-based $\hat\sigma$ estimation is that&lt;/p&gt;
+
+\[\begin{aligned}
+\hat F^{-1}(3/4) - \hat F^{-1}(1/4)
+ &amp;amp;\approx \hat \Phi_\sigma^{-1}(3/4) - \hat \Phi_\sigma^{-1}(1/4) \\
+ &amp;amp;= \sigma \left(\hat \Phi^{-1}(3/4) - \hat \Phi^{-1}(1/4)\right)
+\end{aligned}\]
+
+&lt;p&gt;so we estimate $\sigma$ with&lt;/p&gt;
+
+\[\hat\sigma = \frac{\hat F^{-1}(3/4) - \hat F^{-1}(1/4)}{\hat \Phi^{-1}(3/4) - \hat \Phi^{-1}(1/4)}.\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;oversmoothing&quot;&gt;Oversmoothing&lt;/h2&gt;
+
+&lt;p&gt;It is known that&lt;/p&gt;
+
+\[\sup_{p \in \mathcal{F}_\sigma} \frac{\int K^2}{\mu_2(K)^2 \int (p'')^2} = \frac{243}{35} \frac{\int K^2}{\mu_2(K)^2} \sigma,\]
+
+&lt;p&gt;where $\mathcal{F}_\sigma$ is the collection of densities with variance $\sigma^2.$ ($\int u^2p(u)du - (\int up(u)du)^2 = \sigma^2.$) We can simply use this upper bound as our bandwidth, with $\hat\sigma$ estimated as the above.&lt;/p&gt;
+
+\[\hat h_{OS} = \frac{243}{35} \frac{\int K^2}{\mu_2(K)^2} \hat\sigma.\]
+
+&lt;p&gt;We call this the &lt;strong&gt;oversmoothed bandwidth selector&lt;/strong&gt;, since it will certainly be larger than $h_\text{opt}$ if the variance assumption is true, and the larger the bandwidth, the smoother the density estimate we get.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;least-squares-cross-validation&quot;&gt;Least squares cross-validation&lt;/h2&gt;
+
+&lt;p&gt;Recall that $h_\text{opt}$ minimizes AMISE, and hopefully MISE.&lt;/p&gt;
+
+\[\begin{aligned}
+\text{MISE}(\hat p)
+ &amp;amp;= E\int \left( \hat p(x) - p(x) \right)^2 dx \\
+ &amp;amp;= E\int \hat p(x)^2 dx - 2E\int \hat p(x)p(x)dx + E\int p(x)^2dx.
+\end{aligned}\]
+
+&lt;p&gt;Observe that the last term is independent to $h$ so we only focus on the first two terms.&lt;/p&gt;
+
+\[\begin{aligned}
+\text{MISE}(\hat p) - E\int p(x)^2dx
+ &amp;amp;= E\int \hat p(x)^2 dx - 2E\int \hat p(x)p(x)dx \\
+ &amp;amp;= E\left[ \int \hat p(x)^2 dx - \frac{2}{n} \sum_{i=1}^n \hat p_{-i}(X_i) \right],
+\end{aligned}\]
+
+&lt;p&gt;where&lt;/p&gt;
+
+\[\hat p_{-i}(X_i) := \frac{1}{n-1} \sum_{j\ne i} K_h(x-X_j).\]
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+E\hat p_{-i}(X_i)
+ &amp;amp;= E\left[ E(\hat p_{-i}(X_i)|X_i) \right] \\
+ &amp;amp;= E\left[ \frac{1}{\cancel{n-1}}\cancel{(n-1)} \int K_h(X_i-X_j)p(X_i)dX_i \right] \\
+ &amp;amp;= E\left[ K_h * p(X_i) \right] \\
+ &amp;amp;= E\left[ E(\hat p(X_i) | X_i) \right] \\
+ &amp;amp;= E\int \hat p(x)p(x) dx.
+\end{aligned}
+$$
+
+
+
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;strong&gt;least squares cross-validation selector (LSCV)&lt;/strong&gt; chooses $\hat h_\text{LSCV}$ by obtaining a minimizer of&lt;/p&gt;
+
+\[\begin{aligned}
+\text{LSCV(h)}
+ ~=&amp;amp; \int \hat p(x)^2 dx - \frac{2}{n} \sum_{i=1}^n \hat p_{-i}(X_i) \\
+ =&amp;amp; \frac{1}{n^2} \sum_i\sum_j K_h * K_h(X_i-X_j) \\
+  &amp;amp; - \frac{2}{n(n-1)} \sum_{i} \sum_{j\ne i} K_h(X_i - X_j).
+\end{aligned}\]
+
+&lt;p&gt;which is the integrand of MISE. The second equality holds if $K$ is symmetric.&lt;/p&gt;
+
+&lt;div class=&quot;proof&quot;&gt;&lt;br /&gt;
+$$
+\begin{aligned}
+\int \hat p^2
+ &amp;amp;= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \int K_h(x-X_i)K_h(x-X_j) dx \\
+ &amp;amp;= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \int K_h(w + X_j - X_i) K_h(w) dw \\
+ &amp;amp;= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \int K_h(X_i - X_j - w) K_h(w) dw \\
+ &amp;amp;= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n K_h * K_h (X_i-X_j).
+\end{aligned}
+$$
+
+In the second equality, $x-X_j$ was substituted to $w,$ and in the third equality, symmetry of $K$ was used.
+
+&lt;/div&gt;
+
+&lt;p&gt;We define LSCV bandwidth selector as&lt;/p&gt;
+
+\[\hat h_\text{LSCV} = \argmin_{h&amp;gt;0} \text{LSCV}(h).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;k-fold-lscv&quot;&gt;$k$-fold LSCV&lt;/h2&gt;
+
+&lt;p&gt;Although the LSCV gives better bandwidth than normal referencing or oversmoothing, it is computationally heavy since it requires $n^2$ order of operations. To relieve the computational stress, $k$-fold LSCV was devised.&lt;/p&gt;
+
+&lt;p&gt;Instead of using “leave-one-out” density estimate $\hat p_{-i},$ $k$-fold LSCV uses “leave-many-out” estimate $\hat p_{A_i}.$ Formal definition is as follows: let $A_1,\cdots,A_k$ be a partition of the index set $\{1,2,\cdots,n\},$ and define&lt;/p&gt;
+
+\[\hat p_{-A_i} := \left( \sum_{i=1}^n \mathbf{1}(i \notin A_i) \right)^{-1} \sum_{i \in A_i} K_h(x-X_i).\]
+
+&lt;p&gt;$k$-fold LSCV is defined accordingly.&lt;/p&gt;
+
+\[\text{LSCV}^\text{$k$-fold}(h) = \int \hat p(x)^2 dx - \frac{2}{k} \sum_{l=1}^k \left( \left(\sum_{i=1}^n \mathbf{1}(i \in A_l)\right )^{-1} \sum_{i \in A_l} \hat p_{-A_l}(X_i) \right).\]
+
+&lt;p&gt;Notice that now linear order ($\sim N$) of computation is enough since $k$ is prespecified (mostly, $k=5$ for $10$). $E \left[ \text{LSCV}^\text{$k$-fold}(h) \right]$ is the same as in standard LSCV. Finally, $k$-fold LSCV selector is&lt;/p&gt;
+
+\[\hat h_\text{LSCV}^\text{$k$-fold} = \argmin_{h&amp;gt;0} \text{LSCV}^\text{$k$-fold}(h).\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;other-selectors&quot;&gt;Other selectors&lt;/h2&gt;
+
+&lt;h3 id=&quot;biased-cross-validation&quot;&gt;Biased cross-validation&lt;/h3&gt;
+
+&lt;p&gt;Biased cross-validation (BCV) is a hybrid of normal reference-type plug in selector and LSCV-type cross validation selector. Recall that the bias expansion gives&lt;/p&gt;
+
+\[\text{AMISE} = \frac{1}{4}h^4 \mu_2(K)^2 \int (p'')^2 + \frac{1}{nh} \int K^2\]
+
+&lt;p&gt;The idea of BCV is to replace $\int (p’’)^2$ by&lt;/p&gt;
+
+\[\int (\hat p'')^2 = \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n K_h'' * K_h'' (X_i-X_j)\]
+
+&lt;p&gt;to get&lt;/p&gt;
+
+\[\text{BCV}(h) = \frac{1}{4}h^4 \mu_2(K)^2 \int (\hat p'')^2 + \frac{1}{nh} \int K^2.\]
+
+&lt;p&gt;(The proof is the same as in LSCV.) $\hat h_\text{BCV}$ is defined as a minimizer of BCV.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;selectors-that-converges-faster&quot;&gt;Selectors that converges faster&lt;/h3&gt;
+
+&lt;p&gt;One can show that LSCV and BCV selector both converge unbearably slowly to the true $h_\text{opt}$:&lt;/p&gt;
+
+\[\left( \frac{\hat h_\text{LSCV}}{h_\text{opt}} - 1 \right) n^{1/10} \overset{\text{d}}{\to} \mathcal{N}(0, \sigma^2_\text{LSCV}).\]
+
+&lt;p&gt;That is the order of $n^{1/10}$: to make $n^{1/10}$ grow from 0 to 2, a thousand of samples is required! As remedies of this problem, &lt;strong&gt;solve-the-equation rule&lt;/strong&gt; ($\sim n^{4/13},$ later improved to $\sim n^{5/14}$) and &lt;strong&gt;smoothed CV&lt;/strong&gt; ($\sim n^{1/2}$) selectors are proposed.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Nonparametric Function Estimation (Spring, 2021)&lt;/strong&gt; @ Seoul National University, Republic of Korea (instructor: Prof. Byeong U. Park).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bookdown.org/egarpor/NP-UC3M/&quot;&gt;&lt;strong&gt;Nonparametric Statistics&lt;/strong&gt;&lt;/a&gt;, by Eduardo García Portugués.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 18 Mar 2021 16:55:00 +0900</pubDate>
+        <link>http://localhost:4000/non-parametric/Nonparametric-3-Bandwidth-Selection</link>
+        <guid isPermaLink="true">http://localhost:4000/non-parametric/Nonparametric-3-Bandwidth-Selection</guid>
+        
+        
+        <category>non-parametric</category>
+        
+      </item>
+    
+      <item>
         <title>[Statistical Learning] 3. Shrinkage Estimators</title>
-        <description>&lt;p&gt;As a remedy for overdetermines systems and variable selection rule, I would like to cover shrinkage methods in this section. Especially, I would like to focus on ridge and lasso penalization.&lt;/p&gt;
+        <description>&lt;p&gt;As a remedy for overdetermined systems and variable selection rule, I would like to cover shrinkage methods in this section. Especially, I would like to focus on ridge and lasso penalization.&lt;/p&gt;
 
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#variable-selection&quot; id=&quot;markdown-toc-variable-selection&quot;&gt;Variable selection&lt;/a&gt;&lt;/li&gt;
@@ -47,7 +255,7 @@
   &lt;li&gt;Select the best set among possible choices of $k$ variables, and let the model $M_k$ be the one that used it.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Then select the best performing model $M^*&lt;em&gt;k \in \{M_k: 0\le k\le p\}.$ This is a straightforward selection method, but as $\sum&lt;/em&gt;{k=0}^p{p \choose k} = 2^p$ fitting of linear models is required, it is computationally inefficient. In addtion, since we either use a variable or not, it is a &lt;strong&gt;hard decision rule&lt;/strong&gt; (or &lt;strong&gt;hard-thresholding&lt;/strong&gt;) which makes the method unstable: small changes in the data leads to large change in estimator.&lt;/p&gt;
+&lt;p&gt;Then select the best performing model $M^*_k \in \{M_k: 0\le k\le p\}.$ This is a straightforward selection method, but as $\sum_{k=0}^p{p \choose k} = 2^p$ fitting of linear models is required, it is computationally inefficient. In addtion, since we either use a variable or not, it is a &lt;strong&gt;hard decision rule&lt;/strong&gt; (or &lt;strong&gt;hard-thresholding&lt;/strong&gt;) which makes the method unstable: small changes in the data leads to large change in estimator.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -155,6 +363,7 @@
 &lt;div style=&quot;text-align:center&quot;&gt;
 &lt;img src=&quot;/assets/fig/210317_HTF_3.11.png&quot; alt=&quot;210317_HTF_3.11.png&quot; width=&quot;600&quot; /&gt;
 &lt;br /&gt;
+&lt;em&gt;(source: Elements of Statistical Learning)&lt;/em&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -182,7 +391,7 @@
 
 &lt;p&gt;where $f:\mathcal{X}\to\mathbb{R},$ $h=(h_1,\cdots,h_m):\mathcal{X} \to \mathbb{R}^m,$ $g=(g_1,\cdots,g_r):\mathcal{X} \to \mathbb{R}^r.$&lt;/p&gt;
 
-&lt;p&gt;We call it a &lt;strong&gt;convex optimization&lt;/strong&gt; if $f$ is convex and $h_i, g_j$ are linear for all $i,j.$ Furthermore, we call it a &lt;strong&gt;quadratic program (QP)&lt;/strong&gt; if $f$ is quadratic function in particular.&lt;/p&gt;
+&lt;p&gt;We call it a &lt;strong&gt;convex optimization&lt;/strong&gt; if $f$ is convex and $h_i, g_j$ are linear for all $i,j.$ Furthermore, we call it a &lt;strong&gt;quadratic program (QP)&lt;/strong&gt; if $f$ is a quadratic function in particular.&lt;/p&gt;
 
 &lt;p&gt;We can easily show that the lasso problem with $\ell^2$-type objective function is a QP.&lt;/p&gt;
 
@@ -215,7 +424,7 @@ $$
 
 \[A(\mathbf{x}) := \{j: g_j(\mathbf{x})=0\}.\]
 
-&lt;p&gt;In addition, in many cases gradients $\nabla h_i(\mathbf{x}),$ $i=1,\cdots,m$ at $\mathbf{x}$ need to be linearly independent since otherwise $\mu$ is not identifiable. Similarly, $\nabla_j g_j(\mathbf{x})$ need to be linearly independent as well. If the point $\mathbf{x}^&lt;em&gt;$ satisfies these linearly independent gradient conditions, then we call $\mathbf{x}^&lt;/em&gt;$ a &lt;strong&gt;regular point&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In addition, in many cases gradients $\nabla h_i(\mathbf{x}),$ $i=1,\cdots,m$ at $\mathbf{x}$ need to be linearly independent since otherwise $\mu$ is not identifiable. Similarly, $\nabla_j g_j(\mathbf{x})$ need to be linearly independent as well. If the point $\mathbf{x}^*$ satisfies these linearly independent gradient conditions, then we call $\mathbf{x}^*$ a &lt;strong&gt;regular point&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Now we discuss our first theorem: the Karuch-Kuhn-Tucker (KKT) necessary conditions.&lt;/p&gt;
 
@@ -687,14 +896,15 @@ $$
 
 &lt;h3 id=&quot;error-analysis&quot;&gt;Error analysis&lt;/h3&gt;
 
-&lt;p&gt;For function estimation, we frequently use mean integrated squared error (MISE) as an error metric. MISE is defined as follows:
-\(\begin{aligned}
+&lt;p&gt;For function estimation, we frequently use mean integrated squared error (MISE) as an error metric. MISE is defined as follows:&lt;/p&gt;
+
+\[\begin{aligned}
 \text{MISE}(\hat p)
   &amp;amp;:= E\int \left(\hat p(x) - p(x)\right)^2 dx \\
-  &amp;amp;= E \int \text{MSE}(\hat p(x)) dx.
-\end{aligned}\)&lt;/p&gt;
+  &amp;amp;\approx \int \text{MSE}(\hat p(x)) dx.
+\end{aligned}\]
 
-&lt;p&gt;Since MSE can be decomposed into squared bias and variance, in order to compute MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; we get&lt;/p&gt;
+&lt;p&gt;Since MSE can be decomposed into squared bias and variance, in order to get a sense of MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; we get&lt;/p&gt;
 
 &lt;div class=&quot;prop&quot;&gt;&lt;br /&gt;
 
@@ -2399,156 +2609,6 @@ f^0(\mathbf{x})
         <link>http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-ELMo</link>
         <guid isPermaLink="true">http://localhost:4000/machine%20learning/natural%20language%20processing/Understanding-ELMo</guid>
         
-        
-        <category>machine learning</category>
-        
-        <category>natural language processing</category>
-        
-      </item>
-    
-      <item>
-        <title>Understanding Latent Dirichlet Allocation (5) Smooth LDA</title>
-        <description>&lt;p&gt;From background to two inference processes, I covered all the important details of LDA so far. One thing left over is a difference between (basic) LDA and &lt;em&gt;smooth LDA&lt;/em&gt;. Consider this last post as a cherry on top.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;This article is the fifth and the final part of the series “Understanding Latent Dirichlet Allocation”.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;Backgrounds&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model&quot;&gt;Model architecture&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;Inference - variational EM&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling&quot;&gt;Inference - Gibbs sampling&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#empirical-vs-fuller-bayes&quot; id=&quot;markdown-toc-empirical-vs-fuller-bayes&quot;&gt;Empirical vs. fuller Bayes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#smooth-lda&quot; id=&quot;markdown-toc-smooth-lda&quot;&gt;Smooth LDA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#variational-em-for-smooth-lda&quot; id=&quot;markdown-toc-variational-em-for-smooth-lda&quot;&gt;Variational EM for smooth LDA&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#e-step&quot; id=&quot;markdown-toc-e-step&quot;&gt;E-step&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#m-step&quot; id=&quot;markdown-toc-m-step&quot;&gt;M-step&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;empirical-vs-fuller-bayes&quot;&gt;Empirical vs. fuller Bayes&lt;/h2&gt;
-
-&lt;p&gt;Not every Bayesian approches are the same. One of the most important aspect when applying Bayesian model to real-world data is decision of hyperparameters. For the task, empirical Bayes method “fit” the model to the data to derive, in many times, &lt;em&gt;point estimate&lt;/em&gt; of hyperparameter, while standard (fuller) Bayes predefine the &lt;em&gt;prior distribution&lt;/em&gt; before any data and update it later using the data as an evidence.&lt;/p&gt;
-
-&lt;p&gt;Recall the basic LDA that I explained from &lt;a href=&quot;/natural%20language%20processing/LDA-1-background-topic-modelling&quot;&gt;the first&lt;/a&gt; to &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;the third&lt;/a&gt; articles. Pay attention to the part that hyperparameter $\beta$ does not have a distribution; it is assumed to be an unknown but &lt;em&gt;fixed&lt;/em&gt; value. This makes the basic LDA an empirical Bayes model. Can we extend this to make a fuller Bayes model?&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;smooth-lda&quot;&gt;Smooth LDA&lt;/h2&gt;
-
-&lt;p&gt;In order to extend the model to be fully Bayesian, all we need to do is to regard $\beta$ as another hidden parameter by endowing $\beta$ a Dirichlet prior $\beta_i \sim \mathcal{D}_V(\vec\eta)$ for all $i=1,\cdots,k$ where $\vec\eta=(\eta,\cdots,\eta)$ is a $V$-length vectors of &lt;strong&gt;the same elements $\eta $&lt;/strong&gt; by exchangeability. Blei et al. (2003) provides a graphical representation of this extended, or &lt;strong&gt;smoothed&lt;/strong&gt; version of LDA. I added a modified variational distribution for it next to the figure.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/fig/210216_smooth-lda-vem.png&quot; alt=&quot;210216_smooth-lda-vem&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So why would we want to make a model fully Bayesian? This is because of generability. If we use fixed point estimate for $\beta$, we get word-topic assignment that assigns probability zero to words that were not in training data. By giving $\beta$ a distribution, we can smooth it out to assign positive probability to all known and unknown words. In this perspective, fuller Bayes method can be seen as a smoothing method for hierarchical models.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;variational-em-for-smooth-lda&quot;&gt;Variational EM for smooth LDA&lt;/h2&gt;
-
-&lt;p&gt;I already explained inference methods for smooth LDA: &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#gibbs-sampling&quot;&gt;Gibbs sampling with Metropolis-Hastings rule&lt;/a&gt; proposed by Pritchard et al. (2000), and &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling&quot;&gt;Collapsed gibbs sampling&lt;/a&gt; that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look at &lt;a href=&quot;/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM&quot;&gt;the previous articles&lt;/a&gt; before moving on.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;e-step&quot;&gt;E-step&lt;/h3&gt;
-
-&lt;p&gt;As in the figure that I put next to the Figure 7, we add additional variational parameter $\lambda$ that acts as a surrogate of $\eta$ and consider $\beta_i \sim \mathcal{D}_V(\lambda_i)$ for $i=1,\cdots,k$. Then the variational distribution becomes&lt;/p&gt;
-
-\[q(\theta, \mathbf{z}, \beta|\gamma,\phi,\lambda) = \prod_{i=1}^k \mathcal{D}_V(\beta_i|\lambda_i) \prod_{d=1}^M q\big(\theta_d, \mathbf{z}_d|\gamma(\mathbf{w}_d),\phi(\mathbf{w}_d)\big)\]
-
-&lt;p&gt;Since $\beta$ part is multiplicative to the others, update rule for $\phi$ and $\gamma$ remains the same. (Actually, update rule of $\phi$ changes a little as it contains a $\beta$ term which is now considered a random variable.) Update rule for $\lambda$ is easy to derive by (again) differentiating the variational lower bound $L$ and setting it to zero.&lt;/p&gt;
-
-&lt;p&gt;There were no derivation depicted in the Blei et al. (2003), so I did one by myself. The variational lower bound $L$ is&lt;/p&gt;
-
-\[\begin{aligned}
-L(\gamma,\phi,\lambda | \alpha,\eta)
-  &amp;amp;= \sum_{i=1}^k \left( \log\Gamma(V\eta) - V\log\Gamma(\eta) + (\eta\cancel{-1}) \sum_{j=1}^V \bigg(\Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg)\bigg) \right) \\
-  &amp;amp;+ \sum_{d=1}^M\left(\log\Gamma\biggr(\sum_{i=1}^k\alpha_i\biggr) - \sum_{i=1}^k \log\Gamma(\alpha_i) + \sum_{i=1}^k(\alpha_i-1)\left( \Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr) \right)\right) \\
-  &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\left(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\right) \\
-  &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k\sum_{j=1}^V \phi_{dni}w_{dn}^j\left( \Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) \\
-  &amp;amp;- \sum_{i=1}^k \left( \log\Gamma\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) - \sum_{j=1}^V\log\Gamma(\lambda_{ij}) + \sum_{j=1}^V(\lambda_{ij}\cancel{-1})\bigg( \Psi(\lambda_{ij})-\Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \bigg) \right) \\
-  &amp;amp;- \sum_{d=1}^M \left( \log\Gamma\biggr(\sum_{i=1}^k \gamma_{di}\biggr) - \sum_{i=1}^k \log\Gamma(\gamma_{di}) + \sum_{i=1}^k(\gamma_{di}-1)\biggr(\Psi(\gamma_{di}) - \Psi\biggr(\sum_{i=1}^k \gamma_{di}\biggr)\biggr) \right)  \\
-  &amp;amp;- \sum_{d=1}^M\sum_{n=1}^{N_d}\sum_{i=1}^k \phi_{dni}\log\phi_{dni}  .
-\end{aligned}\]
-
-&lt;p&gt;Organize only the terms with $\lambda_{ij}$ and differentiate it then we get&lt;/p&gt;
-
-\[\begin{aligned}
-\frac{\partial L}{\partial \lambda_{ij}}
-  = &amp;amp;~ \eta \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
-    &amp;amp;+ \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni} w_{dn}^j \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \right) } \\
-    &amp;amp;- \cancel{ M \left( \Psi\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) - \Psi\left(\lambda_{ij}\right) \right) } \\
-    &amp;amp;- \cancel{ M \left( \Psi(\lambda_{ij}) - \Psi\bigg( \sum_{j=1}^V \lambda_{ij} \bigg) \right) } \\
-    &amp;amp;- \lambda_{ij} \color{blue}{ \left( \Psi'(\lambda_{ij}) - \Psi'\bigg(\sum_{j=1}^V \lambda_{ij}\bigg) \right) } \\
-\end{aligned}\]
-
-&lt;p&gt;Thus letting it zero yields the update rule for $\lambda$:&lt;/p&gt;
-
-\[\lambda_{ij}^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t)}w_{dn}^j.\]
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;m-step&quot;&gt;M-step&lt;/h3&gt;
-
-&lt;p&gt;Update rule for $\alpha$ is the same: we update it using linear-time Newton-Raphson. What is important is that update rule for $\eta$ is also the same as $\alpha$. It can be confirmed by organizing only the terms with $\eta$.&lt;/p&gt;
-
-\[L_{[\eta]} = \sum_{i=1}^k \left( \log\Gamma(V \eta) - V\log\Gamma(\eta) + (\eta-1) \sum_{j=1}^V \bigg( \Psi(\lambda_{ij}) - \Psi\bigg(\sum_{j=1}^V\lambda_{ij}\bigg) \bigg) \right).\]
-
-&lt;p&gt;This is exactly the same as $L_{[\alpha]}$ if replacing $\eta$ with $\alpha$, $k$ with $M$, and $\eta$ with $\gamma$. (Recall that $\vec\eta$ is a vector of all the same elements) Thus by exactly the same algorithm (implemented as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_update()&lt;/code&gt;), we can update $\eta$.&lt;/p&gt;
-
-&lt;p&gt;To summarize, the &lt;strong&gt;whole process of variational EM is as follows&lt;/strong&gt;: First, initialize $\phi_{dni}^{(0)} := 1/k$ for all $i=1,\cdots,k$, $n=1,\cdots,N_d$ and $d=1,\cdots,M$ along with $\gamma_{di}^{(0)} := \alpha_i^{(0)} + N/k$ for all $i=1,\cdots,k$, $d=1,\cdots,M$. Then repeat the following until convergence.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In the E-step, for $d=1,\cdots,M$,
-    &lt;ol&gt;
-      &lt;li&gt;For $n=1$ to $N$ and $i=1$ to $k$,
-        &lt;ol&gt;
-          &lt;li&gt;$\phi_{dni}^{(t+1)} = \exp\left(\Psi(\lambda_{ij}^{(t)}) - \Psi\big(\sum_{j=1}^V \lambda_{ij}^{(t)}\big) + \Psi(\gamma_{di}^{(t)} - \Psi\big(\sum_{i=1}^k \gamma_{di}^{(t)}\big)\right)$.&lt;/li&gt;
-          &lt;li&gt;For $j=1, \cdots, V$,
-            &lt;ol&gt;
-              &lt;li&gt;$\lambda_{ij}^{(t+1)} = \eta^{(t)} + \sum_{d=1}^M\sum_{n=1}^{N_d} \phi_{dni}^{(t+1)} w_{dn}^j$.&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Normalize $\phi_{dn}^{(t+1)}$ to sum to 1.&lt;/li&gt;
-      &lt;li&gt;$\gamma_d^{(t+1)} = \alpha + \sum_{n=1}^{N_d} \phi_{dni}^{(t+1)}$.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In the M-step,
-    &lt;ol&gt;
-      &lt;li&gt;Update $\alpha^{(t+1)}$ with linear-time Newton-Raphson.&lt;/li&gt;
-      &lt;li&gt;Update $\vec\eta^{(t+1)}$ with linear-time Newton-Raphson.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Python code for the algorithm is in the last part of &lt;a href=&quot;https://github.com/naturale0/NLP-Do-It-Yourself/blob/main/NLP_with_PyTorch/3_document-embedding/3-1.%20latent%20dirichlet%20allocation.ipynb&quot;&gt;this notebook (GitHub)&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;References&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Blei, Ng, Jordan. 2003. &lt;strong&gt;Latent Dirichlet Allocation&lt;/strong&gt;. Journal of Machine Learning Research. 3 (4–5): 993–1022.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 17 Feb 2021 00:51:00 +0900</pubDate>
-        <link>http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</link>
-        <guid isPermaLink="true">http://localhost:4000/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA</guid>
-        
-        
-        <category>bayesian</category>
         
         <category>machine learning</category>
         
