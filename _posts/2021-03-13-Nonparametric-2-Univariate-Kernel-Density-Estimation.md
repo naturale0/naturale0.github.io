@@ -140,16 +140,19 @@ $$
 ### Error analysis
 
 For function estimation, we frequently use mean integrated squared error (MISE) as an error metric. MISE is defined as follows:
+
+
 $$
 \begin{aligned}
 \text{MISE}(\hat p)
   &:= E\int \left(\hat p(x) - p(x)\right)^2 dx \\
-  &= E \int \text{MSE}(\hat p(x)) dx.
+  &\approx \int \text{MSE}(\hat p(x)) dx.
 \end{aligned}
 $$
 
 
-Since MSE can be decomposed into squared bias and variance, in order to compute MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$[^1] we get
+
+Since MSE can be decomposed into squared bias and variance, in order to get a sense of MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$[^1] we get
 
 
 
@@ -559,7 +562,7 @@ K_h * p(x)
  &= \int_{-\infty}^\frac{x}{h} K(w) p(x-hw) dw.
 \end{aligned}
 $$
- 
+
 
 Let $\alpha = x/h,$ and define the "incompelte" moment as the expansion term:
 
