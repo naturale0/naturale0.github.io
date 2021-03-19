@@ -351,5 +351,5 @@ def update_pages(page_objects, search_ids, top_matches):
 if __name__ == "__main__":
     page_objects = PageObject(None).objects_for_directory('./_posts/')
     search_ids, top_matches = LatentSemanticAnalysis(page_objects).top_matches()
-    top_matches = [sorted(match_row, key=lambda x: x["index"]) for match_row in top_matches]
+    #top_matches = [sorted(match_row, key=lambda x: x["index"]) for match_row in top_matches]
     update_pages(page_objects, search_ids, top_matches)
