@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 19 Mar 2021 12:34:58 +0900</pubDate>
-    <lastBuildDate>Fri, 19 Mar 2021 12:34:58 +0900</lastBuildDate>
+    <pubDate>Fri, 19 Mar 2021 13:19:12 +0900</pubDate>
+    <lastBuildDate>Fri, 19 Mar 2021 13:19:12 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -72,8 +72,9 @@
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Scalar bandwidth&lt;/strong&gt;:
- Use the same $h\in\mathbb{R}$ for all $d$ coordinates. i.e.
+    &lt;p&gt;&lt;strong&gt;Scalar bandwidth&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;Use the same $h\in\mathbb{R}$ for all $d$ coordinates. i.e.
  \(\hat p(x) = \frac{1}{nh^d} \sum_{i=1}^n \kappa\left(\frac{x-X_i}{h}\right).\)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -239,11 +240,19 @@ $$
 &lt;p&gt;Bandwidth shrinkage scheme uses a minimizer of marginal $p_j(x_j)$ to infer $\hat h_j.$&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Minimize marginal.&lt;/strong&gt;&lt;br /&gt;
- For each $j,$ let $\hat h_j^\text{mg} = \argmin_{h&amp;gt;0} \text{LSCV}_j(h_j),$ where $\text{LSCV}_j = \int \hat p_j(x_j)^2 dx_j - \frac{2}{n} \hat p_{-i,j}(X_{ij}).$&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Grid search a global scaler.&lt;/strong&gt;&lt;br /&gt;
- Let $\hat \alpha = \argmin_{\alpha \in \mathcal{G}} \text{LSCV}(\alpha \hat h_1^\text{mg}, \cdots, \alpha \hat h_d^\text{mg}),$ where $\mathcal{G} \subset \mathbb{R}$ is a finite grid.&lt;/li&gt;
-  &lt;li&gt;Let $\hat h_j = \hat \alpha \cdot \hat h_j^\text{mg}$ be our bandwidth.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Minimize marginal.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;For each $j,$ let $\hat h_j^\text{mg} = \argmin_{h&amp;gt;0} \text{LSCV}_j(h_j),$ where $\text{LSCV}_j = \int \hat p_j(x_j)^2 dx_j - \frac{2}{n} \hat p_{-i,j}(X_{ij}).$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Grid search a global scaler.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Let $\hat \alpha = \argmin_{\alpha \in \mathcal{G}} \text{LSCV}(\alpha \hat h_1^\text{mg}, \cdots, \alpha \hat h_d^\text{mg}),$ where $\mathcal{G} \subset \mathbb{R}$ is a finite grid.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Let $\hat h_j = \hat \alpha \cdot \hat h_j^\text{mg}$ be our bandwidth.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;coordinate-wise-bandwidth-selection&quot;&gt;Coordinate-wise bandwidth selection&lt;/h3&gt;
@@ -252,8 +261,9 @@ $$
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Initialize.&lt;/strong&gt;&lt;br /&gt;
- Choose $\left( \hat h_1^{(0)}, \cdots, \hat h_d^{(0)} \right)$ from a finite grid $\mathcal{G}_1 \times \cdots \times \mathcal{G}_d \subset \mathbb{R}^d.$&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Initialize.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Choose $\left( \hat h_1^{(0)}, \cdots, \hat h_d^{(0)} \right)$ from a finite grid $\mathcal{G}_1 \times \cdots \times \mathcal{G}_d \subset \mathbb{R}^d.$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Coordinate descent until convergence.&lt;/strong&gt;&lt;/p&gt;

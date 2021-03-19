@@ -50,6 +50,7 @@ We will focus on the simple case of using product kernel.
 Now the bandwidth is also multivariate. Three choices of bandwidth are available.
 
 1. **Scalar bandwidth**:
+
     Use the same $h\in\mathbb{R}$ for all $d$ coordinates. i.e.
     $$
     \hat p(x) = \frac{1}{nh^d} \sum_{i=1}^n \kappa\left(\frac{x-X_i}{h}\right).
@@ -255,10 +256,14 @@ Bandwidth shrinkage scheme uses a minimizer of marginal $p_j(x_j)$ to infer $\ha
 
 
 
-1. **Minimize marginal.**  
+1. **Minimize marginal.**
+
     For each $j,$ let $\hat h_j^\text{mg} = \argmin_{h>0} \text{LSCV}\_j(h_j),$ where $\text{LSCV}\_j = \int \hat p_j(x_j)^2 dx_j - \frac{2}{n} \hat p_{-i,j}(X_{ij}).$
-2. **Grid search a global scaler.**  
+
+2. **Grid search a global scaler.**
+
     Let $\hat \alpha = \argmin_{\alpha \in \mathcal{G}} \text{LSCV}(\alpha \hat h_1^\text{mg}, \cdots, \alpha \hat h_d^\text{mg}),$ where $\mathcal{G} \subset \mathbb{R}$ is a finite grid.
+
 3. Let $\hat h_j = \hat \alpha \cdot \hat h_j^\text{mg}$ be our bandwidth.
 
 
@@ -269,11 +274,12 @@ Coordinate-wise bandwidth selection (CBS) is simply a coordinate descent algorit
 
 
 
-1. **Initialize.**  
+1. **Initialize.**
+
     Choose $\left( \hat h_1^{(0)}, \cdots, \hat h_d^{(0)} \right)$ from a finite grid $\mathcal{G}_1 \times \cdots \times \mathcal{G}_d \subset \mathbb{R}^d.$
 
-2. **Coordinate descent until convergence.**  
-
+2. **Coordinate descent until convergence.**
+    
     $$
     \hat h_1^{(t+1)} = \argmin_{g_1 \in \mathcal{G}_1} \text{LSCV}\left( g_1, \hat h_2^{(t)}, \cdots, \hat h_d^{(t)} \right), \\
     \hat h_2^{(t+1)} = \argmin_{g_2 \in \mathcal{G}_2} \text{LSCV}\left( \hat h_1^{(t+1)}, g_2, \cdots, \hat h_d^{(t)} \right), \\
