@@ -61,7 +61,7 @@ $$
 $$
 C_c(X) := \{f:X\to\mathbb{R},~ f \text{ is continuous and } \text{supp.}f \text{ is compact}\}
 $$
-where $\text{supp.}f:= \overline{\\{ f > 0\\}}.$<br>
+where $\text{supp.}f:= \overline{\{ f > 0\}}.$<br>
 
 (ii) We write $K \prec f,$ if $f \in C_c(X),$ $0 \le f \le 1$ and $f=1$ on $K.$<br>
 
