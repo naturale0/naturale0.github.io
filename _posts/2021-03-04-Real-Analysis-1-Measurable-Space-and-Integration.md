@@ -4,8 +4,9 @@ title: "[Real Analysis] Ch 1. Measurable Space and Integration"
 date:   2021-03-04 14:59:00 +0900
 author: "Sihyung Park"
 categories: [real analysis]
-
 ---
+
+
 
 The `[Real Analysis]` series of posts is my memo on the lecture *Real Analysis (Spring, 2021)* by Prof. Insuk Seo. The lecture follows the table of contents of *Real and Complex Analysis (3rd ed.)* by Rudin, with minor changes in order.
 
@@ -334,7 +335,359 @@ $$
 
 
 
-## (To be appended)
+## Lebesgue integration
+
+Now that we have a measure space, we define integration with respect to measures, or the **Lebesgue integration**. When it comes to defining the integration, since any measurable $f$ can be decomposed into positive functions $f^+$ and $f^-,$ it suffices to define integrals for positive functions.
+
+<br>
+
+<div class="definition" text="simple function"><br>
+$s: X \to \mathbb{R},$ $s(x) = \sum_{i=1}^n \alpha_i \chi_{A_i}(x)$ is a simple function, if $A_1,\cdots,A_n \in \mathfrak{M}$ is a partition of $X$ and $\alpha_i \ne \alpha_j$ for all $i \ne j.$
+
+</div> 
+
+<br>
+
+A simple function $s$ is measurable, since measurability of $A_i$'s implies measurability of $\chi_{A_i}$'s. We use a construction scheme called the **standard machine** to define Lebesgue integral. [Detailed flow and definition is described in the earlier blog post](/probability/PTE-1.4-Lebesgue-integral#lebesgue-integral), so I will not cover it again.
+
+As I discussed at the end of the section of the linked post, (seamingly straightforward) additive property
+
+
+$$
+\int f + g ~d\mu = \int f d\mu + \int g d\mu
+$$
+
+
+requires a convergence theorem to be proved. We will prove it right at the next section. For now, additive property for integrals of simple functions can be easily shown.
+
+<br>
+
+<div class="lemma">
+
+Let $s,t: X \to \overline{\mathbb{R}^+}$ be simple functions and $E \in \mathfrak{M}.$ Then
+$$
+\int_E s+t ~d\mu = \int_E s d\mu + \int_E t d\mu.
+$$
+</div> 
+
+<br>
+
+## Convergence theorems
+
+### Monotone convergence theorem
+
+Convergence theorems will be the most used utility throughout all chapters. Monotone convergence theorem (MCT) will be our starting point. Proof of MCT requires two lemmas.
+
+<br>
+
+<div class="lemma" text="1.25 (a)">
+Let $s: X \to \overline{\mathbb{R}^+}$ be a simple function. Define $\varphi(E) = \int_E s~d\mu$ for all measurable $E.$ Then $\varphi$ is a measure on $(X, \mathfrak{M}).$
+
+</div> 
+
+<div class="lemma">
+We write $E_n \uparrow E$ if $E = \cup_{n=1}^\infty E_n.$ If $E_n \uparrow E$ and $s$ is a simple function, then $\int_{E_n} s d\mu \uparrow \int_E s d\mu.$
+
+</div> 
+
+<br>
+
+
+
+<div class="theorem" text="monotone convergence">
+
+Let $(f_n)_{n=1}^\infty$ be a sequence of positive measurable funnctions such that $f_n \uparrow f$ to a positive function $f.$ Then<br>
+
+(i) $f$ is measurable.<br>
+
+(ii) $\int_X f_n d\mu \uparrow \int_X f d\mu.$
+
+</div> 
+
+<div class="proof"><br>
+(i) Trivial since the pointwise limit of measurable functions is measurable.<br>
+
+(ii) 
+$$
+\int_X f_n d\mu \le \int_X f d\mu,~ \forall n.
+$$
+Thus
+$$
+\lim_n \int_X f_n d\mu \le \int_X f d\mu \tag{1}.
+$$
+Now given a function $s$ such that $0 \le s \le f$ and $0<c<1,$ observe that $E_n := \\{ f_n \ge c\cdot s \\}$ is a measurable set. Since $f_n \uparrow f,$ $E_n \uparrow X$ as $n \to \infty.$
+$$
+\begin{aligned}
+&\int_{E_n} c \cdot s ~d\mu \le \int_{E_n} f_nd\mu \le \int_X f_nd\mu \\
+\overset{n\to\infty}\implies& \int_X c\cdot s ~d\mu \le \lim_n \int_X f_n d\mu \\
+\overset{c\to1, \\ \sup_{0\le s\le f}}\implies& \int_X f d\mu \le \lim_n \int_X f_n d\mu.
+\end{aligned} \tag{2}
+$$
+By (1) and (2), we get the desired result.
+
+</div> 
+
+<br>
+
+
+
+### Results from MCT
+
+Now the additive property of Lebesgue integral is direct from MCT.
+
+<br>
+
+<div class="lemma">
+Let $f,g: X \to \overline{\mathbb{R}^+}$ be measurable functions. Then
+$$
+\int_X f+g ~d\mu = \int_X f d\mu + \int_X gd\mu.
+$$
+</div> 
+
+<br>
+
+
+
+Interchangeability between integral and infinite sum is also clear for positive measurable functions.
+
+<br>
+
+<div class="theorem" text="1.27">
+
+Let $(f_n)_{n=1}^\infty$ be a sequence of positive measurable functions. Then
+$$
+\sum_{n=1}^\infty \int_X f_nd\mu = \int_X \sum_{n=1}^\infty f_n d\mu.
+$$
+</div> 
+
+<br>
+
+
+
+Similar to lemma 13, a measure can be constructed using any positive measurable function. (It will be covered in detail later as a *Radon-Nikodym derivative*.) 
+
+<br>
+
+<div class="theorem">
+
+Let $f: X \to \overline{\mathbb{R}^+}$ be a measurable function and $E \in \mathfrak{M}.$ Define
+$$
+\varphi(E) := \int_E f~d\mu,
+$$
+then $\varphi$ is a measure and
+$$
+\int_X g ~d\varphi = \int_X g \cdot f~d\mu.
+$$
+</div>
+
+<br> 
+
+### Fatou's lemma
+
+In order to use MCT, a sequence $f_n$ must converges to some function $f.$ Fatou's lemma relieves the condition and gives useful tool.
+
+<br>
+
+<div class="theorem" text="Fatou">
+
+Let $(f_n)_{n=1}^\infty$ be a sequence of measurable functions. Then
+$$
+\int_X \liminf_n f_n d\mu \le \liminf_n \int_X f_n d\mu.
+$$
+</div> 
+
+<div class="proof"><br>
+$$
+g_n := \inf_{k \ge n} f_k
+$$
+
+Use MCT with the fact $f_n \ge g_n.$
+
+</div> 
+
+<br>
+
+### Dominated convergence theorem
+
+Another useful convergence theorem is dominated convergence theorem (DCT).
+
+<br>
+
+
+
+<div class="theorem" text="1.32, 1.38">
+
+Let $f,g \in L^1(\mu),$ then<br>
+
+(i) $cf \in L^1(\mu)$ for $c\in\mathbb{R}$ and $\int cf~d\mu = c\int f ~d\mu.$<br>
+
+(ii) $f+g \in L^1(\mu)$ and $\int f+g~d\mu = \int f ~d\mu + \int g ~d\mu.$<br>
+
+(iii) $|\int f ~d\mu| \le \int |f|d\mu.$
+
+</div> 
+
+<br>
+
+
+
+<div class="theorem" text="dominated convergence">
+
+Let $(f_n)_{n=1}^\infty$ be a sequence of measurable functions such that $f_n \to f.$ Suppose there exists a measurable $g$ such that $|f_n| \le g$ for all $n.$ Then<br>
+
+(i) $f \in L^1(\mu).$<br>
+
+(ii) $\int_X |f_n-f| ~d\mu \to 0$ as $n \to \infty.$<br>
+
+(iii) $\int_X f_nd\mu \to \int_X f~d\mu$ as $n\to\infty.$
+
+</div> 
+
+<div class="proof"><br>
+(i) Clearly, $|f| \le g.$<br>
+
+(ii)
+$$
+|f_n - f| \le |f_n| + |f| \le 2g, \\
+2g - |f_n - f| \ge 0.
+$$
+ By Fatou's lemma,
+$$
+\begin{aligned}
+\int_X \liminf_n \left( 2g - |f_n - f|\right) d\mu 
+ &= \int_X 2g~d\mu \\
+ &\le \liminf_n \int_X 2g-|f_n-f| ~d\mu \\
+ &= \int_X 2g~d\mu - \limsup_n \int_X|f_n - f| ~d\mu
+
+\end{aligned}
+$$
+hence
+$$
+\limsup_n \int_X |f_n - f| ~d\mu \le 0.
+$$
+(iii) Trivial by traingle inequality.
+
+</div> 
+
+<br>
+
+## Complete measure space
+
+<div class="definition" text="complete measure space"><br>
+We say a measure space $(X, \mathfrak{M}, \mu)$ is complete, if 
+$$
+E \in \mathfrak{M},~ \mu(E)=0 \implies N \in \mathfrak{M} \text{ and } \mu(N) = 0,~ \forall N \subset E.
+$$
+</div>
+
+<br>
+
+One can build a complete measure space from a given measure space. We call such complete measure space a **completion** of it.
+
+<br>
+
+<div class="theorem" text="completion">
+
+$$
+\mathfrak{M}^* := \left\{E: A\subset E\subset B \text{ for some } A,B\in\mathfrak{M} \text{ s.t. } \mu(B\setminus A)=0\right\} \\
+\mu^*(E) := \mu(A),~ \forall E \in \mathfrak{M}^*
+$$
+
+Then (i) $\mu^*$ is a well-defined measure and (ii) $(X, \mathfrak{M}^*, \mu^*)$ is a complete measure space.
+
+</div> 
+
+<div class="proof"><br>
+(i) It is enough to show that for given sets $A, B, A', B'$ such that 
+$$
+A\subset E\subset B,~ \mu(B-A) = 0 \\
+\text{ and } A'\subset E\subset B', \mu(B'-A')=0,
+$$
+we get $\mu(A) = \mu(A').$
+$$
+A-A' \subset E-A' \subset B'-A' \implies \mu(A-A') \le \mu(B'-A')=0, \\
+A'-A \subset E-A \subset B-A \implies \mu(A-A') \le \mu(B-A)=0.
+$$
+Thus the result follows.<br>
+
+(ii) First we show that $\mathfrak{M}^*$ is a $\sigma$-algebra. It is not difficult to show that $X \in \mathfrak{M}^*$ and $E^c \in \mathfrak{M}^*$ for $E \in \mathfrak{M}.$ Suppose $E_1,E_2,\cdots \in \mathfrak{M}^*.$ Then for given $i,$ there exist
+$$
+A_i \sub E_i \sub B_i,~ \mu(B_i-A_i) = 0.
+$$
+Then
+$$
+\cup_{i=1}^\infty A_i \sub \cup_{i=1}^\infty E_i \sub \cup_{i=1}^\infty B_i,~ \cup_{i=1}^\infty A_i, \cup_{i=1}^\infty B_i \in\mathfrak{M}^*
+$$
+and
+$$
+\begin{aligned}
+\mu(\cup_{i=1}^\infty B_i - \cup_{i=1}^\infty A_i) 
+ &\le \sum_{i=1}^\infty \mu(B_i-A_i) = 0.
+\end{aligned}
+$$
+(iii)
+$$
+\begin{aligned}
+\mu^*(\cup_{i=1}^\infty E_i) 
+= \mu(\cup_{i=1}^\infty A_i)
+= \sum_{i=1}^\infty \mu(A_i) 
+= \sum_{i=1}^\infty \mu^*(E_i).
+\end{aligned}
+$$
+</div> 
+
+<br>
+
+## Sets of Measure zero
+
+### Almost everywhere
+
+<div class="definition" text="almost everywhere"><br>
+we call that the statement $S$ holds almost everywhere (a.e.), if there exists $E \in \mathfrak{M}$ such that $S$ hold on $E$ and $\mu(E^c) = 0.$
+
+</div> 
+
+<br>
+
+<div class="definition" text="measurable function (extended)"><br>
+Let $E \in \mathfrak{M}$ such that $\mu(E^c)=0.$ Then $f: E \to Y$ is a measurable function on $X,$ if 
+$$
+f^{-1}(V\cap E) \in \mathfrak{M},~ \forall \text{ open } V \sub Y.
+$$
+</div> 
+
+If we define $\tilde f$ as an extension of $f$ such that $\tilde f(x) = 0$ for all $x \in E^c,$ then $\tilde f$ is measurable in terms of previous definition.
+
+If the measure space is complete, any arbitrary extension of $f$ is measurable and 
+$$
+\int_X \tilde f ~d\mu = \int_E f ~d\mu.
+$$
+One can show that properties and theorems we discussed earlier in this chapter also holds for conditions relieved to be almost everywhere.
+
+<br>
+
+### Almost everywhere on $E$
+
+<div class="definition" text="a.e. on a set"><br>
+The statement $S$ holds a.e. on $E \in \mathfrak{M}$, if
+$$
+\mu \left( \{x \in E: S \text{ does not hold at } x\} \right).
+$$
+That is,
+$$
+\mu (S^c \cap E) = 0.
+$$
+</div> 
+
+<br>
+
+<div class="theorem" text="1.39 (a), (b)">
+
+(i) $f \ge 0$ on $E \in \mathfrak{M},$ $\int_E f d\mu=0$ $\implies$ $f=0$ a.e. on $E.$<br>
+
+(ii) $f \in L^1(\mu),$  $\int_E f d\mu = 0,$ $\forall E \in \mathfrak{M}$ $\implies$ $f=0$ a.e.
+
+</div> 
 
 
 
