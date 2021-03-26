@@ -142,15 +142,18 @@ $$
 For function estimation, we frequently use mean integrated squared error (MISE) as an error metric. MISE is defined as follows:
 
 
+
 $$
 \begin{aligned}
 \text{MISE}(\hat p)
   &:= E\int \left(\hat p(x) - p(x)\right)^2 dx \\
-  &\approx \int \text{MSE}(\hat p(x)) dx.
+  &= \int \text{MSE}(\hat p(x)) dx.
 \end{aligned}
 $$
 
 
+
+The second inequality follows from Fubini's theorem, because the integrand is clearly non-negative.
 
 Since MSE can be decomposed into squared bias and variance, in order to get a sense of MISE, it is helpful to compute bias and variance of $\hat p(x).$ To simplify the process, we assume $b_j=h$ for all $j$ and $B_j = [(j-1)h,~ jh).$ Let $j(x)$ be the index of the bin where $x$ belongs. That is, $x \in B_{j(x)}.$ Then as $h \to 0$ and $nh\to\infty$ as $n \to \infty,$[^1] we get
 
