@@ -77,7 +77,7 @@ Miniforge installed when installing `tensorflow-macos` defaults to python for AR
 1. Install miniforge for x86_64. \
 ```zsh
 # install miniforge x86_64 in another directory
-/bin/bash Miniforge3-MacOSX-x86_64 -p /Users/$(whoami)/miniforge_x86_64
+/bin/bash Miniforge3-MacOSX-x86_64.sh -p /Users/$(whoami)/miniforge_x86_64
 ```
 Be careful not to install it in the same directory as previously installed miniforge (ARM64).
 
