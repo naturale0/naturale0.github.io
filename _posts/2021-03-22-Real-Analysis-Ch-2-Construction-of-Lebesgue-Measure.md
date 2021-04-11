@@ -168,7 +168,7 @@ Then show the followings one at a time.
     Hence $\mu(K) < \infty$ and $K \in \mathfrak{M}_F.$ 
 3. Any open $V$ is inner regular.  
     Hence if $\mu(V) < \infty,$ then $V \in \mathfrak{M}_F.$
-4. $\mu\left( \cup_{i=1}^\infty E_i \right) = \sum_{i=1}^\infty \mu(E_i)$ for disjoint $E_i \in \mathfrak{M}_F.$ And if $\mu(E) < \infty,$ then $E \in \mathfrak{M}_F.$
+4. $\mu\left( \cup_{i=1}^\infty E_i \right) = \sum_{i=1}^\infty \mu(E_i)$ for disjoint $E_i \in \mathfrak{M}_F.$ And if $\mu(\cup_{i=1}^\infty E_i) < \infty,$ then $\cup_{i=1}^\infty E_i \in \mathfrak{M}_F.$
 5. For a given $E \in \mathfrak{M}_F$ and $\epsilon > 0,$ there exists $K, V$ such that $K \sub E \sub V$ and $\mu(V \setminus K) < \epsilon.$
 6. If $A, B \in \mathfrak{M}_F,$ then $A\setminus B,$ $A \cap B,$ $A\cup B \in \mathfrak{M}_F.$
 7. $\mathfrak{M}$ is a $\sigma$-algebra containing all Borel sets.
@@ -575,11 +575,91 @@ Letting $\epsilon\to0$ yields the desired result.
 
 </div> 
 
+<br>
 
 
 
+---
+
+(contents below are crudely written: the rationale, proofs, implication of theorems will be added later)<br>
 
 
+
+## Regularity of measures
+
+### $\sigma$-finiteness
+
+<div class="theorem" text="">
+Let $(X, \mathfrak{M}, \mu)$ be the measure space constructed from RRT. If $E \in \mathfrak{M}$ is $\sigma$-finite, then $E$ is inner regular.
+
+</div> 
+
+### $\sigma$-compactness
+
+<div class="theorem" text="">
+Let $(X, \mathfrak{M}, \mu)$ be the measure space constructed from RRT. If $X$ is $\sigma$-compact, then the following hold.<br>
+
+(i) For $E \in \mathfrak{M}$ and $\epsilon>0,$ there exists a closed $F$ and and open $V$ such that $F \sub E \sub V$ and $\mu(V-F)<\epsilon.$<br>
+
+(ii) All $E \in \mathcal{B}$ is $\sigma$-finite, hence $\mu$ is regular.<br>
+
+(iii) For $E \in \mathfrak{M},$ there exists a $F_\sigma$-set $A$ and and $G_\delta$-set $B$ such that $A \sub E \sub B$ and $\mu(B-A)=0.$
+
+</div> <br>
+
+
+
+<div class="theorem" text="">
+Let $(X, \mathcal{B}, \lambda)$ be a measure space defined on a Borel $\sigma$-algebra $\mathcal{B}.$ If all open sets $V$ are $\sigma$-compact and $\lambda(K) < \infty$ for all compact $K,$ then $\lambda$ is regular.
+
+</div> <br>
+
+<br>
+
+## The Lebesgue measure
+
+### Construction
+
+<div class="definition" text="cell"><br>
+$W:= \prod_{i=1}^d \langle a_i, b_i \rangle,$ where $\langle\cdot,\cdot\rangle$ can be either one of open, closed or half-open interval, is a cell in $\mathbb{R}^d.$
+
+</div> 
+
+<br>
+
+
+
+<div class="theorem" text="(2.20) construction part">
+
+There exists a measure space $(\mathbb{R}^d, \mathfrak{M}, m)$ that satisfies the followings.<br>
+(i) $(\mathbb{R}^d, \mathfrak{M}, m)$ is a complete regular measure space, and
+$$
+\forall E \in \mathfrak{M},~ \exists A \in F_\sigma, B \in G_\delta \text{ s.t. } A \sub E \sub B,~ m(B-A)=0.
+$$
+(ii) $m(W) = \text{vol}(W)$ for all cells $W.$<br>
+
+</div> 
+
+<div class="proof"><br>
+(i) RRT & $\sigma$-compactness of $\mathbb{R}^d.$<br>
+
+(ii) (1) open cells ($\sigma$-compact -> define $g_n \uparrow \chi_V$. + convergence in two perspective). (2) all cells
+
+</div><br>
+
+
+
+<div class="theorem" text="(2.20) properties">
+
+(continued from the theorem above)<br>
+
+(iii) $m(E) = m(E+x)$ for all $x \in X.$<br>
+
+(iv) If $\mu$ is a measure on $(\mathbb{R}^d, \mathfrak{M})$ that is translation invariant and $\mu(K)<\infty$ for all compact $K,$ then $\mu(E) = c\cdot m(E)$ for all $E\in\mathcal{B}$ for some $c\in\mathbb{R}.$<br>
+
+(v) For a linear map $T: \mathbb{R}^d \to \mathbb{R}^d,$ there exists $\Delta_T \in \mathbb{R}$ such that $m(T(E)) = \Delta_T\cdot m(E)$ for all $E \in \mathcal{B}.$
+
+</div> 
 
 
 
