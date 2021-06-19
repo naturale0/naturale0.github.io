@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Asymptotics is strange..."
+title: "Asymptotics is strange"
 date:   2021-04-21 16:38:00 +0900
 author: "Sihyung Park"
 categories: [Nonparametric]
