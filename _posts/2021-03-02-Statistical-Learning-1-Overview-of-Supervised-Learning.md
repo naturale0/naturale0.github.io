@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Statistical Learning] 1. Overview of Supervised Learning"
+title: "1. Overview of Supervised Learning"
 date:   2021-03-03 00:13:00 +0900
 author: "Sihyung Park"
 categories: [statistical learning]

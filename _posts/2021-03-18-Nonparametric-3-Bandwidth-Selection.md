@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Nonparametric] 3. Bandwidth Selection"
+title: "3. Bandwidth Selection"
 date:   2021-03-18 16:55:00 +0900
 author: "Sihyung Park"
-categories: [non-parametric]
+categories: [nonparametric]
 ---
 
 

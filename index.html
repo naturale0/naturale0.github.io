@@ -12,6 +12,19 @@ title: Home
       <header class="post_header">
         <h1 class="post_title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title}}</a></h1>
         <time class="post_date">{{ post.date | date: "%d %B %Y, %A" }}</time>
+        <!-- display tags -->
+        &ensp;
+        <span>
+          {% for tag in post.categories %}
+            {% capture tag_name %}{{ tag }}{% endcapture %}
+            <a href="/category/{{ tag_name }}">
+              <tagging class="highlighter-tag">
+                {{ tag_name | strip }}
+              </tagging> 
+            </a>
+            &VeryThinSpace;
+          {% endfor %}
+        </span>
       </header>
       <div class="post_excerpt">
         <p>

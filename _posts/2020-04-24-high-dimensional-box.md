@@ -3,7 +3,7 @@ layout: post
 title:  "High-dimensional box"
 date:   2020-04-24 18:37:10 +0900
 author: "Sihyung Park"
-categories: probability
+categories: [probability]
 ---
 
 <div class="example" text='High-dimensional box'>
@@ -14,5 +14,3 @@ Consider an $n$-dimensional box $[-1, 1]^n$. Suppose we randomly pick an element
 
 This implies that the probability of observing the element at the surface of the box becomes 1 as the dimension increases. This is one of the properties of high-dimensional problems which makes them challenging.
 
-
- 

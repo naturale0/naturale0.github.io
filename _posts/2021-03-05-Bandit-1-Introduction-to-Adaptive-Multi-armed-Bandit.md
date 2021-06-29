@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Bandit] 1. Introduction to Multi-armed Bandit"
+title: "1. Introduction to Multi-armed Bandit"
 date:   2021-03-05 12:28:00 +0900
 author: "Sihyung Park"
 categories: [adaptive sequential decision making]

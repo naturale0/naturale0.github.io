@@ -3,7 +3,7 @@ layout: post
 title:  "A metric derived from KL divergence"
 date:   2020-05-05 01:37:00 +0900
 author: "Sihyung Park"
-category: information theory
+categories: [information theory]
 ---
 
 <div class="definition" text="Kullback-Leibler divergence">

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Statistical Learning] 2. Linear classifiers"
+title: "2. Linear classifiers"
 date:   2021-03-16 00:44:00 +0900
 author: "Sihyung Park"
 categories: [statistical learning]

@@ -3,7 +3,7 @@ layout: post
 title:  "Limitation of $R^2$"
 date:   2020-04-28 18:37:10 +0900
 author: "Sihyung Park"
-category: linear model
+categories: [linear model]
 ---
 
 <div class="fact" text='limitation of coefficient of determination'>

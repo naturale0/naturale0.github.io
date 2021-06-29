@@ -3,7 +3,7 @@ layout: post
 title:  "Borel-Cantelli lemmas are converses of each other"
 date:   2020-04-29 15:11:00 +0900
 author: "Sihyung Park"
-categories: probability
+categories: [probability]
 ---
 
 <div class="theorem" text='Borel-Cantelli lemmas'>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Statistical Learning] 3. Shrinkage Estimators"
+title: "3. Shrinkage Estimators"
 date:   2021-03-17 16:40:00 +0900
 author: "Sihyung Park"
 categories: [statistical learning]

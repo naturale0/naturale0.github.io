@@ -12,7 +12,12 @@ layout: default
       <span>
         {% for tag in page.categories %}
           {% capture tag_name %}{{ tag }}{% endcapture %}
-          <code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>
+          <a href="/category/{{ tag_name }}">
+            <tagging class="highlighter-tag">
+              {{ tag_name | strip }}
+            </tagging> 
+          </a>
+          &VeryThinSpace;
         {% endfor %}
       </span>
       <!-- /display tags -->

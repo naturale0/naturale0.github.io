@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Nonparametric] 4. Multivariate Kernel Density Estimation"
+title: "4. Multivariate Kernel Density Estimation"
 date:   2021-03-19 10:41:00 +0900
 author: "Sihyung Park"
-categories: [non-parametric]
+categories: [nonparametric]
 ---
 
 

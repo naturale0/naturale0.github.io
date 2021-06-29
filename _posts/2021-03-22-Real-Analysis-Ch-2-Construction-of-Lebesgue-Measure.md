@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Real Analysis] Ch 2. Construction of Lebesgue Measure"
+title: "2. Construction of Lebesgue Measure"
 date:   2021-03-22 10:50:00 +0900
 author: "Sihyung Park"
 categories: [real analysis]

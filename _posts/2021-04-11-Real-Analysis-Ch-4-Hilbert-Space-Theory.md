@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Real Analysis] Ch 4. Hilbert Space Theory"
+title: "4. Hilbert Space Theory"
 date:   2021-04-11 14:09:00 +0900
 author: "Sihyung Park"
 categories: [real analysis]

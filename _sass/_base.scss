@@ -349,6 +349,16 @@ pre > code {
   display: block;
   padding: 1rem 1.5rem;
   white-space: pre; }
+tagging {
+  padding: .2rem .5rem;
+  margin: -1.5 .2rem;
+  font-size: 90%;
+  white-space: nowrap;
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  border-radius: 10px;
+  text-align: center;
+}
 
 
 /* Tables
@@ -448,6 +458,14 @@ blockquote {
   line-height: 1.8rem;
   border-left: 3px solid #D0E5F2;
   font-size: 1.3rem;
+}
+
+
+/* tag */
+.highlighter-tag {
+  color: #e28585;
+  background-color: rgb(255, 255, 255);
+  font-size: 0.7em;
 }
 
 
