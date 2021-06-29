@@ -7,6 +7,8 @@ categories: [real analysis]
 
 ---
 
+Objective of this chapter is to completely characterize $L^2(\mu),$ the famous Hilbert space. To achieve our goal, we will use the fact that a Hilbert space can be seen as an infinite-dimensional vector space where there exists a "orthogonal basis". i.e. any element in the space can be decomposed into an infinite linear combination of orthogonal components. In fact, the basis decomposition yields to the main result that $L^2$ is actually isomorphic to $\ell^2.$
+
 
 
 - TOC
