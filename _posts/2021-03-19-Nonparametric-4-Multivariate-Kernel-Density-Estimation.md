@@ -36,7 +36,7 @@ We need a $d$-variate kernel function $\kappa$ for this. There are several possi
     $$
     \kappa(x) := K(x^\intercal x),
     $$
-
+    
     where $K:\mathbb{R}\to\mathbb{R}$ is a univariate function with $\int K(x^\intercal x)dx = 1.$
 
 
@@ -56,7 +56,6 @@ Now the bandwidth is also multivariate. Three choices of bandwidth are available
     \hat p(x) = \frac{1}{nh^d} \sum_{i=1}^n \kappa\left(\frac{x-X_i}{h}\right).
     $$
     
-
 2. **Vector bandwidth (coordinate-wise bandwidth)**:
 
     If the density has different smoothness along different coordinates, then setting a scalar bandwidth might not provide good result. To account for the problem, vector bandwidth use $h_j\in\mathbb{R}$ for $j$-th coordinates, $j=1,\cdots,d.$
@@ -66,7 +65,6 @@ Now the bandwidth is also multivariate. Three choices of bandwidth are available
     \hat p(x) = \frac{1}{n\prod_{j=1}^d h_j} \sum_{i=1}^n \kappa\left(\frac{x_1-X_{i1}}{h_1}, \cdots, \frac{x_d-X_{id}}{h_d} \right).
     $$
     
-
 3. **Bandwidth matrix**:
 
     In order to further account for possible rotation of the density contour, we can use a bandwidth matrix $H \in \mathbb{R}^{d\times d}$ so that our estimate be
@@ -76,7 +74,6 @@ Now the bandwidth is also multivariate. Three choices of bandwidth are available
     $$
     \hat p(x) = \frac{1}{n|H|} \sum_{i=1}^n \kappa\left( H^{-1} (x-X_i) \right).
     $$
-    
 
 Throughout this post, we will only focus on multivariate KDE cases with **product kernel function** and **coordinate-wise bandwidth**.
 
@@ -279,7 +276,7 @@ Coordinate-wise bandwidth selection (CBS) is simply a coordinate descent algorit
     Choose $\left( \hat h_1^{(0)}, \cdots, \hat h_d^{(0)} \right)$ from a finite grid $\mathcal{G}_1 \times \cdots \times \mathcal{G}_d \subset \mathbb{R}^d.$
 
 2. **Coordinate descent until convergence.**
-    
+   
     $$
     \hat h_1^{(t+1)} = \argmin_{g_1 \in \mathcal{G}_1} \text{LSCV}\left( g_1, \hat h_2^{(t)}, \cdots, \hat h_d^{(t)} \right), \\
     \hat h_2^{(t+1)} = \argmin_{g_2 \in \mathcal{G}_2} \text{LSCV}\left( \hat h_1^{(t+1)}, g_2, \cdots, \hat h_d^{(t)} \right), \\

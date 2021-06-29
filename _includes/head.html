@@ -21,6 +21,10 @@
     {% include ga.html %}
   {% endif %}
 
+  {% if site.categories != "" %}
+    {% include collecttags.html %}
+  {% endif %}
+
   <script language='JavaScript' type='text/javascript'>
     function layer_toggle(obj) {
         if (obj.style.display=='none') obj.style.display = 'block';

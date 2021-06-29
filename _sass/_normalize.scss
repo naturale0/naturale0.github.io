@@ -230,8 +230,14 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
+  font-family: "JuliaMono";
+  font-size: 0.9em;
+}
+
+@font-face {
+  font-family: "JuliaMono";
+  src: url("../assets/font/JuliaMono-Regular.woff2") format("woff2");
+  text-rendering: optimizeLegibility;
 }
 
 /* Forms
