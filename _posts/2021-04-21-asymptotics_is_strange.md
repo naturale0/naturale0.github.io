@@ -3,7 +3,7 @@ layout: post
 title: "Asymptotics is strange"
 date:   2021-04-21 16:38:00 +0900
 author: "Sihyung Park"
-categories: [nonparametric]
+categories: [asymptotics]
 ---
 
 It is a useful trick to "flip" the denominator into numerator when it comes to proving asymptotic properties of errors. Here's how to do so. Consider a form
