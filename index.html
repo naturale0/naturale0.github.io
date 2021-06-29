@@ -14,7 +14,6 @@ title: Home
         <time class="post_date">{{ post.date | date: "%d %B %Y, %A" }}</time>
         <!-- display tags -->
         &ensp;
-        <span>
           {% for tag in post.categories %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/category/{{ tag_name }}">
@@ -24,7 +23,6 @@ title: Home
             </a>
             &VeryThinSpace;
           {% endfor %}
-        </span>
       </header>
       <div class="post_excerpt">
         <p>
