@@ -23,16 +23,24 @@ My major goal is to review the first four chapters of van de Geer (2000). This c
 ## Notation and Settings
 
 Let $(\mathcal{X}, \mathcal{A})$ be a measurable space. Let $P$ be a probability measure on such space and $g: \mathcal{X} \to \mathbb R.$ Suppose we have a random sample
+
+
 $$
 X_1, \cdots, X_n \overset{\text{i.i.d.}} \sim P.
 $$
+
+
 As I briefly mentioned above, the two major theorems of probability theory is the strong law of large numbers and the central limit theorem.
+
+
 $$
 \begin{aligned}
 \text{SLLN: }\;& E|g(X_1)| < \infty \implies \frac1n \sum_{i=1}^n g(X_i) \to Eg(X_1) \text{ a.s.} \\
 \text{CLT: }\;& \sigma_g^2 := \text{Var}(g(X_1)) < \infty \implies \frac{1}{\sqrt{n}} \sum_{i=1}^n \big(g(X_i)-Eg(X_i)\big) \overset{d}{\to} \mathcal{N}(0,1)
 \end{aligned} \tag{1}
 $$
+
+
 One important remark is that this results hold only for a $g.$ Our interest from now on lies on the case where $g$ is not fixed.
 
 Consider a class of functions $\mathcal{G} = \\{g_\theta: \mathcal{X} \to \mathbb R,~ \theta\in\Theta\\}$ indexed by a paramter $\theta$ in a metric space $\Theta.$ We want to prove or disprove that the result (1) holds uniformly on $\mathcal{G}.$ In addition, if (1) uniformly holds, then for $(\hat \theta_n)_ \{n\in\mathbb{N}\}$ such that $\hat \theta_n \overset{P}{\to} \theta_0,$ we want to show the consistency and asymptotic normality of $g_{\hat \theta_n}.$
@@ -48,8 +56,8 @@ $$
 
 
 
-
 In other words, $o_P$ is merely a convergence in probability while $\mathcal{O}_P$ implies stochastic boundedness. That is, 
+
 
 
 $$
