@@ -295,9 +295,13 @@ One can also show that the same rate holds for the Hellinger distance as well.
 ### (case 3) nonparametric concave model
 
 In addition to the second model, we can restrict the shape of the function further by adding concavity constaint. To be specific, assume that
+
+
 $$
 F_0 \in \tilde\Lambda := \{F:\mathbb R \to [0,1],~ 0\le\frac{dF}{dz}\le M,~ F \text{ is concave} \}.
 $$
+
+
 The derivative condition implies that $F$ is increasing no faster than the rate of $M.$ It can be shown later that this model has slightly improved rate of $L^2(Q)$-convergence of $\mathcal{O}_P(n^{-2/5}).$
 
 
