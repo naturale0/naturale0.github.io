@@ -28,7 +28,7 @@ Objective of this chapter is to completely characterize $L^2(\mu),$ the famous H
 
 ### The element of the smallest norm
 
-<div class="theorem" text="">
+<div class="theorem" text="the element of the smallest norm">
 Let $E \sub H$ be a non-empty, closed, convex set. Then there uniquely exists $x \in E$ that satisfies
 $$
 \|x\| = \inf_{y \in E} \|y\|.
@@ -290,9 +290,9 @@ $$
 $$
 Thus $f$ is surjective.
 
-</div>
+</div></details>
 
- </details><br>
+<br>
 
 
 
@@ -311,7 +311,13 @@ Then the followings are equivalent.<br>
 
 (iv) $(x,y) = \sum_{\alpha \in A} \widehat x(\alpha) \widehat y(\alpha)$ for all $x,y\in H.$
 
-</div> 
+</div>
+
+<details>
+  <summary>
+    expand proof
+  </summary> 
+
 
 <div class="proof"><br>
 (i$\Rightarrow$ii) Suppose not. Then there exists $x \in H \setminus \overline S.$ Since $\overline S$ is a closed subspace, there is a unique decomposition $x = P_x + Q_x$ where $P_x \in \overline S$ and $Q_x \in \overline S ^\perp.$ Note that $Q_x \ne 0$ since otherwise $x \in \overline S$ which is a contradiction. Let $u = Q_x,$ then 
@@ -319,6 +325,7 @@ $$
 \{u_\alpha\}_{\alpha \in A} \cup \{u\}
 $$
 is an orthonormal set, which is a contradiction.<br>
+
 
 (ii$\Rightarrow$iii) By the previous theorem, it is trivial.<br>
 

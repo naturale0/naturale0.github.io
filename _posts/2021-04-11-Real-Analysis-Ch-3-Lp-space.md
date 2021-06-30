@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "[Real Analysis] Ch 3. $L^p$ Space"
+title: "3. $L^p$ Space"
 date:   2021-04-11 14:01:00 +0900
 author: "Sihyung Park"
-categories: [real analysis]
+categories: [real analysis, Real and Complex Analysis]
 ---
 
 
+
+As we defined the Lebesgue integral and proved the basic properties, it is time to study the space of functions with finite integrals.
 
 ## Inequalities
 
@@ -34,7 +36,13 @@ $$
 
 
 
-<div class="theorem" text="Minkowski">
+<div class="theorem" text="the element of the smallest norm">
+Let $E \sub H$ be a non-empty, closed, convex set. Then there uniquely exists $x \in E$ that satisfies
+$$
+\|x\| = \inf_{y \in E} \|y\|.
+$$
+</div>
+
 
 $f,g \ge 0,$ $p \ge 1,$ then
 $$
@@ -103,13 +111,12 @@ $$
 ### $p=\infty$
 
 <div class="theorem" text="">
-$L^\infty(\mu)$ is complete in $\|\cdot\|_\infty.$
+$L^\infty(\mu)$ is complete with respect to $\|\cdot\|_\infty.$
 
 </div> 
 
 <div class="proof"><br>
 uniformly cauchy
-
 </div> <br>
 
 
@@ -120,16 +127,16 @@ uniformly cauchy
 
 
 
-* S ~ L^p
+* $S$ ~ $L^p$
 * Lusin's theorem
-* C_c(X) ~ L^p
+* $C_c(X)$ ~ $L^p$
 
 
 
 ### $C_0(X)$ and $C_c(X)$
 
-* C_c is dense in C_0
-* C_0 is complete
+* $C_c$ is dense in $C_0$
+* $C_0$ is complete
 
 
 

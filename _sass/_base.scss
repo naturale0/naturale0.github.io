@@ -483,8 +483,12 @@ body {
 
 .theorem {
   display: block;
-  margin: 12px 0;
+  margin: 2px;
   font-style: italic;
+  border-style: none none none solid;
+  border-width: 2px;
+  border-color: #a0a0a0;
+  padding: 5px 8px;
   counter-increment: theorem
 }
 .theorem:before {
@@ -499,8 +503,12 @@ body {
 
 .corollary {
   display: block;
-  margin: 12px 0;
   font-style: italic;
+  margin: 2px;
+  border-style: none none none solid;
+  border-width: 2px;
+  border-color: #e9e9e9;
+  padding: 5px 8px;
   counter-increment: theorem//corollary
 }
 .corollary:before {
@@ -548,8 +556,12 @@ body {
 
 .prop {
   display: block;
-  margin: 12px 0;
   font-style: italic;
+  margin: 2px;
+  border-style: none none none solid;
+  border-width: 2px;
+  border-color: #e9e9e9;
+  padding: 5px 8px;
   counter-increment: theorem//prop
 }
 .prop:before {
@@ -580,8 +592,12 @@ body {
 
 .lemma {
   display: block;
-  margin: 12px 0;
   font-style: italic;
+  margin: 2px;
+  border-style: none none none solid;
+  border-width: 2px;
+  border-color: #e9e9e9;
+  padding: 5px 8px;
   counter-increment: theorem//lemma
 }
 .lemma:before {
