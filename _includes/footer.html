@@ -9,13 +9,15 @@
 
     <div class="footer right column one-half">
       <section class="small-font">
-        <a><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fnaturale0.github.io&count_bg=%23A4A4A4&title_bg=%23292929&icon=&icon_color=%23E7E7E7&title=VISITS&edge_flat=false"/></a>
+        {% if jekyll.environment == 'production' %}
+          {% include counter.html %}
+        {% endif %}
          -
         {% if site.github_username %}
-        {% include icon-github.html username=site.github_username %}
+          {% include icon-github.html username=site.github_username %}
         {% endif %}
         {% if site.twitter_username %}
-        {% include icon-twitter.html username=site.twitter_username %}
+          {% include icon-twitter.html username=site.twitter_username %}
         {% endif %}
       </section>
     </div>
