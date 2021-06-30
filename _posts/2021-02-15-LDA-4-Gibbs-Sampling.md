@@ -285,7 +285,7 @@ Finally we can plot it as a heatmap.
 ***References***
 
 * Pritchard, Stephens, Donnelly. 2000. **Inference of Population Structure Using Multilocus Genotype Data**. Genetics. 155: 945–959.
-* Griffiths, Steyvers. 2004. **Finding scientific topics**. Proceedings of the National Academy of Sciencess of the United States of America. 101: 5228-5235.
+* Griffiths, Steyvers. 2004. **Finding scientific topics**. Proceedings of the National Academy of Sciences of the United States of America. 101: 5228-5235.
 
 
 
