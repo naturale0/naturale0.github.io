@@ -16,7 +16,7 @@ h_\text{opt} = \left( \frac{\int K^2}{\mu_2(K) \int p''(x)^2 dx} \right)^{1/5} n
 $$
 
 
-However since $p$ is unknown, we cannot use this directly. Rather, we need an appropriate estimate of $\int p''(x) dx$ to do get a usable bandwidth.
+However since $p$ is unknown, we cannot use this directly. Rather, we need an appropriate estimate of $\int p\'\'(x) dx$ to get a usable bandwidth.
 
 
 
