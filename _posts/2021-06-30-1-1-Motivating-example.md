@@ -41,7 +41,7 @@ $$
 $$
 
 
-One important remark is that this results hold only for a $g.$ Our interest from now on lies on the case where $g$ is not fixed.
+One important remark is that this results hold only for a fixed $g.$ Our interest from now on lies on the case where $g$ is not fixed.
 
 Consider a class of functions $\mathcal{G} = \\{g_\theta: \mathcal{X} \to \mathbb R,~ \theta\in\Theta\\}$ indexed by a paramter $\theta$ in a metric space $\Theta.$ We want to prove or disprove that the result (1) holds uniformly on $\mathcal{G}.$ In addition, if (1) uniformly holds, then for $(\hat \theta_n)_ \{n\in\mathbb{N}\}$ such that $\hat \theta_n \overset{P}{\to} \theta_0,$ we want to show the consistency and asymptotic normality of $g_{\hat \theta_n}.$
 
