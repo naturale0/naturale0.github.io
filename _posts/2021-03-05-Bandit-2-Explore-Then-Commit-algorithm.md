@@ -3,7 +3,7 @@ layout: post
 title: "2. Explore-Then-Commit algorithm"
 date:   2021-03-05 12:31:00 +0900
 author: "Sihyung Park"
-categories: [adaptive sequential decision making]
+categories: [adaptive sequential decision making, bandit]
 ---
 
 

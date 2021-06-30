@@ -3,7 +3,7 @@ layout: post
 title: "1. Brief Introduction to Nonparametric function estimation"
 date:   2021-03-03 14:59:00 +0900
 author: "Sihyung Park"
-categories: [nonparametric]
+categories: [nonparametric, spline, kernel]
 ---
 
 The `[Nonparametric]` series of posts is my memo on the lecture *Nonparametric Function Estimation (Spring, 2021)* by Prof. Byeong U. Park. The lecture is mainly focused on kernel smoothing, while also briefly covers other nonparametric methods such as MARS.

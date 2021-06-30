@@ -3,7 +3,7 @@ layout: post
 title: "4. Multivariate Kernel Density Estimation"
 date:   2021-03-19 10:41:00 +0900
 author: "Sihyung Park"
-categories: [nonparametric]
+categories: [nonparametric, kernel]
 ---
 
 

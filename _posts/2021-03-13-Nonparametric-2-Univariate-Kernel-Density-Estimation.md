@@ -3,7 +3,7 @@ layout: post
 title: "2. Univariate Kernel Density Estimation"
 date:   2021-03-13 15:35:00 +0900
 author: "Sihyung Park"
-categories: [nonparametric]
+categories: [nonparametric, kernel]
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: "1. Measurable Space and Integration"
 date:   2021-03-04 14:59:00 +0900
 author: "Sihyung Park"
-categories: [real analysis]
+categories: [real analysis, Real and Complex Analysis]
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: "3. Shrinkage Estimators"
 date:   2021-03-17 16:40:00 +0900
 author: "Sihyung Park"
-categories: [statistical learning]
+categories: [statistical learning, The Elements of Statistical Learning]
 ---
 
 

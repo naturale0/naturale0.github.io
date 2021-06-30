@@ -3,7 +3,7 @@ layout: post
 title: "4. Hilbert Space Theory"
 date:   2021-04-11 14:09:00 +0900
 author: "Sihyung Park"
-categories: [real analysis]
+categories: [real analysis, Real and Complex Analysis]
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "2. Linear classifiers"
 date:   2021-03-16 00:44:00 +0900
 author: "Sihyung Park"
-categories: [statistical learning]
+categories: [statistical learning, The Elements of Statistical Learning]
 ---
 
 
