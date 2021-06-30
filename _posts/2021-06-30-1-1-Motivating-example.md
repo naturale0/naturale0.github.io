@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1.1 Motivating example"
+title: "1.1. Binary choice model"
 date:   2021-06-30 13:42:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
@@ -272,7 +272,7 @@ The MLE can be found similarly as in the case 1:
 
 
 $$
-\hat F_n = \argmax_{F \in \Lambda} \sum_{i=1}^n \big( Y_i \log F(Z_i) + (1-Y_i)\log (1-F(Z_i)) \cdot \log(1-F(Z_i)) \big).
+\hat F_n = \argmax_{F \in \Lambda} \sum_{i=1}^n \big( Y_i \log F(Z_i) + (1-Y_i)\log (1-F(Z_i)) \big).
 $$
 
 
