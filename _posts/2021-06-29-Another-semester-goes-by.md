@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Another semester goes by"
+title: "Another semester has gone by"
 date:   2021-06-29 20:58:00 +0900
 author: "Sihyung Park"
 categories: [thoughts]
