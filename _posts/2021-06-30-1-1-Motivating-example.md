@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1.1. Binary choice model"
+title: "1.1. Binary Choice Problem"
 date:   2021-06-30 13:42:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]

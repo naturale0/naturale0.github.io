@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1.2. Mean estimation in the binary choice problem"
+title: "1.2. Mean Estimation in the Binary Choice Problem"
 date:   2021-07-01 00:23:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
