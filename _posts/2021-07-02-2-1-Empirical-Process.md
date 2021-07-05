@@ -112,7 +112,7 @@ $$
 
 
 
-It is direct that the uniform version of the CLT holds for $\\{v_n(g)\\}_ {g\in\mathcal G}$ if it is asymptotically equicontinuous at $g_0,$ $\sigma_ {g_0} ^2$ is finite, and $\hat g_n$ approaches $g_0$ almost surely.
+It is direct that the uniform version of the CLT holds for $\\{v_n(g)\\}_ {g\in\mathcal G}$ if it is asymptotically equicontinuous at $g_0,$ $\sigma_ {g_0} ^2$ is finite, and $\hat g_n$ approaches $g_0$ in probability.
 
 
 
