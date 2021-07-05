@@ -87,7 +87,7 @@ Be careful that since $\hat\theta_n$ contains random component $X_1,\cdots,X_n$ 
 
 <div class="definition" text="empirical process"><br>
 $$
-    \{v_n(g) := \sqrt n \int g~ d(P_n-P) \}_{g \in \mathcal G}
+    \left\{v_n(g) := \sqrt n \int g~ d(P_n-P) \right\}_{g \in \mathcal G}
 $$
     is the empirical process indexed by $\mathcal G.$
 </div> 
