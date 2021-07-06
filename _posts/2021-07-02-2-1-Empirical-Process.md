@@ -16,7 +16,7 @@ Chapter 2 concerns essential notions of the field. First, we will define the emp
 
 
 
-## The Uniform Law of Large Numbers
+## Uniform law of large numbers
 
 Let $X_1,X_2, \cdots \overset {\text{indep.}}\sim P$ be i.i.d. copies of a random variable $X \sim P$ in $(\mathcal{X}, \mathcal{A}).$ Let $\mathcal{G} =\\{g_\theta:\theta\in\Theta\\}$ be a class of functions on $\mathcal X$ indexed by $\theta\in\Theta.$ We define the uniform law of large numbers (ULLN) as follows.
 
@@ -87,10 +87,11 @@ Be careful that since $\hat\theta_n$ contains random component $X_1,\cdots,X_n$ 
 
 <div class="definition" text="empirical process"><br>
 $$
-    \{v_n(g) := \sqrt n \int g~ d(P_n-P) \}_{g \in \mathcal G}
+    \left\{v_n(g) := \sqrt n \int g~ d(P_n-P) \right\}_{g \in \mathcal G}
 $$
     is the empirical process indexed by $\mathcal G.$
 </div> 
+
 
 <br>
 
@@ -112,16 +113,17 @@ $$
 
 
 
-It is direct that the uniform version of the CLT holds for $\\{v_n(g)\\}_ {g\in\mathcal G}$ if it is asymptotically equicontinuous at $g_0,$ $\sigma_ {g_0} ^2$ is finite, and $\hat g_n$ approaches $g_0$ almost surely.
+It is direct that the uniform version of the CLT holds for $\\{v_n(g)\\}_ {g\in\mathcal G}$ if it is asymptotically equicontinuous at $g_0,$ $\sigma_ {g_0} ^2$ is finite, and $\hat g_n$ approaches $g_0$ in probability.
 
 
 
 <div class="lemma" text="(2.3) of p.15">
-Suppose $\{v_n(g)\}_{g \in \mathcal G}$ is asymptotically equicontinuous at $g_0,$ $\sigma^2_{g_0} < \infty,$ and $\|\hat g_n - g_0\| = o_P(1)$ Then
+Suppose $\{v_n(g)\}_{g \in \mathcal G}$ is asymptotically equicontinuous at $g_0,$ $\sigma^2_{g_0} < \infty,$ and $\|\hat g_n - g_0\|_2 = o_P(1)$ Then
                                                                                                                 $$
 v_n(\hat g_n) \overset d \to \mathcal N(0, \sigma_{g_0}^2).
 
-$$                                                                                                                
+
+$$
 </div> 
 
 <div class="proof"><br>
