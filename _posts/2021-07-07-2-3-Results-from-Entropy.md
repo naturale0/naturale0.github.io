@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "2.3. Entropy Inequalities"
-date:   2021-07-07 14:08:00 +0900
+date:   2021-07-07 15:37:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
 ---
