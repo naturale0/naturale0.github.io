@@ -4,8 +4,9 @@ title: "2.3. Entropy Inequalities"
 date:   2021-07-07 14:08:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
-
 ---
+
+
 
 This section covers the important results regarding the upper bound of entropies of popular classes of functions. We will accept most of the results without proving them, since it might obscure our objective: LLN and CLT on function spaces.
 
@@ -63,12 +64,11 @@ $$
     \implies \exists A>0 \text{ s.t. } H_{B,2,Q}(\delta,\mathcal G) \le \frac 1 \delta A,~ \forall \delta >0,~ \forall Q.
     $$
 </p>
-
 <p>
     (3) (lemma 2.3 of the text)
     $$
     \mathcal G = \{g:\mathbb [0,1] \to [0,1],~ \|g\|_\infty\le1 \} \\
-    \implies \exists A>0 \text{ s.t. } H_{B,\infty}(\delta,\mathcal G) \le \frac 1 \delta A,~ \forall \delta >0.
+    \implies \exists A>0 \text{ s.t. } H_\infty(\delta,\mathcal G) \le \frac 1 \delta A,~ \forall \delta >0.
     $$
 </p>
 
@@ -78,9 +78,10 @@ $$
     (4) (theorem 2.4 of the text)
     $$
     \mathcal G = \left\{g:\mathbb [0,1] \to [0,1],~ \int_0^1 \left|g^{(m)}(x)\right|^2 dx \le 1 \right\} \\ \text{(a Sobolev class)} \\
-    \implies \exists A>0 \text{ s.t. } H_{B,\infty}(\delta,\mathcal G) \le \frac 1 {\delta^{1/m}} A,~ \forall \delta >0.
+    \implies \exists A>0 \text{ s.t. } H_\infty(\delta,\mathcal G) \le \frac 1 {\delta^{1/m}} A,~ \forall \delta >0.
     $$
 </p>
+
 
 </div> 
 
@@ -153,16 +154,6 @@ $$
 
 
 </div> 
-
-
-
-
-
-
-
-
-
-
 
 
 
