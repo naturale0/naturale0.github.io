@@ -106,7 +106,8 @@ $$
 $$
 This is from the condition that $\|g'\|_\infty \le 1.$ Thus if $\tilde g(a_{k-1})$ is chosen,
 $$
-\tilde g(a_k) \in \left[\tilde g(a_{k-1}) - 3\delta,~ \tilde g(a_{k-1}) + 3\delta\right]
+\tilde g(a_k) \in \left[\tilde g(a_{k-1}) - 3\delta,~ \tilde g(a_{k-1}) + 3\delta\right], \\
+\left\lfloor\frac{g(a_k)}{\delta}\right\rfloor \in \left[-3, 3\right]\cap\mathbb N,
 $$
 so there are at most $7$ choices for $\tilde g(a_{k}).$<br><br>
 
