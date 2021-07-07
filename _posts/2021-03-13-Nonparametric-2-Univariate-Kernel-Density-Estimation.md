@@ -567,7 +567,7 @@ K_h * p(x)
 $$
 
 
-Let $\alpha = x/h,$ and define the "incompelte" moment as the expansion term:
+Let $\alpha = x/h,$ and define the "incomplete" moment as the expansion term:
 
 
 $$
@@ -732,7 +732,7 @@ h_\text{opt} \sim n^{-1/(2r+5)}, \\
 $$
 
 
-This implies derivatives of density are much harder to estimate since deviation in $\hat p$ is amplifieds as $r$ increases.
+This implies derivatives of density are much harder to estimate since deviation in $\hat p$ is amplified as $r$ increases.
 
 
 
