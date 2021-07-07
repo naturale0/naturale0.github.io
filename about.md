@@ -22,7 +22,9 @@ Hope my knowledge helps someone, including my future self.
 
 ---
 
-Resources
+**Resources**
 
 - Review of Probability Theory I, Spring 2020. [[PDF]](https://naturale0.github.io/assets/src/Review+of+Probability+Theory+I+(2020.S1).pdf)
 - Review of Probability Theory II, Fall 2020. [[PDF]](https://naturale0.github.io/assets/src/Review+of+Probability+Theory+II+(2020.S2).pdf)
+- Understanding Latent Dirichlet Allocation. [[PDF]](https://naturale0.github.io/assets/src/Latent+Dirichlet+Allocation.pdf)
+
