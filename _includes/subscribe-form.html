@@ -1,0 +1,20 @@
+<span id="searchform" method="post" action="/search/" class="">
+    <input class="confirm" type="hidden" name="confirm" />
+    <input class="location" type="hidden" name="location" />
+    <input class="referrer" type="hidden" name="referrer" />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeypress="goSearch()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search anything" />
+    </div>
+
+    <script type="text/javascript">
+        function goSearch() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent(document.getElementById("searchtext").value);
+                window.location.href = "/search?query=" + url;
+            }
+        }
+    </script>
+</span>

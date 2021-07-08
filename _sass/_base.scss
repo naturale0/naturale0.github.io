@@ -234,8 +234,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0; }
+  background-color: #c04848;
+  border-color: #c04848; }
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
@@ -247,8 +247,8 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
-  background-color: #1EAEDB;
-  border-color: #1EAEDB; }
+  background-color: #c04848;
+  border-color: #c04848; }
 
 
 /* Forms
@@ -294,7 +294,7 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border: 1px solid #c04848;
   outline: 0; }
 label,
 legend {
@@ -677,3 +677,271 @@ summary{
 // details[open] summary:after {
 //   //background: url(other-picture);
 // }
+
+
+
+/* 7.1. Subscribe Form
+/* ---------------------------------------------------------- */
+.subscribe-form {
+  margin: 1.5em 0;
+  padding: 6.5vw 7vw 7vw;
+  text-align: center;
+
+  border-radius: 7px;
+}
+
+.subscribe-form-title {
+  margin: 0 0 3px 0;
+  padding: 0;
+  color: var(--darkgrey);
+  font-size: 3.5rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.subscribe-form p {
+  margin-bottom: 1em;
+  color: var(--midgrey);
+  font-size: 2.2rem;
+  line-height: 1.55em;
+  letter-spacing: 0.2px;
+}
+
+.subscribe-form form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.subscribe-form .form-group {
+  flex-grow: 1;
+}
+
+.subscribe-email {
+  display: block;
+  padding: 10px;
+  width: 100%;
+
+  color: #c04848;
+  font-size: 1.8rem;
+  line-height: 1em;
+  font-weight: normal;
+  user-select: text;
+  border-radius: 5px;
+  transition: border-color 0.15s linear;
+
+  -webkit-appearance: none;
+}
+
+.subscribe-email:focus {
+  outline: 0;
+}
+
+.subscribe-form button {
+  display: inline-block;
+  margin: 0 0 0 10px;
+  padding: 0 20px;
+  height: 41px;
+  outline: none;
+  color: #fff;
+  border-color: #c04848;
+  font-size: 1.5rem;
+  line-height: 37px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+  background: #e28585;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px inset rgba(0,0,0,0.14);
+
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.subscribe-form button:active,
+.subscribe-form button:focus {
+  background: #555;
+  border-color: #c04848;
+}
+
+@media (max-width: 650px) {
+  .subscribe-form-title {
+      font-size: 2.4rem;
+  }
+  .subscribe-form p {
+      font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .subscribe-form form {
+      flex-direction: column;
+  }
+  .subscribe-form .form-group {
+      width: 100%;
+  }
+  .subscribe-form button {
+      margin: 10px 0 0 0;
+      width: 100%;
+  }
+}
+
+/* 10. Subscribe Overlay
+/* ---------------------------------------------------------- */
+
+.subscribe-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(247, 247, 247, 0.6);
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+}
+
+.subscribe-overlay:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.subscribe-overlay-content {
+  position: relative;
+  z-index: 9999;
+  margin: 0 0 5vw 0;
+  padding: 4vw;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.subscribe-overlay-logo {
+  position: fixed;
+  top: 23px;
+  left: 30px;
+  height: 30px;
+}
+
+.subscribe-overlay-title {
+  display: inline-block;
+  margin: 0 0 10px 0;
+  font-family: "JuliaMono";
+  font-size: 3.2rem;
+  line-height: 1.15em;
+}
+
+.subscribe-overlay-description {
+  margin: 0 auto 50px;
+  max-width: 650px;
+  font-family: "JuliaMono";
+  font-size: 3rem;
+  line-height: 1.3em;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.subscribe-overlay form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.subscribe-overlay .form-group {
+  flex-grow: 1;
+}
+
+.subscribe-overlay .subscribe-email {
+  display: block;
+  padding: 14px 20px;
+  width: 100%;
+  border: none;
+  color: #c04848;
+  font-size: 1.5rem;
+  line-height: 1em;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  user-select: text;
+  border-radius: 9px;
+  transition: #c04848 0.15s linear;
+
+  -webkit-appearance: none;
+}
+
+.subscribe-email:focus {
+  border-color: #e28585;
+}
+
+.subscribe-overlay button {
+  display: inline-block;
+  margin: 0 0 0 15px;
+  padding: 0 25px;
+  height: 52px;
+  outline: none;
+  color: #fff;
+  font-size: 1.7rem;
+  line-height: 37px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+  background: #e28585;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px inset rgba(0,0,0,0.14);
+
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.subscribe-overlay button:active,
+.subscribe-overlay button:focus {
+  background: #333;
+}
+
+.subscribe-overlay-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+}
+
+.subscribe-overlay-close:before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: #fff;
+  opacity: 0.8;
+  transform: rotate(45deg);
+}
+
+.subscribe-overlay-close:after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: #fff;
+  opacity: 0.8;
+  transform: rotate(-45deg);
+}
+
+.subscribe-overlay-close:hover {
+  cursor: default;
+}
+
+.search-highlight {
+  background-color: yellow;
+}

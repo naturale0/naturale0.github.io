@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
+  <div id="search" class="subscribe-overlay">
+    <a class="subscribe-overlay-close" href="#"></a>
+    <div class="subscribe-overlay-content">
+        {% if site.logo %}
+            <img class="subscribe-overlay-logo" 
+                  src="{{ site.baseurl }}{{ site.logo }}" 
+                  alt="{{ site.title }}" />
+        {% endif %}
+        <h1 class="subscribe-overlay-title">Search on {{ site.title }}</h1>
+        {% include subscribe-form.html placeholder="keyword" %}
+    </div>
+  </div>
 
   <body>
   <script type="text/javascript" async

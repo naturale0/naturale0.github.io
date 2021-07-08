@@ -7,13 +7,18 @@
 
             for (var i = 0; i < results.length; i++) {  // Iterate over the results
                 var item = store[results[i].ref];
-                appendString += '<li><a href="' + item.url + '"><h6>' + item.title + '</h6></a>';
-                appendString += '<p>' + item.content.substring(0, 150) + '...</p></li>';
+                appendString += '<li><a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
+                var idx = item.content.toLowerCase().indexOf(searchTerm.toLowerCase())
+                appendString += '<p>... ' 
+                                + item.content.substring(Math.max(idx-115, 0), idx)
+                                + '<span class="search-highlight">' + item.content.substring(idx, idx+searchTerm.length) + '</span>'
+                                + item.content.substring(idx+searchTerm.length, Math.min(idx+115, item.content.length))
+                                + '  ...</p></li>';
             }
 
             searchResults.innerHTML = appendString;
         } else {
-            searchResults.innerHTML = '<li>검색 결과가 없습니다.</li>';
+            searchResults.innerHTML = '<li>No results found. Try different keywords.</li>';
         }
     }
 
@@ -51,7 +56,7 @@
                 lunr.stemmer
             );
             this.field('id');
-            this.field('title', { boost: 10 });
+            this.field('title');
             this.field('author');
             this.field('category');
             this.field('content');
