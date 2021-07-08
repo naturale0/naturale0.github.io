@@ -13,11 +13,11 @@ Latent Dirichlet allocation (LDA) is a three-level bayesian hierarchical model t
 
 > ***This article is the first part of the series "Understanding Latent Dirichlet Allocation".***
 >
-> 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
-> 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
-> 3. [Inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. [Inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
-> 5. [Smooth LDA](/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA)
+> 1. [Backgrounds](/2021/02/14/LDA-1-background-topic-modelling)
+> 2. [Model architecture](/2021/02/14/LDA-2-The-Model)
+> 3. [Inference - variational EM](/2021/02/15/LDA-3-Variational-EM)
+> 4. [Inference - Gibbs sampling](/2021/02/16/LDA-4-Gibbs-Sampling)
+> 5. [Smooth LDA](/2021/02/17/LDA-5-Smooth-LDA)
 
 
 

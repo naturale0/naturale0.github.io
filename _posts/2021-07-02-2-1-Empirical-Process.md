@@ -43,8 +43,6 @@ $$
 
 To grasp the essential of the ULLN, we simplify the formula by defining $P_n,$ the empirical distribution (or the empirical probability measure) of $P.$
 
-[TBD]
-
 <div class="definition" text="empirical distribution"><br>
 $$P_n := \frac1n \sum_{i=1}^n \delta_{Xi}$$
 

@@ -54,7 +54,7 @@ defaults:
       sitemap: false
 
 # permalink
-permalink: /:categories/:title
+permalink:  /:year/:month/:day/:title
 
 # SEO Tags
 author: Sihyung Park

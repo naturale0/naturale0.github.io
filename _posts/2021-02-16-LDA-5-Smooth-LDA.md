@@ -13,11 +13,11 @@ From background to two inference processes, I covered all the important details 
 
 > ***This article is the fifth and the final part of the series "Understanding Latent Dirichlet Allocation".***
 >
-> 1. [Backgrounds](/natural%20language%20processing/LDA-1-background-topic-modelling)
-> 2. [Model architecture](/bayesian/machine%20learning/natural%20language%20processing/LDA-2-The-Model)
-> 3. [Inference - variational EM](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM)
-> 4. [Inference - Gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling)
-> 5. [Smooth LDA](/bayesian/machine%20learning/natural%20language%20processing/LDA-5-Smooth-LDA)
+> 1. [Backgrounds](/2021/02/14/LDA-1-background-topic-modelling)
+> 2. [Model architecture](/2021/02/14/LDA-2-The-Model)
+> 3. [Inference - variational EM](/2021/02/15/LDA-3-Variational-EM)
+> 4. [Inference - Gibbs sampling](/2021/02/16/LDA-4-Gibbs-Sampling)
+> 5. [Smooth LDA](/2021/02/17/LDA-5-Smooth-LDA)
 
 
 
@@ -29,7 +29,7 @@ From background to two inference processes, I covered all the important details 
 
 Not every Bayesian approches are the same. One of the most important aspect when applying Bayesian model to real-world data is decision of hyperparameters. For the task, empirical Bayes method "fit" the model to the data to derive, in many times, *point estimate* of hyperparameter, while standard (fuller) Bayes predefine the *prior distribution* before any data and update it later using the data as an evidence.
 
-Recall the basic LDA that I explained from [the first](/natural%20language%20processing/LDA-1-background-topic-modelling) to [the third](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM) articles. Pay attention to the part that hyperparameter $\beta$ does not have a distribution; it is assumed to be an unknown but *fixed* value. This makes the basic LDA an empirical Bayes model. Can we extend this to make a fuller Bayes model?
+Recall the basic LDA that I explained from [the first](/2021/02/14/LDA-1-background-topic-modelling) to [the third](/2021/02/15/LDA-3-Variational-EM) articles. Pay attention to the part that hyperparameter $\beta$ does not have a distribution; it is assumed to be an unknown but *fixed* value. This makes the basic LDA an empirical Bayes model. Can we extend this to make a fuller Bayes model?
 
 
 
@@ -53,7 +53,7 @@ So why would we want to make a model fully Bayesian? This is because of generabi
 
 ## Variational EM for smooth LDA
 
-I already explained inference methods for smooth LDA: [Gibbs sampling with Metropolis-Hastings rule](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#gibbs-sampling) proposed by Pritchard et al. (2000), and [Collapsed gibbs sampling](/bayesian/machine%20learning/natural%20language%20processing/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling) that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look at [the previous articles](/bayesian/machine%20learning/natural%20language%20processing/LDA-3-Variational-EM) before moving on.
+I already explained inference methods for smooth LDA: [Gibbs sampling with Metropolis-Hastings rule](/2021/02/16/LDA-4-Gibbs-Sampling#gibbs-sampling) proposed by Pritchard et al. (2000), and [Collapsed gibbs sampling](/2021/02/16/LDA-4-Gibbs-Sampling#collapsed-gibbs-sampling) that Griffiths and Steyvers (2002) proposed are the ones. Here I would like to continue the discussion and be more specific on variational EM method that Blei et al. (2003) presented. If you are not familiar with variational EM algorithm, please take a look at [the previous articles](/2021/02/15/LDA-3-Variational-EM) before moving on.
 
 <br>
 

@@ -24,7 +24,7 @@ Researchers carefully split words into subwords by adding special boundary symbo
 
 ## FastText
 
-Aside from the fact that it uses subword vectors to characterize word vectors, it is more or less the same as [skip gram](https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram). It uses [subsampling](https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#subsampling), [negative sampling](https://naturale0.github.io/machine%20learning/natural%20language%20processing/understanding-skip-gram#negative-sampling) just like skip gram, and it is also a binary classification model.
+Aside from the fact that it uses subword vectors to characterize word vectors, it is more or less the same as [skip gram](/2021/02/08/understanding-skip-gram). It uses [subsampling](/2021/02/08/understanding-skip-gram#subsampling), [negative sampling](/2021/02/08/understanding-skip-gram#negative-sampling) just like skip gram, and it is also a binary classification model.
 
 $$s_{i,g} \in \mathcal{G}_{t_i}, \\
 z_{i,g} = Zs_{i,g}, \\

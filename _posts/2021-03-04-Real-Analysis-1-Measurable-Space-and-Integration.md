@@ -348,7 +348,7 @@ $s: X \to \mathbb{R},$ $s(x) = \sum_{i=1}^n \alpha_i \chi_{A_i}(x)$ is a simple 
 
 <br>
 
-A simple function $s$ is measurable, since measurability of $A_i$'s implies measurability of $\chi_{A_i}$'s. We use a construction scheme called the **standard machine** to define Lebesgue integral. [Detailed flow and definition is described in the earlier blog post](/probability/PTE-1.4-Lebesgue-integral#lebesgue-integral), so I will not cover it again.
+A simple function $s$ is measurable, since measurability of $A_i$'s implies measurability of $\chi_{A_i}$'s. We use a construction scheme called the **standard machine** to define Lebesgue integral. [Detailed flow and definition is described in the earlier blog post](/2020/12/19/PTE-1.4-Lebesgue-integral#lebesgue-integral), so I will not cover it again.
 
 As I discussed at the end of the section of the linked post, (seamingly straightforward) additive property
 
