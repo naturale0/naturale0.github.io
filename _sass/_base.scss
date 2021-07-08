@@ -800,11 +800,11 @@ summary{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(247, 247, 247, 0.6);
+  background: rgba(247, 247, 247, 0.75);
   opacity: 0;
   transition: opacity 200ms ease-in;
   pointer-events: none;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(7px);
 }
 
 .subscribe-overlay:target {
