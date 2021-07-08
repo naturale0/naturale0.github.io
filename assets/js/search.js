@@ -18,7 +18,7 @@
 
             searchResults.innerHTML = appendString;
         } else {
-            searchResults.innerHTML = '<li>No results found. Try different keywords.</li>';
+            searchResults.innerHTML = '<h3>No results found. Try different keywords.</h3>';
         }
     }
 
