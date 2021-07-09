@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "3.4. Examples of Sufficiencies of the Uniform Law"
+title: "3.4.1. Examples of Sufficiencies of the Uniform Law"
 date:   2021-07-09 15:33:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
@@ -8,21 +8,23 @@ categories: [empirical process, asymptotics, Empirical Processes in M-estimation
 
 
 
-The ULLN under finite bracketing entropy condition ([lemma 3.1](/2021/07/07/3-1-Uniform-Law-Under-Finite-Bracketing-Entropy#ulln-under-finite-bracketing-entropy)) and vanishing random entropy condition ([theorem 3.7](/2021/07/09/3-3-Uniform-Law-Under-Random-Entropy#theorem-37-main-theorem-l1-condition)) paves the way to the uniform law of frequently used function classes. Here, three examples from lemma 3.1 and one example from theorem 3.7 will be presented.
+The ULLN under finite bracketing entropy condition ([lemma 3.1](/2021/07/07/3-1-Uniform-Law-Under-Finite-Bracketing-Entropy#ulln-under-finite-bracketing-entropy)) and vanishing random entropy condition ([theorem 3.7](/2021/07/09/3-3-Uniform-Law-Under-Random-Entropy#theorem-37-main-theorem-l1-condition)) paves the way to the uniform law of frequently used function classes. Here, three examples from lemma 3.1 will be presented. An example from theorem 3.7 will be covered in the next post.
 
 - TOC
 {:toc}
-<br> 
+<br>
 
-## Results from lemma 3.1
-
-### 1. Class of monotone functions
+## 1. Class of monotone functions
 
 Given a fixed function $F \ge 0,$ define the classese of interest.
+
+
 $$
 \tilde{\mathcal G} := \{\tilde g:\mathbb R\to\mathbb R \text{ is increasing},~ \|\tilde g\|_\infty \le 1\} \\
 \mathcal G := \{\tilde g F:~ \tilde g \in \tilde{\mathcal G}\}
 $$
+
+
 Then the followings hold.
 
 <div class="lemma" text="3.8">
@@ -73,13 +75,19 @@ The last inequality is from the first result of <a href="/2021/07/07/2-3-Results
 
 <br>
 
-### 2. The Sobolev-Hilbert class
+## 2. The Sobolev-Hilbert class
 
 For a fixed $m\in\mathbb N$ and $R>0,$ define **the Sobolev-Hilbert class of $m$**
+
+
 $$
 \mathcal G := \left\{ g:[0,1]\to\mathbb R,~ \int\left( g^{(m)}(x) \right)^2dx\le 1,~ \|g\|_{2,Q} \le R \right\}.
 $$
+
+
 Let
+
+
 $$
 \Sigma_Q := \int \Psi\Psi^\intercal dQ, \\
 \Psi=(\psi_1,\cdots,\psi_m)^\intercal, \\
@@ -99,12 +107,16 @@ It suffices to show the condition of theorem 2.4. The proof uses the Taylor's th
 
 <br>
 
-### 3. Class of functions parametrized by $\theta$
+## 3. Class of functions parametrized by $\theta$
 
 Consider a parameter space $\Theta$ which is a **compact metric space**. Let
+
+
 $$
 \mathcal G := \{g_\theta:~ \theta\in\Theta\}
 $$
+
+
 where the map $\theta \mapsto g_\theta$ is **continuous** for $P$-almost all $x$'s.
 
 van de Geer (2000) mentions that the ULLN for this class is "more or less classical".
@@ -155,24 +167,6 @@ $$
  The proposed result directly follows.
 
 </div> 
-
-
-
-<br>
-
-## Result from theorem 3.7
-
-[TBD]
-
-
-
-
-
-
-
-
-
-
 
 
 
