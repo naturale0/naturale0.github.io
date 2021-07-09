@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "3.3. Uniform Law Under Random Entropy"
-date:   2021-07-09 11:33:00 +0900
+date:   2021-07-09 15:33:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
 ---
