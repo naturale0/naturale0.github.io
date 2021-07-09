@@ -11,7 +11,7 @@ title: Posts
     {% assign category_list = site.categories | sort %}
     {% for category in category_list %}
       <div class="category-name">
-        <h2>{{ category | first }}</h2>
+        <h2>{{ category | first | capitalize }}</h2>
       </div>
     
       {% for post in category.last %}

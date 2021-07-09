@@ -337,11 +337,14 @@ body.custom-background {
 
 .category-name {
   padding-top:20px;
-  text-transform:lowercase;
-  font-variant:small-caps;
+  text-transform: uppercase;
+  font-variant: normal;
   h2 {
    letter-spacing:0;
    border-bottom: 1px solid #ddd;
+   font-size: 1.05em;
+   font-family: 'Nanum Myeongjo', serif;
+   font-weight: 800;
   }
 }
 
