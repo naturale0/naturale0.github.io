@@ -79,8 +79,8 @@ As an example, consider again a class of functions with finite basis:
 
 
 $$
-\mathcal G = \{\theta_1\psi_1+\cdots+\theta_n\psi_n:~ \boldsymbol\theta\in\mathbb R^d\}, \\
-\psi_1,\cdots,\psi_n \text{ are fixed functions.} \tag{ex. 3.7.4d}
+\mathcal G = \{\theta_1\psi_1+\cdots+\theta_d\psi_d:~ \boldsymbol\theta\in\mathbb R^d\}, \\
+\psi_1,\cdots,\psi_d \text{ are fixed functions.} \tag{ex. 3.7.4d}
 $$
 
 
