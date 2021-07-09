@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "3.4.2. Uniform Law of Vapnik-Chervonenkis Subgraph Classes"
-date:   2021-07-09 20:35:00 +0900
+date:   2021-07-10 01:51:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
 ---

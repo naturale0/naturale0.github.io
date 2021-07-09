@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "2017 대선 후보 지지층 군집분석"
-date:   2017-04-28 00:09:00 +0900
+date:   2017-04-28 12:00:00 +0900
 author: "Sihyung Park"
 categories: [applied]
 ---
@@ -31,7 +31,7 @@ categories: [applied]
 5. 데이터포인트를 클러스터링하는 데에는 [계층적 클러스터링](https://en.wikipedia.org/wiki/Hierarchical_clustering), 그 중에서도 agglomerative 방식을 사용했다. 클러스터링 옵션을 더 자세히 설명하자면 이렇다:
     - 계층적 클러스터링을 위해서는 각각의 변수값(여기서는 연령대별 지지율 등등) 사이의 유사도를 계산하는 방법인 '**metric**'과 각 샘플(즉, 여기서는 각 대선후보의 지지층) 사이의 클러스터링 방식인 '**linkage**'을 설정해주어야 한다.
     - Metric으로는 코사인 유사도(cosine similarity)를 사용했다. 이는 응답 값의 차이 대신 응답 패턴의 유사성만을 보기 위해서이다. 코사인 유사도를 사용하면 지지율과 같이 패턴이 비슷해도 값에는 차이가 클 수 있는 데이터에서 패턴의 유사도를 계산할 수 있다. [(figure 출처)](http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/)\
-![cosinesimilarity.png](https://blog.christianperone.com/wp-content/uploads/2013/09/cosinesimilarityfq1.png)
+    ![cosinesimilarity.png](https://blog.christianperone.com/wp-content/uploads/2013/09/cosinesimilarityfq1.png)
     - Linkage로는 Ward's minimum variance method를 사용했다. 그냥 많이들 사용하는 방식이라고 해서 써봤다.
     - 이 외의 metric과 linkage는 [이 도큐멘테이션](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist)을 참고하면 좋다.
     - 클러스터링 결과로 그려진 수형도(tree)에서 가지가 짧을수록 서로 유사한 샘플(지지층)이라고 해석할 수 있다.

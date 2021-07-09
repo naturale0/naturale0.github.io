@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Weakly-Supervised Localization: 뉴럴넷은 어디를 바라보고 있는가"
-date:   2018-06-17 09:00:00 +0900
+date:   2018-06-17 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
 ---

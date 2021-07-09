@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "인공신경망 이해하기 (3) 학습 과정 - 개요"
-date:   2018-04-19 00:09:00 +0900
+date:   2018-04-19 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
 ---

@@ -54,6 +54,7 @@ defaults:
       sitemap: false
 
 # permalink
+timezone: Asia/Seoul
 permalink:  /:year/:month/:day/:title
 
 # SEO Tags

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "인공신경망 이해하기 (2) 퍼셉트론과 신경망"
-date:   2018-04-17 00:12:00 +0900
+date:   2018-04-17 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
 ---

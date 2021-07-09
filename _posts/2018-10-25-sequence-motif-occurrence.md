@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "$k$-mer Sequence Motif는 얼마나 자주 등장할까"
-date:   2018-10-25 09:00:00 +0900
+date:   2018-10-25 12:00:00 +0900
 author: "Sihyung Park"
 categories: [applied]
 ---

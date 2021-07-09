@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "의식을 이식하기"
-date:   2017-03-23 00:09:00 +0900
+date:   2017-03-23 12:00:00 +0900
 author: "Sihyung Park"
 categories: [thoughts]
 ---

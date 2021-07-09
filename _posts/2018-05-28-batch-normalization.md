@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Batch Normalization 이해하기"
-date:   2018-05-28 09:00:00 +0900
+date:   2018-05-28 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
 ---
@@ -61,9 +61,9 @@ BatchNorm이 어떤 의미를 가지는지를 알기 위해서는 BatchNorm이 �
     - $a_r ^\prime = wx + (b + \Delta b)$
 4. [시도 1]을 이용해서 센터링만 한 raw activation은:
     - $$\begin{aligned} a_{r_{centered}} ^\prime &= a_r ^\prime - E(a_r ^\prime) \\ 
-&= \{(wx + b) + \cancel{\Delta b}\} - \{ E[wx + b] + \cancel{\Delta b} \} \\ 
-&= (wx + \cancel{b}) - E[wx + \cancel{b}]
-\end{aligned}$$
+    &= \{(wx + b) + \cancel{\Delta b}\} - \{ E[wx + b] + \cancel{\Delta b} \} \\ 
+    &= (wx + \cancel{b}) - E[wx + \cancel{b}]
+    \end{aligned}$$
 
 Bias $b$의 업데이트 $\Delta b$가 완벽하게 캔슬되었다. 초기 편향값에서 더 이상 업데이트가 되지 않는 것이다. 두 종류의 파라미터 $w$, $b$를 사용했는데 파라미터 $w$ 한 가지만 사용하는 단순한 모형으로 irreversible하게 변환된 것이다.
 
