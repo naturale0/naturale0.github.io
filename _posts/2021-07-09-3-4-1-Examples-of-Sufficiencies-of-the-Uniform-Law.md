@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "3.4.1. Examples of Sufficiencies of the Uniform Law"
-date:   2021-07-09 15:33:00 +0900
+date:   2021-07-09 17:33:00 +0900
 author: "Sihyung Park"
 categories: [empirical process, asymptotics, Empirical Processes in M-estimation]
 ---
 
 
 
-The ULLN under finite bracketing entropy condition ([lemma 3.1](/2021/07/07/3-1-Uniform-Law-Under-Finite-Bracketing-Entropy#ulln-under-finite-bracketing-entropy)) and vanishing random entropy condition ([theorem 3.7](/2021/07/09/3-3-Uniform-Law-Under-Random-Entropy#theorem-37-main-theorem-l1-condition)) paves the way to the uniform law of frequently used function classes. Here, three examples from lemma 3.1 will be presented. An example from theorem 3.7 will be covered in the next post.
+The ULLN under finite bracketing entropy condition ([lemma 3.1](/2021/07/07/3-1-Uniform-Law-Under-Finite-Bracketing-Entropy#ulln-under-finite-bracketing-entropy)) and vanishing random entropy condition ([theorem 3.7](/2021/07/09/3-3-Uniform-Law-Under-Random-Entropy#theorem-37-main-theorem-l1-condition)) paves the way to the uniform law of frequently used function classes. Here, three examples from lemma 3.1 will be presented. An example from theorem 3.7 will be covered in the next article.
 
 - TOC
 {:toc}
