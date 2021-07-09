@@ -152,12 +152,6 @@ Then the desired result follows.
 
 
 
-
-
-
-
-
-
 <br>
 
 ***References***
