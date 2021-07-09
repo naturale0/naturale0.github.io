@@ -136,13 +136,15 @@ $$
   + \color{darkred}{ \int_{G>R} G~dP }. \\
 \end{aligned}
 $$
-For given $\delta>0,$ take $R>0$ large enough so that
+For given $\varepsilon>0,$ take $R>0$ large enough so that
 $$
-\color{darkred}{ \int_{G>R} G~dP } \le \delta.
+\color{darkred}{ \int_{G>R} G~dP } \le \varepsilon.
 $$
 Then take $n\in\mathbb N$ large enough so that
 $$
-\color{darkgreen}{ \int_{G>R} G~dP_n } \le \delta \text{ a.s.} ~\text{ and } \color{darkblue}{ \sup_{g\in\mathcal G} \bigg| \int_{G\le R} g~d(P_n-P) \bigg| } \le \delta \text{ a.s.}
+\color{darkgreen}{ \int_{G>R} G~dP_n } \le \varepsilon \text{ a.s.} 
+~\text{ and } 
+\color{darkblue}{ \sup_{g\in\mathcal G} \bigg| \int_{G\le R} g~d(P_n-P) \bigg| } \le \varepsilon \text{ a.s.}
 $$
 Then the desired result follows.
 
