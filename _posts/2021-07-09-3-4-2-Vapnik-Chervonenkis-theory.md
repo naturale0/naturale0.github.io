@@ -157,7 +157,7 @@ G(x) = \sup_{g\in\mathcal G}|g(x)| = \|\Psi(x)\|_2 \cdot R.
 $$
 Hence
 $$
-\|G\|_Q = \sqrt d R.
+\|G\|_{2,Q} = \sqrt{\text{tr}(\mathbf I_d)} R = \sqrt d R.
 $$
 Now apply theorem 3.11.
 
