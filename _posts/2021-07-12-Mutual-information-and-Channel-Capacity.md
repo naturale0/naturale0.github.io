@@ -146,7 +146,7 @@ which implies no information can be practically transferred.
 
 ## Derivation of $C$
 
-### Random coding theory
+### Random coding
 
 For a message $M,$ let $x^{[n]}$ be a random (binary) code of length $n$ with each component be independent and identically distributed.
 
