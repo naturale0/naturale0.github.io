@@ -137,17 +137,16 @@ Since the solution is achieved at the equality condition of the K-M inequality,
 $$
 \begin{aligned}
 1 &= \sum_{i=1}^m p_i = \lambda \ln2 \sum_{i=1}^m 2^{-\ell_i^*} \\
-  &= \lambda\ln2 = 1
+  &= \lambda\ln2
 \end{aligned}
 $$
 
 
-So $\lambda$ should be $(\ln 2)^{-1}$ and we get **the minimal average code length** of 
+So $\lambda$ should be $(\ln 2)^{-1}$ and $\ell_i^*$ should be $-\log_2 p_i$ so we get **the minimal average code length** of 
 
 
 $$
-\ell_i^* = -\log_2 p_i ,~ 1\le i\le m  \\
-\text{Avg}(\boldsymbol\ell^*) = \color{blue}{ \sum_{i=1}^m p_i \log_2 p_i}
+\text{Avg}(\boldsymbol\ell^*) = \color{blue}{ -\sum_{i=1}^m p_i \log_2 p_i}
 $$
 
 
@@ -158,7 +157,7 @@ which is the definition of the Shannon entropy.
 <div class="definition" text="Shannon entropy"><br>
 For a code $\mathbf X=(X_i)_{i=1}^m,$ the shannon entropy of $\mathbf X$ is 
 $$
-H(\mathbf X) = \sum_{i=1}^m p_i\log_2 p_i
+H(\mathbf X) = -\sum_{i=1}^m p_i\log_2 p_i
 $$
 
 
