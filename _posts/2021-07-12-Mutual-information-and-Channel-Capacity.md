@@ -173,7 +173,7 @@ $$
 $$
 
 
-Notice that although the $\eqref{Seq 2}$ is more probable than the $\eqref{Seq 1}$ with probability $p^n$ if $p>0.5,$ as $n \to \infty$ an arbitrarily chosen sequence will be a permutation of $\eqref{Seq 1}$ with probability tending to one. Such sequence $x^{[n]}$ which is one of the limiting sequences in probability is called a **$\varepsilon$-typical sequence of $X^{[n]}$**. Typical sequence for cases other than binary code can also be defined similarly.
+Notice that although the $\eqref{Seq 2}$ is more probable than the $\eqref{Seq 1}$ with probability $p^n$ if $p<0.5,$ as $n \to \infty$ an arbitrarily chosen sequence will be a permutation of $\eqref{Seq 1}$ with probability tending to one. Such sequence $x^{[n]}$ which is one of the limiting sequences in probability is called a **$\varepsilon$-typical sequence of $X^{[n]}$**. Typical sequence for cases other than binary code can also be defined similarly.
 
 Note that for a $\varepsilon$-typical sequence $x^{[n]}$ of $X^{[n]}$ in any setting (not limited to the binary case), the log likelihood is given as
 
