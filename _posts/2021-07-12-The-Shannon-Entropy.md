@@ -20,8 +20,10 @@ A communication system that we are dealing in the signal transmission can be dep
 
 
 
+
+
 <div style="text-align:center">
-<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/39d63076666d80bf3b6140eadf87155187e371a2" alt="comm_sys.png" width="400"/>
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/39d63076666d80bf3b6140eadf87155187e371a2" alt="comm_sys.png" width="530"/>
 <br>
 <em>Figure 1. The Mathematical model of a communication system (<a href="https://en.wikipedia.org/wiki/Channel_capacity">source: Wikimedia</a>)</em>
 </div><br>
