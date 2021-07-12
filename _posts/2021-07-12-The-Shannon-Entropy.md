@@ -146,11 +146,11 @@ So $\lambda$ should be $(\ln 2)^{-1}$ and $\ell_i^*$ should be $-\log_2 p_i$ so 
 
 
 $$
-\text{Avg}(\boldsymbol\ell^*) = \color{blue}{ -\sum_{i=1}^m p_i \log_2 p_i}
+\text{Avg}(\boldsymbol\ell^*) = \color{blue}{ -\sum_{i=1}^m p_i \log_2 p_i}.
 $$
 
 
-which is the definition of the Shannon entropy.
+Similarly, the expectation of a <u>random</u> $\boldsymbol\ell^*$ becomes the definition of the Shannon entropy.
 
 
 
