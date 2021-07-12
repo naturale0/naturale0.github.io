@@ -155,19 +155,21 @@ which is the definition of the Shannon entropy.
 
 
 <div class="definition" text="Shannon entropy"><br>
-For a code $\mathbf X=(X_i)_{i=1}^m,$ the shannon entropy of $\mathbf X$ is 
+For a random variable $X$ with density function $p,$ the shannon entropy of $X$ is 
 $$
-H(\mathbf X) = -\sum_{i=1}^m p_i\log_2 p_i
+\begin{aligned}
+H(X) 
+ &= -\sum_x p(x)\log_2 p(x) \\
+ &= \mathbb E \left[ \log\frac1{p(x)} \right]
+\end{aligned}
 $$
-
-
 </div> 
 
 <br>
 
-Hence in its definition, the Shannon entropy of a code $\mathbf X$ bounds the efficiency of all the possible codes of $\mathbf M$ from above.
+The term $ \log(1/p(x))$ can be interpreted as the amount of information in the sense that it gives more weight to $p(x)$ if it is less likely to happen. Hence in its definition, the Shannon entropy of a code $\mathbf X$ bounds the efficiency of all the possible codes of $\mathbf M$ from above.
 
-
+In application, the entropy can be intuitively understand as an aggregated statistic of uniformity. Larger entropy implies the heterogeneity of the data $X_i.$ In communication system, more heterogeneous data implies inefficiency (every messages have the same frequency); In ecology, it implies an ecosystem of [more species diversity](https://en.wikipedia.org/wiki/Diversity_index); In thermodynamics, it can be seen as a generalization of the [Boltzmann entropy](https://en.wikipedia.org/wiki/Boltzmann%27s_entropy_formula#Generalization).
 
 
 
