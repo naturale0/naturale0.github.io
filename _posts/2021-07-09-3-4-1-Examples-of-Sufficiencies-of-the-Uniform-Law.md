@@ -16,7 +16,7 @@ The ULLN under finite bracketing entropy condition ([lemma 3.1](/2021/07/07/3-1-
 
 ## 1. Class of monotone functions
 
-Given a fixed function $F \ge 0,$ define the classese of interest.
+Given a fixed function $F \ge 0,$ define the class of interest.
 
 
 $$
