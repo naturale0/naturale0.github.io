@@ -165,7 +165,7 @@ Notice that computation of gradients require summation over all possible values 
 
 It is quite discouraging that the model is implausible even for a not-so-big data. Follow up research was mainly focused on constraints makes the model plausible for data of nontrivial size while maintaining its theoretical advantages. Hinton (2002) proposed the one: the restricted Boltzmann machine (RBM).
 
-Considera BM with hidden nodes (nodes that cannot be observed). Hinton thought of a BM as a network between layers of units. RBM restricts the ordinary Boltzmann machine by imposing a constraint that *each node within the same layer cannot have connections*.
+Consider a BM with hidden nodes (nodes that cannot be observed). Hinton thought of a BM as a network between layers of units. RBM restricts the ordinary Boltzmann machine by imposing a constraint that *each node within the same layer cannot have connections*.
 
 <div style="text-align:center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Boltzmannexamplev1.png" alt="boltzmann_w_hidden.png" width="200"/>
@@ -190,11 +190,11 @@ where joint energy is defined similar to $\eqref{1}$ as well.
 
 
 $$
-E(\mathbf x, \mathbf h) =  \color{blue}{ -\sum_{i,j} w_{ij}x_ih_j } \color{green}{ -\sum_{i} a_ix_i } \color{green}{ -\sum_{j} b_jh_j } 
+E(\mathbf x, \mathbf h) =  \color{blue}{ -\sum_{i,j} w_{ij}x_ih_j } \color{green}{ -\sum_{i} a_ix_i } \color{green}{ -\sum_{j} b_jh_j }
 $$
 
 
-
+Notice the additional threshold $\mathbf b$ for hidden units $\mathbf h$ and the correlation is now in between $\mathbf x$ and $\mathbf h.$
 
 
 
