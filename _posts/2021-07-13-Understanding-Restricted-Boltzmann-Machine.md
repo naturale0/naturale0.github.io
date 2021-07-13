@@ -20,7 +20,7 @@ A Boltzmann machine is an unsuperviced generative model that learns the probabil
 
 We will consider the simplest version here: The one without any hidden units.
 
-Let $\mathbf x=(x_1,\cdots,x_m)^\intercal \in \mathbb \{0, 1\}^m$ be a realization of a <u>binary</u> $m$-dimensional random vector following the distribution $P.$ Each entry $x_i$ will become a unit (node) of the network (Boltzmann machine) that is visible (observable). One can interpret that the unit $x_i$ is "on" if $x_i=1$ and is "off" otherwise. Suppose that we have a training data $\\{\mathbf x_\ell:~ 1\le \ell\le L\\}$ of size $L.$ Our goal is to learn $p$ using the data at hand. A (unrestricted) Boltzmann machine (BM) models the distribution with the Boltzmann distribution with product of Boltzmann constant $k$ and temperature $T$ set to $kT=1$ and the energy $E(\mathbf x)$ of the visible (observed) sample $\mathbf x$ follows the formula below.
+Let $\mathbf x=(x_1,\cdots,x_m)^\intercal \in \mathbb \\{0, 1\\}^m$ be a realization of a <u>binary</u> $m$-dimensional random vector following the distribution $P.$ Each entry $x_i$ will become a unit (node) of the network (Boltzmann machine) that is visible (observable). One can interpret that the unit $x_i$ is "on" if $x_i=1$ and is "off" otherwise. Suppose that we have a training data $\\{\mathbf x_\ell:~ 1\le \ell\le L\\}$ of size $L.$ Our goal is to learn $p$ using the data at hand. A (unrestricted) Boltzmann machine (BM) models the distribution with the Boltzmann distribution with product of Boltzmann constant $k$ and temperature $T$ set to $kT=1$ and the energy $E(\mathbf x)$ of the visible (observed) sample $\mathbf x$ follows the formula below.
 
 
 $$
