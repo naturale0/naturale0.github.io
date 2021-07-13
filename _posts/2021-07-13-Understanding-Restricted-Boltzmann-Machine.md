@@ -56,7 +56,7 @@ The energy $E(\mathbf x)$ is assigned to each global state of the network. I wil
 
 
 
-> This quantity is called "energy" because it either decreases or stays the same upon network units being updated. Furthermore, under repeated updating the network will eventually converge to a state which is a [local minimum](https://en.wikipedia.org/wiki/Local_minimum) in the energy function. (...) Thus, if a state is a local minimum in the energy function it is a stable state for the network.       ([Hopfield network, Wikipedia](https://en.wikipedia.org/wiki/Hopfield_network#Energy))
+> This quantity is called "energy" because it either decreases or stays the same upon network units being updated. Furthermore, under repeated updating the network will eventually converge to a state which is a local minimum in the energy function. (...) Thus, if a state is a local minimum in the energy function it is a stable state for the network.       ([Hopfield network, Wikipedia](https://en.wikipedia.org/wiki/Hopfield_network#Energy))
 
 
 
