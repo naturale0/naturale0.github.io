@@ -275,7 +275,7 @@ $$
 $$
 
 
-In some literature the blue part is referred to as the **negative gradient** and the green part to as the **positive gradient**. Since 
+In some literature the blue part is referred to as the **negative gradient** and the green part as the **positive gradient**. Since 
 
 
 $$
@@ -322,6 +322,20 @@ Repeat the following until convergence of parameters for the training data.
     1. $\Delta \mathbf W = \mathbf x \mathbf h^\intercal - \tilde{\mathbf{x}} \tilde{\mathbf{h}}^\intercal$
     2. $\Delta\mathbf a = \mathbf x - \tilde{\mathbf x}$
     3. $\Delta\mathbf b = \mathbf h - \tilde{\mathbf h}$
+
+<br>
+
+## Relation of RBM to neural nets
+
+One might notice that the RBM closely resembles the structure of a neural net. In fact, the forward feeding of a RBM can be viewed as a forward propagation of a stochastic neural net with sigmoid function $\sigma$ as its activation function that only have binary outputs. That is, recall the equation
+
+
+$$
+\hat p_{\mathbf H|\mathbf X}(h_j=1|\mathbf x) = \sigma \left( \sum_{i} w_{ij}x_i + b_j \right).
+$$
+
+
+
 
 <br>
 
