@@ -161,9 +161,10 @@ $$
 H(X) 
  &= -\sum_x p(x)\log_2 p(x) \\
  &= \mathbb E \left[ \log\frac1{p(x)} \right]
-\end{aligned}
+\label{shannon entropy}\end{aligned}
 $$
 </div> 
+
 
 <br>
 
