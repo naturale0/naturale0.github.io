@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Understanding Restricted Boltzmann Machine"
-date:   2021-07-13 17:53:00 +0900
+date:   2021-07-14 00:50:00 +0900
 author: "Sihyung Park"
 categories: [machine learning, information theory, generative]
 ---
@@ -44,10 +44,11 @@ In Boltzmann machine setting, we assume that $w_{ij}=w_{ji}$ which makes it a **
 
 
 <div style="text-align:center">
-<img src="/assets/fig/210713_BM.png" alt="boltzmann.png" width="350"/>
+<img src="/assets/fig/210713_BM.png" alt="boltzmann.png" width="300"/>
 <br>
 <em>Figure 1. A Boltzmann machine with visible units only</em>
 </div><br>
+
 <br>
 
 ### 2. Energy
@@ -94,11 +95,11 @@ Define the **local energy** $E(x_k) := -\sum_{i}w_{ki}x_kx_i - a_kx_k$ **at the 
 
 
 $$
-\Delta E(x_k) = E(x_k=1)-E(x_k=0) = \sum_i w_{ki}x_i - a_k.
+\Delta E(x_k) = E(x_k=0)-E(x_k=1) = \sum_i w_{ki}x_i + a_k.
 $$
 
 
-Notice that during the learning process, the model tends to turn the $k$-th unit *on* if the surrounding signal $\sum_i w_{ki}x_i$ of the unit $x_k$ is stronger than the value $a_k.$ This is why we call the term "threshold" (Ackley et al., 1985).
+Notice that during the learning process, the model tends to turn the $k$-th unit *on* if the surrounding signal $\sum_i w_{ki}x_i$ of the unit $x_k$ is stronger than the value $\theta_k:=-a_k.$ This is why we call the term "threshold" (Ackley et al., 1985).
 
 <br>
 
@@ -176,7 +177,7 @@ Consider a BM with hidden nodes (nodes that cannot be observed). Hinton thought 
 
 
 
-Under this constraint, the visible unit $x_i$ can have relationship with $x_j$ only through the hidden unit $h_k.$ In this sense the hidden unit $\mathbf h$ can be interpreted as the **internal representation of $\mathbf x$**.
+Under this constraint, the visible unit $x_i$ can have relationship with $x_j$ only through the hidden (latent) unit $h_k.$ In this sense the hidden unit $\mathbf h$ can be interpreted as the **internal representation of $\mathbf x$**.
 
 Now, as in the ordinary BM, we have a learned density $\hat p$ but this time it is a joint density of $(\mathbf x, \mathbf h).$
 
@@ -190,23 +191,137 @@ where joint energy is defined similar to $\eqref{1}$ as well.
 
 
 $$
-E(\mathbf x, \mathbf h) =  \color{blue}{ -\sum_{i,j} w_{ij}x_ih_j } \color{green}{ -\sum_{i} a_ix_i } \color{green}{ -\sum_{j} b_jh_j }
+E(\mathbf x, \mathbf h) =  -\sum_{i,j} w_{ij}x_ih_j -\sum_{i} a_ix_i -\sum_{j} b_jh_j 
 $$
 
 
-Notice the additional threshold $\mathbf b$ for hidden units $\mathbf h$ and the correlation is now in between $\mathbf x$ and $\mathbf h.$
+Notice the additional threshold $\mathbf b$ for hidden units $\mathbf h$ and the correlation is now in between $\mathbf x$ and $\mathbf h.$ Estimation of the marginal $p_L(\mathbf x)$ is done by marginalizing the joint density over $\mathbf h$: $\hat p_\mathbf{X}(\mathbf x) = \sum_{\mathbf h} \hat p(\mathbf x,\mathbf h).$
+
+<br>
+
+### Activation probabilities of hidden units
+
+There are some additional assumptions from the model structure. We assume that, by the restriction on connection between units in the same layer, activation of hidden units ($h_j$'s) are mutually independent given observable units ($x_i$'s). That is,
 
 
-
-[TBD]
-
-
-
-
+$$
+x_i|\mathbf h \overset{\text{i.i.d.}}{\sim} \text{Multinomial},~ 1\le i\le m \\
+h_j|\mathbf x \overset{\text{i.i.d.}}{\sim} \text{Bernoulli},~ 1\le j\le n
+$$
 
 
+From this activation probabilities are direct:
 
 
+$$
+\begin{cases}
+\hat p_{\mathbf H|\mathbf X}(h_{j}=1|\mathbf x) + \hat p_{\mathbf H|\mathbf X}(h_{j}=0|\mathbf x) = 1, \\
+\frac{\hat p_{\mathbf H|\mathbf X}(h_{j}=1|\mathbf x)}{\hat p_{\mathbf H|\mathbf X}(h_{j}=0|\mathbf x)} = \frac{e^{-E(h_j=1)}/\cancel Z}{e^{-E(h_j=0)}/\cancel Z} = e^{\Delta E(h_j)}.
+\end{cases}\tag{2}\label{2}
+$$
+
+
+where
+
+
+$$
+\begin{aligned}
+\Delta E(h_j) &= E(\mathbf x,h_j=0)-E(\mathbf x,h_j=1) \\
+ &= \sum_i w_{ij}x_i + b_j.
+\end{aligned}
+$$
+
+
+Solving the equation $\eqref{2}$ yields
+
+
+$$
+\hat p_{\mathbf H|\mathbf X}(h_j=1|\mathbf x) = \frac{e^{\Delta E(h_j)}}{1 + e^{\Delta E(h_j)}} = \sigma\left( \sum_i w_{ij}x_i + b_j \right) \\
+\hat p_{\mathbf H|\mathbf X}(h_j=0|\mathbf x) = \frac 1 {1 + e^{\Delta E(h_j)}} = \sigma\left( -\sum_i w_{ij}x_i - b_j \right)
+\tag{3}\label{3}
+$$
+
+
+These activation probabilities will be later used in Gibbs sampling step.
+
+<br>
+
+### Minimizing the KL divergence
+
+The scheme of the learning process is more or less the same as in an ordinary BM: We find the minimizer of the KL divergence $K=K(p_L\\|\hat p_\mathbf{X})$. In fact, since the $p_L$ part is fixed, it is equivalent to minimize the negative log likelihood $-\log \hat p_\mathbf{X}(\mathbf x).$ In this equivalent problem, the gradient descent update rule becomes
+
+
+$$
+w_{ij} \leftarrow w_{ij} - \lambda \frac{\partial}{\partial w_{ij}} \left(-\log \hat p_{\mathbf X}(\mathbf x)\right) \\
+a_i \leftarrow a_i - \lambda \frac{\partial}{\partial a_i} \left(-\log \hat p_{\mathbf X}(\mathbf x)\right) \\
+b_i \leftarrow b_i - \lambda \frac{\partial}{\partial b_i} \left(-\log \hat p_{\mathbf X}(\mathbf x)\right)
+$$
+
+
+Gradients can be computed as follows. Below, the placeholder $\theta$ can be replaced to any parameters being updated ($a_i$, $b_j$, or $w_{ij}$).
+
+
+$$
+\begin{aligned}
+&\frac{\partial}{\partial \theta} \left(-\log \hat p_{\mathbf X}(\mathbf x)\right) \\
+ &= \frac{\partial}{\partial \theta} \left(-\log \sum_{\mathbf h} \hat p(\mathbf x, \mathbf h)\right) \\
+ &= \frac{\partial}{\partial \theta} \left[ \log\left(\sum_{\mathbf x, \mathbf h}e^{-E(\mathbf x, \mathbf h)}\right) - \log\left(\sum_{\mathbf h}e^{-E(\mathbf x, \mathbf h)}\right) \right] \\
+ &= -\frac1{\left(\sum_{\mathbf x, \mathbf h}e^{-E(\mathbf x, \mathbf h)}\right)} \left(\sum_{\mathbf x, \mathbf h}e^{-E(\mathbf x, \mathbf h)}\right) \frac{\partial}{\partial \theta}E(\mathbf x, \mathbf h) \\
+ &\;\;\;\;+ \frac1{\left(\sum_{\mathbf h}e^{-E(\mathbf x, \mathbf h)}\right)} \left(\sum_{\mathbf h}e^{-E(\mathbf x, \mathbf h)}\right) \frac{\partial}{\partial \theta}E(\mathbf x, \mathbf h) \\
+ &=-\sum_{\mathbf x, \mathbf h} \hat p(\mathbf x, \mathbf h) \frac{\partial}{\partial\theta} E(\mathbf x, \mathbf h) + \sum_{\mathbf h} \hat p_{\mathbf H|\mathbf X}(\mathbf h|\mathbf x) \frac{\partial}{\partial\theta} E(\mathbf x, \mathbf h) \\
+ &=-\color{blue}{ \mathbb E_{\hat p} \left( \frac{\partial}{\partial\theta}E(\mathbf x, \mathbf h) \right) } 
+ + \color{green}{ E_{\hat p_{\mathbf H|\mathbf X}}\left( \frac{\partial}{\partial\theta} E(\mathbf x, \mathbf h) \right) }
+\end{aligned}
+$$
+
+
+In some literature the blue part is referred to as the **negative gradient** and the green part to as the **positive gradient**. Since 
+
+
+$$
+\begin{cases}
+\frac{\partial}{\partial w_{ij}} E(\mathbf x, \mathbf h) = -x_ih_j \\
+\frac{\partial}{\partial a_i} E(\mathbf x, \mathbf h) = -h_j\\
+\frac{\partial}{\partial b_j} E(\mathbf x, \mathbf h) = -x_i
+\end{cases}
+$$
+
+
+by replacing the placeholder $\theta,$ the gradient becomes
+
+
+$$
+\begin{aligned}
+&\frac{\partial}{\partial w_{ij}}\left(-\log \hat p_{\mathbf X}(\mathbf x)\right) \\
+ &= \color{blue}{ \sum_{\mathbf x, \mathbf h} \hat p(\mathbf x, \mathbf h) x_ih_j } - \color{green}{ \sum_{\mathbf h} \hat p_{\mathbf H|\mathbf X}(\mathbf h|\mathbf x) x_ih_j }
+\end{aligned}
+$$
+
+
+Here, the positive gradient (blue term) can be interpreted as the probability density of the input data, and the negative one (green term) can be interpreted as the learned probablity density. It is quite similar to the form of the gradients in ordinary BM model.
+
+During the training process, the second term can be computed asymptotically by Gibbs sampling. Detail will be covered in the next subsection.
+
+<br>
+
+### Learning process
+
+Synthesizing all the results from earlier subsections, we arrive at the learning process of a RBM.
+
+Repeat the following until convergence of parameters for the training data.
+
+1. Take a sample $\mathbf x$ from the training data.
+    Compute $\hat p_{\mathbf H|\mathbf X}(h_j|\mathbf x)$ using the equation $\eqref{3}$.
+2. Compute the gradient.
+    1. Compute positive gradient: $\mathbf x \mathbf h^\intercal$.
+    2. Apply Gibbs sampling:
+        1. Sample $\tilde {\mathbf x}$ from $\mathbf h.$
+        2. Sample $\tilde {\mathbf h}$ from $\tilde{\mathbf x}.$
+    3. Compute negative gradient: $\tilde{\mathbf{x}} \tilde{\mathbf{h}}^\intercal$
+3. Update parameters.
+    1. $\Delta \mathbf W = \mathbf x \mathbf h^\intercal - \tilde{\mathbf{x}} \tilde{\mathbf{h}}^\intercal$
+    2. $\Delta\mathbf a = \mathbf x - \tilde{\mathbf x}$
+    3. $\Delta\mathbf b = \mathbf h - \tilde{\mathbf h}$
 
 <br>
 
