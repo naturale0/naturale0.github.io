@@ -171,7 +171,7 @@ Considera BM with hidden nodes (nodes that cannot be observed). Hinton thought o
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Boltzmannexamplev1.png" alt="boltzmann_w_hidden.png" width="200"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Restricted_Boltzmann_machine.svg/440px-Restricted_Boltzmann_machine.svg.png" alt="RBM.png" width="200"/>
 <br>
-<em>Figure 2. (left) A Boltzmann machine with visible units (blue) and hidden units (white). (right) A restricted Boltzmann machine. (Sources: <a href="https://en.wikipedia.org/wiki/Boltzmann_machine">left</a>, <a href="https://en.wikipedia.org/wiki/Restricted_Boltzmann_machine">right</a>)</em>
+<em>Figure 2. (left) A Boltzmann machine with visible units (white) and hidden units (blue). (right) A restricted Boltzmann machine. (Sources: <a href="https://en.wikipedia.org/wiki/Boltzmann_machine">left</a>, <a href="https://en.wikipedia.org/wiki/Restricted_Boltzmann_machine">right</a>)</em>
 </div><br>
 
 
