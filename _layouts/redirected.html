@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <head>
+    <link rel="canonical" href="{{ page.redirect_to }}"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="refresh" content="0;url={{ page.redirect_to }}" />
+  </head>
+
+  <div id="search" class="subscribe-overlay">
+    <a class="subscribe-overlay-close" href="#"></a>
+    <div class="subscribe-overlay-content">
+        {% if site.logo %}
+            <img class="subscribe-overlay-logo" 
+                  src="{{ site.baseurl }}{{ site.logo }}" 
+                  alt="{{ site.title }}" />
+        {% endif %}
+        <h1 class="subscribe-overlay-title">Search on {{ site.title }}</h1>
+        {% include subscribe-form.html placeholder="keyword" %}
+    </div>
+  </div>
+
+  <body>
+  <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {scale: 90}
+    });
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+    MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"],
+        sub: ["Extension", "mediawiki-texvc"]
+      });
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/math...">
+  </script>
+    <div class="page-content">
+      <div class="container">
+        <div class="three columns">
+          {% include header.html %}
+        </div>
+
+        <div class="nine columns" style="z-index:100;">
+          <div class="wrapper">
+            <h2>Redirecting to the requested page...</h1>
+            <a href="{{ page.redirect_to }}">[Click here if you are not redirected]<a>
+            <script>location='{{ page.redirect_to }}'</script>
+          </div>
+        </div>
+      </div>
+      {% include footer.html %}
+    </div>
+
+  <!-- pull down animation for details-proof tag -->
+  <!-- should only work for *proof*. (not for def., thm., etc..) -->
+  <!--<script type="text/javascript" src="https://naturale0.github.io/assets/js/animation.js"></script>-->
+  </body>
+</html>
