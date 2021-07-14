@@ -4,6 +4,7 @@ title: "2017 대선 후보 지지층 군집분석"
 date:   2017-04-28 12:00:00 +0900
 author: "Sihyung Park"
 categories: [applied]
+locale: ko_KR
 ---
 
 

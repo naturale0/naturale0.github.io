@@ -4,6 +4,7 @@ title: "$k$-mer Sequence Motif는 얼마나 자주 등장할까"
 date:   2018-10-25 12:00:00 +0900
 author: "Sihyung Park"
 categories: [applied]
+locale: ko_KR
 ---
 
 > 전체 $n$ ntd로 이루어진 target RNA 한 가닥이 있다고 하자. 이 RNA는 완전히 랜덤하게 만들어진 가닥이라고 가정한다. 즉, 각 위치에 A, U, G, C가 같은 확률로 존재할 수 있다.

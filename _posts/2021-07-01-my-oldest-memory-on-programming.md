@@ -4,6 +4,7 @@ title: "내 가장 오래된 프로그래밍 기억"
 date:   2021-07-01 22:14:00 +0900
 author: "Sihyung Park"
 categories: [thoughts]
+locale: ko_KR
 ---
 
 

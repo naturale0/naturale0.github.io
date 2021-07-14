@@ -4,6 +4,7 @@ title: "Weakly-Supervised Localization: 뉴럴넷은 어디를 바라보고 있�
 date:   2018-06-17 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
+locale: ko_KR
 ---
 
 ConvNet이 이미지를 다루는 데 강력한 성능을 보이기는 하지만, layer가 깊어지면 깊어질수록 이미지의 어떤 특징을 보고 판단을 내리는지를 파악하기란 쉽지 않다.

@@ -4,6 +4,7 @@ title: "Quantile Normalization"
 date:   2019-07-19 12:00:00 +0900
 author: "Sihyung Park"
 categories: [bioinformatics]
+locale: ko_KR
 ---
 
 

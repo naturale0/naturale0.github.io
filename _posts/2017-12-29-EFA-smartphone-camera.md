@@ -4,6 +4,7 @@ title: "요인분석으로 내게 맞는 스마트폰 카메라 찾기"
 date:   2017-12-29 12:00:00 +0900
 author: "Sihyung Park"
 categories: [applied, exploratory analysis, multivariate]
+locale: ko_KR
 ---
 
 

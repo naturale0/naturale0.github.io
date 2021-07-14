@@ -4,6 +4,7 @@ title: "의식을 이식하기"
 date:   2017-03-23 12:00:00 +0900
 author: "Sihyung Park"
 categories: [thoughts]
+locale: ko_KR
 ---
 
 

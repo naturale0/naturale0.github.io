@@ -4,6 +4,7 @@ title: "Batch Normalization 이해하기"
 date:   2018-05-28 12:00:00 +0900
 author: "Sihyung Park"
 categories: [machine learning]
+locale: ko_KR
 ---
 
 
