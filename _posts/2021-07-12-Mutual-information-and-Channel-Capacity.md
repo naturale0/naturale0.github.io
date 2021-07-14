@@ -264,7 +264,7 @@ d(x^{[n]}, z^{[n]}) = \frac1n \sum_{i=1}^n d(x_i, z_i)
 $$
 
 
-where $d(x_i, z_i)$ is the distance (metric; distortion) between elements $x_i,z_i$ in a metric space. The mean distortion can be computed as 
+where $d(x_i, z_i)$ is the distance (metric) between elements $x_i,z_i$ in a metric space. The mean distortion can be computed as 
 
 
 $$
@@ -279,8 +279,9 @@ $$
 R(D) = \inf_{~~~p_{Z|X}(z|x)\\:~ \mathbb E d(X,Z) \le D} I(X;Z).
 $$
 
+This can be viewed as eliminating as many information as possible from $X$ to construct the compressed code $Z$ that has distortion of at most $D.$ Hence $R(D)$ is the *amount of information about $X$ that the compressed code $Z$ can have* under a certain distortion level $D.$
 
-Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R=R(D),$ one can send $2^{nR}$ distinguishable messages. Hence the optimization problem is a process of *minimizing the rate of distortion* (loss in mutual information) while *controlling for the desired distinguishability* of a compressed code.
+Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R=R(D),$ one can send $2^{nR}$ distinguishable messages.
 
 <br>
 
