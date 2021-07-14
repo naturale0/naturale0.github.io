@@ -63,6 +63,7 @@ class PageObject(object):
     file_contents = file.read()
     # TODO: check page_contents length and drop short pages
     processed_fname = str(file_name[20:-3].encode()).replace(r"\x", "%").replace(" ", "-")[2:-1]
+    #print(processed_fname)
     page_url = self._extract_permalink(processed_fname)
     page_date = self._extract_date(file_name, file_contents)
     page_title = self._extract_title(file_contents)
@@ -80,6 +81,7 @@ class PageObject(object):
       'needs_related': self._extract_needs_related(processed_fname)
     }
     file.close()
+    #print(file_name, page_url)
     return page_object
 
   def _extract_permalink(self, title):
