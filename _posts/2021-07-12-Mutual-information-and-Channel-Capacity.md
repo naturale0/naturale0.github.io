@@ -248,7 +248,7 @@ $$
 $$
 
 
-In fact, it is the **upper bound of the number of distinguishable messages**. Since $I(X;Y)$ determines the rate of which the number of distinguishable messages increases as $n$ grows, we define the channel capacity as of $I(X,Y)$ in the best case scenario (the supremum with respect to $p_X$).
+In fact, it is the **upper bound of the number of distinguishable messages**. Since $I(X;Y)$ determines the rate of which the number of distinguishable messages increases as $n$ grows, we define the channel capacity as the value of $I(X,Y)$ in the best case scenario (the supremum with respect to $p_X$).
 
 <br>
 
@@ -264,7 +264,7 @@ d(x^{[n]}, z^{[n]}) = \frac1n \sum_{i=1}^n d(x_i, z_i)
 $$
 
 
-where $d(x_i, z_i)$ is the distance (metric) between elements $x_i,z_i$ in a metric space. The mean distortion can be computed as 
+where $d(x_i, z_i)$ is the distance (metric; distortion) between elements $x_i,z_i$ in a metric space. The mean distortion can be computed as 
 
 
 $$
@@ -286,27 +286,29 @@ Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R=R(D)
 
 ### Examples
 
-If we do not allow any distortion, we get
+If we do not allow any distortion, $Z$ virtually contains the same information to $X.$ Furthermore since $p_{Z|X}(z|x)=1$ we get
 
 
 
 $$
-R(0) = I(X;Z) = H(X) - \cancel{H(X|Z)}.
+R(0) = I(X;Z) = H(X) - \cancel{H(X|Z)},
 $$
 
 
 
-For a distortion $D>0,$ 
+which was the length of the optimal code. Thus in this case total of $2^{H(X)}$ codes are distinguishable.
+
+For a compression $Z$ of distortion $D>0,$ the number of distinguishable codes is
 
 
 
 $$
-R(D) = 2^{H(X)} / 2^{H(X|Z)} = 2^{I(X;Z)}.
+2^{H(X)} / 2^{H(X|Z)} = 2^{I(X;Z)} = 2^{nR(D)},
 $$
 
 
 
-It is somewhat similar to the form $\eqref{2}$ during derivation of channel capacity. In fact, there is a duality between $R(D)$ and $C$ which will be mentioned later.
+which is somewhat similar to the form $\eqref{2}$ during derivation of channel capacity and gives relationship between $R(D)$ and $C.$ In fact, there is a duality between $R(D)$ and $C$ which will be mentioned later.
 
 <br>
 
