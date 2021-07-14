@@ -244,7 +244,7 @@ $$
 &2^{nH(X)}\cdot2^{nH(Y)}/2^{nH(X,Y)} \\
  &= 2^{n{(H(X) + H(Y) - H(X,Y))}} \\
  &= 2^{nI(X;Y)}.
-\end{aligned}
+\end{aligned}\tag{2}\label{2}
 $$
 
 
@@ -276,11 +276,11 @@ where $p$ is the joint density. Finally the **rate distortion** is defined as th
 
 
 $$
-R(D) = \inf_{p_{Z|X}(z|x):~ \mathbb E d(X,Z) \le D} I(X,Z).
+R(D) = \inf_{~~~p_{Z|X}(z|x)\\:~ \mathbb E d(X,Z) \le D} I(X;Z).
 $$
 
 
-Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R(D),$ one can send $2^{nR}$ distinguishable messages.
+Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R=R(D),$ one can send $2^{nR}$ distinguishable messages. Hence the optimization problem is a process of *minimizing the rate of distortion* (loss in mutual information) while *controlling for the desired distinguishability* of a compressed code.
 
 <br>
 
@@ -289,20 +289,24 @@ Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R(D),$
 If we do not allow any distortion, we get
 
 
+
 $$
 R(0) = I(X;Z) = H(X) - \cancel{H(X|Z)}.
 $$
 
 
+
 For a distortion $D>0,$ 
 
 
+
 $$
-R(D) = 2^{H(X)} / 2^{H(X|Z)} = 2^{I(X;Z)},
+R(D) = 2^{H(X)} / 2^{H(X|Z)} = 2^{I(X;Z)}.
 $$
 
 
-which gives us *the relationship between the rate distortion and the channel capacity*.
+
+It is somewhat similar to the form $\eqref{2}$ during derivation of channel capacity. In fact, there is a duality between $R(D)$ and $C$ which will be mentioned later.
 
 <br>
 
