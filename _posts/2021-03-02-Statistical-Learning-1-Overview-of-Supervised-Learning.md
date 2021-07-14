@@ -273,7 +273,7 @@ However, even in 10-dimensional problem, we need to take a hypercube with segmen
 
 ### Data is distributed along the boundary
 
-Let $\mathbf{X} = (X_1,\cdots,X_p)$ be a random vector from uniform distribution over a $p$-dimensional unit ball, centered at $\mathbf{0}.$ Let $R_i = \sqrt{\sum_{k=1}^p X_{ki}^2}$ be the distance of $\mathbf{X}_i.$ Let $R_{(1)}$ be the smallest of $R_1,\cdots,R_N.$ Then
+Let $\mathbf{X} = (X_1,\cdots,X_p)$ be a random vector from uniform distribution over a $p$-dimensional unit ball, centered at $\mathbf{0}.$ Let $R_i = \sqrt{\sum_{k=1}^p X_{ki}^2}$ be the distance of $\mathbf{X}_ i.$ Let $R_ {(1)}$ be the smallest of $R_1,\cdots,R_N.$ Then
 
 
 $$
@@ -387,7 +387,7 @@ $$
 $$
 
 
-As the model complexity increases, bias decreases but variance increases, which is an overfitting. In the case of k-NN, let $X_{(i)}$ be the $i$-th closest neighbor. Then
+As the model complexity increases, bias decreases but variance increases, which indicates overfitting. In the case of k-NN, let $X_{(i)}$ be the $i$-th closest neighbor. Then
 
 
 $$
