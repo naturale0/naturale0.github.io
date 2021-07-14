@@ -4,10 +4,10 @@ title: About
 permalink: /about/
 ---
 
-<p align="center">
+<div align="center">
   <img src="https://naturale0.github.io/assets/img/goni.jpg" alt="goni" width="200">
   <img src="https://naturale0.github.io/assets/img/bori.jpg" alt="bori" width="200">
-</p>
+</div>
 <p align="center">
   <em>Goni and Bori, my cockatiels. They love getting head scritches.</em>
 </p>

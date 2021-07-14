@@ -18,7 +18,9 @@ Skip gram is based on the [distributional hypothesis](https://en.wikipedia.org/w
 
 ## Vanilla skip gram
 
-![https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png](https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png)
+<img src="https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png" alt="https://d3i71xaburhd42.cloudfront.net/a1d083c872e848787cb572a73d97f2c24947a374/5-Figure1-1.png" style="zoom:50%;" />
+
+
 
 Main idea is to optimize model so that if it is queried with a word, it should correctly guess all the context ($\pm$2 in the figure) words. That is,
 

@@ -293,13 +293,13 @@ Suppose we have a binary code $X$ of length three that can have values from `000
 
 
 
-| $Z$  \  $X$    | `000` | `010` | `110` | `111` | marginal<br />of $Z$ |
-| -------------- | ----- | ----- | ----- | ----- | -------------------- |
-| `00`           | 1/4   | 1/48  | 1/48  | 1/48  | 5/16                 |
-| `01`           | 1/48  | 1/4   | 1/48  | 1/48  | 5/16                 |
-| `10`           | 1/48  | 1/48  | 1/48  | 1/8   | 3/16                 |
-| `11`           | 1/48  | 1/48  | 1/8   | 1/48  | 1/16                 |
-| maginal of $X$ | 5/16  | 5/16  | 3/16  | 3/16  |                      |
+| $Z$  \  $X$        | `000` | `010` | `110` | `111` | marginal of $Z$ |
+| ------------------ | ----- | ----- | ----- | ----- | --------------- |
+| `00`               | 1/4   | 1/48  | 1/48  | 1/48  | 5/16            |
+| `01`               | 1/48  | 1/4   | 1/48  | 1/48  | 5/16            |
+| `10`               | 1/48  | 1/48  | 1/48  | 1/8   | 3/16            |
+| `11`               | 1/48  | 1/48  | 1/8   | 1/48  | 1/16            |
+| **maginal of $X$** | 5/16  | 5/16  | 3/16  | 3/16  |                 |
 
 <br>
 
@@ -309,8 +309,7 @@ Then in this case the mean distortion can be calculated as
 $$
 \begin{aligned}
 &\mathbb Ed(X,Z) \\
- &= \frac14(0+0) + \frac12\cdot1 + \frac1{8}(2+0) \\
- &\;\;\;\;+ \frac1{48}(1+2+3+1+2+1+2+1+2+1+1) \\
+ &= \frac14\cdot0 + \frac12\cdot1 + \frac1{8}\cdot2 + \frac1{48}\cdot17 \\
  &= \frac{24+12+17}{48} = \frac{53}{48}.
 \end{aligned}
 $$
@@ -321,7 +320,7 @@ Since the setting is non-random and the mutual information is
 
 $$
 \begin{aligned}
-I(X;Z) 
+&I(X;Z) \\
  &= H(X) + H(Z) - H(X,Z) \\
  &= -2\left(2\frac{5}{16}\log{\frac{5}{16}}+2\frac{3}{16}\log{\frac{3}{16}}\right) \\
  &\;\;\;\;+12\frac1{48}\log\frac{1}{48} +2\frac18\log\frac18 +2\frac14\log\frac14 \\
@@ -335,7 +334,7 @@ We have the rate distortion
 $$
 R(D) = \begin{cases}
 I(X;Z),&~ \text{if } D \ge 53/48 \\
-0,&~ \text{otherwise}
+\text{undefined},&~ \text{otherwise}
 \end{cases}
 $$
 
