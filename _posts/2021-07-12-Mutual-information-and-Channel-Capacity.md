@@ -285,7 +285,7 @@ Using the compressed signal $Z^{[n]}$ by the method with rate distortion $R=R(D)
 
 <br>
 
-### Examples
+### Relation with channel capacity
 
 If we do not allow any distortion, $Z$ virtually contains the same information to $X.$ Furthermore since $p_{Z|X}(z|x)=1$ we get
 
