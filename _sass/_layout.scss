@@ -124,11 +124,18 @@ body {
     opacity: 1;
     height: auto;
     margin-bottom:-25px;
+    a#menu-toggle {
+      display: block;
+    }
   }
 }
 
 input#menu-toggle {
-  display:none;
+  display: none;
+}
+
+a#menu-toggle {
+  display: none;
 }
 
 .nav .menu-icon {

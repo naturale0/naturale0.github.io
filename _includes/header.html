@@ -17,25 +17,12 @@
     <div class="site-nav">
       <nav>
         <ul class="page-link">
-          <li><a href="{{ "/" | prepend: site.baseurl }}">Home</a></li>
-          <li><a href="{{ "/archive" | prepend: site.baseurl }}">Posts</a></li>
-          <li><a href="{{ "/about" | prepend: site.baseurl }}">About</a></li>
-          <li><a class="subscribe-button" href="#search">Search...&ensp;&ensp;&ensp;| </a></li>
-
-          <!-- 카테고리
+          <li><a href="{{ "/" | prepend: site.baseurl }}" id="menu-toggle">Home</a></li>
+          <li><a href="{{ "/archive" | prepend: site.baseurl }}" id="menu-toggle">Posts</a></li>
+          <li><a href="{{ "/about" | prepend: site.baseurl }}" id="menu-toggle">About</a></li>
+          <li><a class="subscribe-button" href="#search" id="menu-toggle">Search...&ensp;&ensp;&ensp;| </a></li>
           <br>
-          {% assign pages_list = site.pages %}
-            {% for node in pages_list %}
-              {% if node.title != null %}
-                {% if node.layout == "category" %}
-                  <li><a class="category-link {% if page.url == node.url %} active{% endif %}"
-                  href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a></li>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          -->
-          <br>
-          <li><a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a></li>
+          <li><a href="{{ "/feed.xml" | prepend: site.baseurl }}" id="menu-toggle">RSS</a></li>
         </ul>
       </nav>
     </div>
