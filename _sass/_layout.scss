@@ -109,7 +109,7 @@ body {
     opacity: 0;
     max-height: 0;
     -webkit-transition: all .5s ease;
-    transition: opacity .5s linear max-height .5s ease;
+    transition: opacity .5s linear max-height .5s linear;
 
     -webkit-justify-content: center;
     justify-content:center;
@@ -137,7 +137,9 @@ body {
     max-height: 0px;
     
     nav a {
-      display: none;
+      cursor: pointer;
+      pointer-events: none;
+      max-height: 0px
     }
   }
 }
