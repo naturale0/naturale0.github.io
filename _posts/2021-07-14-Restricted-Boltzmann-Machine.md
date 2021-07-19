@@ -3,7 +3,7 @@ layout: post
 title: "Understanding Restricted Boltzmann Machine"
 date:   2021-07-14 00:50:00 +0900
 author: "Sihyung Park"
-categories: [machine learning, information theory, generative]
+categories: [machine learning, information theory, generative model]
 ---
 
 
