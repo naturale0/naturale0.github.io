@@ -108,8 +108,8 @@ body {
 
     opacity: 0;
     max-height: 0;
-    -webkit-transition: all .4s;
-    transition: opacity .4s linear max-height .4s ease;
+    -webkit-transition: all .5s ease;
+    transition: opacity .5s linear max-height .5s ease;
 
     -webkit-justify-content: center;
     justify-content:center;
@@ -132,12 +132,11 @@ body {
     }
   }
 
-  #menu-toggle:checked-.site-nav {
-    nav {
-      display: none;
-    }
+  #menu-toggle:not(:checked)+.site-nav {
+    opacity: 0;
+    max-height: 0px;
     
-    a#menu-toggle {
+    nav a {
       display: none;
     }
   }
