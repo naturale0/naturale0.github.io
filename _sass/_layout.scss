@@ -107,9 +107,9 @@ body {
     display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */// Import partials from `sass_dir` (defaults to `_sass`)
 
     opacity: 0;
-    height: 0;
+    max-height: 0;
     -webkit-transition: all .4s;
-    transition: all .4s;
+    transition: opacity .4s linear max-height .4s ease;
 
     -webkit-justify-content: center;
     justify-content:center;
@@ -122,19 +122,28 @@ body {
 
   #menu-toggle:checked+.site-nav {
     opacity: 1;
-    height: auto;
+    max-height: 500px;
     margin-bottom:-25px;
     a#menu-toggle {
       display: block;
+    }
+    nav {
+      display: block;
+    }
+  }
+
+  #menu-toggle:checked-.site-nav {
+    nav {
+      display: none;
+    }
+    
+    a#menu-toggle {
+      display: none;
     }
   }
 }
 
 input#menu-toggle {
-  display: none;
-}
-
-a#menu-toggle {
   display: none;
 }
 
