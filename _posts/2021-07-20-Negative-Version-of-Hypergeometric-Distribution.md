@@ -39,7 +39,10 @@ $$
 $$
 
 
-Surprisingly, organizing the terms results in the denominator that is independent to the value of $x.$ 
+
+We name the distribution of such $X$ by negative hypergeometric distribution $\text{NH}(x;N,K,r).$
+
+Note that surprisingly, organizing the terms results in the denominator that is independent to the value of $x.$ This formulation allows us to compute moments easily.
 
 <br>
 
