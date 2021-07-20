@@ -78,7 +78,7 @@ $$
 \mathbb EX 
  &= \sum_{x=r}^{N-K+r} x \frac{ {N-x \choose K-r} {x-1 \choose r-1} }{N \choose K} \\
  &= \sum_{k=0}^{N-K} (k+r) \frac{ {N-r-k \choose N-K-k} {k+r-1 \choose k} }{ {N \choose K} } \\
- &= \frac{m}{N \choose K} \sum_{k=0}^{N-K} {N-r-k \choose N-K-k}{k+r \choose k}
+ &= \frac{r}{N \choose K} \sum_{k=0}^{N-K} {N-r-k \choose N-K-k}{k+r \choose k}
 \end{aligned}
 $$
 
@@ -98,10 +98,10 @@ Now apply lemma 2 and lemma 1 again then the expectation becomes
 $$
 \begin{aligned}
 \mathbb EX
- &= \frac{m}{N \choose K} (-1)^{N-K} \sum_{k=0}^{N-K} {r-K-1 \choose N-K-k}{-r-1 \choose k} \\
- &= \frac{m}{N \choose K} (-1)^{N-K} {-K-2 \choose N-K} \\
- &= \frac{m}{N \choose K} {N+1 \choose N-K} \\
- &= m\cdot\frac{N+1}{K+1}.
+ &= \frac{r}{N \choose K} (-1)^{N-K} \sum_{k=0}^{N-K} {r-K-1 \choose N-K-k}{-r-1 \choose k} \\
+ &= \frac{r}{N \choose K} (-1)^{N-K} {-K-2 \choose N-K} \\
+ &= \frac{r}{N \choose K} {N+1 \choose N-K} \\
+ &= r\cdot\frac{N+1}{K+1}.
 \end{aligned}
 $$
 
