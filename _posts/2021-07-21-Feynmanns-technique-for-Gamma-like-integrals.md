@@ -39,8 +39,8 @@ $$
  &= \int_0^\infty \frac{\partial^{k-1}}{\partial^{k-1} \theta} e^{-\theta x} dx \\
  &= \int_0^\infty (-1)^{k-1} x^{k-1} e^{-\theta x}dx \\
  &=\begin{cases}
- \Gamma(k;\theta),& \text{$k$ is even} \\
- -\Gamma(k;\theta),& \text{$k$ is odd}
+ \Gamma(k;\theta),& \text{$k$ is odd} \\
+ -\Gamma(k;\theta),& \text{$k$ is even}
  \end{cases}
 \end{aligned}
 $$
@@ -50,7 +50,7 @@ $$
 
 
 $$
-\Gamma(k;\theta) = (k-1)!\frac{1}{\theta^k}.
+\Gamma(k;\theta) = (-1)^{k-1}(k-1)!\frac{1}{\theta^k}.
 $$
 
 
