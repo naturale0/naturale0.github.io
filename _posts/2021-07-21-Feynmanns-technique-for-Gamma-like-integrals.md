@@ -14,11 +14,11 @@ In mathematical statistics and probability theory, integration of the form that 
 $$
 \Gamma(k;\theta):=\int_0^\infty x^{k-1}e^{-\theta x}dx,~ k\in\mathbb N.
 $$
- 
+
 
 If $\theta=1,$ then it is the gamma function. The notation $\Gamma(k;\theta)$ is *not* a standard one. I wanted to make relationship with gamma function clear.
 
-I recently encountered this form (with $k=3$) when trying to compute variance of standard logistic distribution. Without second thoughts, I applied integration by parts to solve it. Although integration by parts solved the problem, unfolding the integral revealed its recurring form, which means it can be computed in much easier way. However, trying to derive the general form for any values of $k$ using integration by parts was a lot of labor.
+I recently encountered this form (with $k=3$) when trying to compute variance of standard logistic distribution. Without second thoughts, I applied integration by parts to solve it[^1]. Although integration by parts solved the problem, unfolding the integral revealed its recurring form, which means it can be computed in much easier way[^1]. However, trying to derive the general form for any values of $k$ using integration by parts was a lot of labor.
 
 It turns out, the famous [Feynmann's integral trick](https://www.cantorsparadise.com/richard-feynmans-integral-trick-e7afae85e25c) can be applied (and proved) to this form without a hassle.
 
@@ -53,4 +53,7 @@ $$
 \Gamma(k;\theta) = (k-1)!\frac{1}{\theta^k}.
 $$
 
+
+
+[^1]: In fact, it is so much easier to solve it using integration by substitution. Substitute $y=\theta x$ then we can evaluate the integral as $\Gamma(k)/\theta^k$​ which is the same as from the Feynmann's trick. It is just over by that.. but hey, at least we get another solution to the problem that does not require knowledge of the form of gamma function!
 
