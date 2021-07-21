@@ -50,7 +50,7 @@ $$
 
 
 $$
-\Gamma(k;\theta) = (-1)^{k-1}(k-1)!\frac{1}{\theta^k}.
+\Gamma(k;\theta) = (k-1)!\frac{1}{\theta^k}.
 $$
 
 
