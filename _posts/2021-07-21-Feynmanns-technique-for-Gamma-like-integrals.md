@@ -20,7 +20,7 @@ If $\theta=1,$ then it is the gamma function. The notation $\Gamma(k;\theta)$ is
 
 I recently encountered this form (with $k=3$) when trying to compute variance of standard logistic distribution. Without second thoughts, I applied integration by parts to solve it. Although integration by parts solved the problem, unfolding the integral revealed its recurring form, which means it can be computed in much easier way. However, trying to derive the general form for any values of $k$ using integration by parts was a lot of labor.
 
-In turns out, the famous [Feynmann's integral trick](https://www.cantorsparadise.com/richard-feynmans-integral-trick-e7afae85e25c) can be applied (and proved) to this form without a hassle.
+It turns out, the famous [Feynmann's integral trick](https://www.cantorsparadise.com/richard-feynmans-integral-trick-e7afae85e25c) can be applied (and proved) to this form without a hassle.
 
 **First**, let the integral of exponential part as a function in $\theta.$ That is, denote integral by
 
