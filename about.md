@@ -51,7 +51,7 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ### Peer-reviewed journal articles
 
-* **S. Park**, S. H. Ahn, E. S. Cho, Y. K. Cho, E. S. Jang, S. W. Chi. (2018). "CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals". *Nucleic acids research*. 46(21), 11153-11168.
+* **S. Park**, S. H. Ahn, E. S. Cho, Y. K. Cho, E. S. Jang, S. W. Chi. (2018). "CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals". *Nucleic acids research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)
 
 
 
