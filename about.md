@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-<img src="https://naturale0.github.io/assets/me2.jpg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="210"/>
+<img src="https://naturale0.github.io/assets/me2.jpg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="215"/>
 
 
 
