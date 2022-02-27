@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-<img src="https://naturale0.github.io/assets/me.JPG" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="210"/>
+<img src="https://naturale0.github.io/assets/me2.jpg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="210"/>
 
 
 
@@ -37,8 +37,8 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## Education
 
-* Seoul National University  *(Mar. 2020 - present)*
-    * M.S. in Statistics expected in Feb. 2022
+* Seoul National University  *(Mar. 2020 - Feb. 2022)*
+    * M.S. in Statistics
 * Korea University  *(Mar. 2014 - Feb. 2018)*
     * B.S. in Life Sciences
     * B.Econ. in Statistics (double major)
