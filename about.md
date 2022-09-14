@@ -6,9 +6,9 @@ permalink: /about/
 
 
 
-<img src="https://naturale0.github.io/assets/me3.jpeg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="215"/>
+<img src="https://naturale0.github.io/assets/me3.jpeg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="145"/>
 
-
+<br>
 
 Ph.D. Student in Statistics  
 [Department of Statistics](https://statistics.sciences.ncsu.edu//)  
@@ -49,14 +49,21 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## Experiences
 
-* Intelligent water purification system \ WIDEP, Korea Ministry of Environment  *(Sep. 2021 - Feb.2022)*
+* Intelligent water purification system  *(Sep. 2021 - Feb.2022)*
+    * Comissioned by WIDEP and Korea Ministry of Environment
     * Implemented a Bayesian contextual linear bandit with Thompson sampling
-* Interval prediction for an undisclosed regression model \ Woori Bank  *(Apr. 2021 - Aug. 2021)*
+    
+* Interval prediction for an undisclosed regression model  *(Apr. 2021 - Aug. 2021)*
+    * Comissioned by Woori Bank
     * Implemented a residual bootstrapping-based prediction interval
     * Applied nonparametric isotonic concave regression to model uncertainty in time
-* Estimation of recall status of defective refrigerators \ Korean Agency for Technology and Standards  *(Mar. 2021 - Jan. 2022)*
+* Estimation and forecasting of recall status of defective refrigerators  *(Mar. 2021 - Jan. 2022)*
+    * Comissioned by Korean Agency for Technology and Standards
     * Implemented an autoencoder-based anomaly detector
     * Fitted piecewise logistic growth curve with press coverage frequency as a covariate
+
+
+<br>
 
 
 
@@ -66,15 +73,17 @@ I am interested in applying machine learning methods in a socially responsible w
 
 * **S. Park**, S. H. Ahn, E. S. Cho, Y. K. Cho, E. S. Jang, S. W. Chi. (2018). "CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals". *Nucleic acids research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)
 
+<br>
+
 
 
 ## Honors and Awards
 
-* Korean Government Scholarship for Study Overseas \ Korean Government  *(2022-2024)*
-* Academic Excellence Scholarship \ Seoul National University  *(Fall 2020, Fall 2021)*
-* Summa Cum Laude \ Korea University  *(Feb. 2018)*
-* Korea University Future Research Grant \ Korea University  *(2016-2018)*
-* Academic Excellence Award \ Korea University  *(2014-2015, 2017)*
+* Korean Government Scholarship for Study Overseas - *Korean Government*  *(2022-2024)*
+* Academic Excellence Scholarship - *Seoul National University*  *(Fall 2020, Fall 2021)*
+* Summa Cum Laude - *Korea University*  *(Feb. 2018)*
+* Korea University Future Research Grant - *Korea University*  *(2016-2018)*
+* Academic Excellence Award - *Korea University*  *(2014-2015, 2017)*
 
 <br>
 
