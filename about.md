@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-<img src="https://naturale0.github.io/assets/me3.jpg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="215"/>
+<img src="https://naturale0.github.io/assets/me3.jpeg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="215"/>
 
 
 
@@ -49,12 +49,12 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## Experiences
 
-* Intelligent water purification system | WIDEP, Korea Ministry of Environment  *(Sep. 2021 - Feb.2022)*
+* Intelligent water purification system \ WIDEP, Korea Ministry of Environment  *(Sep. 2021 - Feb.2022)*
     * Implemented a Bayesian contextual linear bandit with Thompson sampling
-* Interval prediction for an undisclosed regression model | Woori Bank  *(Apr. 2021 - Aug. 2021)*
+* Interval prediction for an undisclosed regression model \ Woori Bank  *(Apr. 2021 - Aug. 2021)*
     * Implemented a residual bootstrapping-based prediction interval
     * Applied nonparametric isotonic concave regression to model uncertainty in time
-* Estimation of recall status of defective refrigerators | Korean Agency for Technology and Standards  *(Mar. 2021 - Jan. 2022)*
+* Estimation of recall status of defective refrigerators \ Korean Agency for Technology and Standards  *(Mar. 2021 - Jan. 2022)*
     * Implemented an autoencoder-based anomaly detector
     * Fitted piecewise logistic growth curve with press coverage frequency as a covariate
 
@@ -70,11 +70,11 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## Honors and Awards
 
-* Korean Government Scholarship for Study Overseas | Korean Government  *(2022-2024)*
-* Academic Excellence Scholarship | Seoul National University  *(Fall 2020, Fall 2021)*
-* Summa Cum Laude | Korea University  *(Feb. 2018)*
-* Korea University Future Research Grant | Korea University  *(2016-2018)*
-* Academic Excellence Award | Korea University  *(2014-2015, 2017)*
+* Korean Government Scholarship for Study Overseas \ Korean Government  *(2022-2024)*
+* Academic Excellence Scholarship \ Seoul National University  *(Fall 2020, Fall 2021)*
+* Summa Cum Laude \ Korea University  *(Feb. 2018)*
+* Korea University Future Research Grant \ Korea University  *(2016-2018)*
+* Academic Excellence Award \ Korea University  *(2014-2015, 2017)*
 
 <br>
 
