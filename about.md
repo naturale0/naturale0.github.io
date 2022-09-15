@@ -22,7 +22,7 @@ spark52 <u>at</u> ncsu *dot* edu
 
 ## Brief Biography
 
-I am a first-year Ph.D. student in the Department of Statistics at North Carolina State University. Prior to joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html/)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
+I am Sihyung Park (pronounced "See-Young"), a first-year Ph.D. student in the Department of Statistics at North Carolina State University. Prior to joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
 I am interested in applying machine learning methods in a socially responsible way. Since most of the current issues result from the colossal, overparametrized structure of neural networks, my interest is in the compression of such models while retaining their performance. My current interests lie broadly in low-rank latent structure, tensor decomposition methods, dimension reduction, and nonparametric (shape-constrained) function estimation.
 
@@ -49,7 +49,7 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## Experiences
 
-* Intelligent water purification system  *(Sep. 2021 - Feb.2022)*
+* Constructing intelligent water purification system  *(Sep. 2021 - Feb.2022)*
     * Comissioned by WIDEP and Korea Ministry of Environment
     * Implemented a Bayesian contextual linear bandit with Thompson sampling
     
@@ -95,7 +95,7 @@ I am interested in applying machine learning methods in a socially responsible w
 
 ## About the Blog
 
-*De Novo* is a word frequently used in Biology, which means "of new", or "from the beginning" in Latin. This blog is a journal written by a student who wants to make a living by studying and doing research. Contents are mostly about some interesting or important ideas I encountered while studying and doing research. This is my attempt to build up and organize new (and hopefully meaningful) knowledge from scratch.
+*De Novo* is a word frequently used in Biology, which means "of new", or "from the beginning" in Latin. This blog is a journal written by a student who wants to make a living by studying and doing research. Contents are mostly about some interesting or important ideas I encountered while studying and doing research. This is my attempt to build up and organize new (and hopefully meaningful) knowledge.
 
 
 
