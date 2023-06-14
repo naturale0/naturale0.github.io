@@ -1,0 +1,25 @@
+! 2022-10-15 https://m.comic.naver.com
+m.comic.naver.com##.section_weekday_new
+m.comic.naver.com###cbox_module
+
+! 2022-10-20 https://www.wired.com
+www.wired.com##.paywall-bar__collapsed.paywall-bar__container
+www.wired.com##.persistent-bottom.jbjUXy.PersistentBottomWrapper-byCRxI
+
+! 2023-02-20 https://m.comic.naver.com
+||ssl.pstatic.net/melona/libs/*/*.jpg$image
+m.comic.naver.com##.viewer_da_ly.ly_wrap
+m.comic.naver.com##ly_txt
+m.comic.naver.com##ly_box
+m.comic.naver.com##.swiper-wrapper.inner_item
+
+! instagram popup
+instagram.com##body:style(overflow-y: scroll !important;)
+!instagram.com##DIV[role="presentation"]
+instagram.com##.x1uhb9sk
+
+! 2023-04-26 https://k26.toonthe.com
+toonthe.com##.top_banner.clearfix.row > table > tbody
+toonthe.com##.top_banner.clearfix.row > table > tbody > tr > td
+toonthe.com/img/banner/banner_mcasino_728x110.gif$image
+www.sysnet.pe.kr##.popup_layer
