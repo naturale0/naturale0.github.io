@@ -24,9 +24,7 @@ spark52 <u>at</u> ncsu *dot* edu
 
 I am Sihyung Park (pronounced "See-Young"), a first-year Ph.D. student in the Department of Statistics at North Carolina State University. Prior to joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
-I am interested in applying machine learning methods in a socially responsible way. Since most of the current issues result from the colossal, overparametrized structure of neural networks, my interest is in the compression of such models while retaining their performance. My current interests lie broadly in low-rank latent structure, tensor decomposition methods, dimension reduction, and nonparametric (shape-constrained) function estimation.
-
-<br>
+I am interested in applying machine learning methods in a socially and environmentally responsible way. I think most of the real-world issues can be solved using a well-crafted statistical model instead of a deep learning model. My current interests lie broadly in adaptive sequential decision-making, reinforcement learning, and tensor decomposition methods. <br>
 
 
 
