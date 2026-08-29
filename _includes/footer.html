@@ -9,7 +9,7 @@
 
     <div class="footer right column one-half">
       <section class="small-font">
-        {% if jekyll.environment == 'production' %}
+        {% if site.github or jekyll.environment == 'production' %}
           {% include counter.html %}
         {% endif %}
          -
