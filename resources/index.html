@@ -1,0 +1,46 @@
+---
+layout: default
+title: Resources
+---
+
+<div class="home">
+  <div class="post-list">
+    {% for post in site.posts %}
+      {% unless post.categories contains 'thoughts' or post.categories contains 'news' %}
+
+      <article class="post_card post">
+        <header class="post_header">
+          <h3 class="post_title">
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h3>
+          <time class="post_date">{{ post.date | date: "%d %B %Y, %A" }}</time>
+          &ensp;
+            {% for tag in post.categories %}
+              {% capture tag_name %}{{ tag }}{% endcapture %}
+              <a href="/category/{{ tag_name }}">
+                <tagging class="highlighter-tag">
+                  {{ tag_name | strip }}
+                </tagging> 
+              </a>
+              &VeryThinSpace;
+            {% endfor %}
+        </header>
+        <div class="post_excerpt">
+          <p>
+            {% if post.description %}
+            {{ post.description }}
+            {% else %}
+            {{ post.excerpt | split: "</p>" | first }}    
+            {% endif %}
+            <a class="read-more-btn" href="{{ post.url | prepend: site.baseurl }}"><br> » continue reading </a>
+          </p>
+        </div>
+        <hr/>
+      </article>
+      
+      {% endunless %}
+    {% endfor %}
+
+    <div class="pagination older-post"><a href="/archive"><data data-icon="ei-arrow-right"></data> Archive  </a></div>
+  </div>
+</div>
