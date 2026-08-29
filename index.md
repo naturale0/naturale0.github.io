@@ -20,7 +20,7 @@ spark52 <u>at</u> ncsu *dot* edu
 
 
 
-## Brief Biography
+## Biography
 
 I am Sihyung Park (pronounced "See-He-Young"), a Ph.D. candidate in the Department of Statistics at North Carolina State University, co-advised by Professors [Wenbin Lu](https://www4.stat.ncsu.edu/~wlu4//), [Shu Yang](https://shuyang.wordpress.ncsu.edu/), and [Leonard A. Stefanski](https://www4.stat.ncsu.edu/~stefansk/). Before joining the Ph.D. program, I earned a B.S. in Life Sciences (thesis advisor: Professor [Sung Wook Chi](https://clip.mystrikingly.com/#professor)) and a B.Econ. in Statistics from Korea University, followed by an M.S. in Statistics from Seoul National University (advisor: Professor [Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
