@@ -45,11 +45,11 @@ url: "https://naturale0.github.io"
 
 # paginate
 paginate: 5
-paginate_path: "/page/:num"
+paginate_path: "/posts/page/:num"
 defaults:
   -
     scope:
-      path: "page"
+      path: "posts/page"
     values:
       sitemap: false
 
