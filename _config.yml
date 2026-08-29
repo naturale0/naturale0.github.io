@@ -32,6 +32,7 @@ excerpt_separator: <!--description-->
 exclude:
   - .jekyll-cache
   - vendor
+  - unused
 
 plugins:
   - jekyll-paginate
