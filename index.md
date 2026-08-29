@@ -84,10 +84,10 @@ My research focuses on causal inference, specifically addressing unmeasured conf
 - **S. Park**, L. A. Stefanski. (2025) Non-null Shrinkage Regression and Subset Selection via the Fractional Ridge Regression, arXiv preprint arXiv:2505.23925 [(link)](https://arxiv.org/pdf/2505.23925)
 
 ### Technical reports
-- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) Galloisiana odaesanensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113552199A113555367.en)
-- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) Galloisiana kosuensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113551876A113555352.en)
-- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Shin, H.-S., Lee, S.-J., Lee, D.-H., Oh, H.-K & Gwon, S.-A. (2018) Namkungia biryongensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035265A88035387.en)
-- Chung, H.-Y., Lee, Y-W, Lim, C.-S., **Park, S.-H.**, Park, S.-H., Lee, Y.-S., Hong, M.-H., Lee, S.-J., Lee, D.-H., Shin, H.-S., Oh, H.-K & Gwon, S.-A. (2018) Namkungia magnus. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035333A88037526.en)
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) _Galloisiana odaesanensis_. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113552199A113555367.en)
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) _Galloisiana kosuensis_. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113551876A113555352.en)
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Shin, H.-S., Lee, S.-J., Lee, D.-H., Oh, H.-K & Gwon, S.-A. (2018) _Namkungia biryongensis_. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035265A88035387.en)
+- Chung, H.-Y., Lee, Y-W, Lim, C.-S., **Park, S.-H.**, Park, S.-H., Lee, Y.-S., Hong, M.-H., Lee, S.-J., Lee, D.-H., Shin, H.-S., Oh, H.-K & Gwon, S.-A. (2018) _Namkungia magnus_. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035333A88037526.en)
 
 <br>
 
