@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Park, Si Hyung (Sihyung) 
-permalink: /about/
+permalink: /
 ---
 
 
@@ -10,7 +10,7 @@ permalink: /about/
 
 <br>
 
-Ph.D. Student in Statistics  
+Ph.D. Candidate in Statistics  
 [Department of Statistics](https://statistics.sciences.ncsu.edu//)  
 [North Carolina State University](https://www.ncsu.edu//)  
 
@@ -22,29 +22,33 @@ spark52 <u>at</u> ncsu *dot* edu
 
 ## Brief Biography
 
-I am Sihyung Park (pronounced "See-Young"), a first-year Ph.D. student in the Department of Statistics at North Carolina State University. Prior to joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
+I am Sihyung Park (pronounced "See-He-Young"), a Ph.D. candidate in the Department of Statistics at North Carolina State University. Before joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
-I am interested in applying machine learning methods in a socially and environmentally responsible way. I think most of the real-world issues can be solved using a well-crafted statistical model instead of a deep learning model. My current interests lie broadly in adaptive sequential decision-making, reinforcement learning, and tensor decomposition methods. <br>
+My research focuses on causal inference, specifically addressing unmeasured confounding and principal stratification in observational studies, and high-dimensional methods. Given my early training in Genomics and Ecology, I am currently interested in bringing methodological insights to problems in genomics and evolutionary biology. 
+
+<!--I am interested in applying machine learning methods in a socially and environmentally responsible way. I think most of the real-world issues can be solved using a well-crafted statistical model instead of a deep learning model. My current interests lie broadly in adaptive sequential decision-making, reinforcement learning, and tensor decomposition methods.--> 
+<br>
 
 
 
 ## Education
 
-* North Carolina State University  *(Sep. 2022 - Present)*
-    * First-year Ph.D student in Statistics
+* North Carolina State University  *(Aug. 2022 - Present)*
+    * Ph.D candidate in Statistics
 
 * Seoul National University  *(Mar. 2020 - Feb. 2022)*
     * M.S. in Statistics
-    * Thesis: Large-factor compression of neural networks via tensor decomposition
+    * Advisor: Byeong U. Park
 * Korea University  *(Mar. 2014 - Feb. 2018)*
     * B.S. in Life Sciences
     * B.Econ. in Statistics (double major)
-    * Thesis: Deconvolution of Ago CLIP-Seq resolves genome-wide miRNA target sites
+    * Summa Cum Laude
+    * Advisor: Sung Wook Chi
 
 <br>
 
 
-
+<!--
 ## Experiences
 
 * Constructing intelligent water purification system  *(Sep. 2021 - Feb.2022)*
@@ -59,6 +63,7 @@ I am interested in applying machine learning methods in a socially and environme
     * Comissioned by Korean Agency for Technology and Standards
     * Implemented an autoencoder-based anomaly detector
     * Fitted piecewise logistic growth curve with press coverage frequency as a covariate
+-->
 
 
 <br>
@@ -68,25 +73,46 @@ I am interested in applying machine learning methods in a socially and environme
 ## Publications
 
 ### Peer-reviewed journal articles
+- **S. Park**, W. Lu, S. Yang. (2026) Evaluating and Learning Optimal Dynamic Treatment Regimes under Truncation by Death, *Advances in Neural Information Processing Systems*, 38, 109502-109538. [(link)](https://proceedings.neurips.cc/paper_files/paper/2025/file/9deeb6f5be09657d9e6e6c0d2416af47-Paper-Conference.pdf)
+- **S. Park**<sup>\*</sup>, S. H. Ahn<sup>\*</sup>, E. S. Cho<sup>\*</sup>, Y. K. Cho, E. S. Jang, S. W. Chi. (2018) CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals. *Nucleic Acids Research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)  (<sup>\*</sup>equal contribution)
 
-* **S. Park**, S. H. Ahn, E. S. Cho, Y. K. Cho, E. S. Jang, S. W. Chi. (2018). "CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals". *Nucleic acids research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)
+### Preprints and manuscripts under review
+- **S. Park**, S. Yang, W. Ye, M. Shan. (2026) A Tutorial on Evaluating Long-Term Clinical Efficacy via External Control Integration. (Under Review)
+- **S. Park**, S. Yang, M. Shan, W. Ye, I. Lipkovich. (2026) Proximal Difference-in-Differences for Long-Term Causal Learning under Confounding and Outcome Drift. (Under Review)
+- **S. Park**, L. A. Stefanski. (2025) Non-null Shrinkage Regression and Subset Selection via the Fractional Ridge Regression, arXiv preprint arXiv:2505.23925 [(link)](https://arxiv.org/pdf/2505.23925)
+
+### Technical reports
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) Galloisiana odaesanensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113552199A113555367.en)
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Lee, D.-H., Shin, H.-S., Lee, S.-J., Oh, H.-K & Gwon, S.-A. (2018) Galloisiana kosuensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T113551876A113555352.en)
+- Chung, H.-Y., Lee, Y-W, **Park, S.-H.**, Lim, C.-S., Park, S.-H., Hong, M.-H., Lee, Y.-S., Shin, H.-S., Lee, S.-J., Lee, D.-H., Oh, H.-K & Gwon, S.-A. (2018) Namkungia biryongensis. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035265A88035387.en)
+- Chung, H.-Y., Lee, Y-W, Lim, C.-S., **Park, S.-H.**, Park, S.-H., Lee, Y.-S., Hong, M.-H., Lee, S.-J., Lee, D.-H., Shin, H.-S., Oh, H.-K & Gwon, S.-A. (2018) Namkungia magnus. *The IUCN Red List of Threatened Species 2018*. [(link)](https://doi.org/10.2305/IUCN.UK.2018-1.RLTS.T88035333A88037526.en)
 
 <br>
 
+## Presentations
+- A Flexible and Robust Sensitivity Model for Principal Ignorability Violation, *Eastern North American Region (ENAR) International Biometric Society*, Boston, MA, USA, March 2027 (*invited, forthcoming*)
+- Proximal Difference-in-Differences, *Eastern North American Region (ENAR) International Biometric Society*, Indianapolis, IN, USA, March 16, 2026.
+- Fractional Ridge Regression, *JMP R&D Seminar*, Cary, NC, USA, September 18, 2025.
+- Fractional Ridge Regression, *Joint Statistical Meetings (JSM)*, Nashville, TN, USA, August 8, 2025.
+- CLIPick: an expression-based deconvolution software for sensitive resolving of HITS-CLIP peaks, *International Union of Biochemistry and Molecular Biology (IUBMB) Congress*, Seoul, Korea, June 2018
+
+<br>
 
 
 ## Honors and Awards
-
-* Korean Government Scholarship for Study Overseas - *Korean Government*  *(2022-2024)*
-* Academic Excellence Scholarship - *Seoul National University*  *(Fall 2020, Fall 2021)*
-* Summa Cum Laude - *Korea University*  *(Feb. 2018)*
-* Korea University Future Research Grant - *Korea University*  *(2016-2018)*
-* Academic Excellence Award - *Korea University*  *(2014-2015, 2017)*
+- Merck Research Fellowship - *Department of Statistics, NC State University*  *(2026)*
+- Distinguished Student Paper Award - *ENAR 2026 Student Paper Conpetition*  *(2026)*
+- Honorable Mention - *ASA Biopharmaceutical Section 2026 Student Paper Conpetition*  *(2026)*
+- Outstanding Teaching Assistant Award - *Department of Statistics, NC State University*  *(2026)*
+- Korean Government Scholarship for Study Overseas - *Ministry of Education, Republic of Korea*  *(2022-2024)*
+- Academic Excellence Scholarship - *Seoul National University*  *(Fall 2020, Fall 2021)*
+- Korea University Future Research Grant - *Korea University*  *(2016-2018)*
+- Academic Excellence Award - *Korea University*  *(2014-2015, 2017)*
 
 <br>
 
 
-
+<!--
 ---
 
 
@@ -106,7 +132,6 @@ I am interested in applying machine learning methods in a socially and environme
 </p>
 
 
-
 ---
 
 **Resources**
@@ -115,3 +140,4 @@ I am interested in applying machine learning methods in a socially and environme
 - Review of Probability Theory II, Fall 2020. [[PDF]](https://naturale0.github.io/assets/src/Review+of+Probability+Theory+II+(2020.S2).pdf)
 - Understanding Latent Dirichlet Allocation. [[PDF]](https://naturale0.github.io/assets/src/Latent+Dirichlet+Allocation.pdf)
 
+-->
