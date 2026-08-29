@@ -235,11 +235,13 @@ p.readmore {
 
 }
 
-.article-content a {
+.article-content a,
+.resources-intro a {
   border-bottom:1px dotted red;
   text-decoration:none;
 }
-.article-content a:hover {
+.article-content a:hover,
+.resources-intro a:hover {
   color:red;
   border-bottom:1px dotted red;
 }
