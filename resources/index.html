@@ -5,8 +5,7 @@ title: Resources
 
 <div class="home">
   <div class="post-list">
-    {% for post in site.posts %}
-      {% unless post.categories contains 'thoughts' or post.categories contains 'news' %}
+    {% for post in paginator.posts %}
 
       <article class="post_card post">
         <header class="post_header">
@@ -40,6 +39,8 @@ title: Resources
       
       {% endunless %}
     {% endfor %}
+
+    {% include pagination.html %}
 
     <div class="pagination older-post"><a href="/archive"><data data-icon="ei-arrow-right"></data> Archive  </a></div>
   </div>
