@@ -22,7 +22,7 @@ spark52 <u>at</u> ncsu *dot* edu
 
 ## Brief Biography
 
-I am Sihyung Park (pronounced "See-He-Young"), a Ph.D. candidate in the Department of Statistics at North Carolina State University. Before joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
+I am Sihyung Park (pronounced "See-He-Young"), a Ph.D. candidate in the Department of Statistics at North Carolina State University, co-advised by Professor [Wenbin Lu](https://www4.stat.ncsu.edu/~wlu4//), Professor [Shu Yang](https://shuyang.wordpress.ncsu.edu/), and Professor [Leonard A. Stefanski](https://www4.stat.ncsu.edu/~stefansk/). Before joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: Professor [Sung Wook Chi](https://clip.mystrikingly.com/#professor)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: Professor [Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
 My research focuses on causal inference, specifically addressing unmeasured confounding and principal stratification in observational studies, as well as high-dimensional methods. Grounded in my early background in ecology and genomics, I am interested in bringing methodological insights to problems in genomics and evolutionary biology. 
 
