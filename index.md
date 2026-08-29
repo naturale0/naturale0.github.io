@@ -6,7 +6,7 @@ permalink: /
 
 
 
-<img src="https://naturale0.github.io/assets/me3.jpeg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="145"/>
+<img src="https://naturale0.github.io/assets/me3.jpeg" alt="SihyungPark.jpg" style="float: left; margin-right: 20px; margin-left: 10px; margin-top; 15px" height="165"/>
 
 <br>
 
@@ -24,7 +24,7 @@ spark52 <u>at</u> ncsu *dot* edu
 
 I am Sihyung Park (pronounced "See-He-Young"), a Ph.D. candidate in the Department of Statistics at North Carolina State University. Before joining the Ph.D. program, I received a B.S. in Life Sciences (thesis advisor: [Prof. Sung Wook Chi](http://clip.korea.ac.kr/Professor.html)) and a B.Econ. in Statistics (double major) from Korea University. After that, I received an M.S. in Statistics from Seoul National University (advisor: [Prof. Byeong Uk Park](https://sites.google.com/view/bupark/)).
 
-My research focuses on causal inference, specifically addressing unmeasured confounding and principal stratification in observational studies, and high-dimensional methods. Given my early training in Genomics and Ecology, I am currently interested in bringing methodological insights to problems in genomics and evolutionary biology. 
+My research focuses on causal inference, specifically addressing unmeasured confounding and principal stratification in observational studies, as well as high-dimensional methods. Grounded in my early background in ecology and genomics, I am interested in bringing methodological insights to problems in genomics and evolutionary biology. 
 
 <!--I am interested in applying machine learning methods in a socially and environmentally responsible way. I think most of the real-world issues can be solved using a well-crafted statistical model instead of a deep learning model. My current interests lie broadly in adaptive sequential decision-making, reinforcement learning, and tensor decomposition methods.--> 
 <br>
