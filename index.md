@@ -10,7 +10,7 @@ permalink: /
 
 <br>
 
-Ph.D. Candidate in Statistics  
+Ph.D. Candidate  
 [Department of Statistics](https://statistics.sciences.ncsu.edu//)  
 [North Carolina State University](https://www.ncsu.edu//)  
 
