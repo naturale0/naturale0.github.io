@@ -105,7 +105,8 @@ My research focuses on causal inference, specifically addressing unmeasured conf
 - Merck Research Fellowship - *Department of Statistics, NC State University*  *(2026)*
 - Distinguished Student Paper Award - *ENAR 2026 Student Paper Conpetition*  *(2026)*
 - Honorable Mention - *ASA Biopharmaceutical Section 2026 Student Paper Conpetition*  *(2026)*
-- Outstanding Teaching Assistant Award - *Department of Statistics, NC State University*  *(2026)*
+- NeurIPS Scholar Award - *The 39th Annual Conference on Neural Information Processing Systems*  *(2025)*
+- Outstanding Teaching Assistant Award - *Department of Statistics, NC State University*  *(2023)*
 - Korean Government Scholarship for Study Overseas - *Ministry of Education, Republic of Korea*  *(2022-2024)*
 - Academic Excellence Scholarship - *Seoul National University*  *(Fall 2020, Fall 2021)*
 - Korea University Future Research Grant - *Korea University*  *(2016-2018)*
