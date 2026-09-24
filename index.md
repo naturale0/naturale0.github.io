@@ -75,12 +75,12 @@ My research focuses on causal inference, specifically addressing unmeasured conf
 ## Publications
 
 ### Peer-reviewed journal articles
-- **S. Park**, W. Lu, S. Yang. (2026) Evaluating and Learning Optimal Dynamic Treatment Regimes under Truncation by Death, *Advances in Neural Information Processing Systems*, 38, 109502-109538. [(link)](https://proceedings.neurips.cc/paper_files/paper/2025/file/9deeb6f5be09657d9e6e6c0d2416af47-Paper-Conference.pdf)
+- **S. Park**, S. Yang, M. Shan, W. Ye, I. Lipkovich. (2026) Proximal Difference-in-Differences for Long-Term Causal Learning under Confounding and Outcome Drift. *NeurIPS 2026*, Accepted
+- **S. Park**, W. Lu, S. Yang. (2026) Evaluating and Learning Optimal Dynamic Treatment Regimes under Truncation by Death, *NeurIPS 2025 (Advances in Neural Information Processing Systems, 38)*, 109502-109538. [(link)](https://proceedings.neurips.cc/paper_files/paper/2025/file/9deeb6f5be09657d9e6e6c0d2416af47-Paper-Conference.pdf)
 - **S. Park**<sup>\*</sup>, S. H. Ahn<sup>\*</sup>, E. S. Cho<sup>\*</sup>, Y. K. Cho, E. S. Jang, S. W. Chi. (2018) CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals. *Nucleic Acids Research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)  (<sup>\*</sup>equal contribution)
 
 ### Preprints and manuscripts under review
 - **S. Park**, S. Yang, W. Ye, M. Shan. (2026) A Tutorial on Evaluating Long-Term Clinical Efficacy via External Control Integration. (Under Review)
-- **S. Park**, S. Yang, M. Shan, W. Ye, I. Lipkovich. (2026) Proximal Difference-in-Differences for Long-Term Causal Learning under Confounding and Outcome Drift. (Under Review)
 - **S. Park**, L. A. Stefanski. (2025) Non-null Shrinkage Regression and Subset Selection via the Fractional Ridge Regression, arXiv preprint arXiv:2505.23925 [(link)](https://arxiv.org/pdf/2505.23925)
 
 ### Technical reports
