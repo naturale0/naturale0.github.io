@@ -36,7 +36,7 @@ My research focuses on causal inference, specifically addressing unmeasured conf
 ## Education
 
 * North Carolina State University  *(Aug. 2022 - Present)*
-    * Ph.D candidate in Statistics
+    * Ph.D. candidate in Statistics
 
 * Seoul National University  *(Mar. 2020 - Feb. 2022)*
     * M.S. in Statistics
@@ -75,7 +75,7 @@ My research focuses on causal inference, specifically addressing unmeasured conf
 ## Publications
 
 ### Peer-reviewed journal articles
-- **S. Park**, S. Yang, M. Shan, W. Ye, I. Lipkovich. (2026) Proximal Difference-in-Differences for Long-Term Causal Learning under Confounding and Outcome Drift. *NeurIPS 2026*, Accepted
+- **S. Park**, S. Yang, M. Shan, W. Ye, I. Lipkovich. (2026) Proximal Difference-in-Differences for Long-Term Causal Learning under Confounding and Outcome Drift. *NeurIPS 2026*, Accepted.
 - **S. Park**, W. Lu, S. Yang. (2026) Evaluating and Learning Optimal Dynamic Treatment Regimes under Truncation by Death, *NeurIPS 2025 (Advances in Neural Information Processing Systems, 38)*, 109502-109538. [(link)](https://proceedings.neurips.cc/paper_files/paper/2025/file/9deeb6f5be09657d9e6e6c0d2416af47-Paper-Conference.pdf)
 - **S. Park**<sup>\*</sup>, S. H. Ahn<sup>\*</sup>, E. S. Cho<sup>\*</sup>, Y. K. Cho, E. S. Jang, S. W. Chi. (2018) CLIPick: a sensitive peak caller for expression-based deconvolution of HITS-CLIP signals. *Nucleic Acids Research*. 46(21), 11153-11168. [(link)](https://doi.org/10.1093/nar/gky917)  (<sup>\*</sup>equal contribution)
 
